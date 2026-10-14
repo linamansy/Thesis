@@ -83,6 +83,7 @@ class BaseAgent(ABC):
                 retries=attempt,
                 duration_seconds=round(duration, 4),
                 finish_reason=self.llm.last_finish_reason,
+                model_digest=self.llm.model_digest,
             )
             if parsed is not None:
                 return parsed

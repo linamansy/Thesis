@@ -34,11 +34,12 @@ class RunLogger:
     def log_call(self, *, case_id: str, component: str, model: str, temperature: float,
                  prompt: str, raw_output: str, parsed_output: dict | None,
                  valid_json: bool, retries: int, duration_seconds: float,
-                 finish_reason: str | None = None) -> dict:
+                 finish_reason: str | None = None, model_digest: str | None = None) -> dict:
         """Append one record to the log file and return it.
 
         finish_reason: why the model stopped, as reported by the API (e.g. "STOP", or "MAX_TOKENS" when
         the answer was cut off at max_tokens); None for providers that do not report it (MockLLM).
+        model_digest: the exact model file used (Ollama's sha256 digest); None for other providers.
         """
         record = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -47,6 +48,7 @@ class RunLogger:
             "case_id": case_id,
             "component": component,
             "model": model,
+            "model_digest": model_digest,
             "temperature": temperature,
             "prompt": prompt,
             "raw_output": raw_output,

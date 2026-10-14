@@ -43,6 +43,7 @@ from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
 from src.llm.mock_llm import MockLLM
+from src.llm.ollama_llm import OllamaLLM
 from src.logger import RunLogger
 from src.orchestrator import Orchestrator
 from src.retrieval.passage import load_passages
@@ -50,7 +51,8 @@ from src.run_folder import RunFolder, default_run_id
 from src.validator import BPMNValidator
 
 MEDIATION_ROLES = ["relevance", "applicability", "requirement"]
-PROVIDERS = ["mock", "gemini", "anthropic"]
+PROVIDERS = ["mock", "ollama", "gemini", "anthropic"]
+REAL_PROVIDERS = {"ollama": OllamaLLM, "gemini": GeminiLLM, "anthropic": AnthropicLLM}
 
 
 class RunInterrupted(Exception):
@@ -66,9 +68,9 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
 
     mock:      every role gets its own fixed answer file (paths.mock_<role>_response),
                because the agents expect different kinds of JSON.
-    gemini / anthropic: the real API, with the same model and temperature for every role. Pass the
-               same `shared` dict for all roles of a run so they share ONE client; then the pause
-               between calls (free-tier per-minute limit) counts over all agents together.
+    ollama / gemini / anthropic: the real model, with the same model and settings for every role. Pass
+               the same `shared` dict for all roles of a run so they share ONE client; then the pause
+               between calls (Gemini free-tier per-minute limit) counts over all agents together.
     """
     llm_config = config["llm"]
     provider = llm_config["provider"]
@@ -79,7 +81,7 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
         raise ValueError(f"llm.provider must be one of {PROVIDERS}, not {provider!r}")
     if shared is not None and provider in shared:
         return shared[provider]
-    llm = GeminiLLM.from_config(config) if provider == "gemini" else AnthropicLLM.from_config(config)
+    llm = REAL_PROVIDERS[provider].from_config(config)
     if shared is not None:
         shared[provider] = llm
     return llm
@@ -236,6 +238,9 @@ def main() -> None:
         runner.case_ids = args.cases
     print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | part {part} | "
           f"provider {config['llm']['provider']} | model {llm.model} (temperature {llm.temperature})")
+    if isinstance(llm, OllamaLLM):
+        print(f"Ollama: digest {llm.expected_digest} | seed {llm.seed} | num_ctx {llm.num_ctx} | "
+              f"think {llm.think} | max_tokens {llm.max_tokens}")
     print(f"{len(runner.case_ids) - len(to_run)} selected case(s) already finished and skipped; "
           f"{len(to_run)} to run: {' '.join(to_run)}\n")
     try:

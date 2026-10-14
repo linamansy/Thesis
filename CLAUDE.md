@@ -34,19 +34,21 @@ No LLM writes BPMN XML directly.
 - All parameters (model names, temperature, k values, file paths) live in config.yaml and are loaded in code. Never hard-code them.
 
 ## LLM provider and experiment runs
-- Provider for the thesis: Google Gemini, free tier (GeminiLLM, src/llm/gemini_llm.py, official google-genai library). Key GEMINI_API_KEY in .env.
-- Model: gemini-3.5-flash (fixed in config.yaml, never a "-latest" alias), temperature 0, max_tokens 8192, used for every agent and condition. The exact model version returned by the API is logged for every call.
-- Free-tier pacing: at least 10 seconds between two API calls (gemini_pause_between_calls_seconds).
-- API errors: rate limit (429 / RESOURCE_EXHAUSTED), overload and timeouts are retried with increasing waits (2, 4, 8, 16, 32 s), up to 5 times, so an overload stops the run after about a minute. An optional pause between calls keeps requests under the free-tier per-minute limit.
+- Provider for the thesis: Ollama, running locally (OllamaLLM, src/llm/ollama_llm.py, REST API at http://localhost:11434, no API key).
+- Model: qwen3:8b, fixed to the exact file by its digest DIGEST_PLACEHOLDER (llm.ollama_model_digest in config.yaml). Before the first call the installed model's digest is checked; if it differs, the run stops.
+- Settings, all in config.yaml and sent with every request: temperature 0, seed 42, num_ctx 16384, thinking off (think: false), max_tokens 8192 (num_predict). Same model and settings for every agent and condition.
+- Logged for every call: model name, model digest and finish_reason (STOP, or MAX_TOKENS when an answer was cut off).
+- Errors: Ollama not reachable (not running), timeouts and server errors are retried with increasing waits (2, 4, 8, 16, 32 s), up to 5 times; other errors (e.g. 404 model not downloaded) are not retried.
+- Prompt length: Ollama silently cuts off prompts longer than num_ctx. Check with src/count_prompt_tokens.py (C1, C2) that prompt + max_tokens fits.
 - 3 repetitions. Finish all three conditions (C1, C2, C3) of a repetition before starting the next repetition.
-- Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: gemini_rep1, gemini_rep2, gemini_rep3). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
-- Resuming: if a run stops (e.g. the daily free-tier limit), rerunning the same command (same condition and repetition) skips finished cases and continues with the unfinished ones, logging to a new log file part. Finished cases are never overwritten or rerun. Any API error (a temporary one after all retries, any other one such as 404 model not found at once) stops the run without writing validation.json; it is never recorded as a model result.
-- AnthropicLLM (src/llm/anthropic_llm.py) is kept for possible later use; MockLLM is used for tests.
+- Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: ollama_rep1, ollama_rep2, ollama_rep3). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
+- Resuming: if a run stops (e.g. Ollama stopped), rerunning the same command (same condition and repetition) skips finished cases and continues with the unfinished ones, logging to a new log file part. Finished cases are never overwritten or rerun. Any API error (a temporary one after all retries, any other one such as 404 model not found at once) stops the run without writing validation.json; it is never recorded as a model result.
+- GeminiLLM (src/llm/gemini_llm.py, model gemini-3.5-flash, key GEMINI_API_KEY in .env, at least 10 s between calls) and AnthropicLLM (src/llm/anthropic_llm.py) are kept for possible later use; MockLLM is used for tests.
 
 ## Code structure (required by supervisor)
 - Object-oriented design. Every agent is its own class in its own file under src/agents/.
 - BaseAgent (src/agents/base_agent.py) holds shared logic: calling the LLM, validating JSON output with Pydantic, one retry on invalid output, and logging. Each agent inherits from BaseAgent and only defines its prompt and output schema.
-- LLM access goes through an abstract LLMClient class (src/llm/base_llm.py) with MockLLM (src/llm/mock_llm.py), GeminiLLM (src/llm/gemini_llm.py) and AnthropicLLM (src/llm/anthropic_llm.py) subclasses, so agents never depend on a specific provider.
+- LLM access goes through an abstract LLMClient class (src/llm/base_llm.py) with MockLLM (src/llm/mock_llm.py), OllamaLLM (src/llm/ollama_llm.py), GeminiLLM (src/llm/gemini_llm.py) and AnthropicLLM (src/llm/anthropic_llm.py) subclasses, so agents never depend on a specific provider.
 - Orchestrator (src/orchestrator.py) runs the mediation agents in order for C3.
 - BPMNGenerator (src/generator.py) is the single shared generator for C1, C2 and C3.
 - BPMNBuilder (src/bpmn_builder.py) converts JSON to BPMN XML without any LLM.
@@ -55,7 +57,7 @@ No LLM writes BPMN XML directly.
 
 ## Logging
 - RunLogger class (src/logger.py) writes one JSON record per LLM call to results/logs/<condition>_<run_id>.jsonl (JSON Lines); a resumed run writes to <condition>_<run_id>_part2.jsonl, _part3, ... An existing log file is never written into again.
-- Each record contains: timestamp, run_id, condition, case_id, component (class name), model, temperature, prompt, raw_output, parsed_output, valid_json, retries, duration_seconds.
+- Each record contains: timestamp, run_id, condition, case_id, component (class name), model, model_digest, finish_reason, temperature, prompt, raw_output, parsed_output, valid_json, retries, duration_seconds.
 - Every component that calls an LLM must log through RunLogger.
 
 ## RAG (used by C2 and C3)

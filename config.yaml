@@ -2,11 +2,19 @@
 # All parameters live here and are loaded in code; nothing is hard-coded.
 
 llm:
-  provider: gemini            # "mock" (fixed answers, no API), "gemini" (Google Gemini free tier, used for the
-                              # thesis) or "anthropic" (kept for possible later use); API keys are in .env
-  model: gemini-3.5-flash     # a FIXED model version (no "-latest" alias)
+  provider: ollama            # "mock" (fixed answers, no API), "ollama" (local model, used for the thesis),
+                              # "gemini" (Google Gemini free tier, model gemini-3.5-flash) or "anthropic"
+                              # (kept for possible later use); API keys are in .env
+  model: qwen3:8b             # a FIXED model version; for Ollama the exact file is fixed by ollama_model_digest
   temperature: 0              # sent to the API (null = not sent)
-  max_tokens: 8192
+  max_tokens: 8192            # longest answer allowed (Ollama: num_predict)
+  seed: 42                    # Ollama: fixed random seed
+  num_ctx: 16384              # Ollama: context window in tokens (prompt + answer)
+  think: false                # Ollama: Qwen3 thinking (hidden reasoning) switched off
+  ollama_url: http://localhost:11434
+  ollama_model_digest: DIGEST_PLACEHOLDER  # from `ollama list` / the Ollama API; the run stops if the installed model differs
+  ollama_timeout_seconds: 900 # Ollama: longest wait for one answer (a local model can be slow)
+  ollama_api_max_retries: 5   # OllamaLLM: extra attempts when Ollama is not reachable, times out or has a server error
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
   api_initial_wait_seconds: 2 # wait before the first API retry; doubles each time (2, 4, 8, ... s)
   api_max_retries: 5          # AnthropicLLM: extra attempts on temporary API errors
