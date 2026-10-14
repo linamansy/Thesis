@@ -13,9 +13,11 @@
       429 / RESOURCE_EXHAUSTED   rate limit or quota
       500 / 502 / 503 / 504      server error, overload (UNAVAILABLE), timeout on the server side
       network errors and timeouts on our side (httpx)
-    Other errors (e.g. a bad request or a wrong key) are raised at once.
-  - If the API still fails after all retries, LLMUnavailableError is raised: the run stops and can
-    be resumed later (for example the next day, when the daily free-tier limit is reset).
+  - Every API error ends in LLMUnavailableError, which stops the run without recording a result
+    for the case, so the case stays unfinished and can be resumed later:
+      - a temporary error that still fails after all retries (e.g. the daily free-tier limit);
+      - any other API error at once, without retrying (e.g. 404 model not found, 400 bad request,
+        wrong key). Such an error is about the API call, not an answer of the model.
   - The library's own automatic retries are switched off, so only the retries described here happen.
 """
 
@@ -103,8 +105,10 @@ class GeminiLLM(LLMClient):
                 response = self.client.models.generate_content(model=self.model, contents=prompt,
                                                                config=self.generation_config())
             except Exception as e:
+                if isinstance(e, errors.APIError) and not is_temporary(e):
+                    raise LLMUnavailableError(f"Gemini API error (not retried): {type(e).__name__}: {e}") from e
                 if not is_temporary(e):
-                    raise
+                    raise  # not an API error (e.g. a bug in our code): raised unchanged
                 if attempt == self.api_max_retries:
                     raise LLMUnavailableError(f"Gemini API still failing after {self.api_max_retries} retries: "
                                               f"{type(e).__name__}: {e}") from e

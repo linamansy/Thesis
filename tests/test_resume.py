@@ -57,6 +57,33 @@ def test_interrupted_run_keeps_finished_cases_and_leaves_the_rest_unfinished(tmp
     assert runner.ran == ["01"]
 
 
+def test_api_error_such_as_404_never_marks_a_case_finished(tmp_path):
+    """A non-temporary API error (here: 404 model not found, as seen in the real smoke test)
+    stops the run at once. No validation.json is written, so the case stays unfinished."""
+    from google.genai import errors
+    from src.llm.gemini_llm import GeminiLLM
+
+    class NotFoundClient:
+        def __init__(self):
+            self.models, self.calls = self, 0
+
+        def generate_content(self, **params):
+            self.calls += 1
+            raise errors.ClientError(404, {"error": {"code": 404, "status": "NOT_FOUND",
+                                                     "message": "simulated: model no longer available"}})
+
+    client = NotFoundClient()
+    llm = GeminiLLM("gemini-test-001", 0, 4096, 5, 2, client=client, sleep=lambda s: None)
+    runner = make_runner(tmp_path, "C1", llm, part=1)
+
+    with pytest.raises(RunInterrupted, match="stopped at case 01.*404"):
+        runner.run_all()
+
+    assert client.calls == 1                                                   # not retried
+    assert not (tmp_path / "run" / "C1" / "01" / "validation.json").exists()  # case stays unfinished
+    assert not runner.is_finished("01") and runner.ran == []
+
+
 def test_resume_skips_finished_cases_and_never_rewrites_them(tmp_path):
     first = make_runner(tmp_path, "C1", QuotaLLM([SAMPLE], calls_left=1), part=1)
     with pytest.raises(RunInterrupted):

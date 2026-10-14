@@ -23,8 +23,8 @@ Everything of one run goes into its own folder (src/run_folder.py); finished cas
 Two kinds of failure are treated differently:
   - the generator gives no valid output after its retry (or another error happens): the case is
     recorded as a failed generation; this is a result, the case is finished
-  - the API is unreachable after all API retries (LLMUnavailableError, e.g. the daily free-tier
-    limit): the run STOPS, the case stays unfinished. Running the same command again later resumes:
+  - the API gives an error instead of an answer (LLMUnavailableError: e.g. the daily free-tier
+    limit after all API retries, or at once for an error such as 404 model not found): the run STOPS, the case stays unfinished. Running the same command again later resumes:
     finished cases are skipped, the others are run, logging goes to a new log part.
 """
 

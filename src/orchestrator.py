@@ -8,8 +8,8 @@ For every passage of the case, in rank order:
   3. RequirementAgent, ONLY for "Applicable"
 If an agent still fails after its retry (invalid output, or another error), the passage is labelled
 "Mediation failed" and the next passage is processed; a case is never stopped for that.
-Exception: LLMUnavailableError (the API itself is unreachable after all API retries, e.g. the daily
-free-tier limit) is NOT a mediation result. It is passed on, so the run stops and can be resumed.
+Exception: LLMUnavailableError (the API gave an error instead of an answer, e.g. the daily free-tier
+limit after all API retries, or 404 model not found) is NOT a mediation result. It is passed on, so the run stops and can be resumed.
 
 The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings,
 each followed by the same fixed explanation line (REQUIREMENTS_EXPLANATION, UNCONFIRMED_EXPLANATION):

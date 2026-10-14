@@ -13,6 +13,7 @@ from run_experiment import create_llm
 from src.agents.base_agent import BaseAgent
 from src.config import load_config
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
+from src.llm.base_llm import LLMUnavailableError
 from src.logger import RunLogger
 
 CONFIG = load_config()
@@ -82,16 +83,18 @@ def test_other_temporary_errors_are_retried(error):
 def test_gives_up_after_five_retries():
     client = FakeClient(*[api_error(anthropic.RateLimitError, 429)] * 6)
     llm, waits = make_llm(client)
-    with pytest.raises(anthropic.RateLimitError):
+    with pytest.raises(LLMUnavailableError, match="after 5 retries"):
         llm.complete("Hello")
     assert len(client.calls) == 6             # first attempt + 5 retries
     assert waits == [2, 4, 8, 16, 32]
 
 
-def test_bad_request_is_not_retried():
-    client = FakeClient(api_error(anthropic.BadRequestError, 400), answer())
+@pytest.mark.parametrize("error", [api_error(anthropic.BadRequestError, 400),
+                                   api_error(anthropic.NotFoundError, 404)])
+def test_other_api_errors_are_not_retried_and_stop_the_run(error):
+    client = FakeClient(error, answer())
     llm, waits = make_llm(client)
-    with pytest.raises(anthropic.BadRequestError):
+    with pytest.raises(LLMUnavailableError, match="not retried"):
         llm.complete("Hello")
     assert len(client.calls) == 1 and waits == []
 

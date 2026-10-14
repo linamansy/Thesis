@@ -105,12 +105,25 @@ def test_gives_up_after_eight_retries_with_llm_unavailable():
     assert waits == [2, 4, 8, 16, 32, 64, 128, 256]
 
 
-def test_bad_request_is_not_retried():
-    client = FakeClient(api_error(400, "INVALID_ARGUMENT"), answer())
+@pytest.mark.parametrize("error", [
+    api_error(400, "INVALID_ARGUMENT"),
+    api_error(404, "NOT_FOUND"),              # e.g. "model no longer available to new users"
+    api_error(403, "PERMISSION_DENIED"),      # e.g. wrong key
+])
+def test_other_api_errors_are_not_retried_and_stop_the_run(error):
+    client = FakeClient(error, answer())
     llm, waits = make_llm(client)
-    with pytest.raises(errors.ClientError):
+    with pytest.raises(LLMUnavailableError, match="not retried") as raised:
         llm.complete("Hello")
+    assert raised.value.__cause__ is error    # the original API error is kept for the message
     assert len(client.calls) == 1 and waits == []
+
+
+def test_errors_that_are_not_api_errors_are_raised_unchanged():
+    client = FakeClient(KeyError("bug in our code"))
+    llm, _ = make_llm(client)
+    with pytest.raises(KeyError):
+        llm.complete("Hello")
 
 
 # ---------- request and response ----------

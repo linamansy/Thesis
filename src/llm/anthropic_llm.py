@@ -8,7 +8,10 @@
     last_response_model, and BaseAgent writes it to the log.
   - Temporary API errors (rate limit, overload, server errors, timeouts, connection
     problems) are retried with increasing waits: 2, 4, 8, 16, 32 seconds (up to 5 retries,
-    numbers from config.yaml). Other errors (e.g. a bad request) are raised at once.
+    numbers from config.yaml).
+  - Every API error ends in LLMUnavailableError, which stops the run without recording a result
+    for the case: a temporary error that still fails after all retries, and any other API error
+    (e.g. a bad request or an unknown model) at once, without retrying.
     This is separate from BaseAgent's single retry for invalid JSON: an API retry repeats
     the identical request because the server did not answer, a JSON retry asks again
     because the answer was unusable.
@@ -24,7 +27,7 @@ import anthropic
 from dotenv import load_dotenv
 
 from src.config import project_path
-from src.llm.base_llm import LLMClient
+from src.llm.base_llm import LLMClient, LLMUnavailableError
 
 PLACEHOLDER_MODEL = "MODEL_NAME_PLACEHOLDER"
 
@@ -87,13 +90,16 @@ class AnthropicLLM(LLMClient):
         for attempt in range(self.api_max_retries + 1):
             try:
                 response = self.client.messages.create(**params)
-            except RETRYABLE_ERRORS:
+            except RETRYABLE_ERRORS as e:
                 if attempt == self.api_max_retries:
-                    raise  # still failing after all retries: BaseAgent's caller records the failure
+                    raise LLMUnavailableError(f"Anthropic API still failing after {self.api_max_retries} retries: "
+                                              f"{type(e).__name__}: {e}") from e
                 wait = self.initial_wait_seconds * 2 ** attempt
                 self.retry_waits.append(wait)
                 self.sleep(wait)
                 continue
+            except anthropic.APIError as e:  # any other API error: not retried
+                raise LLMUnavailableError(f"Anthropic API error (not retried): {type(e).__name__}: {e}") from e
             self.last_response_model = response.model
             self.last_stop_reason = response.stop_reason
             # Only text blocks form the answer (thinking blocks, if any, are not part of it).

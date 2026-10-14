@@ -8,7 +8,8 @@ from abc import ABC, abstractmethod
 
 
 class LLMUnavailableError(RuntimeError):
-    """The LLM API could not be reached even after all API retries (e.g. the daily free-tier limit is used up).
+    """The LLM API gave an error instead of an answer: a temporary error that still fails after all API
+    retries (e.g. the daily free-tier limit is used up), or any other API error (e.g. 404 model not found).
 
     This is NOT a result of the experiment: the run stops, the current case stays unfinished,
     and rerunning the same command later continues from that case (see src/run_folder.py).
