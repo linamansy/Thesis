@@ -14,7 +14,9 @@ paths:
   pmo_raw: data/raw/pmo
   pmo_descriptions: data/raw/pmo/descriptions
   pmo_bpmn: data/raw/pmo/bpmn
-  cases: data/cases
+  cases: data/cases                       # one folder per case: data/cases/<id>/
+  case_description_file: description.txt  # file name inside each case folder
+  case_reference_file: reference.bpmn     # file name inside each case folder
   knowledge_raw: data/knowledge/raw
   knowledge_sources: data/knowledge/sources.json
   passages: data/knowledge/passages.jsonl
