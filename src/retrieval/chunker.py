@@ -15,6 +15,11 @@ Rules (CLAUDE.md, RAG section):
     sentence. Otherwise the definitions would form one very long passage.
   - Every passage starts with the directive name and the article title.
   - Ids: <prefix>-Art<article>-<paragraph>, e.g. CRD-Art9-1 and LPD-Art3-1.
+  - A passage longer than chunking.max_passage_chars (config.yaml) is split by its lettered
+    points: each part repeats the heading and the paragraph's introductory sentence,
+    followed by as many whole points as fit. The id gets the letter of the part's first
+    point, e.g. CRD-Art6-1-a (points a-c), CRD-Art6-1-d (points d-e), ...
+    A single point is never cut, so one part can only exceed the limit if that one point does.
 
 How the EUR-Lex XHTML marks the text:
   articles             <div class="eli-subdivision" id="art_9">
@@ -48,15 +53,16 @@ def clean(text: str) -> str:
 class DirectiveChunker:
     """Turns the directives listed in sources.json into Passage objects."""
 
-    def __init__(self, raw_dir: Path, sources: dict):
+    def __init__(self, raw_dir: Path, sources: dict, max_chars: int):
         self.raw_dir = Path(raw_dir)
         self.sources = sources
+        self.max_chars = max_chars
 
     @classmethod
     def from_config(cls, config: dict) -> "DirectiveChunker":
         paths = config["paths"]
         sources = json.loads(project_path(paths["knowledge_sources"]).read_text(encoding="utf-8"))
-        return cls(project_path(paths["knowledge_raw"]), sources)
+        return cls(project_path(paths["knowledge_raw"]), sources, config["chunking"]["max_passage_chars"])
 
     def chunk_all(self) -> list[Passage]:
         passages = []
@@ -78,16 +84,24 @@ class DirectiveChunker:
             number = int(article.get("id").removeprefix("art_"))
             title_el = article.xpath('./div[@class="eli-title"]')
             title = clean(title_el[0].text_content()) if title_el else ""
-            for paragraph, lines in self.split_article(article):
-                passages.append(self.make_passage(source, number, paragraph, title, lines))
+            for paragraph, element, lines in self.split_article(article):
+                passage = self.make_passage(source, number, paragraph, title, lines)
+                if passage.n_chars > self.max_chars and element is not None:
+                    passages += self.split_by_points(source, number, paragraph, title, element) or [passage]
+                else:
+                    passages.append(passage)
         return passages
 
-    def split_article(self, article) -> list[tuple[int, list[str]]]:
-        """Split one article into (paragraph number, text lines) pieces."""
+    def split_article(self, article) -> list[tuple[int, object, list[str]]]:
+        """Split one article into (paragraph number, source element, text lines) pieces.
+
+        The source element is kept so that a long piece can be split by its points later;
+        it is None for definitions, which are already split by numbered point.
+        """
         paragraph_divs = [child for child in article
                           if child.tag == "div" and PARAGRAPH_ID.fullmatch(child.get("id") or "")]
         if paragraph_divs:
-            return [(int(div.get("id").split(".")[1]), render(div)) for div in paragraph_divs]
+            return [(int(div.get("id").split(".")[1]), div, render(div)) for div in paragraph_divs]
 
         top_tables = [child for child in article if child.tag == "table"]
         if top_tables and all(NUMBERED_POINT.fullmatch(table_label(t)) for t in top_tables):
@@ -104,17 +118,60 @@ class DirectiveChunker:
             pieces = []
             for table in top_tables:
                 number = int(NUMBERED_POINT.fullmatch(table_label(table)).group(1))
-                pieces.append((number, intro + render_table(table)))
-            pieces[-1] = (pieces[-1][0], pieces[-1][1] + after)
+                pieces.append((number, None, intro + render_table(table)))
+            pieces[-1] = (pieces[-1][0], None, pieces[-1][2] + after)
             return pieces
 
-        return [(1, render(article))]  # no numbered paragraphs: the whole article is one passage
+        return [(1, article, render(article))]  # no numbered paragraphs: the whole article is one passage
 
-    def make_passage(self, source: dict, article: int, paragraph: int, title: str, lines: list[str]) -> Passage:
+    def split_by_points(self, source: dict, article: int, paragraph: int, title: str, element) -> list[Passage]:
+        """Split a long paragraph into parts of whole lettered points (see the module comment).
+
+        Returns [] if the paragraph has no lettered points to split on.
+        """
+        intro, points, after = [], [], []   # points: (letter, lines) for each lettered point
+        last_point = max((i for i, child in enumerate(element) if child.tag == "table"), default=-1)
+        for position, child in enumerate(element):
+            if not isinstance(child.tag, str) or child.get("class") in SKIPPED_CLASSES:
+                continue
+            if child.tag == "table":
+                points.append((table_label(child).strip("()"), render_table(child)))
+            elif not points:
+                intro += render_child(child)
+            elif position < last_point:
+                points[-1][1].extend(render_child(child))  # text between points stays with the point before
+            else:
+                after += render_child(child)
+        if not points:
+            return []
+
+        # Fill each part with as many whole points as fit under the limit.
+        parts, current = [], []
+        for point in points:
+            lines = intro + [line for _, point_lines in current + [point] for line in point_lines]
+            if current and self.make_passage(source, article, paragraph, title, lines).n_chars > self.max_chars:
+                parts.append(current)
+                current = [point]
+            else:
+                current.append(point)
+        parts.append(current)
+
+        passages = []
+        for number, part in enumerate(parts):
+            lines = intro + [line for _, point_lines in part for line in point_lines]
+            if number == len(parts) - 1:
+                lines += after  # text after the last point goes with the last part
+            passages.append(self.make_passage(source, article, paragraph, title, lines, part=part[0][0]))
+        return passages
+
+    def make_passage(self, source: dict, article: int, paragraph: int, title: str, lines: list[str],
+                     part: str | None = None) -> Passage:
+        """part: the letter of the first point, only for passages split by their points."""
         heading = f"{source['short_name']} ({source['number']}) - Article {article}: {title}"
         text = "\n".join([heading] + lines)
+        suffix = f"-{part}" if part else ""
         return Passage(
-            id=f"{source['id_prefix']}-Art{article}-{paragraph}",
+            id=f"{source['id_prefix']}-Art{article}-{paragraph}{suffix}",
             directive=source["number"],
             article=article,
             paragraph=paragraph,
@@ -128,17 +185,19 @@ def render(element) -> list[str]:
     """The text inside an element as a list of lines; each lettered point gets its own line."""
     lines = []
     for child in element:
-        if not isinstance(child.tag, str) or child.get("class") in SKIPPED_CLASSES:
-            continue
-        if child.tag == "table":
-            lines += render_table(child)
-        elif child.tag == "div":
-            lines += render(child)
-        else:
-            text = clean(child.text_content())
-            if text:
-                lines.append(text)
+        if isinstance(child.tag, str) and child.get("class") not in SKIPPED_CLASSES:
+            lines += render_child(child)
     return lines
+
+
+def render_child(child) -> list[str]:
+    """The lines of one element: a point table, a block containing more elements, or a text line."""
+    if child.tag == "table":
+        return render_table(child)
+    if child.tag == "div":
+        return render(child)
+    text = clean(child.text_content())
+    return [text] if text else []
 
 
 def render_table(table) -> list[str]:

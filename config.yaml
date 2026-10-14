@@ -13,6 +13,9 @@ cases:
 
 conditions: ["C1", "C2", "C3"]
 
+chunking:
+  max_passage_chars: 1500   # longer passages are split by their lettered points (src/retrieval/chunker.py)
+
 evaluation:
   embedding_model: sentence-transformers/all-MiniLM-L6-v2  # embeds task labels for matching
   similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this (to be calibrated)
