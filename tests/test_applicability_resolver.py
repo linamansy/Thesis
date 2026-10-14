@@ -7,7 +7,8 @@ from src.mediation.applicability_resolver import (APPLICABLE, INDETERMINATE, NOT
 DESCRIPTION = """Consider a process for purchasing items from an online shop.
 The user starts an order by logging in to their account.
 Afterward, the user either pays or completes an installment agreement.
-The order is placed by a company buyer."""
+The order is placed by a company buyer.
+The customer’s goods, once packed, are shipped – usually within two days."""
 
 
 def cond(status, evidence=None, text="some condition"):
@@ -65,6 +66,39 @@ def test_quote_across_a_line_break_is_found():
     # The description has a line break between these two sentences.
     result = resolve(cond("satisfied", "online shop. The user starts an order"))
     assert result["label"] == APPLICABLE
+
+
+def test_quote_with_straight_apostrophe_is_accepted():
+    # The description has a curly apostrophe (customer’s); the quote has a straight one.
+    result = resolve(cond("satisfied", "The customer's goods, once packed, are shipped"))
+    assert result["conditions"][0]["evidence_found"] is True
+    assert result["label"] == APPLICABLE
+
+
+def test_quote_with_missing_comma_and_different_dash_is_accepted():
+    result = resolve(cond("satisfied", "The customer’s goods once packed are shipped - usually within two days"))
+    assert result["label"] == APPLICABLE
+
+
+def test_quote_with_a_changed_word_is_rejected():
+    result = resolve(cond("satisfied", "The customer's goods, once paid, are shipped"))  # "packed" -> "paid"
+    c = result["conditions"][0]
+    assert (c["status"], c["evidence_found"], c["downgraded"]) == ("not_stated", False, True)
+    assert result["label"] == INDETERMINATE
+
+
+def test_quote_must_match_whole_words():
+    # "pay" is not a word in the description (only "pays"), so it must not match inside "pays".
+    assert resolve(cond("satisfied", "the user either pay"))["label"] == INDETERMINATE
+
+
+def test_downgrades_are_counted_over_the_whole_run():
+    resolver = ApplicabilityResolver()
+    resolver.resolve([cond("satisfied", "purchasing items from an online shop"), cond("satisfied", "invented")],
+                     DESCRIPTION)
+    resolver.resolve([cond("contradicted", None), cond("not_stated")], DESCRIPTION)
+    assert resolver.run_summary() == {"conditions_checked": 4, "downgraded": 2,
+                                      "downgraded_quote_not_found": 1, "downgraded_no_quote": 1}
 
 
 def test_made_up_contradiction_cannot_make_a_rule_not_applicable():
