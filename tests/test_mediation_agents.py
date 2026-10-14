@@ -108,6 +108,28 @@ def test_applicability_prompt_explains_statuses_and_exact_quotes(tmp_path):
         assert word in prompt
 
 
+def test_applicability_prompt_revision(tmp_path):
+    agent, _ = make(ApplicabilityAgent, tmp_path, APPLICABILITY_ANSWER)
+    prompt = agent.build_prompt(description=DESCRIPTION, **PASSAGE_INPUT)
+    assert ('"satisfied": the description states that the condition holds, in the same or different words. '
+            'Example: "orders through an online shop" satisfies "contract concluded by electronic means at a '
+            'distance".') in prompt
+    assert '"a customer" does not show that the buyer is a "consumer"' in prompt
+    assert "write the exception as a condition that must not be the case" in prompt
+    instructions = prompt.split("JSON SCHEMA")[0]  # the passage itself may contain "explicitly"
+    assert "explicitly" not in instructions and "Do not assume or infer" not in instructions  # old wording gone
+    # The exception instruction comes right after the first (splitting) instruction.
+    assert prompt.index("Split the rule") < prompt.index("If the rule contains an exception") < \
+        prompt.index("For each condition, choose its status")
+
+
+def test_requirement_prompt_asks_for_the_main_obligation(tmp_path):
+    agent, _ = make(RequirementAgent, tmp_path, REQUIREMENT_ANSWER)
+    prompt = agent.build_prompt(description=DESCRIPTION, satisfied_conditions=SATISFIED, **PASSAGE_INPUT)
+    assert ("Turn the rule into one concrete requirement. If the rule contains several obligations, choose the "
+            "main obligation that adds or changes a step in the process.") in prompt
+
+
 # ---------- RequirementAgent ----------
 
 SATISFIED = [{"condition": c["condition"], "evidence": c["evidence"]}

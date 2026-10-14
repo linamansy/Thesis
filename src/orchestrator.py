@@ -9,7 +9,8 @@ For every passage of the case, in rank order:
 If an agent still fails after its retry, the passage is labelled "Mediation failed" and the
 next passage is processed; a case is never stopped.
 
-The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings:
+The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings,
+each followed by the same fixed explanation line (REQUIREMENTS_EXPLANATION, UNCONFIRMED_EXPLANATION):
   REQUIREMENTS                              one line per Applicable passage with its requirement
   RULES WITH UNCONFIRMED APPLICABILITY      id and title of each Indeterminate passage, followed by
                                             "Unconfirmed: <condition>" for each of its conditions whose
@@ -38,7 +39,10 @@ IRRELEVANT = "Irrelevant"
 MEDIATION_FAILED = "Mediation failed"
 LABELS = [APPLICABLE, INDETERMINATE, NOT_APPLICABLE, IRRELEVANT, MEDIATION_FAILED]
 REQUIREMENTS_HEADING = "REQUIREMENTS"
+REQUIREMENTS_EXPLANATION = "These rules were checked and apply to this process."
 UNCONFIRMED_HEADING = "RULES WITH UNCONFIRMED APPLICABILITY"
+UNCONFIRMED_EXPLANATION = ("These rules may apply, but the description does not confirm it. "
+                           "Do not add steps for them unless the description itself supports those steps.")
 EMPTY_SECTION_TEXT = "(none)"
 
 
@@ -154,8 +158,9 @@ class Orchestrator:
             unconfirmed_lines += [f"  Unconfirmed: {c['condition']}"
                                   for c in r["resolution"]["conditions"] if c["status"] == "not_stated"]
 
-        return "\n".join([REQUIREMENTS_HEADING, *(requirement_lines or [EMPTY_SECTION_TEXT]), "",
-                          UNCONFIRMED_HEADING, *(unconfirmed_lines or [EMPTY_SECTION_TEXT])])
+        return "\n".join([REQUIREMENTS_HEADING, REQUIREMENTS_EXPLANATION, *(requirement_lines or [EMPTY_SECTION_TEXT]),
+                          "",
+                          UNCONFIRMED_HEADING, UNCONFIRMED_EXPLANATION, *(unconfirmed_lines or [EMPTY_SECTION_TEXT])])
 
     # ---------- whole run ----------
 

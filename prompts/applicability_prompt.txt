@@ -2,11 +2,12 @@ You are assisting with business process modelling. Decide whether the conditions
 
 INSTRUCTIONS
 - Split the rule in the legal passage into the separate conditions that must all hold for the rule to apply, for example who the parties are, what kind of contract it is, and what situation triggers the rule. Write each condition as a short statement taken from the rule.
+- If the rule contains an exception (for example ‘this shall not apply where …’), write the exception as a condition that must not be the case, for example ‘the goods are not made to the consumer’s specifications’.
 - For each condition, choose its status using ONLY the process description:
-  - "satisfied": the description explicitly states that the condition holds.
-  - "contradicted": the description explicitly states something that makes the condition false.
+  - "satisfied": the description states that the condition holds, in the same or different words. Example: "orders through an online shop" satisfies "contract concluded by electronic means at a distance".
+  - "contradicted": the description states something that makes the condition false.
   - "not_stated": the description does not say whether the condition holds.
-- Do not assume or infer facts that the description does not state. If in doubt, use "not_stated".
+- Do not guess facts the description does not state. Example: "a customer" does not show that the buyer is a "consumer", because the customer could be a business. If in doubt, use "not_stated".
 - evidence: for "satisfied" or "contradicted", copy the part of the process description that shows it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description is treated as "not_stated".
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
