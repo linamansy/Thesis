@@ -1,0 +1,627 @@
+{
+  "created_at": "2026-10-14T14:20:48+00:00",
+  "retrieval_config": {
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "chunking": {
+      "max_passage_chars": 1500
+    }
+  },
+  "reproducibility": {
+    "passages_file": "data/knowledge/passages.jsonl",
+    "passages_sha256": "cb8b262906d48b2d6e31fc8f434fb804caa2b333150dd5fabeef0194d87c5aa6",
+    "n_passages": 158,
+    "dense_index_fingerprint": "f986506b7b6d20048f6ed6bc8c602f7e7380a2d7eed4ecdfd201e211ec32e1a6",
+    "stopwords_count": 198,
+    "stopwords_sha256": "47608d511aa4fec95139d41e487109ab4a260313745d397210dbf966b1d3c225",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "faiss-cpu": "1.15.1",
+      "rank-bm25": "0.2.2",
+      "nltk": "3.10.3"
+    }
+  },
+  "cases": {
+    "01": {
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.18400287054307568,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.17133017754479324,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.1420268177780543,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-6",
+          "fused_score": 0.1312036781626334,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art7-2",
+          "fused_score": 0.11419778922747957,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n2. The trader shall provide the consumer with a copy of the signed contract or the confirmation of the contract on paper or, if the consumer agrees, on another durable medium, including, where applicable, the confirmation of the consumer’s prior express consent and acknowledgement in accordance with point (m) of Article 16."
+        }
+      ]
+    },
+    "03": {
+      "queries": [
+        "This process begins with monitoring inventory levels in a warehouse or store. When stock reaches a predefined threshold, an automated alert or manual check signals the need to reorder. The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability. Once the order is placed, the inventory system updates with expected delivery dates. Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage. The process ends when the inventory levels are updated after the restock is complete.",
+        "This process begins with monitoring inventory levels in a warehouse or store.",
+        "When stock reaches a predefined threshold, an automated alert or manual check signals the need to reorder.",
+        "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability.",
+        "Once the order is placed, the inventory system updates with expected delivery dates.",
+        "Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage.",
+        "The process ends when the inventory levels are updated after the restock is complete."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.1896471531216643,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.15538432353541462,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.15151840901544875,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-1",
+          "fused_score": 0.13266812181894438,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.12490013730164938,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        }
+      ]
+    },
+    "05": {
+      "queries": [
+        "The process begins when a company identifies the need for a new supplier or vendor. The procurement team issues a request for proposals (RFP) and receives responses from various suppliers. Each proposal is evaluated based on criteria like cost, quality, and delivery time. The team may also conduct site visits or interviews with suppliers. After careful analysis, a supplier is selected, and contract negotiations begin. Once both parties agree on the terms, the contract is signed. The process ends when the supplier is officially onboarded, and the contract is executed.",
+        "The process begins when a company identifies the need for a new supplier or vendor.",
+        "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+        "Each proposal is evaluated based on criteria like cost, quality, and delivery time.",
+        "The team may also conduct site visits or interviews with suppliers.",
+        "After careful analysis, a supplier is selected, and contract negotiations begin.",
+        "Once both parties agree on the terms, the contract is signed.",
+        "The process ends when the supplier is officially onboarded, and the contract is executed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.17026645351243053,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.16919673020281165,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-6",
+          "fused_score": 0.15715598445702056,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art7-2",
+          "fused_score": 0.14567036865390912,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n2. The trader shall provide the consumer with a copy of the signed contract or the confirmation of the contract on paper or, if the consumer agrees, on another durable medium, including, where applicable, the confirmation of the consumer’s prior express consent and acknowledgement in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-4",
+          "fused_score": 0.12351429577961466,
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7."
+        }
+      ]
+    },
+    "06": {
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.2049455138127876,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.18631072527357603,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.184617491843919,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-6",
+          "fused_score": 0.15888462772699477,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.1356124584769834,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        }
+      ]
+    },
+    "10": {
+      "queries": [
+        "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware. IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs. If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment. After successful testing, the new solution is rolled out to the requesting department. Training may be provided, and IT support remains available for troubleshooting.",
+        "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+        "IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs.",
+        "If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment.",
+        "After successful testing, the new solution is rolled out to the requesting department.",
+        "Training may be provided, and IT support remains available for troubleshooting."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art5-1-e",
+          "fused_score": 0.13357806698102373,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 5: Information requirements for contracts other than distance or off-premises contracts\n1. Before the consumer is bound by a contract other than a distance or an off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner, if that information is not already apparent from the context:\n(e) in addition to a reminder of the existence of a legal guarantee of conformity for goods, the existence and the conditions of after-sales services and commercial guarantees, where applicable;\n(f) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(g) where applicable, the functionality, including applicable technical protection measures, of digital content;\n(h) where applicable, any relevant interoperability of digital content with hardware and software that the trader is aware of or can reasonably be expected to have been aware of."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art7-4",
+          "fused_score": 0.12929495869106133,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n4. With respect to off-premises contracts where the consumer has explicitly requested the services of the trader for the purpose of carrying out repairs or maintenance for which the trader and the consumer immediately perform their contractual obligations and where the payment to be made by the consumer does not exceed EUR 200:\n(a) the trader shall provide the consumer with the information referred to in points (b) and (c) of Article 6(1) and information about the price or the manner in which the price is to be calculated together with an estimate of the total price, on paper or, if the consumer agrees, on another durable medium. The trader shall provide the information referred to in points (a), (h) and (k) of Article 6(1), but may choose not to provide it on paper or another durable medium if the consumer expressly agrees;\n(b) the confirmation of the contract provided in accordance with paragraph 2 of this Article shall contain the information provided for in Article 6(1).\nMember States may decide not to apply this paragraph."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-6",
+          "fused_score": 0.105238880742913,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art6-1-l",
+          "fused_score": 0.10111233220038084,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(l) a reminder of the existence of a legal guarantee of conformity for goods;\n(m) where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees;\n(n) the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable;\n(o) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(p) where applicable, the minimum duration of the consumer’s obligations under the contract;\n(q) where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader;\n(r) where applicable, the functionality, including applicable technical protection measures, of digital content;\n(s) where applicable, any relevant interoperability of digital content with hardware and software that the trader is aware of or can reasonably be expected to have been aware of;"
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.09435137310697239,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ]
+    },
+    "11": {
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art6-1-e",
+          "fused_score": 0.15261590140061063,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(e) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided;\n(f) the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate;"
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art14-4",
+          "fused_score": 0.11560041262459954,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given his prior express consent to the beginning of the performance before the end of the 14-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art6-1-l",
+          "fused_score": 0.10241647241647242,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(l) a reminder of the existence of a legal guarantee of conformity for goods;\n(m) where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees;\n(n) the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable;\n(o) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(p) where applicable, the minimum duration of the consumer’s obligations under the contract;\n(q) where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader;\n(r) where applicable, the functionality, including applicable technical protection measures, of digital content;\n(s) where applicable, any relevant interoperability of digital content with hardware and software that the trader is aware of or can reasonably be expected to have been aware of;"
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art16-1-h",
+          "fused_score": 0.09735331974562328,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 16: Exceptions from the right of withdrawal\nMember States shall not provide for the right of withdrawal set out in Articles 9 to 15 in respect of distance and off-premises contracts as regards the following:\n(h) contracts where the consumer has specifically requested a visit from the trader for the purpose of carrying out urgent repairs or maintenance. If, on the occasion of such visit, the trader provides services in addition to those specifically requested by the consumer or goods other than replacement parts necessarily used in carrying out the maintenance or in making the repairs, the right of withdrawal shall apply to those additional services or goods;\n(i) the supply of sealed audio or sealed video recordings or sealed computer software which were unsealed after delivery;\n(j) the supply of a newspaper, periodical or magazine with the exception of subscription contracts for the supply of such publications;\n(k) contracts concluded at a public auction;\n(l) the provision of accommodation other than for residential purpose, transport of goods, car rental services, catering or services related to leisure activities if the contract provides for a specific date or period of performance;\n(m) the supply of digital content which is not supplied on a tangible medium if the performance has begun with the consumer’s prior express consent and his acknowledgment that he thereby loses his right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.09490409001052505,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ]
+    },
+    "13": {
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art6-1-t",
+          "fused_score": 0.11686931811738313,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(t) where applicable, the possibility of having recourse to an out-of-court complaint and redress mechanism, to which the trader is subject, and the methods for having access to it."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-5",
+          "fused_score": 0.10528840371976737,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n5. Without prejudice to paragraph 4, if the trader makes a telephone call to the consumer with a view to concluding a distance contract, he shall, at the beginning of the conversation with the consumer, disclose his identity and, where applicable, the identity of the person on whose behalf he makes that call, and the commercial purpose of the call."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art13-1",
+          "fused_score": 0.1044944060507697,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-3",
+          "fused_score": 0.10335568132270107,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-4",
+          "fused_score": 0.10112518636242941,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        }
+      ]
+    },
+    "17": {
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.438404958510959,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.3679097950442019,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-3",
+          "fused_score": 0.3600617314695365,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.34446228462779643,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art14-1",
+          "fused_score": 0.31796160803570195,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        }
+      ]
+    },
+    "19": {
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.16578934258634648,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art14-3",
+          "fused_score": 0.1555741599531649,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n3. Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-3",
+          "fused_score": 0.15410089295500948,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.15079096610029932,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.14680003366728459,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        }
+      ]
+    },
+    "21": {
+      "queries": [
+        "If goods shall be shipped, the secretary clarifies who will do the shipping. If you have large amounts, special shipping will be necessary. In these cases the secretary invites three logistic companies to make offers and she selects one of them. In case of small amounts, normal post shipment is used. Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary. In the meantime the goods can be already packaged by the warehousemen. If everything is ready, the packaged goods are prepared for being picked up by the logistic company.",
+        "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+        "If you have large amounts, special shipping will be necessary.",
+        "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+        "In case of small amounts, normal post shipment is used.",
+        "Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary.",
+        "In the meantime the goods can be already packaged by the warehousemen.",
+        "If everything is ready, the packaged goods are prepared for being picked up by the logistic company."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.19732808920695627,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art20-1",
+          "fused_score": 0.1695347158424973,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 20: Passing of risk\nIn contracts where the trader dispatches the goods to the consumer, the risk of loss of or damage to the goods shall pass to the consumer when he or a third party indicated by the consumer and other than the carrier has acquired the physical possession of the goods. However, the risk shall pass to the consumer upon delivery to the carrier if the carrier was commissioned by the consumer to carry the goods and that choice was not offered by the trader, without prejudice to the rights of the consumer against the carrier."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-1",
+          "fused_score": 0.16917732851773096,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-1",
+          "fused_score": 0.16271434976494153,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art5-1-a",
+          "fused_score": 0.15326896791627928,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 5: Information requirements for contracts other than distance or off-premises contracts\n1. Before the consumer is bound by a contract other than a distance or an off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner, if that information is not already apparent from the context:\n(a) the main characteristics of the goods or services, to the extent appropriate to the medium and to the goods or services;\n(b) the identity of the trader, such as his trading name, the geographical address at which he is established and his telephone number;\n(c) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable;\n(d) where applicable, the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the service, and the trader’s complaint handling policy;"
+        }
+      ]
+    },
+    "37": {
+      "queries": [
+        "Contract For your contract project you need parts from several web shops. In order to find out which web shop has the right parts, you have to query them all, and find out how much they can deliver, at which price, and how long it will take. Create a list of parts that you order from each shop. If one shop has not enough parts, order from several shops. Always use the cheapest parts. The parts arrive in batches in a random order, typically they are +/- 2 days earlier/later. When the first parts arrive you start building. Sometimes you have to reorder parts. If your stock (for a single part) falls below 5, you reorder (the cheapest), if it falls below 3 you reorder again (the fastest). If it is zero, you write a mail to your friends, complaining about the webshops.",
+        "Contract",
+        "For your contract project you need parts from several web shops.",
+        "In order to find out which web shop has the right parts, you have to query them all, and find out how much they can deliver, at which price, and how long it will take.",
+        "Create a list of parts that you order from each shop.",
+        "If one shop has not enough parts, order from several shops.",
+        "Always use the cheapest parts.",
+        "The parts arrive in batches in a random order, typically they are +/- 2 days earlier/later.",
+        "When the first parts arrive you start building.",
+        "Sometimes you have to reorder parts.",
+        "If your stock (for a single part) falls below 5, you reorder (the cheapest), if it falls below 3 you reorder again (the fastest).",
+        "If it is zero, you write a mail to your friends, complaining about the webshops."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-4",
+          "fused_score": 0.21564982466034624,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given his prior express consent to the beginning of the performance before the end of the 14-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art6-5",
+          "fused_score": 0.20218820388714676,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n5. The information referred to in paragraph 1 shall form an integral part of the distance or off-premises contract and shall not be altered unless the contracting parties expressly agree otherwise."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.1953316344990543,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.16240998181351474,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art5-2",
+          "fused_score": 0.15909827996420742,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 5: Information requirements for contracts other than distance or off-premises contracts\n2. Paragraph 1 shall also apply to contracts for the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, of district heating or of digital content which is not supplied on a tangible medium."
+        }
+      ]
+    },
+    "45": {
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-7",
+          "fused_score": 0.23287734858334358,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.216179006919487,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art6-1-l",
+          "fused_score": 0.1582140122378409,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(l) a reminder of the existence of a legal guarantee of conformity for goods;\n(m) where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees;\n(n) the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable;\n(o) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(p) where applicable, the minimum duration of the consumer’s obligations under the contract;\n(q) where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader;\n(r) where applicable, the functionality, including applicable technical protection measures, of digital content;\n(s) where applicable, any relevant interoperability of digital content with hardware and software that the trader is aware of or can reasonably be expected to have been aware of;"
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art7-2",
+          "fused_score": 0.15794155969917917,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n2. The trader shall provide the consumer with a copy of the signed contract or the confirmation of the contract on paper or, if the consumer agrees, on another durable medium, including, where applicable, the confirmation of the consumer’s prior express consent and acknowledgement in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.151898499488054,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ]
+    },
+    "46": {
+      "queries": [
+        "Storage management First, the order is read from the automatic order management system. Then, it's checked if the first product from the order is in stock. If it's in stock then it's withdrawn from the warehouse. However, if it's not in stock then it's reordered from the wholesaler. Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler. After the ordered product has arrived it's registered in the stock management system. Finally, it's checked if the whole order is ready for shipment. If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped. If it isn't then the next product from the order is selected and the process starts again with checking if this order is in stock or not.",
+        "Storage management",
+        "First, the order is read from the automatic order management system.",
+        "Then, it's checked if the first product from the order is in stock.",
+        "If it's in stock then it's withdrawn from the warehouse.",
+        "However, if it's not in stock then it's reordered from the wholesaler.",
+        "Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler.",
+        "After the ordered product has arrived it's registered in the stock management system.",
+        "Finally, it's checked if the whole order is ready for shipment.",
+        "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped.",
+        "If it isn't then the next product from the order is selected and the process starts again with checking if this order is in stock or not."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "fused_score": 0.23381894914154908,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art9-2",
+          "fused_score": 0.222688549905397,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n2. Without prejudice to Article 10, the withdrawal period referred to in paragraph 1 of this Article shall expire after 14 days from:\n(a) in the case of service contracts, the day of the conclusion of the contract;\n(b) in the case of sales contracts, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the goods or:\n(i) in the case of multiple goods ordered by the consumer in one order and delivered separately, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last good;\n(ii) in the case of delivery of a good consisting of multiple lots or pieces, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last lot or piece;\n(iii) in the case of contracts for regular delivery of goods during defined period of time, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the first good;\n(c) in the case of contracts for the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, of district heating or of digital content which is not supplied on a tangible medium, the day of the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-2",
+          "fused_score": 0.2155794784304419,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "fused_score": 0.206409413019252,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-1",
+          "fused_score": 0.18881689445477046,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        }
+      ]
+    }
+  }
+}
