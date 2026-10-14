@@ -160,5 +160,5 @@ def test_key_is_read_from_env_file(tmp_path, monkeypatch):
 
 
 def test_unknown_provider_is_refused():
-    with pytest.raises(ValueError, match="mock' or 'anthropic"):
+    with pytest.raises(ValueError, match="must be one of \\['mock', 'gemini', 'anthropic'\\]"):
         create_llm(dict(CONFIG, llm=dict(CONFIG["llm"], provider="openai")))

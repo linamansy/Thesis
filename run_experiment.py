@@ -11,13 +11,18 @@ The conditions differ ONLY in the knowledge block of the generator prompt:
     C3  the same 5 frozen passages after mediation by the Orchestrator (src/orchestrator.py):
         requirements from Applicable rules + a list of rules with unconfirmed applicability
 
-Everything of one run goes into its own folder (src/run_folder.py), which is never overwritten:
+Everything of one run goes into its own folder (src/run_folder.py); finished cases are never overwritten:
     results/runs/<run_id>/run_info.json
     results/runs/<run_id>/<condition>/<case_id>/generated.json, generated.bpmn, validation.json
     results/runs/<run_id>/C3/mediation/<case_id>.json and run_summary.json
-    results/logs/<condition>_<run_id>.jsonl   (every LLM call)
-A case where the generator fails (invalid output after its retry, or an API error after all API
-retries) is recorded as a failed generation, never skipped.
+    results/logs/<condition>_<run_id>.jsonl   (every LLM call; _part2, _part3, ... for resumed parts)
+
+Two kinds of failure are treated differently:
+  - the generator gives no valid output after its retry (or another error happens): the case is
+    recorded as a failed generation; this is a result, the case is finished
+  - the API is unreachable after all API retries (LLMUnavailableError, e.g. the daily free-tier
+    limit): the run STOPS, the case stays unfinished. Running the same command again later resumes:
+    finished cases are skipped, the others are run, logging goes to a new log part.
 """
 
 import argparse
@@ -32,7 +37,8 @@ from src.bpmn_builder import BPMNBuilder
 from src.config import load_config, project_path
 from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
-from src.llm.base_llm import LLMClient
+from src.llm.base_llm import LLMClient, LLMUnavailableError
+from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
 from src.orchestrator import Orchestrator
@@ -41,22 +47,39 @@ from src.run_folder import RunFolder, default_run_id
 from src.validator import BPMNValidator
 
 MEDIATION_ROLES = ["relevance", "applicability", "requirement"]
+PROVIDERS = ["mock", "gemini", "anthropic"]
 
 
-def create_llm(config: dict, role: str = "generator") -> LLMClient:
+class RunInterrupted(Exception):
+    """The run stopped because the API is unavailable; it can be resumed by running the same command."""
+
+    def __init__(self, case_id: str, error: LLMUnavailableError):
+        super().__init__(f"stopped at case {case_id}: {error}")
+        self.case_id = case_id
+
+
+def create_llm(config: dict, role: str = "generator", shared: dict | None = None) -> LLMClient:
     """The LLM client for one role (generator, relevance, applicability, requirement).
 
     mock:      every role gets its own fixed answer file (paths.mock_<role>_response),
                because the agents expect different kinds of JSON.
-    anthropic: the real API, with the same model and temperature for every role.
+    gemini / anthropic: the real API, with the same model and temperature for every role. Pass the
+               same `shared` dict for all roles of a run so they share ONE client; then the pause
+               between calls (free-tier per-minute limit) counts over all agents together.
     """
     llm_config = config["llm"]
-    if llm_config["provider"] == "mock":
+    provider = llm_config["provider"]
+    if provider == "mock":
         answer = project_path(config["paths"][f"mock_{role}_response"]).read_text(encoding="utf-8")
         return MockLLM([answer], temperature=llm_config["temperature"])
-    if llm_config["provider"] == "anthropic":
-        return AnthropicLLM.from_config(config)
-    raise ValueError(f"llm.provider must be 'mock' or 'anthropic', not {llm_config['provider']!r}")
+    if provider not in PROVIDERS:
+        raise ValueError(f"llm.provider must be one of {PROVIDERS}, not {provider!r}")
+    if shared is not None and provider in shared:
+        return shared[provider]
+    llm = GeminiLLM.from_config(config) if provider == "gemini" else AnthropicLLM.from_config(config)
+    if shared is not None:
+        shared[provider] = llm
+    return llm
 
 
 class ExperimentRunner:
@@ -118,7 +141,9 @@ class ExperimentRunner:
         try:
             process = self.generator.run(case_id=case_id, description=description,
                                          knowledge_block=self.knowledge_block(case_id, description))
-        except Exception as e:  # e.g. the API still failing after all API retries
+        except LLMUnavailableError:
+            raise  # API unreachable: no result for this case; validation.json is NOT written
+        except Exception as e:  # any other error: recorded as a failed generation
             process, error = None, f"generation failed with {type(e).__name__}: {e}"
         record = {"case_id": case_id, "condition": self.condition, "run_id": self.logger.run_id}
 
@@ -130,13 +155,34 @@ class ExperimentRunner:
             self.builder.write(process, bpmn_path)
             record |= {"generation_succeeded": True, **self.validator.validate(bpmn_path)}
 
+        # validation.json is written LAST: its existence marks the case as finished.
         (case_dir / self.validation_file).write_text(json.dumps(record, indent=2), encoding="utf-8")
         return record
 
+    def is_finished(self, case_id: str) -> bool:
+        return (self.output_dir / case_id / self.validation_file).exists()
+
     def run_all(self) -> list[dict]:
-        records = [self.run_case(case_id) for case_id in self.case_ids]
-        if self.orchestrator:
-            self.orchestrator.save_run_summary(self.logger.run_id)
+        """Run every unfinished case; finished cases are skipped and their saved record is used.
+
+        Raises RunInterrupted when the API is unavailable; the cases finished so far are kept.
+        """
+        records, self.skipped, self.ran = [], [], []
+        try:
+            for case_id in self.case_ids:
+                if self.is_finished(case_id):
+                    path = self.output_dir / case_id / self.validation_file
+                    records.append(json.loads(path.read_text(encoding="utf-8")))
+                    self.skipped.append(case_id)
+                    continue
+                try:
+                    records.append(self.run_case(case_id))
+                except LLMUnavailableError as e:
+                    raise RunInterrupted(case_id, e) from e
+                self.ran.append(case_id)
+        finally:
+            if self.orchestrator:
+                self.orchestrator.save_run_summary(self.logger.run_id)
         return records
 
 
@@ -161,19 +207,30 @@ def main() -> None:
     try:
         folder = RunFolder(config, run_id, args.repetition)
         folder.check_can_start(args.condition)  # stop before any LLM call if this would overwrite something
-        llm = create_llm(config, "generator")
-        agent_llms = ({role: create_llm(config, role) for role in MEDIATION_ROLES}
+        if args.run_id is None:
+            folder.check_previous_repetition_complete(config["conditions"])
+        shared = {}
+        llm = create_llm(config, "generator", shared)
+        agent_llms = ({role: create_llm(config, role, shared) for role in MEDIATION_ROLES}
                       if args.condition == "C3" else None)
-        logger = RunLogger(project_path(config["paths"]["logs"]), args.condition, run_id)
-    except (FileExistsError, ValueError, MissingAPIKeyError) as e:
+        part = folder.next_part(args.condition)
+        logger = RunLogger(project_path(config["paths"]["logs"]), args.condition, run_id, part)
+    except (FileExistsError, ValueError, MissingAPIKeyError, MissingGeminiKeyError) as e:
         sys.exit(f"Not started: {e}")
 
-    folder.start(args.condition, logger.log_path)
+    to_run = folder.start_part(args.condition, part, logger.log_path)
     runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms)
-    print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | "
-          f"provider {config['llm']['provider']} | model {llm.model} (temperature {llm.temperature})\n")
-    records = runner.run_all()
-    folder.finish(args.condition, records)
+    print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | part {part} | "
+          f"provider {config['llm']['provider']} | model {llm.model} (temperature {llm.temperature})")
+    print(f"{len(runner.case_ids) - len(to_run)} case(s) already finished and skipped; "
+          f"{len(to_run)} to run: {' '.join(to_run)}\n")
+    try:
+        records = runner.run_all()
+    except RunInterrupted as e:
+        folder.end_part(args.condition, [], interrupted=str(e))
+        sys.exit(f"Run interrupted, {e}\nFinished in this part: {' '.join(runner.ran) or 'none'}. "
+                 f"Run the same command again later to continue with the unfinished cases.")
+    folder.end_part(args.condition, records)
 
     print_summary(records)
     print(f"\nOutputs: {runner.output_dir}")

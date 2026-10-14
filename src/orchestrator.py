@@ -6,8 +6,10 @@ For every passage of the case, in rank order:
   2. ApplicabilityAgent, then ApplicabilityResolver (code, no LLM) -> label
      "Applicable", "Not applicable" or "Indeterminate"
   3. RequirementAgent, ONLY for "Applicable"
-If an agent still fails after its retry, the passage is labelled "Mediation failed" and the
-next passage is processed; a case is never stopped.
+If an agent still fails after its retry (invalid output, or another error), the passage is labelled
+"Mediation failed" and the next passage is processed; a case is never stopped for that.
+Exception: LLMUnavailableError (the API itself is unreachable after all API retries, e.g. the daily
+free-tier limit) is NOT a mediation result. It is passed on, so the run stops and can be resumed.
 
 The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings,
 each followed by the same fixed explanation line (REQUIREMENTS_EXPLANATION, UNCONFIRMED_EXPLANATION):
@@ -18,11 +20,12 @@ each followed by the same fixed explanation line (REQUIREMENTS_EXPLANATION, UNCO
 An empty section contains "(none)". Irrelevant, Not applicable and failed passages are left out.
 Everything comes from the saved agent outputs and resolver results; no extra LLM call.
 
-Saved (provenance, by code):
-  results/C3/mediation/<case_id>.json  per passage: id, text, label, every agent output, the relevance
-                                       quote check, the resolver's checked conditions and downgrades,
-                                       the requirement, and the knowledge block of the case
-  results/C3/mediation/run_summary.json  counts over the whole run
+Saved (provenance, by code) in the run's C3/mediation/ folder:
+  <case_id>.json     per passage: id, text, label, every agent output, the relevance quote check,
+                     the resolver's checked conditions and downgrades, the requirement, and the
+                     knowledge block of the case. Written only when the case's mediation is complete.
+                     If it already exists (a resumed run), it is reused and the agents are not called again.
+  run_summary.json   counts over all mediation files of the run (so it also covers resumed runs)
 """
 
 import json
@@ -32,6 +35,7 @@ from pathlib import Path
 from src.agents.applicability_agent import ApplicabilityAgent
 from src.agents.relevance_agent import RelevanceAgent
 from src.agents.requirement_agent import RequirementAgent
+from src.llm.base_llm import LLMUnavailableError
 from src.mediation.applicability_resolver import APPLICABLE, INDETERMINATE, NOT_APPLICABLE, ApplicabilityResolver
 from src.mediation.relevance_evidence_checker import RelevanceEvidenceChecker
 
@@ -60,24 +64,29 @@ class Orchestrator:
         self.output_dir = Path(output_dir)
         self.resolver = ApplicabilityResolver()
         self.relevance_checker = RelevanceEvidenceChecker()
-        self.label_counts = Counter()
-        self.cases_done = []
+        self.reused_cases = []   # cases whose saved mediation was reused (resumed run)
 
     # ---------- one case ----------
 
     def mediate_case(self, case_id: str, description: str) -> dict:
-        """Mediate all frozen passages of one case, save the result and return it."""
+        """Mediate all frozen passages of one case, save the result and return it.
+
+        If this case's mediation file already exists (complete mediation from an earlier part of the
+        run), it is returned unchanged and no agent is called.
+        """
         if case_id not in self.frozen_cases:
             raise KeyError(f"case {case_id} is missing from the frozen retrieval file")
+        path = self.output_dir / f"{case_id}.json"
+        if path.exists():
+            self.reused_cases.append(case_id)
+            return json.loads(path.read_text(encoding="utf-8"))
+
         passages = sorted(self.frozen_cases[case_id]["passages"], key=lambda p: p["rank"])
         records = [self.mediate_passage(case_id, description, p) for p in passages]
         result = {"case_id": case_id, "passages": records, "knowledge_block": self.knowledge_block(records)}
 
-        self.label_counts.update(r["label"] for r in records)
-        self.cases_done.append(case_id)
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        (self.output_dir / f"{case_id}.json").write_text(json.dumps(result, indent=2, ensure_ascii=False),
-                                                          encoding="utf-8")
+        path.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
         return result
 
     def mediate_passage(self, case_id: str, description: str, passage: dict) -> dict:
@@ -130,7 +139,9 @@ class Orchestrator:
         try:
             output = agent.run(**inputs)
             error = None if output is not None else "no valid output after retry (see the log file)"
-        except Exception as e:  # e.g. an API error: record it and go on with the next passage
+        except LLMUnavailableError:
+            raise  # the API is unreachable: stop the run (it can be resumed), do not record a result
+        except Exception as e:  # any other error: record it and go on with the next passage
             output, error = None, f"{type(e).__name__}: {e}"
         if output is None:
             record["label"] = MEDIATION_FAILED
@@ -165,13 +176,28 @@ class Orchestrator:
     # ---------- whole run ----------
 
     def save_run_summary(self, run_id: str) -> dict:
+        """Counts over ALL saved mediation files of the run, so a resumed run is counted completely."""
+        cases = sorted(p.stem for p in self.output_dir.glob("*.json") if p.name != "run_summary.json")
+        records = [r for case in cases for r in
+                   json.loads((self.output_dir / f"{case}.json").read_text(encoding="utf-8"))["passages"]]
+        labels = Counter(r["label"] for r in records)
+        conditions = [c for r in records if r["resolution"] for c in r["resolution"]["conditions"]]
+        quotes = [r["relevance"]["quote_found"] for r in records
+                  if r["relevance"] and r["relevance"]["quote_found"] is not None]
         summary = {
             "run_id": run_id,
-            "cases": self.cases_done,
-            "n_passages": sum(self.label_counts.values()),
-            "passages_per_label": {label: self.label_counts.get(label, 0) for label in LABELS},
-            "applicability_resolver": self.resolver.run_summary(),
-            "relevance_evidence_checker": self.relevance_checker.run_summary(),
+            "cases": cases,
+            "n_passages": len(records),
+            "passages_per_label": {label: labels.get(label, 0) for label in LABELS},
+            "applicability_resolver": {
+                "conditions_checked": len(conditions),
+                "downgraded": sum(c["downgraded"] for c in conditions),
+                "downgraded_quote_not_found": sum(c["note"] == "evidence quote not found in the description"
+                                                  for c in conditions),
+                "downgraded_no_quote": sum(c["note"] == "no evidence quote given" for c in conditions),
+            },
+            "relevance_evidence_checker": {"process_quotes_checked": len(quotes),
+                                           "process_quotes_not_found": quotes.count(False)},
         }
         self.output_dir.mkdir(parents=True, exist_ok=True)
         (self.output_dir / "run_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")

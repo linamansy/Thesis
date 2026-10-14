@@ -19,6 +19,11 @@ def config_in(tmp_path, **llm):
 
 # ---------- RunLogger ----------
 
+def test_run_logger_part_files(tmp_path):
+    assert RunLogger(tmp_path, "C1", "rep1").log_path.name == "C1_rep1.jsonl"
+    assert RunLogger(tmp_path, "C1", "rep1", part=2).log_path.name == "C1_rep1_part2.jsonl"
+
+
 def test_run_logger_refuses_an_existing_log_file(tmp_path):
     logger = RunLogger(tmp_path, "C1", "rep1")
     logger.log_call(case_id="01", component="X", model="m", temperature=0, prompt="p", raw_output="r",
@@ -40,36 +45,69 @@ def test_repetition_must_be_within_configured_range(tmp_path):
         RunFolder(config_in(tmp_path), "x", 4)
 
 
-def test_start_and_finish_write_run_info(tmp_path):
+def finish_cases(folder, condition, case_ids):
+    """Pretend these cases were finished: write their validation.json."""
+    for case_id in case_ids:
+        case_dir = folder.condition_dir(condition) / case_id
+        case_dir.mkdir(parents=True, exist_ok=True)
+        (case_dir / "validation.json").write_text(json.dumps({"generation_succeeded": True, "valid": True}))
+
+
+def test_parts_are_recorded_in_run_info(tmp_path):
     folder = RunFolder(config_in(tmp_path), "mock_rep2", 2)
-    folder.start("C1", tmp_path / "C1.jsonl")
-    folder.finish("C1", [{"generation_succeeded": True, "valid": True}, {"generation_succeeded": False, "valid": False}])
+    to_run = folder.start_part("C1", 1, tmp_path / "C1.jsonl")
+    assert to_run == CONFIG["cases"]["ids"]
+    finish_cases(folder, "C1", ["01", "03"])
+    folder.end_part("C1", [], interrupted="stopped at case 05: quota")
+
+    assert folder.next_part("C1") == 2
+    to_run = folder.start_part("C1", 2, tmp_path / "C1_part2.jsonl")
+    assert to_run == CONFIG["cases"]["ids"][2:]          # finished cases 01 and 03 are not run again
+    finish_cases(folder, "C1", to_run)
+    folder.end_part("C1", [{"generation_succeeded": True, "valid": True}] * 13)
 
     info = folder.read_info()
     assert (info["run_id"], info["repetition"], info["provider"]) == ("mock_rep2", 2, "mock")
-    assert info["conditions"]["C1"]["n_cases"] == 2 and info["conditions"]["C1"]["n_valid"] == 1
-    assert info["conditions"]["C1"]["finished_at"] is not None
-    assert folder.condition_dir("C1").is_dir()
+    c1 = info["conditions"]["C1"]
+    assert [p["part"] for p in c1["parts"]] == [1, 2]
+    assert c1["parts"][0]["interrupted"] == "stopped at case 05: quota" and c1["parts"][1]["interrupted"] is None
+    assert c1["complete"] is True and c1["n_cases"] == 13 and c1["n_valid"] == 13
 
 
-def test_a_condition_is_never_run_twice_in_a_run(tmp_path):
+def test_a_complete_condition_is_never_started_again(tmp_path):
     folder = RunFolder(config_in(tmp_path), "mock_rep1", 1)
-    folder.start("C1", tmp_path / "log")
-    with pytest.raises(FileExistsError, match="Nothing is overwritten"):
-        folder.start("C1", tmp_path / "log")
-    folder.start("C2", tmp_path / "log2")  # other conditions of the same repetition join the same folder
+    folder.start_part("C1", 1, tmp_path / "log")
+    finish_cases(folder, "C1", CONFIG["cases"]["ids"])
+    with pytest.raises(FileExistsError, match="already complete"):
+        folder.check_can_start("C1")
+    folder.start_part("C2", 1, tmp_path / "log2")  # other conditions of the same repetition join the same folder
     assert set(folder.read_info()["conditions"]) == {"C1", "C2"}
 
 
+def test_next_repetition_needs_the_previous_one_complete(tmp_path):
+    config = config_in(tmp_path)
+    rep1 = RunFolder(config, "mock_rep1", 1)
+    for condition in ("C1", "C2", "C3"):
+        rep1.start_part(condition, 1, tmp_path / condition)
+    finish_cases(rep1, "C1", CONFIG["cases"]["ids"])
+    finish_cases(rep1, "C2", CONFIG["cases"]["ids"])
+    finish_cases(rep1, "C3", CONFIG["cases"]["ids"][:5])           # C3 of repetition 1 is unfinished
+
+    with pytest.raises(ValueError, match="Repetition 1 is not complete yet .unfinished: C3."):
+        RunFolder(config, "mock_rep2", 2).check_previous_repetition_complete(["C1", "C2", "C3"])
+    finish_cases(rep1, "C3", CONFIG["cases"]["ids"])
+    RunFolder(config, "mock_rep2", 2).check_previous_repetition_complete(["C1", "C2", "C3"])  # now allowed
+
+
 def test_a_run_folder_cannot_mix_settings(tmp_path):
-    RunFolder(config_in(tmp_path), "shared", 1).start("C1", tmp_path / "log")
+    RunFolder(config_in(tmp_path), "shared", 1).start_part("C1", 1, tmp_path / "log")
     with pytest.raises(ValueError, match="other settings"):
         RunFolder(config_in(tmp_path), "shared", 2).check_can_start("C2")          # other repetition
     with pytest.raises(ValueError, match="other settings"):
-        RunFolder(config_in(tmp_path, provider="anthropic"), "shared", 1).check_can_start("C2")  # other provider
-    RunFolder(config_in(tmp_path, provider="anthropic", model="claude-a"), "real", 1).start("C1", tmp_path / "x")
+        RunFolder(config_in(tmp_path, provider="gemini"), "shared", 1).check_can_start("C2")  # other provider
+    RunFolder(config_in(tmp_path, provider="gemini", model="gemini-a"), "real", 1).start_part("C1", 1, tmp_path / "x")
     with pytest.raises(ValueError, match="other settings"):
-        RunFolder(config_in(tmp_path, provider="anthropic", model="claude-b"), "real", 1).check_can_start("C2")
+        RunFolder(config_in(tmp_path, provider="gemini", model="gemini-b"), "real", 1).check_can_start("C2")
 
 
 def test_mock_run_records_the_mock_model_name(tmp_path):
@@ -79,8 +117,8 @@ def test_mock_run_records_the_mock_model_name(tmp_path):
 
 def test_find_runs(tmp_path):
     config = config_in(tmp_path)
-    RunFolder(config, "mock_rep2", 2).start("C1", tmp_path / "a")
-    RunFolder(config, "mock_rep1", 1).start("C3", tmp_path / "b")
+    RunFolder(config, "mock_rep2", 2).start_part("C1", 1, tmp_path / "a")
+    RunFolder(config, "mock_rep1", 1).start_part("C3", 1, tmp_path / "b")
     runs = RunFolder.find_runs(config)
     assert [(r["run_id"], list(r["conditions"])) for r in runs] == [("mock_rep1", ["C3"]), ("mock_rep2", ["C1"])]
     assert runs[0]["path"] == tmp_path / "runs" / "mock_rep1"
@@ -104,7 +142,7 @@ def test_cli_refuses_to_overwrite_and_needs_a_valid_repetition(tmp_path):
         assert json.loads((runs_dir / "run_info.json").read_text())["conditions"]["C1"]["n_cases"] == 13
 
         second = run_cli("--condition", "C1", "--repetition", "1", "--run-id", run_id)
-        assert second.returncode != 0 and "Not started" in second.stderr and "already" in second.stderr
+        assert second.returncode != 0 and "Not started" in second.stderr and "already complete" in second.stderr
 
         wrong = run_cli("--condition", "C1", "--repetition", "7", "--run-id", run_id + "_x")
         assert wrong.returncode != 0 and "between 1 and 3" in wrong.stderr

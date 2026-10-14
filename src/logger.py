@@ -4,9 +4,10 @@ File: results/logs/<condition>_<run_id>.jsonl
 Each line is one complete JSON object, so the file can be read line by line
 and every LLM input and output of a run can be inspected later.
 
-One log file belongs to exactly one run: if the file already exists (the same
-condition and run id were used before), RunLogger refuses to start, so records
-of two runs can never be mixed in one file.
+One log file belongs to exactly one run (part): if the file already exists, RunLogger
+refuses to start, so records of two runs can never be mixed in one file. A run that is
+resumed (see src/run_folder.py) writes each further part to a new file:
+  <condition>_<run_id>.jsonl, <condition>_<run_id>_part2.jsonl, <condition>_<run_id>_part3.jsonl, ...
 """
 
 import json
@@ -17,13 +18,15 @@ from pathlib import Path
 class RunLogger:
     """Collects the log records of one experiment run (one condition, one run ID)."""
 
-    def __init__(self, log_dir: Path, condition: str, run_id: str | None = None):
+    def __init__(self, log_dir: Path, condition: str, run_id: str | None = None, part: int = 1):
         self.condition = condition
         # Default run ID: the start time, e.g. "20261014T153000Z".
         self.run_id = run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+        self.part = part
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
-        self.log_path = self.log_dir / f"{condition}_{self.run_id}.jsonl"
+        suffix = "" if part == 1 else f"_part{part}"
+        self.log_path = self.log_dir / f"{condition}_{self.run_id}{suffix}.jsonl"
         if self.log_path.exists():
             raise FileExistsError(f"Log file {self.log_path} already exists: condition {condition} was already "
                                   f"run with run id {self.run_id!r}. Choose a new run id.")
