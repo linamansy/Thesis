@@ -50,13 +50,16 @@ paths:
   applicability_prompt: prompts/applicability_prompt.txt
   requirement_prompt: prompts/requirement_prompt.txt
   mock_generator_response: data/mock/sample_process.json  # fixed answer MockLLM gives the generator
+  mock_relevance_response: data/mock/relevance_response.json          # fixed answers for the C3 agents
+  mock_applicability_response: data/mock/applicability_response.json
+  mock_requirement_response: data/mock/requirement_response.json
   results: results                        # outputs go to results/<condition>/<case_id>/
   generated_json_file: generated.json
   generated_bpmn_file: generated.bpmn
   validation_file: validation.json
   evaluation_details_file: evaluation.json   # per case: results/<condition>/<case_id>/evaluation.json
   logs: results/logs
-  mediation: results/C3/mediation
+  mediation: results/C3/mediation               # one file per case + run_summary.json
   evaluation: results/evaluation.csv                    # main threshold, one row per case per condition
   evaluation_summary: results/evaluation_summary.csv    # main threshold, one row per condition
   evaluation_threshold_csv: results/sensitivity/evaluation_threshold_{threshold}.csv  # one file per sweep threshold

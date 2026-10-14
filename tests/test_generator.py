@@ -72,7 +72,7 @@ def make_runner(tmp_path, condition, responses=("{}",)):
 
 def case_prompt(runner, case_id):
     description = (runner.cases_dir / case_id / runner.description_file).read_text(encoding="utf-8")
-    return runner.generator.build_prompt(description, runner.knowledge_block(case_id))
+    return runner.generator.build_prompt(description, runner.knowledge_block(case_id, description))
 
 
 @pytest.mark.parametrize("case_id", CONFIG["cases"]["ids"])
