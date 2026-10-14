@@ -150,3 +150,29 @@ def test_cli_refuses_to_overwrite_and_needs_a_valid_repetition(tmp_path):
         import shutil
         shutil.rmtree(runs_dir, ignore_errors=True)
         log.unlink(missing_ok=True)
+
+
+def test_cli_cases_option_runs_only_the_selected_cases(tmp_path):
+    run_id = f"smoke_pytest_{tmp_path.name}"
+    runs_dir = PROJECT_ROOT / CONFIG["paths"]["runs"] / run_id
+    logs = [PROJECT_ROOT / CONFIG["paths"]["logs"] / f"C1_{run_id}{s}.jsonl" for s in ("", "_part2")]
+    try:
+        result = run_cli("--condition", "C1", "--repetition", "1", "--run-id", run_id, "--cases", "19")
+        assert result.returncode == 0, result.stderr
+        assert sorted(p.name for p in (runs_dir / "C1").iterdir()) == ["19"]   # only case 19 was run
+        info = json.loads((runs_dir / "run_info.json").read_text())
+        assert info["conditions"]["C1"]["parts"][0]["cases_to_run"] == ["19"]
+        assert info["conditions"]["C1"]["complete"] is False                   # 12 cases not run
+
+        again = run_cli("--condition", "C1", "--repetition", "1", "--run-id", run_id, "--cases", "19", "03")
+        assert again.returncode == 0, again.stderr
+        assert "1 selected case(s) already finished and skipped; 1 to run: 03" in again.stdout
+        assert sorted(p.name for p in (runs_dir / "C1").iterdir()) == ["03", "19"]
+
+        bad = run_cli("--condition", "C1", "--repetition", "1", "--run-id", run_id + "x", "--cases", "99")
+        assert bad.returncode != 0 and "unknown case id(s) ['99']" in bad.stderr
+    finally:
+        import shutil
+        shutil.rmtree(runs_dir, ignore_errors=True)
+        for log in logs:
+            log.unlink(missing_ok=True)

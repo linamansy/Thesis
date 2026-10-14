@@ -107,12 +107,16 @@ class RunFolder:
 
     # ---------- recording parts ----------
 
-    def start_part(self, condition: str, part: int, log_path: Path) -> list[str]:
-        """Record the start of a (new) part. Returns the cases that will be run in this part."""
+    def start_part(self, condition: str, part: int, log_path: Path, case_ids: list[str] | None = None) -> list[str]:
+        """Record the start of a (new) part. Returns the cases that will be run in this part.
+
+        case_ids: run only these cases (--cases); default: all cases in config.yaml.
+        """
         self.check_can_start(condition)
         info = self.read_info() or {**self.settings, "created_at": now(), "conditions": {}}
         entry = info["conditions"].setdefault(condition, {"parts": [], "complete": False})
-        to_run = [c for c in self.case_ids if c not in self.finished_cases(condition)]
+        selected = case_ids or self.case_ids
+        to_run = [c for c in selected if c not in self.finished_cases(condition)]
         entry["parts"].append({"part": part, "started_at": now(), "finished_at": None,
                                "log_file": str(log_path), "cases_to_run": to_run, "interrupted": None})
         self.condition_dir(condition).mkdir(parents=True, exist_ok=True)

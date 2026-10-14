@@ -2,7 +2,10 @@
 
 Usage (from the project root):
     .venv\\Scripts\\python.exe run_experiment.py --condition C1 --repetition 1
-    (optional: --run-id <name>; default "<provider>_rep<repetition>", e.g. "anthropic_rep1")
+    (optional: --run-id <name>; default "<provider>_rep<repetition>", e.g. "gemini_rep1")
+    (optional: --cases 19 03; run only these cases)
+Smoke test (one case, kept out of every evaluation summary):
+    .venv\\Scripts\\python.exe run_experiment.py --condition C1 --repetition 1 --run-id smoke_c1 --cases 19
 
 The conditions differ ONLY in the knowledge block of the generator prompt:
     C1  "No domain knowledge provided."
@@ -200,8 +203,17 @@ def main() -> None:
     parser.add_argument("--condition", required=True, choices=config["conditions"])
     parser.add_argument("--repetition", required=True, type=int,
                         help=f"1 to {config['experiment']['repetitions']}")
-    parser.add_argument("--run-id", default=None, help="default: <provider>_rep<repetition>")
+    parser.add_argument("--run-id", default=None,
+                        help="default: <provider>_rep<repetition>. For test runs use an id starting with "
+                             f"'{config['evaluation']['smoke_run_prefix']}' (excluded from evaluation summaries)")
+    parser.add_argument("--cases", nargs="+", default=None,
+                        help="run only these case ids, e.g. --cases 19; default: all cases in config.yaml")
     args = parser.parse_args()
+    if args.cases:
+        unknown = [c for c in args.cases if c not in config["cases"]["ids"]]
+        if unknown:
+            sys.exit(f"Not started: unknown case id(s) {unknown}; known: {' '.join(config['cases']['ids'])}")
+        args.cases = [c for c in config["cases"]["ids"] if c in args.cases]  # config order, no duplicates
 
     run_id = args.run_id or default_run_id(config, args.repetition)
     try:
@@ -218,11 +230,13 @@ def main() -> None:
     except (FileExistsError, ValueError, MissingAPIKeyError, MissingGeminiKeyError) as e:
         sys.exit(f"Not started: {e}")
 
-    to_run = folder.start_part(args.condition, part, logger.log_path)
+    to_run = folder.start_part(args.condition, part, logger.log_path, args.cases)
     runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms)
+    if args.cases:
+        runner.case_ids = args.cases
     print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | part {part} | "
           f"provider {config['llm']['provider']} | model {llm.model} (temperature {llm.temperature})")
-    print(f"{len(runner.case_ids) - len(to_run)} case(s) already finished and skipped; "
+    print(f"{len(runner.case_ids) - len(to_run)} selected case(s) already finished and skipped; "
           f"{len(to_run)} to run: {' '.join(to_run)}\n")
     try:
         records = runner.run_all()

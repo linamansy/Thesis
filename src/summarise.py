@@ -35,6 +35,8 @@ REPETITION_COLUMNS = {
 def summarise_by_condition(table: pd.DataFrame, group_by: list[str] | None = None) -> pd.DataFrame:
     """One row per condition (or per any other grouping) with mean scores."""
     group_by = group_by or ["condition"]
+    if table.empty:
+        return pd.DataFrame()
     rows = []
     for keys, group in table.groupby(group_by, sort=True):
         keys = keys if isinstance(keys, tuple) else (keys,)
@@ -62,6 +64,8 @@ def summarise_runs(table: pd.DataFrame, extra_keys: list[str] | None = None) -> 
 def summarise_repetitions(run_summary: pd.DataFrame, extra_keys: list[str] | None = None) -> pd.DataFrame:
     """Step 2: per condition, the mean and SD over repetitions of each per-run score."""
     keys = (extra_keys or []) + CONDITION_KEYS
+    if run_summary.empty:
+        return pd.DataFrame()
     rows = []
     for values, group in run_summary.groupby(keys, sort=True):
         values = values if isinstance(values, tuple) else (values,)

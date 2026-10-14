@@ -17,7 +17,8 @@ results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data
 
 Outputs (main threshold from config.yaml), see src/summarise.py for the summaries:
   results/evaluation.csv               one row per run per condition per case, with run_id, repetition,
-                                       provider and model columns
+                                       provider and model columns; smoke (test) runs are included but
+                                       marked smoke_test = True, and left out of every summary
   results/evaluation_run_summary.csv   one row per run per condition (means over the cases)
   results/evaluation_summary.csv       one row per condition (and provider/model): mean and SD over repetitions
   results/runs/<run_id>/<condition>/<case_id>/evaluation.json   all details for one case
@@ -64,6 +65,7 @@ class Evaluator:
         self.threshold_csv_pattern = paths["evaluation_threshold_csv"]
         self.sensitivity_summary_path = project_path(paths["evaluation_sensitivity_summary"])
         self.sweep_thresholds = settings["sensitivity_thresholds"]
+        self.smoke_prefix = settings["smoke_run_prefix"]
         self.matcher = matcher or TaskMatcher(settings["embedding_model"], settings["similarity_threshold"])
         self.complexity = ComplexityMeasurer()
 
@@ -111,6 +113,10 @@ class Evaluator:
         }
 
     # ---------- one case, all cases ----------
+
+    def is_smoke(self, run_id: str) -> bool:
+        """Smoke (test) runs: evaluated, but never part of any summary."""
+        return run_id.startswith(self.smoke_prefix)
 
     def runs(self, run_ids: list[str] | None = None) -> list[dict]:
         """The run_info of every run (or of the given run ids)."""
@@ -160,6 +166,7 @@ class Evaluator:
         similarity = behavioral["behavioral_similarity"]
         return {
             "run_id": run["run_id"],
+            "smoke_test": self.is_smoke(run["run_id"]),
             "repetition": run["repetition"],
             "provider": run["provider"],
             "model": run["model"],
@@ -187,22 +194,34 @@ class Evaluator:
 
         A condition that was started in a run is always evaluated for all cases; a missing case
         gets 0 (never skipped). A condition that was never started in a run has no rows for that run.
+        Smoke runs (test runs, often only one case) are evaluated only for the cases they ran.
         """
         rows = []
         for run in self.runs(run_ids):
             for condition in conditions or self.conditions:
-                if condition in run["conditions"]:
-                    rows += [self.evaluate_case(run, condition, case_id, threshold, save_details)
-                             for case_id in self.case_ids]
+                if condition not in run["conditions"]:
+                    continue
+                case_ids = self.case_ids
+                if self.is_smoke(run["run_id"]):
+                    case_ids = [c for c in case_ids
+                                if (run["path"] / condition / c / self.validation_file).exists()]
+                rows += [self.evaluate_case(run, condition, case_id, threshold, save_details)
+                         for case_id in case_ids]
         table = pd.DataFrame(rows)
         csv_path = csv_path or self.csv_path
         csv_path.parent.mkdir(parents=True, exist_ok=True)
         table.to_csv(csv_path, index=False)
         return table
 
+    def without_smoke_runs(self, table: pd.DataFrame) -> pd.DataFrame:
+        return table[~table["smoke_test"]] if not table.empty else table
+
     def summarise(self, table: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
-        """Per run per condition, and per condition across repetitions; both saved as CSV."""
-        run_summary = summarise_runs(table)
+        """Per run per condition, and per condition across repetitions; both saved as CSV.
+
+        Smoke runs are left out of both summaries (they stay in evaluation.csv, marked smoke_test).
+        """
+        run_summary = summarise_runs(self.without_smoke_runs(table))
         summary = summarise_repetitions(run_summary)
         run_summary.to_csv(self.run_summary_path, index=False)
         summary.to_csv(self.summary_path, index=False)
@@ -219,7 +238,7 @@ class Evaluator:
             csv_path = project_path(self.threshold_csv_pattern.format(threshold=f"{threshold:.2f}"))
             tables.append(self.evaluate(conditions, run_ids, threshold, csv_path, save_details=False))
         keys = ["similarity_threshold"]
-        summary = summarise_repetitions(summarise_runs(pd.concat(tables), keys), keys)
+        summary = summarise_repetitions(summarise_runs(self.without_smoke_runs(pd.concat(tables)), keys), keys)
         self.sensitivity_summary_path.parent.mkdir(parents=True, exist_ok=True)
         summary.to_csv(self.sensitivity_summary_path, index=False)
         return summary
@@ -241,8 +260,15 @@ def main() -> None:
         return
 
     run_summary, summary = evaluator.summarise(table)
+    smoke_runs = sorted(table.loc[table["smoke_test"], "run_id"].unique())
     print(f"Evaluated {len(table)} rows from {table['run_id'].nunique()} run(s) "
-          f"at threshold {evaluator.matcher.threshold}.\n\nPer run:")
+          f"at threshold {evaluator.matcher.threshold}.")
+    if smoke_runs:
+        print(f"Smoke runs (in evaluation.csv, left out of the summaries): {', '.join(smoke_runs)}")
+    if run_summary.empty:
+        print("No non-smoke runs to summarise.")
+        return
+    print("\nPer run:")
     print(run_summary[["run_id", "repetition", "condition", "n_valid", "precision_mean", "recall_mean",
                        "f1_mean", "behavioral_mean_excluding", "behavioral_n_excluded",
                        "behavioral_mean_as_zero"]].to_string(index=False))

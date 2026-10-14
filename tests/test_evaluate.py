@@ -227,3 +227,28 @@ def test_sweep_writes_one_csv_per_threshold(evaluator, tmp_path):
     assert summary["similarity_threshold"].tolist() == [0.70, 0.75, 0.80, 0.85]
     assert set(summary.columns) >= {"f1_mean", "f1_sd", "n_repetitions"}
     assert not (case_dir / "evaluation.json").exists()  # details only describe the main threshold
+
+
+def test_smoke_runs_are_left_out_of_summaries(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    local.case_ids = ["01", "03"]
+    real = make_run(tmp_path, "mock_rep1", 1)
+    write_case(real, "C1", "01", valid=True)
+    write_case(real, "C1", "03", valid=True)
+    smoke = make_run(tmp_path, "smoke_c1", 1)
+    write_case(smoke, "C1", "01", valid=False)   # the smoke run only ran case 01 (and it failed)
+
+    table = local.evaluate()
+    run_summary, summary = local.summarise(table)
+
+    smoke_rows = table[table["smoke_test"]]
+    assert smoke_rows["case_id"].tolist() == ["01"]          # only the case it ran, no zero rows for 03
+    assert run_summary["run_id"].tolist() == ["mock_rep1"]   # smoke run not in the per-run summary
+    assert summary.iloc[0]["n_repetitions"] == 1 and summary.iloc[0]["f1_mean"] == 1.0
+
+
+def test_only_smoke_runs_gives_empty_summaries(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    write_case(make_run(tmp_path, "smoke_test", 1), "C1", "01", valid=True)
+    run_summary, summary = local.summarise(local.evaluate())
+    assert run_summary.empty and summary.empty
