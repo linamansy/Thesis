@@ -24,6 +24,16 @@ def test_prompt_has_three_parts_in_order(tmp_path):
     assert '"sequence_flows"' in prompt  # the JSON schema is included
 
 
+def test_instructions_are_neutral_about_knowledge(tmp_path):
+    prompt = make_generator(tmp_path).build_prompt("Some description.", NO_KNOWLEDGE_TEXT)
+    instructions = prompt.split("PROCESS DESCRIPTION")[0]
+    assert ("Model the process described in the process description. The domain knowledge block "
+            "may contain additional information; use it only where it applies to this specific "
+            "process.") in instructions
+    # C2 passes raw passages that may not apply, so the fixed text must not call them requirements.
+    assert "requirement" not in instructions.lower()
+
+
 def test_only_knowledge_block_changes(tmp_path):
     generator = make_generator(tmp_path)
     a = generator.build_prompt("Same description.", NO_KNOWLEDGE_TEXT)
