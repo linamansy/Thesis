@@ -16,6 +16,17 @@ conditions: ["C1", "C2", "C3"]
 chunking:
   max_passage_chars: 1500   # longer passages are split by their lettered points (src/retrieval/chunker.py)
 
+retrieval:
+  dense_model: intfloat/e5-small-v2   # small English embedding model
+  passage_prefix: "passage: "         # e5 models require these prefixes
+  query_prefix: "query: "
+  bm25_k1: 1.5
+  bm25_b: 0.75
+  stopwords_language: english         # NLTK stopword list
+  top_k_per_retriever: 20             # candidates taken from each retriever before fusion
+  rrf_k: 60                           # Reciprocal Rank Fusion constant: score = sum of 1 / (rrf_k + rank)
+  final_top_k: 5                      # passages kept per case (used when retrieval is frozen)
+
 evaluation:
   embedding_model: sentence-transformers/all-MiniLM-L6-v2  # embeds task labels for matching
   similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this (to be calibrated)
@@ -32,6 +43,8 @@ paths:
   knowledge_sources: data/knowledge/sources.json
   passages: data/knowledge/passages.jsonl
   frozen_retrieval: data/retrieval/frozen_retrieval.json
+  dense_index_dir: data/retrieval/dense_index   # FAISS index + the passage ids it contains
+  nltk_data: data/nltk_data                     # NLTK stopword list is downloaded here (not committed)
   generator_prompt: prompts/generator_prompt.txt       # the one prompt template shared by C1, C2, C3
   mock_generator_response: data/mock/sample_process.json  # fixed answer MockLLM gives the generator
   results: results                        # outputs go to results/<condition>/<case_id>/

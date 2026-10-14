@@ -1,6 +1,8 @@
 """Passage: one retrievable piece of legal text (usually one numbered paragraph of an article)."""
 
+import json
 from dataclasses import asdict, dataclass
+from pathlib import Path
 
 
 @dataclass(frozen=True)
@@ -15,3 +17,9 @@ class Passage:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+
+def load_passages(path: Path) -> list[Passage]:
+    """Read data/knowledge/passages.jsonl (one passage per line) in file order."""
+    with open(path, encoding="utf-8") as f:
+        return [Passage(**json.loads(line)) for line in f if line.strip()]
