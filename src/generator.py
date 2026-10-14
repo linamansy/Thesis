@@ -18,6 +18,16 @@ from src.schemas import ProcessModel
 NO_KNOWLEDGE_TEXT = "No domain knowledge provided."
 
 
+def format_passages(passages: list[dict]) -> str:
+    """Knowledge block for C2: the frozen passages in rank order, each as "[passage id] full text".
+
+    passages: entries from frozen_retrieval.json with the keys "rank", "passage_id" and "text".
+    Passages are separated by an empty line.
+    """
+    ordered = sorted(passages, key=lambda p: p["rank"])
+    return "\n\n".join(f"[{p['passage_id']}] {p['text']}" for p in ordered)
+
+
 class BPMNGenerator(BaseAgent):
     """Turns a process description (plus a knowledge block) into a ProcessModel."""
 

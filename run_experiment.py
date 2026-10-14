@@ -3,6 +3,11 @@
 Usage (from the project root):
     .venv\\Scripts\\python.exe run_experiment.py --condition C1
 
+The conditions differ ONLY in the knowledge block of the generator prompt:
+    C1  "No domain knowledge provided."
+    C2  the case's 5 frozen passages from data/retrieval/frozen_retrieval.json, in rank order,
+        each as "[passage id] full passage text" (retrieval is never run here)
+
 For every case it saves, in results/<condition>/<case_id>/:
     generated.json   the process structure returned by the generator
     generated.bpmn   the BPMN XML built from it
@@ -16,7 +21,7 @@ from pathlib import Path
 
 from src.bpmn_builder import BPMNBuilder
 from src.config import load_config, project_path
-from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator
+from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
 from src.llm.base_llm import LLMClient
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
@@ -49,11 +54,19 @@ class ExperimentRunner:
         self.generator = BPMNGenerator(llm, logger)
         self.builder = BPMNBuilder()
         self.validator = BPMNValidator()
+        self.frozen_cases = None
+        if condition == "C2":
+            frozen_path = project_path(paths["frozen_retrieval"])
+            self.frozen_cases = json.loads(frozen_path.read_text(encoding="utf-8"))["cases"]
 
     def knowledge_block(self, case_id: str) -> str:
         """The only part of the generator prompt that differs between conditions."""
         if self.condition == "C1":
             return NO_KNOWLEDGE_TEXT
+        if self.condition == "C2":
+            if case_id not in self.frozen_cases:
+                raise KeyError(f"case {case_id} is missing from the frozen retrieval file")
+            return format_passages(self.frozen_cases[case_id]["passages"])
         raise NotImplementedError(f"condition {self.condition} is not built yet")
 
     def run_case(self, case_id: str) -> dict:
