@@ -9,7 +9,7 @@
   - Pause between calls: the free tier allows only a limited number of requests per minute.
     llm.gemini_pause_between_calls_seconds makes sure at least that many seconds pass between
     the start of two calls (0 = no pause).
-  - Temporary API errors are retried with increasing waits (2, 4, 8, ... seconds, up to 8 retries):
+  - Temporary API errors are retried with increasing waits (2, 4, 8, ... seconds; the number of retries is llm.gemini_api_max_retries):
       429 / RESOURCE_EXHAUSTED   rate limit or quota
       500 / 502 / 503 / 504      server error, overload (UNAVAILABLE), timeout on the server side
       network errors and timeouts on our side (httpx)

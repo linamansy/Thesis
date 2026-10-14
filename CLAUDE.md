@@ -37,7 +37,7 @@ No LLM writes BPMN XML directly.
 - Provider for the thesis: Google Gemini, free tier (GeminiLLM, src/llm/gemini_llm.py, official google-genai library). Key GEMINI_API_KEY in .env.
 - Model: gemini-3.5-flash (fixed in config.yaml, never a "-latest" alias), temperature 0, max_tokens 8192, used for every agent and condition. The exact model version returned by the API is logged for every call.
 - Free-tier pacing: at least 10 seconds between two API calls (gemini_pause_between_calls_seconds).
-- API errors: rate limit (429 / RESOURCE_EXHAUSTED), overload and timeouts are retried with increasing waits, up to 8 times. An optional pause between calls keeps requests under the free-tier per-minute limit.
+- API errors: rate limit (429 / RESOURCE_EXHAUSTED), overload and timeouts are retried with increasing waits (2, 4, 8, 16, 32 s), up to 5 times, so an overload stops the run after about a minute. An optional pause between calls keeps requests under the free-tier per-minute limit.
 - 3 repetitions. Finish all three conditions (C1, C2, C3) of a repetition before starting the next repetition.
 - Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: gemini_rep1, gemini_rep2, gemini_rep3). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
 - Resuming: if a run stops (e.g. the daily free-tier limit), rerunning the same command (same condition and repetition) skips finished cases and continues with the unfinished ones, logging to a new log file part. Finished cases are never overwritten or rerun. An API that is unreachable after all retries stops the run; it is never recorded as a model result.

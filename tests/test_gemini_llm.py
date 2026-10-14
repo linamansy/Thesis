@@ -208,4 +208,4 @@ def test_gemini_provider_from_config_shares_one_client(tmp_path, monkeypatch):
 
     assert isinstance(generator, GeminiLLM)
     assert all(a is generator for a in agents)   # one client: the pause counts over all agents together
-    assert (generator.temperature, generator.api_max_retries, generator.pause_between_calls_seconds) == (0, 8, 4)
+    assert (generator.temperature, generator.api_max_retries, generator.pause_between_calls_seconds) == (0, 5, 4)

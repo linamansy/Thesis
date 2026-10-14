@@ -10,7 +10,7 @@ llm:
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
   api_initial_wait_seconds: 2 # wait before the first API retry; doubles each time (2, 4, 8, ... s)
   api_max_retries: 5          # AnthropicLLM: extra attempts on temporary API errors
-  gemini_api_max_retries: 8   # GeminiLLM: extra attempts on 429/RESOURCE_EXHAUSTED, overload, server errors, timeouts
+  gemini_api_max_retries: 5   # GeminiLLM: extra attempts on 429/RESOURCE_EXHAUSTED, overload, server errors, timeouts
   gemini_pause_between_calls_seconds: 10  # GeminiLLM: minimum seconds between two calls (free-tier per-minute limit)
 
 experiment:
