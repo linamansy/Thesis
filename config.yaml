@@ -22,7 +22,12 @@ paths:
   knowledge_sources: data/knowledge/sources.json
   passages: data/knowledge/passages.jsonl
   frozen_retrieval: data/retrieval/frozen_retrieval.json
-  results: results
+  generator_prompt: prompts/generator_prompt.txt       # the one prompt template shared by C1, C2, C3
+  mock_generator_response: data/mock/sample_process.json  # fixed answer MockLLM gives the generator
+  results: results                        # outputs go to results/<condition>/<case_id>/
+  generated_json_file: generated.json
+  generated_bpmn_file: generated.bpmn
+  validation_file: validation.json
   logs: results/logs
   mediation: results/C3/mediation
   evaluation: results/evaluation.csv

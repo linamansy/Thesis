@@ -1,0 +1,37 @@
+{
+  "start_events": [{"id": "start_1", "name": "Order received"}],
+  "end_events": [{"id": "end_1", "name": "Order handled"}],
+  "tasks": [
+    {"id": "task_1", "name": "Check order"},
+    {"id": "task_2", "name": "Check stock"},
+    {"id": "task_3", "name": "Ship goods"},
+    {"id": "task_4", "name": "Send invoice"},
+    {"id": "task_5", "name": "Reject order"}
+  ],
+  "exclusive_gateways": [
+    {"id": "xor_1", "name": "Product in stock?"},
+    {"id": "xor_2", "name": "Merge"}
+  ],
+  "parallel_gateways": [
+    {"id": "and_1", "name": "Fulfil order"},
+    {"id": "and_2", "name": "Fulfilment complete"}
+  ],
+  "sequence_flows": [
+    {"id": "flow_1", "source": "start_1", "target": "task_1"},
+    {"id": "flow_2", "source": "task_1", "target": "task_2"},
+    {"id": "flow_3", "source": "task_2", "target": "xor_1"},
+    {"id": "flow_4", "source": "xor_1", "target": "and_1", "condition": "yes"},
+    {"id": "flow_5", "source": "and_1", "target": "task_3"},
+    {"id": "flow_6", "source": "and_1", "target": "task_4"},
+    {"id": "flow_7", "source": "task_3", "target": "and_2"},
+    {"id": "flow_8", "source": "task_4", "target": "and_2"},
+    {"id": "flow_9", "source": "and_2", "target": "xor_2"},
+    {"id": "flow_10", "source": "xor_1", "target": "task_5", "condition": "no"},
+    {"id": "flow_11", "source": "task_5", "target": "xor_2"},
+    {"id": "flow_12", "source": "xor_2", "target": "end_1"}
+  ],
+  "lanes": [
+    {"id": "lane_sales", "name": "Sales", "task_ids": ["task_1", "task_4", "task_5"]},
+    {"id": "lane_warehouse", "name": "Warehouse", "task_ids": ["task_2", "task_3"]}
+  ]
+}
