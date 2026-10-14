@@ -9,11 +9,13 @@ For every passage of the case, in rank order:
 If an agent still fails after its retry, the passage is labelled "Mediation failed" and the
 next passage is processed; a case is never stopped.
 
-The C3 knowledge block is then built from the labels:
+The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings:
   REQUIREMENTS                              one line per Applicable passage with its requirement
-  RULES WITH UNCONFIRMED APPLICABILITY      id and title of each Indeterminate passage
-Irrelevant, Not applicable and failed passages are left out; an empty section is left out.
-If nothing is left: "No applicable domain knowledge was identified."
+  RULES WITH UNCONFIRMED APPLICABILITY      id and title of each Indeterminate passage, followed by
+                                            "Unconfirmed: <condition>" for each of its conditions whose
+                                            final status (after the resolver) is not_stated
+An empty section contains "(none)". Irrelevant, Not applicable and failed passages are left out.
+Everything comes from the saved agent outputs and resolver results; no extra LLM call.
 
 Saved (provenance, by code):
   results/C3/mediation/<case_id>.json  per passage: id, text, label, every agent output, the relevance
@@ -35,7 +37,9 @@ from src.mediation.relevance_evidence_checker import RelevanceEvidenceChecker
 IRRELEVANT = "Irrelevant"
 MEDIATION_FAILED = "Mediation failed"
 LABELS = [APPLICABLE, INDETERMINATE, NOT_APPLICABLE, IRRELEVANT, MEDIATION_FAILED]
-NO_MEDIATED_KNOWLEDGE_TEXT = "No applicable domain knowledge was identified."
+REQUIREMENTS_HEADING = "REQUIREMENTS"
+UNCONFIRMED_HEADING = "RULES WITH UNCONFIRMED APPLICABILITY"
+EMPTY_SECTION_TEXT = "(none)"
 
 
 class Orchestrator:
@@ -137,19 +141,21 @@ class Orchestrator:
         requirements = [r for r in records if r["label"] == APPLICABLE and r["requirement"]]
         unconfirmed = [r for r in records if r["label"] == INDETERMINATE]
 
-        sections = []
-        if requirements:
-            lines = ["REQUIREMENTS"]
-            for r in requirements:
-                q = r["requirement"]
-                lines.append(f"- [{r['passage_id']}] Actor: {q['actor']}. Action: {q['action']}. "
-                             f"Condition: {q['condition'] or 'none stated'}. Ordering: {q['ordering'] or 'none stated'}.")
-            sections.append("\n".join(lines))
-        if unconfirmed:
-            lines = ["RULES WITH UNCONFIRMED APPLICABILITY"]
-            lines += [f"- [{r['passage_id']}] {r['title']}" for r in unconfirmed]
-            sections.append("\n".join(lines))
-        return "\n\n".join(sections) if sections else NO_MEDIATED_KNOWLEDGE_TEXT
+        requirement_lines = []
+        for r in requirements:
+            q = r["requirement"]
+            requirement_lines.append(
+                f"- [{r['passage_id']}] Actor: {q['actor']}. Action: {q['action']}. "
+                f"Condition: {q['condition'] or 'none stated'}. Ordering: {q['ordering'] or 'none stated'}.")
+
+        unconfirmed_lines = []
+        for r in unconfirmed:
+            unconfirmed_lines.append(f"- [{r['passage_id']}] {r['title']}")
+            unconfirmed_lines += [f"  Unconfirmed: {c['condition']}"
+                                  for c in r["resolution"]["conditions"] if c["status"] == "not_stated"]
+
+        return "\n".join([REQUIREMENTS_HEADING, *(requirement_lines or [EMPTY_SECTION_TEXT]), "",
+                          UNCONFIRMED_HEADING, *(unconfirmed_lines or [EMPTY_SECTION_TEXT])])
 
     # ---------- whole run ----------
 

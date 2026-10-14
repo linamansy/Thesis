@@ -10,7 +10,7 @@ from src.config import load_config, project_path
 from src.generator import NO_KNOWLEDGE_TEXT
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
-from src.orchestrator import IRRELEVANT, MEDIATION_FAILED, NO_MEDIATED_KNOWLEDGE_TEXT, Orchestrator
+from src.orchestrator import IRRELEVANT, MEDIATION_FAILED, Orchestrator
 from src.retrieval.passage import load_passages
 
 CONFIG = load_config()
@@ -61,6 +61,13 @@ def labels(result):
     return [p["label"] for p in result["passages"]]
 
 
+EMPTY_BLOCK = "REQUIREMENTS\n(none)\n\nRULES WITH UNCONFIRMED APPLICABILITY\n(none)"
+
+
+def headings(block):
+    return [line for line in block.split("\n") if line and not line.startswith(("-", " ", "("))]
+
+
 # ---------- irrelevant passages stop at step 1 ----------
 
 def test_irrelevant_passage_never_reaches_applicability_agent(tmp_path):
@@ -70,7 +77,7 @@ def test_irrelevant_passage_never_reaches_applicability_agent(tmp_path):
     assert labels(result) == [IRRELEVANT] * 5
     assert llms["applicability"].prompts_received == []
     assert llms["requirement"].prompts_received == []
-    assert result["knowledge_block"] == NO_MEDIATED_KNOWLEDGE_TEXT
+    assert result["knowledge_block"] == EMPTY_BLOCK
 
 
 # ---------- the requirement step runs only for Applicable rules ----------
@@ -101,15 +108,47 @@ def test_knowledge_block_lists_requirements_and_unconfirmed_rules(tmp_path):
         "",
         "RULES WITH UNCONFIRMED APPLICABILITY",
         f"- [{PASSAGE_IDS[1]}] {TITLES[PASSAGE_IDS[1]]}",
+        "  Unconfirmed: buyer is a consumer",
         f"- [{PASSAGE_IDS[4]}] {TITLES[PASSAGE_IDS[4]]}",
+        "  Unconfirmed: buyer is a consumer",
     ])
     assert PASSAGE_IDS[2] not in block  # Not applicable is left out
 
 
-def test_only_unconfirmed_rules_gives_only_that_section(tmp_path):
+def test_empty_requirements_section_says_none(tmp_path):
     orchestrator, _ = make(tmp_path, [RELEVANT], [INDETERMINATE])
     block = orchestrator.mediate_case(CASE, DESCRIPTION)["knowledge_block"]
-    assert block.startswith("RULES WITH UNCONFIRMED APPLICABILITY\n") and "REQUIREMENTS" not in block
+    assert block.startswith("REQUIREMENTS\n(none)\n\nRULES WITH UNCONFIRMED APPLICABILITY\n- [")
+
+
+def test_empty_unconfirmed_section_says_none(tmp_path):
+    orchestrator, _ = make(tmp_path, [RELEVANT], [APPLICABLE])
+    block = orchestrator.mediate_case(CASE, DESCRIPTION)["knowledge_block"]
+    assert block.endswith("\n\nRULES WITH UNCONFIRMED APPLICABILITY\n(none)")
+
+
+def test_unconfirmed_lists_only_final_not_stated_conditions(tmp_path):
+    mixed = {"conditions": [
+        {"condition": "sold online", "status": "satisfied", "evidence": "purchasing items from an online shop"},
+        {"condition": "buyer is a consumer", "status": "not_stated", "evidence": None},
+        {"condition": "goods are digital", "status": "satisfied", "evidence": "the items are digital"},  # made up
+    ]}
+    orchestrator, _ = make(tmp_path, [RELEVANT], [mixed])
+    block = orchestrator.mediate_case(CASE, DESCRIPTION)["knowledge_block"]
+    first_rule = block.split("RULES WITH UNCONFIRMED APPLICABILITY\n")[1].split("\n- [")[0]
+    assert first_rule.split("\n")[1:] == ["  Unconfirmed: buyer is a consumer",
+                                          "  Unconfirmed: goods are digital"]  # downgraded, so now not_stated
+    assert "sold online" not in block  # its quote was confirmed
+
+
+def test_every_block_has_exactly_the_two_headings(tmp_path):
+    scenarios = [([NOT_RELEVANT], [APPLICABLE]), ([RELEVANT], [APPLICABLE]), ([RELEVANT], [INDETERMINATE]),
+                 ([RELEVANT], [NOT_APPLICABLE]), (["bad"], [APPLICABLE]),
+                 ([RELEVANT], [APPLICABLE, INDETERMINATE, NOT_APPLICABLE])]
+    for i, (relevance, applicability) in enumerate(scenarios):
+        orchestrator, _ = make(tmp_path / str(i), relevance, applicability)
+        block = orchestrator.mediate_case(CASE, DESCRIPTION)["knowledge_block"]
+        assert headings(block) == ["REQUIREMENTS", "RULES WITH UNCONFIRMED APPLICABILITY"], block
 
 
 def test_made_up_quote_makes_rule_indeterminate_and_no_requirement(tmp_path):
