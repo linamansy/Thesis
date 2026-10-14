@@ -111,50 +111,119 @@ def test_unrelated_labels_are_not_matched(evaluator):
     assert len(result["missing"]) == 1 and len(result["extra"]) == 1
 
 
+# ---------- evaluating runs ----------
+
 def local_evaluator(evaluator, tmp_path):
-    """An Evaluator that writes all its outputs inside tmp_path."""
+    """An Evaluator that reads runs from tmp_path/runs and writes all its outputs inside tmp_path."""
     results = tmp_path / "results"
-    paths = dict(CONFIG["paths"], results=str(results), evaluation=str(results / "evaluation.csv"),
+    paths = dict(CONFIG["paths"], runs=str(tmp_path / "runs"), evaluation=str(results / "evaluation.csv"),
+                 evaluation_run_summary=str(results / "evaluation_run_summary.csv"),
                  evaluation_summary=str(results / "evaluation_summary.csv"),
                  evaluation_threshold_csv=str(results / "sensitivity" / "evaluation_threshold_{threshold}.csv"),
                  evaluation_sensitivity_summary=str(results / "sensitivity" / "summary.csv"))
-    return Evaluator(dict(CONFIG, paths=paths), evaluator.matcher)
+    local = Evaluator(dict(CONFIG, paths=paths), evaluator.matcher)
+    local.case_ids = ["01"]
+    return local
+
+
+def make_run(tmp_path, run_id, repetition, conditions=("C1",), provider="mock", model="MODEL_NAME_PLACEHOLDER"):
+    run_dir = tmp_path / "runs" / run_id
+    run_dir.mkdir(parents=True)
+    info = {"run_id": run_id, "repetition": repetition, "provider": provider, "model": model, "temperature": 0,
+            "conditions": {c: {} for c in conditions}}
+    (run_dir / "run_info.json").write_text(json.dumps(info), encoding="utf-8")
+    return run_dir
+
+
+def write_case(run_dir, condition, case_id, valid):
+    """A valid case is a copy of the reference model (perfect scores); an invalid one failed generation."""
+    case_dir = run_dir / condition / case_id
+    case_dir.mkdir(parents=True)
+    if valid:
+        shutil.copyfile(reference_path(case_id), case_dir / "generated.bpmn")
+    (case_dir / "validation.json").write_text(json.dumps(
+        {"generation_succeeded": valid, "valid": valid, "errors": [] if valid else ["failed"]}))
+    return case_dir
 
 
 def test_failed_and_missing_cases_get_zero_and_are_kept(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
-    failed_dir = tmp_path / "results" / "C1" / "01"
-    failed_dir.mkdir(parents=True)
-    (failed_dir / "validation.json").write_text(json.dumps(
-        {"run_id": "test", "generation_succeeded": False, "valid": False, "errors": ["failed"]}))
+    run_dir = make_run(tmp_path, "mock_rep1", 1)
+    failed_dir = write_case(run_dir, "C1", "01", valid=False)
     local.case_ids = ["01", "03"]  # 03 has no output folder at all
 
-    table = local.evaluate(["C1"])
+    table = local.evaluate()
 
     assert list(table["case_id"]) == ["01", "03"]  # nothing skipped
     assert (table[["precision", "recall", "f1", "behavioral_similarity"]] == 0).all().all()
     assert table["behavioral_computable"].all()  # scored 0 by rule, not "not computable"
+    assert (table["run_id"] == "mock_rep1").all() and (table["repetition"] == 1).all()
     assert (tmp_path / "results" / "evaluation.csv").exists()
     details = json.loads((failed_dir / "evaluation.json").read_text(encoding="utf-8"))
     assert details["syntactic"]["generation_succeeded"] is False
+    assert (details["run_id"], details["repetition"]) == ("mock_rep1", 1)
     assert len(details["semantic"]["missing"]) == details["semantic"]["n_reference_tasks"]
+
+
+def test_only_conditions_run_in_a_run_are_evaluated(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    write_case(make_run(tmp_path, "mock_rep1", 1, conditions=("C1",)), "C1", "01", valid=True)
+    write_case(make_run(tmp_path, "mock_rep2", 2, conditions=("C1", "C2")), "C2", "01", valid=True)
+
+    table = local.evaluate()
+
+    assert list(zip(table["run_id"], table["condition"])) == [("mock_rep1", "C1"), ("mock_rep2", "C1"),
+                                                            ("mock_rep2", "C2")]
+    assert table.loc[1, "f1"] == 0  # rep2 started C1 but case 01 has no output: 0, not skipped
+
+
+def test_summary_gives_mean_and_sd_over_repetitions(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    write_case(make_run(tmp_path, "mock_rep1", 1), "C1", "01", valid=True)    # f1 = 1
+    write_case(make_run(tmp_path, "mock_rep2", 2), "C1", "01", valid=False)   # f1 = 0
+    write_case(make_run(tmp_path, "mock_rep3", 3), "C1", "01", valid=True)    # f1 = 1
+
+    run_summary, summary = local.summarise(local.evaluate())
+
+    assert run_summary["f1_mean"].tolist() == [1.0, 0.0, 1.0]
+    row = summary.iloc[0]
+    assert (row["condition"], row["n_repetitions"], row["repetitions"]) == ("C1", 3, "1,2,3")
+    assert row["f1_mean"] == pytest.approx(2 / 3, abs=1e-4)
+    assert row["f1_sd"] == pytest.approx(0.57735, abs=1e-4)   # sample SD of 1, 0, 1
+    assert (tmp_path / "results" / "evaluation_summary.csv").exists()
+    assert (tmp_path / "results" / "evaluation_run_summary.csv").exists()
+
+
+def test_mock_and_real_runs_are_never_mixed(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    write_case(make_run(tmp_path, "mock_rep1", 1), "C1", "01", valid=False)
+    write_case(make_run(tmp_path, "anthropic_rep1", 1, provider="anthropic", model="claude-x"), "C1", "01",
+               valid=True)
+
+    _, summary = local.summarise(local.evaluate())
+
+    assert list(zip(summary["provider"], summary["f1_mean"])) == [("anthropic", 1.0), ("mock", 0.0)]
+
+
+def test_single_repetition_has_empty_sd(evaluator, tmp_path):
+    local = local_evaluator(evaluator, tmp_path)
+    write_case(make_run(tmp_path, "mock_rep1", 1), "C1", "01", valid=True)
+    _, summary = local.summarise(local.evaluate())
+    assert pd.isna(summary.iloc[0]["f1_sd"])
 
 
 def test_sweep_writes_one_csv_per_threshold(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
-    local.case_ids = ["01"]
-    case_dir = tmp_path / "results" / "C1" / "01"
-    case_dir.mkdir(parents=True)
-    shutil.copyfile(reference_path("01"), case_dir / "generated.bpmn")
-    (case_dir / "validation.json").write_text(json.dumps(
-        {"run_id": "test", "generation_succeeded": True, "valid": True, "errors": []}))
+    case_dir = write_case(make_run(tmp_path, "mock_rep1", 1), "C1", "01", valid=True)
 
-    summary = local.sweep(["C1"])
+    summary = local.sweep()
 
     sensitivity_dir = tmp_path / "results" / "sensitivity"
     for threshold in ["0.70", "0.75", "0.80", "0.85"]:
         table = pd.read_csv(sensitivity_dir / f"evaluation_threshold_{threshold}.csv")
         assert table["similarity_threshold"].tolist() == [float(threshold)]
+        assert table["repetition"].tolist() == [1]
     assert (sensitivity_dir / "summary.csv").exists()
     assert summary["similarity_threshold"].tolist() == [0.70, 0.75, 0.80, 0.85]
+    assert set(summary.columns) >= {"f1_mean", "f1_sd", "n_repetitions"}
     assert not (case_dir / "evaluation.json").exists()  # details only describe the main threshold

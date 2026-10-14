@@ -3,6 +3,10 @@
 File: results/logs/<condition>_<run_id>.jsonl
 Each line is one complete JSON object, so the file can be read line by line
 and every LLM input and output of a run can be inspected later.
+
+One log file belongs to exactly one run: if the file already exists (the same
+condition and run id were used before), RunLogger refuses to start, so records
+of two runs can never be mixed in one file.
 """
 
 import json
@@ -20,6 +24,9 @@ class RunLogger:
         self.log_dir = Path(log_dir)
         self.log_dir.mkdir(parents=True, exist_ok=True)
         self.log_path = self.log_dir / f"{condition}_{self.run_id}.jsonl"
+        if self.log_path.exists():
+            raise FileExistsError(f"Log file {self.log_path} already exists: condition {condition} was already "
+                                  f"run with run id {self.run_id!r}. Choose a new run id.")
 
     def log_call(self, *, case_id: str, component: str, model: str, temperature: float,
                  prompt: str, raw_output: str, parsed_output: dict | None,

@@ -74,7 +74,7 @@ class BaseAgent(ABC):
             self.logger.log_call(
                 case_id=case_id,
                 component=type(self).__name__,
-                model=self.llm.model,
+                model=self.llm.model_for_log,  # the exact model string the API returned, if any
                 temperature=self.llm.temperature,
                 prompt=current_prompt,
                 raw_output=raw_output,

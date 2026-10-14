@@ -46,28 +46,44 @@ def test_only_knowledge_block_changes(tmp_path):
     assert a != b
 
 
-def test_failed_generation_is_recorded_not_skipped(tmp_path, monkeypatch):
-    config = load_config()
-    config["paths"] = dict(config["paths"], results=str(tmp_path / "results"))
-    config["cases"] = {"ids": ["01"]}
-    logger = RunLogger(tmp_path / "logs", "C1", "test")
-    runner = ExperimentRunner(config, "C1", MockLLM(["not json"]), logger)
+def make_runner(tmp_path, condition, responses=("{}",), llm=None):
+    """A runner that writes into tmp_path/run/<condition>/ and logs into tmp_path/logs/."""
+    return ExperimentRunner(CONFIG, condition, llm or MockLLM(list(responses)),
+                            RunLogger(tmp_path / "logs", condition, "test"), tmp_path / "run" / condition)
+
+
+def test_failed_generation_is_recorded_not_skipped(tmp_path):
+    runner = make_runner(tmp_path, "C1", ["not json"])
 
     record = runner.run_case("01")
 
-    case_dir = tmp_path / "results" / "C1" / "01"
+    case_dir = tmp_path / "run" / "C1" / "01"
     saved = json.loads((case_dir / "validation.json").read_text(encoding="utf-8"))
     assert saved == record
     assert record["generation_succeeded"] is False and record["valid"] is False
     assert not (case_dir / "generated.bpmn").exists()
-    assert len(open(logger.log_path, encoding="utf-8").readlines()) == 2  # attempt + one retry
+    assert len(open(runner.logger.log_path, encoding="utf-8").readlines()) == 2  # attempt + one retry
+
+
+class BrokenAPI(MockLLM):
+    """Simulates an API that still fails after all API retries."""
+
+    def complete(self, prompt):
+        raise ConnectionError("API unreachable")
+
+
+def test_api_failure_is_recorded_as_failed_generation_and_the_run_continues(tmp_path):
+    runner = make_runner(tmp_path, "C1", llm=BrokenAPI(["{}"]))
+    runner.case_ids = ["01", "03"]
+
+    records = runner.run_all()
+
+    assert [r["case_id"] for r in records] == ["01", "03"]
+    assert all(r["generation_succeeded"] is False for r in records)
+    assert records[0]["errors"] == ["generation failed with ConnectionError: API unreachable"]
 
 
 # ---------- C2 ----------
-
-def make_runner(tmp_path, condition, responses=("{}",)):
-    config = dict(CONFIG, paths=dict(CONFIG["paths"], results=str(tmp_path / "results")))
-    return ExperimentRunner(config, condition, MockLLM(list(responses)), RunLogger(tmp_path / "logs", condition, "test"))
 
 
 def case_prompt(runner, case_id):
@@ -103,6 +119,6 @@ def test_c2_run_writes_same_files_as_c1(tmp_path):
 
     record = runner.run_case("19")
 
-    case_dir = tmp_path / "results" / "C2" / "19"
+    case_dir = tmp_path / "run" / "C2" / "19"
     assert sorted(p.name for p in case_dir.iterdir()) == ["generated.bpmn", "generated.json", "validation.json"]
     assert record["condition"] == "C2" and record["valid"] is True

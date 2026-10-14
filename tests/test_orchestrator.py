@@ -221,11 +221,13 @@ def test_mediation_files_are_saved(tmp_path):
 # ---------- condition C3 in run_experiment.py ----------
 
 def make_runner(tmp_path, condition):
-    paths = dict(CONFIG["paths"], results=str(tmp_path / "results"), mediation=str(tmp_path / "mediation"))
-    config = dict(CONFIG, paths=paths)
-    agent_llms = {role: create_llm(config, role) for role in MEDIATION_ROLES} if condition == "C3" else None
-    return ExperimentRunner(config, condition, create_llm(config), RunLogger(tmp_path / "logs", condition, "t"),
-                            agent_llms)
+    """A mock runner writing into tmp_path/run/<condition>/ (C3 mediation: tmp_path/run/C3/mediation/)."""
+    agent_llms = {role: create_llm(CONFIG, role) for role in MEDIATION_ROLES} if condition == "C3" else None
+    return ExperimentRunner(CONFIG, condition, create_llm(CONFIG), RunLogger(tmp_path / "logs", condition, "t"),
+                            tmp_path / "run" / condition, agent_llms)
+
+
+MEDIATION_DIR = ("run", "C3", "mediation")
 
 
 def test_c3_prompt_equals_c1_prompt_except_knowledge_block(tmp_path):
@@ -233,7 +235,8 @@ def test_c3_prompt_equals_c1_prompt_except_knowledge_block(tmp_path):
     c1 = c1_runner.generator.build_prompt(DESCRIPTION, c1_runner.knowledge_block(CASE, DESCRIPTION))
     c3 = c3_runner.generator.build_prompt(DESCRIPTION, c3_runner.knowledge_block(CASE, DESCRIPTION))
 
-    block = json.loads((tmp_path / "mediation" / f"{CASE}.json").read_text(encoding="utf-8"))["knowledge_block"]
+    mediation = tmp_path.joinpath(*MEDIATION_DIR)
+    block = json.loads((mediation / f"{CASE}.json").read_text(encoding="utf-8"))["knowledge_block"]
     assert c1.count(NO_KNOWLEDGE_TEXT) == 1
     assert c1.replace(NO_KNOWLEDGE_TEXT, block) == c3
 
@@ -244,9 +247,10 @@ def test_c3_run_writes_outputs_and_mediation(tmp_path):
     record = runner.run_all()[0]
 
     assert record["condition"] == "C3" and record["valid"] is True
-    assert sorted(p.name for p in (tmp_path / "results" / "C3" / CASE).iterdir()) == \
+    assert sorted(p.name for p in (tmp_path / "run" / "C3" / CASE).iterdir()) == \
         ["generated.bpmn", "generated.json", "validation.json"]
-    assert (tmp_path / "mediation" / f"{CASE}.json").exists()
-    assert (tmp_path / "mediation" / "run_summary.json").exists()
+    mediation = tmp_path.joinpath(*MEDIATION_DIR)  # mediation lives inside the run's C3 folder
+    assert (mediation / f"{CASE}.json").exists()
+    assert (mediation / "run_summary.json").exists()
     components = {json.loads(line)["component"] for line in open(runner.logger.log_path, encoding="utf-8")}
     assert components == {"RelevanceAgent", "ApplicabilityAgent", "RequirementAgent", "BPMNGenerator"}

@@ -14,9 +14,17 @@ class LLMClient(ABC):
     subclass (such as MockLLM) that fills in the complete() method.
     """
 
-    def __init__(self, model: str, temperature: float):
-        self.model = model              # model name and version, written to every log record
-        self.temperature = temperature  # 0 in this project, read from config.yaml
+    def __init__(self, model: str, temperature: float | None):
+        self.model = model              # the model name requested (from config.yaml)
+        self.temperature = temperature  # 0 in this project, read from config.yaml (None = not sent)
+        # The exact model string the provider reported for the last answer. Written to the log;
+        # stays None for providers that do not report one (then the requested name is logged).
+        self.last_response_model: str | None = None
+
+    @property
+    def model_for_log(self) -> str:
+        """The model name written to the log: the provider's answer if known, else the requested name."""
+        return self.last_response_model or self.model
 
     @abstractmethod
     def complete(self, prompt: str) -> str:

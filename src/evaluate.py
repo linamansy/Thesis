@@ -2,7 +2,9 @@
 
 This is the ONLY component that reads the reference BPMN; no LLM ever sees it.
 
-For results/<condition>/<case_id>/generated.bpmn against data/cases/<case_id>/reference.bpmn:
+It evaluates every run in results/runs/ (see src/run_folder.py): for every run, every condition
+that was run, and every case,
+results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data/cases/<case_id>/reference.bpmn:
   1. Syntactic validity  - was a model generated, and did it pass the validator?
                            A failed or invalid model scores 0 on everything else; it is never skipped.
   2. Semantic quality    - task matching by label meaning: precision, recall, F1,
@@ -13,16 +15,18 @@ For results/<condition>/<case_id>/generated.bpmn against data/cases/<case_id>/re
                            fewer than two matched tasks.
   4. Reference complexity - tasks, gateways, loops, nesting depth and Cardoso's CFC (src/complexity.py)
 
-Outputs (main threshold from config.yaml):
-  results/evaluation.csv                          one row per case per condition
-  results/evaluation_summary.csv                  one row per condition (src/summarise.py)
-  results/<condition>/<case_id>/evaluation.json   all details for one case
+Outputs (main threshold from config.yaml), see src/summarise.py for the summaries:
+  results/evaluation.csv               one row per run per condition per case, with run_id, repetition,
+                                       provider and model columns
+  results/evaluation_run_summary.csv   one row per run per condition (means over the cases)
+  results/evaluation_summary.csv       one row per condition (and provider/model): mean and SD over repetitions
+  results/runs/<run_id>/<condition>/<case_id>/evaluation.json   all details for one case
 With --sweep, additionally for every threshold in evaluation.sensitivity_thresholds:
   results/sensitivity/evaluation_threshold_<t>.csv and results/sensitivity/summary.csv
 
 Run from the project root:
-  .venv\\Scripts\\python.exe -m src.evaluate                  (every condition that has results)
-  .venv\\Scripts\\python.exe -m src.evaluate --conditions C1
+  .venv\\Scripts\\python.exe -m src.evaluate                       (all runs, all conditions)
+  .venv\\Scripts\\python.exe -m src.evaluate --runs anthropic_rep1 --conditions C1
   .venv\\Scripts\\python.exe -m src.evaluate --sweep
 """
 
@@ -36,7 +40,8 @@ from src.behavioral_profile import behavioral_similarity
 from src.bpmn_graph import BPMNGraph
 from src.complexity import ComplexityMeasurer
 from src.config import load_config, project_path
-from src.summarise import summarise_by_condition
+from src.run_folder import RunFolder
+from src.summarise import summarise_repetitions, summarise_runs
 from src.task_matcher import TaskMatcher
 
 
@@ -45,14 +50,16 @@ class Evaluator:
 
     def __init__(self, config: dict, matcher: TaskMatcher | None = None):
         paths, settings = config["paths"], config["evaluation"]
+        self.config = config
+        self.conditions = config["conditions"]
         self.case_ids = config["cases"]["ids"]
         self.cases_dir = project_path(paths["cases"])
         self.reference_file = paths["case_reference_file"]
-        self.results_dir = project_path(paths["results"])
         self.validation_file = paths["validation_file"]
         self.bpmn_file = paths["generated_bpmn_file"]
         self.details_file = paths["evaluation_details_file"]
         self.csv_path = project_path(paths["evaluation"])
+        self.run_summary_path = project_path(paths["evaluation_run_summary"])
         self.summary_path = project_path(paths["evaluation_summary"])
         self.threshold_csv_pattern = paths["evaluation_threshold_csv"]
         self.sensitivity_summary_path = project_path(paths["evaluation_sensitivity_summary"])
@@ -105,11 +112,16 @@ class Evaluator:
 
     # ---------- one case, all cases ----------
 
-    def evaluate_case(self, condition: str, case_id: str, threshold: float | None = None,
+    def runs(self, run_ids: list[str] | None = None) -> list[dict]:
+        """The run_info of every run (or of the given run ids)."""
+        runs = RunFolder.find_runs(self.config)
+        return [r for r in runs if run_ids is None or r["run_id"] in run_ids]
+
+    def evaluate_case(self, run: dict, condition: str, case_id: str, threshold: float | None = None,
                       save_details: bool = True) -> dict:
-        """Evaluate one case, optionally save evaluation.json, and return its CSV row."""
+        """Evaluate one case of one run, optionally save evaluation.json, and return its CSV row."""
         threshold = self.matcher.threshold if threshold is None else threshold
-        case_dir = self.results_dir / condition / case_id
+        case_dir = run["path"] / condition / case_id
         reference_path = self.cases_dir / case_id / self.reference_file
         reference = BPMNGraph.from_file(reference_path)
 
@@ -129,9 +141,12 @@ class Evaluator:
 
         if save_details:
             details = {
+                "run_id": run["run_id"],
+                "repetition": run["repetition"],
+                "provider": run["provider"],
+                "model": run["model"],
                 "condition": condition,
                 "case_id": case_id,
-                "run_id": validation.get("run_id"),
                 "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
                 **scores,
                 "reference_complexity": complexity,
@@ -144,9 +159,12 @@ class Evaluator:
         semantic, behavioral = scores["semantic"], scores["behavioral"]
         similarity = behavioral["behavioral_similarity"]
         return {
+            "run_id": run["run_id"],
+            "repetition": run["repetition"],
+            "provider": run["provider"],
+            "model": run["model"],
             "condition": condition,
             "case_id": case_id,
-            "run_id": validation.get("run_id"),
             "similarity_threshold": threshold,
             "generation_succeeded": validation["generation_succeeded"],
             "valid": validation["valid"],
@@ -162,28 +180,46 @@ class Evaluator:
             **{f"ref_{name}": value for name, value in complexity.items()},
         }
 
-    def evaluate(self, conditions: list[str], threshold: float | None = None,
-                 csv_path: Path | None = None, save_details: bool = True) -> pd.DataFrame:
-        """Evaluate every case of the given conditions at one threshold and write the CSV."""
-        rows = [self.evaluate_case(condition, case_id, threshold, save_details)
-                for condition in conditions for case_id in self.case_ids]
+    def evaluate(self, conditions: list[str] | None = None, run_ids: list[str] | None = None,
+                 threshold: float | None = None, csv_path: Path | None = None,
+                 save_details: bool = True) -> pd.DataFrame:
+        """Evaluate every case of every run (and condition run in it) at one threshold; write the CSV.
+
+        A condition that was started in a run is always evaluated for all cases; a missing case
+        gets 0 (never skipped). A condition that was never started in a run has no rows for that run.
+        """
+        rows = []
+        for run in self.runs(run_ids):
+            for condition in conditions or self.conditions:
+                if condition in run["conditions"]:
+                    rows += [self.evaluate_case(run, condition, case_id, threshold, save_details)
+                             for case_id in self.case_ids]
         table = pd.DataFrame(rows)
         csv_path = csv_path or self.csv_path
         csv_path.parent.mkdir(parents=True, exist_ok=True)
         table.to_csv(csv_path, index=False)
         return table
 
-    def sweep(self, conditions: list[str]) -> pd.DataFrame:
+    def summarise(self, table: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+        """Per run per condition, and per condition across repetitions; both saved as CSV."""
+        run_summary = summarise_runs(table)
+        summary = summarise_repetitions(run_summary)
+        run_summary.to_csv(self.run_summary_path, index=False)
+        summary.to_csv(self.summary_path, index=False)
+        return run_summary, summary
+
+    def sweep(self, conditions: list[str] | None = None, run_ids: list[str] | None = None) -> pd.DataFrame:
         """Sensitivity analysis: evaluate at every sweep threshold, one CSV per threshold.
 
         Per-case evaluation.json files are not written here; they always describe the main threshold.
-        Returns (and saves) the per-condition summary for all thresholds together.
+        Returns (and saves) the per-threshold, per-condition summary (mean and SD over repetitions).
         """
         tables = []
         for threshold in self.sweep_thresholds:
             csv_path = project_path(self.threshold_csv_pattern.format(threshold=f"{threshold:.2f}"))
-            tables.append(self.evaluate(conditions, threshold, csv_path, save_details=False))
-        summary = summarise_by_condition(pd.concat(tables), group_by=["similarity_threshold", "condition"])
+            tables.append(self.evaluate(conditions, run_ids, threshold, csv_path, save_details=False))
+        keys = ["similarity_threshold"]
+        summary = summarise_repetitions(summarise_runs(pd.concat(tables), keys), keys)
         self.sensitivity_summary_path.parent.mkdir(parents=True, exist_ok=True)
         summary.to_csv(self.sensitivity_summary_path, index=False)
         return summary
@@ -192,31 +228,30 @@ class Evaluator:
 def main() -> None:
     config = load_config()
     parser = argparse.ArgumentParser(description="Evaluate generated BPMN models against the references.")
-    parser.add_argument("--conditions", nargs="+", choices=config["conditions"],
-                        help="default: every condition that has a results folder")
+    parser.add_argument("--conditions", nargs="+", choices=config["conditions"], help="default: all")
+    parser.add_argument("--runs", nargs="+", help="run ids to evaluate; default: every run in results/runs/")
     parser.add_argument("--sweep", action="store_true",
                         help="also evaluate at every threshold in evaluation.sensitivity_thresholds")
     args = parser.parse_args()
 
     evaluator = Evaluator(config)
-    conditions = args.conditions or [c for c in config["conditions"] if (evaluator.results_dir / c).is_dir()]
-    if not conditions:
-        print("No results found to evaluate.")
+    table = evaluator.evaluate(args.conditions, args.runs)
+    if table.empty:
+        print("No runs found to evaluate.")
         return
 
-    table = evaluator.evaluate(conditions)
-    columns = ["condition", "case_id", "valid", "n_matched", "precision", "recall", "f1",
-               "behavioral_similarity", "behavioral_computable", "ref_tasks", "ref_gateways",
-               "ref_loops", "ref_nesting_depth", "ref_cfc"]
-    print(table[columns].to_string(index=False))
-    summary = summarise_by_condition(table)
-    summary.to_csv(evaluator.summary_path, index=False)
-    print(f"\nSummary at threshold {evaluator.matcher.threshold}:")
+    run_summary, summary = evaluator.summarise(table)
+    print(f"Evaluated {len(table)} rows from {table['run_id'].nunique()} run(s) "
+          f"at threshold {evaluator.matcher.threshold}.\n\nPer run:")
+    print(run_summary[["run_id", "repetition", "condition", "n_valid", "precision_mean", "recall_mean",
+                       "f1_mean", "behavioral_mean_excluding", "behavioral_n_excluded",
+                       "behavioral_mean_as_zero"]].to_string(index=False))
+    print("\nPer condition, mean and SD over repetitions:")
     print(summary.to_string(index=False))
-    print(f"\nSaved {evaluator.csv_path}\nSaved {evaluator.summary_path}")
+    print(f"\nSaved {evaluator.csv_path}\nSaved {evaluator.run_summary_path}\nSaved {evaluator.summary_path}")
 
     if args.sweep:
-        sensitivity = evaluator.sweep(conditions)
+        sensitivity = evaluator.sweep(args.conditions, args.runs)
         print("\nSensitivity analysis:")
         print(sensitivity.to_string(index=False))
         print(f"\nSaved one CSV per threshold and {evaluator.sensitivity_summary_path}")

@@ -2,11 +2,16 @@
 # All parameters live here and are loaded in code; nothing is hard-coded.
 
 llm:
-  provider: mock              # "mock" until an API key is added to .env, then "anthropic"
-  model: MODEL_NAME_PLACEHOLDER
-  temperature: 0
+  provider: mock              # "mock" (fixed answers, no API) or "anthropic" (real API, key in .env)
+  model: MODEL_NAME_PLACEHOLDER   # must be set to a real model id before an "anthropic" run
+  temperature: 0              # sent to the API; set to null to leave it out (current Claude models reject it)
   max_tokens: 4096
-  max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema
+  max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
+  api_max_retries: 5          # extra attempts on temporary API errors: rate limit, overload, timeout (AnthropicLLM)
+  api_initial_wait_seconds: 2 # wait before the first API retry; doubles each time (2, 4, 8, 16, 32 s)
+
+experiment:
+  repetitions: 3              # each condition is run this many times: --repetition 1, 2, 3
 
 cases:
   ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
@@ -53,14 +58,17 @@ paths:
   mock_relevance_response: data/mock/relevance_response.json          # fixed answers for the C3 agents
   mock_applicability_response: data/mock/applicability_response.json
   mock_requirement_response: data/mock/requirement_response.json
-  results: results                        # outputs go to results/<condition>/<case_id>/
+  env_file: .env                          # holds ANTHROPIC_API_KEY (never committed)
+  runs: results/runs                      # one folder per run: results/runs/<run_id>/<condition>/<case_id>/
+  run_info_file: run_info.json            # per run: repetition, provider, model, conditions run
+  mediation_dir: mediation                # C3 only: results/runs/<run_id>/C3/mediation/
   generated_json_file: generated.json
   generated_bpmn_file: generated.bpmn
   validation_file: validation.json
-  evaluation_details_file: evaluation.json   # per case: results/<condition>/<case_id>/evaluation.json
-  logs: results/logs
-  mediation: results/C3/mediation               # one file per case + run_summary.json
-  evaluation: results/evaluation.csv                    # main threshold, one row per case per condition
-  evaluation_summary: results/evaluation_summary.csv    # main threshold, one row per condition
+  evaluation_details_file: evaluation.json   # per case, next to generated.bpmn
+  logs: results/logs                      # one file per run and condition: <condition>_<run_id>.jsonl
+  evaluation: results/evaluation.csv                    # main threshold, one row per run per condition per case
+  evaluation_run_summary: results/evaluation_run_summary.csv  # main threshold, one row per run per condition
+  evaluation_summary: results/evaluation_summary.csv    # main threshold, per condition: mean and SD over repetitions
   evaluation_threshold_csv: results/sensitivity/evaluation_threshold_{threshold}.csv  # one file per sweep threshold
-  evaluation_sensitivity_summary: results/sensitivity/summary.csv  # all sweep thresholds, one row per threshold per condition
+  evaluation_sensitivity_summary: results/sensitivity/summary.csv  # per threshold per condition: mean and SD over repetitions
