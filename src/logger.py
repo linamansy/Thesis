@@ -33,8 +33,13 @@ class RunLogger:
 
     def log_call(self, *, case_id: str, component: str, model: str, temperature: float,
                  prompt: str, raw_output: str, parsed_output: dict | None,
-                 valid_json: bool, retries: int, duration_seconds: float) -> dict:
-        """Append one record to the log file and return it."""
+                 valid_json: bool, retries: int, duration_seconds: float,
+                 finish_reason: str | None = None) -> dict:
+        """Append one record to the log file and return it.
+
+        finish_reason: why the model stopped, as reported by the API (e.g. "STOP", or "MAX_TOKENS" when
+        the answer was cut off at max_tokens); None for providers that do not report it (MockLLM).
+        """
         record = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "run_id": self.run_id,
@@ -49,6 +54,7 @@ class RunLogger:
             "valid_json": valid_json,
             "retries": retries,
             "duration_seconds": duration_seconds,
+            "finish_reason": finish_reason,
         }
         with open(self.log_path, "a", encoding="utf-8") as f:
             f.write(json.dumps(record, ensure_ascii=False) + "\n")

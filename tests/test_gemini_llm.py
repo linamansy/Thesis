@@ -146,6 +146,29 @@ def test_exact_model_version_is_logged(tmp_path):
     record = json.loads(open(logger.log_path, encoding="utf-8").readline())
     assert record["model"] == "gemini-test-001-2026-09"
     assert record["temperature"] == 0
+    assert record["finish_reason"] == "STOP"
+
+
+def test_cut_off_answer_is_logged_as_max_tokens(tmp_path):
+    from google.genai import types
+
+    class Out(BaseModel):
+        answer: str
+
+    class Agent(BaseAgent):
+        output_schema = Out
+
+        def build_prompt(self, question):
+            return question
+
+    cut_off = SimpleNamespace(text='{"answ', model_version="gemini-test-001",
+                              candidates=[SimpleNamespace(finish_reason=types.FinishReason.MAX_TOKENS)])
+    llm, _ = make_llm(FakeClient(cut_off, cut_off))
+    logger = RunLogger(tmp_path, "C1", "test")
+    Agent(llm, logger, max_retries=1).run(case_id="01", question="?")
+
+    records = [json.loads(line) for line in open(logger.log_path, encoding="utf-8")]
+    assert [(r["finish_reason"], r["valid_json"]) for r in records] == [("MAX_TOKENS", False)] * 2
 
 
 def test_pause_between_calls():

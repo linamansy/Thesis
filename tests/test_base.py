@@ -16,7 +16,13 @@ REQUIRED_FIELDS = {
     "timestamp", "run_id", "condition", "case_id", "component", "model",
     "temperature", "prompt", "raw_output", "parsed_output", "valid_json",
     "retries", "duration_seconds",
+    "finish_reason",   # added: why the model stopped (None for MockLLM), to detect cut-off answers
 }
+
+
+def test_tests_never_use_a_real_provider():
+    from src.config import load_config
+    assert load_config()["llm"]["provider"] == "mock"
 
 VALID_ANSWER = '{"answer": "yes", "confidence": 0.9}'
 

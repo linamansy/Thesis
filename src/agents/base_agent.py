@@ -82,6 +82,7 @@ class BaseAgent(ABC):
                 valid_json=parsed is not None,
                 retries=attempt,
                 duration_seconds=round(duration, 4),
+                finish_reason=self.llm.last_finish_reason,
             )
             if parsed is not None:
                 return parsed

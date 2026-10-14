@@ -28,6 +28,8 @@ class LLMClient(ABC):
         # The exact model string the provider reported for the last answer. Written to the log;
         # stays None for providers that do not report one (then the requested name is logged).
         self.last_response_model: str | None = None
+        # Why the model stopped on the last answer (e.g. "STOP", "MAX_TOKENS"); None if not reported.
+        self.last_finish_reason: str | None = None
 
     @property
     def model_for_log(self) -> str:

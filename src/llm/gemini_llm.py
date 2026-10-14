@@ -66,7 +66,6 @@ class GeminiLLM(LLMClient):
         self.retry_waits: list[float] = []   # every retry wait that happened, for inspection
         self.pause_waits: list[float] = []   # every pause between calls that happened
         self.last_call_started: float | None = None
-        self.last_finish_reason: str | None = None
         if client is None:
             api_key = os.environ.get("GEMINI_API_KEY")
             if not api_key:
@@ -115,6 +114,8 @@ class GeminiLLM(LLMClient):
                 continue
             self.last_response_model = response.model_version or self.model
             candidates = response.candidates or []
-            self.last_finish_reason = str(candidates[0].finish_reason) if candidates else None
+            reason = candidates[0].finish_reason if candidates else None
+            # The library gives an enum (FinishReason.STOP); its .name is the plain word "STOP".
+            self.last_finish_reason = getattr(reason, "name", None) or (str(reason) if reason else None)
             # response.text is None when the answer was blocked or empty; BaseAgent then treats it as invalid.
             return response.text or ""
