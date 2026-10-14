@@ -1,0 +1,22 @@
+You are assisting with business process modelling. A legal rule has been confirmed to apply to the business process described below. Turn the rule into one concrete requirement for this process.
+
+INSTRUCTIONS
+- Use only what the legal rule says. Do not add any obligation, actor, deadline, condition, document or step that is not in the rule, and do not combine it with other rules or with general knowledge.
+- actor: who must act, as named in the rule (for example "the trader").
+- action: what the actor must do, as stated in the rule.
+- condition: the situation in which the action is required, as stated in the rule, or null if the rule states none.
+- ordering: when the action must happen relative to activities in the process description (for example "before the customer places the order"), only if the rule itself determines this timing; otherwise null.
+- The confirmed conditions below show why the rule applies to this process. Use them for understanding only; they are not extra requirements.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGE
+{passage}
+
+CONFIRMED CONDITIONS
+{conditions}

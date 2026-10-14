@@ -1,0 +1,19 @@
+You are assisting with business process modelling. Decide whether a legal passage is about the business process described below.
+
+INSTRUCTIONS
+- The passage is relevant if its topic matches the process: the same kind of parties, transaction, contract, payment, delivery or communication as in the process description.
+- Judge the topic only. Do not decide yet whether every condition of the rule is met; that is checked in a later step.
+- Use only the two texts below. Do not assume facts about the process that the description does not state.
+- reason: one or two sentences explaining your decision.
+- evidence_process: an exact quote from the process description that shows the link, copied word for word, or null if there is none.
+- evidence_passage: an exact quote from the legal passage that shows the link, copied word for word, or null if there is none.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGE
+{passage}

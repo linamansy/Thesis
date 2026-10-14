@@ -1,0 +1,20 @@
+You are assisting with business process modelling. Decide whether the conditions of a legal rule are met by the business process described below.
+
+INSTRUCTIONS
+- Split the rule in the legal passage into the separate conditions that must all hold for the rule to apply, for example who the parties are, what kind of contract it is, and what situation triggers the rule. Write each condition as a short statement taken from the rule.
+- For each condition, choose its status using ONLY the process description:
+  - "satisfied": the description explicitly states that the condition holds.
+  - "contradicted": the description explicitly states something that makes the condition false.
+  - "not_stated": the description does not say whether the condition holds.
+- Do not assume or infer facts that the description does not state. If in doubt, use "not_stated".
+- evidence: for "satisfied" or "contradicted", copy the part of the process description that shows it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description is treated as "not_stated".
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGE
+{passage}

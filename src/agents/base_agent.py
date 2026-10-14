@@ -1,21 +1,23 @@
 """BaseAgent: the shared logic for every LLM-based component.
 
 Each concrete agent (RelevanceAgent, ApplicabilityAgent, ...) inherits from
-BaseAgent and only defines two things:
+BaseAgent and only defines:
   1. output_schema: a Pydantic model describing the JSON the LLM must return
-  2. build_prompt(): how to turn the inputs into a prompt
+  2. prompt_key: the name of its prompt template file in config.yaml (paths section)
+  3. build_prompt(): how to fill the template with the inputs
 
-Everything else (calling the LLM, checking the JSON, retrying once, logging)
-is written once, here.
+Everything else (loading the template, calling the LLM, checking the JSON,
+retrying once, logging) is written once, here.
 """
 
 import json
 import time
 from abc import ABC, abstractmethod
+from pathlib import Path
 
 from pydantic import BaseModel, ValidationError
 
-from src.config import load_config
+from src.config import load_config, project_path
 from src.llm.base_llm import LLMClient
 from src.logger import RunLogger
 
@@ -30,13 +32,24 @@ class BaseAgent(ABC):
 
     # Every subclass must set this to its own Pydantic model.
     output_schema: type[BaseModel]
+    # Key under "paths" in config.yaml that points to the agent's prompt template file.
+    prompt_key: str | None = None
 
-    def __init__(self, llm: LLMClient, logger: RunLogger, max_retries: int | None = None):
+    def __init__(self, llm: LLMClient, logger: RunLogger, max_retries: int | None = None,
+                 template_path: Path | None = None):
         self.llm = llm
         self.logger = logger
+        config = load_config()
         if max_retries is None:
-            max_retries = load_config()["llm"]["max_retries"]
+            max_retries = config["llm"]["max_retries"]
         self.max_retries = max_retries
+        if template_path is None and self.prompt_key:
+            template_path = project_path(config["paths"][self.prompt_key])
+        self.template = Path(template_path).read_text(encoding="utf-8") if template_path else None
+
+    def schema_text(self) -> str:
+        """The output schema as indented JSON, for the {schema} part of a prompt template."""
+        return json.dumps(self.output_schema.model_json_schema(), indent=2)
 
     @abstractmethod
     def build_prompt(self, **inputs) -> str:

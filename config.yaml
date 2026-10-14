@@ -46,6 +46,9 @@ paths:
   dense_index_dir: data/retrieval/dense_index   # FAISS index + the passage ids it contains
   nltk_data: data/nltk_data                     # NLTK stopword list is downloaded here (not committed)
   generator_prompt: prompts/generator_prompt.txt       # the one prompt template shared by C1, C2, C3
+  relevance_prompt: prompts/relevance_prompt.txt       # C3 mediation agents
+  applicability_prompt: prompts/applicability_prompt.txt
+  requirement_prompt: prompts/requirement_prompt.txt
   mock_generator_response: data/mock/sample_process.json  # fixed answer MockLLM gives the generator
   results: results                        # outputs go to results/<condition>/<case_id>/
   generated_json_file: generated.json
