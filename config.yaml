@@ -15,12 +15,8 @@ conditions: ["C1", "C2", "C3"]
 
 evaluation:
   embedding_model: sentence-transformers/all-MiniLM-L6-v2  # embeds task labels for matching
-  similarity_threshold: 0.75   # a generated and a reference task match only if cosine similarity >= this
-  complexity_weights:          # combined score = sum of weight * measure (see src/complexity.py)
-    tasks: 1
-    gateways: 2
-    loops: 3
-    nesting_depth: 3
+  similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this (to be calibrated)
+  sensitivity_thresholds: [0.70, 0.75, 0.80, 0.85]  # used by: python -m src.evaluate --sweep
 
 paths:
   pmo_raw: data/raw/pmo
@@ -42,4 +38,7 @@ paths:
   evaluation_details_file: evaluation.json   # per case: results/<condition>/<case_id>/evaluation.json
   logs: results/logs
   mediation: results/C3/mediation
-  evaluation: results/evaluation.csv
+  evaluation: results/evaluation.csv                    # main threshold, one row per case per condition
+  evaluation_summary: results/evaluation_summary.csv    # main threshold, one row per condition
+  evaluation_threshold_csv: results/sensitivity/evaluation_threshold_{threshold}.csv  # one file per sweep threshold
+  evaluation_sensitivity_summary: results/sensitivity/summary.csv  # all sweep thresholds, one row per threshold per condition

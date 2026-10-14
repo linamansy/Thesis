@@ -8,16 +8,22 @@ For results/<condition>/<case_id>/generated.bpmn against data/cases/<case_id>/re
   2. Semantic quality    - task matching by label meaning: precision, recall, F1,
                            plus lists of matched, missing and extra tasks (src/task_matcher.py)
   3. Behavioral quality  - share of matched task pairs with the same relation
-                           (order / exclusive / parallel) in both models (src/behavioral_profile.py)
-  4. Reference complexity - size and control-flow complexity of the reference (src/complexity.py)
+                           (order / exclusive / parallel) in both models (src/behavioral_profile.py).
+                           Empty and behavioral_computable = False when a valid model has
+                           fewer than two matched tasks.
+  4. Reference complexity - tasks, gateways, loops, nesting depth and Cardoso's CFC (src/complexity.py)
 
-Outputs:
+Outputs (main threshold from config.yaml):
   results/evaluation.csv                          one row per case per condition
+  results/evaluation_summary.csv                  one row per condition (src/summarise.py)
   results/<condition>/<case_id>/evaluation.json   all details for one case
+With --sweep, additionally for every threshold in evaluation.sensitivity_thresholds:
+  results/sensitivity/evaluation_threshold_<t>.csv and results/sensitivity/summary.csv
 
 Run from the project root:
   .venv\\Scripts\\python.exe -m src.evaluate                  (every condition that has results)
   .venv\\Scripts\\python.exe -m src.evaluate --conditions C1
+  .venv\\Scripts\\python.exe -m src.evaluate --sweep
 """
 
 import argparse
@@ -30,6 +36,7 @@ from src.behavioral_profile import behavioral_similarity
 from src.bpmn_graph import BPMNGraph
 from src.complexity import ComplexityMeasurer
 from src.config import load_config, project_path
+from src.summarise import summarise_by_condition
 from src.task_matcher import TaskMatcher
 
 
@@ -46,16 +53,20 @@ class Evaluator:
         self.bpmn_file = paths["generated_bpmn_file"]
         self.details_file = paths["evaluation_details_file"]
         self.csv_path = project_path(paths["evaluation"])
+        self.summary_path = project_path(paths["evaluation_summary"])
+        self.threshold_csv_pattern = paths["evaluation_threshold_csv"]
+        self.sensitivity_summary_path = project_path(paths["evaluation_sensitivity_summary"])
+        self.sweep_thresholds = settings["sensitivity_thresholds"]
         self.matcher = matcher or TaskMatcher(settings["embedding_model"], settings["similarity_threshold"])
-        self.complexity = ComplexityMeasurer(settings["complexity_weights"])
+        self.complexity = ComplexityMeasurer()
 
     # ---------- comparing two models ----------
 
-    def compare(self, generated_path: Path, reference_path: Path) -> dict:
+    def compare(self, generated_path: Path, reference_path: Path, threshold: float | None = None) -> dict:
         """Semantic and behavioral scores of one generated model against one reference."""
         generated = BPMNGraph.from_file(generated_path)
         reference = BPMNGraph.from_file(reference_path)
-        matching = self.matcher.match(generated.task_labels(), reference.task_labels())
+        matching = self.matcher.match(generated.task_labels(), reference.task_labels(), threshold)
 
         n_matched = len(matching["matched"])
         precision = n_matched / len(generated.tasks) if generated.tasks else 0.0  # generated tasks that are correct
@@ -77,7 +88,10 @@ class Evaluator:
         }
 
     def zero_scores(self, reference: BPMNGraph) -> dict:
-        """Scores for a failed or invalid model: 0 everywhere, all reference tasks missing."""
+        """Scores for a failed or invalid model: 0 everywhere, all reference tasks missing.
+
+        Behavioral similarity is 0 here (not empty): the model is scored by rule, so it counts as computable.
+        """
         return {
             "semantic": {
                 "n_generated_tasks": 0, "n_reference_tasks": len(reference.tasks), "n_matched": 0,
@@ -85,13 +99,16 @@ class Evaluator:
                 "missing": [{"reference_id": i, "reference_label": label}
                             for i, label in reference.task_labels().items()],
             },
-            "behavioral": {"behavioral_similarity": 0.0, "n_pairs": 0, "n_same": 0, "pairs": []},
+            "behavioral": {"behavioral_similarity": 0.0, "behavioral_computable": True,
+                           "n_pairs": 0, "n_same": 0, "pairs": []},
         }
 
     # ---------- one case, all cases ----------
 
-    def evaluate_case(self, condition: str, case_id: str) -> dict:
-        """Evaluate one case, save evaluation.json, and return its CSV row."""
+    def evaluate_case(self, condition: str, case_id: str, threshold: float | None = None,
+                      save_details: bool = True) -> dict:
+        """Evaluate one case, optionally save evaluation.json, and return its CSV row."""
+        threshold = self.matcher.threshold if threshold is None else threshold
         case_dir = self.results_dir / condition / case_id
         reference_path = self.cases_dir / case_id / self.reference_file
         reference = BPMNGraph.from_file(reference_path)
@@ -104,27 +121,33 @@ class Evaluator:
                           "errors": ["no output found for this case"]}
 
         usable = validation["generation_succeeded"] and validation["valid"]
-        scores = self.compare(case_dir / self.bpmn_file, reference_path) if usable else self.zero_scores(reference)
+        if usable:
+            scores = self.compare(case_dir / self.bpmn_file, reference_path, threshold)
+        else:
+            scores = self.zero_scores(reference)
         complexity = self.complexity.measure(reference)
 
-        details = {
-            "condition": condition,
-            "case_id": case_id,
-            "run_id": validation.get("run_id"),
-            "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
-            **scores,
-            "reference_complexity": complexity,
-            "settings": {"embedding_model": self.matcher.model_name,
-                         "similarity_threshold": self.matcher.threshold},
-        }
-        case_dir.mkdir(parents=True, exist_ok=True)
-        (case_dir / self.details_file).write_text(json.dumps(details, indent=2, ensure_ascii=False), encoding="utf-8")
+        if save_details:
+            details = {
+                "condition": condition,
+                "case_id": case_id,
+                "run_id": validation.get("run_id"),
+                "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
+                **scores,
+                "reference_complexity": complexity,
+                "settings": {"embedding_model": self.matcher.model_name, "similarity_threshold": threshold},
+            }
+            case_dir.mkdir(parents=True, exist_ok=True)
+            (case_dir / self.details_file).write_text(json.dumps(details, indent=2, ensure_ascii=False),
+                                                      encoding="utf-8")
 
         semantic, behavioral = scores["semantic"], scores["behavioral"]
+        similarity = behavioral["behavioral_similarity"]
         return {
             "condition": condition,
             "case_id": case_id,
             "run_id": validation.get("run_id"),
+            "similarity_threshold": threshold,
             "generation_succeeded": validation["generation_succeeded"],
             "valid": validation["valid"],
             "n_generated_tasks": semantic["n_generated_tasks"],
@@ -133,18 +156,37 @@ class Evaluator:
             "precision": round(semantic["precision"], 4),
             "recall": round(semantic["recall"], 4),
             "f1": round(semantic["f1"], 4),
-            "behavioral_similarity": round(behavioral["behavioral_similarity"], 4),
+            "behavioral_similarity": None if similarity is None else round(similarity, 4),
+            "behavioral_computable": behavioral["behavioral_computable"],
             "n_pairs": behavioral["n_pairs"],
             **{f"ref_{name}": value for name, value in complexity.items()},
         }
 
-    def evaluate(self, conditions: list[str]) -> pd.DataFrame:
-        """Evaluate every case of the given conditions and write results/evaluation.csv."""
-        rows = [self.evaluate_case(condition, case_id) for condition in conditions for case_id in self.case_ids]
+    def evaluate(self, conditions: list[str], threshold: float | None = None,
+                 csv_path: Path | None = None, save_details: bool = True) -> pd.DataFrame:
+        """Evaluate every case of the given conditions at one threshold and write the CSV."""
+        rows = [self.evaluate_case(condition, case_id, threshold, save_details)
+                for condition in conditions for case_id in self.case_ids]
         table = pd.DataFrame(rows)
-        self.csv_path.parent.mkdir(parents=True, exist_ok=True)
-        table.to_csv(self.csv_path, index=False)
+        csv_path = csv_path or self.csv_path
+        csv_path.parent.mkdir(parents=True, exist_ok=True)
+        table.to_csv(csv_path, index=False)
         return table
+
+    def sweep(self, conditions: list[str]) -> pd.DataFrame:
+        """Sensitivity analysis: evaluate at every sweep threshold, one CSV per threshold.
+
+        Per-case evaluation.json files are not written here; they always describe the main threshold.
+        Returns (and saves) the per-condition summary for all thresholds together.
+        """
+        tables = []
+        for threshold in self.sweep_thresholds:
+            csv_path = project_path(self.threshold_csv_pattern.format(threshold=f"{threshold:.2f}"))
+            tables.append(self.evaluate(conditions, threshold, csv_path, save_details=False))
+        summary = summarise_by_condition(pd.concat(tables), group_by=["similarity_threshold", "condition"])
+        self.sensitivity_summary_path.parent.mkdir(parents=True, exist_ok=True)
+        summary.to_csv(self.sensitivity_summary_path, index=False)
+        return summary
 
 
 def main() -> None:
@@ -152,6 +194,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Evaluate generated BPMN models against the references.")
     parser.add_argument("--conditions", nargs="+", choices=config["conditions"],
                         help="default: every condition that has a results folder")
+    parser.add_argument("--sweep", action="store_true",
+                        help="also evaluate at every threshold in evaluation.sensitivity_thresholds")
     args = parser.parse_args()
 
     evaluator = Evaluator(config)
@@ -162,10 +206,20 @@ def main() -> None:
 
     table = evaluator.evaluate(conditions)
     columns = ["condition", "case_id", "valid", "n_matched", "precision", "recall", "f1",
-               "behavioral_similarity", "ref_tasks", "ref_gateways", "ref_loops", "ref_nesting_depth",
-               "ref_complexity_score"]
+               "behavioral_similarity", "behavioral_computable", "ref_tasks", "ref_gateways",
+               "ref_loops", "ref_nesting_depth", "ref_cfc"]
     print(table[columns].to_string(index=False))
-    print(f"\nSaved {evaluator.csv_path}")
+    summary = summarise_by_condition(table)
+    summary.to_csv(evaluator.summary_path, index=False)
+    print(f"\nSummary at threshold {evaluator.matcher.threshold}:")
+    print(summary.to_string(index=False))
+    print(f"\nSaved {evaluator.csv_path}\nSaved {evaluator.summary_path}")
+
+    if args.sweep:
+        sensitivity = evaluator.sweep(conditions)
+        print("\nSensitivity analysis:")
+        print(sensitivity.to_string(index=False))
+        print(f"\nSaved one CSV per threshold and {evaluator.sensitivity_summary_path}")
 
 
 if __name__ == "__main__":

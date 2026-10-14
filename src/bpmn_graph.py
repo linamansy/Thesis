@@ -80,7 +80,12 @@ class BPMNGraph:
     def task_labels(self) -> dict[str, str]:
         return {n: self.names[n] for n in self.tasks}
 
+    def out_degree(self, node: str) -> int:
+        """Number of outgoing flows, including flows that loop back."""
+        return sum(1 for source, _ in self.edges if source == node)
+
     def is_split(self, node: str) -> bool:
+        """Split in the loop-free graph (flows that loop back are not counted)."""
         return len(self.successors[node]) >= 2
 
     def is_join(self, node: str) -> bool:

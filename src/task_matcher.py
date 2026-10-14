@@ -28,21 +28,23 @@ class TaskMatcher:
         ref_vectors = self.model.encode(reference, normalize_embeddings=True)
         return gen_vectors @ ref_vectors.T  # with normalised vectors, dot product = cosine
 
-    def match(self, generated: dict[str, str], reference: dict[str, str]) -> dict:
+    def match(self, generated: dict[str, str], reference: dict[str, str], threshold: float | None = None) -> dict:
         """Match {id: label} of the generated model against {id: label} of the reference.
 
+        threshold: overrides the default threshold for this call (used by the threshold sweep).
         Returns the matched pairs plus the missing (reference only) and extra (generated only) tasks.
         """
+        threshold = self.threshold if threshold is None else threshold
         gen_ids, ref_ids = list(generated), list(reference)
         matched = []
         if gen_ids and ref_ids:
             similarity = self.similarity_matrix([generated[i] for i in gen_ids], [reference[i] for i in ref_ids])
             # Pairs below the threshold count as 0, so the algorithm never gives up an
             # acceptable pair in exchange for unacceptable ones.
-            usable = np.where(similarity >= self.threshold, similarity, 0.0)
+            usable = np.where(similarity >= threshold, similarity, 0.0)
             rows, cols = linear_sum_assignment(usable, maximize=True)
             for r, c in zip(rows, cols):
-                if similarity[r, c] >= self.threshold:
+                if similarity[r, c] >= threshold:
                     matched.append({
                         "generated_id": gen_ids[r], "generated_label": generated[gen_ids[r]],
                         "reference_id": ref_ids[c], "reference_label": reference[ref_ids[c]],

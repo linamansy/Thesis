@@ -58,8 +58,8 @@ def behavioral_similarity(generated: BPMNGraph, reference: BPMNGraph,
 
     matches: (generated task id, reference task id) for every matched task.
     Only matched tasks are compared; missing and extra tasks are already counted
-    by precision and recall. With fewer than two matched tasks there are no pairs
-    and the similarity is 0.
+    by precision and recall. With fewer than two matched tasks there are no pairs,
+    so the similarity cannot be computed and is None (an empty cell in the CSV).
     """
     gen_profile, ref_profile = BehavioralProfile(generated), BehavioralProfile(reference)
     pairs = []
@@ -76,7 +76,8 @@ def behavioral_similarity(generated: BPMNGraph, reference: BPMNGraph,
             })
     n_same = sum(p["same"] for p in pairs)
     return {
-        "behavioral_similarity": n_same / len(pairs) if pairs else 0.0,
+        "behavioral_similarity": n_same / len(pairs) if pairs else None,
+        "behavioral_computable": bool(pairs),
         "n_pairs": len(pairs),
         "n_same": n_same,
         "pairs": pairs,

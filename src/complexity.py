@@ -1,40 +1,59 @@
 """ComplexityMeasurer: how complex is a (reference) process model?
 
-Measures:
+Descriptive measures:
   tasks          number of tasks
   gateways       number of gateways (splits and joins)
   loops          number of back edges, i.e. flows that jump back to an earlier element
   nesting_depth  the largest number of splits that are "open" at the same time,
                  e.g. a decision inside a parallel branch has depth 2
 
-Combined score (weights in config.yaml, evaluation.complexity_weights):
-  score = w_tasks * tasks + w_gateways * gateways + w_loops * loops + w_nesting * nesting_depth
+Control-Flow Complexity (CFC, Cardoso 2005, 2006) counts how many different
+situations ("states") a reader must consider after each split. Every split adds:
+  exclusive split (XOR) with n outgoing branches:  n        exactly one of n paths is chosen
+  parallel split (AND):                            1        all paths run, so only one situation
+  inclusive split (OR) with n outgoing branches:   2^n - 1  any non-empty subset of the paths can run
+CFC is the sum over all splits; joins add nothing.
 
-Default weights 1, 2, 3, 3. Rationale: a task is one unit of work; every gateway adds a
-branching decision that a reader (or an LLM) must get right; loops and deep nesting
-make the control flow hardest to follow. Process-model metrics research (e.g. Mendling's
-work on connectors, cycles and nesting) supports giving control-flow constructs more weight
-than plain activities. The weights are a modelling choice and can be changed in config.yaml.
+Mapping of other BPMN split types (Cardoso defines only XOR, AND and OR):
+  event-based gateway  -> like XOR (one path is chosen, by the first event)
+  complex gateway      -> like OR (any combination of paths may be activated)
+  activity with several outgoing flows -> like AND (BPMN starts all of them)
+A split's branches include flows that loop back, because they are real choices.
 """
 
 from src.bpmn_graph import BPMNGraph
 
+XOR_LIKE = {"exclusiveGateway", "eventBasedGateway"}
+OR_LIKE = {"inclusiveGateway", "complexGateway"}
+
 
 class ComplexityMeasurer:
-    """Computes the complexity measures of one BPMN model."""
-
-    def __init__(self, weights: dict[str, float]):
-        self.weights = weights
+    """Computes the descriptive measures and the CFC of one BPMN model."""
 
     def measure(self, graph: BPMNGraph) -> dict:
-        measures = {
+        return {
             "tasks": len(graph.tasks),
             "gateways": len(graph.gateways),
             "loops": len(graph.back_edges),
             "nesting_depth": nesting_depth(graph),
+            "cfc": control_flow_complexity(graph),
         }
-        measures["complexity_score"] = sum(self.weights[name] * value for name, value in measures.items())
-        return measures
+
+
+def control_flow_complexity(graph: BPMNGraph) -> int:
+    """Cardoso's CFC: the sum of every split's contribution (see the module comment)."""
+    cfc = 0
+    for node, node_type in graph.types.items():
+        n = graph.out_degree(node)
+        if n < 2:
+            continue  # not a split
+        if node_type in XOR_LIKE:
+            cfc += n
+        elif node_type in OR_LIKE:
+            cfc += 2 ** n - 1
+        else:  # parallel gateway, or an activity/event with several outgoing flows
+            cfc += 1
+    return cfc
 
 
 def nesting_depth(graph: BPMNGraph) -> int:

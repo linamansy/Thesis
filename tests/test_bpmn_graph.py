@@ -6,8 +6,6 @@ from src.behavioral_profile import BehavioralProfile
 from src.bpmn_graph import BPMNGraph
 from src.complexity import ComplexityMeasurer
 
-WEIGHTS = {"tasks": 1, "gateways": 2, "loops": 3, "nesting_depth": 3}
-
 
 def graph_of(tmp_path, nodes, flows):
     return BPMNGraph.from_file(write_bpmn(tmp_path / "m.bpmn", nodes, flows))
@@ -55,19 +53,45 @@ def test_nearest_split_decides_in_nested_model(tmp_path):
     profile = BehavioralProfile(graph)
     assert profile.relation("B", "C") == "#"
     assert profile.relation("A", "B") == "||"
-    assert ComplexityMeasurer(WEIGHTS).measure(graph)["nesting_depth"] == 2
+    measures = ComplexityMeasurer().measure(graph)
+    assert measures["nesting_depth"] == 2
+    assert measures["cfc"] == 1 + 2  # AND split adds 1, XOR split with 2 branches adds 2
 
 
 def test_complexity_of_simple_split(tmp_path):
-    measures = ComplexityMeasurer(WEIGHTS).measure(graph_of(tmp_path, *split_model("exclusiveGateway")))
-    assert measures == {"tasks": 3, "gateways": 2, "loops": 0, "nesting_depth": 1,
-                        "complexity_score": 3 * 1 + 2 * 2 + 0 * 3 + 1 * 3}
+    measures = ComplexityMeasurer().measure(graph_of(tmp_path, *split_model("exclusiveGateway")))
+    assert measures == {"tasks": 3, "gateways": 2, "loops": 0, "nesting_depth": 1, "cfc": 2}
+
+
+def three_way_split(gateway_tag: str):
+    """s -> split -> (A | B | C) -> join -> e"""
+    nodes = START_END + [(gateway_tag, "g1", ""), (gateway_tag, "g2", ""),
+                         ("task", "A", "a"), ("task", "B", "b"), ("task", "C", "c")]
+    flows = [("s", "g1"), ("g1", "A"), ("g1", "B"), ("g1", "C"),
+             ("A", "g2"), ("B", "g2"), ("C", "g2"), ("g2", "e")]
+    return nodes, flows
+
+
+def test_cfc_per_gateway_type(tmp_path):
+    def cfc(tag):
+        return ComplexityMeasurer().measure(graph_of(tmp_path, *three_way_split(tag)))["cfc"]
+
+    assert cfc("exclusiveGateway") == 3   # n branches
+    assert cfc("parallelGateway") == 1    # always 1
+    assert cfc("inclusiveGateway") == 7   # 2^3 - 1
+    assert cfc("eventBasedGateway") == 3  # treated like XOR
+    assert cfc("complexGateway") == 7     # treated like OR
+
+
+def test_cfc_of_sequence_is_zero(tmp_path):
+    assert ComplexityMeasurer().measure(graph_of(tmp_path, *sequential_model()))["cfc"] == 0
 
 
 def test_complexity_counts_loops(tmp_path):
     # s -> A -> XOR -> A (back) or -> e
     nodes = START_END + [("task", "A", "Correct invoice"), ("exclusiveGateway", "x", "OK?")]
     flows = [("s", "A"), ("A", "x"), ("x", "A"), ("x", "e")]
-    measures = ComplexityMeasurer(WEIGHTS).measure(graph_of(tmp_path, nodes, flows))
+    measures = ComplexityMeasurer().measure(graph_of(tmp_path, nodes, flows))
     assert measures["loops"] == 1
     assert measures["nesting_depth"] == 0  # a loop is not a nested split
+    assert measures["cfc"] == 2            # but the loop decision is a real XOR choice with 2 branches
