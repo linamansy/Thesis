@@ -1,0 +1,25 @@
+# Central configuration for the thesis experiment.
+# All parameters live here and are loaded in code; nothing is hard-coded.
+
+llm:
+  provider: mock              # "mock" until an API key is added to .env, then "anthropic"
+  model: MODEL_NAME_PLACEHOLDER
+  temperature: 0
+  max_tokens: 4096
+
+cases:
+  ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
+
+paths:
+  pmo_raw: data/raw/pmo
+  pmo_descriptions: data/raw/pmo/descriptions
+  pmo_bpmn: data/raw/pmo/bpmn
+  cases: data/cases
+  knowledge_raw: data/knowledge/raw
+  knowledge_sources: data/knowledge/sources.json
+  passages: data/knowledge/passages.jsonl
+  frozen_retrieval: data/retrieval/frozen_retrieval.json
+  results: results
+  logs: results/logs
+  mediation: results/C3/mediation
+  evaluation: results/evaluation.csv
