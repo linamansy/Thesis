@@ -15,6 +15,7 @@ from pathlib import Path
 
 from lxml import etree
 
+from src.graph_utils import find_back_edges
 from src.schemas import ProcessModel
 
 BPMN_NS = "http://www.omg.org/spec/BPMN/20100524/MODEL"
@@ -196,30 +197,6 @@ class BPMNBuilder:
         # Backward (a loop): leave at the bottom, go back underneath, enter at the bottom.
         below = max(sy, ty) + self.ROW_HEIGHT / 2 - 5
         return [(sx, sy + sh / 2), (sx, below), (tx, below), (tx, ty + th / 2)]
-
-
-def find_back_edges(node_ids: list[str], start_ids: list[str], edges: list[tuple[str, str]]) -> set:
-    """Find the flows that go back to an earlier element (loops), using depth-first search."""
-    successors = {n: [] for n in node_ids}
-    for source, target in edges:
-        successors[source].append(target)
-
-    state = {}  # "active" while the element is on the current path, "done" afterwards
-    back_edges = set()
-
-    def visit(node):
-        state[node] = "active"
-        for nxt in successors[node]:
-            if state.get(nxt) == "active":
-                back_edges.add((node, nxt))
-            elif nxt not in state:
-                visit(nxt)
-        state[node] = "done"
-
-    for node in start_ids + node_ids:
-        if node not in state:
-            visit(node)
-    return back_edges
 
 
 def assign_columns(node_ids: list[str], start_ids: list[str], edges: list[tuple[str, str]]) -> dict:

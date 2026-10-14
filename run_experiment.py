@@ -22,8 +22,6 @@ from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
 from src.validator import BPMNValidator
 
-CONDITIONS = ["C1", "C2", "C3"]
-
 
 def create_llm(config: dict) -> LLMClient:
     """Choose the LLM provider named in config.yaml."""
@@ -97,12 +95,12 @@ def print_summary(records: list[dict]) -> None:
 
 
 def main() -> None:
+    config = load_config()
     parser = argparse.ArgumentParser(description="Run one experimental condition.")
-    parser.add_argument("--condition", required=True, choices=CONDITIONS)
+    parser.add_argument("--condition", required=True, choices=config["conditions"])
     parser.add_argument("--run-id", default=None, help="optional; defaults to the start time")
     args = parser.parse_args()
 
-    config = load_config()
     llm = create_llm(config)
     logger = RunLogger(project_path(config["paths"]["logs"]), args.condition, args.run_id)
     runner = ExperimentRunner(config, args.condition, llm, logger)
