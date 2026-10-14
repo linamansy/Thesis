@@ -6,6 +6,7 @@ llm:
   model: MODEL_NAME_PLACEHOLDER
   temperature: 0
   max_tokens: 4096
+  max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema
 
 cases:
   ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
