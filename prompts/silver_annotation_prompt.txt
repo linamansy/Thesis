@@ -1,0 +1,23 @@
+You are a legal analyst preparing an evaluation reference for business process models. Read the process description and ONE passage of EU law, and state whether the passage creates obligations for this specific process, and if so, which process steps it requires.
+
+INSTRUCTIONS
+- First decide whether the passage concerns this kind of process at all (same kind of parties, transaction, contract, payment, delivery or communication). If not, the label is "irrelevant".
+- If it does, list the facts the rule depends on (for example who the parties are, how the contract is concluded, what triggers the rule, any exception). Judge each fact using only what the description says.
+- Label:
+  - "applicable": the description states every fact the rule depends on.
+  - "not_applicable": the description states at least one fact that excludes the rule.
+  - "indeterminate": the rule concerns this process, but the description does not state enough facts to decide.
+  Do not assume facts that are not written. A "customer" is not necessarily a "consumer"; it may be a business.
+- required_steps: ONLY for "applicable". Each step is an activity that the process must contain to comply, written as a short BPMN task label in the form verb + object (for example "Provide withdrawal information"), with who performs it and, if the rule says so, when (before or after which existing step of the description). Only steps that the passage itself requires; nothing from other laws or general good practice. If the rule is already fully met by steps the description contains, list those steps anyway and set already_in_description to true.
+- possible_steps: ONLY for "indeterminate". The steps the passage WOULD require if it applied, in the same format.
+- evidence: copy the parts of the process description that support your judgement, word for word.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGE
+{passage}

@@ -44,4 +44,5 @@ def test_c1_has_no_knowledge_traceable_tasks(tmp_path):
     extra = [{"generated_id": "t1", "generated_label": "withdraw from contract"}]
     result = evaluator.extra_task_diagnostics("C1", "19", tmp_path, extra)
     assert result == {"n_extra_tasks": 1, "n_extra_knowledge_traceable": 0,
-                      "extra_tasks": [{"label": "withdraw from contract", "knowledge_traceable": False}]}
+                      "extra_tasks": [{"generated_id": "t1", "label": "withdraw from contract",
+                                      "knowledge_traceable": False}]}

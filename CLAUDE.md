@@ -92,10 +92,18 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - The C3 block only DESCRIBES what mediation found (headings + one descriptive line each). It contains no instructions to the generator (no "do not add steps"), because C2 gets none either; only the knowledge may differ.
 - All agent outputs are saved to results/runs/<run_id>/C3/mediation/, one file per case.
 
+## Silver legal reference (evaluation only)
+- Problem it solves: the PMo reference models contain no legal steps, so a correct legal step would count as an error.
+- src/build_silver_reference.py runs ONCE before the experiment runs and freezes data/silver/silver_reference.json: for every case and each of its 5 frozen passages, SilverAnnotator (src/agents/silver_annotator.py, prompts/silver_annotation_prompt.txt) labels the passage applicable / not_applicable / indeterminate / irrelevant and lists the process steps an applicable rule requires.
+- Independence from C3: a different and stronger model (Gemini, config.yaml silver section, not qwen3), a different prompt, one call per passage, and it never sees generated models or C3 outputs. The file stores the annotator model version, prompt checksum and frozen-retrieval checksum.
+- The labels are AI-made: SILVER, provisional, never gold. Decision 16 Oct 2026: no human audit; this is a stated limitation.
+- Used by: the evaluator (precision_adjusted, requirement_coverage, justified extra tasks, unjustified knowledge additions) and src/rq3_agreement.py (agreement of C3's labels with silver: accuracy, Cohen's kappa, confusion matrix; reported as agreement with a stronger model, not as correctness).
+
 ## Evaluation
 - Syntactic validity: does the generated BPMN parse and validate.
 - Semantic quality: activity precision and recall against the reference BPMN, using label similarity matching.
 - Behavioral quality: ordering, exclusive and parallel relations between matched activities. All pools are read; message flows count as order (BPMNGen draws one pool per actor, PMo references have one process); sub-processes are opened up.
+- Legal steps (silver reference): precision_adjusted (extra tasks that realise a required legal step are NOT errors; plain precision is kept too), requirement_coverage, n_extra_justified, n_unjustified_knowledge_additions.
 - Unsupported additions (PROVISIONAL diagnostic): number of extra generated tasks, and how many look like they came from the knowledge block (evaluation.trace_threshold, not calibrated yet).
 - Generator diagnostics per condition: cases that hit the context limit, token counts, BPMNGen auto-repairs.
 - Complexity of each case is measured from the reference BPMN (tasks, gateways, loops, nesting).
@@ -104,8 +112,8 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 
 ## Current scope
 - Focus now: building C1, C2 and C3 and evaluating BPMN quality automatically against the reference models.
-- Applicability evaluation (RQ3) is postponed. Every agent output is still saved so it can be evaluated later.
-- Known limitation: a correct legally required step added in C2/C3 is not in the PMo reference BPMN, so it counts as an extra task and lowers precision. Such tasks are listed in evaluation.json (extra_task_diagnostics) and must be read by hand before conclusions are drawn. With the PMo references, the realistic expectation for C3 is "avoids the extra tasks raw RAG adds" (C3 ≈ C1 > C2 on precision), not "beats C1".
+- Applicability evaluation (RQ3): automated against the silver reference (src/rq3_agreement.py); agreement, not correctness, because silver is not human-checked.
+- Known limitation (partly solved): a correct legal step is not in the PMo reference BPMN. precision_adjusted and requirement_coverage use the silver reference so such steps are no longer errors, but silver is AI-made and unverified; report plain precision as well.
 - Known limitation: 13 cases × 3 repetitions is pilot-sized. Report paired per-case comparisons; RQ2 (complexity) is exploratory only.
 
 ## Workflow

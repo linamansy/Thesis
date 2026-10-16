@@ -20,8 +20,8 @@ I didn't edit the .docx. Change these sentences yourself so the wording stays yo
 8. **2.4 promises outcomes that are not all measured yet.** It lists "requirement coverage, unsupported additions, applicability accuracy, requirement-transformation fidelity, and provenance support" as distinct outcomes. Current state:
    - unsupported additions: implemented (extra tasks, plus a *provisional* "knowledge-traceable" count; threshold not calibrated yet)
    - provenance: saved for every C3 passage
-   - applicability accuracy, requirement-transformation fidelity, requirement coverage (RQ3): **postponed**. They need validated labels, and AI-made labels may only be called provisional.
-   Either plan RQ3 into the timeline or narrow the wording now.
+   - requirement coverage and applicability (RQ3): now measured automatically against a **silver** reference made by a different, stronger model (Gemini). It isn't human-checked, so write "agreement with a silver reference", not "accuracy". Requirement-transformation fidelity is still not measured.
+   Adjust the wording in 2.4 and RQ3 accordingly.
 9. **2.8 / RQ2.** With 13 cases, a moderation test has very little power. Call RQ2 *exploratory* in Chapter 3.
 
 ## C. Expectation to set in Chapter 3

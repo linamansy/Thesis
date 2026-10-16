@@ -40,6 +40,15 @@ generator:
   timeout_seconds: 900        # per case (8B model on an RTX 4060)
   npx_command: null           # null = find npx automatically; set a full path if needed
 
+silver:
+  # Automatic legal reference for EVALUATION only (src/build_silver_reference.py), built once before the runs.
+  # Deliberately a different, stronger model than the generator and the C3 agents (qwen3), so C3 is not graded
+  # by its own model. AI-made = SILVER (provisional); decision 16 Oct 2026: no human audit (stated limitation).
+  provider: gemini            # uses GEMINI_API_KEY from .env and the gemini_* settings of the llm section
+  model: gemini-3.5-flash     # fixed version; the exact version returned by the API is stored in the file
+  temperature: 0
+  max_tokens: 8192
+
 experiment:
   repetitions: 3              # each condition is run this many times: --repetition 1, 2, 3
                               # finish C1, C2 and C3 of a repetition before starting the next one
@@ -91,6 +100,9 @@ paths:
   relevance_prompt: prompts/relevance_prompt.txt       # C3 mediation agents
   applicability_prompt: prompts/applicability_prompt.txt
   requirement_prompt: prompts/requirement_prompt.txt
+  silver_prompt: prompts/silver_annotation_prompt.txt  # evaluation reference only, NOT a C3 agent
+  silver_reference: data/silver/silver_reference.json  # built once by src/build_silver_reference.py, then frozen
+  mock_silver_response: data/mock/silver_response.json
   mock_generator_response: data/mock/sample_process.json  # fixed answer MockLLM gives the generator
   mock_relevance_response: data/mock/relevance_response.json          # fixed answers for the C3 agents
   mock_applicability_response: data/mock/applicability_response.json

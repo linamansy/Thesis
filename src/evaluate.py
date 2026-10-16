@@ -15,6 +15,9 @@ results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data
                            fewer than two matched tasks. Message flows count as order (config).
   3b. Unsupported additions - extra (unmatched) generated tasks, and how many of them look like they
                            came from the knowledge block (PROVISIONAL diagnostic, see extra_task_diagnostics)
+  3d. Legal steps (SILVER reference, data/silver/silver_reference.json, AI-made, provisional):
+                           requirement coverage, extra tasks that are justified legal steps (not errors),
+                           precision_adjusted, unjustified knowledge additions (see silver_diagnostics)
   3c. Generator diagnostics (BPMNGen) - context limit hit, token counts, BPMNGen auto-repairs
   4. Reference complexity - tasks, gateways, loops, nesting depth and Cardoso's CFC (src/complexity.py)
 
@@ -81,6 +84,9 @@ class Evaluator:
         self.message_flows_as_order = settings.get("message_flows_as_order", True)
         self.trace_threshold = settings.get("trace_threshold", 0.5)
         self.knowledge_file = paths.get("knowledge_block_file", "knowledge_block.txt")
+        silver_path = project_path(paths["silver_reference"]) if "silver_reference" in paths else None
+        self.silver = (json.loads(silver_path.read_text(encoding="utf-8"))["cases"]
+                       if silver_path and silver_path.exists() else None)
 
     # ---------- comparing two models ----------
 
@@ -159,6 +165,8 @@ class Evaluator:
         complexity = self.complexity.measure(reference)
         additions = self.extra_task_diagnostics(condition, case_id, case_dir, scores["semantic"]["extra"]) \
             if usable else {"n_extra_tasks": 0, "n_extra_knowledge_traceable": 0, "extra_tasks": []}
+        legal = self.silver_diagnostics(case_id, case_dir / self.bpmn_file if usable else None,
+                                        scores["semantic"], additions)
         bpmngen = validation.get("bpmngen") or {}
         repairs = bpmngen.get("auto_repairs") or {}
 
@@ -173,6 +181,7 @@ class Evaluator:
                 "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
                 **scores,
                 "extra_task_diagnostics": additions,
+                "silver_legal_diagnostics": legal,
                 "bpmngen": bpmngen or None,
                 "reference_complexity": complexity,
                 "settings": {"embedding_model": self.matcher.model_name, "similarity_threshold": threshold},
@@ -205,6 +214,11 @@ class Evaluator:
             "n_pairs": behavioral["n_pairs"],
             "n_extra_tasks": additions["n_extra_tasks"],
             "n_extra_knowledge_traceable": additions["n_extra_knowledge_traceable"],
+            "n_required_steps": legal["n_required_steps"],
+            "requirement_coverage": legal["requirement_coverage"],
+            "n_extra_justified": legal["n_extra_justified"],
+            "precision_adjusted": legal["precision_adjusted"],
+            "n_unjustified_knowledge_additions": legal["n_unjustified_knowledge_additions"],
             "context_limit_hit": bool(validation.get("context_limit_hit", False)),
             "prompt_tokens": bpmngen.get("prompt_tokens"),
             "output_tokens": bpmngen.get("output_tokens"),
@@ -225,21 +239,62 @@ class Evaluator:
         does not contain also lands here, so read the listed tasks before drawing conclusions.
         """
         labels = [e["generated_label"] for e in extra]
+        ids = [e["generated_id"] for e in extra]
         result = {"n_extra_tasks": len(labels), "n_extra_knowledge_traceable": 0, "extra_tasks": []}
         knowledge_path = case_dir / self.knowledge_file
         if condition == "C1" or not labels or not knowledge_path.exists():
-            result["extra_tasks"] = [{"label": label, "knowledge_traceable": False} for label in labels]
+            result["extra_tasks"] = [{"generated_id": i, "label": label, "knowledge_traceable": False}
+                                     for i, label in zip(ids, labels)]
             return result
         description = (self.cases_dir / case_id / self.config["paths"]["case_description_file"]).read_text(
             encoding="utf-8")
         to_knowledge = self.matcher.best_similarity(labels, split_sentences(knowledge_path.read_text(encoding="utf-8")))
         to_description = self.matcher.best_similarity(labels, split_sentences(description))
-        for label, k, d in zip(labels, to_knowledge, to_description):
+        for i, label, k, d in zip(ids, labels, to_knowledge, to_description):
             traceable = k >= self.trace_threshold and k > d
-            result["extra_tasks"].append({"label": label, "similarity_to_knowledge": round(k, 4),
+            result["extra_tasks"].append({"generated_id": i, "label": label, "similarity_to_knowledge": round(k, 4),
                                           "similarity_to_description": round(d, 4), "knowledge_traceable": traceable})
         result["n_extra_knowledge_traceable"] = sum(e["knowledge_traceable"] for e in result["extra_tasks"])
         return result
+
+    def silver_diagnostics(self, case_id: str, generated_path: Path | None, semantic: dict, additions: dict) -> dict:
+        """Scores against the SILVER legal reference (data/silver/silver_reference.json, AI-made, provisional).
+
+        n_required_steps       steps that the applicable rules of the case require (silver)
+        requirement_coverage   share of those steps realised by some generated task (one-to-one matching, same
+                               embedding threshold as the task matching); None if the case has no required step
+        n_extra_justified      extra tasks (not in the PMo reference) that realise a required step: they are a
+                               correct legal addition, NOT an error
+        precision_adjusted     (n_matched + n_extra_justified) / n_generated_tasks: precision in which correct
+                               legal steps no longer count against the model (plain precision is kept as well)
+        n_unjustified_knowledge_additions  knowledge-traceable extra tasks that realise NO required step:
+                               the damage raw retrieval is expected to cause and mediation to prevent
+        All are None when no silver reference has been built yet.
+        """
+        empty = {"n_required_steps": None, "requirement_coverage": None, "n_extra_justified": None,
+                 "precision_adjusted": None, "n_unjustified_knowledge_additions": None, "required_step_matches": []}
+        if self.silver is None or case_id not in self.silver:
+            return empty
+        required = {f"req_{i}": step["label"] for i, step in enumerate(self.silver[case_id]["required_steps"])}
+        result = dict(empty, n_required_steps=len(required))
+        if generated_path is None:  # failed or invalid model: nothing realised
+            return dict(result, requirement_coverage=0.0 if required else None, n_extra_justified=0,
+                        precision_adjusted=0.0, n_unjustified_knowledge_additions=0)
+        generated = BPMNGraph.from_file(generated_path, self.message_flows_as_order).task_labels()
+        matches = self.matcher.match(generated, required)["matched"] if required else []
+        realising = {m["generated_id"] for m in matches}
+        extra_ids = {e["generated_id"] for e in semantic["extra"]}
+        justified = extra_ids & realising
+        unjustified = sum(1 for e in additions["extra_tasks"]
+                          if e["knowledge_traceable"] and e["generated_id"] not in justified)
+        n_generated = semantic["n_generated_tasks"]
+        return dict(result,
+                    requirement_coverage=round(len(matches) / len(required), 4) if required else None,
+                    n_extra_justified=len(justified),
+                    precision_adjusted=round((semantic["n_matched"] + len(justified)) / n_generated, 4)
+                    if n_generated else 0.0,
+                    n_unjustified_knowledge_additions=unjustified,
+                    required_step_matches=matches)
 
     def evaluate(self, conditions: list[str] | None = None, run_ids: list[str] | None = None,
                  threshold: float | None = None, csv_path: Path | None = None,

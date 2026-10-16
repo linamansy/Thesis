@@ -9,6 +9,9 @@ so the choice is visible instead of hidden:
 Failed or invalid models already have behavioral similarity 0 (they are scored 0
 on every metric), so they are included in both averages.
 
+Silver legal reference (AI-made, provisional): mean precision_adjusted (correct legal steps are not errors),
+requirement coverage (mean over the cases that have required steps), justified extra tasks and unjustified
+knowledge additions.
 Also per group: mean number of extra (unsupported) tasks and of knowledge-traceable extra tasks,
 and how many cases hit the context limit or were auto-repaired by BPMNGen (diagnostics, reported
 per condition so that a difference between conditions is visible).
@@ -35,6 +38,10 @@ REPETITION_COLUMNS = {
     "behavioral_mean_as_zero": "behavioral_as_zero",
     "extra_tasks_mean": "extra_tasks",
     "extra_knowledge_traceable_mean": "extra_knowledge_traceable",
+    "precision_adjusted_mean": "precision_adjusted",
+    "requirement_coverage_mean": "requirement_coverage",
+    "extra_justified_mean": "extra_justified",
+    "unjustified_knowledge_additions_mean": "unjustified_knowledge_additions",
     "n_context_limit_hit": "n_context_limit_hit",
     "n_auto_repaired": "n_auto_repaired",
 }
@@ -83,6 +90,10 @@ def summarise_by_condition(table: pd.DataFrame, group_by: list[str] | None = Non
             "behavioral_mean_as_zero": round(behavioral.fillna(0).mean(), 4),
             "extra_tasks_mean": mean_or_none(group, "n_extra_tasks"),
             "extra_knowledge_traceable_mean": mean_or_none(group, "n_extra_knowledge_traceable"),
+            "precision_adjusted_mean": mean_or_none(group, "precision_adjusted"),
+            "requirement_coverage_mean": mean_or_none(group, "requirement_coverage"),
+            "extra_justified_mean": mean_or_none(group, "n_extra_justified"),
+            "unjustified_knowledge_additions_mean": mean_or_none(group, "n_unjustified_knowledge_additions"),
             "n_context_limit_hit": count_true(group, "context_limit_hit"),
             "n_auto_repaired": count_auto_repaired(group),
         }
