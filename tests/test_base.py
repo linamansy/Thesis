@@ -17,6 +17,7 @@ REQUIRED_FIELDS = {
     "temperature", "prompt", "raw_output", "parsed_output", "valid_json",
     "retries", "duration_seconds",
     "finish_reason",   # added: why the model stopped (None for MockLLM), to detect cut-off answers
+    "model_digest",    # added: exact model file (Ollama sha256 digest; None for other providers)
 }
 
 

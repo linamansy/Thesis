@@ -16,7 +16,8 @@ A condition whose cases are all finished is complete and is never started again.
 
 Other protections:
   - run_info.json must agree with the current repetition, provider, model, temperature and generator
-    (and, for Ollama, the exact model digest); a run folder can never mix runs made with different settings
+    (for Ollama also the model digest, seed, num_ctx, think and max_tokens of the agents, and the digest of
+    the generator's model); a run folder can never mix runs made with different settings
   - with the default run ids, repetition n can only start when all conditions of repetition n-1
     are complete (all three conditions of a repetition are finished before the next one starts)
 """
@@ -59,8 +60,11 @@ class RunFolder:
         generator = config["generator"]
         generator_name = (f"bpmngen/{generator['model']}" if generator["type"] == "bpmngen" else "json_builder")
         self.settings = {"run_id": run_id, "repetition": repetition, "provider": llm["provider"],
-                         "model": model, "temperature": llm["temperature"], "generator": generator_name,
-                         **(extra_settings or {})}
+                         "model": model, "temperature": llm["temperature"], "generator": generator_name}
+        if llm["provider"] == "ollama":  # the exact local model file and its generation settings
+            self.settings |= {"model_digest": llm["ollama_model_digest"], "seed": llm["seed"],
+                              "num_ctx": llm["num_ctx"], "think": llm["think"], "max_tokens": llm["max_tokens"]}
+        self.settings |= extra_settings or {}
 
     # ---------- state of the run ----------
 

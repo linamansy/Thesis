@@ -1,23 +1,27 @@
-"""OllamaLLM: calls a local Ollama server (qwen3:8b) for the C3 mediation agents.
+"""OllamaLLM: calls a model that runs locally in Ollama (http://localhost:11434), through its REST API.
 
-Why Ollama: the BPMN generator (BPMNGen) runs qwen3:8b on Ollama, and the mediation agents use the
-SAME model, so C3 cannot win just by borrowing a stronger model's knowledge (fairness decision,
-16 Oct 2026). Generator and agents share one model; only the knowledge processing differs.
-
-  - Native endpoint POST <base_url>/api/chat, not streamed (one JSON answer).
-  - Settings from config.yaml (llm section): model, temperature (0 for the agents), num_ctx
-    (context window; Ollama's default is small and would silently cut long prompts), timeout.
-  - Thinking is switched off ("think": false), the same choice BPMNGen makes with "/no_think".
-    Any <think>...</think> block that still appears is removed before the answer is returned.
-  - "format": "json" makes Ollama return a JSON object; BaseAgent still validates it with Pydantic.
-  - After every answer: the model name Ollama reports -> last_response_model, and done_reason
-    ("stop", or "length" when the context window was full) -> last_finish_reason; both are logged.
-  - A connection error or timeout is retried (waits 2, 4, 8, ... s). If it still fails, or Ollama
-    returns an HTTP error (e.g. 404 model not pulled), LLMUnavailableError stops the run without
-    recording a result, exactly like the Gemini client.
+  - No API key: the model runs on this computer. Ollama must be running (it starts with Windows,
+    or start it with `ollama serve`) and the model must be downloaded (`ollama pull qwen3:8b`).
+  - Every setting comes from config.yaml and is sent with every request:
+      temperature 0, a fixed seed (42), num_ctx (the context window in tokens: prompt + answer),
+      max_tokens (num_predict: the longest answer allowed), and thinking switched OFF (think: false),
+      so Qwen3 answers directly without a hidden reasoning part.
+  - Fixed model version: a name like "qwen3:8b" can point to a different file after a new
+    `ollama pull`. The exact file is identified by its digest (a sha256 hash). Before the first call,
+    the digest of the installed model is read from Ollama (/api/tags) and compared with
+    llm.ollama_model_digest in config.yaml; if they differ, the run stops. The digest is logged
+    with every call (model_digest), next to the model name.
+  - finish_reason: Ollama reports "stop" (answer complete) or "length" (cut off at max_tokens).
+    They are written as "STOP" and "MAX_TOKENS", the same words as for Gemini, so cut-off
+    answers are found the same way for every provider.
+  - Errors, as for GeminiLLM:
+      temporary (retried with increasing waits 2, 4, 8, ... s, llm.ollama_api_max_retries times):
+        Ollama not reachable (not running), timeouts, server errors (HTTP 5xx)
+      not retried: other HTTP errors such as 404 (model not downloaded)
+    Every one of them ends in LLMUnavailableError, which stops the run without recording a result
+    for the case, so the case stays unfinished and is continued when the command is run again.
 """
 
-import re
 import time
 from typing import Callable
 
@@ -25,86 +29,99 @@ import httpx
 
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 
-THINK_BLOCK = re.compile(r"<think>[\s\S]*?</think>", re.IGNORECASE)
+# Ollama's words for why the model stopped -> the words used in the log (same as Gemini).
+FINISH_REASONS = {"stop": "STOP", "length": "MAX_TOKENS"}
 
 
-def strip_think(text: str) -> str:
-    return THINK_BLOCK.sub("", text).strip()
+def is_temporary(error: Exception) -> bool:
+    """True for errors worth retrying: Ollama not reachable, timeouts, server errors."""
+    if isinstance(error, httpx.HTTPStatusError):
+        return error.response.status_code >= 500
+    return isinstance(error, httpx.TransportError)  # connection refused (Ollama not running), timeouts
 
 
 class OllamaLLM(LLMClient):
-    """LLMClient for a local Ollama server."""
+    """LLMClient for a local Ollama model."""
 
-    def __init__(self, model: str, temperature: float | None, base_url: str, num_ctx: int,
-                 timeout_seconds: float, api_max_retries: int, initial_wait_seconds: float,
-                 json_format: bool = True, client: httpx.Client | None = None,
-                 sleep: Callable[[float], None] = time.sleep):
-        """client and sleep can be replaced in tests: no real server and no real waiting."""
+    def __init__(self, model: str, temperature: float, max_tokens: int, seed: int, num_ctx: int,
+                 think: bool, expected_digest: str | None, base_url: str, timeout_seconds: float,
+                 api_max_retries: int, initial_wait_seconds: float,
+                 client: httpx.Client | None = None, sleep: Callable[[float], None] = time.sleep):
+        """client and sleep can be replaced in tests: no real Ollama and no real waiting."""
         super().__init__(model=model, temperature=temperature)
-        self.base_url = base_url.rstrip("/")
+        self.max_tokens = max_tokens
+        self.seed = seed
         self.num_ctx = num_ctx
+        self.think = think
+        self.expected_digest = expected_digest
         self.api_max_retries = api_max_retries
         self.initial_wait_seconds = initial_wait_seconds
-        self.json_format = json_format
         self.sleep = sleep
-        self.retry_waits: list[float] = []
-        self.client = client or httpx.Client(timeout=timeout_seconds)
-        # Token counts of the last answer (for checking the context window).
+        self.retry_waits: list[float] = []   # every retry wait that happened, for inspection
         self.last_prompt_tokens: int | None = None
-        self.last_output_tokens: int | None = None
+        self.client = client or httpx.Client(base_url=base_url, timeout=timeout_seconds)
 
     @classmethod
     def from_config(cls, config: dict, client: httpx.Client | None = None) -> "OllamaLLM":
         llm = config["llm"]
-        return cls(llm["model"], llm["temperature"], llm["ollama_base_url"], llm["ollama_num_ctx"],
-                   llm["ollama_timeout_seconds"], llm["ollama_api_max_retries"], llm["api_initial_wait_seconds"],
-                   client=client)
+        return cls(llm["model"], llm["temperature"], llm["max_tokens"], llm["seed"], llm["num_ctx"],
+                   llm["think"], llm["ollama_model_digest"], llm["ollama_url"], llm["ollama_timeout_seconds"],
+                   llm["ollama_api_max_retries"], llm["api_initial_wait_seconds"], client=client)
 
     def request_body(self, prompt: str) -> dict:
-        """The exact request sent for every call."""
-        options = {"num_ctx": self.num_ctx}
-        if self.temperature is not None:
-            options["temperature"] = self.temperature
-        body = {"model": self.model, "messages": [{"role": "user", "content": prompt}],
-                "stream": False, "think": False, "options": options}
-        if self.json_format:
-            body["format"] = "json"
-        return body
+        """The exact request sent to /api/chat for every call."""
+        return {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "stream": False,      # one complete answer instead of pieces
+            "think": self.think,  # false: no reasoning part
+            "options": {"temperature": self.temperature, "seed": self.seed,
+                        "num_ctx": self.num_ctx, "num_predict": self.max_tokens},
+        }
 
-    def complete(self, prompt: str) -> str:
+    def _send(self, method: str, path: str, body: dict | None = None) -> dict:
+        """One HTTP request to Ollama, with retries on temporary errors. Returns the JSON answer."""
         for attempt in range(self.api_max_retries + 1):
             try:
-                response = self.client.post(f"{self.base_url}/api/chat", json=self.request_body(prompt))
-            except httpx.TransportError as e:  # connection refused, timeout, network error
+                response = self.client.request(method, path, json=body)
+                response.raise_for_status()
+                return response.json()
+            except (httpx.HTTPStatusError, httpx.TransportError) as e:
+                if not is_temporary(e):
+                    raise LLMUnavailableError(f"Ollama error (not retried): {describe(e)}") from e
                 if attempt == self.api_max_retries:
-                    raise LLMUnavailableError(f"Ollama not reachable after {self.api_max_retries} retries "
-                                              f"({self.base_url}): {type(e).__name__}: {e}") from e
+                    hint = " Is Ollama running? (start it with: ollama serve)" if isinstance(e, httpx.ConnectError) else ""
+                    raise LLMUnavailableError(f"Ollama still failing after {self.api_max_retries} retries: "
+                                              f"{describe(e)}.{hint}") from e
                 wait = self.initial_wait_seconds * 2 ** attempt
                 self.retry_waits.append(wait)
                 self.sleep(wait)
-                continue
-            if response.status_code != 200:
-                raise LLMUnavailableError(f"Ollama error {response.status_code}: {response.text[:300]}")
-            data = response.json()
-            self.last_response_model = data.get("model") or self.model
-            self.last_finish_reason = data.get("done_reason")
-            self.last_prompt_tokens = data.get("prompt_eval_count")
-            self.last_output_tokens = data.get("eval_count")
-            return strip_think((data.get("message") or {}).get("content") or "")
+
+    def check_model(self) -> None:
+        """Read the digest of the installed model and stop if it is not the one fixed in config.yaml."""
+        installed = {m["name"]: m["digest"] for m in self._send("GET", "/api/tags").get("models", [])}
+        if self.model not in installed:
+            raise LLMUnavailableError(f"Model {self.model!r} is not downloaded in Ollama "
+                                      f"(installed: {sorted(installed) or 'none'}). Run: ollama pull {self.model}")
+        digest = installed[self.model]
+        if self.expected_digest and digest != self.expected_digest:
+            raise LLMUnavailableError(f"Model {self.model!r} in Ollama has digest {digest}, but config.yaml fixes "
+                                      f"{self.expected_digest} (llm.ollama_model_digest). The model was changed.")
+        self.model_digest = digest
+
+    def complete(self, prompt: str) -> str:
+        if self.model_digest is None:
+            self.check_model()   # once, before the first call
+        data = self._send("POST", "/api/chat", self.request_body(prompt))
+        self.last_response_model = data.get("model") or self.model
+        self.last_prompt_tokens = data.get("prompt_eval_count")   # prompt length in the model's own tokens
+        reason = data.get("done_reason")
+        self.last_finish_reason = FINISH_REASONS.get(reason, reason.upper() if reason else None)
+        return data.get("message", {}).get("content") or ""
 
 
-def ollama_model_digest(base_url: str, model: str, client: httpx.Client | None = None) -> str | None:
-    """The digest (exact version) of an installed Ollama model, from GET /api/tags; None if not found.
-
-    A tag such as "qwen3:8b" can point to a newer file after `ollama pull`; the digest cannot.
-    It is stored in run_info.json, so all parts and conditions of a run provably used the same model.
-    """
-    client = client or httpx.Client(timeout=30)
-    try:
-        response = client.get(f"{base_url.rstrip('/')}/api/tags")
-    except httpx.TransportError as e:
-        raise LLMUnavailableError(f"Ollama not reachable at {base_url}: {e}") from e
-    for entry in response.json().get("models", []):
-        if entry.get("name") == model or entry.get("model") == model:
-            return entry.get("digest")
-    return None
+def describe(error: Exception) -> str:
+    """A short description of an HTTP error, including Ollama's own error message if there is one."""
+    if isinstance(error, httpx.HTTPStatusError):
+        return f"HTTP {error.response.status_code}: {error.response.text.strip()}"
+    return f"{type(error).__name__}: {error}"

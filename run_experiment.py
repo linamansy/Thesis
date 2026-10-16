@@ -45,14 +45,14 @@ from src.agents.applicability_agent import ApplicabilityAgent
 from src.agents.relevance_agent import RelevanceAgent
 from src.agents.requirement_agent import RequirementAgent
 from src.bpmn_builder import BPMNBuilder
-from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit
+from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit, installed_ollama_digest
 from src.config import load_config, project_path
 from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
 from src.llm.mock_llm import MockLLM
-from src.llm.ollama_llm import OllamaLLM, ollama_model_digest
+from src.llm.ollama_llm import OllamaLLM
 from src.logger import RunLogger
 from src.orchestrator import Orchestrator
 from src.retrieval.passage import load_passages
@@ -62,6 +62,7 @@ from src.validator import BPMNValidator
 MEDIATION_ROLES = ["relevance", "applicability", "requirement"]
 PROVIDERS = ["mock", "ollama", "gemini", "anthropic"]
 GENERATOR_TYPES = ["bpmngen", "json_builder"]
+REAL_PROVIDERS = {"ollama": OllamaLLM, "gemini": GeminiLLM, "anthropic": AnthropicLLM}
 
 
 class RunInterrupted(Exception):
@@ -77,9 +78,9 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
 
     mock:      every role gets its own fixed answer file (paths.mock_<role>_response),
                because the agents expect different kinds of JSON.
-    gemini / anthropic: the real API, with the same model and temperature for every role. Pass the
-               same `shared` dict for all roles of a run so they share ONE client; then the pause
-               between calls (free-tier per-minute limit) counts over all agents together.
+    ollama / gemini / anthropic: the real model, with the same model and settings for every role. Pass
+               the same `shared` dict for all roles of a run so they share ONE client; then the pause
+               between calls (Gemini free-tier per-minute limit) counts over all agents together.
     """
     llm_config = config["llm"]
     provider = llm_config["provider"]
@@ -90,12 +91,7 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
         raise ValueError(f"llm.provider must be one of {PROVIDERS}, not {provider!r}")
     if shared is not None and provider in shared:
         return shared[provider]
-    if provider == "ollama":
-        llm = OllamaLLM.from_config(config)
-    elif provider == "gemini":
-        llm = GeminiLLM.from_config(config)
-    else:
-        llm = AnthropicLLM.from_config(config)
+    llm = REAL_PROVIDERS[provider].from_config(config)
     if shared is not None:
         shared[provider] = llm
     return llm
@@ -248,23 +244,25 @@ class ExperimentRunner:
 
 
 def ollama_settings(config: dict) -> dict:
-    """Exact digests of the Ollama models used in this run (generator and/or mediation agents).
+    """The exact digest of the generator's Ollama model (BPMNGen calls Ollama itself), for run_info.json.
 
-    Stored in run_info.json; a later part of the run with a different digest is refused.
-    Raises LLMUnavailableError if Ollama is not reachable, or ValueError if a model is not installed.
+    A later part of the run with a different digest is refused. If the generator uses the same model as the
+    mediation agents, it must also be the exact file fixed in llm.ollama_model_digest (one model everywhere).
+    Raises LLMUnavailableError if Ollama is not reachable, ValueError if the model is missing or different.
     """
-    models = {}
-    if config["generator"]["type"] == "bpmngen":
-        models["generator_digest"] = (config["generator"]["ollama_base_url"], config["generator"]["model"])
-    if config["llm"]["provider"] == "ollama":
-        models["agents_digest"] = (config["llm"]["ollama_base_url"], config["llm"]["model"])
-    settings = {}
-    for key, (base_url, model) in models.items():
-        digest = ollama_model_digest(base_url, model)
-        if digest is None:
-            raise ValueError(f"model {model!r} is not installed in Ollama at {base_url} (run: ollama pull {model})")
-        settings[key] = digest
-    return settings
+    generator = config["generator"]
+    if generator["type"] != "bpmngen":
+        return {}
+    digest = installed_ollama_digest(generator["ollama_base_url"], generator["model"])
+    if digest is None:
+        raise ValueError(f"model {generator['model']!r} is not installed in Ollama at "
+                         f"{generator['ollama_base_url']} (run: ollama pull {generator['model']})")
+    llm = config["llm"]
+    if llm["provider"] == "ollama" and llm["model"] == generator["model"] and digest != llm["ollama_model_digest"]:
+        raise ValueError(f"the installed {generator['model']} has digest {digest}, but config.yaml fixes "
+                         f"llm.ollama_model_digest = {llm['ollama_model_digest']}. If this is the model you want "
+                         f"to use for the whole experiment, copy this digest into config.yaml.")
+    return {"generator_digest": digest}
 
 
 def print_summary(records: list[dict]) -> None:
@@ -328,6 +326,10 @@ def main() -> None:
                    f"(temperature {config['llm']['temperature']})" if args.condition == "C3" else "")
     print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | part {part} | "
           f"{generator_text}{agents_text}")
+    agent_llm = agent_llms["relevance"] if agent_llms else llm
+    if isinstance(agent_llm, OllamaLLM):
+        print(f"Ollama (agents): digest {agent_llm.expected_digest} | seed {agent_llm.seed} | num_ctx {agent_llm.num_ctx} | "
+              f"think {agent_llm.think} | max_tokens {agent_llm.max_tokens}")
     print(f"{len(runner.case_ids) - len(to_run)} selected case(s) already finished and skipped; "
           f"{len(to_run)} to run: {' '.join(to_run)}\n")
     try:

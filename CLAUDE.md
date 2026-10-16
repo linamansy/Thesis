@@ -43,14 +43,16 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - All parameters (model names, temperature, k values, file paths) live in config.yaml and are loaded in code. Never hard-code them.
 
 ## LLM provider and experiment runs
-- Everything runs on qwen3:8b in Ollama (on the PC with the RTX 4060): the BPMNGen generator AND the C3 mediation agents (OllamaLLM, src/llm/ollama_llm.py: /api/chat, num_ctx 16384, think false, format json, temperature 0).
-- The exact Ollama model digest of the generator and the agents is stored in run_info.json; a later part of a run with a different digest is refused (a tag like qwen3:8b can change after `ollama pull`).
-- Ollama not reachable / HTTP error / harness timeout: retried where sensible, then the run STOPS without recording a result (LLMUnavailableError), so the case can be resumed.
-- GeminiLLM and AnthropicLLM are kept in the code but not used for the thesis.
+- Everything runs on qwen3:8b in Ollama (on the PC with the RTX 4060, http://localhost:11434, no API key): the BPMNGen generator AND the C3 mediation agents.
+- Mediation agents (OllamaLLM, src/llm/ollama_llm.py), all settings in config.yaml and sent with every request: temperature 0, seed 42, num_ctx 16384, thinking off (think: false), max_tokens 8192 (num_predict).
+- The exact model file is fixed by its digest (llm.ollama_model_digest, still DIGEST_PLACEHOLDER: fill it in from the Ollama API before the first real run). The agents check it before their first call; the generator's model is checked against the same digest when a run starts (run_experiment.ollama_settings) and stored in run_info.json. If anything differs, the run stops.
+- Logged for every call: model name, model digest and finish_reason (STOP, or MAX_TOKENS when an answer was cut off).
+- Errors: Ollama not reachable, timeouts and server errors are retried with increasing waits (2, 4, 8, 16, 32 s), up to 5 times; other errors (e.g. 404 model not downloaded) are not retried. Every such error stops the run without recording a result (LLMUnavailableError), so the case can be resumed.
+- Prompt length: for the BPMNGen generator, prompt and answer tokens are measured on every call (meta.json) and a cut-off answer is flagged (context_limit_hit). src/count_prompt_tokens.py counts the prompt of the LEGACY json_builder generator only.
+- GeminiLLM (src/llm/gemini_llm.py, model gemini-3.5-flash, key GEMINI_API_KEY in .env, at least 10 s between calls) and AnthropicLLM are kept for possible later use (e.g. a second-model robustness check); MockLLM is used for tests.
 - 3 repetitions. Finish all three conditions (C1, C2, C3) of a repetition before starting the next repetition.
 - Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: ollama_rep1, ollama_rep2, ollama_rep3). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
 - Resuming: if a run stops (e.g. the daily free-tier limit), rerunning the same command (same condition and repetition) skips finished cases and continues with the unfinished ones, logging to a new log file part. Finished cases are never overwritten or rerun. Any API error (a temporary one after all retries, any other one such as 404 model not found at once) stops the run without writing validation.json; it is never recorded as a model result.
-- MockLLM is used for tests.
 
 ## Code structure (required by supervisor)
 - Object-oriented design. Every agent is its own class in its own file under src/agents/.
@@ -64,7 +66,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 
 ## Logging
 - RunLogger class (src/logger.py) writes one JSON record per LLM call to results/logs/<condition>_<run_id>.jsonl (JSON Lines); a resumed run writes to <condition>_<run_id>_part2.jsonl, _part3, ... An existing log file is never written into again.
-- Each record contains: timestamp, run_id, condition, case_id, component (class name), model, temperature, prompt, raw_output, parsed_output, valid_json, retries, duration_seconds.
+- Each record contains: timestamp, run_id, condition, case_id, component (class name), model, model_digest, finish_reason, temperature, prompt, raw_output, parsed_output, valid_json, retries, duration_seconds.
 - Every component that calls an LLM must log through RunLogger. BPMNGenGenerator logs one record per case with the exact messages sent to Ollama, the raw output and the harness meta data; the full files are in <case>/bpmngen/.
 
 ## RAG (used by C2 and C3)

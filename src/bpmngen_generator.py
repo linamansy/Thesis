@@ -33,6 +33,8 @@ import subprocess
 from pathlib import Path
 from typing import Callable
 
+import httpx
+
 from src.config import project_path
 from src.llm.base_llm import LLMUnavailableError
 from src.logger import RunLogger
@@ -123,3 +125,19 @@ class BPMNGenGenerator:
 def context_limit_hit(meta: dict) -> bool:
     """True when the model was cut off: the answer did not end normally or the window was full."""
     return meta.get("done_reason") != "stop" or meta.get("fits_context") is False
+
+
+def installed_ollama_digest(base_url: str, model: str, client: httpx.Client | None = None) -> str | None:
+    """The digest (exact file) of an installed Ollama model, from GET /api/tags; None if not installed.
+
+    Used for the GENERATOR's model, which BPMNGen calls itself (the agents' OllamaLLM checks its own).
+    """
+    client = client or httpx.Client(timeout=30)
+    try:
+        response = client.get(f"{base_url.rstrip('/')}/api/tags")
+    except httpx.TransportError as e:
+        raise LLMUnavailableError(f"Ollama not reachable at {base_url}: {e}") from e
+    for entry in response.json().get("models", []):
+        if model in (entry.get("name"), entry.get("model")):
+            return entry.get("digest")
+    return None

@@ -31,6 +31,8 @@ class LLMClient(ABC):
         self.last_response_model: str | None = None
         # Why the model stopped on the last answer (e.g. "STOP", "MAX_TOKENS"); None if not reported.
         self.last_finish_reason: str | None = None
+        # The exact model file (e.g. Ollama's sha256 digest), written to the log; None if the provider has none.
+        self.model_digest: str | None = None
 
     @property
     def model_for_log(self) -> str:

@@ -5,19 +5,25 @@ llm:
   # LLM for the C3 mediation agents (relevance, applicability, requirement) and for the legacy JSON generator.
   # Thesis decision (16 Oct 2026): the agents use the SAME model as the BPMN generator (qwen3:8b on Ollama),
   # so C3 cannot win by borrowing a stronger model. The BPMN generator itself is configured under "generator".
-  provider: ollama            # "mock" (fixed answers, tests), "ollama" (thesis), "gemini" / "anthropic" (kept, not used)
-  model: qwen3:8b             # must match `ollama list`; the model digest is recorded in run_info.json
-  temperature: 0              # mediation agents only (BPMNGen keeps its own fixed 0.3, see generator below)
-  max_tokens: 8192            # gemini / anthropic only
+  # Its digest is checked against ollama_model_digest below too, so both use the exact same model file.
+  provider: ollama            # "mock" (fixed answers, no API), "ollama" (local model, used for the thesis),
+                              # "gemini" (Google Gemini free tier, model gemini-3.5-flash) or "anthropic"
+                              # (kept for possible later use); API keys are in .env
+  model: qwen3:8b             # a FIXED model version; for Ollama the exact file is fixed by ollama_model_digest
+  temperature: 0              # mediation agents (BPMNGen keeps its own fixed 0.3, see generator below)
+  max_tokens: 8192            # longest answer allowed (Ollama: num_predict)
+  seed: 42                    # Ollama: fixed random seed
+  num_ctx: 16384              # Ollama: context window in tokens (prompt + answer)
+  think: false                # Ollama: Qwen3 thinking (hidden reasoning) switched off
+  ollama_url: http://localhost:11434
+  ollama_model_digest: DIGEST_PLACEHOLDER  # from `ollama list` / the Ollama API; the run stops if the installed model differs
+  ollama_timeout_seconds: 900 # Ollama: longest wait for one answer (a local model can be slow)
+  ollama_api_max_retries: 5   # OllamaLLM: extra attempts when Ollama is not reachable, times out or has a server error
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
   api_initial_wait_seconds: 2 # wait before the first API retry; doubles each time (2, 4, 8, ... s)
   api_max_retries: 5          # AnthropicLLM: extra attempts on temporary API errors
   gemini_api_max_retries: 5   # GeminiLLM: extra attempts on 429/RESOURCE_EXHAUSTED, overload, server errors, timeouts
   gemini_pause_between_calls_seconds: 10  # GeminiLLM: minimum seconds between two calls (free-tier per-minute limit)
-  ollama_base_url: http://localhost:11434 # Ollama on the PC with the GPU
-  ollama_num_ctx: 16384       # context window, the same value BPMNGen uses (Ollama's default would silently cut prompts)
-  ollama_timeout_seconds: 600 # per call
-  ollama_api_max_retries: 3   # retries when Ollama is not reachable
 
 generator:
   # The ONE BPMN generator shared by C1, C2 and C3.
@@ -27,7 +33,7 @@ generator:
   bpmngen_server_dir: ../BPMNGen-backend-main/BPMNGen-backend-main/server  # relative to the project root, or absolute
   harness: bpmngen_harness/run_bpmngen.ts
   model: qwen3:8b             # BPMNGen settings that are NOT changed: system prompt, temperature 0.3, num_ctx 16384, /no_think
-  ollama_base_url: http://localhost:11434
+  ollama_base_url: http://localhost:11434   # keep equal to llm.ollama_url
   # Neutral label in front of the knowledge block, identical for C1, C2 and C3 (PROVISIONAL: agree with
   # supervisors / Ulm). Replaces BPMNGen's DMN label "...rules the generated process MUST follow".
   knowledge_label: "[Domain information (it may or may not apply to this process):]"
