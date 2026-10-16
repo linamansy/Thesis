@@ -12,7 +12,10 @@ results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data
   3. Behavioral quality  - share of matched task pairs with the same relation
                            (order / exclusive / parallel) in both models (src/behavioral_profile.py).
                            Empty and behavioral_computable = False when a valid model has
-                           fewer than two matched tasks.
+                           fewer than two matched tasks. Message flows count as order (config).
+  3b. Unsupported additions - extra (unmatched) generated tasks, and how many of them look like they
+                           came from the knowledge block (PROVISIONAL diagnostic, see extra_task_diagnostics)
+  3c. Generator diagnostics (BPMNGen) - context limit hit, token counts, BPMNGen auto-repairs
   4. Reference complexity - tasks, gateways, loops, nesting depth and Cardoso's CFC (src/complexity.py)
 
 Outputs (main threshold from config.yaml), see src/summarise.py for the summaries:
@@ -33,6 +36,7 @@ Run from the project root:
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import pandas as pd
@@ -44,6 +48,12 @@ from src.config import load_config, project_path
 from src.run_folder import RunFolder
 from src.summarise import summarise_repetitions, summarise_runs
 from src.task_matcher import TaskMatcher
+
+
+def split_sentences(text: str) -> list[str]:
+    """Sentences and list lines of a text (for the extra-task diagnostic); very short pieces are dropped."""
+    pieces = re.split(r"(?<=[.;:!?])\s+|\n+", text)
+    return [p.strip(" -") for p in pieces if len(p.strip(" -")) >= 15]
 
 
 class Evaluator:
@@ -68,13 +78,16 @@ class Evaluator:
         self.smoke_prefix = settings["smoke_run_prefix"]
         self.matcher = matcher or TaskMatcher(settings["embedding_model"], settings["similarity_threshold"])
         self.complexity = ComplexityMeasurer()
+        self.message_flows_as_order = settings.get("message_flows_as_order", True)
+        self.trace_threshold = settings.get("trace_threshold", 0.5)
+        self.knowledge_file = paths.get("knowledge_block_file", "knowledge_block.txt")
 
     # ---------- comparing two models ----------
 
     def compare(self, generated_path: Path, reference_path: Path, threshold: float | None = None) -> dict:
         """Semantic and behavioral scores of one generated model against one reference."""
-        generated = BPMNGraph.from_file(generated_path)
-        reference = BPMNGraph.from_file(reference_path)
+        generated = BPMNGraph.from_file(generated_path, self.message_flows_as_order)
+        reference = BPMNGraph.from_file(reference_path, self.message_flows_as_order)
         matching = self.matcher.match(generated.task_labels(), reference.task_labels(), threshold)
 
         n_matched = len(matching["matched"])
@@ -129,7 +142,7 @@ class Evaluator:
         threshold = self.matcher.threshold if threshold is None else threshold
         case_dir = run["path"] / condition / case_id
         reference_path = self.cases_dir / case_id / self.reference_file
-        reference = BPMNGraph.from_file(reference_path)
+        reference = BPMNGraph.from_file(reference_path, self.message_flows_as_order)
 
         validation_path = case_dir / self.validation_file
         if validation_path.exists():
@@ -144,6 +157,10 @@ class Evaluator:
         else:
             scores = self.zero_scores(reference)
         complexity = self.complexity.measure(reference)
+        additions = self.extra_task_diagnostics(condition, case_id, case_dir, scores["semantic"]["extra"]) \
+            if usable else {"n_extra_tasks": 0, "n_extra_knowledge_traceable": 0, "extra_tasks": []}
+        bpmngen = validation.get("bpmngen") or {}
+        repairs = bpmngen.get("auto_repairs") or {}
 
         if save_details:
             details = {
@@ -155,6 +172,8 @@ class Evaluator:
                 "case_id": case_id,
                 "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
                 **scores,
+                "extra_task_diagnostics": additions,
+                "bpmngen": bpmngen or None,
                 "reference_complexity": complexity,
                 "settings": {"embedding_model": self.matcher.model_name, "similarity_threshold": threshold},
             }
@@ -184,8 +203,43 @@ class Evaluator:
             "behavioral_similarity": None if similarity is None else round(similarity, 4),
             "behavioral_computable": behavioral["behavioral_computable"],
             "n_pairs": behavioral["n_pairs"],
+            "n_extra_tasks": additions["n_extra_tasks"],
+            "n_extra_knowledge_traceable": additions["n_extra_knowledge_traceable"],
+            "context_limit_hit": bool(validation.get("context_limit_hit", False)),
+            "prompt_tokens": bpmngen.get("prompt_tokens"),
+            "output_tokens": bpmngen.get("output_tokens"),
+            "auto_flows_added": repairs.get("auto_flows_added"),
+            "auto_links_added": repairs.get("auto_links_added"),
+            "first_task_inserted": repairs.get("first_task_inserted"),
             **{f"ref_{name}": value for name, value in complexity.items()},
         }
+
+    def extra_task_diagnostics(self, condition: str, case_id: str, case_dir: Path, extra: list[dict]) -> dict:
+        """Unsupported additions: generated tasks with no match in the reference (PROVISIONAL diagnostic).
+
+        n_extra_tasks: all unmatched generated tasks (= n_generated_tasks - n_matched).
+        n_extra_knowledge_traceable: the extra tasks that look like they came from the KNOWLEDGE block,
+        not from the description: label similarity to some knowledge sentence >= trace_threshold AND higher
+        than to every description sentence. Only for C2 and C3 (C1 has no knowledge). This is the error
+        raw RAG is expected to cause and mediation to reduce. A correct legal step that the PMo reference
+        does not contain also lands here, so read the listed tasks before drawing conclusions.
+        """
+        labels = [e["generated_label"] for e in extra]
+        result = {"n_extra_tasks": len(labels), "n_extra_knowledge_traceable": 0, "extra_tasks": []}
+        knowledge_path = case_dir / self.knowledge_file
+        if condition == "C1" or not labels or not knowledge_path.exists():
+            result["extra_tasks"] = [{"label": label, "knowledge_traceable": False} for label in labels]
+            return result
+        description = (self.cases_dir / case_id / self.config["paths"]["case_description_file"]).read_text(
+            encoding="utf-8")
+        to_knowledge = self.matcher.best_similarity(labels, split_sentences(knowledge_path.read_text(encoding="utf-8")))
+        to_description = self.matcher.best_similarity(labels, split_sentences(description))
+        for label, k, d in zip(labels, to_knowledge, to_description):
+            traceable = k >= self.trace_threshold and k > d
+            result["extra_tasks"].append({"label": label, "similarity_to_knowledge": round(k, 4),
+                                          "similarity_to_description": round(d, 4), "knowledge_traceable": traceable})
+        result["n_extra_knowledge_traceable"] = sum(e["knowledge_traceable"] for e in result["extra_tasks"])
+        return result
 
     def evaluate(self, conditions: list[str] | None = None, run_ids: list[str] | None = None,
                  threshold: float | None = None, csv_path: Path | None = None,

@@ -58,3 +58,11 @@ class TaskMatcher:
             "missing": [{"reference_id": i, "reference_label": reference[i]} for i in ref_ids if i not in used_ref],
             "extra": [{"generated_id": i, "generated_label": generated[i]} for i in gen_ids if i not in used_gen],
         }
+
+    def best_similarity(self, labels: list[str], texts: list[str]) -> list[float]:
+        """For every label, the highest cosine similarity to any of the texts (0.0 if there are no texts)."""
+        if not labels:
+            return []
+        if not texts:
+            return [0.0] * len(labels)
+        return [float(row.max()) for row in self.similarity_matrix(labels, texts)]

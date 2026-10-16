@@ -95,3 +95,43 @@ def test_complexity_counts_loops(tmp_path):
     assert measures["loops"] == 1
     assert measures["nesting_depth"] == 0  # a loop is not a nested split
     assert measures["cfc"] == 2            # but the loop decision is a real XOR choice with 2 branches
+
+
+# ---------- pools (message flows) and sub-processes, as BPMNGen produces them ----------
+
+TWO_POOLS = """<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL">
+<collaboration id="c"><participant id="p1" processRef="P1"/><participant id="p2" processRef="P2"/>
+<messageFlow id="m1" sourceRef="A" targetRef="s2"/></collaboration>
+<process id="P1"><startEvent id="s1"/><task id="A" name="Send order"/><endEvent id="e1"/>
+<sequenceFlow id="f1" sourceRef="s1" targetRef="A"/><sequenceFlow id="f2" sourceRef="A" targetRef="e1"/></process>
+<process id="P2"><startEvent id="s2"/><task id="B" name="Check order"/><endEvent id="e2"/>
+<sequenceFlow id="f3" sourceRef="s2" targetRef="B"/><sequenceFlow id="f4" sourceRef="B" targetRef="e2"/></process>
+</definitions>"""
+
+SUBPROCESS = """<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"><process id="P">
+<startEvent id="s"/><task id="A" name="Receive order"/>
+<subProcess id="sp" name="Handle order"><startEvent id="is"/><task id="B" name="Check stock"/><endEvent id="ie"/>
+<sequenceFlow id="i1" sourceRef="is" targetRef="B"/><sequenceFlow id="i2" sourceRef="B" targetRef="ie"/></subProcess>
+<task id="C" name="Ship goods"/><endEvent id="e"/>
+<sequenceFlow id="f1" sourceRef="s" targetRef="A"/><sequenceFlow id="f2" sourceRef="A" targetRef="sp"/>
+<sequenceFlow id="f3" sourceRef="sp" targetRef="C"/><sequenceFlow id="f4" sourceRef="C" targetRef="e"/>
+</process></definitions>"""
+
+
+def test_message_flows_give_order_between_pools(tmp_path):
+    path = tmp_path / "pools.bpmn"
+    path.write_text(TWO_POOLS, encoding="utf-8")
+    assert BehavioralProfile(BPMNGraph.from_file(path)).relation("A", "B") == "->"
+    # without message flows the two pools are unrelated
+    assert BehavioralProfile(BPMNGraph.from_file(path, message_flows_as_order=False)).relation("A", "B") == "#"
+
+
+def test_subprocess_tasks_are_read_and_ordered(tmp_path):
+    path = tmp_path / "sub.bpmn"
+    path.write_text(SUBPROCESS, encoding="utf-8")
+    graph = BPMNGraph.from_file(path)
+    assert sorted(graph.task_labels().values()) == ["Check stock", "Receive order", "Ship goods"]
+    profile = BehavioralProfile(graph)
+    assert profile.relation("A", "B") == "->"
+    assert profile.relation("B", "C") == "->"
+    assert not graph.is_split("sp")  # opening the sub-process must not create a fake split

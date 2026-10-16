@@ -2,16 +2,37 @@
 # All parameters live here and are loaded in code; nothing is hard-coded.
 
 llm:
-  provider: gemini            # "mock" (fixed answers, no API), "gemini" (Google Gemini free tier, used for the
-                              # thesis) or "anthropic" (kept for possible later use); API keys are in .env
-  model: gemini-3.5-flash     # a FIXED model version (no "-latest" alias)
-  temperature: 0              # sent to the API (null = not sent)
-  max_tokens: 8192
+  # LLM for the C3 mediation agents (relevance, applicability, requirement) and for the legacy JSON generator.
+  # Thesis decision (16 Oct 2026): the agents use the SAME model as the BPMN generator (qwen3:8b on Ollama),
+  # so C3 cannot win by borrowing a stronger model. The BPMN generator itself is configured under "generator".
+  provider: ollama            # "mock" (fixed answers, tests), "ollama" (thesis), "gemini" / "anthropic" (kept, not used)
+  model: qwen3:8b             # must match `ollama list`; the model digest is recorded in run_info.json
+  temperature: 0              # mediation agents only (BPMNGen keeps its own fixed 0.3, see generator below)
+  max_tokens: 8192            # gemini / anthropic only
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
   api_initial_wait_seconds: 2 # wait before the first API retry; doubles each time (2, 4, 8, ... s)
   api_max_retries: 5          # AnthropicLLM: extra attempts on temporary API errors
   gemini_api_max_retries: 5   # GeminiLLM: extra attempts on 429/RESOURCE_EXHAUSTED, overload, server errors, timeouts
   gemini_pause_between_calls_seconds: 10  # GeminiLLM: minimum seconds between two calls (free-tier per-minute limit)
+  ollama_base_url: http://localhost:11434 # Ollama on the PC with the GPU
+  ollama_num_ctx: 16384       # context window, the same value BPMNGen uses (Ollama's default would silently cut prompts)
+  ollama_timeout_seconds: 600 # per call
+  ollama_api_max_retries: 3   # retries when Ollama is not reachable
+
+generator:
+  # The ONE BPMN generator shared by C1, C2 and C3.
+  type: bpmngen               # "bpmngen" (thesis: BPMNGen + Ollama via bpmngen_harness) or "json_builder"
+                              # (legacy: own prompt -> JSON -> src/bpmn_builder.py; used by the mock tests)
+  # BPMNGen is private Ulm code: it lives OUTSIDE this repository and is never committed or changed.
+  bpmngen_server_dir: ../BPMNGen-backend-main/BPMNGen-backend-main/server  # relative to the project root, or absolute
+  harness: bpmngen_harness/run_bpmngen.ts
+  model: qwen3:8b             # BPMNGen settings that are NOT changed: system prompt, temperature 0.3, num_ctx 16384, /no_think
+  ollama_base_url: http://localhost:11434
+  # Neutral label in front of the knowledge block, identical for C1, C2 and C3 (PROVISIONAL: agree with
+  # supervisors / Ulm). Replaces BPMNGen's DMN label "...rules the generated process MUST follow".
+  knowledge_label: "[Domain information (it may or may not apply to this process):]"
+  timeout_seconds: 900        # per case (8B model on an RTX 4060)
+  npx_command: null           # null = find npx automatically; set a full path if needed
 
 experiment:
   repetitions: 3              # each condition is run this many times: --repetition 1, 2, 3
@@ -41,6 +62,11 @@ evaluation:
   similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this (to be calibrated)
   sensitivity_thresholds: [0.70, 0.75, 0.80, 0.85]  # used by: python -m src.evaluate --sweep
   smoke_run_prefix: smoke      # runs whose id starts with this are test runs: excluded from all summaries
+  message_flows_as_order: true # message flows (between pools) count as "before/after" in the behavioral profile;
+                               # BPMNGen draws one pool per actor, the PMo references use one process
+  trace_threshold: 0.5         # PROVISIONAL diagnostic: an extra (unmatched) generated task counts as
+                               # "knowledge-traceable" if its label is at least this similar to a sentence of the
+                               # knowledge block AND more similar to it than to any sentence of the description
 
 paths:
   pmo_raw: data/raw/pmo
@@ -55,7 +81,7 @@ paths:
   frozen_retrieval: data/retrieval/frozen_retrieval.json
   dense_index_dir: data/retrieval/dense_index   # FAISS index + the passage ids it contains
   nltk_data: data/nltk_data                     # NLTK stopword list is downloaded here (not committed)
-  generator_prompt: prompts/generator_prompt.txt       # the one prompt template shared by C1, C2, C3
+  generator_prompt: prompts/generator_prompt.txt       # legacy json_builder generator only (BPMNGen has its own prompt)
   relevance_prompt: prompts/relevance_prompt.txt       # C3 mediation agents
   applicability_prompt: prompts/applicability_prompt.txt
   requirement_prompt: prompts/requirement_prompt.txt
@@ -64,6 +90,7 @@ paths:
   mock_applicability_response: data/mock/applicability_response.json
   mock_requirement_response: data/mock/requirement_response.json
   env_file: .env                          # holds GEMINI_API_KEY / ANTHROPIC_API_KEY (never committed)
+  knowledge_block_file: knowledge_block.txt  # per case: the exact knowledge text given to the generator
   runs: results/runs                      # one folder per run: results/runs/<run_id>/<condition>/<case_id>/
   run_info_file: run_info.json            # per run: repetition, provider, model, conditions run
   mediation_dir: mediation                # C3 only: results/runs/<run_id>/C3/mediation/

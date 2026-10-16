@@ -45,8 +45,10 @@ LABELS = [APPLICABLE, INDETERMINATE, NOT_APPLICABLE, IRRELEVANT, MEDIATION_FAILE
 REQUIREMENTS_HEADING = "REQUIREMENTS"
 REQUIREMENTS_EXPLANATION = "These rules were checked and apply to this process."
 UNCONFIRMED_HEADING = "RULES WITH UNCONFIRMED APPLICABILITY"
-UNCONFIRMED_EXPLANATION = ("These rules may apply, but the description does not confirm it. "
-                           "Do not add steps for them unless the description itself supports those steps.")
+# Descriptive only (16 Oct 2026): an instruction such as "Do not add steps for them" would be an extra
+# INSTRUCTION that only C3 gets, so C3 would differ from C2 in more than the knowledge. The block states
+# what mediation found (the status of each rule); what the generator does with it is left to the generator.
+UNCONFIRMED_EXPLANATION = "These rules may apply, but the description does not confirm that their conditions are met."
 EMPTY_SECTION_TEXT = "(none)"
 
 

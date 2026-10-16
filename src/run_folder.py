@@ -15,8 +15,8 @@ unfinished cases are run, and the LLM calls go to a new log file (<condition>_<r
 A condition whose cases are all finished is complete and is never started again.
 
 Other protections:
-  - run_info.json must agree with the current repetition, provider, model and temperature;
-    a run folder can never mix runs made with different settings
+  - run_info.json must agree with the current repetition, provider, model, temperature and generator
+    (and, for Ollama, the exact model digest); a run folder can never mix runs made with different settings
   - with the default run ids, repetition n can only start when all conditions of repetition n-1
     are complete (all three conditions of a repetition are finished before the next one starts)
 """
@@ -40,7 +40,8 @@ def default_run_id(config: dict, repetition: int) -> str:
 class RunFolder:
     """The folder of one run (one repetition)."""
 
-    def __init__(self, config: dict, run_id: str, repetition: int):
+    def __init__(self, config: dict, run_id: str, repetition: int, extra_settings: dict | None = None):
+        """extra_settings: more settings that must stay the same for the whole run (e.g. the Ollama model digest)."""
         n_repetitions = config["experiment"]["repetitions"]
         if not 1 <= repetition <= n_repetitions:
             raise ValueError(f"repetition must be between 1 and {n_repetitions} (experiment.repetitions)")
@@ -55,8 +56,11 @@ class RunFolder:
         llm = config["llm"]
         # A mock run does not use the configured model, so it is recorded as the mock's own name.
         model = MockLLM.MODEL_NAME if llm["provider"] == "mock" else llm["model"]
+        generator = config["generator"]
+        generator_name = (f"bpmngen/{generator['model']}" if generator["type"] == "bpmngen" else "json_builder")
         self.settings = {"run_id": run_id, "repetition": repetition, "provider": llm["provider"],
-                         "model": model, "temperature": llm["temperature"]}
+                         "model": model, "temperature": llm["temperature"], "generator": generator_name,
+                         **(extra_settings or {})}
 
     # ---------- state of the run ----------
 

@@ -10,8 +10,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = PROJECT_ROOT / "config.yaml"
 
 # Safety switch: when this environment variable is "1", the LLM provider is always "mock",
-# whatever config.yaml says. The test suite sets it (tests/conftest.py), so tests can never
-# call a real API or use up the free-tier quota.
+# whatever config.yaml says, and the generator is the legacy JSON generator. The test suite sets it
+# (tests/conftest.py), so tests can never call a real API, Ollama or BPMNGen.
 FORCE_MOCK_VARIABLE = "THESIS_FORCE_MOCK"
 
 
@@ -21,6 +21,9 @@ def load_config(config_path: Path = CONFIG_PATH) -> dict:
         config = yaml.safe_load(f)
     if os.environ.get(FORCE_MOCK_VARIABLE) == "1":
         config["llm"]["provider"] = "mock"
+        # Tests never start BPMNGen/Ollama: they use the legacy JSON generator with mock answers.
+        # (BPMNGenGenerator has its own tests with a fake harness, see tests/test_bpmngen_generator.py.)
+        config["generator"]["type"] = "json_builder"
     return config
 
 

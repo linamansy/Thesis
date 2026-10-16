@@ -120,5 +120,5 @@ def test_c2_run_writes_same_files_as_c1(tmp_path):
     record = runner.run_case("19")
 
     case_dir = tmp_path / "run" / "C2" / "19"
-    assert sorted(p.name for p in case_dir.iterdir()) == ["generated.bpmn", "generated.json", "validation.json"]
+    assert sorted(p.name for p in case_dir.iterdir()) == ["generated.bpmn", "generated.json", "knowledge_block.txt", "validation.json"]
     assert record["condition"] == "C2" and record["valid"] is True

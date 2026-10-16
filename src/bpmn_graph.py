@@ -51,11 +51,23 @@ class BPMNGraph:
         self.depth = self._depths()
 
     @classmethod
-    def from_file(cls, path: Path) -> "BPMNGraph":
+    def from_file(cls, path: Path, message_flows_as_order: bool = True) -> "BPMNGraph":
+        """Read every process of the file (all pools) into one graph.
+
+        Sub-processes are opened up: their inner elements become part of the graph. The flow into a
+        sub-process leads to its inner start event(s), and the flows out of it start from its inner
+        end event(s), so "before/after" between inner and outer tasks is kept.
+        message_flows_as_order: a message flow between two flow nodes (e.g. between two pools) also
+        counts as an edge: the sender comes before the receiver. BPMNGen draws one pool per actor,
+        so without this, tasks in different pools would have no order at all.
+        """
         root = etree.parse(str(path)).getroot()
         types, names, edges = {}, {}, []
-        for process in root.iter(f"{{{BPMN_NS}}}process"):
-            for el in process:
+        inner = {}  # sub-process id -> (inner start ids, inner end ids)
+
+        def read(container):
+            starts, ends = [], []
+            for el in container:
                 if not isinstance(el.tag, str):
                     continue
                 tag = etree.QName(el).localname
@@ -64,6 +76,29 @@ class BPMNGraph:
                 elif is_flow_node(tag) and el.get("id"):
                     types[el.get("id")] = tag
                     names[el.get("id")] = " ".join((el.get("name") or "").split())  # tidy line breaks
+                    if tag == "startEvent":
+                        starts.append(el.get("id"))
+                    elif tag == "endEvent":
+                        ends.append(el.get("id"))
+                    if tag == "subProcess":
+                        inner[el.get("id")] = read(el)
+            return starts, ends
+
+        for process in root.iter(f"{{{BPMN_NS}}}process"):
+            read(process)
+        if message_flows_as_order:
+            for flow in root.iter(f"{{{BPMN_NS}}}messageFlow"):
+                edges.append((flow.get("sourceRef"), flow.get("targetRef")))
+
+        # Open up sub-processes that have an inner start and end event.
+        for sub, (starts, ends) in inner.items():
+            if not starts or not ends:
+                continue
+            outgoing = [t for s, t in edges if s == sub]
+            edges = [(s, t) for s, t in edges if s != sub]
+            edges += [(sub, start) for start in starts]
+            edges += [(end, t) for end in ends for t in outgoing]
+
         edges = [(s, t) for s, t in edges if s in types and t in types]
         return cls(types, names, edges)
 

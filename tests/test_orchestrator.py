@@ -64,8 +64,7 @@ def labels(result):
 REQ_HEAD = ("REQUIREMENTS\n"
             "These rules were checked and apply to this process.")
 UNC_HEAD = ("RULES WITH UNCONFIRMED APPLICABILITY\n"
-            "These rules may apply, but the description does not confirm it. "
-            "Do not add steps for them unless the description itself supports those steps.")
+            "These rules may apply, but the description does not confirm that their conditions are met.")
 EMPTY_BLOCK = f"{REQ_HEAD}\n(none)\n\n{UNC_HEAD}\n(none)"
 
 
@@ -248,7 +247,7 @@ def test_c3_run_writes_outputs_and_mediation(tmp_path):
 
     assert record["condition"] == "C3" and record["valid"] is True
     assert sorted(p.name for p in (tmp_path / "run" / "C3" / CASE).iterdir()) == \
-        ["generated.bpmn", "generated.json", "validation.json"]
+        ["generated.bpmn", "generated.json", "knowledge_block.txt", "validation.json"]
     mediation = tmp_path.joinpath(*MEDIATION_DIR)  # mediation lives inside the run's C3 folder
     assert (mediation / f"{CASE}.json").exists()
     assert (mediation / "run_summary.json").exists()
