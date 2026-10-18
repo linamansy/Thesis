@@ -85,6 +85,17 @@ class GeminiLLM(LLMClient):
         return cls(llm["model"], llm["temperature"], llm["max_tokens"], llm["gemini_api_max_retries"],
                    llm["api_initial_wait_seconds"], llm["gemini_pause_between_calls_seconds"], client=client)
 
+    def listed_version(self) -> str | None:
+        """The internal version of self.model in Gemini's model list (e.g. "3.6-flash-07-2026").
+
+        Read from models.get, which does not count against the generate_content quota. It identifies the
+        model more exactly than its name, which Google can point to a newer model.
+        """
+        try:
+            return self.client.models.get(model=self.model).version
+        except (errors.APIError, httpx.TransportError) as e:
+            raise LLMUnavailableError(f"Gemini model list not available: {type(e).__name__}: {e}") from e
+
     def generation_config(self) -> types.GenerateContentConfig:
         """The exact generation settings sent with every request."""
         return types.GenerateContentConfig(temperature=self.temperature, max_output_tokens=self.max_tokens)

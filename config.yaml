@@ -45,7 +45,9 @@ silver:
   # Deliberately a different, stronger model than the generator and the C3 agents (qwen3), so C3 is not graded
   # by its own model. AI-made = SILVER (provisional); decision 16 Oct 2026: no human audit (stated limitation).
   provider: gemini            # uses GEMINI_API_KEY from .env and the gemini_* settings of the llm section
-  model: gemini-3.5-flash     # fixed version; the exact version returned by the API is stored in the file
+  model: gemini-3.6-flash     # the model Google actually serves (it answered gemini-3.5-flash requests with 3.6, 18 Oct
+                              # 2026); the API lists no fixed -00X name, only version "3.6-flash-07-2026". Every answer
+                              # must report exactly this name, otherwise the build stops (src/build_silver_reference.py)
   temperature: 0
   max_tokens: 8192
 

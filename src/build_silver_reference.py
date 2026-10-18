@@ -1,4 +1,5 @@
-"""Build the silver legal reference ONCE, before any experiment run, and freeze it (like the retrieval).
+"""Build the silver legal reference ONCE and freeze it (like the retrieval). It must be complete before the
+evaluation (python -m src.evaluate), not before the generation runs: it never uses generated models.
 
 For every working case and every one of its 5 frozen passages, SilverAnnotator (Gemini, see
 src/agents/silver_annotator.py) labels the passage applicable / not_applicable / indeterminate / irrelevant
@@ -11,6 +12,12 @@ the annotator model version, the prompt checksum and the frozen-retrieval checks
 
 Rules:
   - It reads only descriptions and frozen passages. It never reads a generated model or a C3 output.
+  - One annotator model for the whole file: after every call, the model name in Gemini's answer must equal
+    silver.model in config.yaml (Google once served gemini-3.6-flash for gemini-3.5-flash requests). If it
+    differs, the run stops at once WITHOUT saving that case and prints both names (ModelMismatchError).
+    A saved file made by another model is refused in the same way.
+  - The header also stores annotator_model_version: the model's internal version from Gemini's model list
+    (e.g. "3.6-flash-07-2026"), read at the start of every run; a saved file with another version is refused.
   - Resumable: finished cases are kept and skipped; rerun the same command after an API stop.
   - Labels are SILVER (AI-made, not human-checked). Report them as provisional.
 
@@ -34,6 +41,10 @@ from src.mediation.quote_checker import QuoteChecker
 STATUS = "silver: AI-made reference, not checked by a human (provisional, never gold)"
 
 
+class ModelMismatchError(RuntimeError):
+    """Gemini answered with (or the saved file was made by) another model than silver.model in config.yaml."""
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -52,10 +63,16 @@ def create_annotator_llm(config: dict) -> LLMClient:
 
 
 class SilverReferenceBuilder:
-    def __init__(self, config: dict, annotator: SilverAnnotator, output_path: Path):
+    def __init__(self, config: dict, annotator: SilverAnnotator, output_path: Path,
+                 expected_model: str | None = None, model_version: str | None = None):
+        """expected_model: silver.model; every answer must come from it (None = not checked, mock tests).
+        model_version: internal version of that model in Gemini's model list (e.g. "3.6-flash-07-2026"),
+        stored in the file header; a saved file with another version is refused (None = not checked)."""
         paths = config["paths"]
         self.config = config
         self.annotator = annotator
+        self.expected_model = expected_model
+        self.model_version = model_version
         self.output_path = Path(output_path)
         self.case_ids = config["cases"]["ids"]
         self.cases_dir = project_path(paths["cases"])
@@ -71,9 +88,20 @@ class SilverReferenceBuilder:
             if data["frozen_retrieval_sha256"] != sha256(self.frozen_path):
                 raise ValueError("the frozen retrieval changed since the silver reference was built; "
                                  "build a new silver reference (new file) instead of mixing them")
+            saved_model = data.get("annotator_model")
+            if self.expected_model and saved_model and saved_model != self.expected_model:
+                raise ModelMismatchError(f"the saved silver reference was made by {saved_model!r}, but "
+                                         f"silver.model is {self.expected_model!r}; one file must have one annotator")
+            saved_version = data.get("annotator_model_version")
+            if self.model_version and saved_version and saved_version != self.model_version:
+                raise ModelMismatchError(f"the saved silver reference was made by version {saved_version!r}, but "
+                                         f"Gemini now lists {self.model_version!r}; one file must have one annotator")
+            if self.model_version:
+                data["annotator_model_version"] = self.model_version
             return data
         return {"status": STATUS, "created_at": datetime.now(timezone.utc).isoformat(),
-                "annotator_model": None, "prompt_sha256": sha256(self.prompt_path),
+                "annotator_model": None, "annotator_model_version": self.model_version,
+                "prompt_sha256": sha256(self.prompt_path),
                 "frozen_retrieval_sha256": sha256(self.frozen_path), "cases": {}}
 
     def save(self, data: dict) -> None:
@@ -87,6 +115,7 @@ class SilverReferenceBuilder:
         for p in passages:
             out = self.annotator.run(case_id=case_id, description=description,
                                      passage_id=p["passage_id"], passage_text=p["text"])
+            self.check_model()   # before anything of this case is saved
             if out is None:
                 records.append({"passage_id": p["passage_id"], "label": "annotation_failed",
                                 "required_steps": [], "possible_steps": []})
@@ -101,6 +130,13 @@ class SilverReferenceBuilder:
         required = [{"passage_id": r["passage_id"], **s} for r in records for s in r["required_steps"]]
         possible = [{"passage_id": r["passage_id"], **s} for r in records for s in r["possible_steps"]]
         return {"passages": records, "required_steps": required, "possible_steps": possible}
+
+    def check_model(self) -> None:
+        """Stop if Gemini's last answer came from another model than silver.model."""
+        served = self.annotator.llm.model_for_log
+        if self.expected_model and served != self.expected_model:
+            raise ModelMismatchError(f"Gemini answered with model {served!r}, but silver.model in config.yaml "
+                                     f"is {self.expected_model!r}")
 
     def build(self) -> dict:
         data = self.load()
@@ -118,14 +154,20 @@ def main() -> None:
     paths = config["paths"]
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     logger = RunLogger(project_path(paths["logs"]), "SILVER", f"silver_{stamp}")
-    builder = SilverReferenceBuilder(config, SilverAnnotator(create_annotator_llm(config), logger),
-                                     project_path(paths["silver_reference"]))
+    llm = create_annotator_llm(config)
+    expected_model = None if config["llm"]["provider"] == "mock" else config["silver"]["model"]
     try:
+        model_version = llm.listed_version() if isinstance(llm, GeminiLLM) else None
+        builder = SilverReferenceBuilder(config, SilverAnnotator(llm, logger), project_path(paths["silver_reference"]),
+                                         expected_model, model_version)
         data = builder.build()
     except LLMUnavailableError as e:
         raise SystemExit(f"Stopped (API error): {e}\nFinished cases are saved; run the same command again later.")
+    except ModelMismatchError as e:
+        raise SystemExit(f"Stopped (model mismatch, this case was NOT saved): {e}")
     labels = [p["label"] for c in data["cases"].values() for p in c["passages"]]
-    print(f"Silver reference: {len(data['cases'])} cases, annotator {data['annotator_model']}")
+    print(f"Silver reference: {len(data['cases'])} cases, annotator {data['annotator_model']} "
+          f"(version {data.get('annotator_model_version')})")
     print({label: labels.count(label) for label in sorted(set(labels))})
     print(f"required steps: {sum(len(c['required_steps']) for c in data['cases'].values())}")
     print(f"Saved {builder.output_path}  ({STATUS})")

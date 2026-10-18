@@ -137,6 +137,26 @@ def test_request_sends_model_and_temperature_zero():
     assert call["config"].temperature == 0 and call["config"].max_output_tokens == 4096
 
 
+def test_listed_version_comes_from_the_model_list():
+    client = FakeClient()
+    client.get = lambda model: SimpleNamespace(name=f"models/{model}", version="3.6-flash-07-2026")
+    llm, _ = make_llm(client)
+    assert llm.listed_version() == "3.6-flash-07-2026"
+    assert client.calls == []                  # no generate_content call: no quota used
+
+
+def test_model_list_error_stops_the_run():
+    client = FakeClient()
+
+    def get(model):
+        raise api_error(503, "UNAVAILABLE")
+
+    client.get = get
+    llm, _ = make_llm(client)
+    with pytest.raises(LLMUnavailableError, match="model list not available"):
+        llm.listed_version()
+
+
 def test_empty_or_blocked_answer_becomes_empty_text():
     llm, _ = make_llm(FakeClient(SimpleNamespace(text=None, model_version="gemini-test-001", candidates=[])))
     assert llm.complete("x") == ""

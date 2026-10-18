@@ -2,8 +2,10 @@
 
 import json
 
+import pytest
+
 from src.agents.silver_annotator import SilverAnnotator
-from src.build_silver_reference import STATUS, SilverReferenceBuilder, create_annotator_llm
+from src.build_silver_reference import STATUS, ModelMismatchError, SilverReferenceBuilder, create_annotator_llm
 from src.config import load_config
 from src.evaluate import Evaluator
 from src.llm.mock_llm import MockLLM
@@ -43,6 +45,61 @@ def test_builder_resumes_and_skips_finished_cases(tmp_path):
     data = second.build()
     assert data["cases"]["19"]["passages"][0]["label"] == "indeterminate"   # kept, not re-annotated
     assert data["cases"]["01"]["passages"][0]["label"] == "annotation_failed"
+
+
+class ServedModelLLM(MockLLM):
+    """MockLLM that reports which model "served" each answer, like Gemini's model_version."""
+
+    def __init__(self, answers, served_models):
+        super().__init__(answers)
+        self.served_models = list(served_models)
+
+    def complete(self, prompt):
+        self.last_response_model = self.served_models.pop(0)
+        return super().complete(prompt)
+
+
+def guarded_builder(tmp_path, served_models, cases=("19",), run_id="g1"):
+    config = dict(CONFIG, cases={"ids": list(cases)})
+    llm = ServedModelLLM([INDETERMINATE], served_models)
+    annotator = SilverAnnotator(llm, RunLogger(tmp_path / "logs", "SILVER", run_id))
+    return SilverReferenceBuilder(config, annotator, tmp_path / "silver.json", expected_model="gemini-3.6-flash")
+
+
+def test_answers_from_the_configured_model_are_saved(tmp_path):
+    data = guarded_builder(tmp_path, ["gemini-3.6-flash"] * 5).build()
+    assert data["annotator_model"] == "gemini-3.6-flash" and len(data["cases"]["19"]["passages"]) == 5
+
+
+def test_other_served_model_stops_without_saving_the_case(tmp_path):
+    # case 19: all 5 answers from the right model; case 01: the 3rd answer comes from another model
+    served = ["gemini-3.6-flash"] * 5 + ["gemini-3.6-flash", "gemini-3.6-flash", "gemini-3.7-flash"]
+    builder = guarded_builder(tmp_path, served, cases=("19", "01"))
+    with pytest.raises(ModelMismatchError) as stop:
+        builder.build()
+    assert "'gemini-3.7-flash'" in str(stop.value) and "'gemini-3.6-flash'" in str(stop.value)  # both names
+    saved = json.loads((tmp_path / "silver.json").read_text(encoding="utf-8"))
+    assert list(saved["cases"]) == ["19"]                     # case 01 was NOT saved
+    assert saved["annotator_model"] == "gemini-3.6-flash"
+
+
+def test_listed_model_version_is_stored_and_must_stay_the_same(tmp_path):
+    first = guarded_builder(tmp_path, ["gemini-3.6-flash"] * 5)
+    first.model_version = "3.6-flash-07-2026"
+    assert first.build()["annotator_model_version"] == "3.6-flash-07-2026"
+
+    later = guarded_builder(tmp_path, [], cases=("19", "01"), run_id="g2")
+    later.model_version = "3.6-flash-09-2026"                  # Google updated the model behind the name
+    with pytest.raises(ModelMismatchError, match="version '3.6-flash-07-2026'.*'3.6-flash-09-2026'"):
+        later.build()
+
+
+def test_saved_file_from_another_model_is_refused(tmp_path):
+    guarded_builder(tmp_path, ["gemini-3.6-flash"] * 5).build()
+    other = guarded_builder(tmp_path, [], cases=("19", "01"), run_id="g2")
+    other.expected_model = "gemini-3.7-flash"                  # e.g. silver.model changed later
+    with pytest.raises(ModelMismatchError, match="one file must have one annotator"):
+        other.build()
 
 
 class WordMatcher:
