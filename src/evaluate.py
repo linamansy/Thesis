@@ -62,6 +62,23 @@ from src.summarise import summarise_repetitions, summarise_runs
 from src.task_matcher import TaskMatcher
 
 
+def failure_type(validation: dict, di_stripped: bool) -> str:
+    """One failure type per case (decided 18 Oct 2026, before the real runs), the first that applies:
+    timed_out, context_limit_hit (cut off), thinking_detected (thinking text or a stray </think> despite
+    think:false: a genuine model failure, never repaired or retried), missing_namespace_rescued (invalid only
+    because of the diagram section, scored without it, see src/di_rescue.py), invalid_xml_other (any other
+    invalid or failed model), or "none" for a valid model."""
+    if validation.get("timed_out"):
+        return "timed_out"
+    if validation.get("context_limit_hit"):
+        return "context_limit_hit"
+    if validation.get("thinking_detected"):
+        return "thinking_detected"
+    if validation.get("generation_succeeded") and validation.get("valid"):
+        return "none"
+    return "missing_namespace_rescued" if di_stripped else "invalid_xml_other"
+
+
 def split_sentences(text: str) -> list[str]:
     """Sentences and list lines of a text (for the extra-task diagnostic); very short pieces are dropped."""
     pieces = re.split(r"(?<=[.;:!?])\s+|\n+", text)
@@ -231,6 +248,7 @@ class Evaluator:
             "valid": validation["valid"],                        # strict: our validator (main metric)
             "bpmnlint_valid": bpmngen.get("bpmnlint_valid"),     # BPMNGen's own verdict (None: not BPMNGen)
             "di_stripped": di_stripped,                          # scored without its diagram section
+            "failure_type": failure_type(validation, di_stripped),  # one per case, see failure_type()
             "n_generated_tasks": semantic["n_generated_tasks"],
             "n_reference_tasks": semantic["n_reference_tasks"],
             "n_matched": semantic["n_matched"],
@@ -433,6 +451,9 @@ def main() -> None:
     print(run_summary[["run_id", "repetition", "condition", "n_valid", "precision_mean", "recall_mean",
                        "f1_mean", "behavioral_mean_excluding", "behavioral_n_excluded",
                        "behavioral_mean_as_zero"]].to_string(index=False))
+    print("\nFailure types per run and condition (each case counted once):")
+    print(run_summary[["run_id", "condition", "n_cases", "n_valid"]
+                      + [c for c in run_summary.columns if c.startswith("n_fail_")]].to_string(index=False))
     print("\nPer condition, mean and SD over repetitions:")
     print(summary.to_string(index=False))
     print(f"\nSaved {evaluator.csv_path}\nSaved {evaluator.run_summary_path}\nSaved {evaluator.summary_path}")

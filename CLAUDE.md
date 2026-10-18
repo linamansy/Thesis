@@ -32,6 +32,8 @@ Thesis generator (generator.type: bpmngen): knowledge block -> bpmngen_harness/r
 - Failed generations (model results: scored as 0, never retried, validation.json written):
   - cut off: the harness aborts the stream when the output passes num_ctx tokens (done_reason "cut_off_by_harness"), or Ollama reports a length stop / the window was full -> context_limit_hit = True
   - timeout (generator.timeout_seconds, 900 s): the whole process tree (npx and its node child) is killed -> timed_out = True
+- Stray </think> (decided 18 Oct 2026, before the real runs): even with think:false, qwen3 sometimes breaks off mid-XML, writes "</think>" and continues (2 of 6 smoke generations). This is treated as a genuine model failure: no repair, no retry, no change to how BPMNGen is called. The file stays invalid (score 0), thinking_detected is flagged, and it is counted per condition.
+- Failure types (src/evaluate.py failure_type, counted per condition in the summaries as n_fail_<type>; each case counts once, under the first that applies): timed_out, context_limit_hit, thinking_detected, missing_namespace_rescued (di_stripped), invalid_xml_other.
 - Only real Ollama unavailability (connection refused, HTTP errors) stops the run without a result (LLMUnavailableError), so the case can be resumed.
 - Discarded run: the first, partial repetition 1 (C1, 9 cases, made with hidden thinking) was moved to results/_discarded/ollama_rep1_thinking_on/ (kept, never evaluated); repetition 1 restarts from scratch.
 Legacy generator (generator.type: json_builder, used by the mock tests): own prompt -> JSON -> src/bpmn_builder.py. Not used for thesis runs.

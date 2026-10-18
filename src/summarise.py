@@ -25,6 +25,11 @@ per-repetition means. The SD is the sample SD (n - 1); with a single repetition 
 
 import pandas as pd
 
+# Failure types, in the order they are checked (each case gets the first that applies; see
+# failure_type() in src/evaluate.py). "none" (a valid model) is not a failure and is not counted here.
+FAILURE_TYPES = ["timed_out", "context_limit_hit", "thinking_detected", "missing_namespace_rescued",
+                 "invalid_xml_other"]
+
 METRICS = ["precision", "recall", "f1"]
 RUN_KEYS = ["provider", "model", "condition", "run_id", "repetition"]
 CONDITION_KEYS = ["provider", "model", "condition"]
@@ -49,6 +54,7 @@ REPETITION_COLUMNS = {
     "n_context_limit_hit": "n_context_limit_hit",
     "n_timed_out": "n_timed_out",
     "n_thinking_detected": "n_thinking_detected",
+    **{f"n_fail_{t}": f"n_fail_{t}" for t in FAILURE_TYPES},
     "n_auto_repaired": "n_auto_repaired",
 }
 
@@ -63,6 +69,11 @@ def mean_or_none(group: pd.DataFrame, column: str):
 
 def count_true(group: pd.DataFrame, column: str) -> int:
     return int(group[column].fillna(False).astype(bool).sum()) if column in group else 0
+
+
+def count_failure(group: pd.DataFrame, kind: str) -> int:
+    """Cases of one failure type (column failure_type; 0 for older evaluation tables without it)."""
+    return int((group["failure_type"] == kind).sum()) if "failure_type" in group else 0
 
 
 def count_auto_repaired(group: pd.DataFrame) -> int:
@@ -105,6 +116,8 @@ def summarise_by_condition(table: pd.DataFrame, group_by: list[str] | None = Non
             "n_context_limit_hit": count_true(group, "context_limit_hit"),  # cut off: failed generation
             "n_timed_out": count_true(group, "timed_out"),                  # harness timeout: failed generation
             "n_thinking_detected": count_true(group, "thinking_detected"),  # thinking despite think:false
+            # failure types per condition: each case counts once, under its first failure type (evaluate.py)
+            **{f"n_fail_{t}": count_failure(group, t) for t in FAILURE_TYPES},
             "n_auto_repaired": count_auto_repaired(group),
         }
         rows.append(row)
