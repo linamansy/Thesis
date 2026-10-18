@@ -41,3 +41,5 @@ If a dataset with descriptions, reference BPMN models and clear legal relevance 
 
 ## 9. Deviations
 Any change after this commit is reported as a deviation with date and reason.
+
+- 2026-10-19 – implementation fix: smoke runs excluded from rq3 output, main numbers unchanged. src/rq3_agreement.py had also listed the smoke runs (smoke_bpmngen, smoke_nothink) as separate rows, against section 5; they are now left out. The rows and confusion matrices of ollama_rep1–3 are identical before and after the fix.

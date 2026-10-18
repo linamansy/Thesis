@@ -182,6 +182,14 @@ def test_kappa_and_agreement():
     assert result["accuracy"] == 0.5 and result["confusion"]["indeterminate"]["applicable"] == 1
 
 
+def test_rq3_leaves_out_smoke_runs():
+    from src.rq3_agreement import analysed_runs
+    runs = [{"run_id": "ollama_rep1"}, {"run_id": "smoke_bpmngen"}, {"run_id": "smoke_nothink"},
+            {"run_id": "ollama_rep2"}]
+    assert [r["run_id"] for r in analysed_runs(runs, CONFIG["evaluation"]["smoke_run_prefix"])] == \
+        ["ollama_rep1", "ollama_rep2"]
+
+
 def test_label_pairs_maps_c3_labels(tmp_path):
     (tmp_path / "19.json").write_text(json.dumps({"passages": [
         {"passage_id": "P1", "label": "Applicable"}, {"passage_id": "P2", "label": "Mediation failed"},
