@@ -206,6 +206,25 @@ def test_validity_rule_strict_valid_bpmnlint_and_di_rescue(evaluator, tmp_path):
     assert (details["valid"], details["bpmnlint_valid"], details["di_stripped"]) == (False, True, True)
 
 
+def test_trace_threshold_sensitivity_check(evaluator, tmp_path):
+    """trace_threshold stays 0.5; --sweep also evaluates 0.4 / 0.5 / 0.6 into their own files."""
+    local = local_evaluator(evaluator, tmp_path)
+    local.trace_csv_pattern = str(tmp_path / "results" / "sensitivity" / "trace_threshold_{threshold}.csv")
+    local.trace_summary_path = tmp_path / "results" / "sensitivity" / "trace_summary.csv"
+    write_case(make_run(tmp_path, "mock_rep1", 1, conditions=("C2",)), "C2", "01", valid=True)
+    assert (local.trace_threshold, local.trace_sweep_thresholds) == (0.5, [0.4, 0.5, 0.6])  # from config.yaml
+
+    summary = local.trace_sweep()
+
+    assert list(summary["trace_threshold"]) == [0.4, 0.5, 0.6]
+    for value in ("0.40", "0.50", "0.60"):
+        table = pd.read_csv(tmp_path / "results" / "sensitivity" / f"trace_threshold_{value}.csv")
+        assert list(table["trace_threshold"]) == [float(value)]
+    assert local.trace_summary_path.exists()
+    assert local.trace_threshold == 0.5                       # the fixed value is restored
+    assert list(local.evaluate()["trace_threshold"]) == [0.5]  # main evaluation uses the fixed value
+
+
 def test_only_conditions_run_in_a_run_are_evaluated(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
     write_case(make_run(tmp_path, "mock_rep1", 1, conditions=("C1",)), "C1", "01", valid=True)

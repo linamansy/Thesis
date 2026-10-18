@@ -44,6 +44,8 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 
 ## LLM provider and experiment runs
 - Everything runs on qwen3:8b in Ollama (on the PC with the RTX 4060, http://localhost:11434, no API key): the BPMNGen generator AND the C3 mediation agents.
+- Ollama server settings (decided 18 Oct 2026, before the real runs): Windows user environment variables OLLAMA_FLASH_ATTENTION=1 and OLLAMA_KV_CACHE_TYPE=q8_0 (config.yaml llm.ollama_server_env; restart Ollama after a change). With them qwen3:8b at num_ctx 16384 runs 100% on the GPU (6.3 GB); without them 20% ran on the CPU. Speed test (smoke_speed, case 01, C1): about 42 tokens/s (7372 tokens in 176 s) vs about 11 tokens/s before (4294 tokens in 401 s). num_ctx stays 16384 for the generator (BPMNGen's own fixed value, not changed) and the agents, so Ollama never reloads the model between them.
+- run_info.json stores, for every run: the generator's model digest, the Ollama version (0.40.6 on 18 Oct 2026; Ollama updates itself, so a later part with another version is refused) and the Ollama server settings. A run does not start if the server settings differ from config.yaml.
 - Mediation agents (OllamaLLM, src/llm/ollama_llm.py), all settings in config.yaml and sent with every request: temperature 0, seed 42, num_ctx 16384, thinking off (think: false), max_tokens 8192 (num_predict).
 - The exact model file is fixed by its digest: qwen3:8b = 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 (llm.ollama_model_digest; pulled 18 Oct 2026, read with installed_ollama_digest). The agents check it before their first call; the generator's model is checked against the same digest when a run starts (run_experiment.ollama_settings) and stored in run_info.json. If anything differs, the run stops.
 - Logged for every call: model name, model digest and finish_reason (STOP, or MAX_TOKENS when an answer was cut off).
@@ -51,7 +53,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Prompt length: for the BPMNGen generator, prompt and answer tokens are measured on every call (meta.json) and a cut-off answer is flagged (context_limit_hit). src/count_prompt_tokens.py counts the prompt of the LEGACY json_builder generator only.
 - GeminiLLM (src/llm/gemini_llm.py, model gemini-3.5-flash, key GEMINI_API_KEY in .env, at least 10 s between calls) and AnthropicLLM are kept for possible later use (e.g. a second-model robustness check); MockLLM is used for tests.
 - 3 repetitions. Finish all three conditions (C1, C2, C3) of a repetition before starting the next repetition.
-- Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: ollama_rep1, ollama_rep2, ollama_rep3). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
+- Each repetition is one run folder: results/runs/<run_id>/<condition>/<case_id>/ (run id default: ollama_rep1, ollama_rep2, ollama_rep3; decided 18 Oct 2026: the real runs use these default ids, because then the code refuses to start repetition n before every condition of n-1 is complete). C3 mediation goes into results/runs/<run_id>/C3/mediation/.
 - Resuming: if a run stops (e.g. the daily free-tier limit), rerunning the same command (same condition and repetition) skips finished cases and continues with the unfinished ones, logging to a new log file part. Finished cases are never overwritten or rerun. Any API error (a temporary one after all retries, any other one such as 404 model not found at once) stops the run without writing validation.json; it is never recorded as a model result.
 
 ## Code structure (required by supervisor)
@@ -112,7 +114,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Semantic quality: activity precision and recall against the reference BPMN, using label similarity matching.
 - Behavioral quality: ordering, exclusive and parallel relations between matched activities. All pools are read; message flows count as order (BPMNGen draws one pool per actor, PMo references have one process); sub-processes are opened up.
 - Legal steps (silver reference): precision_adjusted (extra tasks that realise a required legal step are NOT errors; plain precision is kept too), requirement_coverage, n_extra_justified, n_unjustified_knowledge_additions.
-- Unsupported additions (PROVISIONAL diagnostic): number of extra generated tasks, and how many look like they came from the knowledge block (evaluation.trace_threshold, not calibrated yet).
+- Unsupported additions: number of extra generated tasks, and how many look like they came from the knowledge block (knowledge-traceable). evaluation.trace_threshold is FIXED at 0.5, decided 18 Oct 2026 before the real runs; a sensitivity check at 0.4 / 0.5 / 0.6 (evaluation.trace_sensitivity_thresholds) runs with python -m src.evaluate --sweep and is reported next to the main result.
 - Generator diagnostics per condition: cases that hit the context limit, token counts, BPMNGen auto-repairs.
 - Complexity of each case is measured from the reference BPMN (tasks, gateways, loops, nesting).
 - Results: results/evaluation.csv, one row per case per condition per repetition (with a repetition column), plus a summary per condition with the mean and standard deviation across repetitions.

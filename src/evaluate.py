@@ -34,6 +34,9 @@ Outputs (main threshold from config.yaml), see src/summarise.py for the summarie
   results/runs/<run_id>/<condition>/<case_id>/evaluation.json   all details for one case
 With --sweep, additionally for every threshold in evaluation.sensitivity_thresholds:
   results/sensitivity/evaluation_threshold_<t>.csv and results/sensitivity/summary.csv
+and, for the knowledge-traceable diagnostic, for every value in evaluation.trace_sensitivity_thresholds
+(trace_threshold 0.5 fixed before the real runs, checked at 0.4 / 0.5 / 0.6):
+  results/sensitivity/trace_threshold_<t>.csv and results/sensitivity/trace_summary.csv
 
 Run from the project root:
   .venv\\Scripts\\python.exe -m src.evaluate                       (all runs, all conditions)
@@ -90,6 +93,10 @@ class Evaluator:
         self.di_rescue = DIRescue()
         self.message_flows_as_order = settings.get("message_flows_as_order", True)
         self.trace_threshold = settings.get("trace_threshold", 0.5)
+        self.trace_sweep_thresholds = settings.get("trace_sensitivity_thresholds", [])
+        self.trace_csv_pattern = paths.get("evaluation_trace_csv")
+        self.trace_summary_path = (project_path(paths["evaluation_trace_summary"])
+                                   if "evaluation_trace_summary" in paths else None)
         self.knowledge_file = paths.get("knowledge_block_file", "knowledge_block.txt")
         silver_path = project_path(paths["silver_reference"]) if "silver_reference" in paths else None
         self.silver = (json.loads(silver_path.read_text(encoding="utf-8"))["cases"]
@@ -219,6 +226,7 @@ class Evaluator:
             "condition": condition,
             "case_id": case_id,
             "similarity_threshold": threshold,
+            "trace_threshold": self.trace_threshold,
             "generation_succeeded": validation["generation_succeeded"],
             "valid": validation["valid"],                        # strict: our validator (main metric)
             "bpmnlint_valid": bpmngen.get("bpmnlint_valid"),     # BPMNGen's own verdict (None: not BPMNGen)
@@ -372,6 +380,28 @@ class Evaluator:
         summary.to_csv(self.sensitivity_summary_path, index=False)
         return summary
 
+    def trace_sweep(self, conditions: list[str] | None = None, run_ids: list[str] | None = None) -> pd.DataFrame:
+        """Sensitivity check of trace_threshold (decided before the real runs: 0.5 fixed, checked at 0.4/0.5/0.6).
+
+        Only the knowledge-traceable counts (n_extra_knowledge_traceable, n_unjustified_knowledge_additions)
+        depend on it; everything else is computed at the main thresholds. One CSV per value, plus a summary
+        per value per condition (mean and SD over repetitions). evaluation.json files are not written here.
+        """
+        fixed = self.trace_threshold
+        tables = []
+        try:
+            for value in self.trace_sweep_thresholds:
+                self.trace_threshold = value
+                csv_path = project_path(self.trace_csv_pattern.format(threshold=f"{value:.2f}"))
+                tables.append(self.evaluate(conditions, run_ids, csv_path=csv_path, save_details=False))
+        finally:
+            self.trace_threshold = fixed
+        keys = ["trace_threshold"]
+        summary = summarise_repetitions(summarise_runs(self.without_smoke_runs(pd.concat(tables)), keys), keys)
+        self.trace_summary_path.parent.mkdir(parents=True, exist_ok=True)
+        summary.to_csv(self.trace_summary_path, index=False)
+        return summary
+
 
 def main() -> None:
     config = load_config()
@@ -410,6 +440,11 @@ def main() -> None:
         print("\nSensitivity analysis:")
         print(sensitivity.to_string(index=False))
         print(f"\nSaved one CSV per threshold and {evaluator.sensitivity_summary_path}")
+        trace = evaluator.trace_sweep(args.conditions, args.runs)
+        print(f"\nSensitivity check of trace_threshold (fixed {evaluator.trace_threshold}):")
+        print(trace[["trace_threshold", "condition", "extra_knowledge_traceable_mean", "extra_knowledge_traceable_sd",
+                     "unjustified_knowledge_additions_mean"]].to_string(index=False) if not trace.empty else "(no runs)")
+        print(f"\nSaved one CSV per trace threshold and {evaluator.trace_summary_path}")
 
 
 if __name__ == "__main__":

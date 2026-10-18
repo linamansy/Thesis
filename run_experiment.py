@@ -54,6 +54,7 @@ from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
 from src.llm.mock_llm import MockLLM
 from src.llm.ollama_llm import OllamaLLM
 from src.logger import RunLogger
+from src.ollama_server import ollama_version, read_environment_variable, server_environment
 from src.orchestrator import Orchestrator
 from src.retrieval.passage import load_passages
 from src.run_folder import RunFolder, default_run_id
@@ -243,17 +244,22 @@ class ExperimentRunner:
         return records
 
 
-def ollama_settings(config: dict) -> dict:
-    """The exact digest of the generator's Ollama model (BPMNGen calls Ollama itself), for run_info.json.
+def ollama_settings(config: dict, client=None, env_reader=read_environment_variable) -> dict:
+    """Facts about Ollama that must stay the same for the whole run, for run_info.json:
+    the exact digest of the generator's model (BPMNGen calls Ollama itself), the Ollama version and the
+    Ollama server settings (llm.ollama_server_env, see src/ollama_server.py).
 
-    A later part of the run with a different digest is refused. If the generator uses the same model as the
+    A later part of the run where any of these differs is refused. If the generator uses the same model as the
     mediation agents, it must also be the exact file fixed in llm.ollama_model_digest (one model everywhere).
-    Raises LLMUnavailableError if Ollama is not reachable, ValueError if the model is missing or different.
+    Raises LLMUnavailableError if Ollama is not reachable, ValueError if the model is missing or different
+    or the server settings differ from config.yaml. client and env_reader can be replaced in tests.
     """
     generator = config["generator"]
     if generator["type"] != "bpmngen":
         return {}
-    digest = installed_ollama_digest(generator["ollama_base_url"], generator["model"])
+    server_env = server_environment(config["llm"].get("ollama_server_env") or {}, env_reader)
+    version = ollama_version(generator["ollama_base_url"], client)
+    digest = installed_ollama_digest(generator["ollama_base_url"], generator["model"], client)
     if digest is None:
         raise ValueError(f"model {generator['model']!r} is not installed in Ollama at "
                          f"{generator['ollama_base_url']} (run: ollama pull {generator['model']})")
@@ -262,7 +268,7 @@ def ollama_settings(config: dict) -> dict:
         raise ValueError(f"the installed {generator['model']} has digest {digest}, but config.yaml fixes "
                          f"llm.ollama_model_digest = {llm['ollama_model_digest']}. If this is the model you want "
                          f"to use for the whole experiment, copy this digest into config.yaml.")
-    return {"generator_digest": digest}
+    return {"generator_digest": digest, "ollama_version": version, "ollama_server_env": server_env}
 
 
 def print_summary(records: list[dict]) -> None:

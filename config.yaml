@@ -17,6 +17,12 @@ llm:
   think: false                # Ollama: Qwen3 thinking (hidden reasoning) switched off
   ollama_url: http://localhost:11434
   ollama_model_digest: 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41  # qwen3:8b, pulled 18 Oct 2026; from `ollama list` / the Ollama API; the run stops if the installed model differs
+  ollama_server_env:          # settings of the Ollama SERVER (Windows user environment variables; restart Ollama after
+                              # a change). Checked when a run starts and stored in run_info.json; a run with other
+                              # values is refused. Decided 18 Oct 2026: with these, qwen3:8b at num_ctx 16384 fits
+                              # 100% on the RTX 4060 GPU (without them 20% ran on the CPU, about 4x slower).
+    OLLAMA_FLASH_ATTENTION: "1"
+    OLLAMA_KV_CACHE_TYPE: q8_0
   ollama_timeout_seconds: 900 # Ollama: longest wait for one answer (a local model can be slow)
   ollama_api_max_retries: 5   # OllamaLLM: extra attempts when Ollama is not reachable, times out or has a server error
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)
@@ -81,9 +87,10 @@ evaluation:
   smoke_run_prefix: smoke      # runs whose id starts with this are test runs: excluded from all summaries
   message_flows_as_order: true # message flows (between pools) count as "before/after" in the behavioral profile;
                                # BPMNGen draws one pool per actor, the PMo references use one process
-  trace_threshold: 0.5         # PROVISIONAL diagnostic: an extra (unmatched) generated task counts as
+  trace_threshold: 0.5         # FIXED before the real runs (18 Oct 2026): an extra (unmatched) generated task counts as
                                # "knowledge-traceable" if its label is at least this similar to a sentence of the
                                # knowledge block AND more similar to it than to any sentence of the description
+  trace_sensitivity_thresholds: [0.4, 0.5, 0.6]  # sensitivity check of trace_threshold, also run by --sweep
 
 paths:
   pmo_raw: data/raw/pmo
@@ -125,3 +132,5 @@ paths:
   evaluation_summary: results/evaluation_summary.csv    # main threshold, per condition: mean and SD over repetitions
   evaluation_threshold_csv: results/sensitivity/evaluation_threshold_{threshold}.csv  # one file per sweep threshold
   evaluation_sensitivity_summary: results/sensitivity/summary.csv  # per threshold per condition: mean and SD over repetitions
+  evaluation_trace_csv: results/sensitivity/trace_threshold_{threshold}.csv  # one file per trace_sensitivity_thresholds value
+  evaluation_trace_summary: results/sensitivity/trace_summary.csv  # per trace threshold per condition: mean and SD
