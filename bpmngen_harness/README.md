@@ -26,12 +26,15 @@ Adjust the `..\..\..\` parts if the folders are not next to each other. `--cwdMo
 |---|---|
 | `ollama_request.json` | exact messages + options sent to Ollama (proof of what the model saw) |
 | `raw_model_output.txt` | model text before BPMNGen's cleanup |
+| `raw_thinking.txt` | Ollama's separate thinking field (should be empty: the harness sends `think: false`, `--think false`) |
 | `bpmngen_cleaned_output.txt` | after BPMNGen's cleanup |
 | `generated.bpmn` | the BPMN that gets evaluated |
 | `validation.json` | BPMNGen's own bpmnlint check |
 | `meta.json` | model, num_ctx, temperature, prompt/output tokens, done_reason, `fits_context`, `auto_repairs`, time |
 
-Check in `meta.json`: `done_reason` = "stop", `fits_context` = true, `ollama_model_reported` = "qwen3:8b".
+Check in `meta.json`: `done_reason` = "stop", `fits_context` = true, `ollama_model_reported` = "qwen3:8b", `think_param` = false, `raw_has_think_block` = false.
+
+A runaway answer (more output tokens than `num_ctx`) is stopped by the harness: `done_reason` = "cut_off_by_harness", no `generated.bpmn`; `run_experiment.py` records it as a failed generation (`context_limit_hit`). A run longer than `generator.timeout_seconds` is killed with its whole process tree (failed generation, `timed_out`).
 
 ## C2 / C3
 You normally don't call the harness by hand: `run_experiment.py` does it for every case (src/bpmngen_generator.py). It writes `knowledge_block.txt` for every condition and passes it with `--knowledge`. C1's block is "No domain knowledge provided.", so all three conditions get the same layout. The block is appended after the description under the neutral label from config.yaml (`generator.knowledge_label`, PROVISIONAL, still to be agreed).

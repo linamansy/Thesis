@@ -47,6 +47,8 @@ REPETITION_COLUMNS = {
     "extra_justified_mean": "extra_justified",
     "unjustified_knowledge_additions_mean": "unjustified_knowledge_additions",
     "n_context_limit_hit": "n_context_limit_hit",
+    "n_timed_out": "n_timed_out",
+    "n_thinking_detected": "n_thinking_detected",
     "n_auto_repaired": "n_auto_repaired",
 }
 
@@ -100,7 +102,9 @@ def summarise_by_condition(table: pd.DataFrame, group_by: list[str] | None = Non
             "requirement_coverage_mean": mean_or_none(group, "requirement_coverage"),
             "extra_justified_mean": mean_or_none(group, "n_extra_justified"),
             "unjustified_knowledge_additions_mean": mean_or_none(group, "n_unjustified_knowledge_additions"),
-            "n_context_limit_hit": count_true(group, "context_limit_hit"),
+            "n_context_limit_hit": count_true(group, "context_limit_hit"),  # cut off: failed generation
+            "n_timed_out": count_true(group, "timed_out"),                  # harness timeout: failed generation
+            "n_thinking_detected": count_true(group, "thinking_detected"),  # thinking despite think:false
             "n_auto_repaired": count_auto_repaired(group),
         }
         rows.append(row)

@@ -59,7 +59,8 @@ def test_ollama_version_and_unreachable_server():
 
 def test_run_info_records_version_digest_and_server_settings(tmp_path):
     settings = ollama_settings(bpmngen_config(), fake_ollama(), EXPECTED_ENV.get)
-    assert settings == {"generator_digest": DIGEST, "ollama_version": "0.40.6", "ollama_server_env": EXPECTED_ENV}
+    assert settings == {"generator_digest": DIGEST, "ollama_version": "0.40.6", "ollama_server_env": EXPECTED_ENV,
+                        "generator_think_param": False}            # think:false is recorded in run_info.json
 
     config = dict(bpmngen_config(), paths=dict(CONFIG["paths"], runs=str(tmp_path)))
     folder = RunFolder(config, "ollama_rep1", 1, settings)

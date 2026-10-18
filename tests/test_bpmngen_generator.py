@@ -26,12 +26,17 @@ def bpmngen_config():
     config = load_config()
     config["generator"] = {"type": "bpmngen", "bpmngen_server_dir": "/bpmngen/server", "harness": "h.ts",
                            "model": "qwen3:8b", "ollama_base_url": "http://ollama:11434",
-                           "knowledge_label": LABEL, "timeout_seconds": 5, "npx_command": "npx"}
+                           "knowledge_label": LABEL, "timeout_seconds": 5, "npx_command": "npx",
+                           "think_param": False}
     return config
 
 
-def fake_harness(done_reason="stop", fits=True, returncode=0, stderr="", calls=None):
-    """A stand-in for subprocess.run that behaves like the harness."""
+def fake_harness(done_reason="stop", fits=True, returncode=0, stderr="", calls=None, thinking="", cut_off=False,
+                 think_tags=0):
+    """A stand-in for the harness process: writes the files the real harness writes.
+
+    thinking: text the model "thought" (Ollama's separate field); cut_off: the harness stopped a runaway answer.
+    """
 
     def run(command, **kwargs):
         if calls is not None:
@@ -44,16 +49,23 @@ def fake_harness(done_reason="stop", fits=True, returncode=0, stderr="", calls=N
         knowledge = Path(args["--knowledge"]).read_text(encoding="utf-8").strip()
         description = Path(args["--description"]).read_text(encoding="utf-8").strip()
         user = f"{description}\n\n{args['--label']}\n{knowledge}\n\n/no_think"
+        think = {"false": False, "true": True}.get(args.get("--think"))
         (out / "ollama_request.json").write_text(json.dumps(
             {"model": args["--model"], "messages": [{"role": "system", "content": "SYS"},
                                                     {"role": "user", "content": user}],
-             "options": {"num_ctx": 16384, "temperature": 0.3}}), encoding="utf-8")
+             "options": {"num_ctx": 16384, "temperature": 0.3}, "think": think}), encoding="utf-8")
         (out / "raw_model_output.txt").write_text("<xml/>", encoding="utf-8")
-        (out / "generated.bpmn").write_text(make_bpmn(*sequential_model()), encoding="utf-8")
-        meta = {"ollama_model_reported": "qwen3:8b", "temperature": 0.3, "num_ctx": 16384,
-                "prompt_tokens": 2100, "output_tokens": 900, "done_reason": done_reason, "fits_context": fits,
+        (out / "raw_thinking.txt").write_text(thinking, encoding="utf-8")
+        if not cut_off:
+            (out / "generated.bpmn").write_text(make_bpmn(*sequential_model()), encoding="utf-8")
+        meta = {"ollama_model_reported": "qwen3:8b", "temperature": 0.3, "num_ctx": 16384, "think_param": think,
+                "prompt_tokens": 2100, "output_tokens": 16385 if cut_off else 900,
+                "done_reason": "cut_off_by_harness" if cut_off else done_reason,
+                "fits_context": False if cut_off else fits, "cut_off_by_harness": cut_off,
+                "raw_has_think_block": bool(thinking) or think_tags > 0, "think_tags_in_answer": think_tags,
+                "thinking_chars": len(thinking),
                 "auto_repairs": {"auto_flows_added": 0, "auto_links_added": 1, "first_task_inserted": False},
-                "valid": True, "seconds": 12.5}
+                "valid": not cut_off, "seconds": 12.5}
         (out / "meta.json").write_text(json.dumps(meta), encoding="utf-8")
         return subprocess.CompletedProcess(command, 0, json.dumps(meta), "")
 
@@ -110,12 +122,97 @@ def test_other_harness_failures_are_errors(tmp_path):
         generator.run("19", description_file(tmp_path), "block", tmp_path / "case")
 
 
-def test_timeout_stops_the_run(tmp_path):
-    def slow(command, **kwargs):
-        raise subprocess.TimeoutExpired(command, 5)
+def slow(command, **kwargs):
+    raise subprocess.TimeoutExpired(command, 5)
 
-    with pytest.raises(LLMUnavailableError, match="timed out"):
-        make_generator(tmp_path, slow).run("19", description_file(tmp_path), "block", tmp_path / "case")
+
+def test_timeout_is_returned_not_raised(tmp_path):
+    meta = make_generator(tmp_path, slow).run("19", description_file(tmp_path), "block", tmp_path / "case")
+    assert meta["timed_out"] is True and meta["valid"] is False
+
+
+def test_think_false_is_passed_to_the_harness(tmp_path):
+    calls = []
+    make_generator(tmp_path, fake_harness(calls=calls)).run("19", description_file(tmp_path), "block", tmp_path / "c")
+    command = calls[0][0]
+    assert command[command.index("--think") + 1] == "false"
+
+
+# ---------- 2. thinking text is always saved, and flagged if it appears ----------
+
+def test_no_thinking_is_not_flagged(tmp_path):
+    runner = make_runner(tmp_path, "C1", fake_harness())
+    record = runner.run_case("19")
+    assert "thinking_detected" not in record and "warnings" not in record
+    assert record["bpmngen"]["think_param"] is False and record["bpmngen"]["thinking_chars"] == 0
+    assert (tmp_path / "run" / "C1" / "19" / "bpmngen" / "raw_thinking.txt").exists()   # always saved
+
+
+def test_thinking_despite_think_false_is_saved_and_flagged(tmp_path):
+    thinking = "Okay, let's tackle this BPMN diagram..."
+    runner = make_runner(tmp_path, "C1", fake_harness(thinking=thinking))
+    record = runner.run_case("19")
+
+    assert record["thinking_detected"] is True and "thinking text despite think=False" in record["warnings"][0]
+    assert record["bpmngen"]["raw_has_think_block"] is True and record["bpmngen"]["thinking_chars"] == len(thinking)
+    log = json.loads(runner.logger.log_path.read_text(encoding="utf-8").splitlines()[0])
+    assert log["parsed_output"]["thinking_detected"] is True
+    assert log["parsed_output"]["raw_thinking"] == "Okay, let's tackle this BPMN diagram..."   # saved in the log too
+    saved = json.loads((tmp_path / "run" / "C1" / "19" / "validation.json").read_text(encoding="utf-8"))
+    assert saved["thinking_detected"] is True
+
+
+def test_stray_closing_think_tag_in_the_answer_is_flagged(tmp_path):
+    """Seen in the smoke test: with think:false qwen3 wrote a draft, then "</think>", then the real XML."""
+    runner = make_runner(tmp_path, "C1", fake_harness(think_tags=2))
+    record = runner.run_case("19")
+    assert record["thinking_detected"] is True and record["bpmngen"]["think_tags_in_answer"] == 2
+    assert "2 think tag(s) in the answer" in record["warnings"][0]
+
+
+# ---------- 3. cut-off answers are failed generations, scored and never retried ----------
+
+def test_harness_cut_off_is_a_finished_failed_generation(tmp_path):
+    runner = make_runner(tmp_path, "C1", fake_harness(cut_off=True))
+    runner.case_ids = ["19"]
+    records = runner.run_all()                                  # no RunInterrupted: the run goes on
+
+    record = records[0]
+    assert record["generation_succeeded"] is False and record["valid"] is False
+    assert record["context_limit_hit"] is True and record["timed_out"] is False
+    assert record["bpmngen"]["done_reason"] == "cut_off_by_harness"
+    assert runner.is_finished("19")                             # validation.json written: never retried
+    assert not (tmp_path / "run" / "C1" / "19" / "generated.bpmn").exists()
+
+
+# ---------- 4. timeouts are failed generations; only Ollama problems stop the run ----------
+
+def test_timeout_is_a_finished_failed_generation(tmp_path):
+    runner = make_runner(tmp_path, "C1", slow)
+    runner.case_ids = ["19"]
+    record = runner.run_all()[0]                                # no RunInterrupted
+
+    assert record["generation_succeeded"] is False and record["timed_out"] is True
+    assert record["context_limit_hit"] is False and "timed out after 5 s" in record["errors"][0]
+    assert runner.is_finished("19")
+    log = json.loads(runner.logger.log_path.read_text(encoding="utf-8").splitlines()[0])
+    assert log["parsed_output"]["timed_out"] is True            # the timeout is logged as well
+
+
+def test_timeout_kills_the_whole_process_tree(tmp_path):
+    """A parent that starts a child which keeps the output pipe open (like npx -> node on Windows).
+    Without killing the tree, waiting for the pipes would last as long as the child (60 s)."""
+    import sys
+    import time
+
+    from src.bpmngen_generator import run_with_tree_kill
+
+    child = "import time; time.sleep(60)"
+    parent = f"import subprocess, sys, time; subprocess.Popen([sys.executable, '-c', {child!r}]); time.sleep(60)"
+    start = time.monotonic()
+    with pytest.raises(subprocess.TimeoutExpired):
+        run_with_tree_kill([sys.executable, "-c", parent], cwd=str(tmp_path), timeout=2)
+    assert time.monotonic() - start < 30                        # parent AND child were killed
 
 
 def test_context_limit_detection():

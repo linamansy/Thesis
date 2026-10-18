@@ -39,11 +39,16 @@ generator:
   bpmngen_server_dir: ../BPMNGen-backend-main/BPMNGen-backend-main/server  # relative to the project root, or absolute
   harness: bpmngen_harness/run_bpmngen.ts
   model: qwen3:8b             # BPMNGen settings that are NOT changed: system prompt, temperature 0.3, num_ctx 16384, /no_think
+  think_param: false          # Ollama's think switch, added by the harness to BPMNGen's request (decided 18 Oct 2026):
+                              # BPMNGen asks for no thinking with "/no_think", but Ollama 0.40.6 let qwen3 think anyway
+                              # (hidden, unsaved, once an endless loop). false = what BPMNGen intends. Stored in run_info.json
   ollama_base_url: http://localhost:11434   # keep equal to llm.ollama_url
   # Neutral label in front of the knowledge block, identical for C1, C2 and C3 (PROVISIONAL: agree with
   # supervisors / Ulm). Replaces BPMNGen's DMN label "...rules the generated process MUST follow".
   knowledge_label: "[Domain information (it may or may not apply to this process):]"
-  timeout_seconds: 900        # per case (8B model on an RTX 4060)
+  timeout_seconds: 900        # per case (8B model on an RTX 4060, ~42 tokens/s: a full 16384-token window takes ~6.5 min).
+                              # On timeout the whole process tree is killed and the case is a FAILED generation
+                              # (timed_out = True), scored, never retried
   npx_command: null           # null = find npx automatically; set a full path if needed
 
 silver:

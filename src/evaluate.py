@@ -248,6 +248,8 @@ class Evaluator:
             "precision_adjusted": legal["precision_adjusted"],
             "n_unjustified_knowledge_additions": legal["n_unjustified_knowledge_additions"],
             "context_limit_hit": bool(validation.get("context_limit_hit", False)),
+            "timed_out": bool(validation.get("timed_out", False)),
+            "thinking_detected": bool(validation.get("thinking_detected", False)),
             "prompt_tokens": bpmngen.get("prompt_tokens"),
             "output_tokens": bpmngen.get("output_tokens"),
             "auto_flows_added": repairs.get("auto_flows_added"),

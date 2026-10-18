@@ -200,20 +200,33 @@ class ExperimentRunner:
         except Exception as e:  # any other error: recorded as a failed generation
             record |= {"generation_succeeded": False, "parses": False, "valid": False,
                        "errors": [f"generation failed with {type(e).__name__}: {e}"], "counts": None,
-                       "context_limit_hit": False, "bpmngen": None}
+                       "context_limit_hit": False, "timed_out": False, "bpmngen": None}
         else:
             bpmngen_info = {key: meta.get(key) for key in (
-                "ollama_model_reported", "temperature", "num_ctx", "prompt_tokens", "output_tokens",
-                "done_reason", "fits_context", "auto_repairs", "valid", "seconds")}
+                "ollama_model_reported", "temperature", "num_ctx", "think_param", "prompt_tokens", "output_tokens",
+                "done_reason", "fits_context", "cut_off_by_harness", "raw_has_think_block", "think_tags_in_answer",
+                "thinking_chars", "auto_repairs", "valid", "seconds")}
             bpmngen_info["bpmnlint_valid"] = bpmngen_info.pop("valid")
-            if context_limit_hit(meta):
-                record |= {"generation_succeeded": False, "parses": False, "valid": False,
-                           "errors": [f"answer cut off (done_reason={meta.get('done_reason')!r}, "
-                                      f"fits_context={meta.get('fits_context')})"], "counts": None,
-                           "context_limit_hit": True, "bpmngen": bpmngen_info}
+            failed = {"generation_succeeded": False, "parses": False, "valid": False, "counts": None,
+                      "bpmngen": bpmngen_info}
+            # Timeout and cut-off are results of the model: a failed generation, scored, never retried.
+            if meta.get("timed_out"):
+                record |= failed | {"errors": [f"BPMNGen harness timed out after {meta['seconds']} s "
+                                               f"(process tree killed)"],
+                                    "context_limit_hit": False, "timed_out": True}
+            elif context_limit_hit(meta):
+                record |= failed | {"errors": [f"answer cut off (done_reason={meta.get('done_reason')!r}, "
+                                               f"fits_context={meta.get('fits_context')})"],
+                                    "context_limit_hit": True, "timed_out": False}
             else:
                 record |= {"generation_succeeded": True, **self.validator.validate(bpmn_path),
-                           "context_limit_hit": False, "bpmngen": bpmngen_info}
+                           "context_limit_hit": False, "timed_out": False, "bpmngen": bpmngen_info}
+            if meta.get("raw_has_think_block"):  # should not happen with think:false; flagged, never hidden
+                record["thinking_detected"] = True
+                record["warnings"] = [f"the model produced thinking text despite think={meta.get('think_param')} "
+                                      f"({meta.get('thinking_chars')} chars in Ollama's thinking field, see "
+                                      f"bpmngen/raw_thinking.txt; {meta.get('think_tags_in_answer') or 0} think "
+                                      f"tag(s) in the answer)"]
         (case_dir / self.validation_file).write_text(json.dumps(record, indent=2), encoding="utf-8")
         return record
 
@@ -268,7 +281,8 @@ def ollama_settings(config: dict, client=None, env_reader=read_environment_varia
         raise ValueError(f"the installed {generator['model']} has digest {digest}, but config.yaml fixes "
                          f"llm.ollama_model_digest = {llm['ollama_model_digest']}. If this is the model you want "
                          f"to use for the whole experiment, copy this digest into config.yaml.")
-    return {"generator_digest": digest, "ollama_version": version, "ollama_server_env": server_env}
+    return {"generator_digest": digest, "ollama_version": version, "ollama_server_env": server_env,
+            "generator_think_param": generator.get("think_param")}
 
 
 def print_summary(records: list[dict]) -> None:

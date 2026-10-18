@@ -6,7 +6,7 @@ Compare three conditions for generating BPMN from text:
 - C2: description + raw retrieved rule passages (RAG) -> same generator
 - C3: description + the same retrieved passages after mediation agents -> same generator
 
-The generator must be IDENTICAL in all three conditions: BPMNGen (Ulm University) with qwen3:8b on Ollama, its own fixed system prompt, temperature 0.3, num_ctx 16384, thinking off. Only the knowledge block differs. It is always appended after the description under the same neutral label (config.yaml generator.knowledge_label, PROVISIONAL until agreed with supervisors/Ulm):
+The generator must be IDENTICAL in all three conditions: BPMNGen (Ulm University) with qwen3:8b on Ollama, its own fixed system prompt, temperature 0.3, num_ctx 16384, thinking off (BPMNGen's "/no_think" plus Ollama's think:false, added by the harness; see Pipeline). Only the knowledge block differs. It is always appended after the description under the same neutral label (config.yaml generator.knowledge_label, PROVISIONAL until agreed with supervisors/Ulm):
 - C1: "No domain knowledge provided." (same label and layout, empty block)
 - C2: the 5 frozen passages, verbatim, with their IDs
 - C3: requirements produced by the mediation agents + a list of rules marked Indeterminate
@@ -27,7 +27,13 @@ Thesis generator (generator.type: bpmngen): knowledge block -> bpmngen_harness/r
 - BPMNGen is private Ulm code. It lives OUTSIDE this repository (generator.bpmngen_server_dir). Never copy it in, never change its files, never push it anywhere.
 - The harness imports BPMNGen's classes and repeats createBPMN() without database, login or title. See docs/BPMNGEN_ANALYSIS.md and bpmngen_harness/README.md.
 - BPMNGen's cleanup can ADD sequence flows or a first task. These auto-repairs are counted per case and must be reported per condition.
-- An answer that is cut off (done_reason not "stop" or context window full) is a failed generation with context_limit_hit = True.
+- Thinking (decided 18 Oct 2026): BPMNGen asks for no thinking only with "/no_think" in the prompt; Ollama 0.40.6 let qwen3 think anyway, in a separate "thinking" field BPMNGen never reads (hidden, unsaved; one case looped to 122,236 tokens). The harness therefore adds Ollama's think:false to BPMNGen's request (config.yaml generator.think_param, stored in run_info.json). This is the ONLY change to BPMNGen's request; no BPMNGen file is changed.
+- The thinking field is always saved (bpmngen/raw_thinking.txt and the log). raw_has_think_block is true if there is thinking text in that field OR a <think>/</think> tag in the answer (qwen3 can still write a draft followed by "</think>"); then validation.json gets thinking_detected = True and a warning. It is flagged, never repaired.
+- Failed generations (model results: scored as 0, never retried, validation.json written):
+  - cut off: the harness aborts the stream when the output passes num_ctx tokens (done_reason "cut_off_by_harness"), or Ollama reports a length stop / the window was full -> context_limit_hit = True
+  - timeout (generator.timeout_seconds, 900 s): the whole process tree (npx and its node child) is killed -> timed_out = True
+- Only real Ollama unavailability (connection refused, HTTP errors) stops the run without a result (LLMUnavailableError), so the case can be resumed.
+- Discarded run: the first, partial repetition 1 (C1, 9 cases, made with hidden thinking) was moved to results/_discarded/ollama_rep1_thinking_on/ (kept, never evaluated); repetition 1 restarts from scratch.
 Legacy generator (generator.type: json_builder, used by the mock tests): own prompt -> JSON -> src/bpmn_builder.py. Not used for thesis runs.
 
 ## Rules for the code
