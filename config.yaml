@@ -103,6 +103,21 @@ evaluation:
                                # knowledge block AND more similar to it than to any sentence of the description
   trace_sensitivity_thresholds: [0.4, 0.5, 0.6]  # sensitivity check of trace_threshold, also run by --sweep
 
+statistics:
+  # docs/ANALYSIS_PLAN.md sections 1-5, fixed before any evaluation (src/statistics.py)
+  runs: [ollama_rep1, ollama_rep2, ollama_rep3]
+  primary_metrics: [f1, behavioral_similarity]
+  planned_comparisons: [[C3, C1], [C3, C2]]     # two-sided Wilcoxon; Holm over 2 metrics x 2 comparisons
+  descriptive_comparisons: [[C2, C1]]           # effect sizes only, no test
+  alpha: 0.05
+  bootstrap_resamples: 10000                    # bootstrap 95% CI of the median paired difference
+  bootstrap_seed: 42
+  secondary_metrics: [precision, recall, valid, precision_adjusted, requirement_coverage, n_extra_tasks,
+                      n_extra_knowledge_traceable, n_unjustified_knowledge_additions]
+  overapplication_metric: n_unjustified_knowledge_additions
+  overapplication_comparison: [C3, C2]          # difference C3 minus C2
+  complexity_measures: [ref_flow_nodes, ref_cfc]  # of the PMo reference model (RQ2, exploratory)
+
 paths:
   pmo_raw: data/raw/pmo
   pmo_descriptions: data/raw/pmo/descriptions
@@ -143,5 +158,6 @@ paths:
   evaluation_summary: results/evaluation_summary.csv    # main threshold, per condition: mean and SD over repetitions
   evaluation_threshold_csv: results/sensitivity/evaluation_threshold_{threshold}.csv  # one file per sweep threshold
   evaluation_sensitivity_summary: results/sensitivity/summary.csv  # per threshold per condition: mean and SD over repetitions
+  statistics_dir: results/statistics       # CSV tables of src/statistics.py
   evaluation_trace_csv: results/sensitivity/trace_threshold_{threshold}.csv  # one file per trace_sensitivity_thresholds value
   evaluation_trace_summary: results/sensitivity/trace_summary.csv  # per trace threshold per condition: mean and SD

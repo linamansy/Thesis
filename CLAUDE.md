@@ -128,6 +128,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Complexity of each case is measured from the reference BPMN (tasks, gateways, loops, nesting).
 - Results: results/evaluation.csv, one row per case per condition per repetition (with a repetition column), plus a summary per condition with the mean and standard deviation across repetitions.
 - Sanity check: comparing a reference BPMN with itself must give perfect scores.
+- Statistics (src/statistics.py, config.yaml statistics section) follow docs/ANALYSIS_PLAN.md exactly: repetitions averaged per case and condition; Friedman; Wilcoxon C3 vs C1 and C3 vs C2 on F1 and behavioural similarity with Holm over these 4; median paired difference with bootstrap 95% CI (seed 42) and rank-biserial; over-application (n_unjustified_knowledge_additions, C3 vs C2); Spearman with reference complexity (ref_flow_nodes, ref_cfc) for RQ2; the same tests on valid/rescued generations only; failure types per condition. Tables in results/statistics/. Tested on synthetic data only.
 
 ## Current scope
 - Focus now: building C1, C2 and C3 and evaluating BPMN quality automatically against the reference models.

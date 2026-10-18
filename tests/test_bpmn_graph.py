@@ -60,7 +60,8 @@ def test_nearest_split_decides_in_nested_model(tmp_path):
 
 def test_complexity_of_simple_split(tmp_path):
     measures = ComplexityMeasurer().measure(graph_of(tmp_path, *split_model("exclusiveGateway")))
-    assert measures == {"tasks": 3, "gateways": 2, "loops": 0, "nesting_depth": 1, "cfc": 2}
+    # flow nodes: start, end, 2 gateways, 3 tasks
+    assert measures == {"flow_nodes": 7, "tasks": 3, "gateways": 2, "loops": 0, "nesting_depth": 1, "cfc": 2}
 
 
 def three_way_split(gateway_tag: str):

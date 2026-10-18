@@ -1,6 +1,7 @@
 """ComplexityMeasurer: how complex is a (reference) process model?
 
 Descriptive measures:
+  flow_nodes     number of flow nodes (tasks, events, gateways, sub-processes); the size measure used for RQ2
   tasks          number of tasks
   gateways       number of gateways (splits and joins)
   loops          number of back edges, i.e. flows that jump back to an earlier element
@@ -32,6 +33,7 @@ class ComplexityMeasurer:
 
     def measure(self, graph: BPMNGraph) -> dict:
         return {
+            "flow_nodes": len(graph.types),  # every flow node of the graph (BPMNGraph keeps only flow nodes)
             "tasks": len(graph.tasks),
             "gateways": len(graph.gateways),
             "loops": len(graph.back_edges),
