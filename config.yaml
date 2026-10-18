@@ -16,7 +16,7 @@ llm:
   num_ctx: 16384              # Ollama: context window in tokens (prompt + answer)
   think: false                # Ollama: Qwen3 thinking (hidden reasoning) switched off
   ollama_url: http://localhost:11434
-  ollama_model_digest: DIGEST_PLACEHOLDER  # from `ollama list` / the Ollama API; the run stops if the installed model differs
+  ollama_model_digest: 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41  # qwen3:8b, pulled 18 Oct 2026; from `ollama list` / the Ollama API; the run stops if the installed model differs
   ollama_timeout_seconds: 900 # Ollama: longest wait for one answer (a local model can be slow)
   ollama_api_max_retries: 5   # OllamaLLM: extra attempts when Ollama is not reachable, times out or has a server error
   max_retries: 1              # extra attempts when the LLM output is not valid JSON for the schema (BaseAgent)

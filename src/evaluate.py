@@ -6,7 +6,11 @@ It evaluates every run in results/runs/ (see src/run_folder.py): for every run, 
 that was run, and every case,
 results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data/cases/<case_id>/reference.bpmn:
   1. Syntactic validity  - was a model generated, and did it pass the validator?
+                           valid (main metric) = our strict validator; bpmnlint_valid = BPMNGen's own verdict.
                            A failed or invalid model scores 0 on everything else; it is never skipped.
+                           Only exception (decided 18 Oct 2026, all conditions): if the diagram (bpmndi)
+                           section is the file's only problem, the structural metrics are computed without
+                           it and di_stripped = True; valid stays False (src/di_rescue.py).
   2. Semantic quality    - task matching by label meaning: precision, recall, F1,
                            plus lists of matched, missing and extra tasks (src/task_matcher.py)
   3. Behavioral quality  - share of matched task pairs with the same relation
@@ -40,6 +44,7 @@ Run from the project root:
 import argparse
 import json
 import re
+import tempfile
 from pathlib import Path
 
 import pandas as pd
@@ -48,6 +53,7 @@ from src.behavioral_profile import behavioral_similarity
 from src.bpmn_graph import BPMNGraph
 from src.complexity import ComplexityMeasurer
 from src.config import load_config, project_path
+from src.di_rescue import DIRescue
 from src.run_folder import RunFolder
 from src.summarise import summarise_repetitions, summarise_runs
 from src.task_matcher import TaskMatcher
@@ -81,6 +87,7 @@ class Evaluator:
         self.smoke_prefix = settings["smoke_run_prefix"]
         self.matcher = matcher or TaskMatcher(settings["embedding_model"], settings["similarity_threshold"])
         self.complexity = ComplexityMeasurer()
+        self.di_rescue = DIRescue()
         self.message_flows_as_order = settings.get("message_flows_as_order", True)
         self.trace_threshold = settings.get("trace_threshold", 0.5)
         self.knowledge_file = paths.get("knowledge_block_file", "knowledge_block.txt")
@@ -157,16 +164,26 @@ class Evaluator:
             validation = {"generation_succeeded": False, "valid": False,
                           "errors": ["no output found for this case"]}
 
-        usable = validation["generation_succeeded"] and validation["valid"]
-        if usable:
-            scores = self.compare(case_dir / self.bpmn_file, reference_path, threshold)
-        else:
-            scores = self.zero_scores(reference)
+        generated_path = case_dir / self.bpmn_file
+        with tempfile.TemporaryDirectory() as work_dir:
+            # The model file that is scored: the generated file if it is valid; otherwise, if the diagram
+            # section was its only problem, a copy without that section (src/di_rescue.py); else none (score 0).
+            model_path = None
+            di_stripped = False
+            if validation["generation_succeeded"] and validation["valid"]:
+                model_path = generated_path
+            elif validation["generation_succeeded"] and generated_path.exists():
+                model_path = self.di_rescue.rescue(generated_path, Path(work_dir))
+                di_stripped = model_path is not None
+            usable = model_path is not None
+            if usable:
+                scores = self.compare(model_path, reference_path, threshold)
+            else:
+                scores = self.zero_scores(reference)
+            additions = self.extra_task_diagnostics(condition, case_id, case_dir, scores["semantic"]["extra"]) \
+                if usable else {"n_extra_tasks": 0, "n_extra_knowledge_traceable": 0, "extra_tasks": []}
+            legal = self.silver_diagnostics(case_id, model_path, scores["semantic"], additions)
         complexity = self.complexity.measure(reference)
-        additions = self.extra_task_diagnostics(condition, case_id, case_dir, scores["semantic"]["extra"]) \
-            if usable else {"n_extra_tasks": 0, "n_extra_knowledge_traceable": 0, "extra_tasks": []}
-        legal = self.silver_diagnostics(case_id, case_dir / self.bpmn_file if usable else None,
-                                        scores["semantic"], additions)
         bpmngen = validation.get("bpmngen") or {}
         repairs = bpmngen.get("auto_repairs") or {}
 
@@ -178,7 +195,8 @@ class Evaluator:
                 "model": run["model"],
                 "condition": condition,
                 "case_id": case_id,
-                "syntactic": {key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
+                "syntactic": {**{key: validation.get(key) for key in ("generation_succeeded", "valid", "errors")},
+                              "bpmnlint_valid": bpmngen.get("bpmnlint_valid"), "di_stripped": di_stripped},
                 **scores,
                 "extra_task_diagnostics": additions,
                 "silver_legal_diagnostics": legal,
@@ -202,7 +220,9 @@ class Evaluator:
             "case_id": case_id,
             "similarity_threshold": threshold,
             "generation_succeeded": validation["generation_succeeded"],
-            "valid": validation["valid"],
+            "valid": validation["valid"],                        # strict: our validator (main metric)
+            "bpmnlint_valid": bpmngen.get("bpmnlint_valid"),     # BPMNGen's own verdict (None: not BPMNGen)
+            "di_stripped": di_stripped,                          # scored without its diagram section
             "n_generated_tasks": semantic["n_generated_tasks"],
             "n_reference_tasks": semantic["n_reference_tasks"],
             "n_matched": semantic["n_matched"],

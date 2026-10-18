@@ -45,7 +45,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 ## LLM provider and experiment runs
 - Everything runs on qwen3:8b in Ollama (on the PC with the RTX 4060, http://localhost:11434, no API key): the BPMNGen generator AND the C3 mediation agents.
 - Mediation agents (OllamaLLM, src/llm/ollama_llm.py), all settings in config.yaml and sent with every request: temperature 0, seed 42, num_ctx 16384, thinking off (think: false), max_tokens 8192 (num_predict).
-- The exact model file is fixed by its digest (llm.ollama_model_digest, still DIGEST_PLACEHOLDER: fill it in from the Ollama API before the first real run). The agents check it before their first call; the generator's model is checked against the same digest when a run starts (run_experiment.ollama_settings) and stored in run_info.json. If anything differs, the run stops.
+- The exact model file is fixed by its digest: qwen3:8b = 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 (llm.ollama_model_digest; pulled 18 Oct 2026, read with installed_ollama_digest). The agents check it before their first call; the generator's model is checked against the same digest when a run starts (run_experiment.ollama_settings) and stored in run_info.json. If anything differs, the run stops.
 - Logged for every call: model name, model digest and finish_reason (STOP, or MAX_TOKENS when an answer was cut off).
 - Errors: Ollama not reachable, timeouts and server errors are retried with increasing waits (2, 4, 8, 16, 32 s), up to 5 times; other errors (e.g. 404 model not downloaded) are not retried. Every such error stops the run without recording a result (LLMUnavailableError), so the case can be resumed.
 - Prompt length: for the BPMNGen generator, prompt and answer tokens are measured on every call (meta.json) and a cut-off answer is flagged (context_limit_hit). src/count_prompt_tokens.py counts the prompt of the LEGACY json_builder generator only.
@@ -101,6 +101,11 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 
 ## Evaluation
 - Syntactic validity: does the generated BPMN parse and validate.
+- Validity rule (decided 18 Oct 2026, before the real runs, same for C1, C2, C3):
+  - "valid" (main metric) = our strict validator (src/validator.py), unchanged.
+  - "bpmnlint_valid" = BPMNGen's own bpmnlint verdict, reported next to it (it is more lenient: it accepted a file with an undeclared bpmndi namespace).
+  - Rescue for the structural metrics only (src/di_rescue.py): if a file is not valid and removing its <bpmndi:BPMNDiagram> section makes it pass the whole validator, the metrics are computed on that copy and "di_stripped" = True; "valid" stays False. The diagram section only holds drawing positions. Nothing else is ever repaired (e.g. a "b3pmn:" typo is not rescued and scores 0). The generated file is never changed; the copy lives in a temporary folder.
+  - Smoke test 18 Oct 2026 (case 01): both XML errors were already in qwen3's raw answer, not caused by BPMNGen's cleanup.
 - Semantic quality: activity precision and recall against the reference BPMN, using label similarity matching.
 - Behavioral quality: ordering, exclusive and parallel relations between matched activities. All pools are read; message flows count as order (BPMNGen draws one pool per actor, PMo references have one process); sub-processes are opened up.
 - Legal steps (silver reference): precision_adjusted (extra tasks that realise a required legal step are NOT errors; plain precision is kept too), requirement_coverage, n_extra_justified, n_unjustified_knowledge_additions.

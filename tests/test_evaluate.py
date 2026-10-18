@@ -165,6 +165,47 @@ def test_failed_and_missing_cases_get_zero_and_are_kept(evaluator, tmp_path):
     assert len(details["semantic"]["missing"]) == details["semantic"]["n_reference_tasks"]
 
 
+def write_generated(run_dir, condition, case_id, xml_text, bpmnlint_valid):
+    """A BPMNGen-style case: generated.bpmn as given, validation.json with OUR strict verdict on it."""
+    from src.validator import BPMNValidator
+
+    case_dir = run_dir / condition / case_id
+    case_dir.mkdir(parents=True)
+    (case_dir / "generated.bpmn").write_text(xml_text, encoding="utf-8")
+    verdict = BPMNValidator().validate(case_dir / "generated.bpmn")
+    (case_dir / "validation.json").write_text(json.dumps(
+        {"generation_succeeded": True, "valid": verdict["valid"], "errors": verdict["errors"],
+         "bpmngen": {"bpmnlint_valid": bpmnlint_valid}}), encoding="utf-8")
+    return case_dir
+
+
+def test_validity_rule_strict_valid_bpmnlint_and_di_rescue(evaluator, tmp_path):
+    """valid stays strict; only a model whose diagram section is the sole problem is scored (di_stripped)."""
+    from test_di_rescue import B3PMN_TYPO_AND_MISSING_DI, MISSING_DI_NAMESPACE, VALID
+
+    local = local_evaluator(evaluator, tmp_path)
+    run_dir = make_run(tmp_path, "smoke_test", 1, conditions=("C1", "C2", "C3"), provider="ollama")
+    write_generated(run_dir, "C1", "01", VALID, bpmnlint_valid=True)
+    write_generated(run_dir, "C2", "01", B3PMN_TYPO_AND_MISSING_DI, bpmnlint_valid=False)
+    rescued_dir = write_generated(run_dir, "C3", "01", MISSING_DI_NAMESPACE, bpmnlint_valid=True)
+
+    rows = local.evaluate().set_index("condition")
+
+    assert list(rows["valid"]) == [True, False, False]               # strict verdict, never changed
+    assert list(rows["bpmnlint_valid"]) == [True, False, True]       # BPMNGen's own verdict, reported next to it
+    assert list(rows["di_stripped"]) == [False, False, True]
+    # the rescued model is scored exactly like the same model with a correct diagram section ...
+    for column in ("n_generated_tasks", "n_matched", "precision", "recall", "f1"):
+        assert rows.loc["C3", column] == rows.loc["C1", column], column
+    assert rows.loc["C3", "n_generated_tasks"] == 2
+    # ... the typo is not repaired: scored 0 like every other invalid model
+    assert rows.loc["C2", "n_generated_tasks"] == 0 and rows.loc["C2", "f1"] == 0
+    # the generated file itself is never changed, and the details say what happened
+    assert (rescued_dir / "generated.bpmn").read_text(encoding="utf-8") == MISSING_DI_NAMESPACE
+    details = json.loads((rescued_dir / "evaluation.json").read_text(encoding="utf-8"))["syntactic"]
+    assert (details["valid"], details["bpmnlint_valid"], details["di_stripped"]) == (False, True, True)
+
+
 def test_only_conditions_run_in_a_run_are_evaluated(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
     write_case(make_run(tmp_path, "mock_rep1", 1, conditions=("C1",)), "C1", "01", valid=True)

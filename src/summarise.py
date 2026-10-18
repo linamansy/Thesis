@@ -7,7 +7,9 @@ so the choice is visible instead of hidden:
   behavioral_mean_excluding  average over computable cases only; behavioral_n_excluded says how many were left out
   behavioral_mean_as_zero    average over all cases, counting non-computable cases as 0
 Failed or invalid models already have behavioral similarity 0 (they are scored 0
-on every metric), so they are included in both averages.
+on every metric), so they are included in both averages. Exception: invalid models whose only problem was
+the diagram (bpmndi) section are scored without it (src/di_rescue.py); n_di_stripped counts them, and
+n_bpmnlint_valid counts the models BPMNGen's own check accepted (n_valid stays the strict count).
 
 Silver legal reference (AI-made, provisional): mean precision_adjusted (correct legal steps are not errors),
 requirement coverage (mean over the cases that have required steps), justified extra tasks and unjustified
@@ -30,6 +32,8 @@ CONDITION_KEYS = ["provider", "model", "condition"]
 # Columns of the per-run summary -> name used in the across-repetitions summary.
 REPETITION_COLUMNS = {
     "n_valid": "n_valid",
+    "n_bpmnlint_valid": "n_bpmnlint_valid",
+    "n_di_stripped": "n_di_stripped",
     "precision_mean": "precision",
     "recall_mean": "recall",
     "f1_mean": "f1",
@@ -82,7 +86,9 @@ def summarise_by_condition(table: pd.DataFrame, group_by: list[str] | None = Non
         row = dict(zip(group_by, keys))
         row |= {
             "n_cases": len(group),
-            "n_valid": int(group["valid"].sum()),
+            "n_valid": int(group["valid"].sum()),                  # strict validator (main metric)
+            "n_bpmnlint_valid": count_true(group, "bpmnlint_valid"),  # BPMNGen's own verdict
+            "n_di_stripped": count_true(group, "di_stripped"),      # scored without the diagram section
             **{f"{m}_mean": round(group[m].mean(), 4) for m in METRICS},
             "behavioral_mean_excluding": (round(pd.to_numeric(computable["behavioral_similarity"]).mean(), 4)
                                           if len(computable) else None),
