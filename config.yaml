@@ -52,15 +52,21 @@ generator:
   npx_command: null           # null = find npx automatically; set a full path if needed
 
 silver:
-  # Automatic legal reference for EVALUATION only (src/build_silver_reference.py), built once before the runs.
+  # Automatic legal reference for EVALUATION only (src/build_silver_reference.py), complete before the evaluation.
   # Deliberately a different, stronger model than the generator and the C3 agents (qwen3), so C3 is not graded
   # by its own model. AI-made = SILVER (provisional); decision 16 Oct 2026: no human audit (stated limitation).
-  provider: gemini            # uses GEMINI_API_KEY from .env and the gemini_* settings of the llm section
-  model: gemini-3.6-flash     # the model Google actually serves (it answered gemini-3.5-flash requests with 3.6, 18 Oct
-                              # 2026); the API lists no fixed -00X name, only version "3.6-flash-07-2026". Every answer
-                              # must report exactly this name, otherwise the build stops (src/build_silver_reference.py)
+  # Changed 19 Oct 2026, before any evaluation: gemini-3.6-flash -> openai/gpt-oss-120b via Groq, because the
+  # Gemini free tier allows only 20 requests/day and paid billing was not possible (65 calls are needed).
+  provider: groq              # "groq" (GROQ_API_KEY in .env) or "gemini" (GEMINI_API_KEY, gemini_* settings in llm)
+  model: openai/gpt-oss-120b  # every answer must report exactly this name, otherwise the build stops
   temperature: 0
-  max_tokens: 8192
+  max_tokens: 5000            # Groq counts prompt + max_tokens against its 8000 tokens/minute free limit when a request
+                              # arrives; the largest silver prompt is ~2000 tokens, so 5000 keeps every request under it
+  groq_base_url: https://api.groq.com/openai/v1
+  groq_timeout_seconds: 120
+  groq_api_max_retries: 5     # extra attempts on server errors and timeouts (waits 2, 4, 8, ... s)
+  groq_max_rate_limit_wait_seconds: 900  # 429 rate limit: wait as Groq asks (not a failure); a longer requested wait
+                                         # means the daily limit (1000 requests/day) is used up -> stop, resume later
 
 experiment:
   repetitions: 3              # each condition is run this many times: --repetition 1, 2, 3

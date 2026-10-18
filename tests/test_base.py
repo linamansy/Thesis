@@ -18,6 +18,7 @@ REQUIRED_FIELDS = {
     "retries", "duration_seconds",
     "finish_reason",   # added: why the model stopped (None for MockLLM), to detect cut-off answers
     "model_digest",    # added: exact model file (Ollama sha256 digest; None for other providers)
+    "reasoning",       # added: reasoning text of a reasoning model (Groq gpt-oss; None otherwise)
 }
 
 

@@ -1,79 +1,67 @@
 {
   "status": "silver: AI-made reference, not checked by a human (provisional, never gold)",
-  "created_at": "2026-10-18T12:47:12.736280+00:00",
-  "annotator_model": "gemini-3.6-flash",
+  "created_at": "2026-10-18T21:22:41.849159+00:00",
+  "annotator_provider": "groq",
+  "annotator_model": "openai/gpt-oss-120b",
+  "annotator_model_version": null,
+  "annotation_dates": [
+    "2026-10-18"
+  ],
   "prompt_sha256": "02a6ad4205ef05cc1424cd70bf0b2feb321d8f7158dfc999285f8a26fe91bc72",
   "frozen_retrieval_sha256": "0a59828ad966dc04dfe9fb66fb7c1e4ac599f68a56d3abcac57c25ffa43b5ab7",
   "cases": {
     "01": {
+      "annotated_at": "2026-10-18T21:23:01+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_803c0ba83d",
+        "fp_c800245357",
+        "fp_e1a78f200e"
+      ],
       "passages": [
         {
           "passage_id": "CRD-Art8-3",
-          "label": "indeterminate",
-          "facts": [
-            {
-              "fact": "The customer is a consumer",
-              "status": "not_stated"
-            },
-            {
-              "fact": "The transaction is a distance contract",
-              "status": "not_stated"
-            },
-            {
-              "fact": "The ordering process takes place on a trading website",
-              "status": "not_stated"
-            }
-          ],
-          "reason": "The rule applies to distance contracts concluded with consumers on trading websites. While the description covers a sales and ordering process, it does not state whether the customer is a consumer, whether the contract is a distance contract, or whether it is conducted via a trading website.",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies only to trading websites concluding distance contracts, requiring information about delivery restrictions and payment methods at the start of the ordering process. The described process does not mention a website, online ordering, or distance contract, so the rule does not pertain to it.",
           "required_steps": [],
-          "possible_steps": [
-            {
-              "label": "Indicate delivery restrictions and accepted payment means",
-              "actor": "Trading website",
-              "timing": "at the latest at the beginning of the ordering process",
-              "already_in_description": false
-            }
-          ],
-          "evidence": [
-            "This process begins when a potential customer inquires about a product or service.",
-            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
-          ],
-          "evidence_found": [
-            true,
-            true
-          ]
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
         },
         {
           "passage_id": "CRD-Art8-7",
           "label": "indeterminate",
           "facts": [
             {
-              "fact": "The contract is a distance contract",
+              "fact": "The other party is a consumer",
               "status": "not_stated"
             },
             {
-              "fact": "The customer is a consumer",
+              "fact": "The contract is concluded at a distance",
               "status": "not_stated"
             },
             {
-              "fact": "The seller is a trader",
+              "fact": "Trader must provide contract confirmation on a durable medium",
               "status": "not_stated"
             }
           ],
-          "reason": "The passage applies to distance contracts concluded between a trader and a consumer. The description involves order placement and confirmation, but does not specify whether the customer is a consumer or whether the contract is concluded at a distance.",
+          "reason": "The description does not state whether the customer is a consumer nor whether the contract is concluded at a distance, which are essential conditions for the Directive provision.",
           "required_steps": [],
           "possible_steps": [
             {
-              "label": "Provide confirmation of contract on durable medium",
-              "actor": "Trader",
-              "timing": "within a reasonable time after contract conclusion, and at the latest at delivery or before performance of service begins",
+              "label": "Provide contract confirmation",
+              "actor": "trader",
+              "timing": "before delivery or before performance of the service",
               "already_in_description": false
             }
           ],
           "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
             "The order is then recorded in the system, and the customer receives confirmation of their order."
           ],
           "evidence_found": [
+            true,
             true
           ]
         },
@@ -82,39 +70,61 @@
           "label": "indeterminate",
           "facts": [
             {
-              "fact": "The customer is a consumer",
+              "fact": "Contract is concluded by electronic means",
               "status": "not_stated"
             },
             {
-              "fact": "The contract is a distance contract concluded by electronic means",
+              "fact": "Party is a consumer",
               "status": "not_stated"
             },
             {
-              "fact": "The order places the customer under an obligation to pay",
+              "fact": "Order placement creates an obligation to pay",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader must provide information points (a, e, o, p) before order",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer must explicitly acknowledge payment obligation",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Order button must be labelled ‘order with obligation to pay’",
               "status": "not_stated"
             }
           ],
-          "reason": "The passage governs electronic distance contracts with consumers that involve an obligation to pay. While the process describes order placement following a quote, it does not state whether the customer is a consumer or if the contract is concluded via electronic distance means.",
+          "reason": "The passage applies to distance contracts concluded electronically with a consumer, but the description does not state whether the contract is electronic or whether the customer is a consumer, so applicability cannot be determined.",
           "required_steps": [],
           "possible_steps": [
             {
-              "label": "Make consumer aware of required pre-contractual information",
-              "actor": "Sales staff",
-              "timing": "Directly before the customer places the order",
+              "label": "Provide pre‑order information",
+              "actor": "trader",
+              "timing": "before order placement",
               "already_in_description": false
             },
             {
-              "label": "Obtain explicit acknowledgment of obligation to pay",
-              "actor": "Sales staff",
-              "timing": "When the customer places the order",
+              "label": "Obtain explicit payment acknowledgment",
+              "actor": "consumer",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Label order button with ‘order with obligation to pay’",
+              "actor": "trader",
+              "timing": "before order placement",
               "already_in_description": false
             }
           ],
           "evidence": [
             "This process begins when a potential customer inquires about a product or service.",
-            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
           ],
           "evidence_found": [
+            true,
+            true,
             true,
             true
           ]
@@ -124,35 +134,39 @@
           "label": "indeterminate",
           "facts": [
             {
-              "fact": "The customer is a consumer",
+              "fact": "Contract is concluded by telephone",
               "status": "not_stated"
             },
             {
-              "fact": "The contract is concluded by telephone",
+              "fact": "Customer is a consumer",
               "status": "not_stated"
             }
           ],
-          "reason": "The rule applies to distance contracts concluded by telephone between a trader and a consumer. The process description involves order placement and quotes, but does not state whether the customer is a consumer or whether the process takes place over the telephone.",
+          "reason": "The passage applies only to distance contracts concluded by telephone with a consumer. The process description does not state that the contract is concluded by telephone nor that the customer is a consumer, so the applicability cannot be determined.",
           "required_steps": [],
           "possible_steps": [
             {
-              "label": "Confirm offer on durable medium",
-              "actor": "Sales representative",
-              "timing": "After providing a quote and before order placement",
+              "label": "Confirm offer to consumer",
+              "actor": "trader",
+              "timing": "after customer signs offer or sends written consent",
               "already_in_description": false
             },
             {
-              "label": "Obtain written consent or signed offer",
-              "actor": "Sales representative",
-              "timing": "Before order placement",
+              "label": "Provide confirmation on durable medium",
+              "actor": "trader",
+              "timing": null,
               "already_in_description": false
             }
           ],
           "evidence": [
             "This process begins when a potential customer inquires about a product or service.",
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
             "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
           ],
           "evidence_found": [
+            true,
+            true,
             true,
             true
           ]
@@ -162,25 +176,35 @@
           "label": "indeterminate",
           "facts": [
             {
+              "fact": "The party is a consumer",
+              "status": "not_stated"
+            },
+            {
               "fact": "The contract is concluded off-premises",
               "status": "not_stated"
             },
             {
-              "fact": "The customer is a consumer",
+              "fact": "A signed contract exists",
               "status": "not_stated"
             },
             {
-              "fact": "The seller is a trader",
+              "fact": "Consumer agrees to receive contract on a durable medium",
               "status": "not_stated"
             }
           ],
-          "reason": "The passage sets requirements for off-premises contracts between a trader and a consumer. The description involves an order placement and confirmation process, but it does not specify whether the contract is concluded off-premises or whether the customer is a consumer.",
+          "reason": "The passage applies to consumer‑trader off‑premises contracts, but the description does not state that the customer is a consumer, that a contract is signed, or that the consumer has agreed to a durable medium, so the applicability cannot be determined.",
           "required_steps": [],
           "possible_steps": [
             {
-              "label": "Provide contract copy or confirmation on paper or durable medium",
-              "actor": "Sales representative",
-              "timing": "after order placement",
+              "label": "Provide contract copy to consumer",
+              "actor": "sales representative",
+              "timing": "after contract is signed",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain consumer agreement to durable medium",
+              "actor": "sales representative",
+              "timing": "before providing contract copy",
               "already_in_description": false
             }
           ],
@@ -197,93 +221,124 @@
       "required_steps": [],
       "possible_steps": [
         {
-          "passage_id": "CRD-Art8-3",
-          "label": "Indicate delivery restrictions and accepted payment means",
-          "actor": "Trading website",
-          "timing": "at the latest at the beginning of the ordering process",
-          "already_in_description": false
-        },
-        {
           "passage_id": "CRD-Art8-7",
-          "label": "Provide confirmation of contract on durable medium",
-          "actor": "Trader",
-          "timing": "within a reasonable time after contract conclusion, and at the latest at delivery or before performance of service begins",
+          "label": "Provide contract confirmation",
+          "actor": "trader",
+          "timing": "before delivery or before performance of the service",
           "already_in_description": false
         },
         {
           "passage_id": "CRD-Art8-2",
-          "label": "Make consumer aware of required pre-contractual information",
-          "actor": "Sales staff",
-          "timing": "Directly before the customer places the order",
+          "label": "Provide pre‑order information",
+          "actor": "trader",
+          "timing": "before order placement",
           "already_in_description": false
         },
         {
           "passage_id": "CRD-Art8-2",
-          "label": "Obtain explicit acknowledgment of obligation to pay",
-          "actor": "Sales staff",
-          "timing": "When the customer places the order",
+          "label": "Obtain explicit payment acknowledgment",
+          "actor": "consumer",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Label order button with ‘order with obligation to pay’",
+          "actor": "trader",
+          "timing": "before order placement",
           "already_in_description": false
         },
         {
           "passage_id": "CRD-Art8-6",
-          "label": "Confirm offer on durable medium",
-          "actor": "Sales representative",
-          "timing": "After providing a quote and before order placement",
+          "label": "Confirm offer to consumer",
+          "actor": "trader",
+          "timing": "after customer signs offer or sends written consent",
           "already_in_description": false
         },
         {
           "passage_id": "CRD-Art8-6",
-          "label": "Obtain written consent or signed offer",
-          "actor": "Sales representative",
-          "timing": "Before order placement",
+          "label": "Provide confirmation on durable medium",
+          "actor": "trader",
+          "timing": null,
           "already_in_description": false
         },
         {
           "passage_id": "CRD-Art7-2",
-          "label": "Provide contract copy or confirmation on paper or durable medium",
-          "actor": "Sales representative",
-          "timing": "after order placement",
+          "label": "Provide contract copy to consumer",
+          "actor": "sales representative",
+          "timing": "after contract is signed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "Obtain consumer agreement to durable medium",
+          "actor": "sales representative",
+          "timing": "before providing contract copy",
           "already_in_description": false
         }
       ]
     },
     "03": {
+      "annotated_at": "2026-10-18T21:24:01+00:00",
+      "system_fingerprints": [
+        "fp_420c059a6a",
+        "fp_4727af4560",
+        "fp_b9a23305b9",
+        "fp_c800245357",
+        "fp_e5b4e54fbb"
+      ],
       "passages": [
         {
           "passage_id": "CRD-Art8-3",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates information displayed on trading websites for consumers, whereas this process concerns internal B2B inventory management and procurement from suppliers.",
+          "reason": "The legal passage regulates trading websites and consumer distance contracts, requiring them to disclose delivery restrictions and payment methods. The described process concerns internal inventory monitoring and procurement between a company and its suppliers, not a consumer-facing online sale.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "This process begins with monitoring inventory levels in a warehouse or store.",
+            "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art18-2",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates delivery obligations and contract termination rights in consumer sales contracts (B2C), whereas this process describes an internal inventory restocking and procurement process between a business and its suppliers (B2B).",
+          "reason": "The legal passage regulates delivery obligations in consumer contracts between a trader and a consumer, whereas the described process concerns a business procurement team ordering stock from suppliers, i.e., a business‑to‑business transaction.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability.",
+            "Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art8-7",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage applies to B2C distance contracts concluded between a trader and a consumer, whereas this process concerns B2B procurement and internal inventory management between a business and its suppliers.",
+          "reason": "The legal passage regulates obligations of a trader towards a consumer in distance contracts, while the described process concerns internal business procurement between a company and its suppliers, with no consumer involved.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability."
+          ],
+          "evidence_found": [
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art18-1",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates delivery obligations in sales contracts between traders and consumers, whereas this process concerns internal B2B inventory procurement from suppliers.",
+          "reason": "The passage governs delivery obligations to a consumer under the Consumer Rights Directive, while the described process deals with internal business procurement and inventory replenishment between a trader and its supplier, not involving a consumer.",
           "required_steps": [],
           "possible_steps": [],
           "evidence": [],
@@ -293,63 +348,1958 @@
           "passage_id": "CRD-Art8-2",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage applies to consumer distance contracts where a consumer places an order with a trader. In contrast, this process concerns business-to-business inventory procurement from suppliers.",
+          "reason": "The legal passage regulates electronic distance contracts with consumers, requiring pre‑order information and acknowledgement. The described process concerns internal procurement ordering from suppliers, not a consumer transaction, so the rule does not apply.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability.",
+            "If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware..."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ]
         }
       ],
       "required_steps": [],
       "possible_steps": []
     },
     "05": {
+      "annotated_at": "2026-10-18T21:24:48+00:00",
+      "system_fingerprints": [
+        "fp_69334c0be3",
+        "fp_8655ddce88",
+        "fp_c800245357",
+        "fp_ca5edfaab2"
+      ],
       "passages": [
         {
           "passage_id": "CRD-Art8-7",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage applies to distance contracts between traders and consumers, whereas the process describes a business-to-business (B2B) procurement and onboarding process for selecting suppliers.",
+          "reason": "The legal passage regulates obligations of a trader towards a consumer in distance contracts, whereas the described process concerns a company procuring a supplier (business-to-business) and contains no consumer or distance contract context.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The process begins when a company identifies the need for a new supplier or vendor.",
+            "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+            "After careful analysis, a supplier is selected, and contract negotiations begin."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art8-3",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage applies to distance contracts on trading websites, whereas the process describes a B2B procurement and RFP process with negotiated contracts.",
+          "reason": "The legal passage concerns consumer distance contracts on trading websites, requiring disclosure of delivery restrictions and payment methods. The described process is a B2B procurement and supplier onboarding, not a consumer transaction or distance contract.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The process begins when a company identifies the need for a new supplier or vendor.",
+            "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art8-6",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates distance contracts concluded by telephone between a trader and a consumer, whereas the process describes a business-to-business procurement procedure between a company and its suppliers.",
+          "reason": "The legal passage deals with consumer distance contracts concluded by telephone, which does not relate to the described B2B procurement process between a company and a supplier.",
           "required_steps": [],
           "possible_steps": [],
-          "evidence": [],
-          "evidence_found": []
+          "evidence": [
+            "The process begins when a company identifies the need for a new supplier or vendor.",
+            "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
         },
         {
           "passage_id": "CRD-Art7-2",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates off-premises contracts concluded between a trader and a consumer, whereas the process describes a business-to-business (B2B) procurement process between a company and a supplier.",
+          "reason": "The legal passage applies to off‑premises contracts between a trader and a consumer, whereas the described process involves a company procuring a supplier, i.e., a business‑to‑business relationship, not a consumer contract.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a company identifies the need for a new supplier or vendor.",
+            "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+            "After careful analysis, a supplier is selected, and contract negotiations begin."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "LPD-Art3-4",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Parties are undertakings (company and supplier)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Procedure of acceptance or verification of conformity is provided for",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Date of receipt of goods or services is defined",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The directive applies to transactions between undertakings, which the process involves, but the description does not state whether a conformity acceptance/verification procedure exists or when goods/services are received, so the rule's applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Perform acceptance verification",
+              "actor": "procurement team",
+              "timing": "within 30 calendar days after receipt of goods or services",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The process begins when a company identifies the need for a new supplier or vendor.",
+            "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+            "After careful analysis, a supplier is selected, and contract negotiations begin.",
+            "Once both parties agree on the terms, the contract is signed.",
+            "The process ends when the supplier is officially onboarded, and the contract is executed."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "LPD-Art3-4",
+          "label": "Perform acceptance verification",
+          "actor": "procurement team",
+          "timing": "within 30 calendar days after receipt of goods or services",
+          "already_in_description": false
+        }
+      ]
+    },
+    "06": {
+      "annotated_at": "2026-10-18T21:26:08+00:00",
+      "system_fingerprints": [
+        "fp_47082602e2",
+        "fp_4de1d6a1ee",
+        "fp_69334c0be3",
+        "fp_90620edd96",
+        "fp_c800245357"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader operates a trading website",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Order is concluded via distance contract",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with consumers on trading websites. The description shows an online ordering process but does not state whether the customer is a consumer, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display delivery restrictions",
+              "actor": "Trader",
+              "timing": "before ordering process begins",
+              "already_in_description": false
+            },
+            {
+              "label": "Display accepted payment methods",
+              "actor": "Trader",
+              "timing": "before ordering process begins",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Party is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Contract concluded by electronic means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Order places the consumer under an obligation to pay",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader provides required pre‑order information (points a, e, o, p of Art 6(1))",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer explicitly acknowledges payment obligation when placing order",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Order button is labelled ‘order with obligation to pay’",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with a consumer and requires pre‑order information, explicit acknowledgment and specific button labelling. The description mentions an online order but does not state whether the customer is a consumer nor any of the required pre‑order steps, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display pre‑order information",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain explicit acknowledgment of payment obligation",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Label order button with ‘order with obligation to pay’",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "distance contract",
+              "status": "stated_true"
+            },
+            {
+              "fact": "customer is a consumer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with a consumer, but the description does not state that the customer is a consumer, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Send contract confirmation",
+              "actor": "trader",
+              "timing": "before delivery",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract concluded by telephone",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader provides order confirmation to consumer",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Consumer bound only after signing offer or sending written consent",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Confirmation must be on a durable medium",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns telephone distance contracts, but the description does not state whether the contract was concluded by phone, nor whether the consumer gave a signature or written consent, nor whether confirmation must be on a durable medium. Therefore the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Obtain consumer signature or written consent",
+              "actor": "Trader",
+              "timing": "before contract becomes binding",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide confirmation on durable medium",
+              "actor": "Trader",
+              "timing": "after consumer gives signature or consent",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader has an obligation to deliver goods at an agreed time",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Delivery time was agreed between trader and consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Delivery is essential for the contract",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to consumer contracts with a trader and sets obligations when delivery is late. The process description mentions a customer and delivery but does not state that the customer is a consumer nor that a specific delivery deadline was agreed, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Consumer calls upon trader to deliver within additional period",
+              "actor": "Consumer",
+              "timing": "After missed delivery deadline",
+              "already_in_description": false
+            },
+            {
+              "label": "Consumer terminates contract",
+              "actor": "Consumer",
+              "timing": "If trader fails to deliver within additional period",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The order is then handed over to a logistics provider for delivery.",
+            "Tracking information is sent to the customer.",
+            "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display delivery restrictions",
+          "actor": "Trader",
+          "timing": "before ordering process begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display accepted payment methods",
+          "actor": "Trader",
+          "timing": "before ordering process begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Display pre‑order information",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Obtain explicit acknowledgment of payment obligation",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Label order button with ‘order with obligation to pay’",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "Send contract confirmation",
+          "actor": "trader",
+          "timing": "before delivery",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "Obtain consumer signature or written consent",
+          "actor": "Trader",
+          "timing": "before contract becomes binding",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "Provide confirmation on durable medium",
+          "actor": "Trader",
+          "timing": "after consumer gives signature or consent",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Consumer calls upon trader to deliver within additional period",
+          "actor": "Consumer",
+          "timing": "After missed delivery deadline",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Consumer terminates contract",
+          "actor": "Consumer",
+          "timing": "If trader fails to deliver within additional period",
+          "already_in_description": false
+        }
+      ]
+    },
+    "10": {
+      "annotated_at": "2026-10-18T21:27:00+00:00",
+      "system_fingerprints": [
+        "fp_27194a498a",
+        "fp_4a7bb72c24",
+        "fp_998410db10",
+        "fp_a655021f7d"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art5-1-e",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns information obligations of a trader towards a consumer in a contract for goods or digital content. The described process is an internal corporate IT procurement between an employee/department and the IT department, not involving a consumer or a trader relationship.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+            "IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs.",
+            "If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art7-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies to off‑premises contracts between a consumer and a trader for repair or maintenance services with a price limit of €200. The described process involves an internal employee or department requesting an IT solution from the company's own IT department, which is not a consumer‑trader relationship.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+            "IT assesses the request, ... If approved, IT procures the necessary tools or licenses, installs the solution, and tests it ..."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates formal requirements for distance contracts between a trader and a consumer, specifically telephone conclusions and consumer consent, which do not relate to the internal corporate IT procurement process described.",
           "required_steps": [],
           "possible_steps": [],
           "evidence": [],
           "evidence_found": []
         },
         {
-          "passage_id": "LPD-Art3-4",
+          "passage_id": "CRD-Art6-1-l",
           "label": "irrelevant",
           "facts": [],
-          "reason": "The legal passage regulates the maximum duration of procedures for accepting or verifying goods or services after receipt, whereas the described process is strictly limited to supplier selection, proposal evaluation, contract negotiation, and onboarding.",
+          "reason": "The legal passage regulates information obligations for traders towards consumers in distance or off‑premises contracts, whereas the described process concerns an internal request and procurement of IT solutions between an employee/department and the company's IT department, not a consumer‑trader relationship.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+            "IT assesses the request, ... procures the necessary tools or licenses, installs the solution, and tests it ..."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns consumer distance contracts on trading websites, requiring disclosure of delivery restrictions and payment methods. The described process is an internal corporate IT procurement request, not a consumer transaction, not a distance contract, and does not involve a trading website.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process starts when an employee or department submits a request for an IT solution",
+            "IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs",
+            "If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment"
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": []
+    },
+    "11": {
+      "annotated_at": "2026-10-18T21:28:33+00:00",
+      "system_fingerprints": [
+        "fp_5a93aea882",
+        "fp_9241e9962b",
+        "fp_c3da0d4bb9",
+        "fp_ca5edfaab2"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art6-1-e",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Contract is concluded at a distance or off‑premises",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Contract contains a subscription",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Total price (including per billing period) is provided before contract is bound",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Cost of distance communication is provided before contract is bound",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies only to consumers in distance/off‑premises contracts. The description mentions a customer and a subscription but does not state that the customer is a consumer nor that the contract is concluded at a distance, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide total price information",
+              "actor": "trader",
+              "timing": "before customer sign‑up",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide distance‑communication cost information",
+              "actor": "trader",
+              "timing": "before customer sign‑up",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The service is supplied during the withdrawal period",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader has provided the information required by Art 6(1) points (h) or (j)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer has expressly requested performance to begin during the withdrawal period in accordance with Art 7(3) and Art 8(8)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer gave prior express consent to the beginning of the performance of digital content before the end of the 14‑day period",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer acknowledged that he loses his right of withdrawal when giving his consent",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader provided confirmation in accordance with Art 7(2) or Art 8(7)",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage deals with consumer withdrawal rights for services and digital content, which matches the subscription service context, but the description does not state whether the customer is a consumer nor any of the pre‑contractual information, consent or acknowledgment requirements, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide required pre‑contractual information",
+              "actor": "Trader",
+              "timing": "before contract conclusion",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain consumer's express request to begin performance during withdrawal period",
+              "actor": "Trader",
+              "timing": "before performance starts",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain consumer's prior express consent to start digital content performance",
+              "actor": "Trader",
+              "timing": "before the end of the 14‑day withdrawal period",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain consumer's acknowledgment of loss of withdrawal right",
+              "actor": "Trader",
+              "timing": "when consent is given",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide confirmation of consumer's consent",
+              "actor": "Trader",
+              "timing": "immediately after consent is obtained",
+              "already_in_description": false
+            },
+            {
+              "label": "Ensure consumer bears no cost for services performed during withdrawal period",
+              "actor": "Trader",
+              "timing": "upon withdrawal",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is concluded at a distance/off‑premises",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Information must be provided before the contract is bound",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to consumer distance contracts, but the description does not state whether the customer is a consumer nor that pre‑contract information is already given, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide guarantee information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide after‑sale assistance information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide codes of conduct information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide contract duration and termination conditions",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide minimum obligation duration",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide deposit or financial guarantee information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide digital content functionality information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide interoperability information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art16-1-h",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The contract is concluded with a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is a distance contract",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The supply is digital content not supplied on a tangible medium",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The trader has obtained the consumer’s prior express consent to begin performance",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The consumer has acknowledged that they thereby lose the right of withdrawal",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns consumer distance contracts for digital content, which may apply to a subscription service, but the description does not state whether the customer is a consumer, whether the content is digital, or whether prior consent and acknowledgment were obtained.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Obtain prior express consent",
+              "actor": "Trader",
+              "timing": "before performance begins",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain acknowledgment of loss of withdrawal right",
+              "actor": "Trader",
+              "timing": "before performance begins",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is concluded at a distance",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The trader must provide a durable‑medium confirmation of the contract",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with a consumer, but the description does not state whether the customer is a consumer nor that the contract is a distance contract, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract confirmation",
+              "actor": "trader",
+              "timing": "before service begins",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "The system generates an account, assigns access, and triggers automated billing cycles."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art6-1-e",
+          "label": "Provide total price information",
+          "actor": "trader",
+          "timing": "before customer sign‑up",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-e",
+          "label": "Provide distance‑communication cost information",
+          "actor": "trader",
+          "timing": "before customer sign‑up",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Provide required pre‑contractual information",
+          "actor": "Trader",
+          "timing": "before contract conclusion",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Obtain consumer's express request to begin performance during withdrawal period",
+          "actor": "Trader",
+          "timing": "before performance starts",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Obtain consumer's prior express consent to start digital content performance",
+          "actor": "Trader",
+          "timing": "before the end of the 14‑day withdrawal period",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Obtain consumer's acknowledgment of loss of withdrawal right",
+          "actor": "Trader",
+          "timing": "when consent is given",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Provide confirmation of consumer's consent",
+          "actor": "Trader",
+          "timing": "immediately after consent is obtained",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "Ensure consumer bears no cost for services performed during withdrawal period",
+          "actor": "Trader",
+          "timing": "upon withdrawal",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide guarantee information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide after‑sale assistance information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide codes of conduct information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide contract duration and termination conditions",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide minimum obligation duration",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide deposit or financial guarantee information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide digital content functionality information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide interoperability information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art16-1-h",
+          "label": "Obtain prior express consent",
+          "actor": "Trader",
+          "timing": "before performance begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art16-1-h",
+          "label": "Obtain acknowledgment of loss of withdrawal right",
+          "actor": "Trader",
+          "timing": "before performance begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "Provide contract confirmation",
+          "actor": "trader",
+          "timing": "before service begins",
+          "already_in_description": false
+        }
+      ]
+    },
+    "13": {
+      "annotated_at": "2026-10-18T21:29:03+00:00",
+      "system_fingerprints": [
+        "fp_4a7bb72c24",
+        "fp_5a93aea882",
+        "fp_8655ddce88",
+        "fp_c800245357",
+        "fp_e1a78f200e"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art6-1-t",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns pre‑contract information that a trader must give to a consumer before a distance or off‑premises contract is concluded. The described process deals only with handling a complaint and refund after a contract already exists, so the rule does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+            "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates telephone calls made by a trader to a consumer for concluding a distance contract, which is unrelated to the complaint handling and refund process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art13-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage governs the trader's obligations when a consumer withdraws from a contract, requiring reimbursement within 14 days. The described process deals with handling a customer complaint and refund decisions, not with a consumer exercising a withdrawal right, so the rule does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "If a refund is approved, the financial team processes the reimbursement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art13-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage concerns the trader's obligations in a consumer withdrawal scenario, which is unrelated to the complaint handling and refund process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "If a refund is approved, the financial team processes the reimbursement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns delivery and contract termination rights of a consumer, which does not relate to the complaint‑handling and refund process described. No obligations for this process are derived from the passage.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+            "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": []
+    },
+    "17": {
+      "annotated_at": "2026-10-18T21:30:05+00:00",
+      "system_fingerprints": [
+        "fp_420c059a6a",
+        "fp_4de1d6a1ee",
+        "fp_803c0ba83d",
+        "fp_c652c0ffaa",
+        "fp_e1a78f200e"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "contract is a distance contract",
+              "status": "not_stated"
+            },
+            {
+              "fact": "trading website provides the ordering interface",
+              "status": "stated_true"
+            },
+            {
+              "fact": "delivery restrictions are indicated at the beginning of the ordering process",
+              "status": "not_stated"
+            },
+            {
+              "fact": "accepted means of payment are indicated at the beginning of the ordering process",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to consumer distance contracts on trading websites, requiring pre‑order information on delivery restrictions and payment methods. The description mentions an e‑commerce company and a customer ordering, but does not state whether the customer is a consumer nor that the required information is provided, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display delivery restrictions information",
+              "actor": "Website",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            },
+            {
+              "label": "Display accepted payment methods information",
+              "actor": "Website",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "Payment processing begins."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The other party is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "A distance contract has been concluded",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts between a trader and a consumer and requires a contract confirmation. The process involves a trader and a customer, but it does not state that the customer is a consumer nor that a contract has been formally concluded, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract confirmation",
+              "actor": "trader",
+              "timing": "before dispatch or at latest at delivery",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "The system sends a shipping confirmation to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Contract is terminated",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader is the e‑commerce company",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The passage concerns reimbursement after contract termination in a consumer contract, which matches the e‑commerce context, but the description does not state whether the customer is a consumer nor whether the contract is terminated, so the obligation cannot be definitively applied.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Reimburse payment",
+              "actor": "Trader",
+              "timing": "after contract termination",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Processing a refund or replacement.",
+            "If the customer reports any issues upon delivery, a returns process is initiated, which includes: ... Processing a refund or replacement."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract is concluded by electronic means (distance contract)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Contract places the party ordering the goods under an obligation to pay",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The party placing the order is a consumer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to electronic distance contracts with a consumer, but the description only identifies a \"customer\" without stating that the customer is a consumer, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display mandatory pre‑order information",
+              "actor": "trader",
+              "timing": "directly before the consumer places the order",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain explicit acknowledgment of payment obligation",
+              "actor": "consumer",
+              "timing": "when placing the order",
+              "already_in_description": false
+            },
+            {
+              "label": "Label order button with ‘order with obligation to pay’",
+              "actor": "trader",
+              "timing": "when presenting the order button",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "Payment processing begins."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer has communicated decision to withdraw within 14 days",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader has not offered to collect the goods himself",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Goods cannot normally be returned by post (off‑premises contract)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader has agreed to bear the return costs or has informed the consumer about cost allocation",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage deals with consumer withdrawal rights, which relate to the same type of e‑commerce transaction, but the description does not state whether the customer is a consumer, whether a withdrawal has been communicated, or any of the cost‑allocation or collection conditions required by the rule.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Communicate withdrawal decision",
+              "actor": "consumer",
+              "timing": "before initiating returns process",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform consumer about return cost",
+              "actor": "trader",
+              "timing": "before consumer returns goods",
+              "already_in_description": false
+            },
+            {
+              "label": "Offer collection of goods",
+              "actor": "trader",
+              "timing": "before consumer returns goods",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide return shipping label",
+              "actor": "trader",
+              "timing": "before consumer returns goods",
+              "already_in_description": false
+            },
+            {
+              "label": "Return goods to trader",
+              "actor": "consumer",
+              "timing": "within 14 days of withdrawal communication",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement."
+          ],
+          "evidence_found": [
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display delivery restrictions information",
+          "actor": "Website",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display accepted payment methods information",
+          "actor": "Website",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "Provide contract confirmation",
+          "actor": "trader",
+          "timing": "before dispatch or at latest at delivery",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-3",
+          "label": "Reimburse payment",
+          "actor": "Trader",
+          "timing": "after contract termination",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Display mandatory pre‑order information",
+          "actor": "trader",
+          "timing": "directly before the consumer places the order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Obtain explicit acknowledgment of payment obligation",
+          "actor": "consumer",
+          "timing": "when placing the order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Label order button with ‘order with obligation to pay’",
+          "actor": "trader",
+          "timing": "when presenting the order button",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "Communicate withdrawal decision",
+          "actor": "consumer",
+          "timing": "before initiating returns process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "Inform consumer about return cost",
+          "actor": "trader",
+          "timing": "before consumer returns goods",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "Offer collection of goods",
+          "actor": "trader",
+          "timing": "before consumer returns goods",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "Provide return shipping label",
+          "actor": "trader",
+          "timing": "before consumer returns goods",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "Return goods to trader",
+          "actor": "consumer",
+          "timing": "within 14 days of withdrawal communication",
+          "already_in_description": false
+        }
+      ]
+    },
+    "19": {
+      "annotated_at": "2026-10-18T21:31:17+00:00",
+      "system_fingerprints": [
+        "fp_4727af4560",
+        "fp_69334c0be3",
+        "fp_90620edd96",
+        "fp_c15aa9c1b7",
+        "fp_d577f40f11"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "distance contract concluded by electronic means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "order places consumer under an obligation to pay",
+              "status": "stated_true"
+            },
+            {
+              "fact": "party is a consumer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The process is an online distance sale that creates a payment obligation, matching the scope of the rule, but the description does not state whether the user is a consumer, which is a required condition for the Directive provision.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display pre‑order payment information",
+              "actor": "trader",
+              "timing": "before user places order",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain explicit acknowledgement of payment obligation",
+              "actor": "trader",
+              "timing": "before user places order",
+              "already_in_description": false
+            },
+            {
+              "label": "Label order button with ‘order with obligation to pay’",
+              "actor": "trader",
+              "timing": "before user places order",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "Afterward, the user either pays or completes an installment agreement."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art14-3",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "The user is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The consumer exercises the right of withdrawal",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The consumer makes a withdrawal request in accordance with Article 7(3) or Article 8(8)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Partial performance of the contract has occurred before withdrawal",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage governs the consumer's obligations when exercising the EU right of withdrawal, but the process description only mentions a right to return items for exchange and does not identify the user as a consumer nor refer to a withdrawal request, so the rule does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Trader and consumer contract exists",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Contract is terminated",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Sums have been paid under the contract",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The passage concerns reimbursement upon contract termination, which relates to the online purchase process, but the description does not state whether the user is a consumer nor that the contract has been terminated.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Reimburse payment",
+              "actor": "trader",
+              "timing": "after contract termination",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Afterward, the user either pays or completes an installment agreement.",
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "User is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Process is a distance contract (online ordering)",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The rule applies to consumer distance contracts, but the description does not state that the user is a consumer, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display delivery restrictions information",
+              "actor": "trading website",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            },
+            {
+              "label": "Display accepted payment methods information",
+              "actor": "trading website",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Consider a process for purchasing items from an online shop.",
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "Finally, the items are delivered."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Buyer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Delivery date was agreed with the consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader fails to deliver within the agreed time",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article regulates delivery obligations in consumer contracts, but the process description does not specify that the user is a consumer nor that a delivery date was agreed, so it is unclear whether the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Notify trader of delivery failure",
+              "actor": "Consumer",
+              "timing": "After delivery deadline passes without receipt",
+              "already_in_description": false
+            },
+            {
+              "label": "Set additional delivery period",
+              "actor": "Trader",
+              "timing": "After consumer notification",
+              "already_in_description": false
+            },
+            {
+              "label": "Terminate contract",
+              "actor": "Consumer",
+              "timing": "If trader does not deliver within additional period",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Finally, the items are delivered.",
+            "Consider a process for purchasing items from an online shop."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Display pre‑order payment information",
+          "actor": "trader",
+          "timing": "before user places order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Obtain explicit acknowledgement of payment obligation",
+          "actor": "trader",
+          "timing": "before user places order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Label order button with ‘order with obligation to pay’",
+          "actor": "trader",
+          "timing": "before user places order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-3",
+          "label": "Reimburse payment",
+          "actor": "trader",
+          "timing": "after contract termination",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display delivery restrictions information",
+          "actor": "trading website",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display accepted payment methods information",
+          "actor": "trading website",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Notify trader of delivery failure",
+          "actor": "Consumer",
+          "timing": "After delivery deadline passes without receipt",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Set additional delivery period",
+          "actor": "Trader",
+          "timing": "After consumer notification",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Terminate contract",
+          "actor": "Consumer",
+          "timing": "If trader does not deliver within additional period",
+          "already_in_description": false
+        }
+      ]
+    },
+    "21": {
+      "annotated_at": "2026-10-18T21:31:47+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_267e812a3a",
+        "fp_4a7bb72c24",
+        "fp_c800245357"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates delivery obligations in consumer contracts, whereas the process description concerns internal logistics decisions without any consumer or trader relationship.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+            "In these cases the secretary invites three logistic companies to make offers and she selects one of them."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art20-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage governs risk transfer in consumer contracts where a trader dispatches goods to a consumer. The process description concerns internal shipping arrangements by a secretary and logistics companies, without any mention of a consumer, trader, or consumer‑commissioned carrier.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+            "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+            "In case of small amounts, normal post shipment is used."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates delivery obligations from a trader to a consumer, while the process description involves internal company roles (secretary, logistics department head, warehousemen) and logistic companies, with no indication of a consumer or trader relationship.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+            "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+            "In case of small amounts, normal post shipment is used.",
+            "Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art14-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates consumer withdrawal and return of goods, which does not relate to the described internal shipping and logistics process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art5-1-a",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates information duties of a trader toward a consumer before a contract is concluded. The process description concerns internal logistics steps (secretary, logistic companies, warehousemen) with no consumer or trader‑consumer contract, so the rule does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+            "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+            "Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": []
+    },
+    "37": {
+      "annotated_at": "2026-10-18T21:33:24+00:00",
+      "system_fingerprints": [
+        "fp_02b0d31eca",
+        "fp_90620edd96",
+        "fp_998410db10",
+        "fp_c800245357",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art14-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns consumer withdrawal rights and obligations, which apply to consumers in distance contracts for services, utilities, or digital content. The described process involves a business ordering physical parts from web shops for manufacturing, not a consumer transaction, and does not involve withdrawal, digital content, or utility supply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "For your contract project you need parts from several web shops.",
+            "Create a list of parts that you order from each shop.",
+            "When the first parts arrive you start building."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art6-5",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The contract is a distance or off‑premises contract",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The buyer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Required pre‑contractual information is supplied",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No alteration of that information without express agreement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to consumer distance contracts, and the process involves ordering parts online (a distance contract), but the description does not state whether the buyer is a consumer or that the required information is provided, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide mandatory contract information",
+              "actor": "Web shop",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain express agreement for any alteration",
+              "actor": "Both parties",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "For your contract project you need parts from several web shops.",
+            "Create a list of parts that you order from each shop."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Buyer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Order is concluded via a distance contract",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The rule applies to consumer distance contracts with trading websites. The description involves ordering from web shops but does not state that the buyer is a consumer nor that the contract is a distance contract, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Indicate delivery restrictions",
+              "actor": "Web shop",
+              "timing": "at the beginning of ordering process",
+              "already_in_description": false
+            },
+            {
+              "label": "Indicate accepted payment methods",
+              "actor": "Web shop",
+              "timing": "at the beginning of ordering process",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "For your contract project you need parts from several web shops.",
+            "Create a list of parts that you order from each shop."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Buyer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "There is an agreed delivery time with the trader",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Trader fails to deliver within the agreed time",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consumer calls upon trader to deliver within an additional period",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies only to contracts where the buyer is a consumer and an agreed delivery date exists. The process description does not state that the buyer is a consumer nor that a specific delivery date was agreed, so it is unclear whether the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Call upon trader to deliver",
+              "actor": "you (consumer)",
+              "timing": "After trader fails to deliver within agreed time",
+              "already_in_description": false
+            },
+            {
+              "label": "Terminate contract",
+              "actor": "you (consumer)",
+              "timing": "After trader fails to deliver within the additional period",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The parts arrive in batches in a random order, typically they are +/- 2 days earlier/later.",
+            "When the first parts arrive you start building."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art5-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage concerns information obligations for consumer contracts and for supply of utilities or digital content, which do not relate to the described process of ordering physical parts from web shops for a contract project.",
           "required_steps": [],
           "possible_steps": [],
           "evidence": [],
@@ -357,8 +2307,568 @@
         }
       ],
       "required_steps": [],
-      "possible_steps": []
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art6-5",
+          "label": "Provide mandatory contract information",
+          "actor": "Web shop",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-5",
+          "label": "Obtain express agreement for any alteration",
+          "actor": "Both parties",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Indicate delivery restrictions",
+          "actor": "Web shop",
+          "timing": "at the beginning of ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Indicate accepted payment methods",
+          "actor": "Web shop",
+          "timing": "at the beginning of ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Call upon trader to deliver",
+          "actor": "you (consumer)",
+          "timing": "After trader fails to deliver within agreed time",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "Terminate contract",
+          "actor": "you (consumer)",
+          "timing": "After trader fails to deliver within the additional period",
+          "already_in_description": false
+        }
+      ]
+    },
+    "45": {
+      "annotated_at": "2026-10-18T21:34:50+00:00",
+      "system_fingerprints": [
+        "fp_4727af4560",
+        "fp_6c36ac20de",
+        "fp_76082d2bd0",
+        "fp_c868cf1eaa"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is concluded at a distance",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with a consumer, but the description only mentions a \"customer\" and does not state whether they are a consumer nor explicitly describe the contract as a distance contract.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract confirmation",
+              "actor": "trader",
+              "timing": "before delivery or before performance begins",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract concluded by electronic means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Order creates an obligation to pay",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts with a consumer. The process is an electronic ordering flow that creates a payment obligation, but the description does not state whether the customer is a consumer, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display payment‑obligation information",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain explicit acknowledgment of payment obligation",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Label order button with ‘order with obligation to pay’",
+              "actor": "trader",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "contract is distance/off‑premises",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The passage governs information duties that a trader must fulfil before a consumer is bound by a distance contract. The process involves an online shop (a distance contract) but does not state that the customer is a consumer, so it is unclear whether the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide legal guarantee information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide after‑sale assistance information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide codes of conduct information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide contract duration information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide minimum consumer obligations duration information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide deposit or financial guarantee information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide digital content functionality information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide interoperability information",
+              "actor": "trader",
+              "timing": "before contract is bound",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The other party is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is concluded off-premises (distance selling)",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The passage applies to consumer contracts concluded off-premises. The process is an online shop (distance) but it does not state that the customer is a consumer, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Obtain consumer agreement to receive contract on durable medium",
+              "actor": "Trader",
+              "timing": "before providing contract copy",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide contract copy to consumer",
+              "actor": "Trader",
+              "timing": "after order is finished",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Trader is a trading website",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Contract is a distance contract",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts between a trader and a consumer, but the description does not state whether the customer is a consumer, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display delivery restrictions information",
+              "actor": "E‑Shop system",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            },
+            {
+              "label": "Display accepted payment methods information",
+              "actor": "E‑Shop system",
+              "timing": "at the beginning of the ordering process",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system",
+            "After selecting a product the customer has to add it to a shopping cart",
+            "For the payment the customer has to enter its payment data"
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "Provide contract confirmation",
+          "actor": "trader",
+          "timing": "before delivery or before performance begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Display payment‑obligation information",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Obtain explicit acknowledgment of payment obligation",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Label order button with ‘order with obligation to pay’",
+          "actor": "trader",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide legal guarantee information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide after‑sale assistance information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide codes of conduct information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide contract duration information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide minimum consumer obligations duration information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide deposit or financial guarantee information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide digital content functionality information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art6-1-l",
+          "label": "Provide interoperability information",
+          "actor": "trader",
+          "timing": "before contract is bound",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "Obtain consumer agreement to receive contract on durable medium",
+          "actor": "Trader",
+          "timing": "before providing contract copy",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "Provide contract copy to consumer",
+          "actor": "Trader",
+          "timing": "after order is finished",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display delivery restrictions information",
+          "actor": "E‑Shop system",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Display accepted payment methods information",
+          "actor": "E‑Shop system",
+          "timing": "at the beginning of the ordering process",
+          "already_in_description": false
+        }
+      ]
+    },
+    "46": {
+      "annotated_at": "2026-10-18T21:35:46+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_4200b3f836",
+        "fp_8655ddce88",
+        "fp_93703442d9",
+        "fp_c800245357"
+      ],
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns obligations of trading websites towards consumers at the start of an online ordering process, which does not relate to the internal storage management process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "First, the order is read from the automatic order management system.",
+            "Then, it's checked if the first product from the order is in stock.",
+            "If it's in stock then it's withdrawn from the warehouse.",
+            "However, if it's not in stock then it's reordered from the wholesaler.",
+            "Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler.",
+            "After the ordered product has arrived it's registered in the stock management system.",
+            "Finally, it's checked if the whole order is ready for shipment.",
+            "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art9-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage deals with the consumer's right of withdrawal in sales contracts, which applies to consumer contracts and the acquisition of physical possession of goods. The described process concerns internal storage and order fulfillment without any reference to a consumer or withdrawal rights, so the rule does not pertain to this process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "First, the order is read from the automatic order management system.",
+            "Then, it's checked if the first product from the order is in stock.",
+            "If it's in stock then it's withdrawn from the warehouse.",
+            "However, if it's not in stock then it's reordered from the wholesaler.",
+            "After the ordered product has arrived it's registered in the stock management system.",
+            "Finally, it's checked if the whole order is ready for shipment."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates consumer distance contracts and pre‑order information obligations, which are unrelated to the internal storage‑management process described, which contains no consumer, trader, or payment ordering steps.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "First, the order is read from the automatic order management system.",
+            "Then, it's checked if the first product from the order is in stock.",
+            "If it's in stock then it's withdrawn from the warehouse.",
+            "However, if it's not in stock then it's reordered from the wholesaler."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates delivery obligations in contracts with a consumer, while the process description deals with internal stock management and order fulfillment without any reference to a consumer or consumer contract.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "First, the order is read from the automatic order management system.",
+            "Then, it's checked if the first product from the order is in stock.",
+            "If it's in stock then it's withdrawn from the warehouse.",
+            "However, if it's not in stock then it's reordered from the wholesaler.",
+            "After the ordered product has arrived it's registered in the stock management system.",
+            "Finally, it's checked if the whole order is ready for shipment.",
+            "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art18-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The buyer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The parties have not agreed otherwise on the time of delivery",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Delivery must occur within 30 days of contract conclusion",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns delivery obligations to a consumer, which matches the process' delivery activity, but the description does not state whether the recipient is a consumer nor any agreed delivery time, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Transfer possession of goods to consumer",
+              "actor": "trader",
+              "timing": "no later than 30 days after contract conclusion",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped."
+          ],
+          "evidence_found": [
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art18-1",
+          "label": "Transfer possession of goods to consumer",
+          "actor": "trader",
+          "timing": "no later than 30 days after contract conclusion",
+          "already_in_description": false
+        }
+      ]
     }
-  },
-  "annotator_model_version": "3.6-flash-07-2026"
+  }
 }

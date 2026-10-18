@@ -7,7 +7,8 @@ then (1) no longer counts generated tasks that realise a required step as errors
 requirement coverage. It also gives an applicability label to compare C3's labels with (RQ3).
 
 Independence from C3 (so C3 is not graded by its own work):
-  - a DIFFERENT and stronger model (config.yaml, silver section: Gemini, not qwen3)
+  - a DIFFERENT and stronger model (config.yaml, silver section: openai/gpt-oss-120b on Groq, not qwen3;
+    changed from gemini-3.6-flash on 19 Oct 2026, before any evaluation, because of Gemini's 20 requests/day)
   - a DIFFERENT prompt (prompts/silver_annotation_prompt.txt), one call per passage, no shared code path
     with the mediation agents, and it never sees any generated model or any C3 output.
 The labels are AI-made: they are SILVER (provisional), never gold. Decision 16 Oct 2026: no human audit,

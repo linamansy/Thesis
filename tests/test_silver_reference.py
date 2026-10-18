@@ -94,6 +94,27 @@ def test_listed_model_version_is_stored_and_must_stay_the_same(tmp_path):
         later.build()
 
 
+def test_dates_and_fingerprints_are_recorded(tmp_path):
+    builder = guarded_builder(tmp_path, ["gemini-3.6-flash"] * 5)
+    builder.annotator.llm.last_system_fingerprint = "fp_4a7bb72c24"   # as Groq reports it
+    data = builder.build()
+    case = data["cases"]["19"]
+    assert case["annotated_at"][:10] in data["annotation_dates"]
+    assert case["system_fingerprints"] == ["fp_4a7bb72c24"]
+    assert data["annotator_provider"] == CONFIG["silver"]["provider"]
+
+
+def test_groq_answer_from_another_model_stops_the_build(tmp_path):
+    """The model guard works for Groq as well: openai/gpt-oss-120b expected, another model served."""
+    config = dict(CONFIG, cases={"ids": ["19"]})
+    llm = ServedModelLLM([INDETERMINATE], ["openai/gpt-oss-120b", "openai/gpt-oss-20b"])
+    builder = SilverReferenceBuilder(config, SilverAnnotator(llm, RunLogger(tmp_path / "logs", "SILVER", "q")),
+                                     tmp_path / "silver.json", expected_model="openai/gpt-oss-120b")
+    with pytest.raises(ModelMismatchError, match="'openai/gpt-oss-20b'.*'openai/gpt-oss-120b'"):
+        builder.build()
+    assert not (tmp_path / "silver.json").exists()          # nothing saved
+
+
 def test_saved_file_from_another_model_is_refused(tmp_path):
     guarded_builder(tmp_path, ["gemini-3.6-flash"] * 5).build()
     other = guarded_builder(tmp_path, [], cases=("19", "01"), run_id="g2")

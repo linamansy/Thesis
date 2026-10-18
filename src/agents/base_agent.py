@@ -84,6 +84,7 @@ class BaseAgent(ABC):
                 duration_seconds=round(duration, 4),
                 finish_reason=self.llm.last_finish_reason,
                 model_digest=self.llm.model_digest,
+                reasoning=self.llm.last_reasoning,
             )
             if parsed is not None:
                 return parsed

@@ -1,0 +1,364 @@
+{
+  "status": "silver: AI-made reference, not checked by a human (provisional, never gold)",
+  "created_at": "2026-10-18T12:47:12.736280+00:00",
+  "annotator_model": "gemini-3.6-flash",
+  "prompt_sha256": "02a6ad4205ef05cc1424cd70bf0b2feb321d8f7158dfc999285f8a26fe91bc72",
+  "frozen_retrieval_sha256": "0a59828ad966dc04dfe9fb66fb7c1e4ac599f68a56d3abcac57c25ffa43b5ab7",
+  "cases": {
+    "01": {
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The transaction is a distance contract",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The ordering process takes place on a trading website",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The rule applies to distance contracts concluded with consumers on trading websites. While the description covers a sales and ordering process, it does not state whether the customer is a consumer, whether the contract is a distance contract, or whether it is conducted via a trading website.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Indicate delivery restrictions and accepted payment means",
+              "actor": "Trading website",
+              "timing": "at the latest at the beginning of the ordering process",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The contract is a distance contract",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The seller is a trader",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to distance contracts concluded between a trader and a consumer. The description involves order placement and confirmation, but does not specify whether the customer is a consumer or whether the contract is concluded at a distance.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide confirmation of contract on durable medium",
+              "actor": "Trader",
+              "timing": "within a reasonable time after contract conclusion, and at the latest at delivery or before performance of service begins",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is a distance contract concluded by electronic means",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The order places the customer under an obligation to pay",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage governs electronic distance contracts with consumers that involve an obligation to pay. While the process describes order placement following a quote, it does not state whether the customer is a consumer or if the contract is concluded via electronic distance means.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Make consumer aware of required pre-contractual information",
+              "actor": "Sales staff",
+              "timing": "Directly before the customer places the order",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain explicit acknowledgment of obligation to pay",
+              "actor": "Sales staff",
+              "timing": "When the customer places the order",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The contract is concluded by telephone",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The rule applies to distance contracts concluded by telephone between a trader and a consumer. The process description involves order placement and quotes, but does not state whether the customer is a consumer or whether the process takes place over the telephone.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Confirm offer on durable medium",
+              "actor": "Sales representative",
+              "timing": "After providing a quote and before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain written consent or signed offer",
+              "actor": "Sales representative",
+              "timing": "Before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The contract is concluded off-premises",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The seller is a trader",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage sets requirements for off-premises contracts between a trader and a consumer. The description involves an order placement and confirmation process, but it does not specify whether the contract is concluded off-premises or whether the customer is a consumer.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract copy or confirmation on paper or durable medium",
+              "actor": "Sales representative",
+              "timing": "after order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "Indicate delivery restrictions and accepted payment means",
+          "actor": "Trading website",
+          "timing": "at the latest at the beginning of the ordering process",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "Provide confirmation of contract on durable medium",
+          "actor": "Trader",
+          "timing": "within a reasonable time after contract conclusion, and at the latest at delivery or before performance of service begins",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Make consumer aware of required pre-contractual information",
+          "actor": "Sales staff",
+          "timing": "Directly before the customer places the order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "Obtain explicit acknowledgment of obligation to pay",
+          "actor": "Sales staff",
+          "timing": "When the customer places the order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "Confirm offer on durable medium",
+          "actor": "Sales representative",
+          "timing": "After providing a quote and before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "Obtain written consent or signed offer",
+          "actor": "Sales representative",
+          "timing": "Before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "Provide contract copy or confirmation on paper or durable medium",
+          "actor": "Sales representative",
+          "timing": "after order placement",
+          "already_in_description": false
+        }
+      ]
+    },
+    "03": {
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates information displayed on trading websites for consumers, whereas this process concerns internal B2B inventory management and procurement from suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art18-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates delivery obligations and contract termination rights in consumer sales contracts (B2C), whereas this process describes an internal inventory restocking and procurement process between a business and its suppliers (B2B).",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies to B2C distance contracts concluded between a trader and a consumer, whereas this process concerns B2B procurement and internal inventory management between a business and its suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art18-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates delivery obligations in sales contracts between traders and consumers, whereas this process concerns internal B2B inventory procurement from suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art8-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies to consumer distance contracts where a consumer places an order with a trader. In contrast, this process concerns business-to-business inventory procurement from suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": []
+    },
+    "05": {
+      "passages": [
+        {
+          "passage_id": "CRD-Art8-7",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies to distance contracts between traders and consumers, whereas the process describes a business-to-business (B2B) procurement and onboarding process for selecting suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art8-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage applies to distance contracts on trading websites, whereas the process describes a B2B procurement and RFP process with negotiated contracts.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art8-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates distance contracts concluded by telephone between a trader and a consumer, whereas the process describes a business-to-business procurement procedure between a company and its suppliers.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "CRD-Art7-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates off-premises contracts concluded between a trader and a consumer, whereas the process describes a business-to-business (B2B) procurement process between a company and a supplier.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "LPD-Art3-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates the maximum duration of procedures for accepting or verifying goods or services after receipt, whereas the described process is strictly limited to supplier selection, proposal evaluation, contract negotiation, and onboarding.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": []
+    }
+  },
+  "annotator_model_version": "3.6-flash-07-2026"
+}

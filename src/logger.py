@@ -34,12 +34,14 @@ class RunLogger:
     def log_call(self, *, case_id: str, component: str, model: str, temperature: float,
                  prompt: str, raw_output: str, parsed_output: dict | None,
                  valid_json: bool, retries: int, duration_seconds: float,
-                 finish_reason: str | None = None, model_digest: str | None = None) -> dict:
+                 finish_reason: str | None = None, model_digest: str | None = None,
+                 reasoning: str | None = None) -> dict:
         """Append one record to the log file and return it.
 
         finish_reason: why the model stopped, as reported by the API (e.g. "STOP", or "MAX_TOKENS" when
         the answer was cut off at max_tokens); None for providers that do not report it (MockLLM).
         model_digest: the exact model file used (Ollama's sha256 digest); None for other providers.
+        reasoning: the reasoning text of a reasoning model, returned next to the answer (Groq gpt-oss); else None.
         """
         record = {
             "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -52,6 +54,7 @@ class RunLogger:
             "temperature": temperature,
             "prompt": prompt,
             "raw_output": raw_output,
+            "reasoning": reasoning,
             "parsed_output": parsed_output,
             "valid_json": valid_json,
             "retries": retries,
