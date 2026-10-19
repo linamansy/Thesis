@@ -380,3 +380,38 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** documentation only.
 - **Risk:** the manifest is a snapshot of 19 Oct 2026. Files added later (e.g. fix 12's preflight folder) are not
   in it; a later manifest needs a new file name (paths.results_manifest).
+
+## Fix 12 (E1): preflight command, 19 Oct 2026 (done after 13 and 14, as you chose)
+- **Your decisions:** checksums as a plan addendum; Ollama count if running, else estimate; real C3 agents on the
+  2 DEVELOPMENT cases with the longest C2 prompt, never on test cases (test cases: C1/C2 only); all 13 Study 1
+  cases are development cases (`cases.development_ids`; `cases.test_ids` empty for now).
+- **What changed:**
+  - `src/preflight.py` (new): `python -m src.preflight`, one PASS / FAIL / SKIP line per check, exit code 1 on any
+    FAIL. Checks: plan committed; frozen_retrieval.json and passages.jsonl SHA-256 = plan section 9; C3 = frozen
+    v1 (src/c3_version.py); installed model digest = config; BPMNGen file hashes = the verified record; per sample
+    development case, C1/C2/C3 requests (from BPMNGen's own dry run) pass check_request and differ only in the
+    knowledge block; every request < 80% of num_ctx (Ollama count with num_predict 1, logged; without Ollama a
+    conservative ESTIMATE at 3.3 chars/token = the lowest Study 1 ratio 3.305 rounded down); test cases: C1/C2
+    only. Output: results/preflight/<timestamp>/ (report.txt, dry-run requests, C3 mediation, logs of every LLM call).
+  - Harness `--dry-run`: BPMNGen builds the request as for a generation; the harness records it and stops before
+    it is sent. Checked live: the dry-run request for case 01/C2 is IDENTICAL to the stored Study 1 request.
+    Generation mode is unchanged.
+  - `BPMNGenGenerator.dry_run_request()`: the same harness command as a generation, plus `--dry-run`.
+  - `docs/ANALYSIS_PLAN.md`: dated section 9 addendum with the two checksums (no change to the analysis).
+  - `docs/bpmngen_hashes_2026-10-19.json` (new): the 16 verified BPMNGen file hashes (= docs/BPMNGEN_VERSION_CHECK.md).
+  - `config.yaml`: `cases.development_ids` / `test_ids`, `preflight` section, paths (analysis_plan,
+    bpmngen_expected_hashes, preflight_dir). `CLAUDE.md` and harness README updated.
+- **Tests:** `tests/test_preflight.py` (9 new; fake harness / probe / hasher, MockLLM agents, throwaway git repo):
+  all-ready passes with one line per check; sample = longest C2 development cases; wrong plan checksum, changed C3
+  prompt, other digest, other BPMNGen files, too-long prompt, request differing from config all FAIL; without
+  Ollama the development sample is not checked and test cases are estimated; agents run only on development cases.
+  Suite: 581 passed.
+- **Incident during testing:** the first version of the test built the agents from a config naming the real
+  provider (ollama), so it started real qwen3 agent calls against the running Ollama before I stopped it. Those
+  calls only wrote into the pytest temp folder; results/ stayed byte-identical and no process was left. The test
+  now forces MockLLM and asserts it.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical (before the real preflight run).
+- **Fairness:** the preflight enforces it (identical requests except the knowledge block). Generation unchanged.
+- **Risk:** the frozen-retrieval checksum is over raw bytes. A checkout with other line-ending settings would fail
+  the check (correctly flagged, but needs care on another machine). The C3 check covers prompts and schemas, not the
+  resolver code.

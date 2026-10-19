@@ -78,6 +78,8 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Evaluator (src/evaluate.py) compares generated BPMN with reference BPMN.
 - run_experiment.py is the entry point and takes --condition C1, C2 or C3 and --repetition 1, 2 or 3.
 
+- Preflight (fix E1, 19 Oct 2026): `python -m src.preflight` must pass before any generation (one PASS/FAIL line per check: plan committed, frozen-retrieval checksums = plan section 9, C3 = frozen version, model digest, BPMNGen hashes = docs/bpmngen_hashes_2026-10-19.json, sample development cases: C1/C2/C3 requests from BPMNGen's own dry run differ only in the knowledge block and stay < 80% of num_ctx). The C3 agents run only on development cases (cases.development_ids: all 13 Study 1 cases); test cases (cases.test_ids) get C1/C2 checks only. Output in results/preflight/<timestamp>/.
+
 ## Logging
 - RunLogger class (src/logger.py) writes one JSON record per LLM call to results/logs/<condition>_<run_id>.jsonl (JSON Lines); a resumed run writes to <condition>_<run_id>_part2.jsonl, _part3, ... An existing log file is never written into again.
 - Each record contains: timestamp, run_id, condition, case_id, component (class name), model, model_digest, finish_reason, reasoning (reasoning models only), temperature, prompt, raw_output, parsed_output, valid_json, retries, duration_seconds.

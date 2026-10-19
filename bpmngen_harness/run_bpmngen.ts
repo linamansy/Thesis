@@ -29,6 +29,7 @@
  *                                    prompt, but newer Ollama versions let qwen3 think anyway and return the
  *                                    thinking in a separate field BPMNGen never reads (found 18 Oct 2026).
  *                                    think:false makes Ollama do what BPMNGen intends. No BPMNGen file is changed.
+ *           --dry-run                preflight: record the request BPMNGen would send (ollama_request.json), do not send it
  *           --list-files             no generation and no Ollama call: load BPMNGen, build a prompt, and print the
  *                                    BPMNGen files Node loaded or read, as one JSON line {"bpmngen_files": [...]}.
  *                                    src/bpmngen_files.py hashes them for run_info.json (audit 19 Oct 2026).
@@ -73,6 +74,9 @@ const names = {
 const thinkArg = arg("think");  // "false" / "true"; not given = BPMNGen's request is sent unchanged
 const thinkParam: boolean | undefined = thinkArg === undefined ? undefined : thinkArg === "true";
 const listFiles = process.argv.includes("--list-files");
+// --dry-run (preflight, fix E1): BPMNGen builds its request exactly as for a generation; the harness records it
+// (ollama_request.json) and stops BEFORE it reaches Ollama. No model call, no other output file.
+const dryRun = process.argv.includes("--dry-run");
 if (!listFiles && (!descriptionFile || !outDir)) {
     console.error("Usage: --description <file> --out <dir> [--knowledge <file>] [--base-url URL] [--model NAME]");
     process.exit(2);
@@ -92,6 +96,7 @@ type Captured = { url: string; requestBody: any; rawContent: string; rawThinking
                   streamedTokens: number; cutOff: boolean };
 const captured: Captured[] = [];
 class ContextLimitCutOff extends Error {}
+class DryRunStop extends Error {}
 const realFetch = globalThis.fetch;
 globalThis.fetch = (async (url: any, init?: any) => {
     if (!String(url).includes("/api/chat")) return realFetch(url, init);
@@ -101,6 +106,7 @@ globalThis.fetch = (async (url: any, init?: any) => {
     const rec: Captured = { url: String(url), requestBody: body, rawContent: "", rawThinking: "", finalChunk: null,
                             streamedTokens: 0, cutOff: false };
     captured.push(rec);
+    if (dryRun) throw new DryRunStop("dry run: request recorded, not sent");
     const controller = new AbortController();
     const resp = await realFetch(url, { ...init, body: JSON.stringify(body), signal: controller.signal });
     if (!resp.ok || !resp.body) return resp;  // BPMNGen reports HTTP errors itself ("Ollama error ...")
@@ -201,6 +207,12 @@ async function main() {
         diagram = (Ai as any).convertResponseToDiagramOutput(cleaned, fmt, mode);
         validation = await validateBpmnXml(diagram?.xml);
     } catch (e) {
+        if (e instanceof DryRunStop) {
+            fs.mkdirSync(outDir!, { recursive: true });
+            fs.writeFileSync(path.join(outDir!, names.request), JSON.stringify(captured[captured.length - 1]?.requestBody ?? null, null, 2));
+            console.log("dry run: request written, not sent");
+            return;
+        }
         if (!(e instanceof ContextLimitCutOff)) throw e;  // anything else: harness failure (exit code 1)
         console.error(`Cut off: ${e.message}`);
     }

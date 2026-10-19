@@ -107,6 +107,11 @@ experiment:
 
 cases:
   ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
+  # Development vs test cases (decided 19 Oct 2026): all 13 Study 1 cases are DEVELOPMENT cases (their outputs
+  # are known). The preflight may run the C3 agents only on development cases; for test cases it checks only the
+  # C1 and C2 prompts. Test cases are added when a later study is defined.
+  development_ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
+  test_ids: []
 
 conditions: ["C1", "C2", "C3"]
 
@@ -164,6 +169,13 @@ statistics:
     rq2_case_effects: rq2_case_effects.csv
     valid_or_rescued_tests: secondary_valid_or_rescued_tests.csv
     failure_types: failure_types.csv
+
+preflight:
+  # python -m src.preflight: must pass before any generation (fix E1, 19 Oct 2026)
+  n_sample_cases: 2                  # development cases with the longest C2 prompt (worst case)
+  max_prompt_share_of_num_ctx: 0.8   # prompt tokens must stay below this share of model.num_ctx
+  chars_per_token_estimate: 3.3      # used only without Ollama: the lowest characters-per-token ratio of the
+                                     # 117 Study 1 requests (3.305), rounded down = a conservative token estimate
 
 diagnostics:
   matcher_sample_size: 30   # src/matcher_sample.py: matched AND unmatched task pairs, this many of each
@@ -234,5 +246,8 @@ paths:
   structure_measures_report: results/diagnostics/structure_measures_study1.md  # means per condition
   matcher_sample: results/diagnostics/matcher_sample.csv  # src/matcher_sample.py: pairs for a manual check
   results_manifest: results/MANIFEST.csv   # src/results_manifest.py: every file under results/ with its SHA-256
-  results_readme: results/README.md        # explains every file kind under results/
+  results_readme: results/README.md
+  analysis_plan: docs/ANALYSIS_PLAN.md     # must be committed; holds the frozen-retrieval checksums (section 9)
+  bpmngen_expected_hashes: docs/bpmngen_hashes_2026-10-19.json  # verified BPMNGen file hashes (preflight)
+  preflight_dir: results/preflight        # one folder per preflight: results/preflight/<timestamp>/        # explains every file kind under results/
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)

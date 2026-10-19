@@ -160,6 +160,20 @@ class BPMNGenGenerator:
         if not self.harness.exists():
             raise FileNotFoundError(f"Harness not found at {self.harness}")
 
+    def dry_run_request(self, description_file: Path, knowledge_block: str, work_dir: Path) -> dict:
+        """The exact Ollama request BPMNGen WOULD send for this case, without sending it (harness --dry-run,
+        preflight). The same command as a generation; the knowledge file and the request go into work_dir."""
+        work_dir.mkdir(parents=True, exist_ok=True)
+        knowledge_file = work_dir / self.files["knowledge"]
+        knowledge_file.write_text(knowledge_block.strip() + "\n", encoding="utf-8")
+        out_dir = work_dir / self.files["out_dir"]
+        command = self.command(description_file, knowledge_file, out_dir) + ["--dry-run"]
+        result = self.runner(command, cwd=str(self.server_dir), timeout=self.timeout_seconds)
+        if result.returncode != 0:
+            raise RuntimeError(f"BPMNGen harness dry run failed (exit code {result.returncode}): "
+                               f"{((result.stderr or '') + (result.stdout or ''))[-1000:]}")
+        return json.loads((out_dir / self.files["request"]).read_text(encoding="utf-8"))
+
     def check_request(self, request: dict) -> None:
         """Stop the run (GeneratorSetupError) if BPMNGen's request is not the one config.yaml describes: the model,
         BPMNGen's fixed temperature and num_ctx, the think switch and BPMNGen's system prompt (SHA-256)."""
