@@ -165,6 +165,10 @@ statistics:
     valid_or_rescued_tests: secondary_valid_or_rescued_tests.csv
     failure_types: failure_types.csv
 
+diagnostics:
+  matcher_sample_size: 30   # src/matcher_sample.py: matched AND unmatched task pairs, this many of each
+  matcher_sample_seed: 42
+
 paths:
   pmo_raw: data/raw/pmo
   pmo_descriptions: data/raw/pmo/descriptions
@@ -228,4 +232,5 @@ paths:
   requirement_fidelity_summary: results/diagnostics/requirement_fidelity_summary.csv  # one row per run
   structure_measures_csv: results/diagnostics/structure_measures_study1.csv    # src/structure_measures.py
   structure_measures_report: results/diagnostics/structure_measures_study1.md  # means per condition
+  matcher_sample: results/diagnostics/matcher_sample.csv  # src/matcher_sample.py: pairs for a manual check
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)

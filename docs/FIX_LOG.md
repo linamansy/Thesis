@@ -316,3 +316,21 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** evaluation only; same rule for all conditions.
 - **Risk:** count-based matching for decisions and events does not check WHERE they are in the model. Actor
   evidence in Study 1 is very thin (one case).
+
+## Fix 11 (D4): matcher sample for a manual check, 19 Oct 2026
+- **What changed:** `src/matcher_sample.py` (new). Population from the stored evaluation.json files of the study's
+  runs (read only): every matched pair, and every unmatched generated task paired with its most similar reference
+  task of the same case (similarity from the same TaskMatcher, used read only; the matcher is not changed).
+  30 of each kind drawn with seed 42 (config.yaml `diagnostics`), shuffled together so the order does not reveal
+  the kind, with an empty `manual_judgement` column. Never overwrites.
+- **Study 1 output (new file):** `results/diagnostics/matcher_sample.csv`. Population: 154 matched, 155 unmatched
+  pairs; sample 30 + 30. Columns: sample_id, run_id, condition, case_id, generated_label, reference_label,
+  similarity, matcher_decision, threshold, manual_judgement (empty).
+- **Files:** `src/matcher_sample.py` (new), `config.yaml` (`diagnostics` section, output path),
+  `tests/test_matcher_sample.py` (new), the results file (force-added).
+- **Tests:** 4 new (only study runs; each extra paired with its best reference; 30 + 30, empty judgement column,
+  reproducible, shuffled; small population taken whole; never overwrites). Suite: 559 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/: no existing file changed, 1 new file.
+- **Fairness:** diagnostics only.
+- **Risk:** the matcher_decision and similarity columns are visible. For a blind judgement, hide those two
+  columns while you fill in manual_judgement.
