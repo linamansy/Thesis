@@ -4,7 +4,7 @@ Layout:
   results/runs/<run_id>/run_info.json                   repetition, provider, model, temperature, parts run
   results/runs/<run_id>/<condition>/<case_id>/...       generated.json, generated.bpmn, validation.json
   results/runs/<run_id>/C3/mediation/...                C3 mediation outputs
-The run id defaults to "<provider>_rep<repetition>", e.g. "gemini_rep1", so mock and real runs never
+The run id defaults to "<provider>_rep<repetition>", e.g. "ollama_rep1", so mock and real runs never
 share a folder. The conditions C1, C2 and C3 of one repetition go into the same run folder.
 
 Finished case = its validation.json exists (it is written last, after the model files).

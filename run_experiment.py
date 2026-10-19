@@ -2,7 +2,7 @@
 
 Usage (from the project root):
     .venv\\Scripts\\python.exe run_experiment.py --condition C1 --repetition 1
-    (optional: --run-id <name>; default "<provider>_rep<repetition>", e.g. "gemini_rep1")
+    (optional: --run-id <name>; default "<provider>_rep<repetition>", e.g. "ollama_rep1")
     (optional: --cases 19 03; run only these cases)
 Smoke test (one case, kept out of every evaluation summary):
     .venv\\Scripts\\python.exe run_experiment.py --condition C1 --repetition 1 --run-id smoke_c1 --cases 19

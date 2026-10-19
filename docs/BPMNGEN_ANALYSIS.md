@@ -2,7 +2,7 @@
 
 Date: 16 Oct 2026. Code read: `BPMNGen-backend-main` (server/) as downloaded, no changes made.
 BPMNGen is private Ulm code: keep this repo private and never push BPMNGen itself.
-No real model output yet. Everything below comes from reading the code, plus one end-to-end test against a **mock** Ollama server.
+Written before any real model output: everything below comes from reading the code, plus one end-to-end test against a **mock** Ollama server. Real qwen3:8b output followed on 18 Oct 2026 (smoke runs and Study 1, `results/runs/ollama_rep1`-`ollama_rep3`, 117 generations).
 
 ## 1. From description to BPMN (Ollama path), step by step
 

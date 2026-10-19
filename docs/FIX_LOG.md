@@ -45,3 +45,28 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Risk:** smoke runs can no longer be evaluated with src.evaluate (intended). The `smoke_test` column stays in
   evaluation.csv for compatibility and is now always False. The redirect applies only when THESIS_RESULTS_DIR is
   set; normal runs are unaffected.
+
+## Fix 2 (B3+B4): stale documentation, 19 Oct 2026
+- **What changed:**
+  - "No real qwen3 output yet" replaced with what exists now (smoke runs and Study 1, 117 generations, 18 Oct 2026)
+    in `bpmngen_harness/README.md` and `docs/BPMNGEN_ANALYSIS.md` (the latter keeps its 16 Oct date, so it is
+    clear the analysis was written before real output).
+  - Old Gemini mentions: `config.yaml` (provider comment no longer says "gemini-3.5-flash"; env_file comment now
+    names GROQ_API_KEY), `requirements.txt` (no longer says Gemini is "used for the thesis"), the run-id example
+    in the docstrings of `run_experiment.py` and `src/run_folder.py` ("gemini_rep1" -> "ollama_rep1").
+    Historical mentions that are still true were kept (e.g. the annotator-change notes, GeminiLLM itself).
+  - `CLAUDE.md`: "cleanup can ADD sequence flows or a first task" replaced with the wording you supplied: the
+    first-task repair cannot run in this code path (opensource.ts lines 83, 313-318, 460), and
+    first_task_inserted is false in 117/117 generations.
+- **Files:** `bpmngen_harness/README.md`, `docs/BPMNGEN_ANALYSIS.md`, `config.yaml`, `requirements.txt`,
+  `run_experiment.py`, `src/run_folder.py`, `CLAUDE.md`.
+- **Tests:** no code behaviour changed. config.yaml loads to exactly the same values as before, and the
+  requirement pins are unchanged. Suite: 385 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** comments and docs only.
+- **Risk / not verified:** the code-path reason for the first-task repair (opensource.ts line numbers) is your
+  finding. I did not check it, because opening BPMNGen code is not allowed. The 117/117 count was checked
+  (evaluation.csv). Still stale, outside this fix: `docs/BPMNGEN_ANALYSIS.md:43` still says repairCollapsedFirstAction
+  "inserts a first task" and `:36` refers to old CLAUDE.md text; README folder name `Thesis-BPMN`;
+  `src/agents/silver_annotator.py:12` ("no shared code path"); `config.yaml` similarity_threshold comment
+  "(to be calibrated)"; `docs/REPORT_CHANGES.md:47`.

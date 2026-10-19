@@ -52,4 +52,5 @@ Then, from the Thesis-BPMN folder: `.venv\Scripts\python.exe run_experiment.py -
 ## Tested
 - The harness, end-to-end against a mock Ollama server.
 - The whole pipeline (C1, C2, C3 for one case, including the mediation agents through OllamaLLM), against a mock Ollama server.
-These check the plumbing only and say nothing about quality. No real qwen3 output yet.
+These check the plumbing only and say nothing about quality.
+- Real qwen3:8b runs through this harness: the smoke runs (from 18 Oct 2026) and Study 1, `results/runs/ollama_rep1`-`ollama_rep3` (13 cases × C1/C2/C3 × 3 repetitions = 117 generations, 18 Oct 2026).

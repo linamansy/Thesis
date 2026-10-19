@@ -7,8 +7,8 @@ llm:
   # so C3 cannot win by borrowing a stronger model. The BPMN generator itself is configured under "generator".
   # Its digest is checked against ollama_model_digest below too, so both use the exact same model file.
   provider: ollama            # "mock" (fixed answers, no API), "ollama" (local model, used for the thesis),
-                              # "gemini" (Google Gemini free tier, model gemini-3.5-flash) or "anthropic"
-                              # (kept for possible later use); API keys are in .env
+                              # "gemini" or "anthropic" (both kept for possible later use, e.g. a robustness check);
+                              # API keys are in .env. The silver annotator has its own section (silver, below).
   model: qwen3:8b             # a FIXED model version; for Ollama the exact file is fixed by ollama_model_digest
   temperature: 0              # mediation agents (BPMNGen keeps its own fixed 0.3, see generator below)
   max_tokens: 8192            # longest answer allowed (Ollama: num_predict)
@@ -149,7 +149,8 @@ paths:
   mock_relevance_response: data/mock/relevance_response.json          # fixed answers for the C3 agents
   mock_applicability_response: data/mock/applicability_response.json
   mock_requirement_response: data/mock/requirement_response.json
-  env_file: .env                          # holds GEMINI_API_KEY / ANTHROPIC_API_KEY (never committed)
+  env_file: .env                          # holds GROQ_API_KEY (silver annotator); GEMINI_API_KEY / ANTHROPIC_API_KEY
+                                          # only if those providers are used (never committed)
   knowledge_block_file: knowledge_block.txt  # per case: the exact knowledge text given to the generator
   runs: results/runs                      # one folder per run: results/runs/<run_id>/<condition>/<case_id>/
   run_info_file: run_info.json            # per run: repetition, provider, model, conditions run
