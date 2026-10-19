@@ -246,3 +246,30 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** generator request unchanged (shown live); same counting for every condition.
 - **Risk:** counting by tag name cannot tell WHICH element was changed (e.g. a flow replaced by another), only
   net count changes per type. `raw_equals_cleaned` catches any text change.
+
+## Fix 8 (C3): extended-reference scoring, a new separate output (PROVISIONAL), 19 Oct 2026
+- **What changed:** `src/extended_scoring.py` (new). Reference = PMo tasks + required_steps of rules the silver
+  annotator labelled applicable; one joint one-to-one matching (same matcher and threshold as the main
+  evaluation). Per case: `extended_precision`, `pmo_recall`, `requirement_coverage` ("not defined" when no
+  requirement is expected, never 0 or 1), `over_application` (extra tasks law-traceable, with the existing trace
+  check and trace_threshold, to the frozen passages whose silver label is not applicable; your choice: law text,
+  all conditions incl. C1). Invalid models: same rule as the main evaluation (bpmndi rescue only, else 0).
+  `Evaluator.scored_model()` was extracted from `evaluate_case` so both use the identical rule (pure refactor;
+  invariant unchanged). The command refuses to overwrite its outputs. Status in config
+  (`evaluation.extended_scoring_status`): PROVISIONAL until you commit the Study 2 analysis-plan addendum.
+- **Study 1 outputs (new files):** `results/diagnostics/extended_scoring_study1.csv` (117 rows) and `.md`
+  (old vs new per condition). Silver has 0 applicable rules, so extended precision = old precision and PMo recall =
+  old recall in 117/117 rows, and coverage is "not defined" everywhere. Over-application: C1 1, C2 2, C3 0
+  ("Send Confirmation" rep2 C1 case 01 and rep3 C2 case 45; "Withdraw Product" rep3 C2 case 46). Provisional; the
+  labels are AI-made.
+- **Files:** `src/extended_scoring.py` (new), `src/evaluate.py` (scored_model extracted), `config.yaml`
+  (status, two output paths), `tests/test_extended_scoring.py` (new); the two results/diagnostics files
+  (force-added, as a0780fb did).
+- **Tests:** 7 new (synthetic; fake word matcher): a correct applicable requirement is not penalised (extended
+  precision 1.0 vs plain 0.75); a task from a non-applicable rule counts as over-application; a task from the
+  description does not; zero applicable rules give the original precision and recall, coverage "not defined";
+  failed model; report marked provisional and compares old/new; the command never overwrites. Suite: 540 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/: no existing file changed, 2 new files.
+- **Fairness:** evaluation only; identical rule for all conditions.
+- **Risk:** the over-application trace uses the law text, so a description that paraphrases the law can produce a
+  false positive; the description check (must be more similar to the law than to the description) limits this.

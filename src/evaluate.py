@@ -200,15 +200,7 @@ class Evaluator:
 
         generated_path = case_dir / self.bpmn_file
         with tempfile.TemporaryDirectory() as work_dir:
-            # The model file that is scored: the generated file if it is valid; otherwise, if the diagram
-            # section was its only problem, a copy without that section (src/di_rescue.py); else none (score 0).
-            model_path = None
-            di_stripped = False
-            if validation["generation_succeeded"] and validation["valid"]:
-                model_path = generated_path
-            elif validation["generation_succeeded"] and generated_path.exists():
-                model_path = self.di_rescue.rescue(generated_path, Path(work_dir))
-                di_stripped = model_path is not None
+            model_path, di_stripped = self.scored_model(validation, generated_path, Path(work_dir))
             usable = model_path is not None
             if usable:
                 scores = self.compare(model_path, reference_path, threshold)
@@ -285,6 +277,17 @@ class Evaluator:
             "first_task_inserted": repairs.get("first_task_inserted"),
             **{f"ref_{name}": value for name, value in complexity.items()},
         }
+
+    def scored_model(self, validation: dict, generated_path: Path, work_dir: Path) -> tuple[Path | None, bool]:
+        """The model file that is scored, and whether it is a rescued copy (di_stripped): the generated file if it is
+        valid; otherwise, if the diagram section was its only problem, a copy without that section in work_dir
+        (src/di_rescue.py); else None (score 0). Shared with src/extended_scoring.py."""
+        if validation["generation_succeeded"] and validation["valid"]:
+            return generated_path, False
+        if validation["generation_succeeded"] and generated_path.exists():
+            rescued = self.di_rescue.rescue(generated_path, work_dir)
+            return rescued, rescued is not None
+        return None, False
 
     def extra_task_diagnostics(self, condition: str, case_id: str, case_dir: Path, extra: list[dict]) -> dict:
         """Unsupported additions: generated tasks with no match in the reference (PROVISIONAL diagnostic).

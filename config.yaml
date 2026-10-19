@@ -136,6 +136,7 @@ evaluation:
                                # "knowledge-traceable" if its label is at least this similar to a sentence of the
                                # knowledge block AND more similar to it than to any sentence of the description
   trace_sensitivity_thresholds: [0.4, 0.5, 0.6]  # sensitivity check of trace_threshold, also run by --sweep
+  extended_scoring_status: "PROVISIONAL until the Study 2 analysis-plan addendum is committed"  # src/extended_scoring.py
   trace_min_sentence_chars: 15 # pieces of the knowledge block / description shorter than this are not used as
                                # sentences in the trace check (headings, list markers)
 
@@ -221,4 +222,6 @@ paths:
   evaluation_trace_summary: results/sensitivity/trace_summary.csv  # per trace threshold per condition: mean and SD
   rq3_agreement: results/rq3_agreement.csv  # src/rq3_agreement.py: one row per run
   rq3_confusion: results/rq3_confusion.json  # src/rq3_agreement.py: confusion matrix per run
+  extended_scoring_csv: results/diagnostics/extended_scoring_study1.csv    # src/extended_scoring.py (new output)
+  extended_scoring_report: results/diagnostics/extended_scoring_study1.md  # old vs extended scores (provisional)
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)
