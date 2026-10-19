@@ -43,6 +43,10 @@ generator:
   # A run stops if the hashes differ from an earlier part of the same run, or from another run of the same study
   # (the runs listed in statistics.runs). Paths are relative to bpmngen_server_dir.
   bpmngen_hashed_files: [tools/ai/opensource.ts, tools/ai/ai.ts, tools/utils/xml-validator.ts, environment.ts]
+  bpmngen_key_libraries: [bpmnlint, bpmn-moddle]  # every installed version of these (any depth) goes into
+                              # run_info.json bpmngen_library_versions, together with node/npm and all direct
+                              # dependencies (read only: npm ls; src/bpmngen_libraries.py)
+  npm_command: null           # null = find npm automatically; set a full path if needed
   bpmngen_hash_exclude: [.env]  # BPMNGen's secrets file (API keys); its contents change for reasons unrelated to the
                                 # generator. The harness sets the variables the Ollama path uses (run_bpmngen.ts, step 2)
   model: qwen3:8b             # BPMNGen settings that are NOT changed: system prompt, temperature 0.3, num_ctx 16384, /no_think

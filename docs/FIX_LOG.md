@@ -126,3 +126,27 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
   their run_info.json. The generator's `finish_reason` is still Ollama's lowercase `"stop"`, while the agents log
   `"STOP"` (CLAUDE.md says STOP/MAX_TOKENS). Not changed here, because it was not in this fix; say if you want it
   aligned.
+
+## Fix 4 (B8): BPMNGen library versions in run_info.json, 19 Oct 2026
+- **What changed:** when a BPMNGen run starts, `src/bpmngen_libraries.py` (new) runs `node --version`,
+  `npm --version`, `npm ls --depth=0 --json` and `npm ls <key libraries> --all --json` in the BPMNGen server
+  folder. All of these are read only: npm ls lists what is installed and changes nothing, and no BPMNGen file is
+  opened. The result goes into run_info.json as `bpmngen_library_versions`: node, npm, `top_level` (every direct
+  dependency with its version), `key_libraries` (every installed version, at any depth, of
+  `generator.bpmngen_key_libraries` = [bpmnlint, bpmn-moddle], your examples) and `problems` (what npm ls
+  reports as wrong; recorded, not fatal). It is a run setting, so RunFolder refuses a later part of the same
+  run with other versions.
+- **This PC (19 Oct 2026):** Node v24.20.0, npm 11.19.0, 70 direct dependencies, bpmnlint 11.7.2, bpmn-moddle
+  9.0.4 and 10.0.0 (10.0.0 nested under bpmn-auto-layout), no npm problems. BPMNGen's package-lock.json is still
+  dated 15 Oct.
+- **Files:** `src/bpmngen_libraries.py` (new), `run_experiment.py` (`bpmngen_library_settings`), `config.yaml`
+  (`bpmngen_key_libraries`, `npm_command`), `CLAUDE.md`, `tests/test_bpmngen_libraries.py` (new).
+- **Tests:** 7 new (versions read correctly and only with read-only commands in BPMNGen's folder; every depth;
+  npm problems recorded; unusable npm output stops; stored in run_info; later part with other versions refused;
+  nothing for the legacy generator). Suite: 395 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** the generator request, harness command and prompts are unchanged; only run_info gains a key.
+- **Risk:** the finished runs ollama_rep1-3 have no recorded versions (the values above are from 19 Oct, after
+  the runs). Versions are compared only within one run, not across the study's runs (as with the hashes, this
+  could be added). npm ls adds a few seconds at run start. Old unfinished run folders cannot be resumed (new
+  settings key).

@@ -47,6 +47,7 @@ from src.agents.requirement_agent import RequirementAgent
 from src.bpmn_builder import BPMNBuilder
 from src.bpmngen_files import HASHES_KEY, BPMNGenFiles, check_same_study
 from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit, installed_ollama_digest
+from src.bpmngen_libraries import VERSIONS_KEY, BPMNGenLibraries
 from src.config import load_config, project_path
 from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
@@ -304,6 +305,15 @@ def bpmngen_file_settings(config: dict, run_id: str, files: BPMNGenFiles | None 
     return {HASHES_KEY: hashes}
 
 
+def bpmngen_library_settings(config: dict, libraries: BPMNGenLibraries | None = None) -> dict:
+    """Installed versions of Node, npm and BPMNGen's libraries, for run_info.json (src/bpmngen_libraries.py).
+    Read only. A later part of the same run with other versions is refused by RunFolder.
+    libraries can be replaced in tests."""
+    if config["generator"]["type"] != "bpmngen":
+        return {}
+    return {VERSIONS_KEY: (libraries or BPMNGenLibraries(config)).versions()}
+
+
 def print_summary(records: list[dict]) -> None:
     print(f"{'case':<6}{'generated':>11}{'valid':>7}{'tasks':>7}{'gateways':>10}  errors")
     for r in records:
@@ -333,7 +343,8 @@ def main() -> None:
     run_id = args.run_id or default_run_id(config, args.repetition)
     try:
         folder = RunFolder(config, run_id, args.repetition,
-                           ollama_settings(config) | bpmngen_file_settings(config, run_id))
+                           ollama_settings(config) | bpmngen_file_settings(config, run_id)
+                           | bpmngen_library_settings(config))
         folder.check_can_start(args.condition)  # stop before any LLM call if this would overwrite something
         if args.run_id is None:
             folder.check_previous_repetition_complete(config["conditions"])
