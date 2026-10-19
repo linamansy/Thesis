@@ -24,7 +24,7 @@ Outputs of one case (results/runs/<run_id>/<condition>/<case_id>/):
                                raw_model_output.txt, raw_thinking.txt, bpmngen_cleaned_output.txt, generated.bpmn,
                                validation.json (BPMNGen's own bpmnlint check), meta.json
     generated.bpmn             copy of bpmngen/generated.bpmn, the file that is evaluated
-The call is also logged as one RunLogger record (component "BPMNGenGenerator").
+The call is also logged as one RunLogger record (component "BPMNGenGenerator"), with the model digest.
 
 Results and errors (decided 18 Oct 2026):
   - Answer cut off (the harness stops it when it passes the context window, or Ollama reports a length
@@ -94,8 +94,12 @@ def resolve(path_text: str) -> Path:
 class BPMNGenGenerator:
     """Runs BPMNGen (via the harness) for one case and returns the harness meta data."""
 
-    def __init__(self, config: dict, logger: RunLogger, runner: Callable = run_with_tree_kill):
-        """runner can be replaced in tests (no Node.js, no Ollama)."""
+    def __init__(self, config: dict, logger: RunLogger, runner: Callable = run_with_tree_kill,
+                 model_digest: str | None = None):
+        """runner can be replaced in tests (no Node.js, no Ollama).
+        model_digest: the exact Ollama model file of the generator, checked against config.yaml when the run
+        starts (run_experiment.ollama_settings, stored in run_info.json as generator_digest); written into every
+        log record, like the agents' digest."""
         g = config["generator"]
         self.server_dir = resolve(g["bpmngen_server_dir"])
         self.harness = resolve(g["harness"])
@@ -107,6 +111,7 @@ class BPMNGenGenerator:
         self.npx = g.get("npx_command") or shutil.which("npx") or "npx"
         self.logger = logger
         self.runner = runner
+        self.model_digest = model_digest
 
     def command(self, description_file: Path, knowledge_file: Path, out_dir: Path) -> list[str]:
         command = [self.npx, "ts-node", "--cwdMode", "--transpile-only", str(self.harness),
@@ -181,6 +186,7 @@ class BPMNGenGenerator:
             retries=0,
             duration_seconds=meta.get("seconds"),
             finish_reason=meta.get("done_reason"),
+            model_digest=self.model_digest,
         )
 
 

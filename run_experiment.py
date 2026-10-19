@@ -103,11 +103,13 @@ class ExperimentRunner:
     """Runs the generator, builder and validator for every case of one condition."""
 
     def __init__(self, config: dict, condition: str, llm: LLMClient | None, logger: RunLogger, output_dir: Path,
-                 agent_llms: dict[str, LLMClient] | None = None, bpmngen: BPMNGenGenerator | None = None):
+                 agent_llms: dict[str, LLMClient] | None = None, bpmngen: BPMNGenGenerator | None = None,
+                 generator_digest: str | None = None):
         """output_dir: the condition folder of the run, e.g. results/runs/ollama_rep1/C1.
         llm: the LLM of the legacy json_builder generator (not used with generator.type bpmngen).
         agent_llms: for C3, the LLM client of each mediation role ("relevance", "applicability", "requirement").
-        bpmngen: replaces the real BPMNGenGenerator (tests)."""
+        bpmngen: replaces the real BPMNGenGenerator (tests).
+        generator_digest: the generator's Ollama model digest checked at run start; written into its log records."""
         paths = config["paths"]
         self.generator_type = config["generator"]["type"]
         if self.generator_type not in GENERATOR_TYPES:
@@ -123,7 +125,7 @@ class ExperimentRunner:
         self.validation_file = paths["validation_file"]
         self.logger = logger
         if self.generator_type == "bpmngen":
-            self.generator = bpmngen or BPMNGenGenerator(config, logger)
+            self.generator = bpmngen or BPMNGenGenerator(config, logger, model_digest=generator_digest)
         else:
             self.generator = BPMNGenerator(llm, logger)
         self.builder = BPMNBuilder()
@@ -348,7 +350,8 @@ def main() -> None:
             MissingGeminiKeyError) as e:  # RuntimeError includes LLMUnavailableError
         sys.exit(f"Not started: {e}")
 
-    runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms)
+    runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms,
+                              generator_digest=folder.settings.get("generator_digest"))
     if runner.generator_type == "bpmngen":
         try:
             runner.generator.check_setup()

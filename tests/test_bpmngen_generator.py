@@ -108,6 +108,36 @@ def test_outputs_are_copied_and_logged(tmp_path):
     assert LABEL in record["prompt"] and "block" in record["prompt"]  # the exact prompt is logged
 
 
+DIGEST = "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41"
+
+
+def test_log_records_carry_the_model_digest(tmp_path):
+    generator = BPMNGenGenerator(bpmngen_config(), RunLogger(tmp_path / "logs", "C2", "test"),
+                                 runner=fake_harness(), model_digest=DIGEST)
+    generator.run("19", description_file(tmp_path), "block", tmp_path / "case")
+
+    def timed_out(command, **kwargs):
+        raise subprocess.TimeoutExpired(command, 5)
+    generator.runner = timed_out
+    generator.run("21", description_file(tmp_path), "block", tmp_path / "case21")
+
+    records = [json.loads(line) for line in generator.logger.log_path.read_text(encoding="utf-8").splitlines()]
+    assert [r["model_digest"] for r in records] == [DIGEST, DIGEST]   # normal answer and timeout
+
+
+def test_experiment_runner_gives_the_checked_digest_to_the_generator(tmp_path):
+    runner = ExperimentRunner(bpmngen_config(), "C1", None, RunLogger(tmp_path / "logs", "C1", "test"),
+                              tmp_path / "run" / "C1", generator_digest=DIGEST)
+    assert runner.generator.model_digest == DIGEST
+
+
+def test_readme_manual_command_turns_thinking_off():
+    from src.config import PROJECT_ROOT
+    readme = (PROJECT_ROOT / "bpmngen_harness" / "README.md").read_text(encoding="utf-8")
+    commands = [line for line in readme.splitlines() if line.startswith("npx ts-node") and "run_bpmngen.ts" in line]
+    assert commands and all("--think false" in c for c in commands)
+
+
 @pytest.mark.parametrize("stderr", ["TypeError: fetch failed", "connect ECONNREFUSED 127.0.0.1:11434",
                                     "Ollama error 404: model not found"])
 def test_ollama_problems_stop_the_run(tmp_path, stderr):

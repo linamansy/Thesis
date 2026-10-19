@@ -103,3 +103,26 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** comment only. The silver prompt file and its stored SHA-256 are untouched.
 - **Risk:** none. Two details of the old bullet are gone with the exact wording (the prompt file name, "one call
   per passage"). They are still stated in `src/build_silver_reference.py` and `config.yaml`.
+
+## Fix 3 (B5+B6): generator log records carry the model digest; README command turns thinking off, 19 Oct 2026
+- **What changed:**
+  - Before, every BPMNGenGenerator log record had `model_digest: null` (the agents' records had it), against
+    CLAUDE.md "Logged for every call: model name, model digest". Now `BPMNGenGenerator` takes `model_digest` and
+    writes it into every record, including timeouts. The value is the generator digest that
+    `run_experiment.ollama_settings()` already reads from Ollama at run start, checks against
+    `llm.ollama_model_digest` and stores in run_info.json as `generator_digest`. It reaches the generator through
+    `ExperimentRunner(..., generator_digest=...)`. This is the same pattern as the agents (digest checked once,
+    logged with every call). No extra Ollama call.
+  - `bpmngen_harness/README.md`: the manual smoke command now includes `--think false`, plus a sentence on why.
+    Without it the harness sends BPMNGen's request unchanged and Ollama lets qwen3 think.
+- **Files:** `src/bpmngen_generator.py`, `run_experiment.py`, `bpmngen_harness/README.md`,
+  `tests/test_bpmngen_generator.py`.
+- **Tests:** 3 new (digest in the normal and the timeout record; ExperimentRunner passes the digest; every
+  manual `npx ts-node ... run_bpmngen.ts` command in the README has `--think false`). Suite: 388 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** the harness command and the Ollama request are unchanged (`command()` untouched); only the log
+  record gains the digest.
+- **Risk:** existing Study 1 logs keep `model_digest: null` for the generator (never rewritten). The digest is in
+  their run_info.json. The generator's `finish_reason` is still Ollama's lowercase `"stop"`, while the agents log
+  `"STOP"` (CLAUDE.md says STOP/MAX_TOKENS). Not changed here, because it was not in this fix; say if you want it
+  aligned.

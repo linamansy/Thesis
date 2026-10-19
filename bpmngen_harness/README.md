@@ -17,8 +17,9 @@ Calls BPMNGen's own `OpenSourceLLM` generator directly. No server, database or l
 Run it from the BPMNGen **server** folder (BPMNGen reads its prompt files from there):
 ```
 cd BPMNGen-backend-main\BPMNGen-backend-main\server
-npx ts-node --cwdMode --transpile-only ..\..\..\Thesis\bpmngen_harness\run_bpmngen.ts --description ..\..\..\Thesis\data\cases\01\description.txt --out ..\..\..\Thesis\results\bpmngen_smoke\C1\01 --base-url http://localhost:11434 --model qwen3:8b
+npx ts-node --cwdMode --transpile-only ..\..\..\Thesis\bpmngen_harness\run_bpmngen.ts --description ..\..\..\Thesis\data\cases\01\description.txt --out ..\..\..\Thesis\results\bpmngen_smoke\C1\01 --base-url http://localhost:11434 --model qwen3:8b --think false
 ```
+`--think false` is required: without it the harness sends BPMNGen's request unchanged, and Ollama lets qwen3 think (hidden). `run_experiment.py` always passes it (config.yaml `generator.think_param`).
 Adjust the `..\..\..\` parts if the folders are not next to each other. `--cwdMode` is required.
 
 ## What you get in the output folder
