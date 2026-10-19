@@ -58,6 +58,7 @@ from src.complexity import ComplexityMeasurer
 from src.config import load_config, project_path
 from src.di_rescue import DIRescue
 from src.run_folder import RunFolder
+from src.stage_gates import evaluation_gate, stop_if_closed
 from src.summarise import summarise_repetitions, summarise_runs
 from src.task_matcher import TaskMatcher
 
@@ -447,6 +448,8 @@ def main() -> None:
                         help="also evaluate at every threshold in evaluation.sensitivity_thresholds")
     args = parser.parse_args()
 
+    # stage gate (fix E2): silver complete and committed, every repetition complete
+    stop_if_closed(evaluation_gate(config), "evaluation")
     evaluator = Evaluator(config)
     table = evaluator.evaluate(args.conditions, args.runs)
     if table.empty:

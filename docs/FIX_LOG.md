@@ -334,3 +334,28 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** diagnostics only.
 - **Risk:** the matcher_decision and similarity columns are visible. For a blind judgement, hide those two
   columns while you fill in manual_judgement.
+
+## Fix 13 (E2): stage gates for evaluation and statistics, 19 Oct 2026
+- **Order:** you chose to do fixes 13 and 14 before fix 12 (which needed the development/test split; your answer:
+  all 13 Study 1 cases are development cases).
+- **What changed:** `src/stage_gates.py` (new; `python -m src.stage_gates` prints both gates).
+  - Evaluation gate (in `python -m src.evaluate`, also before `--sweep`): the silver reference has a usable label
+    for every frozen passage and a required_steps list for EVERY case (no annotation_failed); it was built on the
+    current frozen retrieval (stored SHA-256 = file); it is tracked by git with no uncommitted changes; every run in
+    statistics.runs exists and all its conditions are complete.
+  - Statistics gate (in `python -m src.statistics`): evaluation.csv exists and holds exactly the run ids in
+    statistics.runs, each with every condition x case row.
+  A closed gate stops the command with the list of problems before anything is computed or written. The gates are
+  in the command entry points; the classes (used by tests and the invariant check) are unchanged.
+- **Current state:** both gates OPEN for Study 1.
+- **Files:** `src/stage_gates.py` (new), `src/evaluate.py`, `src/statistics.py` (one call each in main),
+  `CLAUDE.md`, `tests/test_stage_gates.py` (new).
+- **Tests:** 10 new (synthetic data, throwaway git repo; skipped without git): open when ready; missing case,
+  missing passage label, annotation_failed, missing required_steps; uncommitted / untracked silver; silver on
+  another frozen retrieval; incomplete / missing run; statistics gate (missing, extra run, missing rows, open);
+  both commands stop before writing anything. Suite: 569 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** no change to generation or scoring.
+- **Risk:** the commit check needs git; without git the evaluation gate stays closed (reported as a problem).
+  rq3_agreement, extended scoring, structure measures and requirement fidelity are not gated (not asked); they read
+  the same silver file.

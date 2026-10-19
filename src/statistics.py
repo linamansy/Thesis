@@ -41,6 +41,7 @@ import pandas as pd
 from scipy import stats
 
 from src.config import load_config, project_path
+from src.stage_gates import statistics_gate, stop_if_closed
 
 FAILURE_TYPES = ["invalid_xml_other", "missing_namespace_rescued", "thinking_detected", "context_limit_hit",
                  "timed_out"]
@@ -250,6 +251,7 @@ def run_analysis(table: pd.DataFrame, config: dict, out_dir) -> dict[str, pd.Dat
 
 def main() -> None:
     config = load_config()
+    stop_if_closed(statistics_gate(config), "statistics")   # fix E2: evaluation of exactly these runs
     out_dir = project_path(config["paths"]["statistics_dir"])
     tables = run_analysis(load_table(config), config, out_dir)
     pd.set_option("display.width", 250)
