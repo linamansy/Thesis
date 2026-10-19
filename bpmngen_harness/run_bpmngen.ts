@@ -42,6 +42,8 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { countRepairs } = require(path.join(__dirname, "repairs.js"));  // fix D2: what the cleanup changed
 
 // ---------- 1. read command-line arguments ----------
 function arg(name: string, fallback?: string): string | undefined {
@@ -237,6 +239,9 @@ async function main() {
             auto_links_added: ((diagram?.xml ?? "").match(/id="auto_link_/g) ?? []).length,
             first_task_inserted: /_firstTask"/.test(diagram?.xml ?? ""),
         },
+        // Everything the cleanup changed, measured from outside (fix D2): element counts in the raw answer vs the
+        // final model, boundary events in the raw answer, raw == cleaned (bpmngen_harness/repairs.js).
+        repair_counts: countRepairs(call?.rawContent ?? "", cutOff ? null : cleaned, cutOff ? null : (diagram?.xml ?? "")),
         valid: validation ? validation.valid : false, seconds,
         timestamp: new Date().toISOString(),
     };

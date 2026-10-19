@@ -220,3 +220,29 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Risk:** changing C3 for a later study means creating v2 (new hashes file + config), not editing v1.
   The agent code paths outside the prompts (resolver, quote checker) are not hashed; they are covered by their
   unit tests and by the tag.
+
+## Fix 7 (D2): count all BPMNGen repairs in meta.json, 19 Oct 2026
+- **What changed:** `bpmngen_harness/repairs.js` (new, plain JavaScript) measures what BPMNGen's cleanup changed,
+  from outside (BPMNGen's code is not read). It counts BPMN elements (every *task as "task", start/end/
+  intermediate/boundary events, the gateway types, sequence and message flows, participants, lanes,
+  sub-processes) in the raw answer and in the final model. The harness writes the result to meta.json as
+  `repair_counts`: `elements_raw`, `elements_final`, `changed_element_types`, `n_element_changes`,
+  `boundary_events_in_raw`, `boundary_events_in_final`, `raw_equals_cleaned`. For a cut-off answer only the raw
+  side is filled. The existing `auto_repairs` entry is unchanged, so validation.json and the evaluation read
+  exactly what they read before.
+- **Files:** `bpmngen_harness/repairs.js` (new), `bpmngen_harness/run_bpmngen.ts` (require + one meta key),
+  `tests/test_bpmngen_repairs.py` (new).
+- **Tests:** 5 new (run with Node; skipped without it): counts before/after, a dropped boundary event and added
+  flows are found, an unchanged model has no repairs, closing tags / similar names are not counted, cut-off case,
+  harness wiring. Suite: 533 passed.
+- **Live check:** a real generation (`smoke_fix7_repairs`, C1, case 01, new folder). meta.json gained only
+  `repair_counts`; the Ollama request is identical to the fix-5 smoke run; check_request passed.
+- **Study 1 (computed for this log only, nothing written to results/):** over the 117 stored raw/final outputs,
+  0 raw answers contained a boundary event; the cleaned text equalled the raw text in 15; the sequence-flow
+  count changed in 71; task / start / end / intermediate-catch / message-flow / participant counts changed in 2.
+  The Study 1 meta.json files are not changed (results rule). A separate Study 1 repair table can be added as a
+  new diagnostics file if you want it.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/: no existing file changed (new smoke folder only).
+- **Fairness:** generator request unchanged (shown live); same counting for every condition.
+- **Risk:** counting by tag name cannot tell WHICH element was changed (e.g. a flow replaced by another), only
+  net count changes per type. `raw_equals_cleaned` catches any text change.
