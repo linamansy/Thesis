@@ -89,3 +89,17 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Risk / not verified:** the :43 note says "verified against the hash-matched BPMNGen download". That verification
   is yours; I could not check the BPMNGen code path. My checks are the hash match (docs/BPMNGEN_VERSION_CHECK.md)
   and the 117/117 count.
+
+## Fix 2c: silver annotator independence sentence, 19 Oct 2026
+- **What changed:** `src/agents/silver_annotator.py` docstring, second "Independence from C3" bullet: "no shared
+  code path with the mediation agents" (never literally true: SilverAnnotator has inherited BaseAgent since
+  1840ea4) replaced with the rewrite you approved: different model and prompt; labels decided by the annotator
+  itself (no C3 agents, resolver or orchestrator); never sees generated models or C3 output; shares only the
+  generic agent machinery (LLM call, JSON check, one retry, logging) and the quote checker, which only records
+  results.
+- **Files:** `src/agents/silver_annotator.py` (module docstring only).
+- **Tests:** the code without the module docstring is identical (AST comparison). Suite: 385 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** comment only. The silver prompt file and its stored SHA-256 are untouched.
+- **Risk:** none. Two details of the old bullet are gone with the exact wording (the prompt file name, "one call
+  per passage"). They are still stated in `src/build_silver_reference.py` and `config.yaml`.
