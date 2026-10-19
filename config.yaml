@@ -76,6 +76,13 @@ generator:
                               # (timed_out = True), scored, never retried
   npx_command: null           # null = find npx automatically; set a full path if needed
 
+mediation:
+  # C3 mediation version (fix C2, 19 Oct 2026). v1 = Study 1 (git tag c3-v1-study1 = commit aa1ca1e). The SHA-256 of
+  # every C3 prompt part (agent prompts, output schemas, retry note, block template) is stored in c3_hashes_file;
+  # tests/test_c3_frozen.py and the preflight fail if anything differs (src/c3_version.py).
+  c3_version: v1
+  c3_hashes_file: tests/c3_v1_hashes.json
+
 silver:
   # Automatic legal reference for EVALUATION only (src/build_silver_reference.py), complete before the evaluation.
   # Deliberately a different, stronger model than the generator and the C3 agents (qwen3), so C3 is not graded

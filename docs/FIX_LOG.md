@@ -197,3 +197,26 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
   order fixes the column order of existing outputs. `scripts/run_main_experiment.ps1` is kept unchanged as the
   record of what ran Study 1. The retry-note path is covered by unit tests only (no retries in Study 1).
   Old unfinished run folders are unaffected (run_info field names unchanged).
+
+## Fix 6 (C2): freeze C3 v1, 19 Oct 2026
+- **What changed:**
+  - Annotated git tag `c3-v1-study1` on commit **aa1ca1e**, the last commit before repetition 1 started (your
+    choice). It is the code that ran Study 1. The tag is local; push it with `git push origin c3-v1-study1` when
+    you push.
+  - `src/c3_version.py` (new): SHA-256 fingerprint of every C3 prompt part: the three agent prompt files, the
+    three agent output schemas (pasted into each prompt), the JSON retry note and the C3 block template (without
+    comments). Line endings are normalised, so a CRLF checkout gives the same hashes.
+  - `tests/c3_v1_hashes.json` (new): the v1 hashes, with tag and commit. Before storing, every item was
+    cross-checked against the content at aa1ca1e: the agent prompt files, the retry note and the block layout
+    (rebuilt from aa1ca1e's code constants) are identical. The agent schema files are unchanged since aa1ca1e.
+  - `config.yaml` `mediation:` `c3_version: v1`, `c3_hashes_file: tests/c3_v1_hashes.json` (for the fix 12
+    preflight).
+- **Tests:** `tests/test_c3_frozen.py` (7 new): C3 unchanged since v1; every part fingerprinted; a one-character
+  change in the template or a prompt is detected; line endings alone do not count; a wrong version name is
+  refused; the tag points at the stored commit; the tagged prompt files equal today's (skipped if the tag is
+  missing in a clone). Suite: 528 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** no prompt or code behaviour changed; C3 is now guarded against accidental change.
+- **Risk:** changing C3 for a later study means creating v2 (new hashes file + config), not editing v1.
+  The agent code paths outside the prompts (resolver, quote checker) are not hashed; they are covered by their
+  unit tests and by the tag.
