@@ -70,3 +70,22 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
   "inserts a first task" and `:36` refers to old CLAUDE.md text; README folder name `Thesis-BPMN`;
   `src/agents/silver_annotator.py:12` ("no shared code path"); `config.yaml` similarity_threshold comment
   "(to be calibrated)"; `docs/REPORT_CHANGES.md:47`.
+
+## Fix 2b: remaining stale items, 19 Oct 2026
+- **What changed:**
+  - `docs/BPMNGEN_ANALYSIS.md`: the 16 Oct text is kept. Two dated notes were added:
+    - after `repairCollapsedFirstAction` (old :43): your first-task correction, as you wrote it.
+    - after old :36: a note that fits that line (it is about temperature and XML, not the first task, your choice):
+      CLAUDE.md has since been updated; Chapter 3 still needs the same update.
+  - `bpmngen_harness/README.md`: folder name `Thesis-BPMN` -> `Thesis` (4 places).
+  - `config.yaml` similarity_threshold comment "(to be calibrated)" -> "Fixed before evaluation, not calibrated;
+    sensitivity sweep reported". `docs/REPORT_CHANGES.md:47` trace threshold "not calibrated yet" -> "threshold 0.5
+    fixed before evaluation, not calibrated; sensitivity sweep reported". No value changed.
+  - `src/agents/silver_annotator.py:12` ("no shared code path"): NOT changed, as asked; explained in the reply.
+- **Files:** `docs/BPMNGEN_ANALYSIS.md`, `bpmngen_harness/README.md`, `config.yaml`, `docs/REPORT_CHANGES.md`.
+- **Tests:** config.yaml loads to identical values. Suite: 385 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** docs and comments only.
+- **Risk / not verified:** the :43 note says "verified against the hash-matched BPMNGen download". That verification
+  is yours; I could not check the BPMNGen code path. My checks are the hash match (docs/BPMNGEN_VERSION_CHECK.md)
+  and the 117/117 count.

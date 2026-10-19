@@ -44,7 +44,7 @@ I didn't edit the .docx. Change these sentences yourself so the wording stays yo
 6. **Appendix Table 1A vs. the gap claim.** The table marks *Explicit mediation = "Yes"* for **Tarifa & Kouki** and **Sai & Rinderle-Ma**. Sections 2.6.2, 2.10 and 2.11 argue that agentic pipelines are *not* explicit applicability mediation. Either change those cells to "Partial" or "No" with a short reason, or explain in 2.11 why their "mediation" differs from yours (e.g. no case-specific applicability judgment). As it stands, your own table weakens your gap.
 7. **Appendix Table 1A, BPMNGen framework row [10].** It marks *NL→BPMN = "Not established from reviewed source"*, but 2.3.1 says this work "addresses the transformation of natural-language process descriptions into BPMN 2.0 models". That should be "Yes".
 8. **2.4 promises outcomes that are not all measured yet.** It lists "requirement coverage, unsupported additions, applicability accuracy, requirement-transformation fidelity, and provenance support" as distinct outcomes. Current state:
-   - unsupported additions: implemented (extra tasks, plus a *provisional* "knowledge-traceable" count; threshold not calibrated yet)
+   - unsupported additions: implemented (extra tasks, plus a *provisional* "knowledge-traceable" count; threshold 0.5 fixed before evaluation, not calibrated; sensitivity sweep reported)
    - provenance: saved for every C3 passage
    - requirement coverage and applicability (RQ3): now measured automatically against a **silver** reference made by a different, stronger model (gpt-oss-120b). It isn't human-checked, so write "agreement with a silver reference", not "accuracy". Requirement-transformation fidelity is still not measured.
    Adjust the wording in 2.4 and RQ3 accordingly.

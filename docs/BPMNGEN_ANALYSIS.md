@@ -34,6 +34,7 @@ There are **no retries, no self-correction loop and no second generation call**.
 Notes:
 - `format: "json"` must not be used with Ollama. The class always returns XML, so the JSON parser would fail.
 - Your CLAUDE.md says "temperature 0" and "no LLM writes BPMN XML directly". Both are false for BPMNGen+Ollama, so Chapter 3 and CLAUDE.md must be updated.
+  *Correction (19 Oct 2026): CLAUDE.md has since been updated (BPMNGen keeps temperature 0.3; qwen3 writes BPMN XML directly). Chapter 3 still needs the same update.*
 
 ## 3. Important: BPMNGen's cleanup can ADD structure
 
@@ -41,6 +42,7 @@ After the model answers, `cleanupModelXml` fixes common small-model mistakes. Mo
 - `ensureSequenceFlows`: if a process has no flows at all, it chains all nodes **in document order**.
 - `connectIsolatedFlowNodes`: links nodes without incoming/outgoing flows to their document neighbours.
 - `repairCollapsedFirstAction`: inserts a first task when the start event was named after the first action.
+  *Correction (19 Oct 2026): the first-task repair cannot run in this code path; see CLAUDE.md. Verified against the hash-matched BPMNGen download; first_task_inserted is false in 117/117 generations.*
 
 These run identically in C1/C2/C3, so they are not a confound by themselves. But they change the order/logic metrics, and they may fire more often in one condition (e.g. when longer prompts make the model sloppier). **The harness counts them for every run** (`meta.json → auto_repairs`). Report them per condition.
 

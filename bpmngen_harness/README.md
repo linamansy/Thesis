@@ -4,7 +4,7 @@ Calls BPMNGen's own `OpenSourceLLM` generator directly. No server, database or l
 
 ## One-time setup (on the PC that runs Ollama, Windows)
 1. Install Node.js 18+ (nodejs.org). Check with `node -v`.
-2. Copy the folders `BPMNGen-backend-main` and `Thesis-BPMN` to that PC (USB or private transfer, **not** a public repo).
+2. Copy the folders `BPMNGen-backend-main` and `Thesis` to that PC (USB or private transfer, **not** a public repo).
 3. In a terminal:
    ```
    cd BPMNGen-backend-main\BPMNGen-backend-main\server
@@ -17,7 +17,7 @@ Calls BPMNGen's own `OpenSourceLLM` generator directly. No server, database or l
 Run it from the BPMNGen **server** folder (BPMNGen reads its prompt files from there):
 ```
 cd BPMNGen-backend-main\BPMNGen-backend-main\server
-npx ts-node --cwdMode --transpile-only ..\..\..\Thesis-BPMN\bpmngen_harness\run_bpmngen.ts --description ..\..\..\Thesis-BPMN\data\cases\01\description.txt --out ..\..\..\Thesis-BPMN\results\bpmngen_smoke\C1\01 --base-url http://localhost:11434 --model qwen3:8b
+npx ts-node --cwdMode --transpile-only ..\..\..\Thesis\bpmngen_harness\run_bpmngen.ts --description ..\..\..\Thesis\data\cases\01\description.txt --out ..\..\..\Thesis\results\bpmngen_smoke\C1\01 --base-url http://localhost:11434 --model qwen3:8b
 ```
 Adjust the `..\..\..\` parts if the folders are not next to each other. `--cwdMode` is required.
 
@@ -44,10 +44,10 @@ You normally don't call the harness by hand: `run_experiment.py` does it for eve
 
 ## Running the whole experiment
 `run_experiment.py` calls this harness for every case (config.yaml, `generator.type: bpmngen`). Two set-ups work:
-- **Everything on the GPU PC:** copy `Thesis-BPMN` (with its Python venv) and `BPMNGen-backend-main` there, as sibling folders. Keep `ollama_base_url: http://localhost:11434` (both in `llm` and `generator`).
+- **Everything on the GPU PC:** copy `Thesis` (with its Python venv) and `BPMNGen-backend-main` there, as sibling folders. Keep `ollama_base_url: http://localhost:11434` (both in `llm` and `generator`).
 - **Python + Node on your laptop, Ollama on the GPU PC:** on the GPU PC set the environment variable `OLLAMA_HOST=0.0.0.0` and restart Ollama. In config.yaml, set both `ollama_base_url` values to `http://<GPU-PC-IP>:11434`.
 
-Then, from the Thesis-BPMN folder: `.venv\Scripts\python.exe run_experiment.py --condition C1 --repetition 1 --run-id smoke_bpmngen --cases 01`
+Then, from the Thesis folder: `.venv\Scripts\python.exe run_experiment.py --condition C1 --repetition 1 --run-id smoke_bpmngen --cases 01`
 
 ## Tested
 - The harness, end-to-end against a mock Ollama server.

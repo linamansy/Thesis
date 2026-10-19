@@ -100,7 +100,8 @@ retrieval:
 
 evaluation:
   embedding_model: sentence-transformers/all-MiniLM-L6-v2  # embeds task labels for matching
-  similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this (to be calibrated)
+  similarity_threshold: 0.75   # main threshold: tasks match only if cosine similarity >= this. Fixed before
+                               # evaluation, not calibrated; sensitivity sweep reported (sensitivity_thresholds)
   sensitivity_thresholds: [0.70, 0.75, 0.80, 0.85]  # used by: python -m src.evaluate --sweep
   smoke_run_prefix: smoke      # runs whose id starts with this are test runs: excluded from all summaries
   message_flows_as_order: true # message flows (between pools) count as "before/after" in the behavioral profile;
