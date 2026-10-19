@@ -359,3 +359,24 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Risk:** the commit check needs git; without git the evaluation gate stays closed (reported as a problem).
   rq3_agreement, extended scoring, structure measures and requirement fidelity are not gated (not asked); they read
   the same silver file.
+
+## Fix 14 (E3): results/README.md and results/MANIFEST.csv, 19 Oct 2026
+- **What changed:**
+  - `results/README.md` (new, by hand): explains every file kind and every top-level file in results/ (run
+    folders, per-case files, bpmngen/ files, mediation, logs, evaluation tables, sensitivity, statistics, RQ3,
+    diagnostics, the PS1 copy, the discarded run), and the manifest's status values.
+  - `src/results_manifest.py` (new): read-only; one row per file under results/ with path, status (study /
+    smoke / discarded / other), run_id, repetition (from run_info), condition, case_id, role, bytes, SHA-256. It
+    does not list itself or the README and never overwrites an existing manifest.
+  - `results/MANIFEST.csv` (new): 1601 files (study 1341, smoke 136, discarded 92, other 32). Every hash equals
+    an independent `sha256sum` fingerprint of results/ (1601 of 1601). The first build wrote repetitions as "3.0";
+    I fixed the code to write whole numbers and rebuilt the file. That file had been created minutes before in
+    this fix, uncommitted; no earlier file was touched.
+- **Files:** `src/results_manifest.py` (new), `config.yaml` (two paths), `tests/test_results_manifest.py` (new),
+  `results/README.md` and `results/MANIFEST.csv` (force-added).
+- **Tests:** 3 new (synthetic folder: every file described with run/condition/case/repetition/role/hash,
+  manifest not self-listed; building changes no file; never overwrites). Suite: 572 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/: no existing file changed, 2 new files.
+- **Fairness:** documentation only.
+- **Risk:** the manifest is a snapshot of 19 Oct 2026. Files added later (e.g. fix 12's preflight folder) are not
+  in it; a later manifest needs a new file name (paths.results_manifest).
