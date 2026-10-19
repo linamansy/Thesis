@@ -29,7 +29,6 @@ from src.config import project_path
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 
 FINISH_REASONS = {"stop": "STOP", "length": "MAX_TOKENS"}  # same words as for Gemini and Ollama
-MAX_RATE_LIMIT_WAITS = 100   # safety stop: a call that keeps getting 429 is given up after this many waits
 
 
 class MissingGroqKeyError(RuntimeError):
@@ -64,11 +63,14 @@ class GroqLLM(LLMClient):
 
     def __init__(self, model: str, temperature: float, max_tokens: int, api_max_retries: int,
                  initial_wait_seconds: float, max_rate_limit_wait_seconds: float, base_url: str,
-                 timeout_seconds: float, api_key: str | None = None, client: httpx.Client | None = None,
+                 timeout_seconds: float, max_rate_limit_waits: int, api_key: str | None = None, client: httpx.Client | None = None,
                  sleep: Callable[[float], None] = time.sleep):
-        """client and sleep can be replaced in tests: no real API call and no real waiting."""
+        """client and sleep can be replaced in tests: no real API call and no real waiting.
+        max_rate_limit_waits: safety stop, one call that keeps getting 429 is given up after this many waits
+        (config.yaml silver.groq_max_rate_limit_waits)."""
         super().__init__(model=model, temperature=temperature)
         self.max_tokens = max_tokens
+        self.max_rate_limit_waits = max_rate_limit_waits
         self.api_max_retries = api_max_retries
         self.initial_wait_seconds = initial_wait_seconds
         self.max_rate_limit_wait_seconds = max_rate_limit_wait_seconds
@@ -91,7 +93,8 @@ class GroqLLM(LLMClient):
         silver, llm = config["silver"], config["llm"]
         return cls(silver["model"], silver["temperature"], silver["max_tokens"], silver["groq_api_max_retries"],
                    llm["api_initial_wait_seconds"], silver["groq_max_rate_limit_wait_seconds"],
-                   silver["groq_base_url"], silver["groq_timeout_seconds"], client=client)
+                   silver["groq_base_url"], silver["groq_timeout_seconds"], silver["groq_max_rate_limit_waits"],
+                   client=client)
 
     def request_body(self, prompt: str) -> dict:
         """The exact request sent for every call."""
@@ -100,7 +103,7 @@ class GroqLLM(LLMClient):
 
     def complete(self, prompt: str) -> str:
         failures = waits = 0   # for this call: counted failures, and rate-limit waits (not counted as failures)
-        for _ in range(MAX_RATE_LIMIT_WAITS + self.api_max_retries + 1):
+        for _ in range(self.max_rate_limit_waits + self.api_max_retries + 1):
             try:
                 response = self.client.post("/chat/completions", json=self.request_body(prompt))
             except httpx.TransportError as e:  # timeout or network error: a counted retry
@@ -113,8 +116,8 @@ class GroqLLM(LLMClient):
                                               f"{self.max_rate_limit_wait_seconds} s, probably the daily limit). "
                                               f"Resume later. {response.text[:300]}")
                 waits += 1
-                if waits > MAX_RATE_LIMIT_WAITS:
-                    raise LLMUnavailableError(f"Groq rate limit: more than {MAX_RATE_LIMIT_WAITS} waits for one call")
+                if waits > self.max_rate_limit_waits:
+                    raise LLMUnavailableError(f"Groq rate limit: more than {self.max_rate_limit_waits} waits for one call")
                 self.rate_limit_waits.append(wait)
                 self.sleep(wait)
                 continue

@@ -42,7 +42,7 @@ def fake_groq(*responses):
 def make_llm(client, max_retries=2, max_wait=900):
     waits = []
     llm = GroqLLM(MODEL, 0, 5000, max_retries, 2, max_wait, "https://api.groq.com/openai/v1", 120,
-                  client=client, sleep=waits.append)
+                  CONFIG["silver"]["groq_max_rate_limit_waits"], client=client, sleep=waits.append)
     return llm, waits
 
 
@@ -113,7 +113,7 @@ def test_other_errors_stop_at_once(status):
 def test_missing_key(monkeypatch):
     monkeypatch.delenv("GROQ_API_KEY", raising=False)
     with pytest.raises(MissingGroqKeyError, match="GROQ_API_KEY is not set"):
-        GroqLLM(MODEL, 0, 5000, 2, 2, 900, "https://api.groq.com/openai/v1", 120)
+        GroqLLM(MODEL, 0, 5000, 2, 2, 900, "https://api.groq.com/openai/v1", 120, 100)
 
 
 def test_model_name_finish_reason_and_reasoning_are_logged(tmp_path):

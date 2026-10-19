@@ -58,7 +58,7 @@ class GeminiLLM(LLMClient):
         """client, sleep and clock can be replaced in tests: no real API call and no real waiting."""
         super().__init__(model=model, temperature=temperature)
         if not model or model == PLACEHOLDER_MODEL:
-            raise ValueError("Set llm.model in config.yaml to a fixed Gemini model version before using the API.")
+            raise ValueError("Set model.name in config.yaml to a fixed Gemini model version before using the API.")
         self.max_tokens = max_tokens
         self.api_max_retries = api_max_retries
         self.initial_wait_seconds = initial_wait_seconds
@@ -73,7 +73,7 @@ class GeminiLLM(LLMClient):
             if not api_key:
                 raise MissingGeminiKeyError(
                     "GEMINI_API_KEY is not set. Add the line GEMINI_API_KEY=<your key> to the .env file in the "
-                    "project root (see .env.example), or set llm.provider to mock in config.yaml.")
+                    "project root (see .env.example), or set model.provider to mock in config.yaml.")
             no_retries = types.HttpOptions(retry_options=types.HttpRetryOptions(attempts=1))
             client = genai.Client(api_key=api_key, http_options=no_retries)
         self.client = client
@@ -82,7 +82,7 @@ class GeminiLLM(LLMClient):
     def from_config(cls, config: dict, client=None) -> "GeminiLLM":
         load_dotenv(project_path(config["paths"]["env_file"]))  # puts GEMINI_API_KEY into the environment
         llm = config["llm"]
-        return cls(llm["model"], llm["temperature"], llm["max_tokens"], llm["gemini_api_max_retries"],
+        return cls(config["model"]["name"], llm["temperature"], llm["max_tokens"], llm["gemini_api_max_retries"],
                    llm["api_initial_wait_seconds"], llm["gemini_pause_between_calls_seconds"], client=client)
 
     def listed_version(self) -> str | None:

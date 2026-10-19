@@ -231,8 +231,8 @@ def test_placeholder_model_is_refused():
 def test_gemini_provider_from_config_shares_one_client(tmp_path, monkeypatch):
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     (tmp_path / ".env").write_text("GEMINI_API_KEY=test-key-not-real\n", encoding="utf-8")
-    config = dict(CONFIG, llm=dict(CONFIG["llm"], provider="gemini", model="gemini-test-001",
-                                   gemini_pause_between_calls_seconds=4),
+    config = dict(CONFIG, model=dict(CONFIG["model"], provider="gemini", name="gemini-test-001"),
+                  llm=dict(CONFIG["llm"], gemini_pause_between_calls_seconds=4),
                   paths=dict(CONFIG["paths"], env_file=str(tmp_path / ".env")))
 
     shared = {}

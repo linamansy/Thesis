@@ -21,8 +21,9 @@ import json
 from datetime import datetime, timezone
 
 from src.config import load_config, project_path
-from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
+from src.generator import BPMNGenerator, format_passages
 from src.llm.ollama_llm import OllamaLLM
+from src.prompt_texts import load_no_knowledge_text
 
 
 def build_prompt(config: dict, condition: str, case_id: str) -> str:
@@ -30,7 +31,7 @@ def build_prompt(config: dict, condition: str, case_id: str) -> str:
     paths = config["paths"]
     description = (project_path(paths["cases"]) / case_id / paths["case_description_file"]).read_text(encoding="utf-8")
     if condition == "C1":
-        knowledge = NO_KNOWLEDGE_TEXT
+        knowledge = load_no_knowledge_text(config)
     else:
         frozen = json.loads(project_path(paths["frozen_retrieval"]).read_text(encoding="utf-8"))["cases"]
         knowledge = format_passages(frozen[case_id]["passages"])
@@ -40,8 +41,8 @@ def build_prompt(config: dict, condition: str, case_id: str) -> str:
 
 def main() -> None:
     config = load_config()
-    if config["llm"]["provider"] != "ollama":
-        raise SystemExit("llm.provider must be ollama in config.yaml")
+    if config["model"]["provider"] != "ollama":
+        raise SystemExit("model.provider must be ollama in config.yaml")
     parser = argparse.ArgumentParser(description="Count the tokens of generator prompts with the Ollama model.")
     parser.add_argument("--condition", required=True, choices=["C1", "C2"])
     parser.add_argument("--cases", nargs="+", default=config["cases"]["ids"])
@@ -50,7 +51,7 @@ def main() -> None:
     llm = OllamaLLM.from_config(config)
     num_ctx, max_tokens = llm.num_ctx, llm.max_tokens
     llm.max_tokens = 1   # only the prompt is of interest
-    out_dir = project_path("results/context_check")
+    out_dir = project_path(config["paths"]["context_check_dir"])
     out_dir.mkdir(parents=True, exist_ok=True)
 
     print(f"{'case':<6}{'prompt tokens':>15}{'room left for answer':>23}  (num_ctx {num_ctx}, max_tokens {max_tokens})")

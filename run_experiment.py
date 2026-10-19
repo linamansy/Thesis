@@ -41,15 +41,17 @@ import json
 import sys
 from pathlib import Path
 
+import httpx
+
 from src.agents.applicability_agent import ApplicabilityAgent
 from src.agents.relevance_agent import RelevanceAgent
 from src.agents.requirement_agent import RequirementAgent
 from src.bpmn_builder import BPMNBuilder
 from src.bpmngen_files import HASHES_KEY, BPMNGenFiles, check_same_study
-from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit, installed_ollama_digest
+from src.bpmngen_generator import BPMNGenGenerator, GeneratorSetupError, context_limit_hit, installed_ollama_digest
 from src.bpmngen_libraries import VERSIONS_KEY, BPMNGenLibraries
 from src.config import load_config, project_path
-from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
+from src.generator import BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
@@ -58,6 +60,7 @@ from src.llm.ollama_llm import OllamaLLM
 from src.logger import RunLogger
 from src.ollama_server import ollama_version, read_environment_variable, server_environment
 from src.orchestrator import Orchestrator
+from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
 from src.retrieval.passage import load_passages
 from src.run_folder import RunFolder, default_run_id
 from src.validator import BPMNValidator
@@ -69,9 +72,10 @@ REAL_PROVIDERS = {"ollama": OllamaLLM, "gemini": GeminiLLM, "anthropic": Anthrop
 
 
 class RunInterrupted(Exception):
-    """The run stopped because the API is unavailable; it can be resumed by running the same command."""
+    """The run stopped because the API is unavailable, or BPMNGen's request differs from config.yaml (setup error);
+    it can be resumed by running the same command (after fixing the setup)."""
 
-    def __init__(self, case_id: str, error: LLMUnavailableError):
+    def __init__(self, case_id: str, error: Exception):
         super().__init__(f"stopped at case {case_id}: {error}")
         self.case_id = case_id
 
@@ -86,12 +90,12 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
                between calls (Gemini free-tier per-minute limit) counts over all agents together.
     """
     llm_config = config["llm"]
-    provider = llm_config["provider"]
+    provider = config["model"]["provider"]
     if provider == "mock":
         answer = project_path(config["paths"][f"mock_{role}_response"]).read_text(encoding="utf-8")
         return MockLLM([answer], temperature=llm_config["temperature"])
     if provider not in PROVIDERS:
-        raise ValueError(f"llm.provider must be one of {PROVIDERS}, not {provider!r}")
+        raise ValueError(f"model.provider must be one of {PROVIDERS}, not {provider!r}")
     if shared is not None and provider in shared:
         return shared[provider]
     llm = REAL_PROVIDERS[provider].from_config(config)
@@ -132,6 +136,7 @@ class ExperimentRunner:
         self.builder = BPMNBuilder()
         self.validator = BPMNValidator()
 
+        self.no_knowledge_text = load_no_knowledge_text(config)   # C1's knowledge block
         self.frozen_cases = None
         self.orchestrator = None
         if condition in ("C2", "C3"):
@@ -145,12 +150,13 @@ class ExperimentRunner:
                 RelevanceAgent(agent_llms["relevance"], logger),
                 ApplicabilityAgent(agent_llms["applicability"], logger),
                 RequirementAgent(agent_llms["requirement"], logger),
-                self.frozen_cases, titles, self.output_dir / paths["mediation_dir"])
+                self.frozen_cases, titles, self.output_dir / paths["mediation_dir"],
+                load_c3_block_template(config), paths["mediation_summary_file"])
 
     def knowledge_block(self, case_id: str, description: str) -> str:
         """The only part of the generator prompt that differs between conditions."""
         if self.condition == "C1":
-            return NO_KNOWLEDGE_TEXT
+            return self.no_knowledge_text
         if case_id not in self.frozen_cases:
             raise KeyError(f"case {case_id} is missing from the frozen retrieval file")
         if self.condition == "C2":
@@ -199,8 +205,8 @@ class ExperimentRunner:
         try:
             knowledge = self.knowledge_block(case_id, description)  # C3: mediation happens here
             meta = self.generator.run(case_id, description_path, knowledge, case_dir)
-        except LLMUnavailableError:
-            raise  # Ollama unreachable: no result for this case; validation.json is NOT written
+        except (LLMUnavailableError, GeneratorSetupError):
+            raise  # Ollama unreachable or wrong setup: no result for this case; validation.json is NOT written
         except Exception as e:  # any other error: recorded as a failed generation
             record |= {"generation_succeeded": False, "parses": False, "valid": False,
                        "errors": [f"generation failed with {type(e).__name__}: {e}"], "counts": None,
@@ -252,7 +258,7 @@ class ExperimentRunner:
                     continue
                 try:
                     records.append(self.run_case(case_id))
-                except LLMUnavailableError as e:
+                except (LLMUnavailableError, GeneratorSetupError) as e:
                     raise RunInterrupted(case_id, e) from e
                 self.ran.append(case_id)
         finally:
@@ -264,29 +270,29 @@ class ExperimentRunner:
 def ollama_settings(config: dict, client=None, env_reader=read_environment_variable) -> dict:
     """Facts about Ollama that must stay the same for the whole run, for run_info.json:
     the exact digest of the generator's model (BPMNGen calls Ollama itself), the Ollama version and the
-    Ollama server settings (llm.ollama_server_env, see src/ollama_server.py).
+    Ollama server settings (model.ollama_server_env, see src/ollama_server.py).
 
-    A later part of the run where any of these differs is refused. If the generator uses the same model as the
-    mediation agents, it must also be the exact file fixed in llm.ollama_model_digest (one model everywhere).
+    A later part of the run where any of these differs is refused. The generator uses the same model as the
+    mediation agents, it must be the exact file fixed in model.ollama_model_digest (one model everywhere).
     Raises LLMUnavailableError if Ollama is not reachable, ValueError if the model is missing or different
     or the server settings differ from config.yaml. client and env_reader can be replaced in tests.
     """
-    generator = config["generator"]
-    if generator["type"] != "bpmngen":
+    if config["generator"]["type"] != "bpmngen":
         return {}
-    server_env = server_environment(config["llm"].get("ollama_server_env") or {}, env_reader)
-    version = ollama_version(generator["ollama_base_url"], client)
-    digest = installed_ollama_digest(generator["ollama_base_url"], generator["model"], client)
+    model = config["model"]   # the one model block, shared by the generator and the agents
+    client = client or httpx.Client(timeout=model["ollama_info_timeout_seconds"])
+    server_env = server_environment(model.get("ollama_server_env") or {}, env_reader)
+    version = ollama_version(model["ollama_url"], client)
+    digest = installed_ollama_digest(model["ollama_url"], model["name"], client)
     if digest is None:
-        raise ValueError(f"model {generator['model']!r} is not installed in Ollama at "
-                         f"{generator['ollama_base_url']} (run: ollama pull {generator['model']})")
-    llm = config["llm"]
-    if llm["provider"] == "ollama" and llm["model"] == generator["model"] and digest != llm["ollama_model_digest"]:
-        raise ValueError(f"the installed {generator['model']} has digest {digest}, but config.yaml fixes "
-                         f"llm.ollama_model_digest = {llm['ollama_model_digest']}. If this is the model you want "
+        raise ValueError(f"model {model['name']!r} is not installed in Ollama at "
+                         f"{model['ollama_url']} (run: ollama pull {model['name']})")
+    if digest != model["ollama_model_digest"]:
+        raise ValueError(f"the installed {model['name']} has digest {digest}, but config.yaml fixes "
+                         f"model.ollama_model_digest = {model['ollama_model_digest']}. If this is the model you want "
                          f"to use for the whole experiment, copy this digest into config.yaml.")
     return {"generator_digest": digest, "ollama_version": version, "ollama_server_env": server_env,
-            "generator_think_param": generator.get("think_param")}
+            "generator_think_param": model["think"]}
 
 
 def bpmngen_file_settings(config: dict, run_id: str, files: BPMNGenFiles | None = None,
@@ -372,10 +378,10 @@ def main() -> None:
     if args.cases:
         runner.case_ids = args.cases
     if runner.generator_type == "bpmngen":
-        generator_text = f"generator BPMNGen/{config['generator']['model']}"
+        generator_text = f"generator BPMNGen/{config['model']['name']}"
     else:
         generator_text = f"generator json_builder/{llm.model} (temperature {llm.temperature})"
-    agents_text = (f" | mediation agents {config['llm']['provider']}/{config['llm']['model']} "
+    agents_text = (f" | mediation agents {config['model']['provider']}/{config['model']['name']} "
                    f"(temperature {config['llm']['temperature']})" if args.condition == "C3" else "")
     print(f"Run {run_id} (repetition {args.repetition}) | condition {args.condition} | part {part} | "
           f"{generator_text}{agents_text}")

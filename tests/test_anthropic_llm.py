@@ -151,7 +151,7 @@ def test_placeholder_model_is_refused():
 def test_key_is_read_from_env_file(tmp_path, monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
     (tmp_path / ".env").write_text("ANTHROPIC_API_KEY=sk-test-not-a-real-key\n", encoding="utf-8")
-    config = dict(CONFIG, llm=dict(CONFIG["llm"], provider="anthropic", model="claude-test-model"),
+    config = dict(CONFIG, model=dict(CONFIG["model"], provider="anthropic", name="claude-test-model"),
                   paths=dict(CONFIG["paths"], env_file=str(tmp_path / ".env")))
 
     llm = create_llm(config, "relevance")   # builds the real SDK client, but makes no request
@@ -164,4 +164,4 @@ def test_key_is_read_from_env_file(tmp_path, monkeypatch):
 
 def test_unknown_provider_is_refused():
     with pytest.raises(ValueError, match="must be one of \\['mock', 'ollama', 'gemini', 'anthropic'\\]"):
-        create_llm(dict(CONFIG, llm=dict(CONFIG["llm"], provider="openai")))
+        create_llm(dict(CONFIG, model=dict(CONFIG["model"], provider="openai")))

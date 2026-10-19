@@ -15,7 +15,7 @@ generator.knowledge_label), in the same place for C1, C2 and C3:
 
 Thinking (decided 18 Oct 2026): BPMNGen asks for no thinking with "/no_think" in its prompt, but newer Ollama
 versions let qwen3 think anyway (in a separate field BPMNGen never reads). The harness therefore adds Ollama's
-own switch think:false to BPMNGen's request (config.yaml generator.think_param); no BPMNGen file is changed.
+own switch think:false to BPMNGen's request (config.yaml model.think); no BPMNGen file is changed.
 Any thinking text that still appears is saved (bpmngen/raw_thinking.txt) and flagged.
 
 Outputs of one case (results/runs/<run_id>/<condition>/<case_id>/):
@@ -34,8 +34,14 @@ Results and errors (decided 18 Oct 2026):
   - Ollama not reachable / HTTP error -> LLMUnavailableError: the run stops and the case stays unfinished
     (resumable), the same rule as for the API clients.
   - Any other harness failure -> RuntimeError: recorded by the runner as a failed generation.
+  - BPMNGen's request differs from config.yaml (model.name / num_ctx / think, generator.expected temperature and
+    system-prompt SHA-256; fix B7, 19 Oct 2026) -> GeneratorSetupError: the run stops after logging the call, the
+    case stays unfinished. A setup error is never recorded as a model result.
+File names inside the case folder come from config.yaml (paths: knowledge_block_file, bpmngen_output_dir,
+bpmngen_*_file, generated_bpmn_file) and are passed to the harness.
 """
 
+import hashlib
 import json
 import os
 import shutil
@@ -91,6 +97,11 @@ def resolve(path_text: str) -> Path:
     return path if path.is_absolute() else project_path(path_text)
 
 
+class GeneratorSetupError(RuntimeError):
+    """BPMNGen's request differs from what config.yaml expects (model, temperature, num_ctx, think, system prompt).
+    Not a model result: the run stops (resumable after fixing the setup), the case stays unfinished."""
+
+
 class BPMNGenGenerator:
     """Runs BPMNGen (via the harness) for one case and returns the harness meta data."""
 
@@ -100,45 +111,77 @@ class BPMNGenGenerator:
         model_digest: the exact Ollama model file of the generator, checked against config.yaml when the run
         starts (run_experiment.ollama_settings, stored in run_info.json as generator_digest); written into every
         log record, like the agents' digest."""
-        g = config["generator"]
+        g, model, paths = config["generator"], config["model"], config["paths"]
         self.server_dir = resolve(g["bpmngen_server_dir"])
         self.harness = resolve(g["harness"])
-        self.model = g["model"]
-        self.base_url = g["ollama_base_url"]
+        self.model = model["name"]                 # the ONE model block, shared with the C3 agents
+        self.base_url = model["ollama_url"]
+        self.think = model["think"]                # Ollama's think switch, added by the harness to BPMNGen's request
+        self.num_ctx = model["num_ctx"]
+        self.llm_module = model["bpmngen_module"]
+        self.llm_class = model["bpmngen_class"]
+        self.mode = g["bpmngen_mode"]
+        self.format = g["bpmngen_format"]
+        self.expected = g["expected"]              # BPMNGen's own fixed request values (checked per request)
         self.knowledge_label = g["knowledge_label"]
         self.timeout_seconds = g["timeout_seconds"]
-        self.think_param = g.get("think_param")  # False: Ollama's think:false is added to BPMNGen's request
         self.npx = g.get("npx_command") or shutil.which("npx") or "npx"
+        self.files = {"knowledge": paths["knowledge_block_file"], "out_dir": paths["bpmngen_output_dir"],
+                      "request": paths["bpmngen_request_file"], "raw": paths["bpmngen_raw_output_file"],
+                      "thinking": paths["bpmngen_thinking_file"], "cleaned": paths["bpmngen_cleaned_file"],
+                      "validation": paths["bpmngen_validation_file"], "meta": paths["bpmngen_meta_file"],
+                      "bpmn": paths["generated_bpmn_file"]}
         self.logger = logger
         self.runner = runner
         self.model_digest = model_digest
 
+    def harness_settings(self) -> list[str]:
+        """The harness arguments that select BPMNGen's generator class and mode (also used by --list-files)."""
+        return ["--llm-module", self.llm_module, "--llm-class", self.llm_class,
+                "--mode", self.mode, "--format", self.format, "--model", self.model]
+
     def command(self, description_file: Path, knowledge_file: Path, out_dir: Path) -> list[str]:
-        command = [self.npx, "ts-node", "--cwdMode", "--transpile-only", str(self.harness),
-                   "--description", str(description_file), "--knowledge", str(knowledge_file),
-                   "--out", str(out_dir), "--base-url", self.base_url, "--model", self.model,
-                   "--label", self.knowledge_label]
-        if self.think_param is not None:
-            command += ["--think", "true" if self.think_param else "false"]
-        return command
+        f = self.files
+        return [self.npx, "ts-node", "--cwdMode", "--transpile-only", str(self.harness),
+                "--description", str(description_file), "--knowledge", str(knowledge_file),
+                "--out", str(out_dir), "--base-url", self.base_url, *self.harness_settings(),
+                "--label", self.knowledge_label, "--think", "true" if self.think else "false",
+                "--request-file", f["request"], "--raw-file", f["raw"], "--thinking-file", f["thinking"],
+                "--cleaned-file", f["cleaned"], "--validation-file", f["validation"], "--meta-file", f["meta"],
+                "--bpmn-file", f["bpmn"]]
 
     def check_setup(self) -> None:
         """Stop before any call if BPMNGen or the harness cannot be found."""
-        if not (self.server_dir / "tools" / "ai" / "opensource.ts").exists():
+        if not (self.server_dir / f"{self.llm_module}.ts").exists():
             raise FileNotFoundError(f"BPMNGen server folder not found at {self.server_dir} "
-                                    f"(generator.bpmngen_server_dir in config.yaml)")
+                                    f"(generator.bpmngen_server_dir and model.bpmngen_module in config.yaml)")
         if not (self.server_dir / "node_modules").exists():
             raise FileNotFoundError(f"BPMNGen dependencies missing: run 'npm install' in {self.server_dir}")
         if not self.harness.exists():
             raise FileNotFoundError(f"Harness not found at {self.harness}")
 
+    def check_request(self, request: dict) -> None:
+        """Stop the run (GeneratorSetupError) if BPMNGen's request is not the one config.yaml describes: the model,
+        BPMNGen's fixed temperature and num_ctx, the think switch and BPMNGen's system prompt (SHA-256)."""
+        options = request.get("options") or {}
+        system = [m["content"] for m in request.get("messages", []) if m.get("role") == "system"]
+        system_sha = hashlib.sha256(system[0].encode("utf-8")).hexdigest() if len(system) == 1 else None
+        found = {"model": request.get("model"), "temperature": options.get("temperature"),
+                 "num_ctx": options.get("num_ctx"), "think": request.get("think"), "system_prompt_sha256": system_sha}
+        expected = {"model": self.model, "temperature": self.expected["temperature"], "num_ctx": self.num_ctx,
+                    "think": self.think, "system_prompt_sha256": self.expected["system_prompt_sha256"]}
+        different = {key: (found[key], expected[key]) for key in expected if found[key] != expected[key]}
+        if different:
+            raise GeneratorSetupError(f"BPMNGen's request differs from config.yaml (found, expected): {different}")
+
     def run(self, case_id: str, description_file: Path, knowledge_block: str, case_dir: Path) -> dict:
         """Generate the BPMN model of one case. Returns meta.json of the harness (with timed_out = True
         and no model if the harness timed out)."""
         case_dir.mkdir(parents=True, exist_ok=True)
-        knowledge_file = case_dir / "knowledge_block.txt"
+        f = self.files
+        knowledge_file = case_dir / f["knowledge"]
         knowledge_file.write_text(knowledge_block.strip() + "\n", encoding="utf-8")
-        out_dir = case_dir / "bpmngen"
+        out_dir = case_dir / f["out_dir"]
         command = self.command(description_file, knowledge_file, out_dir)
 
         try:
@@ -147,7 +190,7 @@ class BPMNGenGenerator:
             # The model kept generating too long: a result of the model (failed generation), not an
             # Ollama problem. The process tree is already killed (run_with_tree_kill).
             meta = {"timed_out": True, "seconds": self.timeout_seconds, "done_reason": None,
-                    "think_param": self.think_param, "valid": False}
+                    "think_param": self.think, "valid": False}
             self._log(case_id, meta, request=None, raw_output="", thinking="")
             return meta
 
@@ -157,18 +200,19 @@ class BPMNGenGenerator:
                 raise LLMUnavailableError(f"Ollama not usable for BPMNGen ({self.base_url}): {output[-500:]}")
             raise RuntimeError(f"BPMNGen harness failed (exit code {result.returncode}): {output[-1000:]}")
 
-        meta = json.loads((out_dir / "meta.json").read_text(encoding="utf-8"))
-        request = json.loads((out_dir / "ollama_request.json").read_text(encoding="utf-8"))
-        raw_output = (out_dir / "raw_model_output.txt").read_text(encoding="utf-8")
-        thinking_path = out_dir / "raw_thinking.txt"
+        meta = json.loads((out_dir / f["meta"]).read_text(encoding="utf-8"))
+        request = json.loads((out_dir / f["request"]).read_text(encoding="utf-8"))
+        raw_output = (out_dir / f["raw"]).read_text(encoding="utf-8")
+        thinking_path = out_dir / f["thinking"]
         thinking = thinking_path.read_text(encoding="utf-8") if thinking_path.exists() else ""
-        if (out_dir / "generated.bpmn").exists() and not meta.get("cut_off_by_harness"):
-            shutil.copyfile(out_dir / "generated.bpmn", case_dir / "generated.bpmn")
+        if (out_dir / f["bpmn"]).exists() and not meta.get("cut_off_by_harness"):
+            shutil.copyfile(out_dir / f["bpmn"], case_dir / f["bpmn"])
         if meta.get("raw_has_think_block"):
-            print(f"WARNING case {case_id}: the model produced thinking text despite think={self.think_param} "
+            print(f"WARNING case {case_id}: the model produced thinking text despite think={self.think} "
                   f"({len(thinking)} chars in the thinking field, saved in {thinking_path}; "
                   f"{meta.get('think_tags_in_answer') or 0} think tag(s) in the answer)")
-        self._log(case_id, meta, request, raw_output, thinking)
+        self._log(case_id, meta, request, raw_output, thinking)   # every call is logged, also a wrong setup
+        self.check_request(request)
         return meta
 
     def _log(self, case_id: str, meta: dict, request: dict | None, raw_output: str, thinking: str) -> None:
@@ -195,12 +239,11 @@ def context_limit_hit(meta: dict) -> bool:
     return meta.get("done_reason") != "stop" or meta.get("fits_context") is False
 
 
-def installed_ollama_digest(base_url: str, model: str, client: httpx.Client | None = None) -> str | None:
+def installed_ollama_digest(base_url: str, model: str, client: httpx.Client) -> str | None:
     """The digest (exact file) of an installed Ollama model, from GET /api/tags; None if not installed.
 
     Used for the GENERATOR's model, which BPMNGen calls itself (the agents' OllamaLLM checks its own).
     """
-    client = client or httpx.Client(timeout=30)
     try:
         response = client.get(f"{base_url.rstrip('/')}/api/tags")
     except httpx.TransportError as e:

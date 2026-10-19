@@ -41,8 +41,12 @@ class BPMNGenFiles:
 
     def __init__(self, config: dict, runner: Callable = run_with_tree_kill):
         """runner can be replaced in tests (no Node.js, no BPMNGen)."""
-        g = config["generator"]
+        g, model = config["generator"], config["model"]
         self.server_dir = resolve(g["bpmngen_server_dir"])
+        # the same BPMNGen class, mode and format as a generation (config.yaml model / generator)
+        self.harness_settings = ["--llm-module", model["bpmngen_module"], "--llm-class", model["bpmngen_class"],
+                                 "--mode", g["bpmngen_mode"], "--format", g["bpmngen_format"],
+                                 "--model", model["name"]]
         self.harness = resolve(g["harness"])
         self.named_files = list(g["bpmngen_hashed_files"])
         self.excluded = set(g.get("bpmngen_hash_exclude") or [])
@@ -51,7 +55,8 @@ class BPMNGenFiles:
         self.runner = runner
 
     def command(self) -> list[str]:
-        return [self.npx, "ts-node", "--cwdMode", "--transpile-only", str(self.harness), "--list-files"]
+        return [self.npx, "ts-node", "--cwdMode", "--transpile-only", str(self.harness), *self.harness_settings,
+                "--list-files"]
 
     def loaded_files(self) -> list[str]:
         """The BPMNGen files (relative paths) the harness loads, as reported by the harness itself."""

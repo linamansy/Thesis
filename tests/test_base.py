@@ -24,7 +24,7 @@ REQUIRED_FIELDS = {
 
 def test_tests_never_use_a_real_provider():
     from src.config import load_config
-    assert load_config()["llm"]["provider"] == "mock"
+    assert load_config()["model"]["provider"] == "mock"
 
 VALID_ANSWER = '{"answer": "yes", "confidence": 0.9}'
 

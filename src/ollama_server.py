@@ -6,7 +6,7 @@ Two things influence speed and (slightly) the numbers the model computes, but ar
       OLLAMA_FLASH_ATTENTION=1   a faster way to compute attention that needs less GPU memory
       OLLAMA_KV_CACHE_TYPE=q8_0  the model's working memory for the context stored with 8 bits instead of 16
     With both, qwen3:8b with a 16384-token context fits completely on the 8 GB GPU.
-The expected values are in config.yaml (llm.ollama_server_env). When a run starts, run_experiment.py reads the
+The expected values are in config.yaml (model.ollama_server_env). When a run starts, run_experiment.py reads the
 real values, refuses to start if they differ, and stores them (and the version) in run_info.json.
 
 Where the variables are read: on Windows they are user (or machine) environment variables, which the Ollama
@@ -43,21 +43,20 @@ def read_environment_variable(name: str) -> str | None:
 
 
 def server_environment(expected: dict, reader: Callable[[str], str | None] = read_environment_variable) -> dict:
-    """The real value of every variable in expected (config.yaml llm.ollama_server_env).
+    """The real value of every variable in expected (config.yaml model.ollama_server_env).
 
     Raises ValueError if any differs from config.yaml, so a run never starts with other server settings.
     """
     actual = {name: reader(name) for name in expected}
     different = {name: (actual[name], str(value)) for name, value in expected.items() if actual[name] != str(value)}
     if different:
-        raise ValueError(f"Ollama server settings differ from config.yaml llm.ollama_server_env (now vs expected): "
+        raise ValueError(f"Ollama server settings differ from config.yaml model.ollama_server_env (now vs expected): "
                          f"{different}. Set them as Windows user environment variables and restart Ollama.")
     return actual
 
 
-def ollama_version(base_url: str, client: httpx.Client | None = None) -> str:
+def ollama_version(base_url: str, client: httpx.Client) -> str:
     """The version of the running Ollama server (GET /api/version)."""
-    client = client or httpx.Client(timeout=30)
     try:
         return client.get(f"{base_url.rstrip('/')}/api/version").json()["version"]
     except httpx.TransportError as e:

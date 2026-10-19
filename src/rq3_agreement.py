@@ -17,7 +17,7 @@ measures AGREEMENT WITH A STRONGER MODEL, not correctness. Report it that way.
 
 Run from the project root:
   .venv\\Scripts\\python.exe -m src.rq3_agreement
-Output: results/rq3_agreement.csv and results/rq3_confusion.json
+Output: results/rq3_agreement.csv and results/rq3_confusion.json (config.yaml paths.rq3_agreement / rq3_confusion)
 """
 
 import json
@@ -44,11 +44,12 @@ def cohen_kappa(pairs: list[tuple[str, str]]) -> float | None:
     return None if expected == 1 else (observed - expected) / (1 - expected)
 
 
-def label_pairs(mediation_dir, silver_cases: dict) -> tuple[list[tuple[str, str]], int]:
-    """(silver label, C3 label) for every passage, and how many pairs were skipped (failed on either side)."""
+def label_pairs(mediation_dir, silver_cases: dict, summary_file: str) -> tuple[list[tuple[str, str]], int]:
+    """(silver label, C3 label) for every passage, and how many pairs were skipped (failed on either side).
+    summary_file: the run summary in mediation_dir (config.yaml paths.mediation_summary_file), not a case."""
     pairs, skipped = [], 0
     for path in sorted(mediation_dir.glob("*.json")):
-        if path.name == "run_summary.json" or path.stem not in silver_cases:
+        if path.name == summary_file or path.stem not in silver_cases:
             continue
         silver = {p["passage_id"]: p["label"] for p in silver_cases[path.stem]["passages"]}
         for record in json.loads(path.read_text(encoding="utf-8"))["passages"]:
@@ -86,13 +87,13 @@ def main() -> None:
         mediation_dir = run["path"] / "C3" / config["paths"]["mediation_dir"]
         if not mediation_dir.exists():
             continue
-        pairs, skipped = label_pairs(mediation_dir, silver_cases)
+        pairs, skipped = label_pairs(mediation_dir, silver_cases, config["paths"]["mediation_summary_file"])
         result = agreement(pairs)
         confusion[run["run_id"]] = result.pop("confusion")
         rows.append({"run_id": run["run_id"], "repetition": run.get("repetition"), **result, "n_skipped": skipped})
     table = pd.DataFrame(rows)
-    table.to_csv(project_path("results/rq3_agreement.csv"), index=False)
-    project_path("results/rq3_confusion.json").write_text(json.dumps(confusion, indent=2), encoding="utf-8")
+    table.to_csv(project_path(config["paths"]["rq3_agreement"]), index=False)
+    project_path(config["paths"]["rq3_confusion"]).write_text(json.dumps(confusion, indent=2), encoding="utf-8")
     print(table.to_string(index=False) if not table.empty else "No C3 mediation files found.")
     print("Agreement with the SILVER (AI-made, not human-checked) reference; rows of the confusion matrix = silver.")
 

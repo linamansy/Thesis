@@ -4,6 +4,7 @@ No Node.js, BPMNGen or Ollama: a fake "runner" replaces subprocess.run and write
 real harness (bpmngen_harness/run_bpmngen.ts) would write.
 """
 
+import hashlib
 import json
 import subprocess
 from pathlib import Path
@@ -13,29 +14,34 @@ import pytest
 from run_experiment import ExperimentRunner
 from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit
 from src.config import load_config
-from src.generator import NO_KNOWLEDGE_TEXT
 from src.llm.base_llm import LLMUnavailableError
 from src.logger import RunLogger
+from src.prompt_texts import load_no_knowledge_text
 
 from bpmn_helpers import make_bpmn, sequential_model
 
 LABEL = "[Domain information (it may or may not apply to this process):]"
+NO_KNOWLEDGE_TEXT = load_no_knowledge_text(load_config())
+SYS_SHA = hashlib.sha256("SYS".encode("utf-8")).hexdigest()   # the fake harness's system prompt
 
 
 def bpmngen_config():
     config = load_config()
     config["generator"] = {"type": "bpmngen", "bpmngen_server_dir": "/bpmngen/server", "harness": "h.ts",
-                           "model": "qwen3:8b", "ollama_base_url": "http://ollama:11434",
                            "knowledge_label": LABEL, "timeout_seconds": 5, "npx_command": "npx",
-                           "think_param": False}
+                           "bpmngen_mode": "quick", "bpmngen_format": "xml",
+                           "expected": {"temperature": 0.3, "system_prompt_sha256": SYS_SHA}}
+    config["model"] = dict(config["model"], provider="ollama", name="qwen3:8b", ollama_url="http://ollama:11434",
+                           num_ctx=16384, think=False)
     return config
 
 
 def fake_harness(done_reason="stop", fits=True, returncode=0, stderr="", calls=None, thinking="", cut_off=False,
-                 think_tags=0):
+                 think_tags=0, request_changes=None):
     """A stand-in for the harness process: writes the files the real harness writes.
 
     thinking: text the model "thought" (Ollama's separate field); cut_off: the harness stopped a runaway answer.
+    request_changes: values that make the recorded Ollama request differ from config (top-level keys or "options").
     """
 
     def run(command, **kwargs):
@@ -50,10 +56,15 @@ def fake_harness(done_reason="stop", fits=True, returncode=0, stderr="", calls=N
         description = Path(args["--description"]).read_text(encoding="utf-8").strip()
         user = f"{description}\n\n{args['--label']}\n{knowledge}\n\n/no_think"
         think = {"false": False, "true": True}.get(args.get("--think"))
-        (out / "ollama_request.json").write_text(json.dumps(
-            {"model": args["--model"], "messages": [{"role": "system", "content": "SYS"},
-                                                    {"role": "user", "content": user}],
-             "options": {"num_ctx": 16384, "temperature": 0.3}, "think": think}), encoding="utf-8")
+        request = {"model": args["--model"], "messages": [{"role": "system", "content": "SYS"},
+                                                          {"role": "user", "content": user}],
+                   "options": {"num_ctx": 16384, "temperature": 0.3}, "think": think}
+        for key, value in (request_changes or {}).items():
+            if key == "options":
+                request["options"] |= value
+            else:
+                request[key] = value
+        (out / "ollama_request.json").write_text(json.dumps(request), encoding="utf-8")
         (out / "raw_model_output.txt").write_text("<xml/>", encoding="utf-8")
         (out / "raw_thinking.txt").write_text(thinking, encoding="utf-8")
         if not cut_off:
@@ -285,6 +296,54 @@ def test_cut_off_answer_is_a_failed_generation(tmp_path):
     assert record["generation_succeeded"] is False and record["valid"] is False
     assert record["context_limit_hit"] is True
     assert "cut off" in record["errors"][0]
+
+
+@pytest.mark.parametrize("changes,field", [
+    ({"options": {"temperature": 0.7}}, "temperature"),
+    ({"options": {"num_ctx": 8192}}, "num_ctx"),
+    ({"model": "qwen3:14b"}, "model"),
+    ({"think": True}, "think"),
+    ({"messages": [{"role": "system", "content": "another system prompt"}, {"role": "user", "content": "u"}]},
+     "system_prompt_sha256"),
+])
+def test_a_request_that_differs_from_config_stops_the_run(tmp_path, changes, field):
+    from run_experiment import RunInterrupted
+    from src.bpmngen_generator import GeneratorSetupError
+
+    runner = make_runner(tmp_path, "C1", fake_harness(request_changes=changes))
+    with pytest.raises(GeneratorSetupError, match=field):
+        runner.run_case("19")
+    assert not runner.is_finished("19")              # a setup error is never recorded as a model result
+    log = runner.logger.log_path.read_text(encoding="utf-8").splitlines()
+    assert len(log) == 1                              # but the call itself is logged
+    runner.case_ids = ["19"]
+    with pytest.raises(RunInterrupted, match=field):  # run_all stops the run (resumable)
+        runner.run_all()
+
+
+def test_harness_gets_class_mode_and_file_names_from_config(tmp_path):
+    calls = []
+    generator = make_generator(tmp_path, fake_harness(calls=calls))
+    generator.run("19", description_file(tmp_path), "block", tmp_path / "case")
+    command = calls[0][0]
+    args = dict(zip(command[5::2], command[6::2]))
+    config = bpmngen_config()
+    assert (args["--llm-module"], args["--llm-class"]) == (config["model"]["bpmngen_module"],
+                                                          config["model"]["bpmngen_class"])
+    assert (args["--mode"], args["--format"], args["--model"]) == ("quick", "xml", config["model"]["name"])
+    assert args["--think"] == "false" and args["--base-url"] == config["model"]["ollama_url"]
+    paths = config["paths"]
+    assert (args["--request-file"], args["--meta-file"], args["--bpmn-file"]) == (
+        paths["bpmngen_request_file"], paths["bpmngen_meta_file"], paths["generated_bpmn_file"])
+
+
+def test_generator_and_agents_read_the_same_model_block(tmp_path):
+    from src.llm.ollama_llm import OllamaLLM
+    config = bpmngen_config()
+    generator = make_generator(tmp_path, fake_harness())
+    agents = OllamaLLM.from_config(config)   # builds an httpx client, makes no request
+    assert (generator.model, generator.num_ctx, generator.think) == (agents.model, agents.num_ctx, agents.think)
+    assert str(agents.client.base_url).rstrip("/") == generator.base_url.rstrip("/") == config["model"]["ollama_url"]
 
 
 def test_unreachable_ollama_leaves_the_case_unfinished(tmp_path):

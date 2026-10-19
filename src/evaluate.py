@@ -79,10 +79,11 @@ def failure_type(validation: dict, di_stripped: bool) -> str:
     return "missing_namespace_rescued" if di_stripped else "invalid_xml_other"
 
 
-def split_sentences(text: str) -> list[str]:
-    """Sentences and list lines of a text (for the extra-task diagnostic); very short pieces are dropped."""
+def split_sentences(text: str, min_chars: int) -> list[str]:
+    """Sentences and list lines of a text (for the extra-task diagnostic); pieces shorter than min_chars
+    (config.yaml evaluation.trace_min_sentence_chars) are dropped."""
     pieces = re.split(r"(?<=[.;:!?])\s+|\n+", text)
-    return [p.strip(" -") for p in pieces if len(p.strip(" -")) >= 15]
+    return [p.strip(" -") for p in pieces if len(p.strip(" -")) >= min_chars]
 
 
 class Evaluator:
@@ -108,16 +109,16 @@ class Evaluator:
         self.matcher = matcher or TaskMatcher(settings["embedding_model"], settings["similarity_threshold"])
         self.complexity = ComplexityMeasurer()
         self.di_rescue = DIRescue()
-        self.message_flows_as_order = settings.get("message_flows_as_order", True)
-        self.trace_threshold = settings.get("trace_threshold", 0.5)
-        self.trace_sweep_thresholds = settings.get("trace_sensitivity_thresholds", [])
-        self.trace_csv_pattern = paths.get("evaluation_trace_csv")
-        self.trace_summary_path = (project_path(paths["evaluation_trace_summary"])
-                                   if "evaluation_trace_summary" in paths else None)
-        self.knowledge_file = paths.get("knowledge_block_file", "knowledge_block.txt")
-        silver_path = project_path(paths["silver_reference"]) if "silver_reference" in paths else None
+        self.message_flows_as_order = settings["message_flows_as_order"]
+        self.trace_threshold = settings["trace_threshold"]
+        self.trace_sweep_thresholds = settings["trace_sensitivity_thresholds"]
+        self.min_sentence_chars = settings["trace_min_sentence_chars"]
+        self.trace_csv_pattern = paths["evaluation_trace_csv"]
+        self.trace_summary_path = project_path(paths["evaluation_trace_summary"])
+        self.knowledge_file = paths["knowledge_block_file"]
+        silver_path = project_path(paths["silver_reference"])
         self.silver = (json.loads(silver_path.read_text(encoding="utf-8"))["cases"]
-                       if silver_path and silver_path.exists() else None)
+                       if silver_path.exists() else None)
 
     # ---------- comparing two models ----------
 
@@ -305,8 +306,9 @@ class Evaluator:
             return result
         description = (self.cases_dir / case_id / self.config["paths"]["case_description_file"]).read_text(
             encoding="utf-8")
-        to_knowledge = self.matcher.best_similarity(labels, split_sentences(knowledge_path.read_text(encoding="utf-8")))
-        to_description = self.matcher.best_similarity(labels, split_sentences(description))
+        knowledge = knowledge_path.read_text(encoding="utf-8")
+        to_knowledge = self.matcher.best_similarity(labels, split_sentences(knowledge, self.min_sentence_chars))
+        to_description = self.matcher.best_similarity(labels, split_sentences(description, self.min_sentence_chars))
         for i, label, k, d in zip(ids, labels, to_knowledge, to_description):
             traceable = k >= self.trace_threshold and k > d
             result["extra_tasks"].append({"generated_id": i, "label": label, "similarity_to_knowledge": round(k, 4),

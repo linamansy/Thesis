@@ -9,7 +9,7 @@
   - Fixed model version: a name like "qwen3:8b" can point to a different file after a new
     `ollama pull`. The exact file is identified by its digest (a sha256 hash). Before the first call,
     the digest of the installed model is read from Ollama (/api/tags) and compared with
-    llm.ollama_model_digest in config.yaml; if they differ, the run stops. The digest is logged
+    model.ollama_model_digest in config.yaml; if they differ, the run stops. The digest is logged
     with every call (model_digest), next to the model name.
   - finish_reason: Ollama reports "stop" (answer complete) or "length" (cut off at max_tokens).
     They are written as "STOP" and "MAX_TOKENS", the same words as for Gemini, so cut-off
@@ -63,9 +63,9 @@ class OllamaLLM(LLMClient):
 
     @classmethod
     def from_config(cls, config: dict, client: httpx.Client | None = None) -> "OllamaLLM":
-        llm = config["llm"]
-        return cls(llm["model"], llm["temperature"], llm["max_tokens"], llm["seed"], llm["num_ctx"],
-                   llm["think"], llm["ollama_model_digest"], llm["ollama_url"], llm["ollama_timeout_seconds"],
+        model, llm = config["model"], config["llm"]   # the shared model block, and the agents' own settings
+        return cls(model["name"], llm["temperature"], llm["max_tokens"], llm["seed"], model["num_ctx"],
+                   model["think"], model["ollama_model_digest"], model["ollama_url"], llm["ollama_timeout_seconds"],
                    llm["ollama_api_max_retries"], llm["api_initial_wait_seconds"], client=client)
 
     def request_body(self, prompt: str) -> dict:
@@ -106,7 +106,7 @@ class OllamaLLM(LLMClient):
         digest = installed[self.model]
         if self.expected_digest and digest != self.expected_digest:
             raise LLMUnavailableError(f"Model {self.model!r} in Ollama has digest {digest}, but config.yaml fixes "
-                                      f"{self.expected_digest} (llm.ollama_model_digest). The model was changed.")
+                                      f"{self.expected_digest} (model.ollama_model_digest). The model was changed.")
         self.model_digest = digest
 
     def complete(self, prompt: str) -> str:

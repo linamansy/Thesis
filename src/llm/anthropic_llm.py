@@ -54,7 +54,7 @@ class AnthropicLLM(LLMClient):
         """client and sleep can be replaced in tests, so no real API call and no real waiting happens."""
         super().__init__(model=model, temperature=temperature)
         if not model or model == PLACEHOLDER_MODEL:
-            raise ValueError("Set llm.model in config.yaml to a real Claude model id before using the Anthropic API.")
+            raise ValueError("Set model.name in config.yaml to a real Claude model id before using the Anthropic API.")
         self.max_tokens = max_tokens
         self.api_max_retries = api_max_retries
         self.initial_wait_seconds = initial_wait_seconds
@@ -66,7 +66,7 @@ class AnthropicLLM(LLMClient):
             if not api_key:
                 raise MissingAPIKeyError(
                     "ANTHROPIC_API_KEY is not set. Create a file .env in the project root (see .env.example) "
-                    "with the line ANTHROPIC_API_KEY=<your key>, or set llm.provider to mock in config.yaml.")
+                    "with the line ANTHROPIC_API_KEY=<your key>, or set model.provider to mock in config.yaml.")
             client = anthropic.Anthropic(api_key=api_key, max_retries=0)
         self.client = client
 
@@ -74,7 +74,7 @@ class AnthropicLLM(LLMClient):
     def from_config(cls, config: dict, client=None) -> "AnthropicLLM":
         load_dotenv(project_path(config["paths"]["env_file"]))  # puts ANTHROPIC_API_KEY into the environment
         llm = config["llm"]
-        return cls(llm["model"], llm["temperature"], llm["max_tokens"], llm["api_max_retries"],
+        return cls(config["model"]["name"], llm["temperature"], llm["max_tokens"], llm["api_max_retries"],
                    llm["api_initial_wait_seconds"], client=client)
 
     def request(self, prompt: str) -> dict:

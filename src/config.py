@@ -26,7 +26,7 @@ def load_config(config_path: Path = CONFIG_PATH) -> dict:
     with open(config_path, encoding="utf-8") as f:
         config = yaml.safe_load(f)
     if os.environ.get(FORCE_MOCK_VARIABLE) == "1":
-        config["llm"]["provider"] = "mock"
+        config["model"]["provider"] = "mock"
         # Tests never start BPMNGen/Ollama: they use the legacy JSON generator with mock answers.
         # (BPMNGenGenerator has its own tests with a fake harness, see tests/test_bpmngen_generator.py.)
         config["generator"]["type"] = "json_builder"

@@ -35,7 +35,7 @@ def now() -> str:
 
 
 def default_run_id(config: dict, repetition: int) -> str:
-    return f"{config['llm']['provider']}_rep{repetition}"
+    return f"{config['model']['provider']}_rep{repetition}"
 
 
 class RunFolder:
@@ -54,16 +54,16 @@ class RunFolder:
         self.validation_file = paths["validation_file"]
         self.path = project_path(paths["runs"]) / run_id
         self.info_path = self.path / paths["run_info_file"]
-        llm = config["llm"]
+        shared, llm = config["model"], config["llm"]   # the one model block, and the agents' own settings
         # A mock run does not use the configured model, so it is recorded as the mock's own name.
-        model = MockLLM.MODEL_NAME if llm["provider"] == "mock" else llm["model"]
+        model = MockLLM.MODEL_NAME if shared["provider"] == "mock" else shared["name"]
         generator = config["generator"]
-        generator_name = (f"bpmngen/{generator['model']}" if generator["type"] == "bpmngen" else "json_builder")
-        self.settings = {"run_id": run_id, "repetition": repetition, "provider": llm["provider"],
+        generator_name = (f"bpmngen/{shared['name']}" if generator["type"] == "bpmngen" else "json_builder")
+        self.settings = {"run_id": run_id, "repetition": repetition, "provider": shared["provider"],
                          "model": model, "temperature": llm["temperature"], "generator": generator_name}
-        if llm["provider"] == "ollama":  # the exact local model file and its generation settings
-            self.settings |= {"model_digest": llm["ollama_model_digest"], "seed": llm["seed"],
-                              "num_ctx": llm["num_ctx"], "think": llm["think"], "max_tokens": llm["max_tokens"]}
+        if shared["provider"] == "ollama":  # the exact local model file and its generation settings
+            self.settings |= {"model_digest": shared["ollama_model_digest"], "seed": llm["seed"],
+                              "num_ctx": shared["num_ctx"], "think": shared["think"], "max_tokens": llm["max_tokens"]}
         self.settings |= extra_settings or {}
 
     # ---------- state of the run ----------

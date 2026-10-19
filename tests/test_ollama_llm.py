@@ -82,13 +82,13 @@ def test_request_sends_all_settings_with_thinking_off():
 
 
 def test_settings_are_read_from_config():
-    config = dict(CONFIG, llm=dict(CONFIG["llm"], provider="ollama"))
+    config = dict(CONFIG, model=dict(CONFIG["model"], provider="ollama"))
     llm = OllamaLLM.from_config(config, client=FakeClient())
-    expected = CONFIG["llm"]
+    shared, agents = CONFIG["model"], CONFIG["llm"]   # the one model block + the agents' own settings
     assert (llm.model, llm.temperature, llm.seed, llm.num_ctx, llm.think, llm.max_tokens) == (
-        expected["model"], expected["temperature"], expected["seed"], expected["num_ctx"],
-        expected["think"], expected["max_tokens"])
-    assert llm.expected_digest == expected["ollama_model_digest"]
+        shared["name"], agents["temperature"], agents["seed"], shared["num_ctx"],
+        shared["think"], agents["max_tokens"])
+    assert llm.expected_digest == shared["ollama_model_digest"]
 
 
 def test_model_name_digest_and_finish_reason_are_logged(tmp_path):
@@ -181,7 +181,7 @@ def test_api_error_does_not_mark_the_case_finished(tmp_path):
 # ---------- setup ----------
 
 def test_ollama_provider_shares_one_client():
-    config = dict(CONFIG, llm=dict(CONFIG["llm"], provider="ollama"))
+    config = dict(CONFIG, model=dict(CONFIG["model"], provider="ollama"))
     shared = {}
     generator = create_llm(config, "generator", shared)   # makes no request
     agents = [create_llm(config, role, shared) for role in MEDIATION_ROLES]
@@ -190,8 +190,8 @@ def test_ollama_provider_shares_one_client():
 
 
 def test_run_folder_records_the_digest_and_settings(tmp_path):
-    config = dict(CONFIG, llm=dict(CONFIG["llm"], provider="ollama"),
+    config = dict(CONFIG, model=dict(CONFIG["model"], provider="ollama"),
                   paths=dict(CONFIG["paths"], runs=str(tmp_path)))
     settings = RunFolder(config, "smoke_test", 1).settings
-    assert settings["model_digest"] == CONFIG["llm"]["ollama_model_digest"]
+    assert settings["model_digest"] == CONFIG["model"]["ollama_model_digest"]
     assert (settings["seed"], settings["num_ctx"], settings["think"]) == (42, 16384, False)

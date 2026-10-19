@@ -7,13 +7,14 @@ from src.agents.applicability_agent import ApplicabilityAgent
 from src.agents.relevance_agent import RelevanceAgent
 from src.agents.requirement_agent import RequirementAgent
 from src.config import load_config, project_path
-from src.generator import NO_KNOWLEDGE_TEXT
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
 from src.orchestrator import IRRELEVANT, MEDIATION_FAILED, Orchestrator
+from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
 from src.retrieval.passage import load_passages
 
 CONFIG = load_config()
+NO_KNOWLEDGE_TEXT = load_no_knowledge_text(CONFIG)
 CASE = "19"
 DESCRIPTION = (project_path(CONFIG["paths"]["cases"]) / CASE / "description.txt").read_text(encoding="utf-8")
 FROZEN = json.loads(project_path(CONFIG["paths"]["frozen_retrieval"]).read_text(encoding="utf-8"))["cases"]
@@ -53,7 +54,8 @@ def make(tmp_path, relevance, applicability, requirement=(REQUIREMENT,), llm_cla
     orchestrator = Orchestrator(RelevanceAgent(llms["relevance"], logger),
                                 ApplicabilityAgent(llms["applicability"], logger),
                                 RequirementAgent(llms["requirement"], logger),
-                                FROZEN, TITLES, tmp_path / "mediation")
+                                FROZEN, TITLES, tmp_path / "mediation", load_c3_block_template(CONFIG),
+                                CONFIG["paths"]["mediation_summary_file"])
     return orchestrator, llms
 
 

@@ -56,14 +56,14 @@ def sha256(path: Path) -> str:
 def create_annotator_llm(config: dict) -> LLMClient:
     """The annotator's LLM: config.yaml silver section (mock in tests)."""
     silver = config["silver"]
-    if config["llm"]["provider"] == "mock":  # THESIS_FORCE_MOCK (tests)
+    if config["model"]["provider"] == "mock":  # THESIS_FORCE_MOCK (tests)
         answer = project_path(config["paths"]["mock_silver_response"]).read_text(encoding="utf-8")
         return MockLLM([answer])
     if silver["provider"] == "groq":
         return GroqLLM.from_config(config)
     if silver["provider"] != "gemini":
         raise ValueError(f"silver.provider must be groq or gemini, not {silver['provider']!r}")
-    annotator_config = dict(config, llm=dict(config["llm"], model=silver["model"],
+    annotator_config = dict(config, model=dict(config["model"], name=silver["model"]), llm=dict(config["llm"],
                                              temperature=silver["temperature"], max_tokens=silver["max_tokens"]))
     return GeminiLLM.from_config(annotator_config)
 
@@ -171,7 +171,7 @@ def main() -> None:
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     logger = RunLogger(project_path(paths["logs"]), "SILVER", f"silver_{stamp}")
     llm = create_annotator_llm(config)
-    expected_model = None if config["llm"]["provider"] == "mock" else config["silver"]["model"]
+    expected_model = None if config["model"]["provider"] == "mock" else config["silver"]["model"]
     try:
         model_version = llm.listed_version() if isinstance(llm, GeminiLLM) else None
         builder = SilverReferenceBuilder(config, SilverAnnotator(llm, logger), project_path(paths["silver_reference"]),

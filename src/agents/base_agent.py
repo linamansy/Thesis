@@ -20,11 +20,10 @@ from pydantic import BaseModel, ValidationError
 from src.config import load_config, project_path
 from src.llm.base_llm import LLMClient
 from src.logger import RunLogger
+from src.prompt_texts import load_json_retry_note
 
-RETRY_NOTE = (
-    "\n\nYour previous answer could not be accepted: {error}\n"
-    "Answer again with only a valid JSON object that matches the required format."
-)
+# The note added to the prompt after an invalid answer is in prompts/json_retry_note.json (config.yaml
+# paths.json_retry_note); it contains {error}.
 
 
 class BaseAgent(ABC):
@@ -43,6 +42,7 @@ class BaseAgent(ABC):
         if max_retries is None:
             max_retries = config["llm"]["max_retries"]
         self.max_retries = max_retries
+        self.retry_note = load_json_retry_note(config)
         if template_path is None and self.prompt_key:
             template_path = project_path(config["paths"][self.prompt_key])
         self.template = Path(template_path).read_text(encoding="utf-8") if template_path else None
@@ -88,7 +88,7 @@ class BaseAgent(ABC):
             )
             if parsed is not None:
                 return parsed
-            current_prompt = prompt + RETRY_NOTE.format(error=error)
+            current_prompt = prompt + self.retry_note.format(error=error)
 
         return None
 

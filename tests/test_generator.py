@@ -6,11 +6,13 @@ import pytest
 
 from run_experiment import ExperimentRunner
 from src.config import load_config, project_path
-from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
+from src.generator import BPMNGenerator, format_passages
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
+from src.prompt_texts import load_no_knowledge_text
 
 CONFIG = load_config()
+NO_KNOWLEDGE_TEXT = load_no_knowledge_text(CONFIG)
 
 
 def make_generator(tmp_path, responses=("{}",)):

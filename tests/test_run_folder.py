@@ -13,8 +13,9 @@ from src.run_folder import RunFolder, default_run_id
 CONFIG = load_config()
 
 
-def config_in(tmp_path, **llm):
-    return dict(CONFIG, llm=dict(CONFIG["llm"], **llm), paths=dict(CONFIG["paths"], runs=str(tmp_path / "runs")))
+def config_in(tmp_path, **model):
+    """model: overrides of the shared model block (provider, name, ...)."""
+    return dict(CONFIG, model=dict(CONFIG["model"], **model), paths=dict(CONFIG["paths"], runs=str(tmp_path / "runs")))
 
 
 # ---------- RunLogger ----------
@@ -105,9 +106,9 @@ def test_a_run_folder_cannot_mix_settings(tmp_path):
         RunFolder(config_in(tmp_path), "shared", 2).check_can_start("C2")          # other repetition
     with pytest.raises(ValueError, match="other settings"):
         RunFolder(config_in(tmp_path, provider="gemini"), "shared", 1).check_can_start("C2")  # other provider
-    RunFolder(config_in(tmp_path, provider="gemini", model="gemini-a"), "real", 1).start_part("C1", 1, tmp_path / "x")
+    RunFolder(config_in(tmp_path, provider="gemini", name="gemini-a"), "real", 1).start_part("C1", 1, tmp_path / "x")
     with pytest.raises(ValueError, match="other settings"):
-        RunFolder(config_in(tmp_path, provider="gemini", model="gemini-b"), "real", 1).check_can_start("C2")
+        RunFolder(config_in(tmp_path, provider="gemini", name="gemini-b"), "real", 1).check_can_start("C2")
 
 
 def test_mock_run_records_the_mock_model_name(tmp_path):

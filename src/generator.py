@@ -8,8 +8,7 @@ knowledge block. The conditions differ ONLY in the text put in the knowledge blo
 from src.agents.base_agent import BaseAgent
 from src.schemas import ProcessModel
 
-# Knowledge block used in condition C1.
-NO_KNOWLEDGE_TEXT = "No domain knowledge provided."
+# The knowledge block of C1 is in prompts/c1_no_knowledge.txt (src/prompt_texts.load_no_knowledge_text).
 
 
 def format_passages(passages: list[dict]) -> str:

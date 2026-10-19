@@ -150,3 +150,50 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
   the runs). Versions are compared only within one run, not across the study's runs (as with the hashes, this
   could be added). npm ls adds a few seconds at run start. Old unfinished run folders cannot be resumed (new
   settings key).
+
+## Fix 5 (B7+C1): hard-coded values into config.yaml; one model block, 19 Oct 2026
+- **Your decisions:** shared model block plus checks; prompt texts as files in prompts/.
+- **What changed:**
+  - **One `model` block** (provider, name, digest, Ollama URL, server env, num_ctx, think, BPMNGen module/class,
+    info timeout), read by BOTH BPMNGenGenerator and the agents (OllamaLLM; also Gemini/Anthropic). `llm` keeps
+    only what the agents send (temperature 0, seed, max_tokens, timeouts, retries). Removed duplicates:
+    `generator.model`, `generator.ollama_base_url`, `generator.think_param`, `llm.model/provider/num_ctx/think/...`.
+  - **`generator.expected`** = BPMNGen's own fixed values (temperature 0.3; SHA-256 of its system prompt, identical
+    in all 117 Study 1 requests). After every BPMNGen call, `check_request()` compares model, temperature,
+    num_ctx, think and system-prompt hash with config. A difference raises `GeneratorSetupError`: the call is
+    logged, the case stays unfinished, and the run stops (resumable). It is never recorded as a model result.
+  - **Prompt texts into files:** `prompts/c1_no_knowledge.txt` (C1 block), `prompts/c3_block_template.json` (C3
+    headings, explanation lines, line formats, "(none)", "none stated"), `prompts/json_retry_note.json` (retry
+    note). They were created from the code constants, unchanged. Exact-whitespace texts are JSON strings.
+    Loader: `src/prompt_texts.py`.
+  - **Harness:** BPMNGen module/class, mode, format and all output file names are now arguments (from config);
+    the defaults equal the old fixed values. A missing class gives a clear error.
+  - **File names / thresholds / settings now in config:** bpmngen output folder and file names, mediation
+    summary file, rq3 outputs, context_check dir, statistics table names and round_decimals (10),
+    trace_min_sentence_chars (15), groq_max_rate_limit_waits (100), ollama_info_timeout_seconds (30). Silent
+    defaults in evaluate.py removed (config values required).
+- **Files:** `config.yaml`, `prompts/c1_no_knowledge.txt`, `prompts/c3_block_template.json`,
+  `prompts/json_retry_note.json` (new), `src/prompt_texts.py` (new), `src/bpmngen_generator.py`,
+  `bpmngen_harness/run_bpmngen.ts`, `run_experiment.py`, `src/orchestrator.py`, `src/agents/base_agent.py`,
+  `src/generator.py`, `src/run_folder.py`, `src/config.py`, `src/bpmngen_files.py`, `src/llm/{ollama,gemini,
+  anthropic,groq}_llm.py`, `src/ollama_server.py`, `src/build_silver_reference.py`, `src/evaluate.py`,
+  `src/statistics.py`, `src/rq3_agreement.py`, `src/count_prompt_tokens.py`, `CLAUDE.md`, tests.
+- **Tests:** `tests/test_study1_prompts.py` (new, 119 tests). The current config reproduces all 117 stored
+  Study 1 generator prompts byte for byte (knowledge block from config = stored knowledge_block.txt; BPMNGen user
+  message = harness join of the stored inputs; check_request passes for every stored request) and all 249
+  logged agent prompts (195 relevance, 54 applicability; no retries and no requirement calls happened in
+  Study 1). Negative checks: changing one template character or the label makes it fail. Plus 7 new tests
+  (each request field mismatch stops the run and is logged; harness args from config; generator and agents read
+  the same model block). Existing tests moved to the new keys. Suite: 521 passed.
+- **Live check:** one real generation (`smoke_fix5_config`, C1, case 01, new folder) passed check_request
+  against the real BPMNGen. run_info has the same fields and values as Study 1 plus hashes and library
+  versions. The log carries the digest. The model's XML was invalid (missing bpmndi namespace, as in Study 1).
+  The harness in list mode with the configured class still sees the same 16 BPMNGen files.
+- **Invariant:** all 21 Study 1 outputs byte-identical. results/: no existing file changed; only the new smoke
+  run folder and its log were added.
+- **Fairness:** the generator request is unchanged (shown for Study 1 data by the reproduction test, and live
+  by check_request). C1/C2/C3 still differ only in the knowledge block.
+- **Risk / left as is:** the three failure-type lists (evaluate/summarise/statistics) stay in code, because their
+  order fixes the column order of existing outputs. `scripts/run_main_experiment.ps1` is kept unchanged as the
+  record of what ran Study 1. The retry-note path is covered by unit tests only (no retries in Study 1).
+  Old unfinished run folders are unaffected (run_info field names unchanged).

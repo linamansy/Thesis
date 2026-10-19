@@ -11,6 +11,7 @@ from src.statistics import (Analysis, bootstrap_median_ci, case_means, friedman_
 
 CONFIG = load_config()
 CONDITIONS = ["C1", "C2", "C3"]
+DECIMALS = CONFIG["statistics"]["round_decimals"]
 CASES = [f"{i:02d}" for i in range(1, 14)]
 
 
@@ -62,9 +63,9 @@ def test_floating_point_noise_is_not_a_difference():
     # 0.3 - 0.2 and 0.4 - 0.3 differ in floating point (1e-17), but they are the same difference
     means = pd.DataFrame({"C1": [0.2, 0.3], "C3": [0.3, 0.4]})
     from src.statistics import paired_differences
-    assert paired_differences(means, "C3", "C1").nunique() == 1
+    assert paired_differences(means, "C3", "C1", DECIMALS).nunique() == 1
     same = pd.DataFrame({"C1": [0.1 + 0.2], "C3": [0.3]})                # 0.30000000000000004 vs 0.3
-    assert paired_differences(same, "C3", "C1").iloc[0] == 0
+    assert paired_differences(same, "C3", "C1", DECIMALS).iloc[0] == 0
 
 
 def test_wilcoxon_all_zero_is_not_testable():
@@ -83,7 +84,7 @@ def test_bootstrap_ci():
 
 def test_case_means_average_repetitions_and_skip_missing():
     table = pd.DataFrame({"case_id": ["01"] * 3, "condition": ["C1"] * 3, "behavioral_similarity": [0.2, 0.4, None]})
-    assert case_means(table, "behavioral_similarity", CONDITIONS).loc["01", "C1"] == pytest.approx(0.3)
+    assert case_means(table, "behavioral_similarity", CONDITIONS, DECIMALS).loc["01", "C1"] == pytest.approx(0.3)
 
 
 def test_friedman_matches_scipy_and_handles_no_differences():
@@ -155,7 +156,7 @@ def test_secondary_analysis_uses_valid_or_rescued_only_and_failure_types():
     table.loc[rescued, ["valid", "di_stripped", "failure_type"]] = [False, True, "missing_namespace_rescued"]
     analysis = Analysis(table, settings(), CONDITIONS)
 
-    main = case_means(table, "f1", CONDITIONS).loc["01", "C3"]
+    main = case_means(table, "f1", CONDITIONS, DECIMALS).loc["01", "C3"]
     assert main == pytest.approx((0 + 0.3 + 0.3) / 3)            # main analysis: invalid counts as 0
     secondary = analysis.valid_or_rescued()
     f1 = secondary[(secondary["metric"] == "f1") & (secondary["comparison"] == "C3 vs C1")].iloc[0]

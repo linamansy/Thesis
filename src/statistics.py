@@ -48,20 +48,21 @@ FAILURE_TYPES = ["invalid_xml_other", "missing_namespace_rescued", "thinking_det
 
 # ---------- building blocks (each tested with known answers) ----------
 
-DECIMALS = 10  # floating-point noise (e.g. 0.3 - 0.2 = 0.09999999999999998) must not create fake ranks or
-               # fake non-zero differences; evaluation.csv has 4 decimals, so 10 loses nothing
+# Case means and paired differences are rounded to config.yaml statistics.round_decimals (10): floating-point noise
+# (e.g. 0.3 - 0.2 = 0.09999999999999998) must not create fake ranks or fake non-zero differences; evaluation.csv
+# has 4 decimals, so 10 loses nothing.
 
 
-def case_means(table: pd.DataFrame, metric: str, conditions: list[str]) -> pd.DataFrame:
+def case_means(table: pd.DataFrame, metric: str, conditions: list[str], decimals: int) -> pd.DataFrame:
     """One value per case and condition: the mean over the repetitions (missing values are skipped)."""
     values = pd.to_numeric(table[metric], errors="coerce")
     means = table.assign(_value=values).groupby(["case_id", "condition"])["_value"].mean().unstack("condition")
-    return means.reindex(columns=conditions).round(DECIMALS)
+    return means.reindex(columns=conditions).round(decimals)
 
 
-def paired_differences(means: pd.DataFrame, first: str, second: str) -> pd.Series:
+def paired_differences(means: pd.DataFrame, first: str, second: str, decimals: int) -> pd.Series:
     """first minus second, for the cases that have a value in both conditions."""
-    return (means[first] - means[second]).dropna().round(DECIMALS)
+    return (means[first] - means[second]).dropna().round(decimals)
 
 
 def wilcoxon_test(differences: pd.Series) -> dict:
@@ -141,7 +142,7 @@ class Analysis:
         self.conditions = conditions
 
     def comparison_row(self, means: pd.DataFrame, metric: str, first: str, second: str, role: str) -> dict:
-        d = paired_differences(means, first, second)
+        d = paired_differences(means, first, second, self.s["round_decimals"])
         median, low, high = bootstrap_median_ci(d, self.s["bootstrap_resamples"], self.s["bootstrap_seed"])
         row = {"metric": metric, "comparison": f"{first} vs {second}", "role": role,
                "median_difference": median, "ci95_low": low, "ci95_high": high,
@@ -154,7 +155,7 @@ class Analysis:
         """Friedman + the 4 planned Wilcoxon tests (Holm-corrected) + C2 vs C1 effect sizes, for one table."""
         rows = []
         for metric in self.s["primary_metrics"]:
-            means = case_means(table, metric, self.conditions)
+            means = case_means(table, metric, self.conditions, self.s["round_decimals"])
             rows.append({"metric": metric, "comparison": " vs ".join(self.conditions), "role": "friedman",
                          **friedman_test(means, self.conditions)})
             for first, second in self.s["planned_comparisons"]:
@@ -171,7 +172,7 @@ class Analysis:
         """Per condition and metric: distribution of the case means (all generations)."""
         rows = []
         for metric in self.s["primary_metrics"] + self.s["secondary_metrics"]:
-            means = case_means(self.table, metric, self.conditions)
+            means = case_means(self.table, metric, self.conditions, self.s["round_decimals"])
             for condition in self.conditions:
                 v = means[condition].dropna()
                 rows.append({"metric": metric, "condition": condition, "n_cases": len(v),
@@ -182,7 +183,7 @@ class Analysis:
     def overapplication(self) -> pd.DataFrame:
         metric = self.s["overapplication_metric"]
         first, second = self.s["overapplication_comparison"]
-        means = case_means(self.table, metric, self.conditions)
+        means = case_means(self.table, metric, self.conditions, self.s["round_decimals"])
         return pd.DataFrame([self.comparison_row(means, metric, first, second, "overapplication")])
 
     def rq2(self) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -190,9 +191,9 @@ class Analysis:
         complexity = self.table.groupby("case_id")[self.s["complexity_measures"]].first()
         effects = pd.DataFrame(index=complexity.index)
         for metric in self.s["primary_metrics"]:
-            means = case_means(self.table, metric, self.conditions)
+            means = case_means(self.table, metric, self.conditions, self.s["round_decimals"])
             for first, second in self.s["planned_comparisons"]:
-                effects[f"{metric}: {first}-{second}"] = (means[first] - means[second]).round(DECIMALS)
+                effects[f"{metric}: {first}-{second}"] = (means[first] - means[second]).round(self.s["round_decimals"])
         rows = [{"complexity": c, "effect": e, **spearman(complexity[c], effects[e])}
                 for c in self.s["complexity_measures"] for e in effects.columns]
         return pd.DataFrame(rows), complexity.join(effects).reset_index()
@@ -231,14 +232,15 @@ def run_analysis(table: pd.DataFrame, config: dict, out_dir) -> dict[str, pd.Dat
     """Compute every table and write it to out_dir as CSV. Returns the tables by file name."""
     analysis = Analysis(table, config["statistics"], config["conditions"])
     rq2, rq2_cases = analysis.rq2()
+    names = config["statistics"]["tables"]   # output file names
     tables = {
-        "rq1_primary_tests.csv": analysis.planned_tests(table),
-        "rq1_descriptive.csv": analysis.descriptive(),
-        "rq1_overapplication.csv": analysis.overapplication(),
-        "rq2_spearman.csv": rq2,
-        "rq2_case_effects.csv": rq2_cases,
-        "secondary_valid_or_rescued_tests.csv": analysis.valid_or_rescued(),
-        "failure_types.csv": analysis.failure_types(),
+        names["primary_tests"]: analysis.planned_tests(table),
+        names["descriptive"]: analysis.descriptive(),
+        names["overapplication"]: analysis.overapplication(),
+        names["rq2_spearman"]: rq2,
+        names["rq2_case_effects"]: rq2_cases,
+        names["valid_or_rescued_tests"]: analysis.valid_or_rescued(),
+        names["failure_types"]: analysis.failure_types(),
     }
     out_dir.mkdir(parents=True, exist_ok=True)
     for name, frame in tables.items():

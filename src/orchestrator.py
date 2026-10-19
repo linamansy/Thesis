@@ -11,8 +11,9 @@ If an agent still fails after its retry (invalid output, or another error), the 
 Exception: LLMUnavailableError (the API gave an error instead of an answer, e.g. the daily free-tier
 limit after all API retries, or 404 model not found) is NOT a mediation result. It is passed on, so the run stops and can be resumed.
 
-The C3 knowledge block is then built from the labels. It ALWAYS has the same two headings,
-each followed by the same fixed explanation line (REQUIREMENTS_EXPLANATION, UNCONFIRMED_EXPLANATION):
+The C3 knowledge block is then built from the labels, with the layout in prompts/c3_block_template.json
+(config.yaml paths.c3_block_template; moved there unchanged from this file on 19 Oct 2026, fix B7).
+It ALWAYS has the same two headings, each followed by the same fixed explanation line:
   REQUIREMENTS                              one line per Applicable passage with its requirement
   RULES WITH UNCONFIRMED APPLICABILITY      id and title of each Indeterminate passage, followed by
                                             "Unconfirmed: <condition>" for each of its conditions whose
@@ -25,7 +26,8 @@ Saved (provenance, by code) in the run's C3/mediation/ folder:
                      the resolver's checked conditions and downgrades, the requirement, and the
                      knowledge block of the case. Written only when the case's mediation is complete.
                      If it already exists (a resumed run), it is reused and the agents are not called again.
-  run_summary.json   counts over all mediation files of the run (so it also covers resumed runs)
+  run_summary.json   counts over all mediation files of the run (so it also covers resumed runs;
+                     file name: config.yaml paths.mediation_summary_file)
 """
 
 import json
@@ -42,14 +44,10 @@ from src.mediation.relevance_evidence_checker import RelevanceEvidenceChecker
 IRRELEVANT = "Irrelevant"
 MEDIATION_FAILED = "Mediation failed"
 LABELS = [APPLICABLE, INDETERMINATE, NOT_APPLICABLE, IRRELEVANT, MEDIATION_FAILED]
-REQUIREMENTS_HEADING = "REQUIREMENTS"
-REQUIREMENTS_EXPLANATION = "These rules were checked and apply to this process."
-UNCONFIRMED_HEADING = "RULES WITH UNCONFIRMED APPLICABILITY"
-# Descriptive only (16 Oct 2026): an instruction such as "Do not add steps for them" would be an extra
-# INSTRUCTION that only C3 gets, so C3 would differ from C2 in more than the knowledge. The block states
-# what mediation found (the status of each rule); what the generator does with it is left to the generator.
-UNCONFIRMED_EXPLANATION = "These rules may apply, but the description does not confirm that their conditions are met."
-EMPTY_SECTION_TEXT = "(none)"
+# The block template (prompts/c3_block_template.json) is descriptive only (16 Oct 2026): an instruction such as
+# "Do not add steps for them" would be an extra INSTRUCTION that only C3 gets, so C3 would differ from C2 in more
+# than the knowledge. The block states what mediation found (the status of each rule); what the generator does
+# with it is left to the generator.
 
 
 class Orchestrator:
@@ -57,13 +55,17 @@ class Orchestrator:
 
     def __init__(self, relevance_agent: RelevanceAgent, applicability_agent: ApplicabilityAgent,
                  requirement_agent: RequirementAgent, frozen_cases: dict, titles: dict[str, str],
-                 output_dir: Path):
+                 output_dir: Path, block_template: dict, summary_file: str):
+        """block_template: src/prompt_texts.load_c3_block_template(config); summary_file: the file name of the
+        run summary (config.yaml paths.mediation_summary_file)."""
         self.relevance_agent = relevance_agent
         self.applicability_agent = applicability_agent
         self.requirement_agent = requirement_agent
         self.frozen_cases = frozen_cases   # "cases" part of frozen_retrieval.json
         self.titles = titles               # passage id -> article title
         self.output_dir = Path(output_dir)
+        self.template = block_template
+        self.summary_file = summary_file
         self.resolver = ApplicabilityResolver()
         self.relevance_checker = RelevanceEvidenceChecker()
         self.reused_cases = []   # cases whose saved mediation was reused (resumed run)
@@ -158,28 +160,28 @@ class Orchestrator:
         requirements = [r for r in records if r["label"] == APPLICABLE and r["requirement"]]
         unconfirmed = [r for r in records if r["label"] == INDETERMINATE]
 
+        t = self.template
         requirement_lines = []
         for r in requirements:
             q = r["requirement"]
-            requirement_lines.append(
-                f"- [{r['passage_id']}] Actor: {q['actor']}. Action: {q['action']}. "
-                f"Condition: {q['condition'] or 'none stated'}. Ordering: {q['ordering'] or 'none stated'}.")
+            requirement_lines.append(t["requirement_line"].format(
+                passage_id=r["passage_id"], actor=q["actor"], action=q["action"],
+                condition=q["condition"] or t["missing_value"], ordering=q["ordering"] or t["missing_value"]))
 
         unconfirmed_lines = []
         for r in unconfirmed:
-            unconfirmed_lines.append(f"- [{r['passage_id']}] {r['title']}")
-            unconfirmed_lines += [f"  Unconfirmed: {c['condition']}"
+            unconfirmed_lines.append(t["unconfirmed_rule_line"].format(passage_id=r["passage_id"], title=r["title"]))
+            unconfirmed_lines += [t["unconfirmed_condition_line"].format(condition=c["condition"])
                                   for c in r["resolution"]["conditions"] if c["status"] == "not_stated"]
 
-        return "\n".join([REQUIREMENTS_HEADING, REQUIREMENTS_EXPLANATION, *(requirement_lines or [EMPTY_SECTION_TEXT]),
-                          "",
-                          UNCONFIRMED_HEADING, UNCONFIRMED_EXPLANATION, *(unconfirmed_lines or [EMPTY_SECTION_TEXT])])
+        return t["block"].format(requirements="\n".join(requirement_lines or [t["empty_section"]]),
+                                 unconfirmed="\n".join(unconfirmed_lines or [t["empty_section"]]))
 
     # ---------- whole run ----------
 
     def save_run_summary(self, run_id: str) -> dict:
         """Counts over ALL saved mediation files of the run, so a resumed run is counted completely."""
-        cases = sorted(p.stem for p in self.output_dir.glob("*.json") if p.name != "run_summary.json")
+        cases = sorted(p.stem for p in self.output_dir.glob("*.json") if p.name != self.summary_file)
         records = [r for case in cases for r in
                    json.loads((self.output_dir / f"{case}.json").read_text(encoding="utf-8"))["passages"]]
         labels = Counter(r["label"] for r in records)
@@ -202,5 +204,5 @@ class Orchestrator:
                                            "process_quotes_not_found": quotes.count(False)},
         }
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        (self.output_dir / "run_summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+        (self.output_dir / self.summary_file).write_text(json.dumps(summary, indent=2), encoding="utf-8")
         return summary

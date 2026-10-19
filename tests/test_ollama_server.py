@@ -11,7 +11,7 @@ from src.ollama_server import ollama_version, server_environment
 from src.run_folder import RunFolder
 
 CONFIG = load_config()
-DIGEST = CONFIG["llm"]["ollama_model_digest"]
+DIGEST = CONFIG["model"]["ollama_model_digest"]
 EXPECTED_ENV = {"OLLAMA_FLASH_ATTENTION": "1", "OLLAMA_KV_CACHE_TYPE": "q8_0"}
 
 
@@ -28,11 +28,11 @@ def fake_ollama(version="0.40.6", digest=DIGEST):
 def bpmngen_config():
     """The thesis settings (tests force the legacy generator, so switch BPMNGen back on, without running it)."""
     return dict(CONFIG, generator=dict(CONFIG["generator"], type="bpmngen"),
-                llm=dict(CONFIG["llm"], provider="ollama", ollama_server_env=EXPECTED_ENV))
+                model=dict(CONFIG["model"], provider="ollama", ollama_server_env=EXPECTED_ENV))
 
 
 def test_config_fixes_the_server_settings():
-    assert load_config()["llm"]["ollama_server_env"] == EXPECTED_ENV
+    assert load_config()["model"]["ollama_server_env"] == EXPECTED_ENV
 
 
 def test_matching_server_environment_is_returned():

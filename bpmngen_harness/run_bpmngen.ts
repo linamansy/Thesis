@@ -55,6 +55,19 @@ const baseUrl = arg("base-url", "http://localhost:11434")!;
 const model = arg("model", "qwen3:8b")!;
 // PROVISIONAL neutral label (to be agreed with supervisors / Ulm). Same text for C2 and C3.
 const knowledgeLabel = arg("label", "[Domain information (it may or may not apply to this process):]")!;
+// Which BPMNGen class and mode (config.yaml model.bpmngen_module / bpmngen_class, generator.bpmngen_mode /
+// bpmngen_format; run_experiment.py always passes them). The defaults are the values used for Study 1.
+const llmModule = arg("llm-module", "tools/ai/opensource")!;
+const llmClass = arg("llm-class", "OpenSourceLLM")!;
+const genMode = arg("mode", "quick")!;
+const genFormat = arg("format", "xml")!;  // the Ollama class always produces XML
+// Output file names inside --out (config.yaml paths.bpmngen_*_file, generated_bpmn_file); defaults = Study 1.
+const names = {
+    request: arg("request-file", "ollama_request.json")!, raw: arg("raw-file", "raw_model_output.txt")!,
+    thinking: arg("thinking-file", "raw_thinking.txt")!, cleaned: arg("cleaned-file", "bpmngen_cleaned_output.txt")!,
+    bpmn: arg("bpmn-file", "generated.bpmn")!, validation: arg("validation-file", "validation.json")!,
+    meta: arg("meta-file", "meta.json")!,
+};
 const thinkArg = arg("think");  // "false" / "true"; not given = BPMNGen's request is sent unchanged
 const thinkParam: boolean | undefined = thinkArg === undefined ? undefined : thinkArg === "true";
 const listFiles = process.argv.includes("--list-files");
@@ -147,16 +160,20 @@ function bpmngenFiles(paths: Iterable<string>): string[] {
     return [...new Set(inside.map((rel) => rel.split(path.sep).join("/")))].sort();
 }
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { OpenSourceLLM } = require(path.join(serverDir, "tools/ai/opensource"));
+const OpenSourceLLM = require(path.join(serverDir, llmModule))[llmClass];
+if (!OpenSourceLLM) {
+    console.error(`BPMNGen class ${llmClass} not found in ${llmModule} (config.yaml model.bpmngen_class / bpmngen_module)`);
+    process.exit(2);
+}
 const { Ai, PromptInput } = require(path.join(serverDir, "tools/ai/ai"));
 const { validateBpmnXml } = require(path.join(serverDir, "tools/utils/xml-validator"));
 
 async function main() {
     if (listFiles) {
         // Build a prompt exactly as below (no Ollama call), so prompt files BPMNGen reads are seen as well.
-        const mode = "quick";
-        const instructions = [].concat((Ai as any).formatInstructions("xml", mode), (Ai as any).modeInstructions(mode));
-        new OpenSourceLLM(model, "xml").mapPromptInput(new PromptInput(instructions, "list files", undefined, [], ""),
+        const mode = genMode;
+        const instructions = [].concat((Ai as any).formatInstructions(genFormat, mode), (Ai as any).modeInstructions(mode));
+        new OpenSourceLLM(model, genFormat).mapPromptInput(new PromptInput(instructions, "list files", undefined, [], ""),
                                                        mode, false);
         const loaded = [...Object.keys(require.cache), ...filesRead];
         console.log(JSON.stringify({ bpmngen_files: bpmngenFiles(loaded) }));
@@ -167,8 +184,8 @@ async function main() {
 
     // Same construction as Ai.createBPMN(): prompt + appended context block.
     const aiPrompt = knowledge ? `${description}\n\n${knowledgeLabel}\n${knowledge}` : description;
-    const mode = "quick";
-    const fmt = "xml"; // the Ollama class always produces XML
+    const mode = genMode;
+    const fmt = genFormat;
     const instructions = [].concat((Ai as any).formatInstructions(fmt, mode), (Ai as any).modeInstructions(mode));
     const promptInput = new PromptInput(instructions, aiPrompt, undefined, [], "");
 
@@ -223,15 +240,15 @@ async function main() {
         valid: validation ? validation.valid : false, seconds,
         timestamp: new Date().toISOString(),
     };
-    fs.writeFileSync(path.join(outDir!, "ollama_request.json"), JSON.stringify(call?.requestBody ?? null, null, 2));
-    fs.writeFileSync(path.join(outDir!, "raw_model_output.txt"), call?.rawContent ?? "");
-    fs.writeFileSync(path.join(outDir!, "raw_thinking.txt"), thinking);
+    fs.writeFileSync(path.join(outDir!, names.request), JSON.stringify(call?.requestBody ?? null, null, 2));
+    fs.writeFileSync(path.join(outDir!, names.raw), call?.rawContent ?? "");
+    fs.writeFileSync(path.join(outDir!, names.thinking), thinking);
     if (!cutOff) {  // a cut-off answer has no model: no cleaned output, BPMN or BPMNGen validation
-        fs.writeFileSync(path.join(outDir!, "bpmngen_cleaned_output.txt"), cleaned ?? "");
-        fs.writeFileSync(path.join(outDir!, "generated.bpmn"), diagram?.xml ?? "");
-        fs.writeFileSync(path.join(outDir!, "validation.json"), JSON.stringify(validation, null, 2));
+        fs.writeFileSync(path.join(outDir!, names.cleaned), cleaned ?? "");
+        fs.writeFileSync(path.join(outDir!, names.bpmn), diagram?.xml ?? "");
+        fs.writeFileSync(path.join(outDir!, names.validation), JSON.stringify(validation, null, 2));
     }
-    fs.writeFileSync(path.join(outDir!, "meta.json"), JSON.stringify(meta, null, 2));
+    fs.writeFileSync(path.join(outDir!, names.meta), JSON.stringify(meta, null, 2));
     console.log(JSON.stringify(meta, null, 2));
 }
 

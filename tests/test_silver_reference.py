@@ -197,5 +197,5 @@ def test_label_pairs_maps_c3_labels(tmp_path):
     silver = {"19": {"passages": [{"passage_id": "P1", "label": "applicable"},
                                   {"passage_id": "P2", "label": "indeterminate"},
                                   {"passage_id": "P3", "label": "not_applicable"}]}}
-    pairs, skipped = label_pairs(tmp_path, silver)
+    pairs, skipped = label_pairs(tmp_path, silver, CONFIG["paths"]["mediation_summary_file"])
     assert pairs == [("applicable", "applicable"), ("not_applicable", "irrelevant")] and skipped == 1

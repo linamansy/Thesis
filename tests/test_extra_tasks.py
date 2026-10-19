@@ -18,8 +18,10 @@ class WordMatcher:
 
 
 def test_split_sentences():
-    assert split_sentences("First sentence here. Second one is here.\n- [CRD-Art9-1] a list line here") == \
+    min_chars = CONFIG["evaluation"]["trace_min_sentence_chars"]
+    assert split_sentences("First sentence here. Second one is here.\n- [CRD-Art9-1] a list line here", min_chars) == \
         ["First sentence here.", "Second one is here.", "[CRD-Art9-1] a list line here"]
+    assert split_sentences("Too short. Long enough sentence.", min_chars) == ["Long enough sentence."]
 
 
 def test_knowledge_traceable_extra_tasks(tmp_path):
