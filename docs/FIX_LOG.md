@@ -293,3 +293,26 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** analysis code only.
 - **Risk:** the comparison is lexical/semantic similarity of short texts with the evaluation threshold
   (0.75), which is not calibrated for requirement texts. Treat it as provisional when data exists.
+
+## Fix 10 (D1): structure measures (actors, decisions, start/end events), a new separate output, 19 Oct 2026
+- **What changed:** `src/structure_measures.py` (new); `BPMNGraph` and the main scores untouched. Per case:
+  - actors = lane names, or pool names when a model has no lanes (BPMNGen: one pool per actor; PMo: lanes), matched
+    one-to-one by label with the evaluation matcher and threshold;
+  - decisions = gateways with >= 2 outgoing flows (loop-back flows included, so a loop decision counts), matched
+    per gateway type (smaller count per type);
+  - start and end events, matched by count.
+  Per family: generated / reference / matched counts, precision, recall; any zero denominator = "not defined"
+  (never 0 or 1). Invalid models: the main evaluation's rule (Evaluator.scored_model), else 0 where defined.
+  The command refuses to overwrite its outputs.
+- **Study 1 outputs (new files):** `results/diagnostics/structure_measures_study1.csv` (117 rows) and `.md`
+  (means per condition and family). Only case 21's reference has actors (1 pool, 3 lanes), so actor scores rest on
+  n = 3 per condition; the other 12 cases are "not defined".
+- **Files:** `src/structure_measures.py` (new), `config.yaml` (two output paths), `tests/test_structure_measures.py`
+  (new), the two results/diagnostics files (force-added).
+- **Tests:** 8 new, synthetic models: pools matched against reference lanes; no reference actors = not defined;
+  decisions per gateway type; a loop decision counts; start/end by count; failed model; summary averages only
+  defined values; never overwrites. Suite: 555 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/: no existing file changed, 2 new files.
+- **Fairness:** evaluation only; same rule for all conditions.
+- **Risk:** count-based matching for decisions and events does not check WHERE they are in the model. Actor
+  evidence in Study 1 is very thin (one case).
