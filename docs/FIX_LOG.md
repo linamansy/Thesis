@@ -273,3 +273,23 @@ Baseline before fix 1: all 21 outputs identical, so the current code reproduces 
 - **Fairness:** evaluation only; identical rule for all conditions.
 - **Risk:** the over-application trace uses the law text, so a description that paraphrases the law can produce a
   false positive; the description check (must be more similar to the law than to the description) limits this.
+
+## Fix 9 (C4): requirement-fidelity analysis code, 19 Oct 2026
+- **What changed:** `src/requirement_fidelity.py` (new), following analysis plan section 4. Only for rules that
+  BOTH C3 (label Applicable, with a requirement) and silver (applicable) call applicable; otherwise "not
+  estimable". Each C3 requirement is compared with the silver required_steps of the same rule: action vs best
+  step label (`action_similarity`, faithful if >= evaluation.similarity_threshold), actor vs that step's actor and
+  ordering vs its timing (None = not comparable when silver states none). Per run: n_pairs, action- and
+  actor-faithful shares, and how many rules only C3 / only silver called applicable (context; their agreement is
+  RQ3). The command (`python -m src.requirement_fidelity`) writes two new files (config paths) and never
+  overwrites.
+- **Study 1:** not run (as asked: synthetic tests only). A dry count, nothing written: 0 pairs in each of
+  ollama_rep1-3 (C3 labelled 0 rules applicable, silver 0), so fidelity is "not estimable", as the plan foresees.
+- **Files:** `src/requirement_fidelity.py` (new), `config.yaml` (two output paths), `tests/test_requirement_fidelity.py`.
+- **Tests:** 7 new, synthetic: only both-applicable rules are compared; a faithful requirement matches its
+  expected step (best of several); an unfaithful one is detected; missing silver actor = not comparable; run
+  summary and "not estimable"; the mediation run summary file is skipped; never overwrites. Suite: 547 passed.
+- **Invariant:** all 21 Study 1 outputs byte-identical; results/ byte-identical.
+- **Fairness:** analysis code only.
+- **Risk:** the comparison is lexical/semantic similarity of short texts with the evaluation threshold
+  (0.75), which is not calibrated for requirement texts. Treat it as provisional when data exists.
