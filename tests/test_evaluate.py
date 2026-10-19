@@ -113,6 +113,9 @@ def test_unrelated_labels_are_not_matched(evaluator):
 
 # ---------- evaluating runs ----------
 
+STUDY_RUNS = ["anthropic_rep1", "mock_rep1", "mock_rep2", "mock_rep3"]  # statistics.runs of the test evaluator
+
+
 def local_evaluator(evaluator, tmp_path):
     """An Evaluator that reads runs from tmp_path/runs and writes all its outputs inside tmp_path."""
     results = tmp_path / "results"
@@ -121,7 +124,8 @@ def local_evaluator(evaluator, tmp_path):
                  evaluation_summary=str(results / "evaluation_summary.csv"),
                  evaluation_threshold_csv=str(results / "sensitivity" / "evaluation_threshold_{threshold}.csv"),
                  evaluation_sensitivity_summary=str(results / "sensitivity" / "summary.csv"))
-    local = Evaluator(dict(CONFIG, paths=paths), evaluator.matcher)
+    study = dict(CONFIG["statistics"], runs=STUDY_RUNS)
+    local = Evaluator(dict(CONFIG, paths=paths, statistics=study), evaluator.matcher)
     local.case_ids = ["01"]
     return local
 
@@ -184,7 +188,7 @@ def test_validity_rule_strict_valid_bpmnlint_and_di_rescue(evaluator, tmp_path):
     from test_di_rescue import B3PMN_TYPO_AND_MISSING_DI, MISSING_DI_NAMESPACE, VALID
 
     local = local_evaluator(evaluator, tmp_path)
-    run_dir = make_run(tmp_path, "smoke_test", 1, conditions=("C1", "C2", "C3"), provider="ollama")
+    run_dir = make_run(tmp_path, "mock_rep1", 1, conditions=("C1", "C2", "C3"), provider="ollama")
     write_generated(run_dir, "C1", "01", VALID, bpmnlint_valid=True)
     write_generated(run_dir, "C2", "01", B3PMN_TYPO_AND_MISSING_DI, bpmnlint_valid=False)
     rescued_dir = write_generated(run_dir, "C3", "01", MISSING_DI_NAMESPACE, bpmnlint_valid=True)
@@ -289,26 +293,27 @@ def test_sweep_writes_one_csv_per_threshold(evaluator, tmp_path):
     assert not (case_dir / "evaluation.json").exists()  # details only describe the main threshold
 
 
-def test_smoke_runs_are_left_out_of_summaries(evaluator, tmp_path):
+def test_only_study_runs_are_evaluated(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
     local.case_ids = ["01", "03"]
     real = make_run(tmp_path, "mock_rep1", 1)
     write_case(real, "C1", "01", valid=True)
     write_case(real, "C1", "03", valid=True)
-    smoke = make_run(tmp_path, "smoke_c1", 1)
-    write_case(smoke, "C1", "01", valid=False)   # the smoke run only ran case 01 (and it failed)
+    write_case(make_run(tmp_path, "smoke_c1", 1), "C1", "01", valid=False)        # smoke run
+    write_case(make_run(tmp_path, "pytest_leftover", 1), "C1", "01", valid=False)  # e.g. left by a crashed test
 
     table = local.evaluate()
     run_summary, summary = local.summarise(table)
 
-    smoke_rows = table[table["smoke_test"]]
-    assert smoke_rows["case_id"].tolist() == ["01"]          # only the case it ran, no zero rows for 03
-    assert run_summary["run_id"].tolist() == ["mock_rep1"]   # smoke run not in the per-run summary
+    assert table["run_id"].unique().tolist() == ["mock_rep1"]   # nothing outside statistics.runs
+    assert not table["smoke_test"].any()
+    assert run_summary["run_id"].tolist() == ["mock_rep1"]
     assert summary.iloc[0]["n_repetitions"] == 1 and summary.iloc[0]["f1_mean"] == 1.0
 
 
-def test_only_smoke_runs_gives_empty_summaries(evaluator, tmp_path):
+def test_run_ids_outside_the_study_are_refused(evaluator, tmp_path):
     local = local_evaluator(evaluator, tmp_path)
     write_case(make_run(tmp_path, "smoke_test", 1), "C1", "01", valid=True)
-    run_summary, summary = local.summarise(local.evaluate())
-    assert run_summary.empty and summary.empty
+    with pytest.raises(ValueError, match="not in config.yaml statistics.runs"):
+        local.evaluate(run_ids=["smoke_test"])
+    assert local.evaluate().empty   # only a smoke run exists: nothing is evaluated

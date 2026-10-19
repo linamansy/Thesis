@@ -182,11 +182,11 @@ def test_kappa_and_agreement():
     assert result["accuracy"] == 0.5 and result["confusion"]["indeterminate"]["applicable"] == 1
 
 
-def test_rq3_leaves_out_smoke_runs():
+def test_rq3_uses_only_the_study_runs():
     from src.rq3_agreement import analysed_runs
     runs = [{"run_id": "ollama_rep1"}, {"run_id": "smoke_bpmngen"}, {"run_id": "smoke_nothink"},
-            {"run_id": "ollama_rep2"}]
-    assert [r["run_id"] for r in analysed_runs(runs, CONFIG["evaluation"]["smoke_run_prefix"])] == \
+            {"run_id": "ollama_rep2"}, {"run_id": "pytest_leftover"}, {"run_id": "ollama_rep9"}]
+    assert [r["run_id"] for r in analysed_runs(runs, ["ollama_rep1", "ollama_rep2", "ollama_rep3"])] == \
         ["ollama_rep1", "ollama_rep2"]
 
 

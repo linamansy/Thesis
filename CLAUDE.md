@@ -45,6 +45,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Save every input and output of every LLM call to results/
 - Model name and exact Ollama model digest logged (run_info.json); temperatures: generator 0.3 (BPMNGen), mediation agents 0
 - Tests always use mock answers and a fake harness (THESIS_FORCE_MOCK); never invent fake "real" results
+- Tests never write into the real results/: tests/conftest.py sets THESIS_RESULTS_DIR to a temporary folder (every "results/..." path in config.yaml is moved there), and tests/test_zz_results_untouched.py plus the session end prove results/ is byte-identical before and after the suite (fix B2, 19 Oct 2026)
 - API keys only in .env, never in code
 - Never put everything in one file
 
@@ -129,6 +130,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Complexity of each case is measured from the reference BPMN (tasks, gateways, loops, nesting).
 - Results: results/evaluation.csv, one row per case per condition per repetition (with a repetition column), plus a summary per condition with the mean and standard deviation across repetitions.
 - Sanity check: comparing a reference BPMN with itself must give perfect scores.
+- Only the study's runs are analysed: src/evaluate.py, src/statistics.py and src/rq3_agreement.py use exactly the run ids in config.yaml statistics.runs (ollama_rep1-3); smoke runs and any other folder in results/runs/ are ignored, and other ids are refused (fix B2, 19 Oct 2026).
 - Statistics (src/statistics.py, config.yaml statistics section) follow docs/ANALYSIS_PLAN.md exactly: repetitions averaged per case and condition; Friedman; Wilcoxon C3 vs C1 and C3 vs C2 on F1 and behavioural similarity with Holm over these 4; median paired difference with bootstrap 95% CI (seed 42) and rank-biserial; over-application (n_unjustified_knowledge_additions, C3 vs C2); Spearman with reference complexity (ref_flow_nodes, ref_cfc) for RQ2; the same tests on valid/rescued generations only; failure types per condition. Tables in results/statistics/. Tested on synthetic data only.
 
 ## Current scope

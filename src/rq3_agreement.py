@@ -9,8 +9,8 @@ For every run that has C3 mediation files (results/runs/<run_id>/C3/mediation/<c
     C3 "Mediation failed" / silver "annotation_failed" are counted, but left out of accuracy and kappa.
 Reported per run: number of pairs, accuracy, Cohen's kappa (agreement corrected for chance), and the
 confusion matrix (rows = silver, columns = C3).
-Smoke runs (run id starting with evaluation.smoke_run_prefix, "smoke") are left out, as the analysis plan
-(docs/ANALYSIS_PLAN.md, section 5) requires.
+Only the study's runs (config.yaml statistics.runs) are analysed; smoke runs and every other run in
+results/runs/ are left out, as the analysis plan (docs/ANALYSIS_PLAN.md, section 5) requires.
 
 IMPORTANT: the silver labels are AI-made (openai/gpt-oss-120b) and were not checked by a human, so this
 measures AGREEMENT WITH A STRONGER MODEL, not correctness. Report it that way.
@@ -70,9 +70,9 @@ def agreement(pairs: list[tuple[str, str]]) -> dict:
             "confusion": {s: {c: sum(1 for a, b in pairs if a == s and b == c) for c in LABELS} for s in LABELS}}
 
 
-def analysed_runs(runs: list[dict], smoke_prefix: str) -> list[dict]:
-    """The runs RQ3 reports on: every run except smoke (test) runs."""
-    return [run for run in runs if not run["run_id"].startswith(smoke_prefix)]
+def analysed_runs(runs: list[dict], study_runs: list[str]) -> list[dict]:
+    """The runs RQ3 reports on: only the study's runs (statistics.runs), in the given order."""
+    return [run for run in runs if run["run_id"] in study_runs]
 
 
 def main() -> None:
@@ -82,7 +82,7 @@ def main() -> None:
         raise SystemExit("No silver reference yet: run python -m src.build_silver_reference first")
     silver_cases = json.loads(silver_path.read_text(encoding="utf-8"))["cases"]
     rows, confusion = [], {}
-    for run in analysed_runs(RunFolder.find_runs(config), config["evaluation"]["smoke_run_prefix"]):
+    for run in analysed_runs(RunFolder.find_runs(config), config["statistics"]["runs"]):
         mediation_dir = run["path"] / "C3" / config["paths"]["mediation_dir"]
         if not mediation_dir.exists():
             continue

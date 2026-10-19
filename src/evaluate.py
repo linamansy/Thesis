@@ -2,8 +2,8 @@
 
 This is the ONLY component that reads the reference BPMN; no LLM ever sees it.
 
-It evaluates every run in results/runs/ (see src/run_folder.py): for every run, every condition
-that was run, and every case,
+It evaluates ONLY the study's runs, config.yaml statistics.runs (see src/run_folder.py; other runs in
+results/runs/, e.g. smoke runs, are ignored): for every such run, every condition that was run, and every case,
 results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data/cases/<case_id>/reference.bpmn:
   1. Syntactic validity  - was a model generated, and did it pass the validator?
                            valid (main metric) = our strict validator; bpmnlint_valid = BPMNGen's own verdict.
@@ -27,8 +27,8 @@ results/runs/<run_id>/<condition>/<case_id>/generated.bpmn is compared with data
 
 Outputs (main threshold from config.yaml), see src/summarise.py for the summaries:
   results/evaluation.csv               one row per run per condition per case, with run_id, repetition,
-                                       provider and model columns; smoke (test) runs are included but
-                                       marked smoke_test = True, and left out of every summary
+                                       provider and model columns (smoke_test column kept for older tables;
+                                       always False now, because smoke runs are not evaluated)
   results/evaluation_run_summary.csv   one row per run per condition (means over the cases)
   results/evaluation_summary.csv       one row per condition (and provider/model): mean and SD over repetitions
   results/runs/<run_id>/<condition>/<case_id>/evaluation.json   all details for one case
@@ -39,8 +39,8 @@ and, for the knowledge-traceable diagnostic, for every value in evaluation.trace
   results/sensitivity/trace_threshold_<t>.csv and results/sensitivity/trace_summary.csv
 
 Run from the project root:
-  .venv\\Scripts\\python.exe -m src.evaluate                       (all runs, all conditions)
-  .venv\\Scripts\\python.exe -m src.evaluate --runs anthropic_rep1 --conditions C1
+  .venv\\Scripts\\python.exe -m src.evaluate                       (the study's runs, all conditions)
+  .venv\\Scripts\\python.exe -m src.evaluate --runs ollama_rep1 --conditions C1
   .venv\\Scripts\\python.exe -m src.evaluate --sweep
 """
 
@@ -169,9 +169,18 @@ class Evaluator:
         return run_id.startswith(self.smoke_prefix)
 
     def runs(self, run_ids: list[str] | None = None) -> list[dict]:
-        """The run_info of every run (or of the given run ids)."""
-        runs = RunFolder.find_runs(self.config)
-        return [r for r in runs if run_ids is None or r["run_id"] in run_ids]
+        """The run_info of the study's runs (config.yaml statistics.runs), or of the given subset of them.
+
+        Only the study's runs are ever evaluated (fix B2): smoke runs, test runs and anything else in
+        results/runs/ are ignored. A run id outside statistics.runs is refused (ValueError).
+        """
+        study = self.config["statistics"]["runs"]
+        unknown = [r for r in run_ids or [] if r not in study]
+        if unknown:
+            raise ValueError(f"run id(s) {unknown} are not in config.yaml statistics.runs {study}; "
+                             f"only the study's runs are evaluated")
+        wanted = run_ids or study
+        return [r for r in RunFolder.find_runs(self.config) if r["run_id"] in wanted]
 
     def evaluate_case(self, run: dict, condition: str, case_id: str, threshold: float | None = None,
                       save_details: bool = True) -> dict:
@@ -427,7 +436,8 @@ def main() -> None:
     config = load_config()
     parser = argparse.ArgumentParser(description="Evaluate generated BPMN models against the references.")
     parser.add_argument("--conditions", nargs="+", choices=config["conditions"], help="default: all")
-    parser.add_argument("--runs", nargs="+", help="run ids to evaluate; default: every run in results/runs/")
+    parser.add_argument("--runs", nargs="+", choices=config["statistics"]["runs"],
+                        help="run ids to evaluate; default: all runs in config.yaml statistics.runs")
     parser.add_argument("--sweep", action="store_true",
                         help="also evaluate at every threshold in evaluation.sensitivity_thresholds")
     args = parser.parse_args()
