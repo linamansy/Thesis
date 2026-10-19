@@ -29,6 +29,9 @@
  *                                    prompt, but newer Ollama versions let qwen3 think anyway and return the
  *                                    thinking in a separate field BPMNGen never reads (found 18 Oct 2026).
  *                                    think:false makes Ollama do what BPMNGen intends. No BPMNGen file is changed.
+ *           --list-files             no generation and no Ollama call: load BPMNGen, build a prompt, and print the
+ *                                    BPMNGen files Node loaded or read, as one JSON line {"bpmngen_files": [...]}.
+ *                                    src/bpmngen_files.py hashes them for run_info.json (audit 19 Oct 2026).
  *
  * Two safety rules (thesis decision 18 Oct 2026), both recorded in meta.json:
  *   - thinking text: Ollama's separate "thinking" field is always saved (raw_thinking.txt) and counted;
@@ -54,7 +57,8 @@ const model = arg("model", "qwen3:8b")!;
 const knowledgeLabel = arg("label", "[Domain information (it may or may not apply to this process):]")!;
 const thinkArg = arg("think");  // "false" / "true"; not given = BPMNGen's request is sent unchanged
 const thinkParam: boolean | undefined = thinkArg === undefined ? undefined : thinkArg === "true";
-if (!descriptionFile || !outDir) {
+const listFiles = process.argv.includes("--list-files");
+if (!listFiles && (!descriptionFile || !outDir)) {
     console.error("Usage: --description <file> --out <dir> [--knowledge <file>] [--base-url URL] [--model NAME]");
     process.exit(2);
 }
@@ -122,12 +126,42 @@ globalThis.fetch = (async (url: any, init?: any) => {
 
 // ---------- 4. load BPMNGen (cwd must be the BPMNGen server folder) ----------
 const serverDir = process.cwd();
+// --list-files only: remember every file read through fs.readFileSync (e.g. prompt files), so the files BPMNGen
+// reads are hashed too, not only its modules. Not installed for a generation, which therefore runs unchanged.
+const filesRead = new Set<string>();
+if (listFiles) {
+    const realFs = require("fs");  // the shared module object, so BPMNGen's reads go through the wrapper
+    const realRead = realFs.readFileSync;
+    realFs.readFileSync = function (file: any, ...rest: any[]) {
+        const content = realRead.call(realFs, file, ...rest);  // throws for a file that does not exist
+        if (typeof file === "string") filesRead.add(path.resolve(file));  // so only files really read are kept
+        return content;
+    };
+}
+// BPMNGen's own files among the given absolute paths: inside the server folder, not in node_modules;
+// returned relative to the server folder with "/" separators, sorted.
+function bpmngenFiles(paths: Iterable<string>): string[] {
+    const inside = [...paths].map((p) => path.relative(serverDir, p))
+        .filter((rel) => rel && !rel.startsWith("..") && !path.isAbsolute(rel)
+                         && !rel.split(path.sep).includes("node_modules"));
+    return [...new Set(inside.map((rel) => rel.split(path.sep).join("/")))].sort();
+}
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { OpenSourceLLM } = require(path.join(serverDir, "tools/ai/opensource"));
 const { Ai, PromptInput } = require(path.join(serverDir, "tools/ai/ai"));
 const { validateBpmnXml } = require(path.join(serverDir, "tools/utils/xml-validator"));
 
 async function main() {
+    if (listFiles) {
+        // Build a prompt exactly as below (no Ollama call), so prompt files BPMNGen reads are seen as well.
+        const mode = "quick";
+        const instructions = [].concat((Ai as any).formatInstructions("xml", mode), (Ai as any).modeInstructions(mode));
+        new OpenSourceLLM(model, "xml").mapPromptInput(new PromptInput(instructions, "list files", undefined, [], ""),
+                                                       mode, false);
+        const loaded = [...Object.keys(require.cache), ...filesRead];
+        console.log(JSON.stringify({ bpmngen_files: bpmngenFiles(loaded) }));
+        return;
+    }
     const description = fs.readFileSync(descriptionFile!, "utf8").trim();
     const knowledge = knowledgeFile ? fs.readFileSync(knowledgeFile, "utf8").trim() : "";
 

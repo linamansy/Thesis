@@ -45,6 +45,7 @@ from src.agents.applicability_agent import ApplicabilityAgent
 from src.agents.relevance_agent import RelevanceAgent
 from src.agents.requirement_agent import RequirementAgent
 from src.bpmn_builder import BPMNBuilder
+from src.bpmngen_files import HASHES_KEY, BPMNGenFiles, check_same_study
 from src.bpmngen_generator import BPMNGenGenerator, context_limit_hit, installed_ollama_digest
 from src.config import load_config, project_path
 from src.generator import NO_KNOWLEDGE_TEXT, BPMNGenerator, format_passages
@@ -285,6 +286,22 @@ def ollama_settings(config: dict, client=None, env_reader=read_environment_varia
             "generator_think_param": generator.get("think_param")}
 
 
+def bpmngen_file_settings(config: dict, run_id: str, files: BPMNGenFiles | None = None,
+                          runs: list[dict] | None = None) -> dict:
+    """SHA-256 of every BPMNGen file the harness loads, for run_info.json (src/bpmngen_files.py).
+
+    Stops (ValueError) if another run of the same study (statistics.runs) stored different hashes; a later part
+    of the same run with different hashes is refused by RunFolder, like any other changed setting.
+    files and runs can be replaced in tests.
+    """
+    if config["generator"]["type"] != "bpmngen":
+        return {}
+    hashes = (files or BPMNGenFiles(config)).hashes()
+    runs = RunFolder.find_runs(config) if runs is None else runs
+    check_same_study(run_id, hashes, runs, config["statistics"]["runs"])
+    return {HASHES_KEY: hashes}
+
+
 def print_summary(records: list[dict]) -> None:
     print(f"{'case':<6}{'generated':>11}{'valid':>7}{'tasks':>7}{'gateways':>10}  errors")
     for r in records:
@@ -313,7 +330,8 @@ def main() -> None:
 
     run_id = args.run_id or default_run_id(config, args.repetition)
     try:
-        folder = RunFolder(config, run_id, args.repetition, ollama_settings(config))
+        folder = RunFolder(config, run_id, args.repetition,
+                           ollama_settings(config) | bpmngen_file_settings(config, run_id))
         folder.check_can_start(args.condition)  # stop before any LLM call if this would overwrite something
         if args.run_id is None:
             folder.check_previous_repetition_complete(config["conditions"])
@@ -326,7 +344,8 @@ def main() -> None:
                       if args.condition == "C3" else None)
         part = folder.next_part(args.condition)
         logger = RunLogger(project_path(config["paths"]["logs"]), args.condition, run_id, part)
-    except (FileExistsError, ValueError, MissingAPIKeyError, MissingGeminiKeyError, LLMUnavailableError) as e:
+    except (FileExistsError, FileNotFoundError, ValueError, RuntimeError, MissingAPIKeyError,
+            MissingGeminiKeyError) as e:  # RuntimeError includes LLMUnavailableError
         sys.exit(f"Not started: {e}")
 
     runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms)

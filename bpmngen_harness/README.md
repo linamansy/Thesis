@@ -36,6 +36,9 @@ Check in `meta.json`: `done_reason` = "stop", `fits_context` = true, `ollama_mod
 
 A runaway answer (more output tokens than `num_ctx`) is stopped by the harness: `done_reason` = "cut_off_by_harness", no `generated.bpmn`; `run_experiment.py` records it as a failed generation (`context_limit_hit`). A run longer than `generator.timeout_seconds` is killed with its whole process tree (failed generation, `timed_out`).
 
+## BPMNGen file hashes (`--list-files`)
+`run_experiment.py` starts the harness once per run with `--list-files`: it loads BPMNGen and builds a prompt (no Ollama call), then prints the BPMNGen files it loaded or read. `src/bpmngen_files.py` hashes those files plus `generator.bpmngen_hashed_files` and stores them in run_info.json (`bpmngen_file_hashes`). A run with different hashes than an earlier part, or than another run of the study, does not start.
+
 ## C2 / C3
 You normally don't call the harness by hand: `run_experiment.py` does it for every case (src/bpmngen_generator.py). It writes `knowledge_block.txt` for every condition and passes it with `--knowledge`. C1's block is "No domain knowledge provided.", so all three conditions get the same layout. The block is appended after the description under the neutral label from config.yaml (`generator.knowledge_label`, PROVISIONAL, still to be agreed).
 

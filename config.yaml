@@ -38,6 +38,13 @@ generator:
   # BPMNGen is private Ulm code: it lives OUTSIDE this repository and is never committed or changed.
   bpmngen_server_dir: ../BPMNGen-backend-main/BPMNGen-backend-main/server  # relative to the project root, or absolute
   harness: bpmngen_harness/run_bpmngen.ts
+  # BPMNGen files hashed (SHA-256, read only) when a run starts and stored in run_info.json as bpmngen_file_hashes
+  # (audit 19 Oct 2026). Every other BPMNGen file the harness loads is added automatically (harness --list-files).
+  # A run stops if the hashes differ from an earlier part of the same run, or from another run of the same study
+  # (the runs listed in statistics.runs). Paths are relative to bpmngen_server_dir.
+  bpmngen_hashed_files: [tools/ai/opensource.ts, tools/ai/ai.ts, tools/utils/xml-validator.ts, environment.ts]
+  bpmngen_hash_exclude: [.env]  # BPMNGen's secrets file (API keys); its contents change for reasons unrelated to the
+                                # generator. The harness sets the variables the Ollama path uses (run_bpmngen.ts, step 2)
   model: qwen3:8b             # BPMNGen settings that are NOT changed: system prompt, temperature 0.3, num_ctx 16384, /no_think
   think_param: false          # Ollama's think switch, added by the harness to BPMNGen's request (decided 18 Oct 2026):
                               # BPMNGen asks for no thinking with "/no_think", but Ollama 0.40.6 let qwen3 think anyway
