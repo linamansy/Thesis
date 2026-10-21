@@ -1,0 +1,138 @@
+# C3 v2 development
+
+This file records why a second version of the C3 mediation agents (v2) is developed and the rules for developing it.
+The rules in section 2 are fixed on 21 Oct 2026, **before** any v2 change is made. C3 v1 (Study 1, git tag
+`c3-v1-study1`, `config.yaml` `c3_version: v1`) stays unchanged and its results are not rerun or replaced.
+
+No code, prompt or config was changed when this file was written.
+
+---
+
+## 1. Two problems of the Study 1 agents (v1)
+
+Evidence is quoted from `results/runs/ollama_rep1/C3/mediation/11.json` (case 11, a subscription service).
+The mediation agents run at temperature 0 with seed 42, so repetitions 2 and 3 give the same labels for case 11
+(checked: identical in `ollama_rep2` and `ollama_rep3`); they confirm the problem is stable, not that it is
+independent evidence.
+
+Case 11 description (`data/cases/11`):
+
+> This process begins when a customer signs up for a subscription service, entering personal and payment information.
+> The system generates an account, assigns access, and triggers automated billing cycles.
+> Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.
+> If the customer decides to cancel, they submit a cancellation request, which the support team processes.
+> Depending on the terms, any refunds or charges are applied.
+> The process concludes when the subscription is deactivated by the support team and the final account balance is settled.
+
+Overall picture in repetition 1: of the 65 passages (13 cases × 5), the agents labelled 47 Irrelevant, 18
+Indeterminate and **0 Applicable**. So the RequirementAgent never ran and no C3 block contained a requirement.
+The two problems below explain much of this.
+
+### Problem 1: RelevanceAgent rejects a relevant passage (CRD-Art14-4)
+
+CRD-Art14-4 ("Obligations of the consumer in the event of withdrawal") is about what a consumer must not pay for
+when they withdraw from a service contract. Case 11 is a consumer subscription service with a cancellation step,
+so the passage is on topic. The RelevanceAgent judged it irrelevant:
+
+```json
+"passage_id": "CRD-Art14-4",
+"label": "Irrelevant",
+"relevance": {
+  "relevant": false,
+  "reason": "The legal passage discusses consumer rights related to withdrawal from services and digital content, while the process description focuses on subscription management, billing, and cancellation. The topics do not align.",
+  "evidence_process": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+  "evidence_passage": "The consumer shall bear no cost for: (a) the performance of services or the supply of water, gas or electricity, ..."
+}
+```
+
+- The agent's own evidence quote (the cancellation request) is the step the passage is about, yet its reason
+  says the topics "do not align". It treats "withdrawal" and "cancellation" as different topics.
+- Because the passage is marked Irrelevant, it stops here: it is not passed to the ApplicabilityAgent and does not
+  appear in the C3 block, not even as an Indeterminate rule.
+- For comparison only (silver is AI-made, not gold): the silver annotator labels CRD-Art14-4 for case 11
+  `indeterminate`, i.e. on topic but with unconfirmed facts ("The passage deals with consumer withdrawal rights for
+  services and digital content, which matches the subscription service context, ...").
+
+The same pattern is visible for CRD-Art8-7 in case 11 (confirmation of a distance contract, judged irrelevant
+because the description "focuses on subscription management, billing cycles, and cancellation procedures").
+
+### Problem 2: ApplicabilityAgent lists obligations as conditions (CRD-Art6-1-e, CRD-Art6-1-l)
+
+A rule has two parts: **conditions** (when does it apply? e.g. "a distance contract with a consumer") and
+**obligations** (what must then be done? e.g. "the trader shall provide the total price"). Only conditions should be
+checked against the description. The v1 ApplicabilityAgent mixes them.
+
+**CRD-Art6-1-e** (label Indeterminate), conditions as produced by the agent:
+
+```json
+{"condition": "the trader shall provide the consumer with the total price of the goods or services inclusive of taxes", "status": "not_stated", "evidence": null},
+{"condition": "the nature of the goods or services is such that the price cannot reasonably be calculated in advance", "status": "not_stated", "evidence": null},
+{"condition": "the total price shall include the total costs per billing period", "status": "not_stated", "evidence": null},
+{"condition": "where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs", "status": "not_stated", "evidence": null},
+{"condition": "the manner in which the price is to be calculated shall be provided", "status": "not_stated", "evidence": null},
+{"condition": "the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate", "status": "not_stated", "evidence": null}
+```
+
+- "the trader shall provide ...", "the total price shall include ...", "... shall be provided" are obligations
+  (what the trader must do), not conditions.
+- The real conditions of the passage are missing: the customer is a consumer, and the contract is a distance or
+  off-premises contract ("Before the consumer is bound by a distance or off-premises contract ...").
+- The one condition the description does state, a contract containing a subscription ("signs up for a subscription
+  service"), is not listed. (The silver annotator lists it as `stated_true`.)
+
+**CRD-Art6-1-l** (label Indeterminate): the agent gives 10 conditions. Only the first is a real condition
+("the contract is a distance or off-premises contract"). The other 9 are items of information the trader must give,
+e.g.:
+
+```json
+{"condition": "the trader provides the consumer with information in a clear and comprehensible manner", "status": "not_stated", "evidence": null},
+{"condition": "a reminder of the existence of a legal guarantee of conformity for goods", "status": "not_stated", "evidence": null},
+{"condition": "the duration of the contract or the conditions for terminating the contract if the contract is of indeterminate duration or is to be extended automatically", "status": "not_stated", "evidence": null}
+```
+
+**Why this matters.** A process description that needs a legal rule usually does *not* already contain the step the
+rule demands; that is why the rule is useful. If the obligation is checked as a condition, it is almost always
+`not_stated`, so under the combination rule (all satisfied → Applicable) the rule can never become Applicable, and the
+RequirementAgent never runs. The C3 block also shows the obligations as "Unconfirmed" conditions, which describes the
+rule incorrectly to the generator.
+
+---
+
+## 2. Rules for developing v2
+
+Fixed on 21 Oct 2026, before any v2 change.
+
+### 2.1 Development cases only
+- v2 is developed and tried **only** on `cases.development_ids` in `config.yaml`
+  (currently the 13 Study 1 cases: 01, 03, 05, 06, 10, 11, 13, 17, 19, 21, 37, 45, 46).
+- No v2 prompt, schema or code may be run on, or tuned by looking at, any case in `cases.test_ids`.
+- The reference BPMN is never given to any agent (unchanged rule).
+
+### 2.2 At most 3 rounds of changes
+- A round = one set of changes to the C3 agents (prompts, schemas, agent code, combination rule), followed by one run
+  of the agents on the development cases and a check against the success criteria (2.3).
+- At most 3 rounds. After round 3, v2 is frozen as it is, whether or not all criteria are met; unmet criteria are
+  reported as a limitation.
+- v2 may stop earlier if all criteria are met.
+- The generator, retrieval, frozen passages, model (qwen3:8b, same digest) and agent settings (temperature 0, seed 42,
+  num_ctx 16384, think off) do not change. Only the C3 mediation may change.
+
+### 2.3 Success criteria (fixed now)
+
+> **TO BE FILLED IN.** The success criteria were not yet provided when this file was created. They must be written
+> here and committed before round 1 starts. They may not be changed after round 1 has started.
+
+### 2.4 Logging of each round
+Each round gets one entry in section 3 below, written on the day of the round, with:
+- date and round number
+- what was changed and why (linked to problem 1, problem 2 or a criterion), with the files changed
+- git commit of the round
+- the run folder of the round's agent outputs
+- the result for each success criterion (met / not met, with the numbers)
+- decision: next round, or freeze v2
+
+---
+
+## 3. Round log
+
+(No rounds yet.)
