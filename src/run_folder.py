@@ -59,6 +59,8 @@ class RunFolder:
         model = MockLLM.MODEL_NAME if shared["provider"] == "mock" else shared["name"]
         generator = config["generator"]
         generator_name = (f"bpmngen/{shared['name']}" if generator["type"] == "bpmngen" else "json_builder")
+        if generator["type"] == "bpmngen_server":  # Study 2: BPMNGen's own server route
+            generator_name = f"bpmngen_server/{config['bpmngen_server']['model']}"
         self.settings = {"run_id": run_id, "repetition": repetition, "provider": shared["provider"],
                          "model": model, "temperature": llm["temperature"], "generator": generator_name}
         if shared["provider"] == "ollama":  # the exact local model file and its generation settings

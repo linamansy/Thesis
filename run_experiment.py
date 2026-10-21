@@ -9,6 +9,8 @@ Smoke test (one case, kept out of every evaluation summary):
 
 The generator (config.yaml, generator.type):
     bpmngen       THESIS: BPMNGen with qwen3:8b on Ollama, run through bpmngen_harness (src/bpmngen_generator.py)
+    bpmngen_server  STUDY 2: BPMNGen's own server route POST /threads (src/bpmngen_server_generator.py); the
+                  C3 agents must then use the same model through OpenRouter (model.provider openrouter)
     json_builder  legacy: own prompt -> JSON -> src/bpmn_builder.py (used by the mock tests)
 The C3 mediation agents use the llm section of config.yaml (thesis: the same qwen3:8b on Ollama).
 
@@ -50,6 +52,7 @@ from src.bpmn_builder import BPMNBuilder
 from src.bpmngen_files import HASHES_KEY, BPMNGenFiles, check_same_study
 from src.bpmngen_generator import BPMNGenGenerator, GeneratorSetupError, context_limit_hit, installed_ollama_digest
 from src.bpmngen_libraries import VERSIONS_KEY, BPMNGenLibraries
+from src.bpmngen_server_generator import BPMNGenServerGenerator
 from src.config import load_config, project_path
 from src.generator import BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
@@ -57,6 +60,7 @@ from src.llm.base_llm import LLMClient, LLMUnavailableError
 from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
 from src.llm.mock_llm import MockLLM
 from src.llm.ollama_llm import OllamaLLM
+from src.llm.openrouter_llm import OpenRouterLLM
 from src.logger import RunLogger
 from src.ollama_server import ollama_version, read_environment_variable, server_environment
 from src.orchestrator import Orchestrator
@@ -67,8 +71,10 @@ from src.validator import BPMNValidator
 
 MEDIATION_ROLES = ["relevance", "applicability", "requirement"]
 PROVIDERS = ["mock", "ollama", "gemini", "anthropic"]
-GENERATOR_TYPES = ["bpmngen", "json_builder"]
-REAL_PROVIDERS = {"ollama": OllamaLLM, "gemini": GeminiLLM, "anthropic": AnthropicLLM}
+STUDY2_PROVIDERS = ["openrouter"]   # only with generator.type bpmngen_server (see check_same_model)
+GENERATOR_TYPES = ["bpmngen", "bpmngen_server", "json_builder"]
+BPMNGEN_TYPES = ("bpmngen", "bpmngen_server")   # both: BPMNGen calls the model itself, same result rules
+REAL_PROVIDERS = {"ollama": OllamaLLM, "gemini": GeminiLLM, "anthropic": AnthropicLLM, "openrouter": OpenRouterLLM}
 
 
 class RunInterrupted(Exception):
@@ -94,8 +100,9 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
     if provider == "mock":
         answer = project_path(config["paths"][f"mock_{role}_response"]).read_text(encoding="utf-8")
         return MockLLM([answer], temperature=llm_config["temperature"])
-    if provider not in PROVIDERS:
-        raise ValueError(f"model.provider must be one of {PROVIDERS}, not {provider!r}")
+    if provider not in PROVIDERS + STUDY2_PROVIDERS:
+        raise ValueError(f"model.provider must be one of {PROVIDERS} (Study 2 also: {STUDY2_PROVIDERS}), "
+                         f"not {provider!r}")
     if shared is not None and provider in shared:
         return shared[provider]
     llm = REAL_PROVIDERS[provider].from_config(config)
@@ -131,6 +138,8 @@ class ExperimentRunner:
         self.logger = logger
         if self.generator_type == "bpmngen":
             self.generator = bpmngen or BPMNGenGenerator(config, logger, model_digest=generator_digest)
+        elif self.generator_type == "bpmngen_server":
+            self.generator = bpmngen or BPMNGenServerGenerator(config, logger)
         else:
             self.generator = BPMNGenerator(llm, logger)
         self.builder = BPMNBuilder()
@@ -171,7 +180,7 @@ class ExperimentRunner:
         description = description_path.read_text(encoding="utf-8")
         case_dir = self.output_dir / case_id
         case_dir.mkdir(parents=True, exist_ok=True)
-        if self.generator_type == "bpmngen":
+        if self.generator_type in BPMNGEN_TYPES:
             return self.run_case_bpmngen(case_id, description_path, description, case_dir)
         json_path, bpmn_path = case_dir / self.json_file, case_dir / self.bpmn_file
 
@@ -320,6 +329,17 @@ def bpmngen_library_settings(config: dict, libraries: BPMNGenLibraries | None = 
     return {VERSIONS_KEY: (libraries or BPMNGenLibraries(config)).versions()}
 
 
+def check_same_model(config: dict) -> None:
+    """Study 2 (generator.type bpmngen_server): the C3 agents must use the SAME model as the generator (decision
+    16 Oct 2026), i.e. OpenRouter with model.name = bpmngen_server.model. Raises ValueError otherwise."""
+    if config["generator"]["type"] != "bpmngen_server" or config["model"]["provider"] == "mock":
+        return
+    model, server_model = config["model"], config["bpmngen_server"]["model"]
+    if model["provider"] != "openrouter" or model["name"] != server_model:
+        raise ValueError(f"generator.type bpmngen_server needs model.provider 'openrouter' and model.name "
+                         f"{server_model!r} (the generator's model), not {model['provider']!r} / {model['name']!r}")
+
+
 def print_summary(records: list[dict]) -> None:
     print(f"{'case':<6}{'generated':>11}{'valid':>7}{'tasks':>7}{'gateways':>10}  errors")
     for r in records:
@@ -348,6 +368,7 @@ def main() -> None:
 
     run_id = args.run_id or default_run_id(config, args.repetition)
     try:
+        check_same_model(config)
         folder = RunFolder(config, run_id, args.repetition,
                            ollama_settings(config) | bpmngen_file_settings(config, run_id)
                            | bpmngen_library_settings(config))
@@ -355,8 +376,8 @@ def main() -> None:
         if args.run_id is None:
             folder.check_previous_repetition_complete(config["conditions"])
         shared = {}
-        if config["generator"]["type"] == "bpmngen":
-            llm = None  # BPMNGen calls Ollama itself
+        if config["generator"]["type"] in BPMNGEN_TYPES:
+            llm = None  # BPMNGen calls the model itself
         else:
             llm = create_llm(config, "generator", shared)
         agent_llms = ({role: create_llm(config, role, shared) for role in MEDIATION_ROLES}
@@ -369,16 +390,18 @@ def main() -> None:
 
     runner = ExperimentRunner(config, args.condition, llm, logger, folder.condition_dir(args.condition), agent_llms,
                               generator_digest=folder.settings.get("generator_digest"))
-    if runner.generator_type == "bpmngen":
+    if runner.generator_type in BPMNGEN_TYPES:
         try:
             runner.generator.check_setup()
-        except FileNotFoundError as e:
+        except (FileNotFoundError, GeneratorSetupError) as e:
             sys.exit(f"Not started: {e}")
     to_run = folder.start_part(args.condition, part, logger.log_path, args.cases)
     if args.cases:
         runner.case_ids = args.cases
     if runner.generator_type == "bpmngen":
         generator_text = f"generator BPMNGen/{config['model']['name']}"
+    elif runner.generator_type == "bpmngen_server":
+        generator_text = f"generator BPMNGen server/{config['bpmngen_server']['model']}"
     else:
         generator_text = f"generator json_builder/{llm.model} (temperature {llm.temperature})"
     agents_text = (f" | mediation agents {config['model']['provider']}/{config['model']['name']} "
