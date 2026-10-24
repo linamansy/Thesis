@@ -89,6 +89,9 @@ bpmngen_server:
   mode: quick                 # BPMNGen's mode and format, as in a new BPMNGen thread
   format: xml
   stream: false
+  input_string_max_chars: 30000  # BPMNGen's check on inputString (endpointValidation.ts, MAX_INPUT_TOKENS, counted in
+                              # characters; docs/BPMNGEN_SERVER_ROUTE.md section 3). Used by the length check of
+                              # src/evaluate_gdpr_dev_smoke.py
   timeout_seconds: 900        # one POST /threads (model call, title call and database save)
   login_timeout_seconds: 30
   email_variable: BPMNGEN_SERVER_EMAIL        # names of the .env variables with the BPMNGen account (role USER);
@@ -303,6 +306,8 @@ paths:
   bpmngen_expected_hashes: docs/bpmngen_hashes_2026-10-19.json  # verified BPMNGen file hashes (preflight)
   preflight_dir: results/preflight        # one folder per preflight: results/preflight/<timestamp>/        # explains every file kind under results/
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)
+  gdpr_dev_smoke_dir: results/diagnostics/gdpr_dev_smoke  # STUDY 2: evaluation of the GDPR development smoke run
+  results_manifest_study2: results/MANIFEST_study2.csv    # STUDY 2: its files under results/ (study2_gdpr.manifest_patterns)
 
 study2_gdpr:
   # STUDY 2 only (GDPR corpus, added 24 Oct 2026). Separate paths so that nothing of Study 1 (data/knowledge/,
@@ -321,6 +326,22 @@ study2_gdpr:
   dense_index_dir_restricted: data/retrieval_gdpr/dense_index_ch1-5  # separate FAISS index for passages_restricted
   frozen_dev_hybrid_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_hybrid.json  # hybrid top 5, like Study 1
   frozen_dev_rerank_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json  # hybrid top 20 -> reranker
+  # Retrieval version used by Study 2 C2 and C3 (decided by Lina 24 Oct 2026, following the rule in
+  # docs/C3_V2_DEVELOPMENT.md section 4: rerank won 3 vs 1 silver-applicable passages). Applied ONLY through the
+  # Study 2 config view (src/study2_config.py), which sets reranker.enabled to reranker_enabled and points
+  # paths.frozen_retrieval / paths.passages to the GDPR files. The Study 1 defaults (reranker.enabled false,
+  # paths.frozen_retrieval) are unchanged.
+  retrieval_version: rerank
+  reranker_enabled: true
+  frozen_retrieval: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json   # = frozen_dev_rerank_restricted
+  # Development smoke run (src/run_gdpr_dev_smoke.py): Study 1's harness + qwen3:8b, unchanged, on the development
+  # cases. The id starts with evaluation.smoke_run_prefix, so every Study 1 analysis ignores it. Its evaluation goes
+  # only into paths.gdpr_dev_smoke_dir (src/evaluate_gdpr_dev_smoke.py), never into results/evaluation.csv.
+  smoke_run_id: smoke_gdpr_dev
+  # Files of Study 2 under results/, listed in paths.results_manifest_study2 (src/results_manifest_study2.py);
+  # patterns relative to results/. Study 1's results/MANIFEST.csv is never changed.
+  manifest_patterns: ["logs/SILVER_gdpr_dev*", "logs/SILVER_study2_laws_dev*", "logs/C?_smoke_gdpr_dev*",
+                      "runs/smoke_gdpr_dev/**/*", "diagnostics/gdpr_dev_smoke/**/*"]
   # Silver labels for the development cases (src/build_silver_gdpr_dev.py): Study 1's silver setup unchanged
   # (silver section, prompts/silver_annotation_prompt.txt), on every case-passage pair of the two ch1-5 files, once.
   silver_reference_dev: data/silver_gdpr/silver_reference_dev.json   # never data/silver/
@@ -335,7 +356,7 @@ reranker:
   # STUDY 2 development comparison only (src/retrieval/cross_encoder_reranker.py). OFF by default: Study 1 and the
   # hybrid frozen files never rerank. Only src/freeze_retrieval_gdpr.py uses it, to make the second (rerank)
   # version of the GDPR development retrieval; the file records these settings.
-  enabled: false
+  enabled: false              # Study 1 default. Study 2 turns it on only in its config view (study2_gdpr.reranker_enabled)
   model: cross-encoder/ms-marco-MiniLM-L-6-v2   # local Hugging Face model, no API key
   revision: 233902d25c440f23af6f7d6e94d2946bac0bee0a  # exact model commit (Hugging Face, checked 24 Oct 2026)
   max_length: 512             # tokens per (query, passage) pair; longer pairs are truncated by the model
