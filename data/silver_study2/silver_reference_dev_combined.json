@@ -1,0 +1,1515 @@
+{
+  "status": "silver: AI-made reference, not checked by a human (provisional, never gold)",
+  "created_at": "2026-10-24T18:29:23.594511+00:00",
+  "annotator_provider": "groq",
+  "annotator_model": "openai/gpt-oss-120b",
+  "annotator_model_version": null,
+  "annotation_dates": [
+    "2026-10-24"
+  ],
+  "prompt_sha256": "02a6ad4205ef05cc1424cd70bf0b2feb321d8f7158dfc999285f8a26fe91bc72",
+  "frozen_retrieval_sha256": "21c31b7a7ed2f28d3d76ef7f7839e0416ec66befcfab70052343b392b7d260f3",
+  "cases": {
+    "01": {
+      "annotated_at": "2026-10-24T18:29:53+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_4727af4560",
+        "fp_9241e9962b",
+        "fp_93703442d9",
+        "fp_e5b4e54fbb"
+      ],
+      "passages": [
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The parties are a service provider and a recipient of the service",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The parties have not otherwise agreed to exclude the requirement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article concerns order placement and requires technical means to correct input errors, which is relevant to the described process, but the description does not state whether the recipient is a consumer nor whether the parties have excluded the requirement.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide error correction mechanism",
+              "actor": "service provider",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Order is placed through technological means",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No otherwise agreement deviating from the rule",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Service provider acknowledges receipt without undue delay and by electronic means",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The description does not specify whether the order is placed electronically, whether the customer is a consumer, or whether the parties have agreed otherwise, so it is unclear if the Directive applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Acknowledge order receipt",
+              "actor": "service provider",
+              "timing": "after order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "order is then recorded in the system, and the customer receives confirmation of their order.",
+            "process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Parties have otherwise agreed that the information requirement does not apply",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to service contracts with consumers unless the parties have agreed otherwise. The process description does not state whether the customer is a consumer or whether an exception agreement exists, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide technical steps to conclude contract",
+              "actor": "service provider",
+              "timing": "prior to order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform about contract filing and accessibility",
+              "actor": "service provider",
+              "timing": "prior to order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide means to identify and correct input errors",
+              "actor": "service provider",
+              "timing": "prior to order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Offer language options for contract conclusion",
+              "actor": "service provider",
+              "timing": "prior to order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order.",
+            "The process ends when the order is successfully placed and confirmed."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract is concluded exclusively by exchange of electronic mail or equivalent individual communications",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns order placement and sets an exception for contracts concluded solely by email, but the process description does not state whether the contract is concluded exclusively by electronic mail, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art16-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates pre‑contractual information for consumer credit advisory services, which is unrelated to the described generic product/service sales and order process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service.",
+            "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "Provide error correction mechanism",
+          "actor": "service provider",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "Acknowledge order receipt",
+          "actor": "service provider",
+          "timing": "after order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide technical steps to conclude contract",
+          "actor": "service provider",
+          "timing": "prior to order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Inform about contract filing and accessibility",
+          "actor": "service provider",
+          "timing": "prior to order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide means to identify and correct input errors",
+          "actor": "service provider",
+          "timing": "prior to order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Offer language options for contract conclusion",
+          "actor": "service provider",
+          "timing": "prior to order placement",
+          "already_in_description": false
+        }
+      ],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "06": {
+      "annotated_at": "2026-10-24T18:31:08+00:00",
+      "system_fingerprints": [
+        "fp_0708ac49a5",
+        "fp_4727af4560",
+        "fp_4a7bb72c24",
+        "fp_86dc843b12",
+        "fp_e5b4e54fbb"
+      ],
+      "passages": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Order placed through technological means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No contrary agreement between parties",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to orders placed by a consumer through technological means unless the parties (who are not consumers) have agreed otherwise. The description confirms an electronic order but does not state whether the customer is a consumer or whether any contrary agreement exists, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Acknowledge order receipt",
+              "actor": "system",
+              "timing": "immediately after order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Parties have otherwise agreed to waive the error‑correction requirement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to order placement between a service provider and a recipient, but the description does not state whether the customer is a consumer nor whether the parties have agreed otherwise, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide error‑correction mechanism",
+              "actor": "service provider",
+              "timing": "before placing order",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-3",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Contract concluded exclusively by electronic mail or equivalent individual communications",
+              "status": "stated_false"
+            }
+          ],
+          "reason": "The passage only excludes the application of certain provisions for contracts concluded exclusively by email; the described process uses an online platform or phone, so the condition for the rule is not met.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Parties have otherwise agreed to waive the information requirement",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information is provided prior to the order being placed",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to consumer‑trader contracts unless the parties are not consumers or have otherwise agreed otherwise, but the description does not state whether the customer is a consumer nor whether any waiver agreement exists, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide technical steps to conclude contract",
+              "actor": "service provider",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide contract filing and accessibility information",
+              "actor": "service provider",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide means to identify and correct input errors",
+              "actor": "service provider",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide language options for contract conclusion",
+              "actor": "service provider",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Parties have otherwise agreed to waive the information requirement",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Service provider subscribes to any codes of conduct",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to e‑commerce service providers and requires them to disclose codes of conduct to consumers, unless the parties are not consumers and have agreed otherwise. The process involves a customer ordering online, but it does not state whether the customer is a consumer, whether any waiver agreement exists, or whether the provider subscribes to codes of conduct.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Indicate subscribed codes of conduct",
+              "actor": "service provider",
+              "timing": "before order confirmation",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide electronic access information for codes",
+              "actor": "service provider",
+              "timing": "before order confirmation",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "Acknowledge order receipt",
+          "actor": "system",
+          "timing": "immediately after order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "Provide error‑correction mechanism",
+          "actor": "service provider",
+          "timing": "before placing order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide technical steps to conclude contract",
+          "actor": "service provider",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide contract filing and accessibility information",
+          "actor": "service provider",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide means to identify and correct input errors",
+          "actor": "service provider",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide language options for contract conclusion",
+          "actor": "service provider",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-2",
+          "label": "Indicate subscribed codes of conduct",
+          "actor": "service provider",
+          "timing": "before order confirmation",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-2",
+          "label": "Provide electronic access information for codes",
+          "actor": "service provider",
+          "timing": "before order confirmation",
+          "already_in_description": false
+        }
+      ],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "11": {
+      "annotated_at": "2026-10-24T18:32:03+00:00",
+      "system_fingerprints": [
+        "fp_93703442d9",
+        "fp_96d96a151c",
+        "fp_dee443f41b",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "CCD-Art24-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage deals with overdraft facilities and creditor notifications, which are unrelated to a subscription service sign‑up, billing, and cancellation process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": [],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art25-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage deals with consumer credit overrunning and creditor obligations, which do not relate to the described subscription service process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": [],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art25-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage deals with consumer credit overrunning and requires a creditor to notify a consumer about changes to overdraft limits, which does not relate to the described subscription service process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art24-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns overdraft facilities and creditor‑consumer relations under the Consumer Credit Directive, which does not relate to the subscription service process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": [],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art26-1",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage governs withdrawal rights for consumer credit agreements, while the process described concerns a subscription service with sign‑up, billing and cancellation, not a credit agreement.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "13": {
+      "annotated_at": "2026-10-24T18:32:35+00:00",
+      "system_fingerprints": [
+        "fp_96d96a151c",
+        "fp_c3da0d4bb9",
+        "fp_dee443f41b"
+      ],
+      "passages": [
+        {
+          "passage_id": "CCD-Art19-8",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns complaint procedures related to credit agreements and database content, while the described process handles general product or service complaints and refunds, with no reference to credit agreements or databases.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "For the purpose of credit agreements, Member States shall ensure that complaint procedures are in place..."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art21-1-u",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates information that must be included in a consumer credit agreement, while the described process concerns handling a product or service complaint and refunds, not a credit agreement.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": [],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art26-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns the consumer's right of withdrawal from a credit agreement and obligations to the creditor, which does not relate to a complaint handling and refund process for a product or service.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "The legal passage refers to a consumer exercising a right of withdrawal from a credit agreement and repaying capital and interest to a creditor."
+          ],
+          "evidence_found": [
+            true,
+            false
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art26-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage deals with the right of withdrawal for linked credit agreements and return policies, which does not relate to the complaint handling and refund process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+            "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+            "If a refund is approved, the financial team processes the reimbursement."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art18-9",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage regulates the creditor's duties in a credit application context, whereas the process described concerns handling a customer complaint and refund, which are unrelated activities.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": [],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "17": {
+      "annotated_at": "2026-10-24T18:33:27+00:00",
+      "system_fingerprints": [
+        "fp_69334c0be3",
+        "fp_96d96a151c",
+        "fp_dee443f41b"
+      ],
+      "passages": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer places order through technological means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Customer is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No other agreement excluding the acknowledgement obligation",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Service provider acknowledges receipt of order by electronic means without undue delay",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to orders placed electronically, which the process involves, but the description does not state whether the customer is a consumer nor whether any exclusion agreement exists, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Acknowledge order receipt",
+              "actor": "e‑commerce company",
+              "timing": "without undue delay after order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Technical means to identify and correct input errors are provided prior to order placement",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Parties have otherwise agreed to waive the requirement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to e‑commerce order placement, but the description does not state whether the customer is a consumer nor whether any error‑correction interface is offered before the order is placed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide error‑correction interface",
+              "actor": "system",
+              "timing": "before customer places order",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information is provided prior to order placement",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Service provider is the e‑commerce company",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Recipient is the customer",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The article applies to consumer contracts and requires pre‑order information, but the description does not state whether the customer is a consumer nor that any such information is given before the order is placed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide technical steps to conclude contract",
+              "actor": "e-commerce company",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide information on contract filing and accessibility",
+              "actor": "e-commerce company",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide means for identifying and correcting input errors",
+              "actor": "e-commerce company",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide languages offered for contract conclusion",
+              "actor": "e-commerce company",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract concluded exclusively by exchange of electronic mail or equivalent individual communications",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies only when the contract is concluded solely by email or equivalent communications, but the process description does not specify the communication channel used for order placement, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The parties are an e‑commerce company and a customer (recipient)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Contract terms and general conditions are provided to the recipient",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to e‑commerce transactions and requires that contract terms be made available for storage/reproduction, but the process description does not state whether such terms are provided to the customer.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract terms to customer",
+              "actor": "e‑commerce company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Enable storage and reproduction of contract terms",
+              "actor": "e‑commerce company",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "The system sends a shipping confirmation to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "Acknowledge order receipt",
+          "actor": "e‑commerce company",
+          "timing": "without undue delay after order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "Provide error‑correction interface",
+          "actor": "system",
+          "timing": "before customer places order",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide technical steps to conclude contract",
+          "actor": "e-commerce company",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide information on contract filing and accessibility",
+          "actor": "e-commerce company",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide means for identifying and correcting input errors",
+          "actor": "e-commerce company",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide languages offered for contract conclusion",
+          "actor": "e-commerce company",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Provide contract terms to customer",
+          "actor": "e‑commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Enable storage and reproduction of contract terms",
+          "actor": "e‑commerce company",
+          "timing": null,
+          "already_in_description": false
+        }
+      ],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "19": {
+      "annotated_at": "2026-10-24T18:34:05+00:00",
+      "system_fingerprints": [
+        "fp_96d96a151c"
+      ],
+      "passages": [
+        {
+          "passage_id": "CCD-Art26-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "existence of a linked credit agreement for the purchase",
+              "status": "not_stated"
+            },
+            {
+              "fact": "return policy ensures a full refund for a period exceeding 14 calendar days",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage applies to purchases involving a linked credit agreement and a return policy that guarantees a full refund for more than 14 days. The process mentions an installment agreement (potential credit) and a right to return items, but does not state that the credit is a linked credit agreement nor that the return policy provides a full refund for a period longer than 14 days.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Inform consumer of extended withdrawal period",
+              "actor": "seller",
+              "timing": "before delivery",
+              "already_in_description": false
+            },
+            {
+              "label": "Allow withdrawal for duration of return policy",
+              "actor": "seller",
+              "timing": "until end of return period",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Afterward, the user either pays or completes an installment agreement.",
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art26-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage deals with a consumer's right of withdrawal from a credit agreement, which is unrelated to the described online purchase process that only mentions payment, installment agreements, and a right to return items, not a credit withdrawal right.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "Afterward, the user either pays or completes an installment agreement.",
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art30-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "User is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Transaction involves a credit agreement (installment agreement)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Credit agreement requires calculation of APR",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Account opening is optional and costs are separately identified",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns consumer credit agreements and APR calculation, which may relate to the installment agreement step, but the description does not state whether the user is a consumer or whether the installment agreement is a credit agreement subject to the CCD, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Calculate total cost of credit",
+              "actor": "Shop",
+              "timing": "before delivery",
+              "already_in_description": false
+            },
+            {
+              "label": "Include account maintenance costs unless optional and separately identified",
+              "actor": "Shop",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Provide APR information to consumer",
+              "actor": "Shop",
+              "timing": "before payment or installment agreement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Afterward, the user either pays or completes an installment agreement.",
+            "Finally, the items are delivered."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "CCD-Art10-5-q",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The transaction involves a consumer credit agreement (installment agreement)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The user is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Pre‑contractual information (including a repayment schedule) is provided before the agreement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns pre‑contractual information for consumer credit agreements. The process mentions an installment agreement but does not state whether it is a consumer credit agreement, whether the user is a consumer, or whether the required repayment schedule is shown, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Display repayment schedule",
+              "actor": "Online shop",
+              "timing": "before contract conclusion",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide benchmark details document",
+              "actor": "Online shop",
+              "timing": "before contract conclusion",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Afterward, the user either pays or completes an installment agreement."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract terms and general conditions are provided to the recipient",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The provision allows the recipient to store and reproduce the terms",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The e‑Commerce Directive article concerns the provision of contract terms to the consumer, which is relevant to an online shop purchase, but the process description does not state whether such terms are provided or how they are made available.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract terms and general conditions",
+              "actor": "Online shop",
+              "timing": "before order confirmation",
+              "already_in_description": false
+            },
+            {
+              "label": "Enable storage and reproduction of contract terms",
+              "actor": "Online shop",
+              "timing": "when providing contract terms",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Consider a process for purchasing items from an online shop.",
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "Afterward, the user either pays or completes an installment agreement.",
+            "After selecting the items, the user chooses between multiple options for a free reward.",
+            "Finally, the items are delivered.",
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "CCD-Art26-3",
+          "label": "Inform consumer of extended withdrawal period",
+          "actor": "seller",
+          "timing": "before delivery",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art26-3",
+          "label": "Allow withdrawal for duration of return policy",
+          "actor": "seller",
+          "timing": "until end of return period",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art30-2",
+          "label": "Calculate total cost of credit",
+          "actor": "Shop",
+          "timing": "before delivery",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art30-2",
+          "label": "Include account maintenance costs unless optional and separately identified",
+          "actor": "Shop",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art30-2",
+          "label": "Provide APR information to consumer",
+          "actor": "Shop",
+          "timing": "before payment or installment agreement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art10-5-q",
+          "label": "Display repayment schedule",
+          "actor": "Online shop",
+          "timing": "before contract conclusion",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "CCD-Art10-5-q",
+          "label": "Provide benchmark details document",
+          "actor": "Online shop",
+          "timing": "before contract conclusion",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Provide contract terms and general conditions",
+          "actor": "Online shop",
+          "timing": "before order confirmation",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Enable storage and reproduction of contract terms",
+          "actor": "Online shop",
+          "timing": "when providing contract terms",
+          "already_in_description": false
+        }
+      ],
+      "n_new": 5,
+      "n_copied": 0
+    },
+    "45": {
+      "annotated_at": "2026-10-24T18:35:12+00:00",
+      "system_fingerprints": [
+        "fp_90620edd96",
+        "fp_96d96a151c",
+        "fp_f640395b96",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Recipient places order through technological means",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No other agreement excluding the rule",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Service provider acknowledges receipt of the order",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns online ordering, which matches the process, but the description does not state whether the customer is a consumer nor whether an acknowledgement of the order is sent, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Acknowledge order receipt",
+              "actor": "shopping system",
+              "timing": "immediately after order is placed",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "evidence_found": [
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The process involves a service provider (E‑Shop) and a recipient (customer)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The parties have not otherwise agreed to waive the requirement",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Order is placed after payment and address steps",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The article applies to e‑commerce ordering and therefore concerns this process, but the description does not state whether the customer is a consumer nor whether the parties have agreed otherwise, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide error‑correction interface",
+              "actor": "shop",
+              "timing": "before order placement",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+            "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+            "Finally if the address and the payment steps are executed then the order will be finished by the system."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art11-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage concerns contracts concluded exclusively by electronic mail, whereas the described process involves an online shop transaction via a web interface, not email communication.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "A customer that logs into an E-Shop system",
+            "Then the order is finished by the shopping system"
+          ],
+          "evidence_found": [
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The parties are a service provider (e‑shop) and a recipient (customer)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The recipient is a consumer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No other agreement excludes the information requirement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The article applies to online sales between a service provider and a consumer, but the description does not state whether the customer is a consumer; therefore applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide technical steps information",
+              "actor": "service provider",
+              "timing": "before order is placed",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide contract filing information",
+              "actor": "service provider",
+              "timing": "before order is placed",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide error identification and correction means",
+              "actor": "service provider",
+              "timing": "before order is placed",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide language options information",
+              "actor": "service provider",
+              "timing": "before order is placed",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "Finally if the address and the payment steps are executed then the order will be finished by the system."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Contract terms and general conditions are provided to the customer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Provision allows the customer to store and reproduce the terms",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The e‑Commerce Directive requires that contract terms be made available for storage and reproduction, but the process description does not state whether such terms are provided to the customer, so the rule may apply but cannot be confirmed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide contract terms",
+              "actor": "E‑Shop system",
+              "timing": "before order finalisation",
+              "already_in_description": false
+            },
+            {
+              "label": "Enable download of contract terms",
+              "actor": "E‑Shop system",
+              "timing": "before order finalisation",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+            "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+            "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+            "Finally if the address and the payment steps are executed then the order will be finished by the system."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "label_source": "new"
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "ECD-Art11-1",
+          "label": "Acknowledge order receipt",
+          "actor": "shopping system",
+          "timing": "immediately after order is placed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art11-2",
+          "label": "Provide error‑correction interface",
+          "actor": "shop",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide technical steps information",
+          "actor": "service provider",
+          "timing": "before order is placed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide contract filing information",
+          "actor": "service provider",
+          "timing": "before order is placed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide error identification and correction means",
+          "actor": "service provider",
+          "timing": "before order is placed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-1",
+          "label": "Provide language options information",
+          "actor": "service provider",
+          "timing": "before order is placed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Provide contract terms",
+          "actor": "E‑Shop system",
+          "timing": "before order finalisation",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "ECD-Art10-3",
+          "label": "Enable download of contract terms",
+          "actor": "E‑Shop system",
+          "timing": "before order finalisation",
+          "already_in_description": false
+        }
+      ],
+      "n_new": 5,
+      "n_copied": 0
+    }
+  },
+  "study": "Study 2 (GDPR Chapters I-V + ECD, TPWC, CCD, OSH), development cases only",
+  "frozen_retrieval_file": "data/retrieval_study2/frozen_retrieval_dev_combined_rerank.json",
+  "labels_reused_from": "data/silver_gdpr/silver_reference_dev.json"
+}
