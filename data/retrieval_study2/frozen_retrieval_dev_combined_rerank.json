@@ -1,0 +1,1556 @@
+{
+  "created_at": "2026-10-24T18:26:59+00:00",
+  "retrieval_config": {
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "chunking": {
+      "max_passage_chars": 1500
+    }
+  },
+  "reproducibility": {
+    "passages_file": "data/knowledge_study2/passages_combined_dev.jsonl",
+    "passages_sha256": "265bb7ee393abca172083b09d808d0e7ee42fcf57b19d31e2488bf9ff3e4e5cd",
+    "n_passages": 502,
+    "dense_index_fingerprint": "2fcb91d3169ec6d2bce6f6226be462f8aeded158b2d56d5f149f213aa5788ce1",
+    "stopwords_count": 198,
+    "stopwords_sha256": "47608d511aa4fec95139d41e487109ab4a260313745d397210dbf966b1d3c225",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "faiss-cpu": "1.15.1",
+      "rank-bm25": "0.2.2",
+      "nltk": "3.10.3"
+    }
+  },
+  "study2": {
+    "study": "Study 2 (GDPR Chapters I-V + ECD, TPWC, CCD, OSH), development cases only",
+    "case_ids": [
+      "01",
+      "06",
+      "11",
+      "13",
+      "17",
+      "19",
+      "45"
+    ],
+    "included_chapters": [
+      "I",
+      "II",
+      "III",
+      "IV",
+      "V"
+    ],
+    "knowledge_sources": [
+      "data/knowledge_gdpr/sources.json",
+      "data/knowledge_study2/sources.json"
+    ],
+    "knowledge_sources_sha256": [
+      "d306a2742eddad234880a1c862b52cc31001b6a8ec7b6bc7cb57b55269eee1ed",
+      "9a3971512319e5b28d1d4a45d39c3dd31aa9e44e7967679eac33c0eae4580dc5"
+    ],
+    "version": "rerank",
+    "method": "hybrid top 20 re-scored by the cross-encoder, top 5 kept",
+    "corpus": "combined",
+    "article_selection": "data/knowledge_study2/article_selection.json",
+    "article_selection_sha256": "a1d0eca549e2816ee2dd6510d4a72affecab3d5a19f831c2a74d69ae0c0302bf",
+    "note": "included_chapters applies to the GDPR passages only; the new laws follow article_selection"
+  },
+  "reranker": {
+    "settings": {
+      "enabled": false,
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "max_length": 512,
+      "batch_size": 32,
+      "candidates": 20,
+      "top_k": 5,
+      "queries": "sentences",
+      "aggregation": "mean"
+    },
+    "class": "CrossEncoderReranker",
+    "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "transformers": "5.19.0",
+      "torch": "2.14.1"
+    },
+    "note": "reranker.enabled is false in config.yaml (off by default); it is switched on only for this file"
+  },
+  "cases": {
+    "01": {
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "reranker_queries": [
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -5.073019464810689,
+          "hybrid_rank": 2,
+          "fused_score": 0.1691452266422664,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -5.362617462873459,
+          "hybrid_rank": 3,
+          "fused_score": 0.12984227711885038,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -6.986997127532959,
+          "hybrid_rank": 1,
+          "fused_score": 0.17064149869242756,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -8.241496165593466,
+          "hybrid_rank": 11,
+          "fused_score": 0.06096713829988478,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art16-2",
+          "rerank_score": -8.310116291046143,
+          "hybrid_rank": 5,
+          "fused_score": 0.10829351977484757,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 16: Advisory services\n2. Member States shall require that the creditor and, where applicable, the credit intermediary, before the provision of advisory services or the conclusion of a contract for the provision of such services, provide the consumer with the following information on paper or another durable medium chosen by the consumer:\n(a) an indication of whether the recommendation will be based on only their own product range or on a wide range of products from across the market in accordance with paragraph 3, point (c);\n(b) where applicable, an indication of the fee payable by the consumer for the advisory services or, where the amount of such fee cannot be established at the time when the information is provided, the method used for its calculation.\nThe information referred to in the first subparagraph of this paragraph may be provided to the consumer in the form of additional pre-contractual information in accordance with Article 10(6), second subparagraph."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -5.073019464810689,
+          "hybrid_rank": 2,
+          "fused_score": 0.1691452266422664
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -5.362617462873459,
+          "hybrid_rank": 3,
+          "fused_score": 0.12984227711885038
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -6.986997127532959,
+          "hybrid_rank": 1,
+          "fused_score": 0.17064149869242756
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -8.241496165593466,
+          "hybrid_rank": 11,
+          "fused_score": 0.06096713829988478
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art16-2",
+          "rerank_score": -8.310116291046143,
+          "hybrid_rank": 5,
+          "fused_score": 0.10829351977484757
+        },
+        {
+          "rank": 6,
+          "passage_id": "CCD-Art16-3",
+          "rerank_score": -8.450358072916666,
+          "hybrid_rank": 4,
+          "fused_score": 0.118630725734808
+        },
+        {
+          "rank": 7,
+          "passage_id": "CCD-Art15-2",
+          "rerank_score": -8.59828511873881,
+          "hybrid_rank": 8,
+          "fused_score": 0.06998270642106258
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -8.999609549840292,
+          "hybrid_rank": 19,
+          "fused_score": 0.055398655398655405
+        },
+        {
+          "rank": 9,
+          "passage_id": "CCD-Art33-1",
+          "rerank_score": -9.030498743057251,
+          "hybrid_rank": 17,
+          "fused_score": 0.05626497360436361
+        },
+        {
+          "rank": 10,
+          "passage_id": "ECD-Art6-1",
+          "rerank_score": -9.284313201904297,
+          "hybrid_rank": 7,
+          "fused_score": 0.07254726629792323
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art32-4",
+          "rerank_score": -9.376398960749308,
+          "hybrid_rank": 10,
+          "fused_score": 0.0622492508372995
+        },
+        {
+          "rank": 12,
+          "passage_id": "CCD-Art9-2-j",
+          "rerank_score": -9.410037676493326,
+          "hybrid_rank": 13,
+          "fused_score": 0.05832478418079823
+        },
+        {
+          "rank": 13,
+          "passage_id": "CCD-Art32-1",
+          "rerank_score": -9.457316875457764,
+          "hybrid_rank": 16,
+          "fused_score": 0.056533146061006956
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art8-5",
+          "rerank_score": -9.48615018526713,
+          "hybrid_rank": 9,
+          "fused_score": 0.06843872501767238
+        },
+        {
+          "rank": 15,
+          "passage_id": "CCD-Art10-7",
+          "rerank_score": -9.981380303700766,
+          "hybrid_rank": 12,
+          "fused_score": 0.058619398407301
+        },
+        {
+          "rank": 16,
+          "passage_id": "CCD-Art11-6",
+          "rerank_score": -10.071876207987467,
+          "hybrid_rank": 6,
+          "fused_score": 0.07372315468493343
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art6-1",
+          "rerank_score": -10.166303157806396,
+          "hybrid_rank": 20,
+          "fused_score": 0.053981484361231194
+        },
+        {
+          "rank": 18,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.215632756551107,
+          "hybrid_rank": 14,
+          "fused_score": 0.05786614025844379
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art11-1",
+          "rerank_score": -10.24575392405192,
+          "hybrid_rank": 18,
+          "fused_score": 0.05591229120640885
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art22-1",
+          "rerank_score": -10.460472424825033,
+          "hybrid_rank": 15,
+          "fused_score": 0.05656274617717203
+        }
+      ]
+    },
+    "06": {
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.227979864392962,
+          "hybrid_rank": 3,
+          "fused_score": 0.15921349149566402,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -7.9220512594495505,
+          "hybrid_rank": 1,
+          "fused_score": 0.17086357544622455,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.207054206303187,
+          "hybrid_rank": 5,
+          "fused_score": 0.11375008010665523,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.309176445007324,
+          "hybrid_rank": 2,
+          "fused_score": 0.16953954693575682,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-2",
+          "rerank_score": -9.572862693241664,
+          "hybrid_rank": 10,
+          "fused_score": 0.07027729883985062,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider indicates any relevant codes of conduct to which he subscribes and information on how those codes can be consulted electronically."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.227979864392962,
+          "hybrid_rank": 3,
+          "fused_score": 0.15921349149566402
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -7.9220512594495505,
+          "hybrid_rank": 1,
+          "fused_score": 0.17086357544622455
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.207054206303187,
+          "hybrid_rank": 5,
+          "fused_score": 0.11375008010665523
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.309176445007324,
+          "hybrid_rank": 2,
+          "fused_score": 0.16953954693575682
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-2",
+          "rerank_score": -9.572862693241664,
+          "hybrid_rank": 10,
+          "fused_score": 0.07027729883985062
+        },
+        {
+          "rank": 6,
+          "passage_id": "ECD-Art7-1",
+          "rerank_score": -9.767500741141182,
+          "hybrid_rank": 13,
+          "fused_score": 0.06800110824675733
+        },
+        {
+          "rank": 7,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -9.865456581115723,
+          "hybrid_rank": 9,
+          "fused_score": 0.07342612044817927
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art7-2",
+          "rerank_score": -9.978105681283134,
+          "hybrid_rank": 8,
+          "fused_score": 0.07367697218240696
+        },
+        {
+          "rank": 9,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.246218953813825,
+          "hybrid_rank": 7,
+          "fused_score": 0.09124523382918905
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art11-1",
+          "rerank_score": -10.369627543858119,
+          "hybrid_rank": 17,
+          "fused_score": 0.05734942378777995
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art44-1",
+          "rerank_score": -10.430749484470912,
+          "hybrid_rank": 11,
+          "fused_score": 0.06930121658911918
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -10.485485621861049,
+          "hybrid_rank": 18,
+          "fused_score": 0.05656014797805843
+        },
+        {
+          "rank": 13,
+          "passage_id": "CCD-Art15-2",
+          "rerank_score": -10.507789066859655,
+          "hybrid_rank": 14,
+          "fused_score": 0.06686088686088687
+        },
+        {
+          "rank": 14,
+          "passage_id": "ECD-Art5-2",
+          "rerank_score": -10.535751751491002,
+          "hybrid_rank": 4,
+          "fused_score": 0.12682658468432245
+        },
+        {
+          "rank": 15,
+          "passage_id": "ECD-Art5-1-g",
+          "rerank_score": -10.557910374232701,
+          "hybrid_rank": 6,
+          "fused_score": 0.10293586435402582
+        },
+        {
+          "rank": 16,
+          "passage_id": "CCD-Art9-2-j",
+          "rerank_score": -10.645079476492745,
+          "hybrid_rank": 16,
+          "fused_score": 0.05869501428863034
+        },
+        {
+          "rank": 17,
+          "passage_id": "ECD-Art6-1",
+          "rerank_score": -10.673812185014997,
+          "hybrid_rank": 15,
+          "fused_score": 0.06039352804058687
+        },
+        {
+          "rank": 18,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.703566414969307,
+          "hybrid_rank": 12,
+          "fused_score": 0.0682926472310034
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art2-1-h",
+          "rerank_score": -10.867796761648995,
+          "hybrid_rank": 19,
+          "fused_score": 0.055030019862766344
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art24-2",
+          "rerank_score": -10.918834550040108,
+          "hybrid_rank": 20,
+          "fused_score": 0.05487702688417399
+        }
+      ]
+    },
+    "11": {
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art24-3",
+          "rerank_score": -9.053118507067362,
+          "hybrid_rank": 9,
+          "fused_score": 0.07230157980219064,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 24: Overdraft facilities\n3. Member States shall require the creditor to notify the consumer in an agreed manner of each reduction or cancellation of the overdraft facility at least 30 days prior to the day when the actual reduction or cancellation of the overdraft facility takes effect."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art25-5",
+          "rerank_score": -9.18478786945343,
+          "hybrid_rank": 7,
+          "fused_score": 0.0756333152677823,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 25: Overrunning\n5. Where the overrunning is reduced or cancelled, Member States shall require that the creditor offer the consumer, before the enforcement proceedings have been initiated, at no additional cost, the possibility to repay the amount actually drawn down to the extent of that reduction or cancellation. Such a repayment shall be made in 12 equal monthly instalments unless the consumer chooses to repay earlier, at the borrowing rate applicable to the overrunning."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art25-4",
+          "rerank_score": -9.236766537030539,
+          "hybrid_rank": 17,
+          "fused_score": 0.05790024073717298,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 25: Overrunning\n4. Member States shall require the creditor to notify the consumer in an agreed manner when the overrunning is not allowed anymore or the limit of the overrunning is reduced at least 30 days prior to the day when the actual cancellation or reduction of the overrunning takes effect."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art24-4",
+          "rerank_score": -9.41713253657023,
+          "hybrid_rank": 6,
+          "fused_score": 0.07753776241679468,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 24: Overdraft facilities\n4. Where the overdraft facility is reduced or cancelled, Member States shall require that the creditor offer the consumer, before the enforcement proceedings have been initiated, at no additional cost, the possibility to repay the amount actually drawn down to the extent of that reduction or cancellation. Such a repayment shall be made in 12 equal monthly instalments unless the consumer chooses to repay earlier, at the borrowing rate applicable to the overdraft facility."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art26-1",
+          "rerank_score": -9.430833498636881,
+          "hybrid_rank": 15,
+          "fused_score": 0.058207417582417584,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 26: Right of withdrawal\n1. Member States shall ensure that the consumer may withdraw from the credit agreement without giving any reason within a period of 14 calendar days.\nThe withdrawal period referred to in the first subparagraph shall begin either:\n(a) from the day of the conclusion of the credit agreement; or\n(b) from the day on which the consumer receives the contractual terms and conditions and the information in accordance with Articles 20 and 21, if that day is later than the date referred to in point (a) of this subparagraph.\nThe deadline referred to in the first subparagraph shall be deemed to have been met if the notification referred to in paragraph 5, first subparagraph, point (a), is dispatched by the consumer to the creditor before that deadline expires."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art24-3",
+          "rerank_score": -9.053118507067362,
+          "hybrid_rank": 9,
+          "fused_score": 0.07230157980219064
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art25-5",
+          "rerank_score": -9.18478786945343,
+          "hybrid_rank": 7,
+          "fused_score": 0.0756333152677823
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art25-4",
+          "rerank_score": -9.236766537030539,
+          "hybrid_rank": 17,
+          "fused_score": 0.05790024073717298
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art24-4",
+          "rerank_score": -9.41713253657023,
+          "hybrid_rank": 6,
+          "fused_score": 0.07753776241679468
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art26-1",
+          "rerank_score": -9.430833498636881,
+          "hybrid_rank": 15,
+          "fused_score": 0.058207417582417584
+        },
+        {
+          "rank": 6,
+          "passage_id": "CCD-Art24-1",
+          "rerank_score": -9.621707757314047,
+          "hybrid_rank": 8,
+          "fused_score": 0.07310417754656597
+        },
+        {
+          "rank": 7,
+          "passage_id": "TPWC-Art10-3",
+          "rerank_score": -9.757351716359457,
+          "hybrid_rank": 14,
+          "fused_score": 0.06104245217148443
+        },
+        {
+          "rank": 8,
+          "passage_id": "CCD-Art30-2",
+          "rerank_score": -9.959777196248373,
+          "hybrid_rank": 3,
+          "fused_score": 0.085396376834733
+        },
+        {
+          "rank": 9,
+          "passage_id": "CCD-Art25-2",
+          "rerank_score": -9.995495955149332,
+          "hybrid_rank": 5,
+          "fused_score": 0.08027965284474446
+        },
+        {
+          "rank": 10,
+          "passage_id": "CCD-Art25-1",
+          "rerank_score": -9.998472531636557,
+          "hybrid_rank": 4,
+          "fused_score": 0.0843675053359276
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art21-1-h",
+          "rerank_score": -10.07063372929891,
+          "hybrid_rank": 1,
+          "fused_score": 0.10239068504499824
+        },
+        {
+          "rank": 12,
+          "passage_id": "CCD-Art21-2",
+          "rerank_score": -10.168413480122885,
+          "hybrid_rank": 20,
+          "fused_score": 0.055069355527102015
+        },
+        {
+          "rank": 13,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.291944662729898,
+          "hybrid_rank": 2,
+          "fused_score": 0.09250729241241576
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art16-2",
+          "rerank_score": -10.320922692616781,
+          "hybrid_rank": 13,
+          "fused_score": 0.07010574831470355
+        },
+        {
+          "rank": 15,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.508387724558512,
+          "hybrid_rank": 10,
+          "fused_score": 0.07193218101895975
+        },
+        {
+          "rank": 16,
+          "passage_id": "CCD-Art24-2",
+          "rerank_score": -10.621006806691488,
+          "hybrid_rank": 16,
+          "fused_score": 0.057951955659935286
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -10.664689064025879,
+          "hybrid_rank": 19,
+          "fused_score": 0.055563034481371856
+        },
+        {
+          "rank": 18,
+          "passage_id": "CCD-Art10-5-q",
+          "rerank_score": -10.717970530192057,
+          "hybrid_rank": 18,
+          "fused_score": 0.056032791174290324
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art5-1-g",
+          "rerank_score": -10.860671679178873,
+          "hybrid_rank": 12,
+          "fused_score": 0.07031554539756564
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art23-2",
+          "rerank_score": -10.981393814086914,
+          "hybrid_rank": 11,
+          "fused_score": 0.07097371527201442
+        }
+      ]
+    },
+    "13": {
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "reranker_queries": [
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art19-8",
+          "rerank_score": -7.541663249333699,
+          "hybrid_rank": 2,
+          "fused_score": 0.14864767015248168,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 19: Databases\n8. For the purpose of credit agreements, Member States shall ensure that complaint procedures are in place in order to facilitate consumers’ challenges to the content of databases, including information that can be obtained by third parties through those databases."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art21-1-u",
+          "rerank_score": -8.310698747634888,
+          "hybrid_rank": 6,
+          "fused_score": 0.08387565421258646,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 21: Information to be included in the credit agreement\n1. Member States shall require that the credit agreement specify in a clear and concise manner all of the following elements:\n(u) the possibility of having recourse to an out-of-court complaint and redress mechanism for the consumer and the methods for having access to it;\n(v) where applicable, other contractual terms and conditions;\n(w) the name and address of the competent supervisory authority;\n(x) the relevant contact details of providers of debt advisory services and a recommendation for the consumer to contact such providers in the event of repayment difficulties.\nThe information referred to in the first subparagraph shall be clearly legible and adapted to take into account the technical constraints of the medium on which it is displayed. Information shall be displayed in an adequate and suitable way on the different channels."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art26-5",
+          "rerank_score": -8.472587903340658,
+          "hybrid_rank": 10,
+          "fused_score": 0.07310347081145044,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 26: Right of withdrawal\n5. If the consumer exercises the right of withdrawal, he or she shall take the following measures:\n(a) notify the creditor in accordance with the information given by the creditor pursuant to Article 21(1), first subparagraph, point (p), on paper or another durable medium chosen by the consumer and specified in the credit agreement within the deadline set out in paragraph 1 of this Article;\n(b) pay to the creditor the capital and the interest accrued thereon from the date on which the credit was drawn down until the date on which the capital is repaid, without any undue delay and in any event no later than 30 calendar days after the dispatch of the notification referred to in point (a).\nThe interest referred to in the first subparagraph, point (b), shall be calculated on the basis of the agreed borrowing rate. The creditor shall not be entitled to any other compensation from the consumer in the event of withdrawal, except compensation for any non-refundable charges paid by the creditor to any public administrative body."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art26-3",
+          "rerank_score": -8.958269516626993,
+          "hybrid_rank": 8,
+          "fused_score": 0.07772283799030996,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 26: Right of withdrawal\n3. In the case of a linked credit agreement for the purchase of a good with a return policy that ensures a full refund for a certain period of time exceeding 14 calendar days, the right of withdrawal shall be extended to match the duration of such return policy."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art18-9",
+          "rerank_score": -9.091501394907633,
+          "hybrid_rank": 11,
+          "fused_score": 0.07261386519782043,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 18: Obligation to assess the creditworthiness of the consumer\n9. Member States shall ensure that, where the credit application is rejected, the creditor is required to inform the consumer without delay of the rejection and, where relevant, refer the consumer to easily accessible debt advisory services. Where applicable, the creditor shall be required to inform the consumer of the fact that the assessment of creditworthiness is based on automated processing of data and about the consumer’s right to human assessment and the procedure for contesting the decision."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art19-8",
+          "rerank_score": -7.541663249333699,
+          "hybrid_rank": 2,
+          "fused_score": 0.14864767015248168
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art21-1-u",
+          "rerank_score": -8.310698747634888,
+          "hybrid_rank": 6,
+          "fused_score": 0.08387565421258646
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art26-5",
+          "rerank_score": -8.472587903340658,
+          "hybrid_rank": 10,
+          "fused_score": 0.07310347081145044
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art26-3",
+          "rerank_score": -8.958269516626993,
+          "hybrid_rank": 8,
+          "fused_score": 0.07772283799030996
+        },
+        {
+          "rank": 5,
+          "passage_id": "CCD-Art18-9",
+          "rerank_score": -9.091501394907633,
+          "hybrid_rank": 11,
+          "fused_score": 0.07261386519782043
+        },
+        {
+          "rank": 6,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -9.181798617045084,
+          "hybrid_rank": 4,
+          "fused_score": 0.09628301895269765
+        },
+        {
+          "rank": 7,
+          "passage_id": "CCD-Art22-1",
+          "rerank_score": -9.222588777542114,
+          "hybrid_rank": 1,
+          "fused_score": 0.15177652397837943
+        },
+        {
+          "rank": 8,
+          "passage_id": "CCD-Art19-6",
+          "rerank_score": -9.27391783396403,
+          "hybrid_rank": 3,
+          "fused_score": 0.1036871342916425
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -9.346355756123861,
+          "hybrid_rank": 5,
+          "fused_score": 0.08531058645440724
+        },
+        {
+          "rank": 10,
+          "passage_id": "CCD-Art24-3",
+          "rerank_score": -9.701310634613037,
+          "hybrid_rank": 20,
+          "fused_score": 0.05424641245536768
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art36-2",
+          "rerank_score": -9.70278231302897,
+          "hybrid_rank": 9,
+          "fused_score": 0.07344810040705563
+        },
+        {
+          "rank": 12,
+          "passage_id": "CCD-Art12-1",
+          "rerank_score": -9.789336840311686,
+          "hybrid_rank": 17,
+          "fused_score": 0.05725806451612903
+        },
+        {
+          "rank": 13,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.82119369506836,
+          "hybrid_rank": 14,
+          "fused_score": 0.05893824485373782
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art25-2",
+          "rerank_score": -10.036475976308187,
+          "hybrid_rank": 12,
+          "fused_score": 0.06104245217148443
+        },
+        {
+          "rank": 15,
+          "passage_id": "CCD-Art11-6",
+          "rerank_score": -10.16259765625,
+          "hybrid_rank": 16,
+          "fused_score": 0.05800288385889791
+        },
+        {
+          "rank": 16,
+          "passage_id": "CCD-Art10-7",
+          "rerank_score": -10.191921552022299,
+          "hybrid_rank": 15,
+          "fused_score": 0.05844990415885938
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art41-2",
+          "rerank_score": -10.311081568400065,
+          "hybrid_rank": 7,
+          "fused_score": 0.07892399003253049
+        },
+        {
+          "rank": 18,
+          "passage_id": "CCD-Art29-3",
+          "rerank_score": -10.454873402913412,
+          "hybrid_rank": 13,
+          "fused_score": 0.06004802065282596
+        },
+        {
+          "rank": 19,
+          "passage_id": "CCD-Art14-5",
+          "rerank_score": -10.76454496383667,
+          "hybrid_rank": 19,
+          "fused_score": 0.05425720857751678
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art23-2",
+          "rerank_score": -10.904282093048096,
+          "hybrid_rank": 18,
+          "fused_score": 0.056763285024154585
+        }
+      ]
+    },
+    "17": {
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "reranker_queries": [
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.747019004254113,
+          "hybrid_rank": 2,
+          "fused_score": 0.3422488969278902,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -9.445532344636463,
+          "hybrid_rank": 1,
+          "fused_score": 0.35495484350684436,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.100611709413075,
+          "hybrid_rank": 3,
+          "fused_score": 0.3376915027034208,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -10.174955867585682,
+          "hybrid_rank": 5,
+          "fused_score": 0.20334943395895105,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -10.315184298015776,
+          "hybrid_rank": 7,
+          "fused_score": 0.192781052344151,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.747019004254113,
+          "hybrid_rank": 2,
+          "fused_score": 0.3422488969278902
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -9.445532344636463,
+          "hybrid_rank": 1,
+          "fused_score": 0.35495484350684436
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.100611709413075,
+          "hybrid_rank": 3,
+          "fused_score": 0.3376915027034208
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -10.174955867585682,
+          "hybrid_rank": 5,
+          "fused_score": 0.20334943395895105
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -10.315184298015776,
+          "hybrid_rank": 7,
+          "fused_score": 0.192781052344151
+        },
+        {
+          "rank": 6,
+          "passage_id": "CCD-Art26-3",
+          "rerank_score": -10.323150839124407,
+          "hybrid_rank": 11,
+          "fused_score": 0.155679870188714
+        },
+        {
+          "rank": 7,
+          "passage_id": "CCD-Art35-5",
+          "rerank_score": -10.445392835707892,
+          "hybrid_rank": 17,
+          "fused_score": 0.1228636948196898
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art10-4",
+          "rerank_score": -10.605164096468972,
+          "hybrid_rank": 6,
+          "fused_score": 0.19625581761622374
+        },
+        {
+          "rank": 9,
+          "passage_id": "ECD-Art10-2",
+          "rerank_score": -10.645525160289946,
+          "hybrid_rank": 20,
+          "fused_score": 0.11686854981274511
+        },
+        {
+          "rank": 10,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.671351659865607,
+          "hybrid_rank": 4,
+          "fused_score": 0.26951896837998185
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art15-2",
+          "rerank_score": -10.699907847813197,
+          "hybrid_rank": 12,
+          "fused_score": 0.142363007144533
+        },
+        {
+          "rank": 12,
+          "passage_id": "ECD-Art7-2",
+          "rerank_score": -10.719399179731097,
+          "hybrid_rank": 9,
+          "fused_score": 0.1750101556905102
+        },
+        {
+          "rank": 13,
+          "passage_id": "CCD-Art21-1-h",
+          "rerank_score": -10.75808997381301,
+          "hybrid_rank": 14,
+          "fused_score": 0.14135322937988154
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art36-2",
+          "rerank_score": -10.782090504964193,
+          "hybrid_rank": 10,
+          "fused_score": 0.17453194850432832
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art28-3-e",
+          "rerank_score": -10.80124382745652,
+          "hybrid_rank": 16,
+          "fused_score": 0.12380316445413235
+        },
+        {
+          "rank": 16,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.832512219746908,
+          "hybrid_rank": 19,
+          "fused_score": 0.1171338798283083
+        },
+        {
+          "rank": 17,
+          "passage_id": "ECD-Art5-2",
+          "rerank_score": -10.873168718247186,
+          "hybrid_rank": 8,
+          "fused_score": 0.18429983519823046
+        },
+        {
+          "rank": 18,
+          "passage_id": "ECD-Art6-1",
+          "rerank_score": -10.889978817531041,
+          "hybrid_rank": 15,
+          "fused_score": 0.1288078270236768
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art5-1-g",
+          "rerank_score": -10.894675481887091,
+          "hybrid_rank": 13,
+          "fused_score": 0.14218000757606347
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art10-5-q",
+          "rerank_score": -10.93802597409203,
+          "hybrid_rank": 18,
+          "fused_score": 0.12252330420773638
+        }
+      ]
+    },
+    "19": {
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "reranker_queries": [
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art26-3",
+          "rerank_score": -9.87366697523329,
+          "hybrid_rank": 5,
+          "fused_score": 0.12072149660527923,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 26: Right of withdrawal\n3. In the case of a linked credit agreement for the purchase of a good with a return policy that ensures a full refund for a certain period of time exceeding 14 calendar days, the right of withdrawal shall be extended to match the duration of such return policy."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art26-5",
+          "rerank_score": -10.176053100162083,
+          "hybrid_rank": 15,
+          "fused_score": 0.09660850152494221,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 26: Right of withdrawal\n5. If the consumer exercises the right of withdrawal, he or she shall take the following measures:\n(a) notify the creditor in accordance with the information given by the creditor pursuant to Article 21(1), first subparagraph, point (p), on paper or another durable medium chosen by the consumer and specified in the credit agreement within the deadline set out in paragraph 1 of this Article;\n(b) pay to the creditor the capital and the interest accrued thereon from the date on which the credit was drawn down until the date on which the capital is repaid, without any undue delay and in any event no later than 30 calendar days after the dispatch of the notification referred to in point (a).\nThe interest referred to in the first subparagraph, point (b), shall be calculated on the basis of the agreed borrowing rate. The creditor shall not be entitled to any other compensation from the consumer in the event of withdrawal, except compensation for any non-refundable charges paid by the creditor to any public administrative body."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art30-2",
+          "rerank_score": -10.244835270775688,
+          "hybrid_rank": 6,
+          "fused_score": 0.11907966821570228,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 30: Calculation of the annual percentage rate of charge\n2. For the purpose of calculating the annual percentage rate of charge, the total cost of the credit to the consumer shall be determined, with the exception of any charges payable by the consumer for non-compliance with any of his or her commitments laid down in the credit agreement and charges other than the purchase price which, for purchases of goods or services, he or she is obliged to pay whether the transaction is effected in cash or on credit.\nThe costs of maintaining an account recording both payment transactions and drawdowns, the costs of using a means of payment for both payment transactions and drawdowns, and other costs relating to payment transactions shall be included in the total cost of the credit to the consumer unless the opening of the account is optional and the costs of the account have been clearly and separately identified in the credit agreement, or in any other agreement concluded with the consumer."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art10-5-q",
+          "rerank_score": -10.416562928093803,
+          "hybrid_rank": 12,
+          "fused_score": 0.10089928273727022,
+          "text": "Consumer Credit Directive ((EU) 2023/2225) - Article 10: Pre-contractual information\n5. The pre-contractual information referred to in paragraph 1 shall specify all of the following elements, which shall be displayed after and noticeably separated from the elements listed in paragraph 3:\n(q) a repayment schedule containing all payments and repayments over the duration of the credit agreement, including the payments and repayments for any ancillary services relating to the credit agreement which are sold simultaneously, whereby payments and repayments, in the event that different borrowing rates apply in different circumstances, are based on reasonable upward changes in the borrowing rate.\nWhere the credit agreement references a benchmark as defined in Article 3(1), point (3), of Regulation (EU) 2016/1011 of the European Parliament and of the Council , the name of that benchmark and of its administrator and potential implications of that benchmark for the consumer shall be specified in a separate document which may be annexed to the Standard European Consumer Credit Information form."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -10.41783661312527,
+          "hybrid_rank": 2,
+          "fused_score": 0.13318679883254647,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CCD-Art26-3",
+          "rerank_score": -9.87366697523329,
+          "hybrid_rank": 5,
+          "fused_score": 0.12072149660527923
+        },
+        {
+          "rank": 2,
+          "passage_id": "CCD-Art26-5",
+          "rerank_score": -10.176053100162083,
+          "hybrid_rank": 15,
+          "fused_score": 0.09660850152494221
+        },
+        {
+          "rank": 3,
+          "passage_id": "CCD-Art30-2",
+          "rerank_score": -10.244835270775688,
+          "hybrid_rank": 6,
+          "fused_score": 0.11907966821570228
+        },
+        {
+          "rank": 4,
+          "passage_id": "CCD-Art10-5-q",
+          "rerank_score": -10.416562928093803,
+          "hybrid_rank": 12,
+          "fused_score": 0.10089928273727022
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -10.41783661312527,
+          "hybrid_rank": 2,
+          "fused_score": 0.13318679883254647
+        },
+        {
+          "rank": 6,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -10.43639490339491,
+          "hybrid_rank": 9,
+          "fused_score": 0.11110872205531117
+        },
+        {
+          "rank": 7,
+          "passage_id": "CCD-Art21-1-h",
+          "rerank_score": -10.528399997287327,
+          "hybrid_rank": 11,
+          "fused_score": 0.10163039777690477
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -10.531297365824381,
+          "hybrid_rank": 4,
+          "fused_score": 0.12516754577765327
+        },
+        {
+          "rank": 9,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -10.538173251681858,
+          "hybrid_rank": 7,
+          "fused_score": 0.11749078907772131
+        },
+        {
+          "rank": 10,
+          "passage_id": "ECD-Art10-4",
+          "rerank_score": -10.543462806277805,
+          "hybrid_rank": 18,
+          "fused_score": 0.0898437900582373
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art15-2",
+          "rerank_score": -10.624141481187609,
+          "hybrid_rank": 19,
+          "fused_score": 0.08941317225010449
+        },
+        {
+          "rank": 12,
+          "passage_id": "CCD-Art15-1",
+          "rerank_score": -10.629501024881998,
+          "hybrid_rank": 16,
+          "fused_score": 0.09319823289616336
+        },
+        {
+          "rank": 13,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.71055433485243,
+          "hybrid_rank": 1,
+          "fused_score": 0.16224842503166717
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art25-2",
+          "rerank_score": -10.885560353597006,
+          "hybrid_rank": 14,
+          "fused_score": 0.0967608261569288
+        },
+        {
+          "rank": 15,
+          "passage_id": "CCD-Art14-2",
+          "rerank_score": -11.007859018113878,
+          "hybrid_rank": 20,
+          "fused_score": 0.08658613817307041
+        },
+        {
+          "rank": 16,
+          "passage_id": "CCD-Art25-5",
+          "rerank_score": -11.020133018493652,
+          "hybrid_rank": 10,
+          "fused_score": 0.10256665627964376
+        },
+        {
+          "rank": 17,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -11.024206161499023,
+          "hybrid_rank": 3,
+          "fused_score": 0.128331198070723
+        },
+        {
+          "rank": 18,
+          "passage_id": "CCD-Art24-4",
+          "rerank_score": -11.060584704081217,
+          "hybrid_rank": 13,
+          "fused_score": 0.09996316274939433
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art5-1-g",
+          "rerank_score": -11.1486447652181,
+          "hybrid_rank": 8,
+          "fused_score": 0.11691053148432012
+        },
+        {
+          "rank": 20,
+          "passage_id": "TPWC-Art4-2-a",
+          "rerank_score": -11.220967716640896,
+          "hybrid_rank": 17,
+          "fused_score": 0.09002582582397572
+        }
+      ]
+    },
+    "45": {
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "reranker_queries": [
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.360767682393393,
+          "hybrid_rank": 2,
+          "fused_score": 0.19090920778947654,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.826292355855307,
+          "hybrid_rank": 3,
+          "fused_score": 0.18638797295385878,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.59328662024604,
+          "hybrid_rank": 10,
+          "fused_score": 0.10059320538800252,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.799931632147896,
+          "hybrid_rank": 1,
+          "fused_score": 0.19908389403198898,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -9.826524628533257,
+          "hybrid_rank": 15,
+          "fused_score": 0.08781872336042505,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.360767682393393,
+          "hybrid_rank": 2,
+          "fused_score": 0.19090920778947654
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.826292355855307,
+          "hybrid_rank": 3,
+          "fused_score": 0.18638797295385878
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.59328662024604,
+          "hybrid_rank": 10,
+          "fused_score": 0.10059320538800252
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.799931632147896,
+          "hybrid_rank": 1,
+          "fused_score": 0.19908389403198898
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -9.826524628533257,
+          "hybrid_rank": 15,
+          "fused_score": 0.08781872336042505
+        },
+        {
+          "rank": 6,
+          "passage_id": "ECD-Art10-2",
+          "rerank_score": -9.858952469295925,
+          "hybrid_rank": 11,
+          "fused_score": 0.0989107755188104
+        },
+        {
+          "rank": 7,
+          "passage_id": "ECD-Art10-4",
+          "rerank_score": -9.949178589714897,
+          "hybrid_rank": 17,
+          "fused_score": 0.08254033843959402
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art7-2",
+          "rerank_score": -10.236861017015245,
+          "hybrid_rank": 20,
+          "fused_score": 0.07278511042097999
+        },
+        {
+          "rank": 9,
+          "passage_id": "CCD-Art16-2",
+          "rerank_score": -10.35384072197808,
+          "hybrid_rank": 9,
+          "fused_score": 0.11491518026913664
+        },
+        {
+          "rank": 10,
+          "passage_id": "CCD-Art25-3",
+          "rerank_score": -10.472522523668077,
+          "hybrid_rank": 14,
+          "fused_score": 0.09042342780542961
+        },
+        {
+          "rank": 11,
+          "passage_id": "CCD-Art21-1-h",
+          "rerank_score": -10.52042622036404,
+          "hybrid_rank": 13,
+          "fused_score": 0.09156582338876132
+        },
+        {
+          "rank": 12,
+          "passage_id": "CCD-Art10-1",
+          "rerank_score": -10.594298362731934,
+          "hybrid_rank": 16,
+          "fused_score": 0.08316544566544568
+        },
+        {
+          "rank": 13,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.60333898332384,
+          "hybrid_rank": 6,
+          "fused_score": 0.1176638648250964
+        },
+        {
+          "rank": 14,
+          "passage_id": "CCD-Art25-2",
+          "rerank_score": -10.632220798068577,
+          "hybrid_rank": 7,
+          "fused_score": 0.11720719206895071
+        },
+        {
+          "rank": 15,
+          "passage_id": "CCD-Art10-5-q",
+          "rerank_score": -10.63760609096951,
+          "hybrid_rank": 5,
+          "fused_score": 0.14435838757423736
+        },
+        {
+          "rank": 16,
+          "passage_id": "ECD-Art5-1-g",
+          "rerank_score": -10.710278722974989,
+          "hybrid_rank": 8,
+          "fused_score": 0.11588480580815104
+        },
+        {
+          "rank": 17,
+          "passage_id": "CCD-Art11-4-h",
+          "rerank_score": -10.7498074637519,
+          "hybrid_rank": 4,
+          "fused_score": 0.15674331664167007
+        },
+        {
+          "rank": 18,
+          "passage_id": "ECD-Art6-1",
+          "rerank_score": -10.78274260626899,
+          "hybrid_rank": 18,
+          "fused_score": 0.07432012548682719
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art2-1-f",
+          "rerank_score": -10.810904714796278,
+          "hybrid_rank": 12,
+          "fused_score": 0.09853842279411934
+        },
+        {
+          "rank": 20,
+          "passage_id": "CCD-Art11-2-a",
+          "rerank_score": -10.831118477715385,
+          "hybrid_rank": 19,
+          "fused_score": 0.07330669330669332
+        }
+      ]
+    }
+  }
+}
