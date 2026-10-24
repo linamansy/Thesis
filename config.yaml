@@ -321,6 +321,10 @@ study2_gdpr:
   dense_index_dir_restricted: data/retrieval_gdpr/dense_index_ch1-5  # separate FAISS index for passages_restricted
   frozen_dev_hybrid_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_hybrid.json  # hybrid top 5, like Study 1
   frozen_dev_rerank_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json  # hybrid top 20 -> reranker
+  # Silver labels for the development cases (src/build_silver_gdpr_dev.py): Study 1's silver setup unchanged
+  # (silver section, prompts/silver_annotation_prompt.txt), on every case-passage pair of the two ch1-5 files, once.
+  silver_reference_dev: data/silver_gdpr/silver_reference_dev.json   # never data/silver/
+  silver_log_condition: SILVER_gdpr_dev   # log files results/logs/SILVER_gdpr_dev_silver_<UTC time>.jsonl
   # SUPERSEDED first comparison (24 Oct 2026): all 99 articles, reranker = max over all queries. Kept unchanged as a
   # record, never used; src/freeze_retrieval_gdpr.py no longer writes them.
   dense_index_dir: data/retrieval_gdpr/dense_index

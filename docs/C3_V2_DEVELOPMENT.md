@@ -166,4 +166,15 @@ The rule is applied once, mechanically, to the counts; the result and the counts
 labels are AI-made (provisional, not gold), so the choice is reported as based on agreement with a stronger model.
 The rule may not be changed after any GDPR silver label exists.
 
-Result: (not yet applied)
+Result (applied 24 Oct 2026, `python -m src.build_silver_gdpr_dev`; silver file
+`data/silver_gdpr/silver_reference_dev.json`, 63 case-passage pairs, `openai/gpt-oss-120b` via Groq, log
+`results/logs/SILVER_gdpr_dev_silver_20261024T132952Z.jsonl`):
+
+| version | applicable | indeterminate | not_applicable | irrelevant |
+|---|---|---|---|---|
+| hybrid | 1 | 18 | 3 | 13 |
+| rerank | 3 | 17 | 6 | 9 |
+
+**rerank wins at step 1** (3 silver-applicable passages vs 1). Applicable: hybrid case 45 GDPR-Art13-2-a; rerank
+case 11 GDPR-Art2-1 and GDPR-Art32-2, case 19 GDPR-Art16-1. Observation (does not change the result): GDPR-Art2-1
+(material scope) is labelled applicable with no required steps; without it rerank would still win (2 vs 1).

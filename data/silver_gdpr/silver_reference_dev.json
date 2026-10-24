@@ -1,0 +1,2974 @@
+{
+  "status": "silver: AI-made reference, not checked by a human (provisional, never gold)",
+  "created_at": "2026-10-24T13:29:52.712751+00:00",
+  "annotator_provider": "groq",
+  "annotator_model": "openai/gpt-oss-120b",
+  "annotator_model_version": null,
+  "annotation_dates": [
+    "2026-10-24"
+  ],
+  "prompt_sha256": "02a6ad4205ef05cc1424cd70bf0b2feb321d8f7158dfc999285f8a26fe91bc72",
+  "frozen_retrieval_sha256": "1860fcf5519ca4e1db7b9837a95a576b11772a0828e037e61a148633ac0639ff",
+  "cases": {
+    "01": {
+      "annotated_at": "2026-10-24T13:31:24+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_27194a498a",
+        "fp_4200b3f836",
+        "fp_4727af4560",
+        "fp_49bfac06f1",
+        "fp_64b2f1c926",
+        "fp_dee443f41b",
+        "fp_e5b4e54fbb"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art13-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data are collected from the data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Controller intends to further process the personal data for a purpose other than that for which they were collected",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The process involves collection of personal data, so Article 13‑3 is relevant, but the description does not state whether the controller will later use the data for a different purpose.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide further processing information",
+              "actor": "controller",
+              "timing": "before further processing",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR provision concerns handling requests from data subjects exercising their rights (e.g., access, rectification) and identity verification for such requests, which is unrelated to the described sales and order placement process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Potential customer is a data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Personal data of the customer is collected",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information required by Articles 13/14 is provided to the customer",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns providing transparent information to data subjects, which could apply to a sales inquiry process, but the description does not state whether personal data is processed or whether the required privacy information is already given, so applicability cannot be confirmed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide privacy information with standardized icons",
+              "actor": "sales staff or customer support",
+              "timing": "before order placement",
+              "already_in_description": false
+            },
+            {
+              "label": "Ensure icons are machine‑readable when presented electronically",
+              "actor": "sales staff or IT system",
+              "timing": "when providing the privacy information",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a potential customer inquires about a product or service.",
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-9",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data of data subjects is processed",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is of a type that may require a DPIA",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller seeks views of data subjects on intended processing",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to processing activities that may need a DPIA and requires seeking data subjects' views, but the description does not state whether a DPIA is required or whether such consultation occurs.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Seek views of data subjects",
+              "actor": "controller",
+              "timing": "before processing",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art13-2-f",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "personal data are obtained from the data subject",
+              "status": "not_stated"
+            },
+            {
+              "fact": "automated decision‑making, including profiling, is used in processing",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR article applies when personal data are collected and automated decision‑making occurs. The description only mentions \"collects relevant information\" and does not specify whether that information is personal data or whether any automated decision‑making is involved, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide automated decision‑making information",
+              "actor": "controller",
+              "timing": "at the time personal data are obtained",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art27-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Controller or processor is not established in the EU",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Data subjects are located in an EU Member State",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Personal data are processed in relation to offering goods or services",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR article applies to controllers or processors outside the Union that process personal data of EU data subjects. The description does not state whether the organisation is established in the EU nor whether the customers are EU residents, and it does not explicitly mention personal data, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Appoint EU representative",
+              "actor": "controller",
+              "timing": "before collecting customer information",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "This process begins when a potential customer inquires about a product or service."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art30-4",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Entity acting as data controller or processor",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Supervisory authority makes a request for records",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to controllers/processors when a supervisory authority requests records, but the process description does not state whether the business is a controller/processor nor whether such a request occurs.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide processing records",
+              "actor": "controller",
+              "timing": "upon supervisory authority request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "The order is then recorded in the system, and the customer receives confirmation of their order."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Obligation is on competent supervisory authority",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Process is performed by sales staff, not supervisory authority",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "Article 35‑6 imposes a duty on the competent supervisory authority to apply a consistency mechanism; the described process involves only sales staff and customers, so the rule does not create obligations for this process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "\"the competent supervisory authority shall apply the consistency mechanism\"",
+            "\"Sales staff or customer support collects relevant information and addresses any concerns or questions\""
+          ],
+          "evidence_found": [
+            false,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data is processed",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Consent is sought for the processing of personal data",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The processing is necessary for performance of the contract",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns consent for personal data processing in contractual contexts. The process mentions collecting information but does not state whether personal data is processed, whether consent is obtained, or whether the processing is necessary, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Assess necessity of data processing",
+              "actor": "Sales staff",
+              "timing": "before collecting personal information",
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain freely given consent",
+              "actor": "Customer",
+              "timing": "before processing personal data that is not necessary",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform that contract is not conditional on consent",
+              "actor": "Sales staff",
+              "timing": "when presenting consent request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+            "If the customer is interested, they are guided through selecting the appropriate product or service."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art13-3",
+          "label": "Provide further processing information",
+          "actor": "controller",
+          "timing": "before further processing",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Provide privacy information with standardized icons",
+          "actor": "sales staff or customer support",
+          "timing": "before order placement",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Ensure icons are machine‑readable when presented electronically",
+          "actor": "sales staff or IT system",
+          "timing": "when providing the privacy information",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art35-9",
+          "label": "Seek views of data subjects",
+          "actor": "controller",
+          "timing": "before processing",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-f",
+          "label": "Provide automated decision‑making information",
+          "actor": "controller",
+          "timing": "at the time personal data are obtained",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art27-3",
+          "label": "Appoint EU representative",
+          "actor": "controller",
+          "timing": "before collecting customer information",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-4",
+          "label": "Provide processing records",
+          "actor": "controller",
+          "timing": "upon supervisory authority request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Assess necessity of data processing",
+          "actor": "Sales staff",
+          "timing": "before collecting personal information",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Obtain freely given consent",
+          "actor": "Customer",
+          "timing": "before processing personal data that is not necessary",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Inform that contract is not conditional on consent",
+          "actor": "Sales staff",
+          "timing": "when presenting consent request",
+          "already_in_description": false
+        }
+      ]
+    },
+    "06": {
+      "annotated_at": "2026-10-24T13:32:58+00:00",
+      "system_fingerprints": [
+        "fp_4200b3f836",
+        "fp_4727af4560",
+        "fp_49bfac06f1",
+        "fp_4a7bb72c24",
+        "fp_8ea50c0161",
+        "fp_a655021f7d",
+        "fp_c3da0d4bb9"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art12-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Data subject makes a request under Articles 15 to 22",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller receives the request",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Request is made by electronic means",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Complexity or number of requests may require an extension of the deadline",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage governs how a data controller must handle a data‑subject rights request, but the process description does not mention any such request being made or handled, so it is unclear whether the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide response to data subject request",
+              "actor": "controller",
+              "timing": "within one month of receipt of the request",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform data subject of deadline extension",
+              "actor": "controller",
+              "timing": "within one month of receipt of the request if extension is needed",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide information by electronic means",
+              "actor": "controller",
+              "timing": "when request was made electronically, unless otherwise requested",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer.",
+            "The warehouse team picks and packs the items, and a shipping label is generated.",
+            "The order is then handed over to a logistics provider for delivery.",
+            "Tracking information is sent to the customer.",
+            "The process continues as the shipment is monitored until it reaches the customer's address.",
+            "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The passage concerns the supervisory authority's consistency mechanism for GDPR impact assessments and does not impose obligations on the business process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer receives information pursuant to GDPR Articles 13 and 14",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information is provided together with standardized icons",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Icons are presented electronically",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Electronic icons are machine‑readable",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns the manner of providing privacy information to data subjects, which is relevant to a process that handles customer personal data, but the description does not state whether such information is provided, nor whether icons are used or are machine‑readable.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide privacy information with standardized icons",
+              "actor": "Company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Ensure electronic icons are machine‑readable",
+              "actor": "Company",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR article concerns the controller's obligations when a data subject makes a request, which is unrelated to the order placement, fulfillment, and delivery steps described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer.",
+            "The warehouse team picks and packs the items, and a shipping label is generated.",
+            "The order is then handed over to a logistics provider for delivery.",
+            "Tracking information is sent to the customer.",
+            "The process continues as the shipment is monitored until it reaches the customer's address.",
+            "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage deals with identity verification for data subject rights requests, which are not mentioned in the order‑fulfilment process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer.",
+            "The warehouse team picks and packs the items, and a shipping label is generated.",
+            "The order is then handed over to a logistics provider for delivery.",
+            "Tracking information is sent to the customer.",
+            "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art14-3",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Personal data are obtained from the data subject",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "Article 14 applies only when personal data have not been obtained from the data subject; the process description shows the customer provides their data when placing the order, so the condition for the rule is not met.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art11-1",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "controller processes personal data",
+              "status": "stated_true"
+            },
+            {
+              "fact": "purposes of processing require identification of the data subject",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The GDPR Article 11 condition applies only when the purposes of processing do not require identification of the data subject. In this order fulfilment process, identification of the customer is necessary to deliver the goods, so the condition is not met.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer.",
+            "The warehouse team picks and packs the items, and a shipping label is generated.",
+            "The order is then handed over to a logistics provider for delivery.",
+            "Tracking information is sent to the customer.",
+            "The process continues as the shipment is monitored until it reaches the customer's address."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art13-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data are collected from the data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Controller intends to further process the personal data for a purpose other than that for which they were collected",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information on the further processing purpose must be provided prior to that processing",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR provision applies to situations where the controller plans to use the collected personal data for a new purpose, but the process description does not state whether such further processing is intended.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide further processing information",
+              "actor": "controller",
+              "timing": "before further processing",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art44-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data of the customer is processed",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Personal data is transferred to a third country or international organisation",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller and processor are identified",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR article concerns transfers of personal data to third countries or international organisations. The process handles personal data and transfers it to a logistics provider, but it does not state whether that provider is located in a third country or an international organisation, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Assess transfer legality",
+              "actor": "Data controller",
+              "timing": "before transfer to logistics provider",
+              "already_in_description": false
+            },
+            {
+              "label": "Implement appropriate safeguards",
+              "actor": "Data controller",
+              "timing": "before transfer to logistics provider",
+              "already_in_description": false
+            },
+            {
+              "label": "Document transfer mechanisms",
+              "actor": "Data controller",
+              "timing": "before transfer to logistics provider",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer places an order through an online platform or over the phone.",
+            "The system automatically generates an order confirmation and sends it to the customer.",
+            "The order is then handed over to a logistics provider for delivery."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art12-3",
+          "label": "Provide response to data subject request",
+          "actor": "controller",
+          "timing": "within one month of receipt of the request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-3",
+          "label": "Inform data subject of deadline extension",
+          "actor": "controller",
+          "timing": "within one month of receipt of the request if extension is needed",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-3",
+          "label": "Provide information by electronic means",
+          "actor": "controller",
+          "timing": "when request was made electronically, unless otherwise requested",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Provide privacy information with standardized icons",
+          "actor": "Company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Ensure electronic icons are machine‑readable",
+          "actor": "Company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-3",
+          "label": "Provide further processing information",
+          "actor": "controller",
+          "timing": "before further processing",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art44-1",
+          "label": "Assess transfer legality",
+          "actor": "Data controller",
+          "timing": "before transfer to logistics provider",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art44-1",
+          "label": "Implement appropriate safeguards",
+          "actor": "Data controller",
+          "timing": "before transfer to logistics provider",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art44-1",
+          "label": "Document transfer mechanisms",
+          "actor": "Data controller",
+          "timing": "before transfer to logistics provider",
+          "already_in_description": false
+        }
+      ]
+    },
+    "11": {
+      "annotated_at": "2026-10-24T13:34:52+00:00",
+      "system_fingerprints": [
+        "fp_4727af4560",
+        "fp_49bfac06f1",
+        "fp_5082008e34",
+        "fp_86dc843b12",
+        "fp_df9620fe21",
+        "fp_f640395b96",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The service processes personal data of the customer",
+              "status": "stated_true"
+            },
+            {
+              "fact": "A data subject makes a request under Articles 15‑22 or 34",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The request is manifestly unfounded or excessive",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to data‑subject requests, which the description does not mention; therefore we cannot determine whether the rule triggers.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide requested information free of charge",
+              "actor": "controller",
+              "timing": "after data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Assess request for manifestly unfounded or excessive character",
+              "actor": "controller",
+              "timing": "after data subject request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The service provider processes personal data of the customer",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The customer (data subject) can make a request for access to their personal data",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The controller may charge a reasonable fee for additional copies of data",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The request can be made by electronic means and data shall be provided in electronic form",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR right of access applies to any processing of personal data, which the process involves, but the description does not state whether the data subject can request access or how it is handled, so the rule's applicability cannot be confirmed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Receive data access request",
+              "actor": "controller",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Provide copy of personal data",
+              "actor": "controller",
+              "timing": "after data access request",
+              "already_in_description": false
+            },
+            {
+              "label": "Charge reasonable fee for additional copies",
+              "actor": "controller",
+              "timing": "when further copies requested",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide data in electronic form",
+              "actor": "controller",
+              "timing": "when request made electronically",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer signs up for a subscription service, entering personal and payment information",
+            "The system generates an account"
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Consent to processing of personal data is sought from the customer",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing of personal data is necessary for performance of the subscription contract",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "Article 7(4) GDPR applies to contracts where consent to non‑necessary data processing is required. The description does not state whether consent is obtained or whether the processing is necessary, so the rule’s applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Obtain separate consent for non‑necessary data processing",
+              "actor": "service provider",
+              "timing": "before account generation",
+              "already_in_description": false
+            },
+            {
+              "label": "Document assessment of consent freedom",
+              "actor": "service provider",
+              "timing": "after obtaining consent",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "The system generates an account, assigns access, and triggers automated billing cycles."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "Article 35(6) imposes a duty on the competent supervisory authority to apply the consistency mechanism, not an obligation on the data controller or the subscription process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The passage states: \"the competent supervisory authority shall apply the consistency mechanism...\""
+          ],
+          "evidence_found": [
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "personal data are obtained from the data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "controller provides the additional information listed in Art 13(2)(a)‑(e) at the time of collection",
+              "status": "not_stated"
+            },
+            {
+              "fact": "processing is based on consent",
+              "status": "not_stated"
+            },
+            {
+              "fact": "provision of personal data is a statutory or contractual requirement",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to any situation where personal data are collected, which the process does, but the description does not state whether the controller supplies the required information, so compliance cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide storage period information",
+              "actor": "controller",
+              "timing": "at data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide data subject rights information",
+              "actor": "controller",
+              "timing": "at data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide right to withdraw consent information",
+              "actor": "controller",
+              "timing": "at data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide right to lodge complaint information",
+              "actor": "controller",
+              "timing": "at data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide statutory/contractual requirement information",
+              "actor": "controller",
+              "timing": "at data collection",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art19-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "service provider acts as data controller",
+              "status": "stated_true"
+            },
+            {
+              "fact": "customer is data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "rectification, erasure, or restriction of processing is carried out",
+              "status": "not_stated"
+            },
+            {
+              "fact": "recipients of personal data exist",
+              "status": "not_stated"
+            },
+            {
+              "fact": "data subject requests information about recipients",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns obligations that arise when personal data are rectified, erased or processing is restricted. The process handles personal data, so the rule is relevant, but the description does not state that any rectification, erasure or restriction occurs, nor that recipients exist or a request is made.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Communicate data correction to recipients",
+              "actor": "controller",
+              "timing": "after rectification or erasure or restriction",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide recipient information to data subject",
+              "actor": "controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art2-1",
+          "label": "applicable",
+          "facts": [
+            {
+              "fact": "Processing of personal data",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Processing by automated means",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "Article 2(1) defines the material scope of the GDPR. The process handles personal data (customer sign‑up information) and does so by automated means (account creation and billing), so the regulation applies.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "customer signs up for a subscription service, entering personal and payment information.",
+            "The system generates an account, assigns access, and triggers automated billing cycles."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "applicable",
+          "facts": [
+            {
+              "fact": "Personal data is processed",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Controller assesses security risks",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Appropriate security measures are implemented",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR Art.32‑2 applies to any processing of personal data, which the described subscription process performs, but the description does not mention a risk assessment or security measures, so the rule creates obligations.",
+          "required_steps": [
+            {
+              "label": "Assess security risks",
+              "actor": "Data protection officer",
+              "timing": "before processing personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Implement security measures",
+              "actor": "IT security team",
+              "timing": "after risk assessment",
+              "already_in_description": false
+            }
+          ],
+          "possible_steps": [],
+          "evidence": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "The system generates an account, assigns access, and triggers automated billing cycles."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        }
+      ],
+      "required_steps": [
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "Assess security risks",
+          "actor": "Data protection officer",
+          "timing": "before processing personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "Implement security measures",
+          "actor": "IT security team",
+          "timing": "after risk assessment",
+          "already_in_description": false
+        }
+      ],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Provide requested information free of charge",
+          "actor": "controller",
+          "timing": "after data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Assess request for manifestly unfounded or excessive character",
+          "actor": "controller",
+          "timing": "after data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Receive data access request",
+          "actor": "controller",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Provide copy of personal data",
+          "actor": "controller",
+          "timing": "after data access request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Charge reasonable fee for additional copies",
+          "actor": "controller",
+          "timing": "when further copies requested",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Provide data in electronic form",
+          "actor": "controller",
+          "timing": "when request made electronically",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Obtain separate consent for non‑necessary data processing",
+          "actor": "service provider",
+          "timing": "before account generation",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Document assessment of consent freedom",
+          "actor": "service provider",
+          "timing": "after obtaining consent",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide storage period information",
+          "actor": "controller",
+          "timing": "at data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide data subject rights information",
+          "actor": "controller",
+          "timing": "at data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide right to withdraw consent information",
+          "actor": "controller",
+          "timing": "at data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide right to lodge complaint information",
+          "actor": "controller",
+          "timing": "at data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide statutory/contractual requirement information",
+          "actor": "controller",
+          "timing": "at data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art19-1",
+          "label": "Communicate data correction to recipients",
+          "actor": "controller",
+          "timing": "after rectification or erasure or restriction",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art19-1",
+          "label": "Provide recipient information to data subject",
+          "actor": "controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        }
+      ]
+    },
+    "13": {
+      "annotated_at": "2026-10-24T13:36:29+00:00",
+      "system_fingerprints": [
+        "fp_4140daa9c2",
+        "fp_47082602e2",
+        "fp_49bfac06f1",
+        "fp_90620edd96",
+        "fp_df9620fe21",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art12-4",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR Article 12‑4 provision concerns a data controller's response to a data subject's request to exercise data protection rights. The described process deals solely with handling a product or service complaint and refund, without any reference to data subject rights requests or personal data processing, so the passage does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art41-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage concerns bodies monitoring compliance with data protection codes of conduct and handling complaints about code infringements, which does not relate to the described product/service complaint and refund process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+            "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+            "If a refund is approved, the financial team processes the reimbursement."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Controller obtains personal data from the data subject",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information required by Art 13(2) is provided at the time of data collection",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to situations where a controller collects personal data from a data subject and must give specific information at that moment. The description mentions a customer filing a complaint but does not state that personal data are collected or that any information is provided, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide storage period information",
+              "actor": "controller",
+              "timing": "at time of data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide data subject rights information",
+              "actor": "controller",
+              "timing": "at time of data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide right to withdraw consent information",
+              "actor": "controller",
+              "timing": "at time of data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide right to lodge complaint information",
+              "actor": "controller",
+              "timing": "at time of data collection",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide statutory/contractual requirement information",
+              "actor": "controller",
+              "timing": "at time of data collection",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR Art 35‑6 provision imposes a duty on the competent supervisory authority to apply a consistency mechanism for cross‑border processing lists; it does not create obligations for the complaint‑handling process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR Article 12(5) provision concerns the provision of information and actions related to data subject rights (access, rectification, erasure, etc.). The described process deals with handling a product/service complaint and refund, not with exercising GDPR data subject rights, so the rule does not apply.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+            "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art47-2-h",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage regulates binding corporate rules and data‑protection‑related complaint procedures, which are unrelated to the described consumer refund complaint process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Controller processes personal data concerning the data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Data subject makes a request for access to personal data",
+              "status": "not_stated"
+            },
+            {
+              "fact": "No exemption or restriction to the right of access applies",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR Art.15 right of access applies to any controller that processes personal data, which this complaint handling process does, but the description does not state whether a data subject requests access, so the obligation cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Confirm processing status",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide personal data",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide information about purposes of processing",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide categories of personal data",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide recipients or categories of recipients",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide envisaged storage period or criteria",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform about rights to rectification, erasure, restriction, objection",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Inform about right to lodge complaint with supervisory authority",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide source of personal data if not collected from data subject",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide information on automated decision‑making and profiling",
+              "actor": "Data controller",
+              "timing": "upon data subject request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Customer service logs the complaint and assigns it to the relevant department for investigation."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art43-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR article concerns the accreditation and duties of data protection certification bodies, which are unrelated to a customer complaint and refund process for a product or service.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art45-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR provision concerns the Commission's consultations on international data transfers, which is unrelated to the complaint handling, refund, and feedback process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide storage period information",
+          "actor": "controller",
+          "timing": "at time of data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide data subject rights information",
+          "actor": "controller",
+          "timing": "at time of data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide right to withdraw consent information",
+          "actor": "controller",
+          "timing": "at time of data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide right to lodge complaint information",
+          "actor": "controller",
+          "timing": "at time of data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide statutory/contractual requirement information",
+          "actor": "controller",
+          "timing": "at time of data collection",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Confirm processing status",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide personal data",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide information about purposes of processing",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide categories of personal data",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide recipients or categories of recipients",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide envisaged storage period or criteria",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Inform about rights to rectification, erasure, restriction, objection",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Inform about right to lodge complaint with supervisory authority",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide source of personal data if not collected from data subject",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-1",
+          "label": "Provide information on automated decision‑making and profiling",
+          "actor": "Data controller",
+          "timing": "upon data subject request",
+          "already_in_description": false
+        }
+      ]
+    },
+    "17": {
+      "annotated_at": "2026-10-24T13:38:03+00:00",
+      "system_fingerprints": [
+        "fp_19b184c447",
+        "fp_4200b3f836",
+        "fp_49bfac06f1",
+        "fp_5082008e34",
+        "fp_90620edd96",
+        "fp_f640395b96",
+        "fp_fe269835c7"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Processing activities are related to offering goods or services to data subjects in several Member States",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Lists referred to in paragraphs 4 and 5 have been adopted",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The passage concerns supervisory‑authority duties (applying the consistency mechanism) and depends on the existence of specific lists, which the process description does not mention; therefore the rule does not create obligations for the e‑commerce process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "If the order is international, customs documentation is prepared."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Customer (data subject) places an order and personal data is recorded",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Information pursuant to Articles 13 and 14 is provided to the data subject",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information is provided using standardized icons",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Icons are presented electronically",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Icons are machine‑readable",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns the provision of privacy information to data subjects, which is relevant to an e‑commerce order process that handles personal data, but the description does not state whether such information is provided, nor whether icons are used, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide privacy information with standardized icons",
+              "actor": "e‑commerce company",
+              "timing": "before recording order details",
+              "already_in_description": false
+            },
+            {
+              "label": "Present icons in machine‑readable format",
+              "actor": "system",
+              "timing": "when providing privacy information",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The entity performing the processing is a processor (or processor's representative)",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The processor processes personal data on behalf of a controller",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The processor maintains a record of processing activities",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns obligations of a processor (or its representative) to keep records of processing activities. The process description does not state whether the e‑commerce company is acting as a processor on behalf of a controller, nor does it mention any record‑keeping of processing activities, so it is unclear if the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Maintain record of processing activities",
+              "actor": "e-commerce company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document categories of processing activities",
+              "actor": "e-commerce company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document transfers of personal data to third countries or international organisations",
+              "actor": "e-commerce company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document technical and organisational security measures",
+              "actor": "e-commerce company",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "Payment processing begins.",
+            "The system sends a shipping confirmation to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The process involves processing personal data of a data subject",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The data subject has given consent for the processing",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is necessary for the performance of a contract to which the data subject is party",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is necessary for compliance with a legal obligation",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is necessary to protect vital interests of the data subject or another natural person",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing is necessary for the purposes of legitimate interests pursued by the controller",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR Art.6 passage concerns personal data processing, which occurs in the described order fulfillment process, but the description does not state which lawful basis applies, so the applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Identify lawful basis for processing",
+              "actor": "e‑commerce company",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Obtain consent from customer",
+              "actor": "e‑commerce company",
+              "timing": "before recording order details",
+              "already_in_description": false
+            },
+            {
+              "label": "Document contract‑performance basis",
+              "actor": "e‑commerce company",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art45-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The legal passage concerns the European Commission's actions regarding adequacy decisions for data transfers to third countries, which does not relate to the e‑commerce order fulfillment steps described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process description details order placement, payment, inventory checks, shipping, and returns, with no reference to personal data transfers or adequacy decisions."
+          ],
+          "evidence_found": [
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "The e-commerce company is a data controller",
+              "status": "not_stated"
+            },
+            {
+              "fact": "The company processes personal data",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The company maintains a record of processing activities",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR article applies to data controllers that process personal data. The description shows personal data processing (order details recorded) but does not state that the company is a controller nor that it keeps a processing record, so applicability cannot be determined.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Maintain record of processing activities",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document controller contact details",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document purposes of processing",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document categories of data subjects and personal data",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document categories of recipients",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document transfers to third countries or international organisations",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document envisaged time limits for erasure",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Document technical and organisational security measures",
+              "actor": "Data protection officer",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "The system sends a shipping confirmation to the customer."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data is processed",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Order details are recorded",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Shipping confirmation is sent to the customer",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Follow‑up email for feedback is sent after delivery",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The GDPR article obliges the controller to assess security risks for personal data processing, but the description does not explicitly state that personal data is processed, so it is unclear whether the rule applies.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Assess security risks of personal data processing",
+              "actor": "Data protection officer",
+              "timing": "before processing personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Implement appropriate technical and organisational security measures",
+              "actor": "IT security team",
+              "timing": "after risk assessment",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "When a customer places an order, the system records the order details.",
+            "The system sends a shipping confirmation to the customer.",
+            "A follow-up email for feedback is sent directly after confirming the successful delivery."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art14-3",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "personal data have not been obtained from the data subject",
+              "status": "stated_false"
+            }
+          ],
+          "reason": "The process obtains personal data directly from the customer when the order is placed, so Article 14, which applies only when data are not obtained from the data subject, does not trigger.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "When a customer places an order, the system records the order details."
+          ],
+          "evidence_found": [
+            true
+          ]
+        }
+      ],
+      "required_steps": [],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Provide privacy information with standardized icons",
+          "actor": "e‑commerce company",
+          "timing": "before recording order details",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Present icons in machine‑readable format",
+          "actor": "system",
+          "timing": "when providing privacy information",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Maintain record of processing activities",
+          "actor": "e-commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Document categories of processing activities",
+          "actor": "e-commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Document transfers of personal data to third countries or international organisations",
+          "actor": "e-commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Document technical and organisational security measures",
+          "actor": "e-commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "Identify lawful basis for processing",
+          "actor": "e‑commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "Obtain consent from customer",
+          "actor": "e‑commerce company",
+          "timing": "before recording order details",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "Document contract‑performance basis",
+          "actor": "e‑commerce company",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Maintain record of processing activities",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document controller contact details",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document purposes of processing",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document categories of data subjects and personal data",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document categories of recipients",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document transfers to third countries or international organisations",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document envisaged time limits for erasure",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art30-1",
+          "label": "Document technical and organisational security measures",
+          "actor": "Data protection officer",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "Assess security risks of personal data processing",
+          "actor": "Data protection officer",
+          "timing": "before processing personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art32-2",
+          "label": "Implement appropriate technical and organisational security measures",
+          "actor": "IT security team",
+          "timing": "after risk assessment",
+          "already_in_description": false
+        }
+      ]
+    },
+    "19": {
+      "annotated_at": "2026-10-24T13:39:54+00:00",
+      "system_fingerprints": [
+        "fp_803c0ba83d",
+        "fp_8655ddce88",
+        "fp_8ea50c0161",
+        "fp_c15aa9c1b7",
+        "fp_c868cf1eaa",
+        "fp_e1a78f200e",
+        "fp_e5b4e54fbb"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Data subject makes a request for information under Articles 13, 14, 15‑22 or 34",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies when a data subject requests information from the controller. The process description does not mention any such request, so it is unclear whether the rule is triggered.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide requested information",
+              "actor": "Online shop",
+              "timing": "After receiving data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Assess request for manifestly unfounded or excessive character",
+              "actor": "Online shop",
+              "timing": "After receiving data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Charge reasonable fee if request is unfounded or excessive",
+              "actor": "Online shop",
+              "timing": "If assessment finds request unfounded or excessive",
+              "already_in_description": false
+            },
+            {
+              "label": "Refuse to act on request if request is unfounded or excessive",
+              "actor": "Online shop",
+              "timing": "If assessment finds request unfounded or excessive",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "Afterward, the user either pays or completes an installment agreement.",
+            "After selecting the items, the user chooses between multiple options for a free reward.",
+            "Finally, the items are delivered.",
+            "The user has the right to return items for exchange."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Processing activities related to offering goods or services to data subjects",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Processing activities involve multiple Member States",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processing activities may substantially affect the free movement of personal data within the Union",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Lists referred to in paragraphs 4 and 5 have not yet been adopted",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns a supervisory‑authority duty (applying the consistency mechanism) and does not impose any obligations on the online‑shop operator or on the described process steps.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "Consider a process for purchasing items from an online shop.",
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "Afterward, the user either pays or completes an installment agreement.",
+            "After selecting the items, the user chooses between multiple options for a free reward.",
+            "Finally, the items are delivered."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "User is a data subject whose personal data is processed",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Controller must provide information pursuant to Articles 13 and 14",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Information may be provided with standardized icons that are machine‑readable when electronic",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage concerns the obligation to give data subjects information via standardized, machine‑readable icons. The process involves a user (data subject) logging in, so the rule is relevant, but the description does not state whether such information is provided, leaving the applicability indeterminate.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide information with machine‑readable standardized icons",
+              "actor": "Shop",
+              "timing": "before user logs in",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The user starts an order by logging in to their account."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR provision concerns the controller's handling of data subject rights requests and identity verification, which is unrelated to the described online purchase, payment, reward selection, delivery, or return steps.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art45-5",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage concerns the European Commission's actions on adequacy decisions for data transfers to third countries, which does not relate to the online shop purchasing, payment, reward selection, delivery, or return steps described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The process description deals only with user login, item selection, payment, reward choice, delivery and returns, with no reference to personal data transfers or third‑country data processing."
+          ],
+          "evidence_found": [
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art16-1",
+          "label": "applicable",
+          "facts": [
+            {
+              "fact": "personal data of the user is processed by the online shop",
+              "status": "stated_true"
+            },
+            {
+              "fact": "the user is a data subject of the online shop",
+              "status": "stated_true"
+            }
+          ],
+          "reason": "The GDPR passage concerns the right of a data subject to have inaccurate personal data rectified. The process involves a user logging into an online shop account, which entails processing personal data, so the rule applies.",
+          "required_steps": [
+            {
+              "label": "Receive rectification request",
+              "actor": "online shop",
+              "timing": null,
+              "already_in_description": false
+            },
+            {
+              "label": "Rectify personal data",
+              "actor": "online shop",
+              "timing": "without undue delay",
+              "already_in_description": false
+            }
+          ],
+          "possible_steps": [],
+          "evidence": [
+            "The user starts an order by logging in to their account."
+          ],
+          "evidence_found": [
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art21-2",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage concerns the right to object to processing of personal data for direct marketing, which is unrelated to the described purchase, payment, reward selection, delivery, and return steps.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art21-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR Article 21 right to object concerns processing of personal data for direct marketing, which is not mentioned in the purchase process description. The described steps involve ordering, payment, reward selection, delivery, and returns, with no reference to direct marketing activities.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        },
+        {
+          "passage_id": "GDPR-Art21-5",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Process is an information society service (online shop)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Data subject is provided with an automated means to object using technical specifications",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage applies to information society services, which the online shop is, but the description does not state whether an automated objection mechanism is offered, so the obligation cannot be confirmed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide automated objection mechanism",
+              "actor": "Online shop",
+              "timing": null,
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "Consider a process for purchasing items from an online shop.",
+            "The user starts an order by logging in to their account."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Online shop processes personal data of the user",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Data subject makes a request for access to personal data",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Request is made by electronic means",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR article concerns a data controller (the online shop) and a data subject (the user), which are present, but the process description does not state that a data‑subject access request occurs, so the rule may apply but cannot be confirmed.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Provide copy of personal data",
+              "actor": "Online shop",
+              "timing": "after data subject request",
+              "already_in_description": false
+            },
+            {
+              "label": "Charge reasonable fee for additional copies",
+              "actor": "Online shop",
+              "timing": "after data subject request for further copies",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide information in electronic form",
+              "actor": "Online shop",
+              "timing": "if request made by electronic means",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "The user starts an order by logging in to their account."
+          ],
+          "evidence_found": [
+            true
+          ]
+        }
+      ],
+      "required_steps": [
+        {
+          "passage_id": "GDPR-Art16-1",
+          "label": "Receive rectification request",
+          "actor": "online shop",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art16-1",
+          "label": "Rectify personal data",
+          "actor": "online shop",
+          "timing": "without undue delay",
+          "already_in_description": false
+        }
+      ],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Provide requested information",
+          "actor": "Online shop",
+          "timing": "After receiving data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Assess request for manifestly unfounded or excessive character",
+          "actor": "Online shop",
+          "timing": "After receiving data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Charge reasonable fee if request is unfounded or excessive",
+          "actor": "Online shop",
+          "timing": "If assessment finds request unfounded or excessive",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-5",
+          "label": "Refuse to act on request if request is unfounded or excessive",
+          "actor": "Online shop",
+          "timing": "If assessment finds request unfounded or excessive",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art12-7",
+          "label": "Provide information with machine‑readable standardized icons",
+          "actor": "Shop",
+          "timing": "before user logs in",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art21-5",
+          "label": "Provide automated objection mechanism",
+          "actor": "Online shop",
+          "timing": null,
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Provide copy of personal data",
+          "actor": "Online shop",
+          "timing": "after data subject request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Charge reasonable fee for additional copies",
+          "actor": "Online shop",
+          "timing": "after data subject request for further copies",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art15-3",
+          "label": "Provide information in electronic form",
+          "actor": "Online shop",
+          "timing": "if request made by electronic means",
+          "already_in_description": false
+        }
+      ]
+    },
+    "45": {
+      "annotated_at": "2026-10-24T13:42:07+00:00",
+      "system_fingerprints": [
+        "fp_02b0d31eca",
+        "fp_19b184c447",
+        "fp_47082602e2",
+        "fp_64b2f1c926",
+        "fp_8ea50c0161",
+        "fp_9241e9962b",
+        "fp_c800245357",
+        "fp_c868cf1eaa",
+        "fp_e1a78f200e"
+      ],
+      "passages": [
+        {
+          "passage_id": "GDPR-Art36-2",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Controller intends processing that may infringe GDPR",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller has insufficiently identified or mitigated the risk",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller submits a request for prior consultation to the supervisory authority",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR Art.36‑2 provision concerns prior consultation on high‑risk processing. The online‑shop process involves personal data (login, payment, address) so the rule is relevant, but the description does not state whether the controller has identified a risk or made a consultation request, leaving the applicability indeterminate.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Submit prior‑consultation request",
+              "actor": "Controller",
+              "timing": "before processing personal data that may pose high risk",
+              "already_in_description": false
+            },
+            {
+              "label": "Await supervisory‑authority advice",
+              "actor": "Controller",
+              "timing": "after submitting prior‑consultation request",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+            "customer logs into an E‑Shop system and has to wait for its login confirmation (its credentials are checked by the system)."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "indeterminate",
+          "facts": [
+            {
+              "fact": "Personal data of the customer is processed",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The e‑shop is the data controller",
+              "status": "not_stated"
+            },
+            {
+              "fact": "At least one lawful basis for processing is identified (e.g., consent, contract performance, legal obligation, vital interests, public task, legitimate interests)",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage is relevant because the process handles personal data, but the description does not state which lawful basis is relied upon, so it is unclear whether the processing meets Article 6 requirements.",
+          "required_steps": [],
+          "possible_steps": [
+            {
+              "label": "Obtain consent for processing personal data",
+              "actor": "Customer",
+              "timing": "before entering payment data or shipping address",
+              "already_in_description": false
+            },
+            {
+              "label": "Document contractual necessity for processing",
+              "actor": "Shop",
+              "timing": "before processing personal data",
+              "already_in_description": false
+            }
+          ],
+          "evidence": [
+            "customer has to enter its payment data",
+            "While waiting for the payment confirmation the customer can enter its shipping address"
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "applicable",
+          "facts": [
+            {
+              "fact": "Personal data are obtained from the data subject (customer)",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The shop (controller) collects the personal data",
+              "status": "stated_true"
+            },
+            {
+              "fact": "Information must be provided at the time personal data are obtained",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The process involves the shop collecting personal data (login credentials, payment data, shipping address) from the customer, which triggers the GDPR Art.13‑2‑a obligation to give specific information at the moment of collection.",
+          "required_steps": [
+            {
+              "label": "Provide storage period information",
+              "actor": "shop",
+              "timing": "before collecting personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide data subject rights information",
+              "actor": "shop",
+              "timing": "before collecting personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide consent withdrawal information",
+              "actor": "shop",
+              "timing": "before collecting personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide complaint right information",
+              "actor": "shop",
+              "timing": "before collecting personal data",
+              "already_in_description": false
+            },
+            {
+              "label": "Provide statutory/contractual requirement information",
+              "actor": "shop",
+              "timing": "before collecting personal data",
+              "already_in_description": false
+            }
+          ],
+          "possible_steps": [],
+          "evidence": [
+            "customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address",
+            "login confirmation (its credentials are checked by the system)"
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art35-6",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Obligation is imposed on the competent supervisory authority",
+              "status": "stated_true"
+            },
+            {
+              "fact": "The process description involves only a customer and an online shop, not a supervisory authority",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage creates a duty for the competent supervisory authority, not for the online shop or customer, so it does not impose obligations on the described ordering process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "Prior to the adoption of the lists ... the competent supervisory authority shall apply the consistency mechanism ...",
+            "A customer that logs into an E-Shop system ... Finally if the address and the payment steps are executed then the order will be finished by the system."
+          ],
+          "evidence_found": [
+            false,
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art9-2-h",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR Article 9‑2‑h passage deals with processing of special categories of personal data for health‑related purposes, which is unrelated to the online shop ordering process that only handles login credentials, payment data and shipping addresses.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "A customer that logs into an E‑Shop system ...",
+            "For the payment the customer has to enter its payment data ...",
+            "While waiting for the payment confirmation the customer can enter its shipping address ..."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art28-7",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR passage concerns the Commission's power to adopt standard contractual clauses for processor contracts, which does not impose any obligations on the online shop ordering process described.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "The passage is about the Commission may lay down standard contractual clauses for matters referred to in paragraph 3 and 4 of this Article.",
+            "The process description details login, product selection, payment and shipping steps, with no reference to processor contracts or EU Commission standards."
+          ],
+          "evidence_found": [
+            false,
+            false
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art28-8",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Supervisory authority has adopted standard contractual clauses for the processor relationship",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Processor relationship covered by GDPR Art 28 paragraphs 3 and 4 exists",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR passage only allows a supervisory authority to adopt standard contractual clauses for processor‑controller relationships; it does not impose a mandatory obligation on the online‑shop process, and the description does not state that such clauses have been adopted.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address)."
+          ],
+          "evidence_found": [
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "Article 12(6) GDPR concerns the controller's response to data subject rights requests, which is unrelated to the ordering, payment, and shipping steps described for the online shop process.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "A customer that logs into an E‑Shop system ...",
+            "After selecting a product the customer has to add it to a shopping cart ...",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-4",
+          "label": "not_applicable",
+          "facts": [
+            {
+              "fact": "Data subject submits a request to the controller",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller does not take action on the request",
+              "status": "not_stated"
+            },
+            {
+              "fact": "Controller must inform the data subject within one month",
+              "status": "not_stated"
+            }
+          ],
+          "reason": "The GDPR provision applies only when a data subject makes a request that the controller does not act upon. The process description of the online shop ordering contains no mention of any data‑subject request, so the condition for the rule is not met.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [
+            "A customer that logs into an E‑Shop system ...",
+            "After selecting a product the customer has to add it to a shopping cart ...",
+            "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+            "While waiting for the payment confirmation the customer can enter its shipping address ..."
+          ],
+          "evidence_found": [
+            true,
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "passage_id": "GDPR-Art12-3",
+          "label": "irrelevant",
+          "facts": [],
+          "reason": "The GDPR article concerns the controller's obligations when responding to data subject rights requests, which are not mentioned in the online shop ordering process description.",
+          "required_steps": [],
+          "possible_steps": [],
+          "evidence": [],
+          "evidence_found": []
+        }
+      ],
+      "required_steps": [
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide storage period information",
+          "actor": "shop",
+          "timing": "before collecting personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide data subject rights information",
+          "actor": "shop",
+          "timing": "before collecting personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide consent withdrawal information",
+          "actor": "shop",
+          "timing": "before collecting personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide complaint right information",
+          "actor": "shop",
+          "timing": "before collecting personal data",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art13-2-a",
+          "label": "Provide statutory/contractual requirement information",
+          "actor": "shop",
+          "timing": "before collecting personal data",
+          "already_in_description": false
+        }
+      ],
+      "possible_steps": [
+        {
+          "passage_id": "GDPR-Art36-2",
+          "label": "Submit prior‑consultation request",
+          "actor": "Controller",
+          "timing": "before processing personal data that may pose high risk",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art36-2",
+          "label": "Await supervisory‑authority advice",
+          "actor": "Controller",
+          "timing": "after submitting prior‑consultation request",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "Obtain consent for processing personal data",
+          "actor": "Customer",
+          "timing": "before entering payment data or shipping address",
+          "already_in_description": false
+        },
+        {
+          "passage_id": "GDPR-Art6-1",
+          "label": "Document contractual necessity for processing",
+          "actor": "Shop",
+          "timing": "before processing personal data",
+          "already_in_description": false
+        }
+      ]
+    }
+  },
+  "frozen_retrieval_rerank_sha256": "176dc9ed2ce824063363d317c8e109b30fe200bb5d8b2d4211363f53931d50e7",
+  "study": "Study 2 (GDPR), development cases only",
+  "frozen_retrieval_files": {
+    "hybrid": "data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_hybrid.json",
+    "rerank": "data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json"
+  },
+  "case_versions": {
+    "01": {
+      "hybrid": [
+        "GDPR-Art13-3",
+        "GDPR-Art12-6",
+        "GDPR-Art12-7",
+        "GDPR-Art35-9",
+        "GDPR-Art13-2-f"
+      ],
+      "rerank": [
+        "GDPR-Art27-3",
+        "GDPR-Art35-9",
+        "GDPR-Art30-4",
+        "GDPR-Art35-6",
+        "GDPR-Art7-4"
+      ]
+    },
+    "06": {
+      "hybrid": [
+        "GDPR-Art12-3",
+        "GDPR-Art35-6",
+        "GDPR-Art12-7",
+        "GDPR-Art12-4",
+        "GDPR-Art12-6"
+      ],
+      "rerank": [
+        "GDPR-Art14-3",
+        "GDPR-Art12-3",
+        "GDPR-Art11-1",
+        "GDPR-Art13-3",
+        "GDPR-Art44-1"
+      ]
+    },
+    "11": {
+      "hybrid": [
+        "GDPR-Art12-5",
+        "GDPR-Art15-3",
+        "GDPR-Art7-4",
+        "GDPR-Art35-6",
+        "GDPR-Art13-2-a"
+      ],
+      "rerank": [
+        "GDPR-Art19-1",
+        "GDPR-Art2-1",
+        "GDPR-Art15-3",
+        "GDPR-Art12-5",
+        "GDPR-Art32-2"
+      ]
+    },
+    "13": {
+      "hybrid": [
+        "GDPR-Art12-4",
+        "GDPR-Art41-2",
+        "GDPR-Art13-2-a",
+        "GDPR-Art35-6",
+        "GDPR-Art12-5"
+      ],
+      "rerank": [
+        "GDPR-Art12-4",
+        "GDPR-Art47-2-h",
+        "GDPR-Art15-1",
+        "GDPR-Art43-2",
+        "GDPR-Art45-6"
+      ]
+    },
+    "17": {
+      "hybrid": [
+        "GDPR-Art35-6",
+        "GDPR-Art12-7",
+        "GDPR-Art30-2",
+        "GDPR-Art6-1",
+        "GDPR-Art45-5"
+      ],
+      "rerank": [
+        "GDPR-Art30-1",
+        "GDPR-Art6-1",
+        "GDPR-Art32-2",
+        "GDPR-Art14-3",
+        "GDPR-Art30-2"
+      ]
+    },
+    "19": {
+      "hybrid": [
+        "GDPR-Art12-5",
+        "GDPR-Art35-6",
+        "GDPR-Art12-7",
+        "GDPR-Art12-6",
+        "GDPR-Art45-5"
+      ],
+      "rerank": [
+        "GDPR-Art16-1",
+        "GDPR-Art21-2",
+        "GDPR-Art21-3",
+        "GDPR-Art21-5",
+        "GDPR-Art15-3"
+      ]
+    },
+    "45": {
+      "hybrid": [
+        "GDPR-Art36-2",
+        "GDPR-Art6-1",
+        "GDPR-Art13-2-a",
+        "GDPR-Art35-6",
+        "GDPR-Art9-2-h"
+      ],
+      "rerank": [
+        "GDPR-Art28-7",
+        "GDPR-Art28-8",
+        "GDPR-Art12-6",
+        "GDPR-Art12-4",
+        "GDPR-Art12-3"
+      ]
+    }
+  }
+}
