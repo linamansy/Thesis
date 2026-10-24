@@ -367,3 +367,25 @@ reranker:
                               # description; with it, the full description gave the maximum for 35 of 35 passages)
   aggregation: mean           # a passage's score = its mean score over those queries (changed 24 Oct 2026 from
                               # "max" over all queries, see the superseded files above)
+
+study2_laws:
+  # STUDY 2 only (added 24 Oct 2026): does adding more EU laws to GDPR Chapters I-V give more silver-applicable
+  # rules on the development cases? Inclusion criterion, article rule and decision rule were fixed before any
+  # download in docs/C3_V2_DEVELOPMENT.md section 5. Own paths: nothing of Study 1 and no existing Study 2 file
+  # (data/knowledge_gdpr/, data/retrieval_gdpr/, data/silver_gdpr/) is written. Cases: study2_gdpr.development_ids.
+  knowledge_raw: data/knowledge_study2/raw          # ECD, TPWC, CCD, OSH, byte-identical CELLAR downloads
+  knowledge_sources: data/knowledge_study2/sources.json
+  article_selection: data/knowledge_study2/article_selection.json   # keep/drop + reason for every article
+  passages_new_laws_all: data/knowledge_study2/passages_new_laws_all.jsonl   # every article of the 4 laws
+  passages_combined: data/knowledge_study2/passages_combined_dev.jsonl       # GDPR ch1-5 lines + kept new passages
+  dense_index_dir_combined: data/retrieval_study2/dense_index_combined       # own FAISS index for passages_combined
+  frozen_dev_combined_rerank: data/retrieval_study2/frozen_retrieval_dev_combined_rerank.json  # Study 2 reranked setup
+  # Silver labels (src/build_silver_study2_laws_dev.py): Study 1's silver setup unchanged. A case-passage pair
+  # already in study2_gdpr.silver_reference_dev keeps that label (copied, source marked); only new pairs are labelled.
+  silver_reference_dev_combined: data/silver_study2/silver_reference_dev_combined.json
+  silver_log_condition: SILVER_study2_laws_dev     # log files results/logs/SILVER_study2_laws_dev_silver_<UTC>.jsonl
+  # Decision rule (section 5): combined replaces GDPR-only only if its summed silver-applicable count in the reranked
+  # top 5 over the 7 development cases is HIGHER than this (the GDPR-only rerank count of section 4).
+  gdpr_only_applicable: 3
+  corpus: gdpr_only               # result of the decision rule (24 Oct 2026): combined 0 applicable, not higher
+                                  # than 3, so Study 2 keeps study2_gdpr.frozen_retrieval (GDPR Chapters I-V, rerank)
