@@ -228,4 +228,19 @@ silver-applicable count in the reranked top 5 over the 7 development cases is **
 rerank count of section 4). If it is equal or lower, Study 2 keeps GDPR-only. The rule is applied once,
 mechanically. It may not change after labelling starts. The silver labels are AI-made (provisional, not gold).
 
-Result: (to be filled in after labelling)
+Result (applied 24 Oct 2026, `python -m src.build_silver_study2_laws_dev`; frozen retrieval
+`data/retrieval_study2/frozen_retrieval_dev_combined_rerank.json`, silver file
+`data/silver_study2/silver_reference_dev_combined.json`, 35 case-passage pairs, all newly labelled (no GDPR passage
+reached any top 5, so no label could be reused), `openai/gpt-oss-120b` via Groq, 35/35 STOP, 0 invalid, log
+`results/logs/SILVER_study2_laws_dev_silver_20261024T182923Z.jsonl`):
+
+| corpus | applicable | indeterminate | not_applicable | irrelevant |
+|---|---|---|---|---|
+| GDPR-only (section 4, rerank) | 3 | 17 | 6 | 9 |
+| combined (GDPR Ch. I-V + ECD, TPWC, CCD, OSH) | 0 | 21 | 1 | 13 |
+
+**GDPR-only is kept**: the combined corpus has 0 silver-applicable passages, which is not higher than 3. Study 2 C2
+and C3 keep `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json` (`config.yaml` `study2_laws.corpus:
+gdpr_only`). Observation (does not change the result): in the combined top 5, the new passages displaced every
+GDPR passage (ECD Articles 10-11 in cases 01, 06, 17, 45; CCD in cases 11, 13, 19), including the 3 GDPR passages
+that were silver-applicable.
