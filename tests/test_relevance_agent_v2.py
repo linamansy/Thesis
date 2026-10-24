@@ -23,7 +23,7 @@ CONFIG = load_config()
 DESCRIPTION = "The customer chooses a product. The customer pays by card. The shop sends the product."
 PASSAGE = "If a customer pays by card, the shop must give a receipt."
 
-REAL = {"law_trigger": "a customer pays by card", "law_quote": "If a customer pays by card", "relevant": True,
+REAL = {"law_focus": "card payments by customers", "law_quote": "If a customer pays by card", "relevant": True,
         "process_step": "the customer pays by card", "description_quote": "The customer pays by card",
         "reason": "The process has a card payment step."}
 FAKE_DESCRIPTION_QUOTE = dict(REAL, description_quote="The customer pays in cash")
