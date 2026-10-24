@@ -119,8 +119,35 @@ Fixed on 21 Oct 2026, before any v2 change.
 
 ### 2.3 Success criteria (fixed now)
 
-> **TO BE FILLED IN.** The success criteria were not yet provided when this file was created. They must be written
-> here and committed before round 1 starts. They may not be changed after round 1 has started.
+Written 24 Oct 2026 (criteria by Lina), committed **before round 1 starts** and before any v2 prompt, schema or code
+exists or has been run. They may not be changed after round 1 has started.
+
+Scope: these criteria are for the **relevance step** of v2 (RelevanceAgent v2). "Silver-relevant" = silver label
+applicable, indeterminate or not_applicable; "silver-irrelevant" = silver label irrelevant.
+
+1. **Recall:** v2 marks relevant at least **70%** of the silver-relevant passages.
+2. **Specificity:** v2 marks irrelevant at least **50%** of the silver-irrelevant passages.
+3. **Generality:** 1 and 2 must each pass separately on the consumer-law development cases AND on the GDPR
+   development cases. Passing on only one law counts as a fail.
+4. **Evidence:** at least **90%** of the law_quote and description_quote values pass the code check (quote found in the
+   passage / in the description).
+5. **Stability:** at least **95%** of the answers are valid JSON after the 1 retry.
+6. **Stop rule:** at most 3 development rounds for relevance. If the criteria are still not met after round 3, the best
+   round is kept and the shortfall is reported. The criteria are never changed after results are seen.
+7. **Note:** silver is AI-made and provisional; these criteria measure agreement with a stronger model, not
+   correctness.
+
+Passages the criteria are computed on (development cases only, 5 frozen passages per case, from the existing silver
+files; no test case):
+
+| law | cases | frozen retrieval | silver file | applicable | indeterminate | not_applicable | irrelevant | total |
+|---|---|---|---|---|---|---|---|---|
+| consumer law (CRD + LPD) | 13 Study 1 cases | `data/retrieval/frozen_retrieval.json` | `data/silver/silver_reference.json` | 0 | 33 | 1 | 31 | 65 |
+| GDPR (Chapters I-V) | 7 GDPR development cases | `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json` | `data/silver_gdpr/silver_reference_dev.json` (rerank top 5 only) | 3 | 17 | 6 | 9 | 35 |
+
+Thresholds in passages: consumer law recall >= 24 of 34 silver-relevant (70% of 34 = 23.8), specificity >= 16 of 31
+silver-irrelevant (50% of 31 = 15.5); GDPR recall >= 19 of 26 (18.2), specificity >= 5 of 9 (4.5). Criteria 4 and 5
+are computed over all answers of both laws together and also reported per law.
 
 ### 2.4 Logging of each round
 Each round gets one entry in section 3 below, written on the day of the round, with:
