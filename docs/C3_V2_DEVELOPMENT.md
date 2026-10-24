@@ -213,6 +213,70 @@ handles personal data. GDPR-Art16-1 (case 19, silver applicable) is one of the m
 **Decision:** pending. Round 1 does not meet all criteria (criterion 3 fails on GDPR recall). Per Lina's instruction,
 the prompt is not changed after seeing these results; the next step (round 2 or freeze) is Lina's decision.
 
+### Round 2 (24 Oct 2026): RelevanceAgent v2, broad relevance
+
+**What changed and why.** Round 1 failed criterion 3 on GDPR recall (13/26): the model took the rule's specific
+trigger event (e.g. "a data subject makes a request") and rejected passages whose event the description does not
+state. Round 2 makes relevance a broad "is this rule about something this process does?" judgement: the prompt asks
+for law_focus (what the rule is about, with an exact law_quote) and the step where that kind of activity happens
+(process_step + description_quote), and says explicitly NOT to check IF conditions, trigger events, deadlines or
+exceptions (left to the applicability stage) and not to mark a passage irrelevant only because a specific event or
+condition is not described. New neutral example: "If a customer complains about a card payment, the shop must refund
+within 14 days" / "The customer pays by card" -> relevant at the payment step. No topic list, no law-specific words.
+Files: `prompts/relevance_prompt_v2.txt`; `src/agents/relevance_agent_v2.py` schema field law_trigger -> law_focus with
+broad descriptions (the schema is pasted into the prompt; Lina chose to change it too); the test's mock answer. The
+code quote check, the runner and the criteria are unchanged.
+
+**Commit:** `b4de8cb` (before the run). **Run folder:** `results/diagnostics/relevance_v2_dev/round2/` (same model,
+settings and development cases as round 1).
+
+**Results** (silver is AI-made and provisional):
+
+| law | silver label | v2 relevant | v2 irrelevant | v1 relevant | v1 irrelevant |
+|---|---|---|---|---|---|
+| consumer law | applicable | 0 | 0 | 0 | 0 |
+| consumer law | indeterminate | 23 | 10 | 15 | 18 |
+| consumer law | not_applicable | 1 | 0 | 1 | 0 |
+| consumer law | irrelevant | 8 | 23 | 2 | 29 |
+| GDPR | applicable | 2 | 1 | 0 | 3 |
+| GDPR | indeterminate | 8 | 9 | 0 | 17 |
+| GDPR | not_applicable | 2 | 4 | 0 | 6 |
+| GDPR | irrelevant | 4 | 5 | 0 | 9 |
+
+| criterion | round 1 | round 2 | round 2 met |
+|---|---|---|---|
+| 1 recall, consumer law | 28/34 = 82.4% | 24/34 = 70.6% | yes (just) |
+| 1 recall, GDPR | 13/26 = 50.0% | **12/26 = 46.2%** | **no** |
+| 2 specificity, consumer law | 26/31 = 83.9% | 23/31 = 74.2% | yes |
+| 2 specificity, GDPR | 6/9 = 66.7% | 5/9 = 55.6% | yes |
+| 3 generality | no | **no** | **no** |
+| 4 evidence | 149/150 = 99.3% | 144/149 = 96.6% (5 law_quotes failed) | yes |
+| 5 stability | 100/100 | 100/100 | yes |
+
+Round 1 vs round 2 per passage: consumer law, silver-relevant 24 relevant in both, 4 lost, 0 gained, 6 irrelevant in
+both; silver-irrelevant 4 newly called relevant, 1 no longer. GDPR, silver-relevant 10 relevant in both, 3 lost, 2
+gained, 11 irrelevant in both; silver-irrelevant 1 newly called relevant. All 14 GDPR misses of round 2 are the
+model's own "not relevant" (no quote failure); its law_focus is still the rule's specific obligation or right (e.g.
+"rectification of inaccurate personal data", "records of processing activities", "right of access by the data
+subject"), and the reasons say the process "does not mention" that activity. GDPR-Art16-1 (case 19, silver
+applicable) is still missed; GDPR-Art2-1 and GDPR-Art32-2 (case 11) are still found.
+
+**Best round so far:** round 1 (higher recall on both laws, higher specificity on both, more quotes found). Neither
+round meets criterion 3.
+
+**Decision:** pending (Lina). The prompt is not changed after seeing these results. One round is left (rule 2.2 /
+criterion 6: at most 3 rounds; after round 3 the best round is kept and the shortfall reported).
+
+**Design decision recorded with round 2 (design only, nothing built yet).** C3 v2 has four boxes:
+1. **RelevanceAgent** (this agent).
+2. **ApplicabilityAgent**, with inside it: a **law-only IF/THEN split call** (the passage alone, no description: which
+   parts are conditions (IF) and which are obligations (THEN); addresses Problem 2) -> a **check-IF call with quotes**
+   (each IF condition against the description: satisfied / contradicted / not_stated, with an exact quote) -> the
+   **code quote check** -> a **second-look call**. The split is its own law-only call and is never combined with the
+   description check in one prompt.
+3. **Resolver** (code): combines the statuses into Applicable / Not applicable / Indeterminate, as in v1.
+4. **RequirementAgent**: turns an Applicable rule's THEN part into a requirement.
+
 ---
 
 ## 4. Study 2: choosing the GDPR retrieval version (development cases)

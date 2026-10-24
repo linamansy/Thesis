@@ -1,0 +1,158 @@
+{
+  "round": 2,
+  "per_law": {
+    "consumer_law": {
+      "v2": {
+        "table": {
+          "applicable": {
+            "relevant": 0,
+            "irrelevant": 0
+          },
+          "indeterminate": {
+            "relevant": 23,
+            "irrelevant": 10
+          },
+          "not_applicable": {
+            "relevant": 1,
+            "irrelevant": 0
+          },
+          "irrelevant": {
+            "relevant": 8,
+            "irrelevant": 23
+          }
+        },
+        "n_silver_relevant": 34,
+        "silver_relevant_found": 24,
+        "recall": 0.7059,
+        "n_silver_irrelevant": 31,
+        "silver_irrelevant_called_relevant": 8,
+        "specificity": 0.7419
+      },
+      "v1": {
+        "table": {
+          "applicable": {
+            "relevant": 0,
+            "irrelevant": 0
+          },
+          "indeterminate": {
+            "relevant": 15,
+            "irrelevant": 18
+          },
+          "not_applicable": {
+            "relevant": 1,
+            "irrelevant": 0
+          },
+          "irrelevant": {
+            "relevant": 2,
+            "irrelevant": 29
+          }
+        },
+        "n_silver_relevant": 34,
+        "silver_relevant_found": 16,
+        "recall": 0.4706,
+        "n_silver_irrelevant": 31,
+        "silver_irrelevant_called_relevant": 2,
+        "specificity": 0.9355
+      },
+      "quotes": {
+        "quotes_checked": 98,
+        "quotes_failed": 3,
+        "evidence": 0.9694,
+        "law_quotes_failed": 3,
+        "description_quotes_failed": 0,
+        "answers": 65,
+        "valid_json": 65,
+        "stability": 1.0
+      }
+    },
+    "gdpr": {
+      "v2": {
+        "table": {
+          "applicable": {
+            "relevant": 2,
+            "irrelevant": 1
+          },
+          "indeterminate": {
+            "relevant": 8,
+            "irrelevant": 9
+          },
+          "not_applicable": {
+            "relevant": 2,
+            "irrelevant": 4
+          },
+          "irrelevant": {
+            "relevant": 4,
+            "irrelevant": 5
+          }
+        },
+        "n_silver_relevant": 26,
+        "silver_relevant_found": 12,
+        "recall": 0.4615,
+        "n_silver_irrelevant": 9,
+        "silver_irrelevant_called_relevant": 4,
+        "specificity": 0.5556
+      },
+      "v1": {
+        "table": {
+          "applicable": {
+            "relevant": 0,
+            "irrelevant": 3
+          },
+          "indeterminate": {
+            "relevant": 0,
+            "irrelevant": 17
+          },
+          "not_applicable": {
+            "relevant": 0,
+            "irrelevant": 6
+          },
+          "irrelevant": {
+            "relevant": 0,
+            "irrelevant": 9
+          }
+        },
+        "n_silver_relevant": 26,
+        "silver_relevant_found": 0,
+        "recall": 0.0,
+        "n_silver_irrelevant": 9,
+        "silver_irrelevant_called_relevant": 0,
+        "specificity": 1.0
+      },
+      "quotes": {
+        "quotes_checked": 51,
+        "quotes_failed": 2,
+        "evidence": 0.9608,
+        "law_quotes_failed": 2,
+        "description_quotes_failed": 0,
+        "answers": 35,
+        "valid_json": 35,
+        "stability": 1.0
+      }
+    }
+  },
+  "overall_quotes": {
+    "quotes_checked": 149,
+    "quotes_failed": 5,
+    "evidence": 0.9664,
+    "law_quotes_failed": 5,
+    "description_quotes_failed": 0,
+    "answers": 100,
+    "valid_json": 100,
+    "stability": 1.0
+  },
+  "criteria_thresholds": {
+    "recall": 0.7,
+    "specificity": 0.5,
+    "evidence": 0.9,
+    "stability": 0.95
+  },
+  "criteria": {
+    "1_recall_consumer_law": true,
+    "2_specificity_consumer_law": true,
+    "1_recall_gdpr": false,
+    "2_specificity_gdpr": true,
+    "3_generality": false,
+    "4_evidence": true,
+    "5_stability": true
+  }
+}
