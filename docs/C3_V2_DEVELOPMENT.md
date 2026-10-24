@@ -178,3 +178,54 @@ Result (applied 24 Oct 2026, `python -m src.build_silver_gdpr_dev`; silver file
 **rerank wins at step 1** (3 silver-applicable passages vs 1). Applicable: hybrid case 45 GDPR-Art13-2-a; rerank
 case 11 GDPR-Art2-1 and GDPR-Art32-2, case 19 GDPR-Art16-1. Observation (does not change the result): GDPR-Art2-1
 (material scope) is labelled applicable with no required steps; without it rerank would still win (2 vs 1).
+
+---
+
+## 5. Study 2: adding more EU laws to the corpus (development cases)
+
+Fixed on 24 Oct 2026, **before any of the new laws was downloaded** and before any silver label for them exists.
+It decides whether Study 2 keeps the GDPR-only corpus (Chapters I-V, section 4) or replaces it with a combined
+corpus. Whichever corpus wins, C2 and C3 get the same corpus and the same frozen passages; only the knowledge block
+differs between C1, C2 and C3.
+
+**Inclusion criterion.** EU laws in force whose obligations fall on the organisation running the process and that
+regulate activity types in the case set (online ordering, personal data, employment, consumer credit, workplace
+safety).
+
+**Laws included by this criterion** (original version, official English text, same CELLAR method as
+`data/knowledge/sources.json`):
+
+| id prefix | law | CELEX | activity type |
+|---|---|---|---|
+| ECD | e-Commerce Directive 2000/31/EC | 32000L0031 | online ordering |
+| TPWC | Directive (EU) 2019/1152 on transparent and predictable working conditions | 32019L1152 | employment |
+| CCD | Directive (EU) 2023/2225 on credit agreements for consumers | 32023L2225 | consumer credit |
+| OSH | Directive 89/391/EEC on safety and health of workers at work | 31989L0391 | workplace safety |
+
+The GDPR Chapters I-V passages (`data/knowledge_gdpr/passages_ch1-5.jsonl`) stay in the combined corpus unchanged.
+
+**Excluded, with reason:**
+- PSD2, Directive (EU) 2015/2366: its duties fall on payment service providers, not on the organisation running
+  the process.
+- Digital Services Act, Regulation (EU) 2022/2065: its duties fall on intermediary services and online
+  marketplaces, not on the organisation running the process.
+- Working Time Directive 2003/88/EC: it gives workers entitlements through the Member States and rarely becomes a
+  process step.
+
+**Article rule.** Keep articles that set duties for the organisation (service provider, employer, creditor) plus
+definitions. Drop scope-only articles and articles on transposition, penalties, reporting, review, amendments and
+final provisions. Every kept and dropped article is logged with a one-line reason in `docs/PROGRESS_2026-10-24.md`.
+
+**Method (unchanged from section 4).** Same chunker and settings as Study 1; own dense index for the combined
+corpus; retrieval for the 7 development cases only (01, 06, 11, 13, 17, 19, 45) with the Study 2 setup (hybrid top
+20 → cross-encoder reranker, sentence queries, mean score → top 5); silver labels with the unchanged Study 1 silver
+setup (`openai/gpt-oss-120b` via Groq, temperature 0, `prompts/silver_annotation_prompt.txt`, same guards). A
+case-passage pair already labelled in `data/silver_gdpr/silver_reference_dev.json` keeps that label (copied, source
+marked); only new pairs are labelled.
+
+**Decision rule.** The combined corpus (GDPR Ch. I-V + the 4 new laws) replaces GDPR-only **only if** the summed
+silver-applicable count in the reranked top 5 over the 7 development cases is **higher than 3** (the GDPR-only
+rerank count of section 4). If it is equal or lower, Study 2 keeps GDPR-only. The rule is applied once,
+mechanically. It may not change after labelling starts. The silver labels are AI-made (provisional, not gold).
+
+Result: (to be filled in after labelling)
