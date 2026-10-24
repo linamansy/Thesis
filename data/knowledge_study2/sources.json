@@ -1,0 +1,105 @@
+{
+  "description": "Additional EU laws for Study 2 (combined corpus with GDPR Chapters I-V), chosen by the inclusion criterion in docs/C3_V2_DEVELOPMENT.md section 5. Official English text as published in the Official Journal (original version, not consolidated).",
+  "version_note": "The originally published versions are used deliberately, as for the CRD/LPD (Study 1) and the GDPR. Later amendments and consolidated versions (e.g. Directive 2007/30/EC and Regulation (EU) 2019/1243 amending Directive 89/391/EEC) were deliberately not used.",
+  "format_note": "Same format as data/knowledge/sources.json (list key 'directives', so the same DirectiveChunker can read it). Extra fields: format, entry_into_force, application (both quoted from the official text). For ECD and OSH, CELLAR holds no XHTML (HTTP 404 'does not hold a content datastream of the requested type'); the only text manifestation is the legacy EUR-Lex HTML (Accept: text/html). It has no article markup, so src/legacy_html_study2_laws.py adds that markup in memory before the unchanged DirectiveChunker reads it; the raw file is never changed.",
+  "download_date": "2026-10-24",
+  "download_method": "curl from the Publications Office CELLAR repository (the official store behind EUR-Lex), requesting the English text by CELEX number with headers 'Accept: application/xhtml+xml' and 'Accept-Language: eng' (same method as data/knowledge/sources.json). For ECD and OSH, where no XHTML exists, 'Accept: text/html' was requested instead.",
+  "directives": [
+    {
+      "id_prefix": "ECD",
+      "short_name": "e-Commerce Directive",
+      "number": "2000/31/EC",
+      "celex": "32000L0031",
+      "full_title": "Directive 2000/31/EC of the European Parliament and of the Council of 8 June 2000 on certain legal aspects of information society services, in particular electronic commerce, in the Internal Market ('Directive on electronic commerce')",
+      "official_journal": "OJ L 178, 17.7.2000, p. 1",
+      "language": "EN",
+      "file": "ECD_2000_31.html",
+      "format": "legacy_html",
+      "requested_url": "https://publications.europa.eu/resource/celex/32000L0031",
+      "resolved_url": "http://publications.europa.eu/resource/cellar/b244164f-dd29-48e9-9063-a86ef4ea7ad9.0005.01/DOC_1",
+      "eurlex_reference_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32000L0031",
+      "entry_into_force": {
+        "date": "2000-07-17",
+        "source": "Article 23: 'This Directive shall enter into force on the day of its publication in the Official Journal of the European Communities.' (OJ L 178, 17.7.2000)"
+      },
+      "application": {
+        "date": "2002-01-17",
+        "source": "Article 22(1): Member States shall bring into force the laws ... necessary to comply with this Directive 'before 17 January 2002'."
+      },
+      "download_date": "2026-10-24",
+      "sha256": "ace6f4c0e50a12845be213ad6094ce38f06a5dd2784fdf07b91b7d2e19f0eaaf"
+    },
+    {
+      "id_prefix": "TPWC",
+      "short_name": "Transparent and Predictable Working Conditions Directive",
+      "number": "(EU) 2019/1152",
+      "celex": "32019L1152",
+      "full_title": "Directive (EU) 2019/1152 of the European Parliament and of the Council of 20 June 2019 on transparent and predictable working conditions in the European Union",
+      "official_journal": "OJ L 186, 11.7.2019, p. 105",
+      "language": "EN",
+      "file": "TPWC_2019_1152.html",
+      "format": "xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/32019L1152",
+      "resolved_url": "http://publications.europa.eu/resource/cellar/aaba87d8-a3b5-11e9-9d01-01aa75ed71a1.0006.03/DOC_1",
+      "eurlex_reference_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32019L1152",
+      "entry_into_force": {
+        "date": "2019-07-31",
+        "source": "Article 25: 'on the twentieth day following its publication in the Official Journal' (published 11.7.2019)."
+      },
+      "application": {
+        "date": "2022-08-01",
+        "source": "Article 21(1): 'Member States shall take the necessary measures to comply with this Directive by 1 August 2022.'"
+      },
+      "download_date": "2026-10-24",
+      "sha256": "0171763090878960e374c720487c9d38a7480cbc255eeddfdc9e7cf5bb4fb67c"
+    },
+    {
+      "id_prefix": "CCD",
+      "short_name": "Consumer Credit Directive",
+      "number": "(EU) 2023/2225",
+      "celex": "32023L2225",
+      "full_title": "Directive (EU) 2023/2225 of the European Parliament and of the Council of 18 October 2023 on credit agreements for consumers and repealing Directive 2008/48/EC",
+      "official_journal": "OJ L, 2023/2225, 30.10.2023",
+      "language": "EN",
+      "file": "CCD_2023_2225.html",
+      "format": "xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/32023L2225",
+      "resolved_url": "http://publications.europa.eu/resource/cellar/12d92010-76c8-11ee-99ba-01aa75ed71a1.0006.03/DOC_1",
+      "eurlex_reference_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32023L2225",
+      "entry_into_force": {
+        "date": "2023-11-19",
+        "source": "Article 49: 'on the twentieth day following that of its publication in the Official Journal' (published 30.10.2023)."
+      },
+      "application": {
+        "date": "2026-11-20",
+        "source": "Article 48(1): Member States adopt and publish the measures by 20 November 2025 and 'shall apply those measures from 20 November 2026'."
+      },
+      "download_date": "2026-10-24",
+      "sha256": "8039387c5357ebfc3b5803693ff7b8bbd5ce335267273b6614f76b6155b2423a"
+    },
+    {
+      "id_prefix": "OSH",
+      "short_name": "OSH Framework Directive",
+      "number": "89/391/EEC",
+      "celex": "31989L0391",
+      "full_title": "Council Directive 89/391/EEC of 12 June 1989 on the introduction of measures to encourage improvements in the safety and health of workers at work",
+      "official_journal": "OJ L 183, 29.6.1989, p. 1",
+      "language": "EN",
+      "file": "OSH_89_391.html",
+      "format": "legacy_html",
+      "requested_url": "https://publications.europa.eu/resource/celex/31989L0391",
+      "resolved_url": "http://publications.europa.eu/resource/cellar/3c966801-b944-46d2-9034-b8c9e37b86c3.0008.01/DOC_1",
+      "eurlex_reference_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:31989L0391",
+      "entry_into_force": {
+        "date": null,
+        "source": "The text has no entry-into-force article; Article 19: 'This Directive is addressed to the Member States.' (a directive of that time took effect on notification to the Member States; the notification date is not in the text)."
+      },
+      "application": {
+        "date": "1992-12-31",
+        "source": "Article 18(1): Member States shall bring into force the laws ... necessary to comply with this Directive 'by 31 December 1992'."
+      },
+      "download_date": "2026-10-24",
+      "sha256": "0f75ed43874cf9a8cbe60aaca220cd11d5f1521733b847afef72abd6853e531e"
+    }
+  ]
+}
