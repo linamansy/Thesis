@@ -1,0 +1,375 @@
+{
+  "created_at": "2026-10-24T12:45:51+00:00",
+  "retrieval_config": {
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "chunking": {
+      "max_passage_chars": 1500
+    }
+  },
+  "reproducibility": {
+    "passages_file": "data/knowledge_gdpr/passages.jsonl",
+    "passages_sha256": "81fd210a28fb5741a16ac32ca52437dbff39769f88da7945bd0d3eb9890313e0",
+    "n_passages": 437,
+    "dense_index_fingerprint": "73c70d495cad6befac9868fde7675d426b5894e8091a4d4bc77dd5fb30d1fb20",
+    "stopwords_count": 198,
+    "stopwords_sha256": "47608d511aa4fec95139d41e487109ab4a260313745d397210dbf966b1d3c225",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "faiss-cpu": "1.15.1",
+      "rank-bm25": "0.2.2",
+      "nltk": "3.10.3"
+    }
+  },
+  "cases": {
+    "01": {
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art13-3",
+          "fused_score": 0.10144073274971857,
+          "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n3. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art12-6",
+          "fused_score": 0.08877078020913637,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art66-2",
+          "fused_score": 0.08641521938022023,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art88-1",
+          "fused_score": 0.08017354876159742,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n1. Member States may, by law or by collective agreements, provide for more specific rules to ensure the protection of the rights and freedoms in respect of the processing of employees' personal data in the employment context, in particular for the purposes of the recruitment, the performance of the contract of employment, including discharge of obligations laid down by law or by collective agreements, management, planning and organisation of work, equality and diversity in the workplace, health and safety at work, protection of employer's or customer's property and for the purposes of the exercise and enjoyment, on an individual or collective basis, of rights and benefits related to employment, and for the purpose of the termination of the employment relationship."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art13-2-f",
+          "fused_score": 0.07347677595628416,
+          "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(f) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject."
+        }
+      ]
+    },
+    "06": {
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art35-6",
+          "fused_score": 0.10995471655076855,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art88-1",
+          "fused_score": 0.09509129063829452,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n1. Member States may, by law or by collective agreements, provide for more specific rules to ensure the protection of the rights and freedoms in respect of the processing of employees' personal data in the employment context, in particular for the purposes of the recruitment, the performance of the contract of employment, including discharge of obligations laid down by law or by collective agreements, management, planning and organisation of work, equality and diversity in the workplace, health and safety at work, protection of employer's or customer's property and for the purposes of the exercise and enjoyment, on an individual or collective basis, of rights and benefits related to employment, and for the purpose of the termination of the employment relationship."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art66-2",
+          "fused_score": 0.08752168010606226,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art58-2-a",
+          "fused_score": 0.08536260963926179,
+          "text": "General Data Protection Regulation (2016/679) - Article 58: Powers\n2. Each supervisory authority shall have all of the following corrective powers:\n(a) to issue warnings to a controller or processor that intended processing operations are likely to infringe provisions of this Regulation;\n(b) to issue reprimands to a controller or a processor where processing operations have infringed provisions of this Regulation;\n(c) to order the controller or the processor to comply with the data subject's requests to exercise his or her rights pursuant to this Regulation;\n(d) to order the controller or processor to bring processing operations into compliance with the provisions of this Regulation, where appropriate, in a specified manner and within a specified period;\n(e) to order the controller to communicate a personal data breach to the data subject;\n(f) to impose a temporary or definitive limitation including a ban on processing;\n(g) to order the rectification or erasure of personal data or restriction of processing pursuant to Articles 16, 17 and 18 and the notification of such actions to recipients to whom the personal data have been disclosed pursuant to Article 17(2) and Article 19;\n(h) to withdraw a certification or to order the certification body to withdraw a certification issued pursuant to Articles 42 and 43, or to order the certification body not to issue certification if the requirements for the certification are not or are no longer met;"
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-3",
+          "fused_score": 0.08489671767054631,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n3. The controller shall provide information on action taken on a request under Articles 15 to 22 to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller shall inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject."
+        }
+      ]
+    },
+    "11": {
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art12-5",
+          "fused_score": 0.13644307224305316,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n5. Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge. Where requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character, the controller may either:\n(a) charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or\n(b) refuse to act on the request.\nThe controller shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art57-4",
+          "fused_score": 0.09299119355868925,
+          "text": "General Data Protection Regulation (2016/679) - Article 57: Tasks\n4. Where requests are manifestly unfounded or excessive, in particular because of their repetitive character, the supervisory authority may charge a reasonable fee based on administrative costs, or refuse to act on the request. The supervisory authority shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art15-3",
+          "fused_score": 0.08956559211414959,
+          "text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art35-6",
+          "fused_score": 0.07622157771055295,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art7-4",
+          "fused_score": 0.07132237132237133,
+          "text": "General Data Protection Regulation (2016/679) - Article 7: Conditions for consent\n4. When assessing whether consent is freely given, utmost account shall be taken of whether, inter alia, the performance of a contract, including the provision of a service, is conditional on consent to the processing of personal data that is not necessary for the performance of that contract."
+        }
+      ]
+    },
+    "13": {
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art65-6",
+          "fused_score": 0.15311862689503172,
+          "text": "General Data Protection Regulation (2016/679) - Article 65: Dispute resolution by the Board\n6. The lead supervisory authority or, as the case may be, the supervisory authority with which the complaint has been lodged shall adopt its final decision on the basis of the decision referred to in paragraph 1 of this Article, without undue delay and at the latest by one month after the Board has notified its decision. The lead supervisory authority or, as the case may be, the supervisory authority with which the complaint has been lodged, shall inform the Board of the date when its final decision is notified respectively to the controller or the processor and to the data subject. The final decision of the supervisory authorities concerned shall be adopted under the terms of Article 60(7), (8) and (9). The final decision shall refer to the decision referred to in paragraph 1 of this Article and shall specify that the decision referred to in that paragraph will be published on the website of the Board in accordance with paragraph 5 of this Article. The final decision shall attach the decision referred to in paragraph 1 of this Article."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art77-2",
+          "fused_score": 0.14954469894644695,
+          "text": "General Data Protection Regulation (2016/679) - Article 77: Right to lodge a complaint with a supervisory authority\n2. The supervisory authority with which the complaint has been lodged shall inform the complainant on the progress and the outcome of the complaint including the possibility of a judicial remedy pursuant to Article 78."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art57-2",
+          "fused_score": 0.14943251216445078,
+          "text": "General Data Protection Regulation (2016/679) - Article 57: Tasks\n2. Each supervisory authority shall facilitate the submission of complaints referred to in point (f) of paragraph 1 by measures such as a complaint submission form which can also be completed electronically, without excluding other means of communication."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art60-8",
+          "fused_score": 0.1481643957569198,
+          "text": "General Data Protection Regulation (2016/679) - Article 60: Cooperation between the lead supervisory authority and the other supervisory authorities concerned\n8. By derogation from paragraph 7, where a complaint is dismissed or rejected, the supervisory authority with which the complaint was lodged shall adopt the decision and notify it to the complainant and shall inform the controller thereof."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art60-9",
+          "fused_score": 0.11552712049316463,
+          "text": "General Data Protection Regulation (2016/679) - Article 60: Cooperation between the lead supervisory authority and the other supervisory authorities concerned\n9. Where the lead supervisory authority and the supervisory authorities concerned agree to dismiss or reject parts of a complaint and to act on other parts of that complaint, a separate decision shall be adopted for each of those parts of the matter. The lead supervisory authority shall adopt the decision for the part concerning actions in relation to the controller, shall notify it to the main establishment or single establishment of the controller or processor on the territory of its Member State and shall inform the complainant thereof, while the supervisory authority of the complainant shall adopt the decision for the part concerning dismissal or rejection of that complaint, and shall notify it to that complainant and shall inform the controller or processor thereof."
+        }
+      ]
+    },
+    "17": {
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art35-6",
+          "fused_score": 0.23393552913680393,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art30-2",
+          "fused_score": 0.21887690793602044,
+          "text": "General Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n2. Each processor and, where applicable, the processor's representative shall maintain a record of all categories of processing activities carried out on behalf of a controller, containing:\n(a) the name and contact details of the processor or processors and of each controller on behalf of which the processor is acting, and, where applicable, of the controller's or the processor's representative, and the data protection officer;\n(b) the categories of processing carried out on behalf of each controller;\n(c) where applicable, transfers of personal data to a third country or an international organisation, including the identification of that third country or international organisation and, in the case of transfers referred to in the second subparagraph of Article 49(1), the documentation of suitable safeguards;\n(d) where possible, a general description of the technical and organisational security measures referred to in Article 32(1)."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art61-2",
+          "fused_score": 0.1935531451717678,
+          "text": "General Data Protection Regulation (2016/679) - Article 61: Mutual assistance\n2. Each supervisory authority shall take all appropriate measures required to reply to a request of another supervisory authority without undue delay and no later than one month after receiving the request. Such measures may include, in particular, the transmission of relevant information on the conduct of an investigation."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art12-7",
+          "fused_score": 0.18581712530776917,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n7. The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-4",
+          "fused_score": 0.17118495212704948,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy."
+        }
+      ]
+    },
+    "19": {
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art35-6",
+          "fused_score": 0.14155298788857132,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art12-5",
+          "fused_score": 0.11924345189082446,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n5. Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge. Where requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character, the controller may either:\n(a) charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or\n(b) refuse to act on the request.\nThe controller shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art61-9",
+          "fused_score": 0.10333877840253892,
+          "text": "General Data Protection Regulation (2016/679) - Article 61: Mutual assistance\n9. The Commission may, by means of implementing acts, specify the format and procedures for mutual assistance referred to in this Article and the arrangements for the exchange of information by electronic means between supervisory authorities, and between supervisory authorities and the Board, in particular the standardised format referred to in paragraph 6 of this Article. Those implementing acts shall be adopted in accordance with the examination procedure referred to in Article 93(2)."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art67-1",
+          "fused_score": 0.09981362375111158,
+          "text": "General Data Protection Regulation (2016/679) - Article 67: Exchange of information\nThe Commission may adopt implementing acts of general scope in order to specify the arrangements for the exchange of information by electronic means between supervisory authorities, and between supervisory authorities and the Board, in particular the standardised format referred to in Article 64.\nThose implementing acts shall be adopted in accordance with the examination procedure referred to in Article 93(2)."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-6",
+          "fused_score": 0.09530349259182212,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject."
+        }
+      ]
+    },
+    "45": {
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art36-2",
+          "fused_score": 0.10787490307022227,
+          "text": "General Data Protection Regulation (2016/679) - Article 36: Prior consultation\n2. Where the supervisory authority is of the opinion that the intended processing referred to in paragraph 1 would infringe this Regulation, in particular where the controller has insufficiently identified or mitigated the risk, the supervisory authority shall, within period of up to eight weeks of receipt of the request for consultation, provide written advice to the controller and, where applicable to the processor, and may use any of its powers referred to in Article 58. That period may be extended by six weeks, taking into account the complexity of the intended processing. The supervisory authority shall inform the controller and, where applicable, the processor, of any such extension within one month of receipt of the request for consultation together with the reasons for the delay. Those periods may be suspended until the supervisory authority has obtained information it has requested for the purposes of the consultation."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art35-6",
+          "fused_score": 0.10670069808286438,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art13-2-a",
+          "fused_score": 0.09892040963625941,
+          "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;"
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art6-1",
+          "fused_score": 0.09744646652541389,
+          "text": "General Data Protection Regulation (2016/679) - Article 6: Lawfulness of processing\n1. Processing shall be lawful only if and to the extent that at least one of the following applies:\n(a) the data subject has given consent to the processing of his or her personal data for one or more specific purposes;\n(b) processing is necessary for the performance of a contract to which the data subject is party or in order to take steps at the request of the data subject prior to entering into a contract;\n(c) processing is necessary for compliance with a legal obligation to which the controller is subject;\n(d) processing is necessary in order to protect the vital interests of the data subject or of another natural person;\n(e) processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller;\n(f) processing is necessary for the purposes of the legitimate interests pursued by the controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data, in particular where the data subject is a child.\nPoint (f) of the first subparagraph shall not apply to processing carried out by public authorities in the performance of their tasks."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art88-1",
+          "fused_score": 0.08995110368090899,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n1. Member States may, by law or by collective agreements, provide for more specific rules to ensure the protection of the rights and freedoms in respect of the processing of employees' personal data in the employment context, in particular for the purposes of the recruitment, the performance of the contract of employment, including discharge of obligations laid down by law or by collective agreements, management, planning and organisation of work, equality and diversity in the workplace, health and safety at work, protection of employer's or customer's property and for the purposes of the exercise and enjoyment, on an individual or collective basis, of rights and benefits related to employment, and for the purpose of the termination of the employment relationship."
+        }
+      ]
+    }
+  },
+  "study2": {
+    "study": "Study 2 (GDPR), development cases only",
+    "case_ids": [
+      "01",
+      "06",
+      "11",
+      "13",
+      "17",
+      "19",
+      "45"
+    ],
+    "knowledge_sources": "data/knowledge_gdpr/sources.json",
+    "knowledge_sources_sha256": "d306a2742eddad234880a1c862b52cc31001b6a8ec7b6bc7cb57b55269eee1ed",
+    "version": "hybrid",
+    "method": "hybrid top 5, exactly like Study 1"
+  }
+}

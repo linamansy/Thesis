@@ -1,0 +1,1460 @@
+{
+  "created_at": "2026-10-24T12:45:51+00:00",
+  "retrieval_config": {
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "chunking": {
+      "max_passage_chars": 1500
+    }
+  },
+  "reproducibility": {
+    "passages_file": "data/knowledge_gdpr/passages.jsonl",
+    "passages_sha256": "81fd210a28fb5741a16ac32ca52437dbff39769f88da7945bd0d3eb9890313e0",
+    "n_passages": 437,
+    "dense_index_fingerprint": "73c70d495cad6befac9868fde7675d426b5894e8091a4d4bc77dd5fb30d1fb20",
+    "stopwords_count": 198,
+    "stopwords_sha256": "47608d511aa4fec95139d41e487109ab4a260313745d397210dbf966b1d3c225",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "torch": "2.14.1",
+      "faiss-cpu": "1.15.1",
+      "rank-bm25": "0.2.2",
+      "nltk": "3.10.3"
+    }
+  },
+  "study2": {
+    "study": "Study 2 (GDPR), development cases only",
+    "case_ids": [
+      "01",
+      "06",
+      "11",
+      "13",
+      "17",
+      "19",
+      "45"
+    ],
+    "knowledge_sources": "data/knowledge_gdpr/sources.json",
+    "knowledge_sources_sha256": "d306a2742eddad234880a1c862b52cc31001b6a8ec7b6bc7cb57b55269eee1ed",
+    "version": "rerank",
+    "method": "hybrid top 20 re-scored by the cross-encoder, top 5 kept"
+  },
+  "reranker": {
+    "settings": {
+      "enabled": false,
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "max_length": 512,
+      "batch_size": 32,
+      "candidates": 20,
+      "top_k": 5,
+      "aggregation": "max"
+    },
+    "class": "CrossEncoderReranker",
+    "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+    "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+    "library_versions": {
+      "sentence-transformers": "6.1.0",
+      "transformers": "5.19.0",
+      "torch": "2.14.1"
+    },
+    "note": "reranker.enabled is false in config.yaml (off by default); it is switched on only for this file"
+  },
+  "cases": {
+    "01": {
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -2.5912270545959473,
+          "hybrid_rank": 3,
+          "fused_score": 0.08641521938022023,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art70-4",
+          "rerank_score": -2.899015188217163,
+          "hybrid_rank": 8,
+          "fused_score": 0.07033976286238276,
+          "text": "General Data Protection Regulation (2016/679) - Article 70: Tasks of the Board\n4. The Board shall, where appropriate, consult interested parties and give them the opportunity to comment within a reasonable period. The Board shall, without prejudice to Article 76, make the results of the consultation procedure publicly available."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art61-1",
+          "rerank_score": -2.980276584625244,
+          "hybrid_rank": 19,
+          "fused_score": 0.04508697131647951,
+          "text": "General Data Protection Regulation (2016/679) - Article 61: Mutual assistance\n1. Supervisory authorities shall provide each other with relevant information and mutual assistance in order to implement and apply this Regulation in a consistent manner, and shall put in place measures for effective cooperation with one another. Mutual assistance shall cover, in particular, information requests and supervisory measures, such as requests to carry out prior authorisations and consultations, inspections and investigations."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art9-2-h",
+          "rerank_score": -3.245269775390625,
+          "hybrid_rank": 17,
+          "fused_score": 0.04841188524590165,
+          "text": "General Data Protection Regulation (2016/679) - Article 9: Processing of special categories of personal data\n2. Paragraph 1 shall not apply if one of the following applies:\n(h) processing is necessary for the purposes of preventive or occupational medicine, for the assessment of the working capacity of the employee, medical diagnosis, the provision of health or social care or treatment or the management of health or social care systems and services on the basis of Union or Member State law or pursuant to contract with a health professional and subject to the conditions and safeguards referred to in paragraph 3;\n(i) processing is necessary for reasons of public interest in the area of public health, such as protecting against serious cross-border threats to health or ensuring high standards of quality and safety of health care and of medicinal products or medical devices, on the basis of Union or Member State law which provides for suitable and specific measures to safeguard the rights and freedoms of the data subject, in particular professional secrecy;"
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -3.3103508949279785,
+          "hybrid_rank": 4,
+          "fused_score": 0.08017354876159742,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n1. Member States may, by law or by collective agreements, provide for more specific rules to ensure the protection of the rights and freedoms in respect of the processing of employees' personal data in the employment context, in particular for the purposes of the recruitment, the performance of the contract of employment, including discharge of obligations laid down by law or by collective agreements, management, planning and organisation of work, equality and diversity in the workplace, health and safety at work, protection of employer's or customer's property and for the purposes of the exercise and enjoyment, on an individual or collective basis, of rights and benefits related to employment, and for the purpose of the termination of the employment relationship."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -2.5912270545959473,
+          "hybrid_rank": 3,
+          "fused_score": 0.08641521938022023
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art70-4",
+          "rerank_score": -2.899015188217163,
+          "hybrid_rank": 8,
+          "fused_score": 0.07033976286238276
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art61-1",
+          "rerank_score": -2.980276584625244,
+          "hybrid_rank": 19,
+          "fused_score": 0.04508697131647951
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art9-2-h",
+          "rerank_score": -3.245269775390625,
+          "hybrid_rank": 17,
+          "fused_score": 0.04841188524590165
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -3.3103508949279785,
+          "hybrid_rank": 4,
+          "fused_score": 0.08017354876159742
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -3.4100241661071777,
+          "hybrid_rank": 2,
+          "fused_score": 0.08877078020913637
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art13-3",
+          "rerank_score": -3.4950828552246094,
+          "hybrid_rank": 1,
+          "fused_score": 0.10144073274971857
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art35-9",
+          "rerank_score": -3.5293314456939697,
+          "hybrid_rank": 13,
+          "fused_score": 0.057497183291564904
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art12-7",
+          "rerank_score": -3.6397223472595215,
+          "hybrid_rank": 15,
+          "fused_score": 0.05462372272852803
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -3.811184883117676,
+          "hybrid_rank": 11,
+          "fused_score": 0.0597187758478081
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art64-7",
+          "rerank_score": -3.881922483444214,
+          "hybrid_rank": 14,
+          "fused_score": 0.05699950322901142
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art13-2-f",
+          "rerank_score": -3.8988490104675293,
+          "hybrid_rank": 5,
+          "fused_score": 0.07347677595628416
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art36-5",
+          "rerank_score": -3.9125823974609375,
+          "hybrid_rank": 6,
+          "fused_score": 0.07210701429076696
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art89-1",
+          "rerank_score": -4.011678695678711,
+          "hybrid_rank": 18,
+          "fused_score": 0.04526198439241918
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -4.117924690246582,
+          "hybrid_rank": 16,
+          "fused_score": 0.054355668486103265
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art56-3",
+          "rerank_score": -4.3947038650512695,
+          "hybrid_rank": 12,
+          "fused_score": 0.0578379587147783
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art36-2",
+          "rerank_score": -4.553481101989746,
+          "hybrid_rank": 20,
+          "fused_score": 0.04434842812451921
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art12-3",
+          "rerank_score": -4.797216892242432,
+          "hybrid_rank": 7,
+          "fused_score": 0.07203202503412232
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art65-6",
+          "rerank_score": -4.959476470947266,
+          "hybrid_rank": 9,
+          "fused_score": 0.06478053939714437
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art58-2-a",
+          "rerank_score": -5.292626857757568,
+          "hybrid_rank": 10,
+          "fused_score": 0.061099735546457264
+        }
+      ]
+    },
+    "06": {
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -3.4088053703308105,
+          "hybrid_rank": 3,
+          "fused_score": 0.08752168010606226,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.7448253631591797,
+          "hybrid_rank": 1,
+          "fused_score": 0.10995471655076855,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art88-2",
+          "rerank_score": -3.7701282501220703,
+          "hybrid_rank": 13,
+          "fused_score": 0.05637654046195545,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n2. Those rules shall include suitable and specific measures to safeguard the data subject's human dignity, legitimate interests and fundamental rights, with particular regard to the transparency of processing, the transfer of personal data within a group of undertakings, or a group of enterprises engaged in a joint economic activity and monitoring systems at the work place."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art67-1",
+          "rerank_score": -3.84226655960083,
+          "hybrid_rank": 10,
+          "fused_score": 0.06711277327769671,
+          "text": "General Data Protection Regulation (2016/679) - Article 67: Exchange of information\nThe Commission may adopt implementing acts of general scope in order to specify the arrangements for the exchange of information by electronic means between supervisory authorities, and between supervisory authorities and the Board, in particular the standardised format referred to in Article 64.\nThose implementing acts shall be adopted in accordance with the examination procedure referred to in Article 93(2)."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -3.8483335971832275,
+          "hybrid_rank": 8,
+          "fused_score": 0.07036999036999038,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -3.4088053703308105,
+          "hybrid_rank": 3,
+          "fused_score": 0.08752168010606226
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.7448253631591797,
+          "hybrid_rank": 1,
+          "fused_score": 0.10995471655076855
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art88-2",
+          "rerank_score": -3.7701282501220703,
+          "hybrid_rank": 13,
+          "fused_score": 0.05637654046195545
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art67-1",
+          "rerank_score": -3.84226655960083,
+          "hybrid_rank": 10,
+          "fused_score": 0.06711277327769671
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -3.8483335971832275,
+          "hybrid_rank": 8,
+          "fused_score": 0.07036999036999038
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art33-2",
+          "rerank_score": -3.8887088298797607,
+          "hybrid_rank": 18,
+          "fused_score": 0.04738666351569577
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art64-7",
+          "rerank_score": -3.9427175521850586,
+          "hybrid_rank": 6,
+          "fused_score": 0.07873678940476103
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art11-1",
+          "rerank_score": -4.187347412109375,
+          "hybrid_rank": 15,
+          "fused_score": 0.05490503899045398
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -4.210989475250244,
+          "hybrid_rank": 7,
+          "fused_score": 0.07338192852898735
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art51-1",
+          "rerank_score": -4.3120951652526855,
+          "hybrid_rank": 9,
+          "fused_score": 0.06918242576137312
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art58-2-a",
+          "rerank_score": -4.386805534362793,
+          "hybrid_rank": 4,
+          "fused_score": 0.08536260963926179
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art61-1",
+          "rerank_score": -4.5801849365234375,
+          "hybrid_rank": 19,
+          "fused_score": 0.046943815757279184
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -4.614014625549316,
+          "hybrid_rank": 16,
+          "fused_score": 0.054517923596870965
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art12-3",
+          "rerank_score": -4.6187615394592285,
+          "hybrid_rank": 5,
+          "fused_score": 0.08489671767054631
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art65-2",
+          "rerank_score": -4.661502361297607,
+          "hybrid_rank": 14,
+          "fused_score": 0.0554170049536988
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art14-3",
+          "rerank_score": -4.772574424743652,
+          "hybrid_rank": 20,
+          "fused_score": 0.04620592054390803
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art82-4",
+          "rerank_score": -4.793779373168945,
+          "hybrid_rank": 17,
+          "fused_score": 0.05338080995975733
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -4.820425033569336,
+          "hybrid_rank": 2,
+          "fused_score": 0.09509129063829452
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art36-2",
+          "rerank_score": -5.487219333648682,
+          "hybrid_rank": 11,
+          "fused_score": 0.06377247488101534
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art65-6",
+          "rerank_score": -5.5917792320251465,
+          "hybrid_rank": 12,
+          "fused_score": 0.060771229668602225
+        }
+      ]
+    },
+    "11": {
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art2-1",
+          "rerank_score": -3.151029586791992,
+          "hybrid_rank": 16,
+          "fused_score": 0.0479384003974168,
+          "text": "General Data Protection Regulation (2016/679) - Article 2: Material scope\n1. This Regulation applies to the processing of personal data wholly or partly by automated means and to the processing other than by automated means of personal data which form part of a filing system or are intended to form part of a filing system."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "rerank_score": -3.3227055072784424,
+          "hybrid_rank": 3,
+          "fused_score": 0.08956559211414959,
+          "text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.5330305099487305,
+          "hybrid_rank": 4,
+          "fused_score": 0.07622157771055295,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art33-5",
+          "rerank_score": -3.731451988220215,
+          "hybrid_rank": 13,
+          "fused_score": 0.05233385983385984,
+          "text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n5. The controller shall document any personal data breaches, comprising the facts relating to the personal data breach, its effects and the remedial action taken. That documentation shall enable the supervisory authority to verify compliance with this Article."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art13-2-a",
+          "rerank_score": -3.7994837760925293,
+          "hybrid_rank": 19,
+          "fused_score": 0.04692957315908136,
+          "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;"
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art2-1",
+          "rerank_score": -3.151029586791992,
+          "hybrid_rank": 16,
+          "fused_score": 0.0479384003974168
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "rerank_score": -3.3227055072784424,
+          "hybrid_rank": 3,
+          "fused_score": 0.08956559211414959
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.5330305099487305,
+          "hybrid_rank": 4,
+          "fused_score": 0.07622157771055295
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art33-5",
+          "rerank_score": -3.731451988220215,
+          "hybrid_rank": 13,
+          "fused_score": 0.05233385983385984
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art13-2-a",
+          "rerank_score": -3.7994837760925293,
+          "hybrid_rank": 19,
+          "fused_score": 0.04692957315908136
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -3.8023154735565186,
+          "hybrid_rank": 11,
+          "fused_score": 0.05708787779725995
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art7-4",
+          "rerank_score": -4.107818603515625,
+          "hybrid_rank": 5,
+          "fused_score": 0.07132237132237133
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art61-2",
+          "rerank_score": -4.536746978759766,
+          "hybrid_rank": 14,
+          "fused_score": 0.05233385983385984
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art38-2",
+          "rerank_score": -4.565069675445557,
+          "hybrid_rank": 18,
+          "fused_score": 0.047379032258064516
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art64-7",
+          "rerank_score": -4.653001308441162,
+          "hybrid_rank": 6,
+          "fused_score": 0.06991062536837185
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art75-5",
+          "rerank_score": -4.695302486419678,
+          "hybrid_rank": 17,
+          "fused_score": 0.04762704813108039
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art57-4",
+          "rerank_score": -4.825275421142578,
+          "hybrid_rank": 2,
+          "fused_score": 0.09299119355868925
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art97-5",
+          "rerank_score": -5.025102615356445,
+          "hybrid_rank": 15,
+          "fused_score": 0.051491228070175435
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -5.072110652923584,
+          "hybrid_rank": 7,
+          "fused_score": 0.06770126447008526
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -5.18436861038208,
+          "hybrid_rank": 8,
+          "fused_score": 0.061567619776575
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -5.264031410217285,
+          "hybrid_rank": 1,
+          "fused_score": 0.13644307224305316
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art43-4",
+          "rerank_score": -5.735108375549316,
+          "hybrid_rank": 20,
+          "fused_score": 0.04490750016696721
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art58-2-a",
+          "rerank_score": -5.742831230163574,
+          "hybrid_rank": 12,
+          "fused_score": 0.05477784942516081
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art65-6",
+          "rerank_score": -5.850102424621582,
+          "hybrid_rank": 10,
+          "fused_score": 0.05854916486807054
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art36-2",
+          "rerank_score": -6.287040710449219,
+          "hybrid_rank": 9,
+          "fused_score": 0.059670753547320564
+        }
+      ]
+    },
+    "13": {
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art60-8",
+          "rerank_score": -0.4680981934070587,
+          "hybrid_rank": 4,
+          "fused_score": 0.1481643957569198,
+          "text": "General Data Protection Regulation (2016/679) - Article 60: Cooperation between the lead supervisory authority and the other supervisory authorities concerned\n8. By derogation from paragraph 7, where a complaint is dismissed or rejected, the supervisory authority with which the complaint was lodged shall adopt the decision and notify it to the complainant and shall inform the controller thereof."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art77-2",
+          "rerank_score": -0.6250306367874146,
+          "hybrid_rank": 2,
+          "fused_score": 0.14954469894644695,
+          "text": "General Data Protection Regulation (2016/679) - Article 77: Right to lodge a complaint with a supervisory authority\n2. The supervisory authority with which the complaint has been lodged shall inform the complainant on the progress and the outcome of the complaint including the possibility of a judicial remedy pursuant to Article 78."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art57-2",
+          "rerank_score": -0.7308158874511719,
+          "hybrid_rank": 3,
+          "fused_score": 0.14943251216445078,
+          "text": "General Data Protection Regulation (2016/679) - Article 57: Tasks\n2. Each supervisory authority shall facilitate the submission of complaints referred to in point (f) of paragraph 1 by measures such as a complaint submission form which can also be completed electronically, without excluding other means of communication."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art60-9",
+          "rerank_score": -1.4076735973358154,
+          "hybrid_rank": 5,
+          "fused_score": 0.11552712049316463,
+          "text": "General Data Protection Regulation (2016/679) - Article 60: Cooperation between the lead supervisory authority and the other supervisory authorities concerned\n9. Where the lead supervisory authority and the supervisory authorities concerned agree to dismiss or reject parts of a complaint and to act on other parts of that complaint, a separate decision shall be adopted for each of those parts of the matter. The lead supervisory authority shall adopt the decision for the part concerning actions in relation to the controller, shall notify it to the main establishment or single establishment of the controller or processor on the territory of its Member State and shall inform the complainant thereof, while the supervisory authority of the complainant shall adopt the decision for the part concerning dismissal or rejection of that complaint, and shall notify it to that complainant and shall inform the controller or processor thereof."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art60-7",
+          "rerank_score": -1.695505142211914,
+          "hybrid_rank": 14,
+          "fused_score": 0.07351163128545993,
+          "text": "General Data Protection Regulation (2016/679) - Article 60: Cooperation between the lead supervisory authority and the other supervisory authorities concerned\n7. The lead supervisory authority shall adopt and notify the decision to the main establishment or single establishment of the controller or processor, as the case may be and inform the other supervisory authorities concerned and the Board of the decision in question, including a summary of the relevant facts and grounds. The supervisory authority with which a complaint has been lodged shall inform the complainant on the decision."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art60-8",
+          "rerank_score": -0.4680981934070587,
+          "hybrid_rank": 4,
+          "fused_score": 0.1481643957569198
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art77-2",
+          "rerank_score": -0.6250306367874146,
+          "hybrid_rank": 2,
+          "fused_score": 0.14954469894644695
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art57-2",
+          "rerank_score": -0.7308158874511719,
+          "hybrid_rank": 3,
+          "fused_score": 0.14943251216445078
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art60-9",
+          "rerank_score": -1.4076735973358154,
+          "hybrid_rank": 5,
+          "fused_score": 0.11552712049316463
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art60-7",
+          "rerank_score": -1.695505142211914,
+          "hybrid_rank": 14,
+          "fused_score": 0.07351163128545993
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art77-1",
+          "rerank_score": -1.7420881986618042,
+          "hybrid_rank": 17,
+          "fused_score": 0.07287056489262372
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art65-6",
+          "rerank_score": -1.858163833618164,
+          "hybrid_rank": 1,
+          "fused_score": 0.15311862689503172
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art78-2",
+          "rerank_score": -1.9119610786437988,
+          "hybrid_rank": 7,
+          "fused_score": 0.09749199836881796
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art65-5",
+          "rerank_score": -2.0418334007263184,
+          "hybrid_rank": 18,
+          "fused_score": 0.06880546774382391
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art61-2",
+          "rerank_score": -2.2742395401000977,
+          "hybrid_rank": 12,
+          "fused_score": 0.08788783018356414
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art65-2",
+          "rerank_score": -2.607174873352051,
+          "hybrid_rank": 9,
+          "fused_score": 0.09194138978481205
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -2.614053249359131,
+          "hybrid_rank": 11,
+          "fused_score": 0.08889372560147207
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art64-7",
+          "rerank_score": -2.6156740188598633,
+          "hybrid_rank": 8,
+          "fused_score": 0.09416485487423704
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art62-6",
+          "rerank_score": -2.814305543899536,
+          "hybrid_rank": 19,
+          "fused_score": 0.060386251970798624
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art41-2",
+          "rerank_score": -2.925082206726074,
+          "hybrid_rank": 10,
+          "fused_score": 0.09151727663528414
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art57-4",
+          "rerank_score": -3.1152403354644775,
+          "hybrid_rank": 16,
+          "fused_score": 0.07313125471020208
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art65-1",
+          "rerank_score": -3.2915568351745605,
+          "hybrid_rank": 6,
+          "fused_score": 0.10331924218491705
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art45-5",
+          "rerank_score": -3.730525255203247,
+          "hybrid_rank": 20,
+          "fused_score": 0.05727482448675673
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -3.8295211791992188,
+          "hybrid_rank": 13,
+          "fused_score": 0.07728937728937729
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art83-2-h",
+          "rerank_score": -4.152624130249023,
+          "hybrid_rank": 15,
+          "fused_score": 0.07327744057317453
+        }
+      ]
+    },
+    "17": {
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art30-1",
+          "rerank_score": -4.606464385986328,
+          "hybrid_rank": 12,
+          "fused_score": 0.12544444227550633,
+          "text": "General Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n1. Each controller and, where applicable, the controller's representative, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information:\n(a) the name and contact details of the controller and, where applicable, the joint controller, the controller's representative and the data protection officer;\n(b) the purposes of the processing;\n(c) a description of the categories of data subjects and of the categories of personal data;\n(d) the categories of recipients to whom the personal data have been or will be disclosed including recipients in third countries or international organisations;\n(e) where applicable, transfers of personal data to a third country or an international organisation, including the identification of that third country or international organisation and, in the case of transfers referred to in the second subparagraph of Article 49(1), the documentation of suitable safeguards;\n(f) where possible, the envisaged time limits for erasure of the different categories of data;\n(g) where possible, a general description of the technical and organisational security measures referred to in Article 32(1)."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art32-1",
+          "rerank_score": -4.6893229484558105,
+          "hybrid_rank": 6,
+          "fused_score": 0.15716133177786304,
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n1. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate:\n(a) the pseudonymisation and encryption of personal data;\n(b) the ability to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services;\n(c) the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident;\n(d) a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -4.7000908851623535,
+          "hybrid_rank": 10,
+          "fused_score": 0.13579714144521549,
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n2. In assessing the appropriate level of security account shall be taken in particular of the risks that are presented by processing, in particular from accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data transmitted, stored or otherwise processed."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art88-2",
+          "rerank_score": -4.762489318847656,
+          "hybrid_rank": 18,
+          "fused_score": 0.11725513776213957,
+          "text": "General Data Protection Regulation (2016/679) - Article 88: Processing in the context of employment\n2. Those rules shall include suitable and specific measures to safeguard the data subject's human dignity, legitimate interests and fundamental rights, with particular regard to the transparency of processing, the transfer of personal data within a group of undertakings, or a group of enterprises engaged in a joint economic activity and monitoring systems at the work place."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -4.8974714279174805,
+          "hybrid_rank": 1,
+          "fused_score": 0.23393552913680393,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art30-1",
+          "rerank_score": -4.606464385986328,
+          "hybrid_rank": 12,
+          "fused_score": 0.12544444227550633
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art32-1",
+          "rerank_score": -4.6893229484558105,
+          "hybrid_rank": 6,
+          "fused_score": 0.15716133177786304
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -4.7000908851623535,
+          "hybrid_rank": 10,
+          "fused_score": 0.13579714144521549
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art88-2",
+          "rerank_score": -4.762489318847656,
+          "hybrid_rank": 18,
+          "fused_score": 0.11725513776213957
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -4.8974714279174805,
+          "hybrid_rank": 1,
+          "fused_score": 0.23393552913680393
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art12-7",
+          "rerank_score": -4.9097795486450195,
+          "hybrid_rank": 4,
+          "fused_score": 0.18581712530776917
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art30-2",
+          "rerank_score": -4.916332721710205,
+          "hybrid_rank": 2,
+          "fused_score": 0.21887690793602044
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art6-1",
+          "rerank_score": -5.0837507247924805,
+          "hybrid_rank": 17,
+          "fused_score": 0.11802903065589478
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art49-6",
+          "rerank_score": -5.108463287353516,
+          "hybrid_rank": 9,
+          "fused_score": 0.14205049249071433
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -5.145106315612793,
+          "hybrid_rank": 19,
+          "fused_score": 0.1134293009621957
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art61-9",
+          "rerank_score": -5.276019096374512,
+          "hybrid_rank": 7,
+          "fused_score": 0.14880955540560742
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art61-2",
+          "rerank_score": -5.460270404815674,
+          "hybrid_rank": 3,
+          "fused_score": 0.1935531451717678
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art35-11",
+          "rerank_score": -5.529528617858887,
+          "hybrid_rank": 14,
+          "fused_score": 0.12196045621777177
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art18-3",
+          "rerank_score": -5.539545059204102,
+          "hybrid_rank": 15,
+          "fused_score": 0.12049463800717791
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art58-2-a",
+          "rerank_score": -5.629062652587891,
+          "hybrid_rank": 16,
+          "fused_score": 0.12028089978717856
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -5.707088470458984,
+          "hybrid_rank": 5,
+          "fused_score": 0.17118495212704948
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art45-3",
+          "rerank_score": -5.986838340759277,
+          "hybrid_rank": 20,
+          "fused_score": 0.11159635227021676
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art45-5",
+          "rerank_score": -6.132330894470215,
+          "hybrid_rank": 8,
+          "fused_score": 0.14437061747512567
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art28-3-e",
+          "rerank_score": -6.354013442993164,
+          "hybrid_rank": 11,
+          "fused_score": 0.13094139528706408
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art70-1-s",
+          "rerank_score": -6.507709503173828,
+          "hybrid_rank": 13,
+          "fused_score": 0.124098814204299
+        }
+      ]
+    },
+    "19": {
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art67-1",
+          "rerank_score": -3.0986242294311523,
+          "hybrid_rank": 4,
+          "fused_score": 0.09981362375111158,
+          "text": "General Data Protection Regulation (2016/679) - Article 67: Exchange of information\nThe Commission may adopt implementing acts of general scope in order to specify the arrangements for the exchange of information by electronic means between supervisory authorities, and between supervisory authorities and the Board, in particular the standardised format referred to in Article 64.\nThose implementing acts shall be adopted in accordance with the examination procedure referred to in Article 93(2)."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -3.146685838699341,
+          "hybrid_rank": 8,
+          "fused_score": 0.08477262046652614,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -3.405770778656006,
+          "hybrid_rank": 11,
+          "fused_score": 0.07235969858920678,
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n2. In assessing the appropriate level of security account shall be taken in particular of the risks that are presented by processing, in particular from accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data transmitted, stored or otherwise processed."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art16-1",
+          "rerank_score": -3.5071773529052734,
+          "hybrid_rank": 16,
+          "fused_score": 0.05820102149435887,
+          "text": "General Data Protection Regulation (2016/679) - Article 16: Right to rectification\nThe data subject shall have the right to obtain from the controller without undue delay the rectification of inaccurate personal data concerning him or her. Taking into account the purposes of the processing, the data subject shall have the right to have incomplete personal data completed, including by means of providing a supplementary statement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.6020519733428955,
+          "hybrid_rank": 1,
+          "fused_score": 0.14155298788857132,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art67-1",
+          "rerank_score": -3.0986242294311523,
+          "hybrid_rank": 4,
+          "fused_score": 0.09981362375111158
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -3.146685838699341,
+          "hybrid_rank": 8,
+          "fused_score": 0.08477262046652614
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -3.405770778656006,
+          "hybrid_rank": 11,
+          "fused_score": 0.07235969858920678
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art16-1",
+          "rerank_score": -3.5071773529052734,
+          "hybrid_rank": 16,
+          "fused_score": 0.05820102149435887
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -3.6020519733428955,
+          "hybrid_rank": 1,
+          "fused_score": 0.14155298788857132
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art21-3",
+          "rerank_score": -3.644371509552002,
+          "hybrid_rank": 13,
+          "fused_score": 0.06793722225753046
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art15-3",
+          "rerank_score": -3.9007608890533447,
+          "hybrid_rank": 14,
+          "fused_score": 0.061355413377472204
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art57-4",
+          "rerank_score": -3.920410633087158,
+          "hybrid_rank": 10,
+          "fused_score": 0.07343489960160131
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art61-9",
+          "rerank_score": -3.975940227508545,
+          "hybrid_rank": 3,
+          "fused_score": 0.10333877840253892
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art12-7",
+          "rerank_score": -4.013612747192383,
+          "hybrid_rank": 9,
+          "fused_score": 0.07384876214167259
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art35-1",
+          "rerank_score": -4.076833724975586,
+          "hybrid_rank": 18,
+          "fused_score": 0.057171542379522
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art51-1",
+          "rerank_score": -4.083940505981445,
+          "hybrid_rank": 20,
+          "fused_score": 0.05634504384504384
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art7-4",
+          "rerank_score": -4.265261650085449,
+          "hybrid_rank": 6,
+          "fused_score": 0.08936216130062473
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -4.499340057373047,
+          "hybrid_rank": 2,
+          "fused_score": 0.11924345189082446
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -4.6492109298706055,
+          "hybrid_rank": 5,
+          "fused_score": 0.09530349259182212
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art82-5",
+          "rerank_score": -4.846867561340332,
+          "hybrid_rank": 19,
+          "fused_score": 0.05694859763376553
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art25-1",
+          "rerank_score": -4.886220932006836,
+          "hybrid_rank": 17,
+          "fused_score": 0.057750676937931615
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art6-4",
+          "rerank_score": -5.141054630279541,
+          "hybrid_rank": 7,
+          "fused_score": 0.08604029563554495
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art45-3",
+          "rerank_score": -5.32861328125,
+          "hybrid_rank": 12,
+          "fused_score": 0.07150278792069836
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art28-3-e",
+          "rerank_score": -5.5744733810424805,
+          "hybrid_rank": 15,
+          "fused_score": 0.05899643403716014
+        }
+      ]
+    },
+    "45": {
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art28-8",
+          "rerank_score": -5.331351280212402,
+          "hybrid_rank": 13,
+          "fused_score": 0.07118454699790316,
+          "text": "General Data Protection Regulation (2016/679) - Article 28: Processor\n8. A supervisory authority may adopt standard contractual clauses for the matters referred to in paragraph 3 and 4 of this Article and in accordance with the consistency mechanism referred to in Article 63."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -5.41480827331543,
+          "hybrid_rank": 10,
+          "fused_score": 0.07449996749677923,
+          "text": "General Data Protection Regulation (2016/679) - Article 66: Urgency procedure\n2. Where a supervisory authority has taken a measure pursuant to paragraph 1 and considers that final measures need urgently be adopted, it may request an urgent opinion or an urgent binding decision from the Board, giving reasons for requesting such opinion or decision."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art2-1",
+          "rerank_score": -5.619041442871094,
+          "hybrid_rank": 14,
+          "fused_score": 0.0637801061386466,
+          "text": "General Data Protection Regulation (2016/679) - Article 2: Material scope\n1. This Regulation applies to the processing of personal data wholly or partly by automated means and to the processing other than by automated means of personal data which form part of a filing system or are intended to form part of a filing system."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art28-7",
+          "rerank_score": -5.768257141113281,
+          "hybrid_rank": 9,
+          "fused_score": 0.07484740485300413,
+          "text": "General Data Protection Regulation (2016/679) - Article 28: Processor\n7. The Commission may lay down standard contractual clauses for the matters referred to in paragraph 3 and 4 of this Article and in accordance with the examination procedure referred to in Article 93(2)."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-7",
+          "rerank_score": -5.788708209991455,
+          "hybrid_rank": 19,
+          "fused_score": 0.05840148264829438,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n7. The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art28-8",
+          "rerank_score": -5.331351280212402,
+          "hybrid_rank": 13,
+          "fused_score": 0.07118454699790316
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art66-2",
+          "rerank_score": -5.41480827331543,
+          "hybrid_rank": 10,
+          "fused_score": 0.07449996749677923
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art2-1",
+          "rerank_score": -5.619041442871094,
+          "hybrid_rank": 14,
+          "fused_score": 0.0637801061386466
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art28-7",
+          "rerank_score": -5.768257141113281,
+          "hybrid_rank": 9,
+          "fused_score": 0.07484740485300413
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art12-7",
+          "rerank_score": -5.788708209991455,
+          "hybrid_rank": 19,
+          "fused_score": 0.05840148264829438
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -5.861817836761475,
+          "hybrid_rank": 15,
+          "fused_score": 0.061703687933196125
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art63-1",
+          "rerank_score": -5.86494255065918,
+          "hybrid_rank": 18,
+          "fused_score": 0.05844195800683142
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art33-1",
+          "rerank_score": -5.883488655090332,
+          "hybrid_rank": 16,
+          "fused_score": 0.05913767326356334
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art45-2-c",
+          "rerank_score": -5.942319869995117,
+          "hybrid_rank": 11,
+          "fused_score": 0.07320157053431701
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art35-6",
+          "rerank_score": -5.986060619354248,
+          "hybrid_rank": 2,
+          "fused_score": 0.10670069808286438
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art3-2",
+          "rerank_score": -6.2115020751953125,
+          "hybrid_rank": 8,
+          "fused_score": 0.07732492978394619
+        },
+        {
+          "rank": 12,
+          "passage_id": "GDPR-Art13-2-a",
+          "rerank_score": -6.323301315307617,
+          "hybrid_rank": 3,
+          "fused_score": 0.09892040963625941
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art65-2",
+          "rerank_score": -6.331413269042969,
+          "hybrid_rank": 20,
+          "fused_score": 0.058272434241283436
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art36-2",
+          "rerank_score": -6.476155757904053,
+          "hybrid_rank": 1,
+          "fused_score": 0.10787490307022227
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art65-6",
+          "rerank_score": -6.515679836273193,
+          "hybrid_rank": 12,
+          "fused_score": 0.07277872328488363
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art35-1",
+          "rerank_score": -6.589712142944336,
+          "hybrid_rank": 17,
+          "fused_score": 0.058530358530358526
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art6-1",
+          "rerank_score": -6.810730457305908,
+          "hybrid_rank": 4,
+          "fused_score": 0.09744646652541389
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art58-2-a",
+          "rerank_score": -6.843937397003174,
+          "hybrid_rank": 6,
+          "fused_score": 0.08860534392163086
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art88-1",
+          "rerank_score": -6.972998142242432,
+          "hybrid_rank": 5,
+          "fused_score": 0.08995110368090899
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art9-2-h",
+          "rerank_score": -7.203718185424805,
+          "hybrid_rank": 7,
+          "fused_score": 0.07870547927297496
+        }
+      ]
+    }
+  }
+}

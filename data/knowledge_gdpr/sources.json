@@ -1,0 +1,24 @@
+{
+  "description": "Legal knowledge source for Study 2 (GDPR cases). Official English text as published in the Official Journal of the European Union (original version, not consolidated).",
+  "version_note": "The originally published 2016 version is used deliberately, as for the CRD/LPD in Study 1. Later corrigenda and consolidated versions were deliberately not used.",
+  "format_note": "Same format as data/knowledge/sources.json. The list key is still called 'directives' so the same DirectiveChunker can read it, although the GDPR is a Regulation.",
+  "download_date": "2026-10-24",
+  "download_method": "curl from the Publications Office CELLAR repository (the official store behind EUR-Lex), requesting the English XHTML by CELEX number with headers 'Accept: application/xhtml+xml' and 'Accept-Language: eng'. Same method as data/knowledge/sources.json.",
+  "directives": [
+    {
+      "id_prefix": "GDPR",
+      "short_name": "General Data Protection Regulation",
+      "number": "2016/679",
+      "celex": "32016R0679",
+      "full_title": "Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such data, and repealing Directive 95/46/EC (General Data Protection Regulation) (Text with EEA relevance)",
+      "official_journal": "OJ L 119, 4.5.2016, p. 1",
+      "language": "EN",
+      "file": "GDPR_2016_679.html",
+      "requested_url": "https://publications.europa.eu/resource/celex/32016R0679",
+      "resolved_url": "http://publications.europa.eu/resource/cellar/3e485e15-11bd-11e6-ba9a-01aa75ed71a1.0006.03/DOC_1",
+      "eurlex_reference_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32016R0679",
+      "download_date": "2026-10-24",
+      "sha256": "962539af03738bf552319ff4ce42d69e5f95a576307c4dfed7bf87e81b646b9d"
+    }
+  ]
+}

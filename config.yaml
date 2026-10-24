@@ -303,3 +303,42 @@ paths:
   bpmngen_expected_hashes: docs/bpmngen_hashes_2026-10-19.json  # verified BPMNGen file hashes (preflight)
   preflight_dir: results/preflight        # one folder per preflight: results/preflight/<timestamp>/        # explains every file kind under results/
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)
+
+study2_gdpr:
+  # STUDY 2 only (GDPR corpus, added 24 Oct 2026). Separate paths so that nothing of Study 1 (data/knowledge/,
+  # data/retrieval/, data/silver/) is read or written by the GDPR scripts. The Study 1 defaults above stay as they are.
+  # Chunking uses the same DirectiveChunker and the same chunking.max_passage_chars as Study 1 (src/chunk_gdpr.py).
+  knowledge_raw: data/knowledge_gdpr/raw
+  knowledge_sources: data/knowledge_gdpr/sources.json
+  passages: data/knowledge_gdpr/passages.jsonl      # all 99 articles (kept; not used for retrieval any more)
+  # Corpus restriction (decided 24 Oct 2026 on development cases, applies to C2 and C3 equally): only the articles of
+  # these chapters are retrieved. Chapters VI-XI address supervisory authorities, remedies, specific national
+  # situations and final provisions, not an organisation's process. I-V = Art 1-50 (chapters read from the XHTML).
+  included_chapters: ["I", "II", "III", "IV", "V"]
+  passages_restricted: data/knowledge_gdpr/passages_ch1-5.jsonl   # the passages of included_chapters only
+  development_ids: ["01", "06", "11", "13", "17", "19", "45"]  # the 7 Study 1 cases that meet the GDPR rule
+                              # (docs/STUDY2_DATASET_PROTOCOL.md); GDPR retrieval and silver run on these only
+  dense_index_dir_restricted: data/retrieval_gdpr/dense_index_ch1-5  # separate FAISS index for passages_restricted
+  frozen_dev_hybrid_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_hybrid.json  # hybrid top 5, like Study 1
+  frozen_dev_rerank_restricted: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json  # hybrid top 20 -> reranker
+  # SUPERSEDED first comparison (24 Oct 2026): all 99 articles, reranker = max over all queries. Kept unchanged as a
+  # record, never used; src/freeze_retrieval_gdpr.py no longer writes them.
+  dense_index_dir: data/retrieval_gdpr/dense_index
+  frozen_dev_hybrid: data/retrieval_gdpr/frozen_retrieval_dev_hybrid.json
+  frozen_dev_rerank: data/retrieval_gdpr/frozen_retrieval_dev_rerank.json
+
+reranker:
+  # STUDY 2 development comparison only (src/retrieval/cross_encoder_reranker.py). OFF by default: Study 1 and the
+  # hybrid frozen files never rerank. Only src/freeze_retrieval_gdpr.py uses it, to make the second (rerank)
+  # version of the GDPR development retrieval; the file records these settings.
+  enabled: false
+  model: cross-encoder/ms-marco-MiniLM-L-6-v2   # local Hugging Face model, no API key
+  revision: 233902d25c440f23af6f7d6e94d2946bac0bee0a  # exact model commit (Hugging Face, checked 24 Oct 2026)
+  max_length: 512             # tokens per (query, passage) pair; longer pairs are truncated by the model
+  batch_size: 32
+  candidates: 20              # hybrid candidates (RRF over the same queries) given to the reranker
+  top_k: 5                    # passages kept per case after reranking (= retrieval.final_top_k)
+  queries: sentences          # score each passage against the description's SENTENCE queries only (not the full
+                              # description; with it, the full description gave the maximum for 35 of 35 passages)
+  aggregation: mean           # a passage's score = its mean score over those queries (changed 24 Oct 2026 from
+                              # "max" over all queries, see the superseded files above)

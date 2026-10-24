@@ -148,3 +148,8 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Work one step at a time. Do only what the current prompt asks.
 - After each step, run what you built and show me the result.
 - Add tests in tests/ for every component.
+
+## Study 2 (GDPR, branch study2-bpmngen-server)
+- GDPR corpus restricted to Chapters I-V (Art 1-50; config.yaml study2_gdpr.included_chapters, data/knowledge_gdpr/passages_ch1-5.jsonl, own dense index data/retrieval_gdpr/dense_index_ch1-5). Reason: Chapters VI–XI address supervisory authorities, remedies, specific national situations and final provisions, not an organisation's process; decided 24 Oct 2026 on development cases, applies to C2 and C3 equally. The full data/knowledge_gdpr/passages.jsonl (all 99 articles) is kept.
+- Reranker (src/retrieval/cross_encoder_reranker.py, config.yaml reranker, off by default): scores each hybrid candidate against the description's sentence queries only and uses the mean score (changed 24 Oct 2026 from max over all queries, where the full description always gave the maximum). The first comparison (all 99 articles, max) is kept in data/retrieval_gdpr/frozen_retrieval_dev_{hybrid,rerank}.json, superseded and never used.
+- Choice between the hybrid and rerank versions: rule fixed in docs/C3_V2_DEVELOPMENT.md section 4 before any GDPR silver labelling (more silver-applicable passages in the top 5 wins; then fewer irrelevant; then hybrid).

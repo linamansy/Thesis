@@ -136,3 +136,34 @@ Each round gets one entry in section 3 below, written on the day of the round, w
 ## 3. Round log
 
 (No rounds yet.)
+
+---
+
+## 4. Study 2: choosing the GDPR retrieval version (development cases)
+
+Fixed on 24 Oct 2026, **before any silver labelling** of GDPR passages (no silver label for any GDPR passage
+exists when this is written). It decides which of the two frozen retrieval versions Study 2 uses for C2 and C3.
+
+Both versions use the GDPR restricted to Chapters I-V (Art 1-50, `config.yaml` `study2_gdpr.included_chapters`;
+Chapters VI-XI address supervisory authorities, remedies, specific national situations and final provisions, not an
+organisation's process) and only the 7 GDPR development cases (01, 06, 11, 13, 17, 19, 45):
+
+- **hybrid**: `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_hybrid.json`, hybrid top 5, exactly like Study 1
+- **rerank**: `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json`, hybrid top 20 re-scored by the
+  cross-encoder (sentence queries only, mean score), top 5 kept
+
+Silver labels: the silver annotator (Study 1 setup, `openai/gpt-oss-120b` via Groq, temperature 0, unchanged prompt)
+labels every case-passage pair that appears in either version once, into
+`data/silver_gdpr/silver_reference_dev.json`. A pair that appears in both versions has one label, used for both.
+
+**Rule** (counts summed over the 7 cases × 5 passages of each version's top 5):
+
+1. The version with **more silver-applicable passages** in its top 5 wins.
+2. If tied: the version with **fewer silver-irrelevant passages** in its top 5 wins.
+3. If still tied: **hybrid** wins (simpler, and identical to the Study 1 method).
+
+The rule is applied once, mechanically, to the counts; the result and the counts are recorded below. The silver
+labels are AI-made (provisional, not gold), so the choice is reported as based on agreement with a stronger model.
+The rule may not be changed after any GDPR silver label exists.
+
+Result: (not yet applied)
