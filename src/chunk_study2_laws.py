@@ -93,7 +93,11 @@ def kept_passages(selection: dict, passages_by_law: dict[str, list[Passage]]) ->
 
 
 def write_combined(gdpr_path: Path, new_passages: list[Passage], output: Path) -> None:
-    """GDPR lines copied byte for byte, then one JSON line per new passage (written like write_jsonl)."""
+    """GDPR lines copied byte for byte, then one JSON line per new passage (written like write_jsonl).
+
+    The new lines end like the GDPR file's lines (CRLF in a Windows working copy, LF in git), so the file never
+    mixes line endings; its SHA-256 is recorded by the freezer.
+    """
     gdpr_ids = {p.id for p in load_passages(gdpr_path)}
     clash = gdpr_ids & {p.id for p in new_passages}
     if clash:
@@ -101,7 +105,8 @@ def write_combined(gdpr_path: Path, new_passages: list[Passage], output: Path) -
     gdpr_bytes = gdpr_path.read_bytes()
     if not gdpr_bytes.endswith(b"\n"):
         raise ValueError(f"{gdpr_path} must end with a line break")
-    lines = b"".join((json.dumps(p.to_dict(), ensure_ascii=False) + "\n").encode("utf-8") for p in new_passages)
+    ending = "\r\n" if gdpr_bytes.endswith(b"\r\n") else "\n"
+    lines = b"".join((json.dumps(p.to_dict(), ensure_ascii=False) + ending).encode("utf-8") for p in new_passages)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_bytes(gdpr_bytes + lines)
 
