@@ -1,0 +1,26 @@
+You are assisting with business process modelling. Decide whether a rule from a legal text applies to something that the business process described below does.
+
+INSTRUCTIONS
+- First find the trigger of the rule: the situation or activity the rule applies to. Write it in law_trigger, and copy the words of the passage that state it, word for word, into law_quote.
+- Then look for a step in the process description that does this situation or activity. Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.
+- relevant is true if some step of the process does what the rule applies to. relevant is false if no step does.
+- Judge by what the process does, not by whether the two texts use similar words or sound like the same subject. A rule can be relevant to a process that never uses the rule's terms, and a rule that uses the process's words can still be irrelevant.
+- Do not decide yet whether every condition of the rule is met; that is checked in a later step.
+- Use only the two texts below. Do not assume steps that the description does not state.
+- If relevant is false, process_step and description_quote are empty strings.
+- reason: one sentence explaining your decision.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+EXAMPLE (made up, for the format only)
+Rule: "If a customer pays by card, the shop must give a receipt."
+Process: "The customer chooses a product. The customer pays by card. The shop sends the product."
+Answer: {{"law_trigger": "a customer pays by card", "law_quote": "If a customer pays by card", "relevant": true, "process_step": "the customer pays by card", "description_quote": "The customer pays by card", "reason": "The process has a card payment step, which is the situation the rule applies to."}}
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGE
+{passage}

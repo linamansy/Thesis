@@ -251,6 +251,7 @@ paths:
   nltk_data: data/nltk_data                     # NLTK stopword list is downloaded here (not committed)
   generator_prompt: prompts/generator_prompt.txt       # legacy json_builder generator only (BPMNGen has its own prompt)
   relevance_prompt: prompts/relevance_prompt.txt       # C3 mediation agents
+  relevance_prompt_v2: prompts/relevance_prompt_v2.txt # C3 v2 development only (RelevanceAgentV2); v1 above stays frozen
   applicability_prompt: prompts/applicability_prompt.txt
   requirement_prompt: prompts/requirement_prompt.txt
   silver_prompt: prompts/silver_annotation_prompt.txt  # evaluation reference only, NOT a C3 agent
@@ -308,6 +309,7 @@ paths:
   context_check_dir: results/context_check  # src/count_prompt_tokens.py (legacy json_builder generator only)
   gdpr_dev_smoke_dir: results/diagnostics/gdpr_dev_smoke  # STUDY 2: evaluation of the GDPR development smoke run
   results_manifest_study2: results/MANIFEST_study2.csv    # STUDY 2: its files under results/ (study2_gdpr.manifest_patterns)
+  relevance_v2_dev_dir: results/diagnostics/relevance_v2_dev  # C3 v2: development test of RelevanceAgentV2, one folder per round
 
 study2_gdpr:
   # STUDY 2 only (GDPR corpus, added 24 Oct 2026). Separate paths so that nothing of Study 1 (data/knowledge/,
@@ -389,3 +391,18 @@ study2_laws:
   gdpr_only_applicable: 3
   corpus: gdpr_only               # result of the decision rule (24 Oct 2026): combined 0 applicable, not higher
                                   # than 3, so Study 2 keeps study2_gdpr.frozen_retrieval (GDPR Chapters I-V, rerank)
+
+c3_v2_dev:
+  # C3 v2 development (docs/C3_V2_DEVELOPMENT.md): development test of RelevanceAgentV2 (src/relevance_v2_dev.py) on
+  # development cases only, compared with v1 and the silver labels. Model and agent settings = model + llm (unchanged).
+  laws: [consumer_law, gdpr]
+  v1_runs:                    # where v1's relevance labels for the same passages are read (C3/mediation/<case>.json)
+    consumer_law: ollama_rep1 # Study 1, repetition 1 (agents at temperature 0, seed 42: reps 2-3 give the same labels)
+    gdpr: smoke_gdpr_dev      # Study 2 development smoke run (reranked GDPR retrieval)
+  log_condition: RELEVANCE_V2 # log files <relevance_v2_dev_dir>/round<n>/logs/RELEVANCE_V2_round<n>_<law>.jsonl
+  criteria:                   # section 2.3, fixed 24 Oct 2026 before round 1 (commit 39c4e3f); never changed
+    recall: 0.70              # share of silver-relevant (applicable / indeterminate / not_applicable) marked relevant
+    specificity: 0.50         # share of silver-irrelevant marked irrelevant
+    evidence: 0.90            # share of non-empty law_quote / description_quote values found by the code check
+    stability: 0.95           # share of answers that are valid JSON after the 1 retry
+  max_rounds: 3
