@@ -162,7 +162,56 @@ Each round gets one entry in section 3 below, written on the day of the round, w
 
 ## 3. Round log
 
-(No rounds yet.)
+### Round 1 (24 Oct 2026): RelevanceAgent v2
+
+**What changed and why.** A new, general relevance step for any kind of law (Problem 1 of section 1; on GDPR, v1
+called all 35 development passages Irrelevant, `results/runs/smoke_gdpr_dev/C3/mediation/`). v1 asked whether the
+passage's *topic* matches the process, with a list of consumer-law topics. v2 asks whether a *step of the process
+does what the rule applies to*: the model names the rule's trigger (law_trigger + law_quote copied from the passage)
+and the process step that does it (process_step + description_quote copied from the description), with no topic
+list, no law-specific words and one neutral made-up example. Code (no LLM) checks both quotes with the QuoteChecker;
+the final label is relevant only if the model said true AND both quotes are found.
+Files (new; the v1 files are unchanged and C3 v1 still matches its frozen hashes): `prompts/relevance_prompt_v2.txt`,
+`src/agents/relevance_agent_v2.py`, `src/mediation/relevance_v2_checker.py`, `src/relevance_v2_dev.py`,
+`tests/test_relevance_agent_v2.py`, `config.yaml` (`paths.relevance_prompt_v2`, `paths.relevance_v2_dev_dir`,
+`c3_v2_dev`). Only the relevance step was run (no ApplicabilityAgent, no generator).
+
+**Commit:** `4ff3ee8` (code, before the run). **Run folder:** `results/diagnostics/relevance_v2_dev/round1/`
+(qwen3:8b digest `500a1f06…`, Ollama 0.40.8, temperature 0, seed 42, think off; development cases only:
+13 consumer-law cases with `data/retrieval/frozen_retrieval.json`, 7 GDPR cases with the rerank file).
+
+**Results** (silver is AI-made and provisional; agreement with a stronger model, not correctness):
+
+| law | silver label | v2 relevant | v2 irrelevant | v1 relevant | v1 irrelevant |
+|---|---|---|---|---|---|
+| consumer law | applicable | 0 | 0 | 0 | 0 |
+| consumer law | indeterminate | 27 | 6 | 15 | 18 |
+| consumer law | not_applicable | 1 | 0 | 1 | 0 |
+| consumer law | irrelevant | 5 | 26 | 2 | 29 |
+| GDPR | applicable | 2 | 1 | 0 | 3 |
+| GDPR | indeterminate | 9 | 8 | 0 | 17 |
+| GDPR | not_applicable | 2 | 4 | 0 | 6 |
+| GDPR | irrelevant | 3 | 6 | 0 | 9 |
+
+| criterion | consumer law | GDPR | met |
+|---|---|---|---|
+| 1 recall >= 70% | 28/34 = 82.4% (v1 16/34 = 47.1%) | **13/26 = 50.0%** (v1 0/26) | consumer yes, **GDPR no** |
+| 2 specificity >= 50% | 26/31 = 83.9% (v1 29/31 = 93.5%) | 6/9 = 66.7% (v1 9/9) | yes, yes |
+| 3 generality (1 and 2 on both laws) | | | **no** (GDPR recall) |
+| 4 evidence >= 90% | 98/98 quotes found | 51/52 found | yes (149/150 = 99.3%) |
+| 5 stability >= 95% | 65/65 valid JSON | 35/35 | yes (100/100, no retry needed) |
+
+Silver-irrelevant passages called relevant by v2: consumer law 5 of 31, GDPR 3 of 9. Quotes failing the code check:
+1 of 150 (a description_quote, GDPR case 11, GDPR-Art15-3).
+
+Of the 13 GDPR silver-relevant passages v2 missed, 12 are the model's own "not relevant" and 1 is a failed quote.
+The model's reasons name a narrow trigger (e.g. "a data subject makes a request", "rectifying inaccurate personal
+data") that the description does not state, while silver labels the same passages on topic because the process
+handles personal data. GDPR-Art16-1 (case 19, silver applicable) is one of the misses; GDPR-Art2-1 and GDPR-Art32-2
+(case 11, silver applicable) are found.
+
+**Decision:** pending. Round 1 does not meet all criteria (criterion 3 fails on GDPR recall). Per Lina's instruction,
+the prompt is not changed after seeing these results; the next step (round 2 or freeze) is Lina's decision.
 
 ---
 
