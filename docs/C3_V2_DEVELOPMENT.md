@@ -325,6 +325,65 @@ Round 1 does not meet all criteria (criterion 3 fails).
 
 **Decision:** round 2 with the criteria of section 8, fixed before any code change.
 
+### Section 8, round 2 (26 Oct 2026): public body in the split, role definitions in check-IF, triggers kept
+
+**What changed (prompts only).** Split prompt: a duty on a public body (Commission, supervisory authority, Member
+State) -> IF = ["the organisation is <that body>"] + a made-up example. Check-IF prompt: fixed ROLE DEFINITIONS
+(controller, processor), a role is confirmed only by its defining facts, never by a similar word; a public-body
+statement is contradicted when the description shows a business; the made-up example now has "processed" ->
+processor not_stated. Requirement prompt: keep every trigger and condition of the obligation ("on request", "where
+applicable"); the made-up example has "if the customer asks". The second-look prompt was NOT changed (outside this
+round's task). The runner got `--round 2` (own folder, same 45 passages).
+
+**Commits:** `d018bf7` (code, before the run), see git log for the REAL RUN commit. **Run folder:**
+`results/diagnostics/c3_v2_round2/` (qwen3:8b digest `500a1f06…`, Ollama 0.40.11, agent calls only, no BPMN
+generation; same 45 passages as round 1; 150 calls). Labels: 19 Irrelevant, 13 Indeterminate, 11 Applicable,
+2 Not applicable (round 1: 14 Applicable).
+
+**Results against the section 7 + 8 criteria:**
+
+| # | Criterion | Result | Met |
+|---|---|---|---|
+| 1 | Usable split ≥ 90% | 45/45 = 100% | yes |
+| 2 | No "must" / "shall" / "is required to" in IF | 0 of 49 IF items | yes |
+| 3 | No situational condition: IF = the role | 31/32 by reading (GDPR-Art15-1, case 13, IF = the data subject's right; passage Irrelevant, so no effect on a label) | **no** |
+| 4 | ≤ 40 words, 1–2 sentences, plain, names the step | code: 11/11 (max 1 sentence); reading: 8/11 name a process step (not: GDPR-Art6-1 case 17, GDPR-Art30-2 variant + oracle 01.1) | **no** |
+| 5 | No "shall" / "controller" / "data subject" / "processor" | 11/11 after the check retry (3 needed it) | yes |
+| 6 | ≤ 50% copied 5-word sequences | 11/11 | yes |
+| 7 | Never instructs the generator to draw | 11/11 by reading | yes |
+| 8 | Valid JSON ≥ 95%, at most 1 retry | 150/150 valid, 3 calls with 1 JSON retry (the GDPR-Art30-2 split, each time) | yes |
+| 9 | Role confirmed only by defining facts; false-applicable ≤ 20% (dev) | dev: 4 Applicable, 3 not silver-applicable = **75%**; reading: 0 of the 11 confirmed role items quote a defining fact (list below) | **no** |
+| 10 | Public-body duty -> Not applicable | GDPR-Art35-6 (case 01, the only one reaching the check) -> Not applicable (round 1: Indeterminate); Art45-6, Art28-7, Art28-8 stopped earlier as Irrelevant; none Applicable | yes |
+| 11 | Requirement keeps every trigger/condition (≥ 90%) | 7/11 = 64% by reading (list below) | **no** |
+| 12 | Role definitions fixed in the prompt, never in the knowledge block | prompt file + tests `test_check_prompt_has_fixed_role_definitions`, `test_role_definitions_never_reach_the_generator` | yes |
+
+Round 2 does not meet all criteria (3, 4, 9 and 11 fail).
+
+**Applicable passages with their confirming quotes (silver only for the 7 development cases):**
+
+| set / case / passage | silver | look | confirmed IF item <- quote | defining fact shown? | trigger kept? |
+|---|---|---|---|---|---|
+| dev 11 GDPR-Art32-2 | applicable | first | "the organisation processes personal data" <- "the support team processes" (= processes a cancellation request) | no, word match | yes |
+| dev 17 GDPR-Art30-1 | indeterminate | second | "acts as a controller" <- "An e-commerce company has a comprehensive order fulfillment process" | no | yes (adds "customer details and data shared with third parties") |
+| dev 17 GDPR-Art6-1 | indeterminate | first | "is a controller" <- same quote | no | no ("only if at least one of (a)-(f)" became "lawful if necessary for the contract") |
+| dev 17 GDPR-Art32-2 | indeterminate | second | "processes personal data" <- "...When a customer places an order, the system records the order details." | partly (order details recorded) | yes |
+| variant 01.1 GDPR-Art35-9 | – | second | "is a controller" <- "The company is based in Germany and sells to customers across the EU." | no | no (seeking views became asking whether the customer wants to share details; "where appropriate" lost) |
+| variant 01.1 GDPR-Art7-4 | – | first | "is a data controller" <- same quote | no | yes |
+| variant 01.1 GDPR-Art30-2 | – | second | "acts as a processor" <- "The company is based ... store them in the system." | no (data is kept for the company itself, not on behalf of another) | no ("on behalf of a controller" became "done for customers") |
+| oracle 01.1 GDPR-Art35-9 | – | second | "is a controller" <- "The company is based in Germany and sells to customers across the EU." | no | yes ("If needed") |
+| oracle 01.1 GDPR-Art7-4 | – | first | "is a data controller" <- same quote | no | yes |
+| oracle 01.1 GDPR-Art30-2 | – | second | as variant | no | no (as variant) |
+| oracle 01.1 GDPR-Art13-1 | – | second | "is a controller" <- "The company is based in Germany and sells to customers across the EU." | no | yes, but content shortened (legal basis, recipients, DPO missing) |
+
+**GDPR-Art13-1 (oracle 01.1) requirement:** "When the customer is contacted during the inquiry, the sales staff must tell
+them about the company's identity, contact details, and the purpose of collecting their data." (1 attempt, 27 words.)
+
+**Observations.** The role definitions did not stop confirmations from quotes without data facts; 6 of the 11
+Applicable labels came from the second look, whose prompt has no role definitions. The public-body rule works
+(Art35-6). Requirements still lose qualifiers ("on behalf of a controller", "only if at least one of").
+
+**Decision:** open (Lina). Round 3 is the last allowed round (section 2.2).
+
 ---
 
 ## 4. Study 2: choosing the GDPR retrieval version (development cases)
