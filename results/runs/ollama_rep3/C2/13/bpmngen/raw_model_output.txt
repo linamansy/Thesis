@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Customer Service" processRef="CustomerServiceProcess"/>
+    <bpmn:participant id="p3" name="Complaint Team" processRef="ComplaintTeamProcess"/>
+    <bpmn:participant id="p4" name="Financial Team" processRef="FinancialTeamProcess"/>
+    <bpmn:messageFlow id="mf1" name="File Complaint" sourceRef="se1" targetRef="t1"/>
+    <bpmn:messageFlow id="mf2" name="Complaint Logged" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf3" name="Investigation Complete" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf4" name="Decision Notified" sourceRef="ice1" targetRef="se3"/>
+    <bpmn:messageFlow id="mf5" name="Refund Approved" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf6" name="Refund Processed" sourceRef="se5" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf7" name="Case Resolved" sourceRef="ice2" targetRef="se6"/>
+    <bpmn:messageFlow id="mf8" name="Feedback Received" sourceRef="se6" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="File Complaint"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Decision Notified">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Refund Processed">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Case Resolved">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Feedback Received"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="ice3" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice2" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="CustomerServiceProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Complaint Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Log Complaint"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t1" targetRef="se3"/>
+  </bpmn:process>
+  <bpmn:process id="ComplaintTeamProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Investigation Started">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Review Details"/>
+    <bpmn:exclusiveGateway id="g1" name="Valid Complaint?"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se3" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t2" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="g1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="g1" targetRef="ice3"/>
+  </bpmn:process>
+  <bpmn:process id="FinancialTeamProcess" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Refund Requested">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Refund"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se4" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t3" targetRef="ice2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="p1" bpmnElement="Customer" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2" bpmnElement="Customer Service" isHorizontal="true">
+        <dc:Bounds x="0" y="160" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p3" bpmnElement="Complaint Team" isHorizontal="true">
+        <dc:Bounds x="0" y="320" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p4" bpmnElement="Financial Team" isHorizontal="true">
+        <dc:Bounds x="0" y="480" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1" bpmnElement="se1">
+        <dc:Bounds x="160" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1" bpmnElement="t1">
+        <dc:Bounds x="260" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1" bpmnElement="ice1">
+        <dc:Bounds x="360" y="0" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice2" bpmnElement="ice2">
+        <dc:Bounds x="400" y="0" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2" bpmnElement="se2">
+        <dc:Bounds x="160" y="160" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2" bpmnElement="t2">
+        <dc:Bounds x="260" y="160" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="g1" bpmnElement="g1">
+        <dc:Bounds x="360" y="160" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se3" bpmnElement="se3">
+        <dc:Bounds x="160" y="320" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3" bpmnElement="t3">
+        <dc:Bounds x="260" y="320" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se4" bpmnElement="se4">
+        <dc:Bounds x="160" y="480" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4" bpmnElement="t4">
+        <dc:Bounds x="260" y="480" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1" bpmnElement="ee1">
+        <dc:Bounds x="360" y="480" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1" bpmnElement="f1">
+        <di:waypoint x="360" y="0"/>
+        <di:waypoint x="360" y="0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2" bpmnElement="f2">
+        <di:waypoint x="400" y="0"/>
+        <di:waypoint x="400" y="0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3" bpmnElement="f3">
+        <di:waypoint x="400" y="0"/>
+        <di:waypoint x="400" y="0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4" bpmnElement="f4">
+        <di:waypoint x="400" y="0"/>
+        <di:waypoint x="400" y="0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5" bpmnElement="f5">
+        <di:waypoint x="260" y="160"/>
+        <di:waypoint x="260" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6" bpmnElement="f6">
+        <di:waypoint x="260" y="160"/>
+        <di:waypoint x="260" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7" bpmnElement="f7">
+        <di:waypoint x="360" y="160"/>
+        <di:waypoint x="360" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f8" bpmnElement="f8">
+        <di:waypoint x="360" y="160"/>
+        <di:waypoint x="360" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f9" bpmnElement="f9">
+        <di:waypoint x="360" y="160"/>
+        <di:waypoint x="360" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10" bpmnElement="f10">
+        <di:waypoint x="360" y="160"/>
+        <di:waypoint x="360" y="160"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11" bpmnElement="f11">
+        <di:waypoint x="260" y="480"/>
+        <di:waypoint x="260" y="480"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12" bpmnElement="f12">
+        <di:waypoint x="260" y="480"/>
+        <di:waypoint x="260" y="480"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13" bpmnElement="f13">
+        <di:waypoint x="360" y="480"/>
+        <di:waypoint x="360" y="480"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14" bpmnElement="f14">
+        <di:waypoint x="360" y="480"/>
+        <di:waypoint x="360" y="480"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

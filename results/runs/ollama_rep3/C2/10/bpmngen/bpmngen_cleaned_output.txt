@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Employee/Department" processRef="EmployeeProcess"/>
+    <bpmn:participant id="p2" name="IT Department" processRef="ITProcess"/>
+  </bpmn:collaboration>
+  <bpmn:process id="EmployeeProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Submit Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Request Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="ice1"/>
+  </bpmn:process>
+  <bpmn:process id="ITProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Assess Request">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Check Compatibility"/>
+    <bpmn:task id="t2" name="Evaluate Cost and Resources"/>
+    <bpmn:exclusiveGateway id="g1" name="Approval Decision"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t2" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="g1" targetRef="t3"/>
+    <bpmn:task id="t3" name="Procure Tools/Licenses"/>
+    <bpmn:task id="t4" name="Install Solution"/>
+    <bpmn:task id="t5" name="Test in Controlled Environment"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="g1" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t5" targetRef="t6"/>
+    <bpmn:task id="t6" name="Roll Out Solution"/>
+    <bpmn:task id="t7" name="Provide Training"/>
+    <bpmn:task id="t8" name="IT Support Available"/>
+    <bpmn:endEvent id="ee1" name="Process Complete"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t8" targetRef="ee1"/>
+  </bpmn:process>
+</bpmn:definitions>

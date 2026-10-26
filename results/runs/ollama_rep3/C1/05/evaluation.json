@@ -1,0 +1,265 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "05",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 59, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C1/05/generated.bpmn, line 59)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 9,
+    "n_reference_tasks": 11,
+    "n_matched": 4,
+    "precision": 0.4444444444444444,
+    "recall": 0.36363636363636365,
+    "f1": 0.39999999999999997,
+    "matched": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Evaluate Proposals",
+        "reference_id": "Task_5",
+        "reference_label": "Evaluate proposal",
+        "similarity": 0.8399
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Conduct Site Visits/Interviews",
+        "reference_id": "Task_2",
+        "reference_label": "Conduct site visit",
+        "similarity": 0.8061
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Negotiate Contract",
+        "reference_id": "Task_7",
+        "reference_label": "Begin contract negotiations",
+        "similarity": 0.8045
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Sign Contract",
+        "reference_id": "Task_1",
+        "reference_label": "Sign contract",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Execute contract"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Identify need for new supplier or vendor"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Receive supplier proposals"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Select supplier"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Conduct interview"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Issue request for proposals (RFP)"
+      },
+      {
+        "reference_id": "Task_11",
+        "reference_label": "Onboard supplier"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Issue RFP"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Sign Contract"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Submit Proposal"
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Prepare for Site Visit"
+      },
+      {
+        "generated_id": "t8",
+        "generated_label": "Negotiate Terms"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.5,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 3,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Evaluate proposal",
+          "Conduct site visit"
+        ],
+        "generated_tasks": [
+          "Evaluate Proposals",
+          "Conduct Site Visits/Interviews"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Evaluate proposal",
+          "Begin contract negotiations"
+        ],
+        "generated_tasks": [
+          "Evaluate Proposals",
+          "Negotiate Contract"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Evaluate proposal",
+          "Sign contract"
+        ],
+        "generated_tasks": [
+          "Evaluate Proposals",
+          "Sign Contract"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Conduct site visit",
+          "Begin contract negotiations"
+        ],
+        "generated_tasks": [
+          "Conduct Site Visits/Interviews",
+          "Negotiate Contract"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Conduct site visit",
+          "Sign contract"
+        ],
+        "generated_tasks": [
+          "Conduct Site Visits/Interviews",
+          "Sign Contract"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Begin contract negotiations",
+          "Sign contract"
+        ],
+        "generated_tasks": [
+          "Negotiate Contract",
+          "Sign Contract"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 5,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Issue RFP",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Sign Contract",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Submit Proposal",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t7",
+        "label": "Prepare for Site Visit",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t8",
+        "label": "Negotiate Terms",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.4444,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1808,
+    "output_tokens": 3789,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 86.49,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 17,
+    "tasks": 11,
+    "gateways": 4,
+    "loops": 1,
+    "nesting_depth": 1,
+    "cfc": 5
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

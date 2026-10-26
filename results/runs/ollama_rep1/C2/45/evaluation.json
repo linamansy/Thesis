@@ -1,0 +1,360 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "45",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 79, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C2/45/generated.bpmn, line 79)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 12,
+    "n_reference_tasks": 13,
+    "n_matched": 5,
+    "precision": 0.4166666666666667,
+    "recall": 0.38461538461538464,
+    "f1": 0.4,
+    "matched": [
+      {
+        "generated_id": "t4",
+        "generated_label": "Save Product",
+        "reference_id": "ManualTask_4",
+        "reference_label": "customer saves product",
+        "similarity": 0.8365
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Enter Payment Data",
+        "reference_id": "ManualTask_6",
+        "reference_label": "customer enters payment data",
+        "similarity": 0.8761
+      },
+      {
+        "generated_id": "t8",
+        "generated_label": "Enter Shipping Address",
+        "reference_id": "ManualTask_7",
+        "reference_label": "customer enters shipping address",
+        "similarity": 0.8183
+      },
+      {
+        "generated_id": "t11",
+        "generated_label": "Prepare Payment",
+        "reference_id": "ServiceTask_2",
+        "reference_label": "Payment is prepared by system",
+        "similarity": 0.7944
+      },
+      {
+        "generated_id": "t12",
+        "generated_label": "Prepare Shipment",
+        "reference_id": "ServiceTask_3",
+        "reference_label": "Shipment is prepared by system",
+        "similarity": 0.818
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "customer waits until bank confirms payment"
+      },
+      {
+        "reference_id": "ServiceTask_1",
+        "reference_label": "customer credentials being checked by system"
+      },
+      {
+        "reference_id": "ServiceTask_4",
+        "reference_label": "order is being finished by system"
+      },
+      {
+        "reference_id": "ManualTask_1",
+        "reference_label": "customer logs into E-Shop"
+      },
+      {
+        "reference_id": "ManualTask_2",
+        "reference_label": "customer selects a product"
+      },
+      {
+        "reference_id": "ManualTask_3",
+        "reference_label": "customer adds product to shopping cart"
+      },
+      {
+        "reference_id": "ManualTask_5",
+        "reference_label": "customer checks if product was already selected"
+      },
+      {
+        "reference_id": "ManualTask_8",
+        "reference_label": "customer enters an independent billing adress"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Login"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Select Product"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Add to Cart"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Check Selected Products"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Finish Order"
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Validate Login"
+      },
+      {
+        "generated_id": "t10",
+        "generated_label": "Process Order"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.4,
+    "behavioral_computable": true,
+    "n_pairs": 10,
+    "n_same": 4,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "customer enters payment data"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Enter Payment Data"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "customer enters shipping address"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Enter Shipping Address"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "Payment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Prepare Payment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "Shipment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Prepare Shipment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer enters payment data",
+          "customer enters shipping address"
+        ],
+        "generated_tasks": [
+          "Enter Payment Data",
+          "Enter Shipping Address"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer enters payment data",
+          "Payment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Enter Payment Data",
+          "Prepare Payment"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer enters payment data",
+          "Shipment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Enter Payment Data",
+          "Prepare Shipment"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer enters shipping address",
+          "Payment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Enter Shipping Address",
+          "Prepare Payment"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer enters shipping address",
+          "Shipment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Enter Shipping Address",
+          "Prepare Shipment"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Payment is prepared by system",
+          "Shipment is prepared by system"
+        ],
+        "generated_tasks": [
+          "Prepare Payment",
+          "Prepare Shipment"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 7,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Login",
+        "similarity_to_knowledge": 0.1204,
+        "similarity_to_description": 0.4019,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Select Product",
+        "similarity_to_knowledge": 0.2522,
+        "similarity_to_description": 0.5467,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Add to Cart",
+        "similarity_to_knowledge": 0.2745,
+        "similarity_to_description": 0.4265,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Check Selected Products",
+        "similarity_to_knowledge": 0.1694,
+        "similarity_to_description": 0.6021,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Finish Order",
+        "similarity_to_knowledge": 0.3638,
+        "similarity_to_description": 0.5542,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t9",
+        "label": "Validate Login",
+        "similarity_to_knowledge": 0.1542,
+        "similarity_to_description": 0.4971,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t10",
+        "label": "Process Order",
+        "similarity_to_knowledge": 0.3757,
+        "similarity_to_description": 0.5323,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.4167,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2719,
+    "output_tokens": 5617,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 134.261,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 25,
+    "tasks": 13,
+    "gateways": 10,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 8
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

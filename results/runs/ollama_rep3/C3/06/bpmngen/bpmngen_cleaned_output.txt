@@ -1,0 +1,84 @@
+
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Warehouse Team" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p4" name="Logistics Provider" processRef="LogisticsProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Order Confirmation" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Shipping Label" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Track Shipment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Delivery Confirmation" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf6" name="Feedback/Return" sourceRef="ice3" targetRef="se6"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Hungry"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmation Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Delivery Confirmation Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Feedback/Return Request">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice3" targetRef="ee1"/>
+  
+    <bpmn:sequenceFlow id="auto_link_in_ice2_to_ice3" sourceRef="ice2" targetRef="ice3"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Order Confirmation"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Order Confirmation Sent">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="System Process Complete"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t2" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice4" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Order Received">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Pick and Pack Items"/>
+    <bpmn:task id="t4" name="Generate Shipping Label"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Shipping Label Sent">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="Warehouse Process Complete"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="se3" targetRef="t3"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1_dup2">
+    <bpmn:participant id="p1_dup2" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2_dup2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3_dup2" name="Warehouse Team" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p4_dup2" name="Logistics Provider" processRef="LogisticsProcess"/>
+    <bpmn:messageFlow id="mf1_dup2" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2_dup2" name="Order Confirmation" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3_dup2" name="Shipping Label" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4_dup2" name="Track Shipment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5_dup2" name="Delivery Confirmation" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf6_dup2" name="Feedback/Return" sourceRef="ice3" targetRef="se6"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess_dup2" isExecutable="false">
+    <bpmn:startEvent id="se1_dup2" name="Hungry"/>
+    <bpmn:task id="t1_dup2" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1_dup2" name="Order Confirmation Received">
+      <bpmn:messageEventDefinition id="med1_dup2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2_dup2" name="Delivery Confirmation Received">
+      <bpmn:messageEventRead
+```

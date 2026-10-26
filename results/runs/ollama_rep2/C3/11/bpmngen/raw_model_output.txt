@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Support Team" processRef="SupportProcess"/>
+    <bpmn:messageFlow id="mf1" name="Subscription Request" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Cancellation Request" sourceRef="t5" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Refund or Charge" sourceRef="t7" targetRef="ice1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Sign Up"/>
+    <bpmn:task id="t1" name="Submit Subscription Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Refund or Charge Applied">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SupportProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Subscription Request Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Account"/>
+    <bpmn:task id="t3" name="Assign Access"/>
+    <bpmn:task id="t4" name="Trigger Billing Cycles"/>
+    <bpmn:task id="t5" name="Process Cancellation Request"/>
+    <bpmn:task id="t6" name="Apply Refund or Charge"/>
+    <bpmn:endEvent id="ee2" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="CustomerProcess_1" bpmnElement="CustomerProcess">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupportProcess_1" bpmnElement="SupportProcess">
+        <dc:Bounds x="300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1_1" bpmnElement="se1">
+        <dc:Bounds x="80" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_1" bpmnElement="t1">
+        <dc:Bounds x="140" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1_1" bpmnElement="ice1">
+        <dc:Bounds x="240" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1_1" bpmnElement="ee1">
+        <dc:Bounds x="340" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2_1" bpmnElement="se2">
+        <dc:Bounds x="280" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmnd
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Support Team" processRef="SupportProcess"/>
+    <bpmn:messageFlow id="mf1" name="Subscription Request" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Cancellation Request" sourceRef="t5" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Refund or Charge" sourceRef="t7" targetRef="ice1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Sign Up"/>
+    <bpmn:task id="t1" name="Submit Subscription Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Refund or Charge Applied">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SupportProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Subscription Request Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Account"/>
+    <bpmn:task id="t3" name="Assign Access"/>
+    <bpmn:task id="t4" name="Trigger Billing Cycles"/>
+    <bpmn:task id="t5" name="Process Cancellation Request"/>
+    <bpmn:task id="t6" name="Apply Refund or Charge"/>
+    <bpmn:endEvent id="ee2" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequence

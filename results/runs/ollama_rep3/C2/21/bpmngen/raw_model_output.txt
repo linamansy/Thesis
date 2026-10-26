@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Secretary" processRef="SecretaryProcess"/>
+    <bpmn:participant id="p2" name="Logistics Department Head" processRef="LogisticsDepartmentHeadProcess"/>
+    <bpmn:participant id="p3" name="Warehousemen" processRef="WarehousemenProcess"/>
+    <bpmn:messageFlow id="mf1" name="Shipping Required" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Special Shipping" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Logistics Offer" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf4" name="Selected Logistics" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Normal Post" sourceRef="t6" targetRef="se7"/>
+    <bpmn:messageFlow id="mf6" name="Package Label" sourceRef="t8" targetRef="se9"/>
+    <bpmn:messageFlow id="mf7" name="Insurance Required" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf8" name="Packaged Goods" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf9" name="Ready for Pickup" sourceRef="t12" targetRef="se13"/>
+  </bpmn:collaboration>
+  <bpmn:process id="SecretaryProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Goods to be Shipped"/>
+    <bpmn:task id="t1" name="Clarify Shipping Responsibility"/>
+    <bpmn:exclusiveGateway id="g1" name="Shipping Decision"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="g1" targetRef="t2"/>
+    <b
+    <bpmn:sequenceFlow id="f4" sourceRef="g1" targetRef="se2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="se6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="se6" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t9" targetRef="se10"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t11" targetRef="se12"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="se12" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t12" targetRef="se13"/>
+  </bpmn:process>
+  <bpmn:process id="LogisticsDepartmentHeadProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Special Shipping Required"/>
+    <bpmn:task id="t3" name="Invite Logistic Companies"/>
+    <bpmn:task id="t4" name="Receive Offers"/>
+    <bpmn:task id="t5" name="Select Logistics Company"/>
+    <bpmn:endEvent id="se6" name="Logistics Selected"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="se6"/>
+  </bpmn:process>
+  <bpmn:process id="WarehousemenProcess" isExecutable="false">
+    <bpmn:startEvent id="se7" name="Normal Post Shipment"/>
+    <bpmn:task id="t8" name="Write Package Label"/>
+    <bpmn:task id="t9" name="Insurance Required"/>
+    <bpmn:task id="t11" name="Packaged Goods"/>
+    <bpmn:endEvent id="se12" name="Ready for Pickup"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="se7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t9" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t11" targetRef="se12"/>
+  </bpmn:process>
+</bpmn:definitions>

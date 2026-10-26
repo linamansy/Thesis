@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p2" name="Procurement Team" processRef="ProcurementProcess"/>
+    <bpmn:participant id="p3" name="Supplier" processRef="SupplierProcess"/>
+    <bpmn:messageFlow id="mf1" name="Reorder Alert" sourceRef="t1" targetRef="t2"/>
+    <bpmn:messageFlow id="mf2" name="Place Order" sourceRef="t2" targetRef="t3"/>
+    <bpmn:messageFlow id="mf3" name="Order Confirmation" sourceRef="t3" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Received" sourceRef="t5" targetRef="t6"/>
+    <bpmn:messageFlow id="mf5" name="Inventory Updated" sourceRef="t6" targetRef="t7"/>
+  </bpmn:collaboration>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Monitor Inventory"/>
+    <bpmn:task id="t1" name="Check Inventory Level"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Stock Below Threshold">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Inventory Updated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="ProcurementProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Reorder Alert Received"/>
+    <bpmn:task id="t2" name="Place Order with Suppliers"/>
+    <bpmn:endEvent id="ee2" name="Order Placed"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="SupplierProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Order Received"/>
+    <bpmn:task id="t3" name="Confirm Order"/>
+    <bpmn:endEvent id="ee3" name="Order Confirmed"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se3" targetRef="t3"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p2" name="Procurement Team" processRef="ProcurementProcess"/>
+    <bpmn:participant id="p3" name="Supplier" processRef="SupplierProcess"/>
+    <bpmn:messageFlow id="mf1" name="Reorder Alert" sourceRef="t1" targetRef="t2"/>
+    <bpmn:messageFlow id="mf2" name="Place Order" sourceRef="t2" targetRef="t3"/>
+    <bpmn:messageFlow id="mf3" name="Order Confirmation" sourceRef="t3" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Received" sourceRef="t5" targetRef="t6"/>
+    <bpmn:messageFlow id="mf5" name="Inventory Updated" sourceRef="t6" targetRef="t7"/>
+  </bpmn:collaboration>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Monitor Inventory"/>
+    <bpmn:task id="t1" name="Check Inventory Level"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Stock Below Threshold">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Inventory Updated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="ProcurementProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Reorder Alert Received"/>
+    <bpmn:task id="t2" name="Place Order with Suppliers"/>
+    <bpmn:endEvent id="ee2" name="Order Placed"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="SupplierProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Order Received"/>
+    <bpmn:task id="t3" name="Confirm Order"/>
+    <bpmn:endEvent id="ee3" name="Order Confirmed"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se3" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t3" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="WarehouseProcess_1" bpmnElement="WarehouseProcess">
+        <dc:Bounds x="100" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_1" bpmnElement="ProcurementProcess">
+        <dc:Bounds x="300" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_1" bpmnElement="SupplierProcess">
+        <dc:Bounds x="500" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1_1" bpmnElement="se1">
+        <dc:Bounds x="80" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_1" bpmnElement="t1">
+        <dc:Bounds x="120" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1_1" bpmnElement="ice1">
+        <dc:Bounds x="220" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1_1" bpmnElement="ee1">
+        <dc:Bounds x="320" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2_1" bpmnElement="se2">
+        <dc:Bounds x="380" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2_1" bpmnElement="t2">
+        <dc:Bounds x="420" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee2_1" bpmnElement="ee2">
+        <dc:Bounds x="520" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se3_1" bpmnElement="se3">
+        <dc:Bounds x="580" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3_1" bpmnElement="t3">
+        <dc:Bounds x="620" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee3_1" bpmnElement="ee3">
+        <dc:Bounds x="720" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_1" bpmnElement="f1">
+        <di:waypoint x="100" y="140"/>
+        <di:waypoint x="120" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_1" bpmnElement="f2">
+        <di:waypoint x="120" y="140"/>
+        <di:waypoint x="220" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_1" bpmnElement="f3">
+        <di:waypoint x="220" y="140"/>
+        <di:waypoint x="320" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4_1" bpmnElement="f4">
+        <di:waypoint x="380" y="140"/>
+        <di:waypoint x="420" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_1" bpmnElement="f5">
+        <di:waypoint x="420" y="140"/>
+        <di:waypoint x="520" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6_1" bpmnElement="f6">
+        <di:waypoint x="580" y="140"/>
+        <di:waypoint x="620" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7_1" bpmnElement="f7">
+        <di:waypoint x="620" y="140"/>
+        <di:waypoint x="720" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf1_1" bpmnElement="mf1">
+        <di:waypoint x="220" y="140"/>
+        <di:waypoint x="380" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf2_1" bpmnElement="mf2">
+        <di:waypoint x="520" y="140"/>
+        <di:waypoint x="580" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf3_1" bpmnElement="mf3">
+        <di:waypoint x="720" y="140"/>
+        <di:waypoint x="720" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf4_1" bpmnElement="mf4">
+        <di:waypoint x="720" y="140"/>
+        <di:waypoint x="720" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf5_1" bpmnElement="mf5">
+        <di:waypoint x="720" y="140"/>
+        <di:waypoint x="720" y="140"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

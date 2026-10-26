@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Secretary" processRef="SecretaryProcess"/>
+    <bpmn:participant id="p2" name="Logistics Department Head" processRef="LogisticsDepartmentHeadProcess"/>
+    <bpmn:participant id="p3" name="Warehousemen" processRef="WarehousemenProcess"/>
+    <bpmn:messageFlow id="mf1" name="Shipping Clarification" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Special Shipping Required" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf3" name="Logistics Offer" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf4" name="Logistics Selected" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf5" name="Normal Post Shipment" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf6" name="Package Label" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf7" name="Parcel Insurance" sourceRef="t13" targetRef="se14"/>
+    <bpmn:messageFlow id="mf8" name="Packaged Goods Ready" sourceRef="t15" targetRef="se16"/>
+  </bpmn:collaboration>
+  <bpmn:process id="SecretaryProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Goods Shall Be Shipped"/>
+    <bpmn:task id="t1" name="Clarify Who Will Do the Shipping"/>
+    <bpmn:exclusiveGateway id="eg1" name="Shipping Decision"/>
+    <bpmn:task id="t3" name="Special Shipping Required"/>
+    <bpmn:exclusiveGateway id="eg2" name="Logistics Selection"/>
+    <bpmn:task id="t5" name="Invite Three Logistic Companies"/>
+    <bpmn:task id="t7" name="Select One Logistic Company"/>
+    <bpmn:task id="t9" name="Normal Post Shipment"/>
+    <bpmn:task id="t11" name="Write Package Label"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Insurance Required">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t13" name="Take Parcel Insurance"/>
+    <bpmn:task id="t15" name="Packaged Goods Ready"/>
+    <bpmn:endEvent id="ee1" name="Goods Prepared for Pickup"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="eg1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="eg1" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="eg2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="eg2" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t5" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t7" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t9" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t11" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="ice1" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t13" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t15" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="LogisticsDepartmentHeadProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Logistics Offer Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t4" name="Select Logistics Company"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="se2" targetRef="t4"/>
+    
+  </bpmn:process>
+  <bpmn:process id="WarehousemenProcess" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Goods Packaged"/>
+    <bpmn:task id="t6" name="Package Goods"/>
+    <bpmn:endEvent id="ee2" name="Packaging Complete"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se4" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t6" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="LogisticsDepartmentHeadProcess_dup2" isExecutable="false">
+    <bpmn:startEvent id="se5" name="Insurance Required"/>
+    <bpmn:task id="t8" name="Take Parcel Insurance"/>
+    <bpmn:endEvent id="ee3" name="Insurance Taken"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="se5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t8" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="SecretaryProcess_dup2" isExecutable="false">
+    <bpmn:startEvent id="se6" name="Packaged Goods Ready"/>
+    <bpmn:task id="t12" name="Prepare Goods for Pickup"/>
+    <bpmn:endEvent id="ee4" name="Goods Prepared"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se6" targetRef="t12"/>
+    <bpmn:sequence
+</bpmn:definitions>

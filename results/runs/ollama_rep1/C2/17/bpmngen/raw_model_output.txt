@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Inventory System" processRef="InventorySystemProcess"/>
+    <bpmn:participant id="p4" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p5" name="Quality Control" processRef="QualityControlProcess"/>
+    <bpmn:participant id="p6" name="Packaging" processRef="PackagingProcess"/>
+    <bpmn:participant id="p7" name="Shipping Department" processRef="ShippingDepartmentProcess"/>
+    <bpmn:participant id="p8" name="Returns Department" processRef="ReturnsDepartmentProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Payment Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Payment Failed" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Check" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Out of Stock" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:messageFlow id="mf6" name="Back Order" sourceRef="t6" targetRef="t7"/>
+    <bpmn:messageFlow id="mf7" name="Stock Available" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:messageFlow id="mf8" name="Pick Items" sourceRef="t8" targetRef="se9"/>
+    <bpmn:messageFlow id="mf9" name="Quality Check" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf10" name="Packaging" sourceRef="t12" targetRef="se13"/>
+    <bpmn:messageFlow id="mf11" name="Gift Wrap" sourceRef="t14" targetRef="se15"/>
+    <bpmn:messageFlow id="mf12" name="Shipping Documents" sourceRef="t16" targetRef="se17"/>
+    <bpmn:messageFlow id="mf13" name="Customs Docs" sourceRef="t18" targetRef="se19"/>
+    <bpmn:messageFlow id="mf14" name="Dispatch Order" sourceRef="t20" targetRef="se21"/>
+    <bpmn:messageFlow id="mf15" name="Shipping Confirmation" sourceRef="t22" targetRef="ice23"/>
+    <bpmn:messageFlow id="mf16" name="Inventory Update" sourceRef="t24" targetRef="se25"/>
+    <bpmn:messageFlow id="mf17" name="Feedback Email" sourceRef="t26" targetRef="se27"/>
+    <bpmn:messageFlow id="mf18" name="Issue Reported" sourceRef="ice28" targetRef="se29"/>
+    <bpmn:messageFlow id="mf19" name="Return Label" sourceRef="t30" targetRef="se31"/>
+    <bpmn:messageFlow id="mf20" name="Return Items" sourceRef="t32" targetRef="se33"/>
+    <bpmn:messageFlow id="mf21" name="Inspect Items" sourceRef="t34" targetRef="se35"/>
+    <bpmn:messageFlow id="mf22" name="Refund/Replacement" sourceRef="t36" targetRef="ee37"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Out of Stock">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Stock Available">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice23" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice28" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="mf1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="ice23" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="ice28" targetRef="t30"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t4" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t8" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t24" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t30" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Payment"/>
+    <bpmn:exclusiveGateway id="g1" name="Payment Result"/>
+    <bpmn:task id="t4" name="Notify Customer"/>
+    <bpmn:task id="t5" name="Check Stock"/>
+    <bpmn:exclusiveGateway id="g2" name="Stock Result"/>
+    <bpmn:task id="t6" name="Initiate Back Order"/>
+    <bpmn:task id="t7" name="Notify Delay"/>
+    <bpmn:task id="t8" name="Pick Items"/>
+    <bpmn:task id="t9" name="Quality Control"/>
+    <bpmn:task id="t10" name="Inspect Items"/>
+    <bpmn:task id="t11" name="Packaging"/>
+    <bpmn:task id="t12" name="Gift Wrap"/>
+    <bpmn:task id="t13" name="Prepare Shipping Docs"/>
+    <bpmn:task id="t14" name="Customs Docs"/>
+    <bpmn:task id="t15" name="Dispatch Order"/>
+    <bpmn:task id="t16" name="Send Shipping Confirmation"/>
+    <bpmn:task id="t17" name="Update Inventory"/>
+    <bpmn:task id="t18" name="Send Feedback Email"/>
+    <bpmn:exclusiveGateway id="g3" name="Issue Reported"/>
+    <bpmn:task id="t19" name="Return Label"/>
+    <bpmn:task id="t20" name="Receive Return Items"/>
+    <bpmn:task id="t21" name="Inspect Returned Items"/>
+    <bpmn:task id="t22" name="Refund/Replacement"/>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t3" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="g1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t4" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="g1" targetRef="t5"/>
+    <bpmn:sequence,Flow id="f18" sourceRef="t5" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="g2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t12" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="t13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t14" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="t15" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t16" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="t17" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="t18" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t18" targetRef="g3"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="g3" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t19" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="t20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t21" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="t22" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="InventorySystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se6" name="Stock Check"/>
+    <bpmn:task id="t5" name="Check Stock"/>
+    <bpmn:exclusiveGateway id="g2" name="Stock Result"/>
+    <bpmn:task id="t6" name="Initiate Back Order"/>
+    <bpmn:task id="t7" name="Notify Delay"/>
+    <bpmn:task id="t8" name="Pick Items"/>
+    <bpmn:endEvent id="ee3" name="End"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="se6" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="t5" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="g2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="t8" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se9" name="Pick Items"/>
+    <bpmn:task id="t8" name="Pick Items"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="se9" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="t8" targetRef="se10"/>
+  </bpmn:process>
+  <bpmn:process id="QualityControlProcess" isExecutable="false">
+    <bpmn:startEvent id="se11" name="Quality Check"/>
+    <bpmn:task id="t10" name="Quality Control"/>
+    <bpmn:sequenceFlow id="f47" sourceRef="se11" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f48" sourceRef="t10" targetRef="se12"/>
+  </bpmn:process>
+  <bpmn:process id="PackagingProcess" isExecutable="false">
+    <bpmn:startEvent id="se13" name="Packaging"/>
+    <bpmn:task id="t11" name="Packaging"/>
+    <bpmn:task id="t12" name="Gift Wrap"/>
+    <bpmn:endEvent id="ee4" name="End"/>
+    <bpmn:sequenceFlow id="f49" sourceRef="se13" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f50" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f51" sourceRef="t12" targetRef="ee4"/>
+  </bpmn:process>
+  <bpmn:process id="ShippingDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se17" name="Shipping Documents"/>
+    <bpmn:task id="t13" name="Prepare Shipping Docs"/>
+    <bpmn:task id="t14" name="Customs Docs"/>
+    <bpmn:task id="t15" name="Dispatch Order"/>
+    <bpmn:task id="t16" name="Send Shipping Confirmation"/>
+    <bpmn:task id="t17" name="Update Inventory"/>
+    <bpmn:endEvent id="ee5" name="End"/>
+    <bpmn:sequenceFlow id="f52" sourceRef="se17" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f53" sourceRef="t13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f54" sourceRef="t14" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f55" sourceRef="t15" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f56" sourceRef="t16" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f57" sourceRef="t17" targetRef="ee5"/>
+  </bpmn:process>
+  <bpmn:process id="ReturnsDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se29" name="Issue Reported"/>
+    <bpmn:task id="t19" name="Return Label"/>
+    <bpmn:task id="t20" name="Receive Return Items"/>
+    <bpmn:task id="t21" name="Inspect Returned Items"/>
+    <bpmn:task id="t22" name="Refund/Replacement"/>
+    <bpmn:endEvent id="ee6" name="End"/>
+    <bpmn:sequenceFlow id="f58" sourceRef="se29" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f59" sourceRef="t19" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f60" sourceRef="t20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f61" sourceRef="t21" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f62" sourceRef="t22" targetRef="ee6"/>
+  </bpmn:process>
+</bpmn:definitions>

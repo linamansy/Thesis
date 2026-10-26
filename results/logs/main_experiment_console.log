@@ -1,0 +1,228 @@
+﻿=== 2026-10-18T20:43:04 START (PID 15708)
+=== 2026-10-18T20:43:04 rep 1 C1 START
+Run ollama_rep1 (repetition 1) | condition C1 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 03: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C1\03\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 17: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C1\17\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 37: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C1\37\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True   True      5         1  0
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False      -         -  1
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C1
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C1_ollama_rep1.jsonl
+=== 2026-10-18T21:08:37 rep 1 C1 END (exit code 0)
+=== 2026-10-18T21:08:37 rep 1 C2 START
+Run ollama_rep1 (repetition 1) | condition C2 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 03: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2\03\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 05: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2\05\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 06: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2\06\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 19: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2\19\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 21: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2\21\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True   True      9         1  0
+11           True  False      -         -  1
+13           True   True      4         1  0
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False     10         3  8
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C2
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C2_ollama_rep1.jsonl
+=== 2026-10-18T21:23:00 rep 1 C2 END (exit code 0)
+=== 2026-10-18T21:23:00 rep 1 C3 START
+Run ollama_rep1 (repetition 1) | condition C3 | part 1 | generator BPMNGen/qwen3:8b | mediation agents ollama/qwen3:8b (temperature 0)
+Ollama (agents): digest 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 | seed 42 | num_ctx 16384 | think False | max_tokens 8192
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 06: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C3\06\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 17: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C3\17\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 19: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C3\19\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True  False      4         1  1
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True   True     10         0  0
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep1\C3
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C3_ollama_rep1.jsonl
+=== 2026-10-18T21:43:44 rep 1 C3 END (exit code 0)
+=== 2026-10-18T21:43:44 rep 2 C1 START
+Run ollama_rep2 (repetition 2) | condition C1 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 19: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C1\19\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True  False      -         -  1
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False      -         -  1
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C1
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C1_ollama_rep2.jsonl
+=== 2026-10-18T22:01:11 rep 2 C1 END (exit code 0)
+=== 2026-10-18T22:01:11 rep 2 C2 START
+Run ollama_rep2 (repetition 2) | condition C2 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 11: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C2\11\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 17: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C2\17\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 19: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C2\19\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True   True      9         2  0
+11           True  False      -         -  1
+13           True   True      4         1  0
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False     10         2  6
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C2
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C2_ollama_rep2.jsonl
+=== 2026-10-18T22:20:05 rep 2 C2 END (exit code 0)
+=== 2026-10-18T22:20:05 rep 2 C3 START
+Run ollama_rep2 (repetition 2) | condition C3 | part 1 | generator BPMNGen/qwen3:8b | mediation agents ollama/qwen3:8b (temperature 0)
+Ollama (agents): digest 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 | seed 42 | num_ctx 16384 | think False | max_tokens 8192
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 11: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C3\11\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 21: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C3\21\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True   True      6         1  0
+17           True  False      -         -  1
+19           True  False     21         2  26
+21           True  False      -         -  1
+37           True  False      -         -  1
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep2\C3
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C3_ollama_rep2.jsonl
+=== 2026-10-18T22:42:00 rep 2 C3 END (exit code 0)
+=== 2026-10-18T22:42:00 rep 3 C1 START
+Run ollama_rep3 (repetition 3) | condition C1 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 06: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C1\06\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 19: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C1\19\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 37: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C1\37\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True  False      -         -  1
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False      -         -  1
+45           True  False      -         -  1
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C1
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C1_ollama_rep3.jsonl
+=== 2026-10-18T23:02:00 rep 3 C1 END (exit code 0)
+=== 2026-10-18T23:02:00 rep 3 C2 START
+Run ollama_rep3 (repetition 3) | condition C2 | part 1 | generator BPMNGen/qwen3:8b
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 06: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C2\06\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 11: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C2\11\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 17: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C2\17\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True  False      -         -  1
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True   True      8         1  0
+11           True  False      -         -  1
+13           True  False      -         -  1
+17           True  False      -         -  1
+19           True  False     16         3  18
+21           True  False      -         -  1
+37           True  False     13         4  6
+45           True   True     11         3  0
+46           True   True     16         2  0
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C2
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C2_ollama_rep3.jsonl
+=== 2026-10-18T23:17:38 rep 3 C2 END (exit code 0)
+=== 2026-10-18T23:17:38 rep 3 C3 START
+Run ollama_rep3 (repetition 3) | condition C3 | part 1 | generator BPMNGen/qwen3:8b | mediation agents ollama/qwen3:8b (temperature 0)
+Ollama (agents): digest 500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41 | seed 42 | num_ctx 16384 | think False | max_tokens 8192
+0 selected case(s) already finished and skipped; 13 to run: 01 03 05 06 10 11 13 17 19 21 37 45 46
+
+WARNING case 06: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C3\06\bpmngen\raw_thinking.txt; 1 think tag(s) in the answer)
+WARNING case 17: the model produced thinking text despite think=False (0 chars in the thinking field, saved in C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C3\17\bpmngen\raw_thinking.txt; 2 think tag(s) in the answer)
+case    generated  valid  tasks  gateways  errors
+01           True  False      -         -  1
+03           True   True      3         0  0
+05           True  False      -         -  1
+06           True  False      -         -  1
+10           True  False      -         -  1
+11           True  False      -         -  1
+13           True  False      -         -  1
+17           True  False      -         -  1
+19           True  False      -         -  1
+21           True  False      -         -  1
+37           True  False     12         0  6
+45           True   True      8         2  0
+46           True  False      -         -  1
+
+Outputs: C:\Users\user\Downloads\Thesis\results\runs\ollama_rep3\C3
+Log:     C:\Users\user\Downloads\Thesis\results\logs\C3_ollama_rep3.jsonl
+=== 2026-10-18T23:39:21 rep 3 C3 END (exit code 0)
+=== 2026-10-18T23:39:21 ALL DONE: ollama_rep1, ollama_rep2, ollama_rep3 complete

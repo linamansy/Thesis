@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Support Team" processRef="SupportTeamProcess"/>
+    <bpmn:messageFlow id="mf1" name="Subscription Confirmation" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Cancellation Request" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf3" name="Refund Processing" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf4" name="Final Balance Settlement" sourceRef="t7" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Sign Up"/>
+    <bpmn:task id="t1" name="Enter Personal and Payment Information"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Subscription Confirmation Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Cancellation Request Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Subscription Confirmation">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Account"/>
+    <bpmn:task id="t3" name="Assign Access"/>
+    <bpmn:task id="t4" name="Trigger Billing Cycles"/>
+    <bpmn:task id="t5" name="Send Updates and Notifications"/>
+    <bpmn:endEvent id="ee2" name="Subscription Active"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t3" targetRef="t4"/>
+    <b
+    <bpmn:sequenceFlow id="f8" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t5" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="SupportTeamProcess" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Cancellation Request">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t5" name="Process Cancellation Request"/>
+    <bpmn:exclusiveGateway id="g1" name="Refund or Charge Application"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t5" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="g1" targetRef="t6"/>
+    <bpmn:task id="t6" name="Apply Refund or Charge"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Final Balance Settlement">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t6" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice3" targetRef="ee1"/>
+  </bpmn:process>
+</bpmn:definitions>

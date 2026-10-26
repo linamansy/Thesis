@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p2" name="Procurement Team" processRef="ProcurementProcess"/>
+    <bpmn:participant id="p3" name="Supplier" processRef="SupplierProcess"/>
+    <bpmn:messageFlow id="mf1" name="Reorder Alert" sourceRef="t1" targetRef="t2"/>
+    <bpmn:messageFlow id="mf2" name="Order Placed" sourceRef="t3" targetRef="t4"/>
+    <bpmn:messageFlow id="mf3" name="Stock Received" sourceRef="t5" targetRef="t6"/>
+  </bpmn:collaboration>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Monitor Inventory"/>
+    <bpmn:task id="t1" name="Check Inventory Level"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Trigger Reorder">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Inventory Updated"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="ProcurementProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Reorder Alert Received"/>
+    <bpmn:task id="t2" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="Order Placed"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="ice2" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="SupplierProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Order Received"/>
+    <bpmn:task id="t3" name="Ship Stock"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Stock Received">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="Stock Shipped"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se3" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="ice3" targetRef="ee3"/>
+  </bpmn:process>
+</bpmn:definitions>

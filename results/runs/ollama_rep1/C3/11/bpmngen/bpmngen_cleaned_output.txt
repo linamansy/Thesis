@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Support Team" processRef="SupportProcess"/>
+    <bpmn:messageFlow id="mf1" name="Subscription Request" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Cancellation Request" sourceRef="t4" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Refund or Charge" sourceRef="t6" targetRef="ice1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Sign Up"/>
+    <bpmn:task id="t1" name="Submit Subscription Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Refund or Charge">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Active"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SupportProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Subscription Request Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Account"/>
+    <bpmn:task id="t3" name="Assign Access"/>
+    <bpmn:task id="t4" name="Process Cancellation Request"/>
+    <bpmn:task id="t5" name="Apply Refund or Charge"/>
+    <bpmn:endEvent id="ee2" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="t4"/>
+    <b
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="p1_dup2" bpmnElement="Customer" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2_dup2" bpmnElement="Support Team" isHorizontal="true">
+        <dc:Bounds x="400" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1_dup2" bpmnElement="Sign Up">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_dup2" bpmnElement="Submit Subscription Request">
+        <dc:Bounds x="200" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1_dup2" bpmnElement="Refund or Charge">
+        <dc:Bounds x="300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1_dup2" bpmnElement="Subscription Active">
+        <dc:Bounds x="400" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2_dup2" bpmnElement="Subscription Request Received">
+        <dc:Bounds x="400" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2_dup2" bpmnElement="Generate Account">
+        <dc:Bounds x="500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3_dup2" bpmnElement="Assign Access">
+        <dc:Bounds x="600" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4_dup2" bpmnElement="Process Cancellation Request">
+        <dc:Bounds x="700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t5_dup2" bpmnElement="Apply Refund or Charge">
+        <dc:Bounds x="800" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee2_dup2" bpmnElement="Subscription Deactivated">
+        <dc:Bounds x="900" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_dup2" bpmnElement="f1">
+        <di:waypoint x="100" y="140"/>
+        <di:waypoint x="200" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_dup2" bpmnElement="f2">
+        <di:waypoint x="200" y="140"/>
+        <di:waypoint x="300" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_dup2" bpmnElement="f3">
+        <di:waypoint x="300" y="140"/>
+        <di:waypoint x="400" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4_dup2" bpmnElement="f4">
+        <di:waypoint x="400" y="140"/>
+        <di:waypoint x="500" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_dup2" bpmnElement="f5">
+        <di:waypoint x="500" y="140"/>
+        <di:waypoint x="600" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6_dup2" bpmnElement="f6">
+        <di:waypoint x="600" y="140"/>
+        <di:waypoint x="700" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7_dup2" bpmnElement="f7">
+        <di:waypoint x="700" y="140"/>
+        <di:waypoint x="800" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f8_dup2" bpmnElement="f8">
+        <di:waypoint x="800" y="140"/>
+        <di:waypoint x="900" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf1_dup2" bpmnElement="mf1">
+        <di:waypoint x="200" y="100"/>
+        <di:waypoint x="400" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf2_dup2" bpmnElement="mf2">
+        <di:waypoint x="300" y="100"/>
+        <di:waypoint x="700" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf3_dup2" bpmnElement="mf3">
+        <di:waypoint x="800" y="100"/>
+        <di:waypoint x="900" y="100"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

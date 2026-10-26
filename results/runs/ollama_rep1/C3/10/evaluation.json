@@ -1,0 +1,118 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C3",
+  "case_id": "10",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Opening and ending tag mismatch: intermediateCatchEvent line 25 and intermediateCatchEvent, line 27, column 34 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C3/10/generated.bpmn, line 27)"
+    ],
+    "bpmnlint_valid": false,
+    "di_stripped": false
+  },
+  "semantic": {
+    "n_generated_tasks": 0,
+    "n_reference_tasks": 9,
+    "n_matched": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "matched": [],
+    "extra": [],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Install the solution"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Assess compatibility"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Evaluate cost and resource needs"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Procure necessary tools or licenses"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Submit IT solution request"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Test solution"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Roll out solution to requesting department"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Provide training"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Provide support for troubleshooting"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.0,
+    "behavioral_computable": true,
+    "n_pairs": 0,
+    "n_same": 0,
+    "pairs": []
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 0,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": []
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.0,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1838,
+    "output_tokens": 3995,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 1,
+      "first_task_inserted": false
+    },
+    "seconds": 91.426,
+    "bpmnlint_valid": false
+  },
+  "reference_complexity": {
+    "flow_nodes": 23,
+    "tasks": 9,
+    "gateways": 12,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 10
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

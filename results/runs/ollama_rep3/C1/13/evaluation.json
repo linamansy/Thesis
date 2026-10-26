@@ -1,0 +1,177 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "13",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 65, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C1/13/generated.bpmn, line 65)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 6,
+    "n_reference_tasks": 9,
+    "n_matched": 2,
+    "precision": 0.3333333333333333,
+    "recall": 0.2222222222222222,
+    "f1": 0.26666666666666666,
+    "matched": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Log Complaint",
+        "reference_id": "Task_5",
+        "reference_label": "Log complaint",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Provide Feedback",
+        "reference_id": "Task_4",
+        "reference_label": "Provide feedback",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Resolve complaint"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Approve and notify customer"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Process reimbursement"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Assign complaint to relevant department"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "File complaint"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Reject and notify customer"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Review complaint details"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Assign to Department"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Review Details"
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Determine Validity"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Notify Customer"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 1,
+    "n_same": 1,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Log complaint",
+          "Provide feedback"
+        ],
+        "generated_tasks": [
+          "Log Complaint",
+          "Provide Feedback"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 4,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t2",
+        "label": "Assign to Department",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Review Details",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t4",
+        "label": "Determine Validity",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Notify Customer",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.3333,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1809,
+    "output_tokens": 3943,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 1,
+      "first_task_inserted": false
+    },
+    "seconds": 90.13,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 15,
+    "tasks": 9,
+    "gateways": 4,
+    "loops": 0,
+    "nesting_depth": 1,
+    "cfc": 4
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

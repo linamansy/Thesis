@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se4"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment Confirmation" sourceRef="t4" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Reward Selection" sourceRef="t6" targetRef="se8"/>
+    <bpmn:messageFlow id="mf7" name="Reward Confirmation" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmation" sourceRef="t8" targetRef="se10"/>
+    <bpmn:messageFlow id="mf9" name="Delivery Request" sourceRef="t9" targetRef="se12"/>
+    <bpmn:messageFlow id="mf10" name="Delivery Confirmation" sourceRef="t10" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf11" name="Return Request" sourceRef="t11" targetRef="se14"/>
+    <bpmn:messageFlow id="mf12" name="Return Confirmation" sourceRef="t12" targetRef="se14"/>
+    <bpmn:messageFlow id="mf13" name="New Delivery Request" sourceRef="t13" targetRef="se16"/>
+    <bpmn:messageFlow id="mf14" name="New Delivery Confirmation" sourceRef="t14" targetRef="ice2"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:parallelGateway id="pg1" name="Parallel Gateway"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:exclusiveGateway id="eg1" name="Payment Decision"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward Option"/>
+    <bpmn:task id="t7" name="Confirm Reward Selection"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Confirm Delivery"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="Confirm Return"/>
+    <bpmn:task id="t13" name="Request New Delivery"/>
+    <bpmn:task id="t14" name="Confirm New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="pg1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="pg1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="pg1" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="eg1"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="eg1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="eg1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t10" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t12" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t14" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Start"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmation">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Delivery Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Return Confirmation">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="New Delivery Confirmation">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End Process"/>
+    <bpmn:task id="t2" name="Validate Login"/>
+    <bpmn:task id="t4" name="Process Payment"/>
+    <bpmn:task id="t5" name="Process Installment Agreement"/>
+    <bpmn:task id="t6" name="Calculate Reward Options"/>
+    <bpmn:task id="t7" name="Process Reward Selection"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Process Delivery"/>
+    <bpmn:task id="t10" name="Process Return"/>
+    <bpmn:task id="t11" name="Process New Delivery"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="t5"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se4"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment Confirmation" sourceRef="t4" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Reward Selection" sourceRef="t6" targetRef="se8"/>
+    <bpmn:messageFlow id="mf7" name="Reward Confirmation" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmation" sourceRef="t8" targetRef="se10"/>
+    <bpmn:messageFlow id="mf9" name="Delivery Request" sourceRef="t9" targetRef="se12"/>
+    <bpmn:messageFlow id="mf10" name="Delivery Confirmation" sourceRef="t10" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf11" name="Return Request" sourceRef="t11" targetRef="se14"/>
+    <bpmn:messageFlow id="mf12" name="Return Confirmation" sourceRef="t12" targetRef="se14"/>
+    <bpmn:messageFlow id="mf13" name="New Delivery Request" sourceRef="t13" targetRef="se16"/>
+    <bpmn:messageFlow id="mf14" name="New Delivery Confirmation" sourceRef="t14" targetRef="ice2"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:parallelGateway id="pg1" name="Parallel Gateway"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:exclusiveGateway id="eg1" name="Payment Decision"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward Option"/>
+    <bpmn:task id="t7" name="Confirm Reward Selection"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Confirm Delivery"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="Confirm Return"/>
+    <bpmn:task id="t13" name="Request New Delivery"/>
+    <bpmn:task id="t14" name="Confirm New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="pg1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="pg1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="pg1" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="eg1"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="eg1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="eg1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t10" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t12" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t14" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Start"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmation">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Delivery Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Return Confirmation">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="New Delivery Confirmation">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End Process"/>
+    <bpmn:task id="t2" name="Validate Login"/>
+    <bpmn:task id="t4" name="Process Payment"/>
+    <bpmn:task id="t5" name="Process Installment Agreement"/>
+    <bpmn:task id="t6" name="Calculate Reward Options"/>
+    <bpmn:task id="t7" name="Process Reward Selection"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Process Delivery"/>
+    <bpmn:task id="t10" name="Process Return"/>
+    <bpmn:task id="t11" name="Process New Delivery"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t9" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice2" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t10" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice3" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t11" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice4" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="UserProcess_1" bpmnElement="se1">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_2" bpmnElement="t1">
+        <dc:Bounds x="200" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_3" bpmnElement="pg1">
+        <dc:Bounds x="300" y="100" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_4" bpmnElement="t2">
+        <dc:Bounds x="400" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_5" bpmnElement="t3">
+        <dc:Bounds x="500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_6" bpmnElement="eg1">
+        <dc:Bounds x="600" y="100" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_7" bpmnElement="t4">
+        <dc:Bounds x="700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_8" bpmnElement="t5">
+        <dc:Bounds x="800" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_9" bpmnElement="t6">
+        <dc:Bounds x="900" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_10" bpmnElement="t7">
+        <dc:Bounds x="1000" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_11" bpmnElement="t8">
+        <dc:Bounds x="1100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_12" bpmnElement="t9">
+        <dc:Bounds x="1200" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_13" bpmnElement="t10">
+        <dc:Bounds x="1300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_14" bpmnElement="t11">
+        <dc:Bounds x="1400" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_15" bpmnElement="t12">
+        <dc:Bounds x="1500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_16" bpmnElement="t13">
+        <dc:Bounds x="1600" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_17" bpmnElement="t14">
+        <dc:Bounds x="1700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_18" bpmnElement="ee1">
+        <dc:Bounds x="1800" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_1" bpmnElement="se2">
+        <dc:Bounds x="100" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_2" bpmnElement="t2">
+        <dc:Bounds x="200" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_3" bpmnElement="t4">
+        <dc:Bounds x="300" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_4" bpmnElement="t5">
+        <dc:Bounds x="400" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_5" bpmnElement="t6">
+        <dc:Bounds x="500" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_6" bpmnElement="t7">
+        <dc:Bounds x="600" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_7" bpmnElement="t8">
+        <dc:Bounds x="700" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_8" bpmnElement="t9">
+        <dc:Bounds x="800" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_9" bpmnElement="t10">
+        <dc:Bounds x="900" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_10" bpmnElement="t11">
+        <dc:Bounds x="1000" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_11" bpmnElement="ee2">
+        <dc:Bounds x="1100" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_19" bpmnElement="ice1">
+        <dc:Bounds x="1100" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_20" bpmnElement="ice2">
+        <dc:Bounds x="1100" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_21" bpmnElement="ice3">
+        <dc:Bounds x="1100" y="300" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserProcess_22" bpmnElement="ice4">
+        <dc:Bounds x="1100" y="400" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_12" bpmnElement="ice1">
+        <dc:Bounds x="200" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_13" bpmnElement="ice2">
+        <dc:Bounds x="300" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_14" bpmnElement="ice3">
+        <dc:Bounds x="400" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="OnlineShopProcess_15" bpmnElement="ice4">
+        <dc:Bounds x="500" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="UserProcess_1" sourceRef="se1" targetRef="t1">
+        <di:waypoint x="150" y="140"/>
+        <di:waypoint x="250" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_2" sourceRef="t1" targetRef="pg1">
+        <di:waypoint x="250" y="140"/>
+        <di:waypoint x="350" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_3" sourceRef="pg1" targetRef="t2">
+        <di:waypoint x="350" y="140"/>
+        <di:waypoint x="450" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_4" sourceRef="pg1" targetRef="t3">
+        <di:waypoint x="350" y="140"/>
+        <di:waypoint x="550" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_5" sourceRef="t2" targetRef="t3">
+        <di:waypoint x="450" y="140"/>
+        <di:waypoint x="550" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_6" sourceRef="t3" targetRef="eg1">
+        <di:waypoint x="550" y="140"/>
+        <di:waypoint x="650" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_7" sourceRef="eg1" targetRef="t4">
+        <di:waypoint x="650" y="140"/>
+        <di:waypoint x="750" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_8" sourceRef="eg1" targetRef="t5">
+        <di:waypoint x="650" y="140"/>
+        <di:waypoint x="850" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_9" sourceRef="t4" targetRef="t8">
+        <di:waypoint x="750" y="140"/>
+        <di:waypoint x="950" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_10" sourceRef="t5" targetRef="t8">
+        <di:waypoint x="850" y="140"/>
+        <di:waypoint x="950" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_11" sourceRef="t8" targetRef="t9">
+        <di:waypoint x="950" y="140"/>
+        <di:waypoint x="1050" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_12" sourceRef="t9" targetRef="t10">
+        <di:waypoint x="1050" y="140"/>
+        <di:waypoint x="1150" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_13" sourceRef="t10" targetRef="ee1">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1250" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_14" sourceRef="t10" targetRef="t11">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1250" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_15" sourceRef="t11" targetRef="t12">
+        <di:waypoint x="1250" y="240"/>
+        <di:waypoint x="1350" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_16" sourceRef="t12" targetRef="t13">
+        <di:waypoint x="1350" y="240"/>
+        <di:waypoint x="1450" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_17" sourceRef="t13" targetRef="t14">
+        <di:waypoint x="1450" y="240"/>
+        <di:waypoint x="1550" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_18" sourceRef="t14" targetRef="ee1">
+        <di:waypoint x="1550" y="240"/>
+        <di:waypoint x="1650" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_1" sourceRef="se2" targetRef="t2">
+        <di:waypoint x="150" y="260"/>
+        <di:waypoint x="250" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_2" sourceRef="t2" targetRef="ice1">
+        <di:waypoint x="250" y="260"/>
+        <di:waypoint x="350" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_3" sourceRef="ice1" targetRef="t4">
+        <di:waypoint x="350" y="260"/>
+        <di:waypoint x="450" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_4" sourceRef="ice1" targetRef="t5">
+        <di:waypoint x="350" y="260"/>
+        <di:waypoint x="550" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_5" sourceRef="ice1" targetRef="t6">
+        <di:waypoint x="350" y="260"/>
+        <di:waypoint x="650" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_6" sourceRef="t4" targetRef="t8">
+        <di:waypoint x="450" y="260"/>
+        <di:waypoint x="550" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_7" sourceRef="t5" targetRef="t8">
+        <di:waypoint x="550" y="260"/>
+        <di:waypoint x="650" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_8" sourceRef="t6" targetRef="t7">
+        <di:waypoint x="650" y="260"/>
+        <di:waypoint x="750" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_9" sourceRef="t7" targetRef="t8">
+        <di:waypoint x="750" y="260"/>
+        <di:waypoint x="850" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_10" sourceRef="t8" targetRef="t9">
+        <di:waypoint x="850" y="260"/>
+        <di:waypoint x="950" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_11" sourceRef="t9" targetRef="ice2">
+        <di:waypoint x="950" y="260"/>
+        <di:waypoint x="1050" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_12" sourceRef="ice2" targetRef="t10">
+        <di:waypoint x="1050" y="260"/>
+        <di:waypoint x="1150" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_13" sourceRef="t10" targetRef="ice3">
+        <di:waypoint x="1150" y="260"/>
+        <di:waypoint x="1250" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_14" sourceRef="ice3" targetRef="t11">
+        <di:waypoint x="1250" y="260"/>
+        <di:waypoint x="1350" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_15" sourceRef="t11" targetRef="ice4">
+        <di:waypoint x="1350" y="260"/>
+        <di:waypoint x="1450" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="OnlineShopProcess_16" sourceRef="ice4" targetRef="ee2">
+        <di:waypoint x="1450" y="260"/>
+        <di:waypoint x="1550" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_19" sourceRef="t10" targetRef="ice1">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1150" y="240"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_20" sourceRef="t10" targetRef="ice2">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1150" y="340"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_21" sourceRef="t10" targetRef="ice3">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1150" y="440"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_22" sourceRef="t10" targetRef="ice4">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1150" y="540"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_23" sourceRef="ice1" targetRef="t8">
+        <di:waypoint x="1100" y="100"/>
+        <di:waypoint x="1100" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_24" sourceRef="ice2" targetRef="t9">
+        <di:waypoint x="1100" y="200"/>
+        <di:waypoint x="1100" y="300"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_25" sourceRef="ice3" targetRef="t11">
+        <di:waypoint x="1100" y="300"/>
+        <di:waypoint x="1100" y="400"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="UserProcess_26" sourceRef="ice4" targetRef="t13">
+        <di:waypoint x="1100" y="400"/>
+        <di:waypoint x="1100" y="500"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Contractor" processRef="ContractorProcess"/>
+    <bpmn:participant id="p2" name="Web Shop 1" processRef="WebShop1Process"/>
+    <bpmn:participant id="p3" name="Web Shop 2" processRef="WebShop2Process"/>
+    <bpmn:participant id="p4" name="Web Shop 3" processRef="WebShop3Process"/>
+    <bpmn:messageFlow id="mf1" name="Query Shops" sourceRef="se1" targetRef="t1"/>
+    <bpmn:messageFlow id="mf2" name="Shop Response" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Order Parts" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf4" name="Parts Arrived" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf5" name="Reorder Parts" sourceRef="t4" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf6" name="Stock Below 5" sourceRef="t5" targetRef="ice5"/>
+    <bpmn:messageFlow id="mf7" name="Stock Below 3" sourceRef="t6" targetRef="ice6"/>
+    <bpmn:messageFlow id="mf8" name="Stock Zero" sourceRef="t7" targetRef="ice7"/>
+  </bpmn:collaboration>
+  <bpmn:process id="ContractorProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Contract"/>
+    <bpmn:task id="t1" name="Query Shops"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Shop Response">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t2" name="Order Parts"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Parts Ordered">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t3" name="Parts Arrived"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Parts Arrived">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t4" name="Reorder Parts"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Reorder Parts">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t5" name="Stock Below 5"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Stock Below 5">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t6" name="Stock Below 3"/>
+    <bpmn:intermediateCatchEvent id="ice6" name="Stock Below 3">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t7" name="Stock Zero"/>
+    <bpmn:intermediateCatchEvent id="ice7" name="Stock Zero">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End Contract"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="ice3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t4" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="ice4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t5" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="ice5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t6" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t7" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="ice7" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop1Process" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Shop Query"/>
+    <bpmn:intermediateCatchEvent id="ice8" name="Shop Response">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t8" name="Provide Parts Info"/>
+    <bpmn:endEvent id="ee2" name="Done"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="se2" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="ice8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t8" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop2Process" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Shop Query"/>
+    <bpmn:intermediateCatchEvent id="ice9" name="Shop Response">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t9" name="Provide Parts Info"/>
+    <bpmn:endEvent id="ee3" name="Done"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se3" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="ice9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t9" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop3Process" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Shop Query"/>
+    <bpmn:intermediateCatchEvent id="ice10" name="Shop Response">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t10" name="Provide Parts Info"/>
+    <bpmn:endEvent id="ee4" name="Done"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="se4" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="ice10" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t10" targetRef="ee4"/>
+  </bpmn:process>
+</bpmn:definitions>

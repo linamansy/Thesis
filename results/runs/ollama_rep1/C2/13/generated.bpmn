@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Customer Service" processRef="CustomerServiceProcess"/>
+    <bpmn:participant id="p3" name="Complaint Team" processRef="ComplaintTeamProcess"/>
+    <bpmn:participant id="p4" name="Financial Team" processRef="FinancialTeamProcess"/>
+    <bpmn:messageFlow id="mf1" name="File Complaint" sourceRef="se1" targetRef="t1"/>
+    <bpmn:messageFlow id="mf2" name="Complaint Logged" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf3" name="Investigation Assigned" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf4" name="Decision Notified" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf5" name="Refund Approved" sourceRef="t4" targetRef="se4"/>
+    <bpmn:messageFlow id="mf6" name="Refund Processed" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf7" name="Feedback Requested" sourceRef="ice3" targetRef="t6"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="File Complaint"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Decision Notified">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Refund Processed">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Case Resolved">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Feedback Provided"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="ice1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice2" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="CustomerServiceProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Complaint Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Log Complaint"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t1"/>
+    
+  </bpmn:process>
+  <bpmn:process id="ComplaintTeamProcess" isExecutable="false">
+    <bpmn:startEvent id="se3" name="Investigation Assigned">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Investigate Complaint"/>
+    <bpmn:exclusiveGateway id="g1" name="Valid Complaint?"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t2" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="g1" targetRef="t3"/>
+    
+    <bpmn:task id="t3" name="Determine Refund Justified"/>
+    
+    
+  
+    <bpmn:sequenceFlow id="auto_link_out_se3_to_t2" sourceRef="se3" targetRef="t2"/>
+  </bpmn:process>
+  <bpmn:process id="FinancialTeamProcess" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Refund Approved">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t4" name="Process Refund"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="se4" targetRef="t4"/>
+    
+  </bpmn:process>
+</bpmn:definitions>
