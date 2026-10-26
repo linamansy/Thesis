@@ -207,7 +207,12 @@ class ApplicabilityAgentV2:
             role_item.update(status="contradicted", decided_by="code rule")
         else:
             role_item.update(status="not_stated", decided_by=None)
-        role_item.update(quote=None, quote_found=None, downgraded=False)
+        # a role confirmed through P1 keeps P1's checked quote, so ResolverV2 counts it as confirmed (bug fix 1)
+        fact = next((f for f in role_facts if f["status"] == "confirmed"), None)
+        if role_item["status"] == "confirmed" and role_item["decided_by"] == "first look" and fact:
+            role_item.update(quote=fact["quote"], quote_found=True, downgraded=False)
+        else:
+            role_item.update(quote=None, quote_found=None, downgraded=False)
 
     def open_conditions(self, record: dict) -> list[dict]:
         """The situational IF conditions that are still not_stated (input of the second look, R5)."""

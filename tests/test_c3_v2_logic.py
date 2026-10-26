@@ -5,10 +5,13 @@ answer below is HAND-WRITTEN FOR LOGIC TESTING, PROVISIONAL: it is what an ideal
 (MockLLM), so the test shows that the code (roles A1/R3, scope R2, quote check, second look R5, ResolverV2 R4, the
 requirement checks R6) gives the expected label when the agents answer well. It says nothing about qwen3:8b (that is
 evaluation (b), results/diagnostics/c3_v2_round3/).
+The OR test (GDPR-Art2-1) is marked expected-failure: it documents a known limitation, the IF list is a conjunction.
 """
 
 import itertools
 import json
+
+import pytest
 
 from src.agents.applicability_agent_v2 import ApplicabilityAgentV2
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
@@ -56,6 +59,21 @@ def run_passage(tmp_path, desc, passage_id, answers, case_passages):
     orch, llm = orchestrator(tmp_path, answers, case_passages)
     passage = {"rank": 1, "passage_id": passage_id, "text": PASSAGES[passage_id]}
     return orch.mediate_passage("c", desc, passage, case_passages), llm
+
+
+def run_case(tmp_path, desc, passage_id, answers):
+    """The whole case with this one passage as its only retrieved passage, so the knowledge block can be checked."""
+    case_passages = [{"rank": 1, "passage_id": passage_id, "text": PASSAGES[passage_id]}]
+    orch, llm = orchestrator(tmp_path, answers, case_passages)
+    result = orch.mediate_case("c", desc)
+    return result["passages"][0], result["knowledge_block"], llm
+
+
+def block(passage_id, requirement):
+    return f"REQUIREMENTS\nThese rules were checked and apply to this process.\n- [{passage_id}] {requirement}"
+
+
+NO_KNOWLEDGE = load_no_knowledge_text(CONFIG)
 
 
 def items(record):
@@ -218,11 +236,176 @@ def test_stated_exception_gives_not_applicable(tmp_path):
     answers = [relevant("communicate any rectification or erasure of personal data",
                         "the subscription is deactivated", "the subscription is deactivated by the support team"),
                split, check]
-    record, llm = run_passage(tmp_path, desc, "GDPR-Art19-1", answers, frozen("frozen_retrieval", "11"))
+    record, knowledge, llm = run_case(tmp_path, desc, "GDPR-Art19-1", answers)
     assert record["resolution"]["if_label"] == APPLICABLE                   # every IF item confirmed ...
     assert record["label"] == NOT_APPLICABLE                                # ... but the stated exception applies (R4)
     assert record["resolution"]["reason"] == "a stated exception applies" and record["requirement"] is None
+    assert record["resolution"]["exceptions_applying"] == split["exceptions"]
     assert len(llm.prompts_received) == 3                                   # dropped: no requirement call
+    assert knowledge == NO_KNOWLEDGE                                        # not passed on
+
+
+@pytest.mark.parametrize("answer", [
+    IRRELEVANT_ANSWER,
+    # the model says relevant, but its description quote is not in the description -> Irrelevant by code
+    relevant("conditions for consent", "the customer gives consent", "the customer ticks the consent box")],
+    ids=["model_says_irrelevant", "description_quote_not_found"])
+def test_irrelevant_never_reaches_applicability(tmp_path, answer):
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art7-4", [answer])
+    assert record["label"] == IRRELEVANT and record["relevance"]["final_relevant"] is False
+    assert record["applicability"] is None and record["resolution"] is None and record["requirement"] is None
+    assert len(llm.prompts_received) == 1                                   # only the relevance call
+    assert knowledge == NO_KNOWLEDGE
+
+
+# Two tiny descriptions MADE UP for this test only (no real case has an organisation working for another one).
+DESC_PAYROLL = ("A payroll service company handles the salary data of employees on behalf of another organisation, its "
+                "client. Each month the payroll staff enter each employee's name and bank account number into the "
+                "payroll system and send the payslips.")
+DESC_SENSORS = ("A logistics company measures the temperature in warehouses on behalf of another organisation, its "
+                "client. Every hour the sensors write the readings into the monitoring system.")
+PAYROLL_STEP = "the payroll staff enter each employee's name and bank account number into the payroll system"
+
+
+def test_processor_confirmed_by_on_behalf_quote_applicable(tmp_path):
+    check = {"results": [
+        {"id": "S1", "status": "confirmed", "quote": "each employee's name and bank account number"},
+        {"id": "P1", "status": "confirmed",
+         "quote": "handles the salary data of employees on behalf of another organisation"}]}
+    requirement = {
+        "requirement": "When the payroll staff enter the employee details, the company keeps a list of every kind of "
+                       "data handling it carries out for its client.",
+        "step_quote": PAYROLL_STEP,
+        "triggers": [{"trigger": "carried out on behalf of a controller", "kept_as": "it carries out for its client"}]}
+    answers = [relevant("shall maintain a record of all categories of processing activities",
+                        "the payroll staff enter the employee details", PAYROLL_STEP),
+               ART30_2_SPLIT, check, requirement]
+    record, knowledge, llm = run_case(tmp_path, DESC_PAYROLL, "GDPR-Art30-2", answers)
+    assert record["label"] == APPLICABLE
+    assert items(record) == {"R1": ("confirmed", "first look"), "S1": ("confirmed", "first look")}
+    assert record["applicability"]["role_facts"][0]["quote_found"] is True
+    assert record["applicability"]["conditions"][0]["roles"][0]["reason"] == "P1 confirmed with a checked quote"
+    assert len(llm.prompts_received) == 4
+    assert knowledge == block("GDPR-Art30-2", requirement["requirement"])
+
+
+def test_scope_not_stated_indeterminate_although_role_holds(tmp_path):
+    check = {"results": [
+        {"id": "S1", "status": "not_stated", "quote": None},       # temperatures, no identifiable people
+        {"id": "P1", "status": "confirmed",
+         "quote": "measures the temperature in warehouses on behalf of another organisation"}]}
+    answers = [relevant("shall maintain a record of all categories of processing activities",
+                        "the sensors write the readings", "the sensors write the readings into the monitoring system"),
+               ART30_2_SPLIT, check]
+    record, knowledge, llm = run_case(tmp_path, DESC_SENSORS, "GDPR-Art30-2", answers)
+    assert items(record) == {"R1": ("confirmed", "first look"), "S1": ("not_stated", None)}
+    assert record["label"] == INDETERMINATE and record["requirement"] is None
+    assert record["resolution"]["reason"] == "not every IF item is confirmed"
+    assert record["applicability"]["look"] == "first"                      # R5: scope is never looked at again
+    assert len(llm.prompts_received) == 3
+    assert knowledge == NO_KNOWLEDGE
+
+
+ART13_1_CHECK_C1_OPEN = {"results": [
+    {"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+    {"id": "C1", "status": "not_stated", "quote": None}]}
+
+
+def test_second_look_resolves_situation_applicable(tmp_path):
+    second = {"results": [{"id": "C1", "status": "confirmed",
+                           "quote": "write down the customer's name, phone number and email address"}]}
+    answers = [ART13_1_RELEVANT, ART13_1_SPLIT, ART13_1_CHECK_C1_OPEN, second, ART13_1_REQUIREMENT]
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art13-1", answers)
+    assert record["applicability"]["first_look_label"] == INDETERMINATE
+    assert record["applicability"]["look"] == "second" and record["applicability"]["second_look_decided"] is True
+    assert items(record) == {"R1": ("confirmed", "code rule"), "S1": ("confirmed", "first look"),
+                             "C1": ("confirmed", "second look")}
+    assert record["label"] == APPLICABLE
+    assert len(llm.prompts_received) == 5
+    assert knowledge == block("GDPR-Art13-1", ART13_1_REQUIREMENT["requirement"])
+
+
+def test_second_look_still_unsure_indeterminate(tmp_path):
+    answers = [ART13_1_RELEVANT, ART13_1_SPLIT, ART13_1_CHECK_C1_OPEN, SECOND_LOOK_NOT_STATED]
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art13-1", answers)
+    assert record["applicability"]["look"] == "second" and record["applicability"]["second_look_decided"] is False
+    assert items(record)["C1"] == ("not_stated", None)
+    assert record["label"] == INDETERMINATE and record["requirement"] is None
+    assert len(llm.prompts_received) == 4                                   # no requirement call
+    assert knowledge == NO_KNOWLEDGE
+
+
+# GDPR-Art30-4: "... shall make the record available to the supervisory authority on request."
+ART30_4_ANSWERS = [
+    relevant("shall make the record available to the supervisory authority on request",
+             "the contact details are stored in the system", "store them in the system"),
+    {"roles": ["controller", "processor"], "if": [],
+     "then": "the controller or the processor must make the record available to the supervisory authority on request",
+     "exceptions": []},
+    {"results": [{"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+                 {"id": "P1", "status": "not_stated", "quote": None}]}]
+ART30_4_KEPT = {
+    "requirement": "When the contact details are stored in the system, the company shows its list of this data "
+                   "handling to the data protection authority if the authority asks.",
+    "step_quote": "store them in the system",
+    "triggers": [{"trigger": "on request", "kept_as": "if the authority asks"}]}
+ART30_4_DROPPED = {**ART30_4_KEPT,       # "on request" is gone from the requirement, so its kept_as is not found
+                   "requirement": "When the contact details are stored in the system, the company shows its list of "
+                                  "this data handling to the data protection authority."}
+DROPPED_PROBLEM = 'the kept_as words "if the authority asks" are not copied word for word from the requirement'
+
+
+def test_requirement_dropping_trigger_rejected_then_fixed_on_retry(tmp_path):
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art30-4",
+                                      ART30_4_ANSWERS + [ART30_4_DROPPED, ART30_4_KEPT])
+    assert record["label"] == APPLICABLE
+    assert [a["problems"] for a in record["requirement"]["attempts"]] == [[DROPPED_PROBLEM], []]
+    assert DROPPED_PROBLEM in llm.prompts_received[4]                       # the retry gets the reason
+    assert record["requirement"]["requirement_invalid"] is False
+    assert knowledge == block("GDPR-Art30-4", ART30_4_KEPT["requirement"])
+
+
+def test_requirement_dropping_trigger_twice_requirement_invalid(tmp_path):
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art30-4",
+                                      ART30_4_ANSWERS + [ART30_4_DROPPED, ART30_4_DROPPED])
+    assert record["label"] == APPLICABLE                                    # the rule applies ...
+    assert record["requirement"]["requirement_invalid"] is True             # ... but its requirement is not passed on
+    assert record["requirement"]["requirement"] is None
+    assert [a["problems"] for a in record["requirement"]["attempts"]] == [[DROPPED_PROBLEM], [DROPPED_PROBLEM]]
+    assert len(llm.prompts_received) == 5                                   # one retry only
+    assert knowledge == NO_KNOWLEDGE
+
+
+def test_requirement_with_fake_step_quote_rejected(tmp_path):
+    fake = {**ART13_1_REQUIREMENT, "step_quote": "the sales staff write down the customer's postal address"}
+    answers = [ART13_1_RELEVANT, ART13_1_SPLIT, ART13_1_CHECK_01_1, fake, fake]
+    record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art13-1", answers)
+    problem = "the step_quote is not copied word for word from the process description"
+    assert [a["problems"] for a in record["requirement"]["attempts"]] == [[problem], [problem]]
+    assert record["label"] == APPLICABLE and record["requirement"]["requirement_invalid"] is True
+    assert len(llm.prompts_received) == 5
+    assert knowledge == NO_KNOWLEDGE
+
+
+@pytest.mark.xfail(strict=True, reason="IF list is a conjunction; OR not represented")
+def test_or_conditions_art2_1_known_limitation(tmp_path):
+    # GDPR-Art2-1: processing "wholly or partly by automated means" OR (not by automated means) "part of a filing
+    # system". One alternative holds in 01.1 (stored in the system), so the rule applies; the code needs ALL IF items
+    # confirmed and gives Indeterminate. Expected to fail until OR conditions are represented.
+    split = {"roles": ["controller"],
+             "if": ["personal data are processed wholly or partly by automated means",
+                    "personal data processed other than by automated means form part of a filing system"],
+             "then": "the processing falls under the Regulation", "exceptions": []}
+    check = {"results": [
+        {"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+        {"id": "C1", "status": "confirmed", "quote": "store them in the system"},
+        {"id": "C2", "status": "not_stated", "quote": None}]}
+    second = {"results": [{"id": "C2", "status": "not_stated", "quote": None}]}
+    answers = [relevant("the processing of personal data wholly or partly by automated means",
+                        "the contact details are stored in the system", "store them in the system"),
+               split, check, second]
+    record, _, _ = run_case(tmp_path, DESC_01_1, "GDPR-Art2-1", answers)
+    assert record["label"] == APPLICABLE
 
 
 # ---------- full pipeline: oracle 01.1, all 5 passages ----------
