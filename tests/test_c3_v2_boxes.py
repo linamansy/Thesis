@@ -9,10 +9,11 @@ from src.agents.applicability_agent_v2 import SPLIT_INVALID, ApplicabilityAgentV
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
 from src.agents.requirement_agent_v2 import RequirementAgentV2, RequirementOutputV2
 from src.c3_version import changed_items
-from src.config import load_config
+from src.config import load_config, project_path
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
 from src.mediation.applicability_resolver import APPLICABLE, INDETERMINATE, NOT_APPLICABLE
+from src.mediation.requirement_checker_v2 import RequirementCheckerV2
 from src.mediation.resolver_v2 import ResolverV2
 from src.orchestrator import IRRELEVANT, MEDIATION_FAILED
 from src.orchestrator_v2 import OrchestratorV2
@@ -32,7 +33,7 @@ NOT_STATED = {"results": [{"id": "C1", "status": "not_stated", "quote": None},
 RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card", "relevant": True,
             "process_step": "the customer pays by card", "description_quote": "The customer pays by card",
             "reason": "The process has a card payment step."}
-REQUIREMENT = {"requirement": "After the customer pays by card, the shop must give a receipt."}
+REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer."}
 
 RUN_IDS = itertools.count()   # every agent gets its own log file (RunLogger never writes into an existing one)
 
@@ -145,7 +146,7 @@ def test_second_look_resolves(tmp_path):
     assert (a["first_look_label"], a["look"], a["second_look_decided"], a["label"]) == \
         (INDETERMINATE, "second", True, APPLICABLE)
     assert (a["conditions"][0]["first_look_status"], a["conditions"][0]["status"]) == ("not_stated", "confirmed")
-    assert record["label"] == APPLICABLE and record["requirement"] == REQUIREMENT
+    assert record["label"] == APPLICABLE and record["requirement"]["requirement"] == REQUIREMENT["requirement"]
     second_prompt = llm.prompts_received[3]
     assert "[P-1] " + PASSAGE in second_prompt and "[P-2] " + OTHER_PASSAGE in second_prompt   # all passages
     assert DESCRIPTION in second_prompt and "C1: a customer pays by card" in second_prompt
@@ -212,7 +213,7 @@ def test_c3_block_has_confirmed_requirements_only(tmp_path):
     result = orch.mediate_case("c", DESCRIPTION)
     assert [p["label"] for p in result["passages"]] == [APPLICABLE, IRRELEVANT]
     assert result["knowledge_block"] == ("REQUIREMENTS\nThese rules were checked and apply to this process.\n"
-                                         "- [P-1] After the customer pays by card, the shop must give a receipt.")
+                                         "- [P-1] After the customer pays by card, a receipt is handed to the customer.")
 
 
 def test_empty_c3_block_is_c1_text(tmp_path):
@@ -234,7 +235,7 @@ def test_audit_trail_saves_every_step_and_is_reused(tmp_path):
     p = saved["passages"][0]
     assert p["relevance"]["final_relevant"] is True and p["applicability"]["split"] == SPLIT
     assert p["applicability"]["check"] == CONFIRMED and p["resolution"]["label"] == APPLICABLE
-    assert p["requirement"] == REQUIREMENT
+    assert p["requirement"]["requirement"] == REQUIREMENT["requirement"] and not p["requirement"]["requirement_invalid"]
     calls = len(llm.prompts_received)
     assert orch.mediate_case("c", DESCRIPTION) == result and len(llm.prompts_received) == calls
 
@@ -247,3 +248,100 @@ def test_failed_call_gives_mediation_failed(tmp_path):
 
 def test_v1_is_unchanged():
     assert changed_items(CONFIG) == []                                           # C3 v1 = its frozen hashes
+
+
+# ---------- round 1 fixes (docs/C3_V2_DEVELOPMENT.md section 7) ----------
+
+CHECKER = RequirementCheckerV2(CONFIG)
+REQ_INPUTS = dict(description=DESCRIPTION, passage_id="P-1", passage_text=PASSAGE, then="the shop must give a receipt",
+                  process_step="the customer pays by card", description_quote="The customer pays by card")
+
+
+def test_split_prompt_has_role_rule_and_example():
+    text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
+    assert '"the organisation acts as a processor"' in text
+    assert "EXAMPLE WITH NO SITUATIONAL CONDITION" in text and "the organisation acts as a carrier" in text
+    assert 'must not contain the words "must", "shall" or "is required to"' in text   # obligation check unchanged
+
+
+def test_role_if_passes_obligation_check(tmp_path):
+    role_split = {"if": ["the organisation acts as a shop"], "then": "the shop must keep a list", "exceptions": []}
+    record, _ = first_look(tmp_path, [role_split, {"results": [{"id": "C1", "status": "not_stated", "quote": None}]}])
+    assert record["split_valid"] is True and record["conditions"][0]["text"] == "the organisation acts as a shop"
+
+
+def test_checker_passes_plain_requirement():
+    assert CHECKER.problems(REQUIREMENT["requirement"], PASSAGE) == []
+
+
+def test_checker_word_limit():
+    long = "The customer is told about the receipt " + "and the shop waits " * 10 + "."
+    assert CHECKER.measure(long, PASSAGE)["n_words"] > 40
+    assert any("words" in p for p in CHECKER.problems(long, PASSAGE))
+
+
+def test_checker_sentence_limit():
+    three = "The customer pays. A receipt is printed. The receipt is handed over."
+    assert CHECKER.measure(three, PASSAGE)["n_sentences"] == 3
+    assert any("sentences" in p for p in CHECKER.problems(three, PASSAGE))
+
+
+def test_checker_banned_words():
+    for text, word in [("The controller tells the customer.", "controller"), ("Data subjects are told.", "data subject"),
+                       ("The shop shall tell the customer.", "shall"), ("Processors keep a list.", "processor")]:
+        assert CHECKER.measure(text, PASSAGE)["banned_found"] == [word]
+        assert any("not allowed" in p for p in CHECKER.problems(text, PASSAGE))
+    assert CHECKER.measure("The shallow shelf is checked.", PASSAGE)["banned_found"] == []   # whole words only
+
+
+def test_checker_copied_share():
+    copied = "If a customer pays by card, the shop must give a receipt."
+    m = CHECKER.measure(copied, PASSAGE)
+    assert m["n_copied_ngrams"] == m["n_ngrams"] == 8 and m["copied_share"] == 1.0
+    assert any("copied" in p for p in CHECKER.problems(copied, PASSAGE))
+    assert CHECKER.measure("Paid.", PASSAGE)["copied_share"] == 0.0                          # fewer than 5 words
+
+
+def test_requirement_prompt_has_limits_and_no_check_note(tmp_path):
+    agent = RequirementAgentV2(mock([REQUIREMENT]), logger(tmp_path))
+    result = agent.write("x", **REQ_INPUTS)
+    assert result == {"requirement": REQUIREMENT["requirement"], "requirement_invalid": False,
+                      "attempts": result["attempts"]} and len(result["attempts"]) == 1
+    prompt = agent.llm.prompts_received[0]
+    assert "at most 40 words" in prompt and '"shall", "controller", "data subject" or "processor"' in prompt
+    assert "could not be accepted" not in prompt and "Art" not in prompt.split("JSON SCHEMA")[0]
+
+
+def test_failed_check_gets_one_retry_with_reason(tmp_path):
+    bad = {"requirement": "The controller must give a receipt."}
+    agent = RequirementAgentV2(mock([bad, REQUIREMENT]), logger(tmp_path))
+    result = agent.write("x", **REQ_INPUTS)
+    assert result["requirement"] == REQUIREMENT["requirement"] and result["requirement_invalid"] is False
+    assert len(agent.llm.prompts_received) == 2 and [bool(a["problems"]) for a in result["attempts"]] == [True, False]
+    assert "uses the word(s) controller" in agent.llm.prompts_received[1]
+    assert agent.llm.prompts_received[1].startswith(agent.llm.prompts_received[0])
+
+
+def test_failing_twice_gives_requirement_invalid_not_passed_on(tmp_path):
+    bad = {"requirement": "The controller must give a receipt."}
+    orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, CONFIRMED, bad, bad])
+    result = orch.mediate_case("c", DESCRIPTION)
+    p = result["passages"][0]
+    assert p["label"] == APPLICABLE and p["requirement"]["requirement_invalid"] is True
+    assert p["requirement"]["requirement"] is None and len(p["requirement"]["attempts"]) == 2
+    assert len(llm.prompts_received) == 5                                        # no third requirement call
+    assert result["knowledge_block"] == load_no_knowledge_text(CONFIG)
+
+
+def test_round1_eval_counts(tmp_path):
+    from src.c3_v2_round1_eval import log_calls, metrics
+    bad = {"requirement": "The controller must give a receipt."}
+    orch, _ = orchestrator(tmp_path, ["bad", RELEVANT, SPLIT, CONFIRMED, bad, REQUIREMENT])
+    record = {"set": "s", "case_id": "c"} | orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1",
+                                                                                  "text": PASSAGE}, [])
+    log = log_calls(tmp_path)
+    assert log == {"calls": 5, "calls_with_retry": 1, "calls_failed_after_retry": 0, "max_retries_seen": 1,
+                   "valid_share": 1.0}
+    m = metrics([record], orch.applicability_agent.obligation_pattern, log, CONFIG["c3_v2"]["requirement_checks"])
+    assert (m["c1_usable_split"], m["c2_if_items_with_obligation_word"], m["requirements_passed_on"],
+            m["requirements_needing_check_retry"], m["c5_banned_word"]) == (1, 0, 1, 1, 0)

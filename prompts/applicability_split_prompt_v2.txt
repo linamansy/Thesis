@@ -5,13 +5,17 @@ INSTRUCTIONS
 - "then": what the rule requires to be done when it applies, in the words of the rule.
 - "exceptions": the situations the rule itself names in which it does not apply (for example "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
 - Never put an obligation into "if". An "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
-- If the rule states no condition, "if" is an empty list.
+- If the rule names no situation or event and simply places a duty on someone, "if" has one item: the role the duty applies to, written as a statement about the organisation, for example "the organisation acts as a processor". Never leave "if" empty in that case.
 - Use only the legal passage below.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE (made up, for the format only)
 Rule: "If a customer pays by card, the shop must give a receipt within one day, unless the customer declines it."
 Answer: {{"if": ["a customer pays by card"], "then": "the shop must give a receipt within one day", "exceptions": ["the customer declines the receipt"]}}
+
+EXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)
+Rule: "Every carrier shall keep a record of the parcels it transports."
+Answer: {{"if": ["the organisation acts as a carrier"], "then": "the carrier must keep a record of the parcels it transports", "exceptions": []}}
 
 JSON SCHEMA
 {schema}

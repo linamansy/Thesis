@@ -7,13 +7,14 @@ For every passage of the case, in rank order:
      split with an obligation word in an IF item -> label "Split invalid", stop
      Indeterminate with open IF conditions -> second look, with the description + ALL retrieved passages of the case
   3. ResolverV2 (code): Applicable only if all IF conditions are confirmed AND no stated exception applies
-  4. RequirementAgentV2, ONLY for Applicable: the THEN part -> 1-2 sentences tied to RelevanceAgentV2's process step
+  4. RequirementAgentV2, ONLY for Applicable: the THEN part -> 1-2 plain sentences tied to RelevanceAgentV2's process
+     step, checked by code (RequirementCheckerV2); failing twice -> requirement_invalid, never passed on
 A call with no valid answer after its retry gives "Mediation failed" (failed_step names the call) and the next
 passage is processed. LLMUnavailableError is passed on (the run stops and can be resumed), as in v1.
 
-Knowledge block: confirmed requirements only (prompts/c3_block_template_v2.json). Indeterminate, Not applicable,
-Split invalid, Irrelevant and failed passages are kept in the audit trail and never passed on. With no requirement,
-the block is C1's text ("No domain knowledge provided.", prompts/c1_no_knowledge.txt), so the generator gets the same
+Knowledge block: confirmed requirements that passed the code check only (prompts/c3_block_template_v2.json).
+Indeterminate, Not applicable, Split invalid, Irrelevant, requirement_invalid and failed passages are kept in the audit
+trail and never passed on. With no requirement, the block is C1's text ("No domain knowledge provided.", prompts/c1_no_knowledge.txt), so the generator gets the same
 layout as C1. The neutral label in front of the block is added by the generator, as for C1 and C2.
 
 Audit trail (by code): output_dir/<case_id>.json with every intermediate step per passage (relevance answer and quote
@@ -110,12 +111,10 @@ class OrchestratorV2:
             return record
 
         # Box 4: requirement, only for Applicable rules
-        requirement = self._step(record, "requirement", lambda: self.requirement_agent.run(
+        record["requirement"] = self._step(record, "requirement", lambda: self.requirement_agent.write(
             case_id, description=description, passage_id=passage_id, passage_text=text,
             then=applicability["split"]["then"], process_step=record["relevance"]["process_step"],
             description_quote=record["relevance"]["description_quote"]))
-        if requirement is not None:
-            record["requirement"] = requirement.model_dump()
         return record
 
     def _step(self, record: dict, step: str, call):
@@ -139,10 +138,11 @@ class OrchestratorV2:
     # ---------- knowledge block ----------
 
     def knowledge_block(self, records: list[dict]) -> str:
-        """Confirmed requirements only; C1's text when there are none."""
+        """Confirmed requirements that passed the code check only; C1's text when there are none."""
         lines = [self.template["requirement_line"].format(passage_id=r["passage_id"],
                                                           requirement=r["requirement"]["requirement"].strip())
-                 for r in records if r["label"] == APPLICABLE and r["requirement"]]
+                 for r in records if r["label"] == APPLICABLE and r["requirement"]
+                 and not r["requirement"]["requirement_invalid"]]
         if not lines:
             return self.no_knowledge_text
         return self.template["block"].format(requirements="\n".join(lines))

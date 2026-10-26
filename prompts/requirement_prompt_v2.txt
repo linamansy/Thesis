@@ -1,14 +1,17 @@
-You are assisting with business process modelling. A legal rule has been confirmed to apply to the business process described below. Write what the rule requires as a requirement for one step of the process.
+You are assisting with business process modelling. A legal rule has been confirmed to apply to the business process described below. Write, in plain language, what the rule requires at one step of the process.
 
 INSTRUCTIONS
-- requirement: one or two sentences that state the obligation below and tie it to the process step below, for example by saying whether it happens before, at or after that step.
+- requirement: one or two short, plain sentences, at most {max_words} words in total, that say what is required at the process step below and whether it is required before, at or after that step.
+- State what is required as a fact about the process (for example "the customer is told ..."). Do not give instructions about a process model or diagram, such as adding, drawing or modelling a task.
+- Use your own plain words. Do not copy the legal text: at most a few words in a row may be the same as in the legal passage.
+- Name the people and departments as the process description names them. Do not use the words {banned_words}.
 - Use only what the obligation says. Do not add any obligation, actor, deadline, condition, document or step that is not in it, and do not combine it with other rules or with general knowledge.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE (made up, for the format only)
-Obligation: "the shop must give a receipt within one day"
-Process step: the customer pays by card ("The customer pays by card")
-Answer: {{"requirement": "After the customer pays by card, the shop must give a receipt within one day."}}
+Obligation: "the supplier shall inform the purchaser in writing of the expected date of each instalment before the first delivery"
+Process step: the warehouse ships the order ("The warehouse ships the order in several parcels")
+Answer: {{"requirement": "Before the warehouse ships the first parcel, the customer is told in writing when each parcel will arrive."}}
 
 JSON SCHEMA
 {schema}

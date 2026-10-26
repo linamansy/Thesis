@@ -315,6 +315,7 @@ paths:
   gdpr_dev_smoke_dir: results/diagnostics/gdpr_dev_smoke  # STUDY 2: evaluation of the GDPR development smoke run
   results_manifest_study2: results/MANIFEST_study2.csv    # STUDY 2: its files under results/ (study2_gdpr.manifest_patterns)
   relevance_v2_dev_dir: results/diagnostics/relevance_v2_dev  # C3 v2: development test of RelevanceAgentV2, one folder per round
+  c3_v2_round1_dir: results/diagnostics/c3_v2_round1   # C3 v2 round 1 fixes (section 7): agent-only evaluation, no generation
 
 study2_gdpr:
   # STUDY 2 only (GDPR corpus, added 24 Oct 2026). Separate paths so that nothing of Study 1 (data/knowledge/,
@@ -417,6 +418,12 @@ study2_laws:
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
   obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid
+  requirement_checks:   # code checks of RequirementAgentV2's answer (section 7, criteria 4-6; src/mediation/requirement_checker_v2.py)
+    max_words: 40
+    max_sentences: 2
+    banned_words: [shall, controller, data subject, processor]
+    ngram: 5                      # word sequences of this length ...
+    max_copied_share: 0.5         # ... at most this share of the requirement's sequences may also be in the passage
 
 c3_v2_dev:
   # C3 v2 development (docs/C3_V2_DEVELOPMENT.md): development test of RelevanceAgentV2 (src/relevance_v2_dev.py) on
