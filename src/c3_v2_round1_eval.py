@@ -13,7 +13,8 @@ second look -> resolver -> requirement for Applicable rules). A passage marked i
 the pipeline; for the split criteria (1-3, "count over all passages") its split call is made on its own (the split
 sees the law text only, so it does not depend on the case).
 
-Writes only into paths.c3_v2_round<n>_dir (n = --round, default 1; round 2 = section 8 prompts, same passages):
+Writes only into paths.c3_v2_round<n>_dir (n = --round, default 1; round 2 = section 8 prompts, same passages), or
+paths.c3_v2_round<n>_<tag>_dir with --tag <tag> (e.g. --tag fix1: round 3 after bug fix 1, same prompts):
   answers.json   one record per passage (the audit-trail record, plus split_only for irrelevant passages); written
                  after every case, a rerun skips finished cases
   logs/          every LLM call (RunLogger)
@@ -21,7 +22,7 @@ Writes only into paths.c3_v2_round<n>_dir (n = --round, default 1; round 2 = sec
   report.md      the same as tables, with every split and every requirement text (criteria 3, 4 and 7 are judged by
                  reading them)
 
-Run from the project root (Ollama running):  .venv\\Scripts\\python.exe -m src.c3_v2_round1_eval [--round 2]
+Run from the project root (Ollama running):  .venv\\Scripts\\python.exe -m src.c3_v2_round1_eval [--round 2] [--tag fix1]
 """
 
 import json
@@ -136,9 +137,10 @@ def report(m: dict, records: list[dict], round_no: int = 1) -> str:
 def main() -> None:
     from run_experiment import create_llm, ollama_settings
     round_no = int(sys.argv[sys.argv.index("--round") + 1]) if "--round" in sys.argv else 1
+    tag = "_" + sys.argv[sys.argv.index("--tag") + 1] if "--tag" in sys.argv else ""
     config = load_config()
     view = study2_view(config)
-    out_dir = project_path(config["paths"][f"c3_v2_round{round_no}_dir"])
+    out_dir = project_path(config["paths"][f"c3_v2_round{round_no}{tag}_dir"])
     try:
         sets = passage_sets(config)
         settings = ollama_settings(view)    # model digest = model.ollama_model_digest, server settings
