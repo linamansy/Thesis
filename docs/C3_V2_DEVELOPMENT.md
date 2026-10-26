@@ -681,3 +681,6 @@ are broken by criterion 11. This is reported as a limitation. There is no round 
 
 **Note.** Three rounds on the development cases carry a risk of overfitting; generalisation is shown only on the test
 cases.
+
+**Bug fix 1 (not a round):** processor role confirmed via P1 was downgraded by ResolverV2, so R3 could never yield
+Applicable for processor duties. Found by logic test. Fixed in `385a461`.
