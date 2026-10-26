@@ -345,6 +345,16 @@ study2_gdpr:
   # any run). Retrieved with the same reranked setup (src/freeze_retrieval_gdpr_variants.py) into their own file.
   variant_ids: ["01.1"]
   frozen_variants_rerank: data/retrieval_gdpr/frozen_retrieval_variants_ch1-5_rerank.json
+  # Variant 01.1 runs (src/run_variant_01_1.py, 26 Oct 2026): Study 1's harness + qwen3:8b with the settings of the
+  # development smoke run (variant_same_as; any difference stops the run), 1 repetition each. Main run: C1 on 01,
+  # C2 and C3 v2 on 01.1 with frozen_variants_rerank. Oracle diagnostic: C2 and C3 v2 on 01.1 with oracle_top5 =
+  # the frozen 01.1 top 5 with rank oracle_replace.rank replaced by oracle_replace.passage_id.
+  variant_same_as: smoke_gdpr_dev
+  variant_run_id: variant_01.1
+  oracle_run_id: oracle_01.1
+  oracle_top5: data/retrieval_gdpr/oracle_01.1_top5.json
+  oracle_replace: {case_id: "01.1", rank: 5, passage_id: GDPR-Art13-1}
+  variant_report_dir: results/diagnostics/variant_01.1   # report.md + summary.json (src/run_variant_01_1.py --report)
   # Development smoke run (src/run_gdpr_dev_smoke.py): Study 1's harness + qwen3:8b, unchanged, on the development
   # cases. The id starts with evaluation.smoke_run_prefix, so every Study 1 analysis ignores it. Its evaluation goes
   # only into paths.gdpr_dev_smoke_dir (src/evaluate_gdpr_dev_smoke.py), never into results/evaluation.csv.
