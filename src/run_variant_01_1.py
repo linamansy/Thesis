@@ -1,9 +1,9 @@
 """Study 2: the variant 01.1 runs and the oracle diagnostic (one repetition each).
 
 Generator: Study 1's harness (bpmngen_harness/run_bpmngen.ts) with BPMNGen's OpenSourceLLM and qwen3:8b on Ollama,
-unchanged. Before any call, the run settings (model digest, Ollama version and server settings, BPMNGen file hashes
-and library versions, agent settings) must equal those of the development smoke run (study2_gdpr.variant_same_as);
-otherwise nothing starts.
+unchanged. Before any call, the run settings (model digest, Ollama server settings, BPMNGen file hashes and library
+versions, agent settings) must equal those of the development smoke run (study2_gdpr.variant_same_as), and the Ollama
+version must equal study2_gdpr.ollama_version (0.40.11; the smoke run had 0.40.8); otherwise nothing starts.
 
 The five runs (config.yaml study2_gdpr):
   run      condition  case   passages
@@ -47,9 +47,10 @@ from src.study2_config import study2_view
 REPETITION = 1   # one repetition per run
 RUNS = {"main": {"C1": "01", "C2": "01.1", "C3": "01.1"},
         "oracle": {"C2": "01.1", "C3": "01.1"}}
-# Settings that must equal the development smoke run's run_info.json
+# Settings that must equal the development smoke run's run_info.json. The Ollama version is checked against
+# study2_gdpr.ollama_version instead (0.40.11; the smoke run ran on 0.40.8).
 SAME_AS_DEV = ["provider", "model", "temperature", "generator", "model_digest", "seed", "num_ctx", "think",
-               "max_tokens", "generator_digest", "ollama_version", "ollama_server_env", "generator_think_param",
+               "max_tokens", "generator_digest", "ollama_server_env", "generator_think_param",
                "bpmngen_file_hashes", "bpmngen_library_versions"]
 
 
@@ -116,13 +117,18 @@ def run_id(config: dict, run: str) -> str:
 
 
 def check_same_as_dev(config: dict, settings: dict) -> None:
-    """Stop unless every setting in SAME_AS_DEV equals the development smoke run's run_info.json."""
+    """Stop unless every setting in SAME_AS_DEV equals the development smoke run's run_info.json and the Ollama
+    version equals study2_gdpr.ollama_version."""
     dev_id = config["study2_gdpr"]["variant_same_as"]
     path = project_path(config["paths"]["runs"]) / dev_id / config["paths"]["run_info_file"]
     dev = json.loads(path.read_text(encoding="utf-8"))
     different = {k: (dev.get(k), settings.get(k)) for k in SAME_AS_DEV if dev.get(k) != settings.get(k)}
     if different:
         raise ValueError(f"settings differ from {dev_id} (theirs vs now): {different}")
+    expected = str(config["study2_gdpr"]["ollama_version"])
+    if settings.get("ollama_version") != expected:
+        raise ValueError(f"ollama_version is {settings.get('ollama_version')!r}, but study2_gdpr.ollama_version "
+                         f"fixes {expected!r}")
 
 
 # ---------- C3 v2 in the runner ----------

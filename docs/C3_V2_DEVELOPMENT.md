@@ -396,3 +396,7 @@ and C3 keep `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json` (`confi
 gdpr_only`). Observation (does not change the result): in the combined top 5, the new passages displaced every
 GDPR passage (ECD Articles 10-11 in cases 01, 06, 17, 45; CCD in cases 11, 13, 19), including the 3 GDPR passages
 that were silver-applicable.
+
+## 6. Ollama version
+
+26 Oct: Ollama auto-updated 0.40.8 → 0.40.11. Model digest unchanged (500a1f06…). smoke_gdpr_dev and RelevanceAgent v2 rounds 1–2 ran on 0.40.8; all Study 2 runs from the case-01 study onward use 0.40.11.

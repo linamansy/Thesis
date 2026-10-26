@@ -64,9 +64,11 @@ def test_settings_must_equal_the_development_run(tmp_path):
     config["paths"]["runs"] = str(tmp_path)
     dev = json.loads(real.read_text(encoding="utf-8"))
     assert dev["ollama_version"] == "0.40.8" and dev["generator"] == "bpmngen/qwen3:8b"
-    settings = {k: dev.get(k) for k in SAME_AS_DEV}
+    settings = {k: dev.get(k) for k in SAME_AS_DEV} | {"ollama_version": "0.40.11"}
+    assert str(GDPR["ollama_version"]) == "0.40.11"
     check_same_as_dev(config, settings)
-    for key, value in (("ollama_version", "0.41.0"), ("generator_digest", "x"), ("temperature", 0.3)):
+    for key, value in (("ollama_version", "0.40.8"), ("ollama_version", None), ("generator_digest", "x"),
+                       ("temperature", 0.3)):
         with pytest.raises(ValueError, match=key):
             check_same_as_dev(config, dict(settings, **{key: value}))
 

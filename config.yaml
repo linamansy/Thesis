@@ -350,6 +350,9 @@ study2_gdpr:
   # C2 and C3 v2 on 01.1 with frozen_variants_rerank. Oracle diagnostic: C2 and C3 v2 on 01.1 with oracle_top5 =
   # the frozen 01.1 top 5 with rank oracle_replace.rank replaced by oracle_replace.passage_id.
   variant_same_as: smoke_gdpr_dev
+  ollama_version: 0.40.11   # fixed Ollama version for all Study 2 runs from the case-01 study on (decided 26 Oct 2026:
+                            # Ollama auto-updated from 0.40.8, model digest unchanged). Checked strictly; smoke_gdpr_dev
+                            # ran on 0.40.8, so the version is the one setting not compared with it
   variant_run_id: variant_01.1
   oracle_run_id: oracle_01.1
   oracle_top5: data/retrieval_gdpr/oracle_01.1_top5.json
