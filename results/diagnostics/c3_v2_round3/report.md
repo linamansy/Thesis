@@ -1,6 +1,28 @@
-# C3 v2 round 3: agent-only evaluation (sections 7 and 8)
+# C3 v2 round 3 (final): agent-only evaluation (sections 7, 8 and 9)
 
-Real calls (qwen3:8b, Ollama), no BPMN generation. Criteria 3, 4 (plain language, names the step) and 7 are judged by reading the texts below.
+Real calls (qwen3:8b, Ollama), no BPMN generation. Criteria 3, 4 (plain language, names the step), 7, 11 and 13 are judged by reading the texts below. Silver labels are provisional (gpt-oss-120b), never gold. Full discussion: `docs/C3_V2_DEVELOPMENT.md`, section 3, "Section 9, round 3".
+
+## Criteria 1–13
+
+| # | Criterion | Result | Met |
+|---|---|---|---|
+| 1 | Usable split ≥ 90% | 42/45 = 93.3% | yes |
+| 2 | No "must" / "shall" / "is required to" in IF | 1 of 49 IF items (GDPR-Art43-2, case 13) | **no** |
+| 3 | No situational condition: IF = the role | role item in 43/43 valid splits, but 0/4 passages without a situational condition got an IF free of made-up items | **no** |
+| 4 | ≤ 40 words, 1–2 sentences, plain, names the step | 1/1 (22 words, 1 sentence) | yes |
+| 5 | No "shall" / "controller" / "data subject" / "processor" | 1/1 after the check retry | yes |
+| 6 | ≤ 50% copied 5-word sequences | 1/1 (0%) | yes |
+| 7 | Never instructs the generator to draw | 1/1 by reading | yes |
+| 8 | Valid JSON ≥ 95%, at most 1 retry | 133/135 = 98.5% | yes |
+| 9 | Role only by defining facts; false-applicable rate ≤ 20% (dev) | 0/32 = 0% (dev passages labelled Applicable with silver not applicable ÷ dev passages with silver not applicable); P1 confirmed 0 times | yes |
+| 10 | Public-body duty -> Not applicable | GDPR-Art35-6 (case 01) Not applicable by code | yes |
+| 11 | Requirement keeps every trigger (≥ 90%) | 1/1 | yes |
+| 12 | Role definitions / A1 / scope fixed, never passed to the generator | prompt + config text, tests | yes |
+| 13 | No situational condition lost | 21/26 by reading (lost in GDPR-Art7-4 ×3, GDPR-Art32-2 ×2) | **no** |
+
+Recall (no committed target; TO DECIDE with supervisor): 0 of the 3 silver-applicable dev passages Applicable (11 Art2-1 and 11 Art32-2 Indeterminate, 19 Art16-1 Irrelevant). The only requirement (GDPR-Art13-1, oracle 01.1) omits the legal basis, recipients and DPO (40-word limit).
+
+False-applicable rate by round (criterion 9, committed definition): round 1 6/32 = 18.8%, round 2 3/32 = 9.4%, round 3 0/32 = 0%. Earlier reported "share of Applicables that are wrong" (a different measure): 6/7 = 86%, 3/4 = 75%, 0/0. Fallback rule: round 3 is final.
 
 ## Counts
 

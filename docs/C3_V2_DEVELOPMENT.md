@@ -410,7 +410,7 @@ Indeterminate, Irrelevant, Not applicable, Irrelevant, Applicable and the exact 
 **Commits:** `2d80a7c` (code, before the run), see git log for the REAL RUN commit. **Run folder:**
 `results/diagnostics/c3_v2_round3/` (qwen3:8b digest `500a1f06…`, Ollama 0.40.11, agent calls only, no BPMN
 generation; same 45 passages; 135 calls). Labels: 19 Irrelevant, 19 Indeterminate, 5 Not applicable, 1 Split invalid,
-1 Applicable (round 2: 11 Applicable). `report.md` lists the counts for criteria 1–8; criteria 9–13 are below.
+1 Applicable (round 2: 11 Applicable). `report.md` lists the counts and the results for criteria 1–13 (same as the table below).
 
 **Evaluation (b), qwen3:8b against criteria 1–13:**
 
@@ -424,7 +424,7 @@ generation; same 45 passages; 135 calls). Labels: 19 Irrelevant, 19 Indeterminat
 | 6 | ≤ 50% copied 5-word sequences | 1/1 | yes |
 | 7 | Never instructs the generator to draw | 1/1 by reading | yes |
 | 8 | Valid JSON ≥ 95%, at most 1 retry | 133/135 = 98.5%, 3 calls with 1 retry, 2 invalid after it (the split-only calls of criterion 1) | yes |
-| 9 | Role only by defining facts; false-applicable ≤ 20% (dev) | 0 Applicable on the dev cases -> 0 false-applicable; roles decided by code, no role confirmed by word match (P1 confirmed 0 times). Recall: 0 of the 3 silver-applicable dev passages Applicable (11 Art2-1 and 11 Art32-2 Indeterminate, 19 Art16-1 Irrelevant) | yes (0 false-applicable) |
+| 9 | Role only by defining facts; false-applicable ≤ 20% (dev) | false-applicable rate 0/32 = 0% (committed definition, see the correction below); roles decided by code, no role confirmed by word match (P1 confirmed 0 times). Recall: 0 of the 3 silver-applicable dev passages Applicable (11 Art2-1 and 11 Art32-2 Indeterminate, 19 Art16-1 Irrelevant) | yes |
 | 10 | Public-body duty -> Not applicable | GDPR-Art35-6 (case 01, the only passage with only role "public body" reaching the check) -> Not applicable by code; Art45-6, Art28-7, Art28-8 Irrelevant; Art43-2 Split invalid | yes |
 | 11 | Requirement keeps every trigger (≥ 90%) | 1/1: "at the time when personal data are obtained" kept as "When the customer's details are collected"; content items with their own triggers (DPO, recipients, (f)) left out, legal basis also left out | yes |
 | 12 | Role definitions / A1 / scope fixed, never passed to the generator | prompt + config text; tests `test_check_prompt_has_fixed_role_definitions`, `test_full_pipeline_oracle_01_1` (A1, S1 text and role definitions not in the block) | yes |
@@ -452,11 +452,40 @@ indeterminate). The S1 quote check downgraded 4 quotes: 3 near-verbatim in case 
 itself copied as the quote). GDPR-Art19-1's "unless ..."
 exception was put into THEN, not into exceptions.
 
-**Fallback rule (section 9).** Evaluation (b) fails, so the final version is the round with the lowest
-false-applicable rate (criterion 9): round 1 6/7 = 86%, round 2 3/4 = 75%, round 3 0 false-applicable (0 Applicable
-on the dev cases; the rate is 0/0, read here as 0 false-applicable labels). No tie, criterion 11 not needed.
-**Round 3 is final** (v2 frozen as committed in `2d80a7c`); criteria 2, 3 and 13, and recall 0/3 silver-applicable
-on the dev cases, are reported as limitations. There is no round 4.
+**Notes on round 3 (limitations).**
+- Recall: 0 of the 3 silver-applicable development passages became Applicable. GDPR-Art32-2 (case 11): Indeterminate;
+  the split lost the situational condition ("in assessing the appropriate level of security" replaced by
+  "processing", criterion 13) and the S1 quote was downgraded by the quote check (near-verbatim "the customer signs up"
+  for "a customer signs up"). GDPR-Art2-1 (case 11): Indeterminate; the split listed the two "or" alternatives
+  (automated / filing system) as two items that must both hold, and C2 (filing system) is not stated. GDPR-Art16-1
+  (case 19): Irrelevant at the relevance step.
+- Recall target: **TO DECIDE with supervisor** (no recall threshold was committed for the applicability step).
+- GDPR-Art13-1 (oracle 01.1), the only requirement: it omits the legal basis, the recipients and the DPO contact
+  details of the passage's list (a)–(f); the 40-word limit (criterion 4) leaves no room for the full list.
+
+**Correction (26 Oct 2026): rounds 1–2 reported share of Applicables that were wrong instead of the committed
+definition; recomputed below.** Committed definition of criterion 9 (section 8): false-applicable rate = (development
+passages labelled Applicable whose silver label is not_applicable, indeterminate or irrelevant) ÷ (all development
+passages whose silver label is not applicable). Development passages = the 7 GDPR development cases × 5 frozen
+(rerank) passages = 35; silver-applicable = 3 (11 Art2-1, 11 Art32-2, 19 Art16-1), so the denominator is 32 in every
+round. Recomputed from `results/diagnostics/c3_v2_round{1,2,3}/answers.json` and
+`data/silver_gdpr/silver_reference_dev.json`; silver is provisional.
+
+| round | false-applicable rate (criterion 9, committed) | share of Applicables that are wrong (different measure, reported earlier) | dev Applicable that are silver-applicable |
+|---|---|---|---|
+| 1 | 6/32 = **18.8%** (01 Art7-4, 11 Art15-3, 11 Art12-5, 17 Art30-1, 17 Art32-2, 17 Art30-2; all silver indeterminate) | 6/7 = 86% | 1 (11 Art32-2) |
+| 2 | 3/32 = **9.4%** (17 Art30-1, 17 Art6-1, 17 Art32-2; all silver indeterminate) | 3/4 = 75% | 1 (11 Art32-2) |
+| 3 | 0/32 = **0%** | 0/0 (no Applicable) | 0 |
+
+Effect on the round 2 table: the rate part of criterion 9 (9.4% ≤ 20%) is met; criterion 9 stays **not met** because
+the reading part fails (0 of the 11 confirmed role items quote a defining fact). Round 1 was not measured against
+criterion 9 (added in section 8).
+
+**Fallback rule (section 9), with the corrected numbers.** Evaluation (b) fails (criteria 2, 3 and 13), so the final
+version is the round with the lowest false-applicable rate (criterion 9): round 1 18.8%, round 2 9.4%, round 3 0%.
+No tie, criterion 11 not needed. **Round 3 is final** (v2 frozen as committed in `2d80a7c`, git tag
+`c3v2-logic-final`); criteria 2, 3 and 13 and recall 0/3 silver-applicable on the dev cases are reported as
+limitations. There is no round 4.
 
 ---
 
