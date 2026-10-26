@@ -542,3 +542,39 @@ BPMN generation, on the 7 development cases + variant 01.1.
 | 12 | The role definitions are fixed text in the agent prompt, identical for all cases, and never passed to the generator | prompt files + knowledge block check |
 
 **Rounds.** This is round 2 of at most 3 (section 2.2).
+
+## 9. Round 3 (final): decision logic (model-independent, committed before code)
+
+Written 26 Oct 2026, after the round 2 run (section 3, "Section 8, round 2") and before any code change for round 3.
+
+**Principle.** The decision logic must be correct on its own. Model quality is measured, never fixed by bending the
+logic.
+
+**Round 2 diagnosis (from answers.json).**
+- Role IF items replaced situational conditions in 3 of 11 Applicable passages (GDPR-Art7-4 twice, GDPR-Art13-1).
+- Role items were mostly confirmed in the second look, with quotes that do not show the role's defining facts.
+
+**Decision rules.**
+
+| # | Rule |
+|---|---|
+| R1 | A duty applies to a role in a situation: IF = role item(s) + every situational condition of the passage. A role never replaces a situation. |
+| R2 | GDPR scope: code adds "the process handles information about identifiable people" to every GDPR passage (quote-checked). |
+| R3 | Roles are decided by code. A1: "the organisation running the described process is the controller of the personal data it collects in that process". Processor only if the description states that the organisation handles data on behalf of another organisation (quote-checked). Public bodies → contradicted. |
+| R4 | Applicable only if every IF item is confirmed (by quote or by R3) and no stated exception applies; any contradicted → Not applicable; else Indeterminate. |
+| R5 | Second look (all 5 passages) only for situational items that are still not_stated. |
+| R6 | Requirement: 1–2 plain sentences, keeps every THEN trigger, includes a verbatim step_quote; states what is required, never tells the generator to draw anything. |
+
+A1 and R2 are fixed, identical for all cases, and never passed to the generator.
+
+**Two evaluations.**
+- (a) Logic test with hand-written ideal agent answers (no model): the code must give the expected label for every
+  case.
+- (b) Model measurement on qwen3:8b against criteria 1–12 (sections 7 and 8) + criterion 13 "no situational
+  condition lost".
+
+**Fallback if (b) fails.** The final version is the round with the lowest false-applicable rate (criterion 9); ties
+are broken by criterion 11. This is reported as a limitation. There is no round 4.
+
+**Note.** Three rounds on the development cases carry a risk of overfitting; generalisation is shown only on the test
+cases.
