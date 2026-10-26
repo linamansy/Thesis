@@ -3,3 +3,6 @@
 data/knowledge/raw/*.html -text
 data/knowledge_gdpr/raw/*.html -text
 data/knowledge_study2/raw/*.html -text
+
+# Keep run outputs byte-for-byte identical, so their SHA-256 hashes in results/MANIFEST*.csv stay valid.
+results/** -text
