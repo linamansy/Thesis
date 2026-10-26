@@ -1,0 +1,187 @@
+{
+  "expected_step": "Inform customer about how their contact details will be used",
+  "target_passage": "GDPR-Art13-1",
+  "match_threshold": 0.75,
+  "rows": [
+    {
+      "run": "variant_01.1/C1/01",
+      "passages_given": [],
+      "valid": false,
+      "bpmnlint_valid": true,
+      "errors": [
+        "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 46, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/variant_01.1/C1/01/generated.bpmn, line 46)"
+      ],
+      "auto_repairs": {
+        "auto_flows_added": 0,
+        "auto_links_added": 1,
+        "first_task_inserted": false
+      },
+      "target_in_prompt": false,
+      "expected_step_present": false,
+      "di_stripped": true,
+      "expected_step_match": null
+    },
+    {
+      "run": "variant_01.1/C2/01.1",
+      "passages_given": [
+        "GDPR-Art35-9",
+        "GDPR-Art7-4",
+        "GDPR-Art30-2",
+        "GDPR-Art12-6",
+        "GDPR-Art13-3"
+      ],
+      "valid": false,
+      "bpmnlint_valid": false,
+      "errors": [
+        "could not parse XML: error parsing attribute name, line 68, column 28 (file:/C:/Users/user/Downloads/Thesis/results/runs/variant_01.1/C2/01.1/generated.bpmn, line 68)"
+      ],
+      "auto_repairs": {
+        "auto_flows_added": 0,
+        "auto_links_added": 0,
+        "first_task_inserted": false
+      },
+      "target_in_prompt": false,
+      "expected_step_present": null,
+      "di_stripped": false,
+      "expected_step_match": null
+    },
+    {
+      "run": "variant_01.1/C3/01.1",
+      "passages_given": [
+        "GDPR-Art35-9",
+        "GDPR-Art7-4",
+        "GDPR-Art30-2",
+        "GDPR-Art12-6",
+        "GDPR-Art13-3"
+      ],
+      "valid": false,
+      "bpmnlint_valid": true,
+      "errors": [
+        "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 51, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/variant_01.1/C3/01.1/generated.bpmn, line 51)"
+      ],
+      "auto_repairs": {
+        "auto_flows_added": 0,
+        "auto_links_added": 1,
+        "first_task_inserted": false
+      },
+      "target_in_prompt": false,
+      "expected_step_present": null,
+      "di_stripped": false,
+      "expected_step_match": null,
+      "c3_passages": [
+        {
+          "passage_id": "GDPR-Art35-9",
+          "label": "Split invalid",
+          "look": "first",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Indeterminate",
+          "look": "second",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Split invalid",
+          "look": "first",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "Indeterminate",
+          "look": "second",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art13-3",
+          "label": "Indeterminate",
+          "look": "second",
+          "failed_step": null
+        }
+      ],
+      "c3_block": "No domain knowledge provided."
+    },
+    {
+      "run": "oracle_01.1/C2/01.1",
+      "passages_given": [
+        "GDPR-Art35-9",
+        "GDPR-Art7-4",
+        "GDPR-Art30-2",
+        "GDPR-Art12-6",
+        "GDPR-Art13-1"
+      ],
+      "valid": false,
+      "bpmnlint_valid": true,
+      "errors": [
+        "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 46, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/oracle_01.1/C2/01.1/generated.bpmn, line 46)"
+      ],
+      "auto_repairs": {
+        "auto_flows_added": 0,
+        "auto_links_added": 0,
+        "first_task_inserted": false
+      },
+      "target_in_prompt": true,
+      "expected_step_present": false,
+      "di_stripped": true,
+      "expected_step_match": null
+    },
+    {
+      "run": "oracle_01.1/C3/01.1",
+      "passages_given": [
+        "GDPR-Art35-9",
+        "GDPR-Art7-4",
+        "GDPR-Art30-2",
+        "GDPR-Art12-6",
+        "GDPR-Art13-1"
+      ],
+      "valid": false,
+      "bpmnlint_valid": false,
+      "errors": [
+        "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 47, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/oracle_01.1/C3/01.1/generated.bpmn, line 47)"
+      ],
+      "auto_repairs": {
+        "auto_flows_added": 0,
+        "auto_links_added": 1,
+        "first_task_inserted": false
+      },
+      "target_in_prompt": true,
+      "expected_step_present": false,
+      "di_stripped": true,
+      "expected_step_match": null,
+      "c3_passages": [
+        {
+          "passage_id": "GDPR-Art35-9",
+          "label": "Split invalid",
+          "look": "first",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art7-4",
+          "label": "Indeterminate",
+          "look": "second",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art30-2",
+          "label": "Split invalid",
+          "look": "first",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art12-6",
+          "label": "Indeterminate",
+          "look": "second",
+          "failed_step": null
+        },
+        {
+          "passage_id": "GDPR-Art13-1",
+          "label": "Applicable",
+          "look": "first",
+          "failed_step": null
+        }
+      ],
+      "c3_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art13-1] At the time when personal data are obtained during the inquiry, the controller shall provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available."
+    }
+  ]
+}
