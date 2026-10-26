@@ -384,6 +384,80 @@ Applicable labels came from the second look, whose prompt has no role definition
 
 **Decision:** open (Lina). Round 3 is the last allowed round (section 2.2).
 
+### Section 9, round 3 (26 Oct 2026, final): decision logic by code
+
+**What changed (rules R1–R6 of section 9).** Split: own `roles` field (controller / processor / public body /
+other), `if` = every situational condition, never a role (R1). Code adds the role item R1 and, for every GDPR passage,
+the scope item S1 "the process handles information about identifiable people" (quote-checked, R2). Roles by code (R3,
+`config.yaml c3_v2.roles`): controller confirmed by A1 (`c3_v2.controller_assumption`); processor confirmed only if
+P1 "the organisation handles personal data on behalf of another organisation" is confirmed with a checked quote,
+otherwise contradicted; public body contradicted; other not_stated. ResolverV2 (R4): Applicable only if every IF item
+is confirmed by a checked quote or the code role rule, the role item exists and no stated exception applies. Second
+look only for situational items still not_stated (R5). RequirementAgentV2 (R6): answer has a verbatim `step_quote`
+and a `triggers` list (trigger copied from the THEN, `kept_as` copied from the requirement), both quote-checked by
+code. Check-IF prompt: public-body rule removed (now code), role definitions kept for P1.
+Files: `src/agents/applicability_agent_v2.py`, `src/mediation/resolver_v2.py`, `src/agents/requirement_agent_v2.py`,
+`src/mediation/requirement_checker_v2.py`, the three v2 prompts (split, check-IF, requirement), `config.yaml`,
+`tests/test_c3_v2_boxes.py` (round 3 answer format), new `tests/test_c3_v2_logic.py`.
+
+**Evaluation (a), logic test (no model).** `tests/test_c3_v2_logic.py`, hand-written ideal answers (provisional) on
+real passages and descriptions: 01.1 Art13-1 Applicable; 01.1 Art30-2 Not applicable (processor contradicted, A1);
+01.1 Art13-3 Indeterminate; 01 Art35-6 Not applicable (public body); 01 Art13-1 Indeterminate (no S1 quote; second
+look gets C1 only); Art19-1 on case 11 + a made-up sentence stating the exception: Not applicable, no requirement
+call; full pipeline oracle 01.1 (5 passages, incl. RelevanceAgent and a second look for Art35-9): labels
+Indeterminate, Irrelevant, Not applicable, Irrelevant, Applicable and the exact C3 block (only Art13-1). 7/7 pass.
+
+**Commits:** `2d80a7c` (code, before the run), see git log for the REAL RUN commit. **Run folder:**
+`results/diagnostics/c3_v2_round3/` (qwen3:8b digest `500a1f06…`, Ollama 0.40.11, agent calls only, no BPMN
+generation; same 45 passages; 135 calls). Labels: 19 Irrelevant, 19 Indeterminate, 5 Not applicable, 1 Split invalid,
+1 Applicable (round 2: 11 Applicable). `report.md` lists the counts for criteria 1–8; criteria 9–13 are below.
+
+**Evaluation (b), qwen3:8b against criteria 1–13:**
+
+| # | Criterion | Result | Met |
+|---|---|---|---|
+| 1 | Usable split ≥ 90% | 42/45 = 93.3% (2 split-only calls on irrelevant passages invalid after the retry: role "data subject", GDPR-Art21-2/21-5 case 19; 1 Split invalid) | yes |
+| 2 | No "must" / "shall" / "is required to" in IF | **1 of 49 IF items** (GDPR-Art43-2, case 13: "... shall be accredited ..."; rejected by code -> Split invalid; silver irrelevant) | **no** |
+| 3 | No situational condition: IF = the role | role item present in 43/43 valid splits (code); but the 4 passages with no situational condition got a made-up IF item: GDPR-Art30-2 (17, variant, oracle) "where applicable", GDPR-Art30-1 (17) "the controller is responsible for processing activities" -> 0/4 | **no** |
+| 4 | ≤ 40 words, 1–2 sentences, plain, names the step | 1/1 (22 words, 1 sentence; step_quote checked) | yes |
+| 5 | No "shall" / "controller" / "data subject" / "processor" | 1/1 after the check retry (attempt 1 used "controller") | yes |
+| 6 | ≤ 50% copied 5-word sequences | 1/1 | yes |
+| 7 | Never instructs the generator to draw | 1/1 by reading | yes |
+| 8 | Valid JSON ≥ 95%, at most 1 retry | 133/135 = 98.5%, 3 calls with 1 retry, 2 invalid after it (the split-only calls of criterion 1) | yes |
+| 9 | Role only by defining facts; false-applicable ≤ 20% (dev) | 0 Applicable on the dev cases -> 0 false-applicable; roles decided by code, no role confirmed by word match (P1 confirmed 0 times). Recall: 0 of the 3 silver-applicable dev passages Applicable (11 Art2-1 and 11 Art32-2 Indeterminate, 19 Art16-1 Irrelevant) | yes (0 false-applicable) |
+| 10 | Public-body duty -> Not applicable | GDPR-Art35-6 (case 01, the only passage with only role "public body" reaching the check) -> Not applicable by code; Art45-6, Art28-7, Art28-8 Irrelevant; Art43-2 Split invalid | yes |
+| 11 | Requirement keeps every trigger (≥ 90%) | 1/1: "at the time when personal data are obtained" kept as "When the customer's details are collected"; content items with their own triggers (DPO, recipients, (f)) left out, legal basis also left out | yes |
+| 12 | Role definitions / A1 / scope fixed, never passed to the generator | prompt + config text; tests `test_check_prompt_has_fixed_role_definitions`, `test_full_pipeline_oracle_01_1` (A1, S1 text and role definitions not in the block) | yes |
+| 13 | No situational condition lost | by reading, 21/26 splits in the pipeline: lost in GDPR-Art7-4 ×3 ("when assessing whether consent is freely given" moved into THEN) and GDPR-Art32-2 ×2 ("in assessing the appropriate level of security" replaced by "processing"; its THEN is not from this passage) | **no** |
+
+Round 3 does not meet all criteria (2, 3 and 13 fail).
+
+**Applicable passages (all IF items):**
+
+| set / case / passage | item | status | decided by | quote |
+|---|---|---|---|---|
+| oracle 01.1 GDPR-Art13-1 | R1 the duty is on: controller | confirmed | code rule (A1) | – |
+| | S1 the process handles information about identifiable people | confirmed | first look | "the sales staff write down the customer's name, phone number and email address and store them in the system" |
+| | C1 personal data relating to a data subject are collected from the data subject | confirmed | first look | same quote |
+
+**GDPR-Art13-1 (oracle 01.1) requirement:** "When the customer's details are collected, the company tells the customer
+about its identity, contact info, and why it's collecting the data." (attempt 2 of 2; step_quote "During the inquiry,
+the sales staff write down the customer's name, phone number and email address and store them in the system";
+trigger "at the time when personal data are obtained" -> "When the customer's details are collected").
+
+**Other observations.** Not applicable: Art35-6 (public body), Art30-2 ×3 (processor, no P1 fact), GDPR-Art7-4 case
+01 (C1 contradicted by "The process ends when the order is successfully placed and confirmed.", a weak quote; silver
+indeterminate). The S1 quote check downgraded 4 quotes: 3 near-verbatim in case 11 ("the customer signs up ..." for
+"a customer signs up ..."), which kept Art19-1, Art15-3, Art32-2 Indeterminate, and 1 in case 45 (the statement
+itself copied as the quote). GDPR-Art19-1's "unless ..."
+exception was put into THEN, not into exceptions.
+
+**Fallback rule (section 9).** Evaluation (b) fails, so the final version is the round with the lowest
+false-applicable rate (criterion 9): round 1 6/7 = 86%, round 2 3/4 = 75%, round 3 0 false-applicable (0 Applicable
+on the dev cases; the rate is 0/0, read here as 0 false-applicable labels). No tie, criterion 11 not needed.
+**Round 3 is final** (v2 frozen as committed in `2d80a7c`); criteria 2, 3 and 13, and recall 0/3 silver-applicable
+on the dev cases, are reported as limitations. There is no round 4.
+
 ---
 
 ## 4. Study 2: choosing the GDPR retrieval version (development cases)
