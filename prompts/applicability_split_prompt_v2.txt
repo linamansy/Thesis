@@ -1,26 +1,30 @@
 You are assisting with business process modelling. Split a rule from a legal text into its parts.
 
 INSTRUCTIONS
-- "if": the conditions that must hold for the rule to apply, for example who the parties are, what kind of situation or activity the rule is about, and what event triggers it. Write each condition as a short statement in the words of the rule. A condition says WHEN the rule applies, never what someone has to do.
-- "then": what the rule requires to be done when it applies, in the words of the rule.
-- "exceptions": the situations the rule itself names in which it does not apply (for example "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
-- Never put an obligation into "if". An "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
-- If the rule names no situation or event and simply places a duty on someone, "if" has one item: the role the duty applies to, written as a statement about the organisation, for example "the organisation acts as a processor". Never leave "if" empty in that case.
-- If the duty is placed on a public body (the Commission, a supervisory authority or a Member State), "if" has exactly one item: "the organisation is <that body>", for example "the organisation is a supervisory authority".
+- "roles": who the rule places its duty on, using only these names:
+  - "controller": the controller (the one who decides why and how personal data is used),
+  - "processor": the processor (the one who handles personal data on behalf of a controller),
+  - "public body": the Commission, a supervisory authority, a Member State or another public body,
+  - "other": anyone else, or the rule names no one.
+  If the duty is on more than one of them (for example "the controller and the processor"), list each.
+- "if": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with "where", "when" or "if"). Write each as a short statement in the words of the rule. Never put a role into "if"; roles go into "roles". Use an empty list only if the rule names no situation at all and simply places a duty on someone.
+- A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into "if": an "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
+- "then": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example "at the time when", "on request", "where applicable").
+- "exceptions": the situations the rule itself names in which it does not apply (for example "unless ..." or "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
 - Use only the legal passage below.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE (made up, for the format only)
-Rule: "If a customer pays by card, the shop must give a receipt within one day, unless the customer declines it."
-Answer: {{"if": ["a customer pays by card"], "then": "the shop must give a receipt within one day", "exceptions": ["the customer declines the receipt"]}}
+Rule: "Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it."
+Answer: {{"roles": ["other"], "if": ["a parcel is collected from a sender"], "then": "the carrier must give a receipt at the time of collection", "exceptions": ["the sender declines the receipt"]}}
 
 EXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)
-Rule: "Every carrier shall keep a record of the parcels it transports."
-Answer: {{"if": ["the organisation acts as a carrier"], "then": "the carrier must keep a record of the parcels it transports", "exceptions": []}}
+Rule: "Each processor shall keep a list of the parcels it handles on behalf of a controller."
+Answer: {{"roles": ["processor"], "if": [], "then": "the processor must keep a list of the parcels it handles on behalf of a controller", "exceptions": []}}
 
 EXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)
-Rule: "Each Member State shall publish a list of approved carriers."
-Answer: {{"if": ["the organisation is a Member State"], "then": "the Member State must publish a list of approved carriers", "exceptions": []}}
+Rule: "Where a list of approved carriers changes, each Member State shall publish it."
+Answer: {{"roles": ["public body"], "if": ["a list of approved carriers changes"], "then": "the Member State must publish the list", "exceptions": []}}
 
 JSON SCHEMA
 {schema}

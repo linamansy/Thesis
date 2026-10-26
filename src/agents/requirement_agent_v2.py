@@ -11,6 +11,11 @@ Round 1 fixes (docs/C3_V2_DEVELOPMENT.md section 7): write() runs the call (JSON
 RequirementCheckerV2 (code) checks word and sentence count, banned words and text copied from the passage. On a failed
 check the call is made once more with the failure reasons added (the JSON retry note); if that answer fails again, the
 requirement is marked requirement_invalid and the orchestrator does not pass it on.
+
+Round 3 (docs/C3_V2_DEVELOPMENT.md section 9, R6): the answer also has a step_quote (the words of the description that
+name the step) and a triggers list (each trigger of the THEN part, copied from it, with the words of the requirement
+that keep it). The code check (RequirementCheckerV2.quote_problems) finds the step_quote in the description, each
+trigger in the THEN part and each kept_as in the requirement; a failure is handled like the other checks.
 """
 
 from pydantic import BaseModel, Field
@@ -20,8 +25,16 @@ from src.config import load_config
 from src.mediation.requirement_checker_v2 import RequirementCheckerV2
 
 
+class TriggerKept(BaseModel):
+    trigger: str = Field(description="A trigger or condition of the obligation, copied exactly from the OBLIGATION")
+    kept_as: str = Field(description="The words of the requirement, copied exactly, that keep this trigger")
+
+
 class RequirementOutputV2(BaseModel):
     requirement: str = Field(description="One or two sentences: what the rule requires, tied to the process step")
+    step_quote: str = Field(description="Exact words copied from the process description that name the step")
+    triggers: list[TriggerKept] = Field(description="Every trigger or condition the obligation states; empty list "
+                                                    "if none")
 
 
 class RequirementAgentV2(BaseAgent):
@@ -57,8 +70,10 @@ class RequirementAgentV2(BaseAgent):
             if output is None:
                 self.check_note = ""
                 return None
-            problems = self.checker.problems(output.requirement, inputs["passage_text"])
-            attempts.append({"requirement": output.requirement, "problems": problems,
+            problems = (self.checker.problems(output.requirement, inputs["passage_text"])
+                        + self.checker.quote_problems(output, inputs["description"], inputs["then"]))
+            attempts.append({"requirement": output.requirement, "step_quote": output.step_quote,
+                             "triggers": [t.model_dump() for t in output.triggers], "problems": problems,
                              "measures": self.checker.measure(output.requirement, inputs["passage_text"])})
             if not problems:
                 break

@@ -24,7 +24,7 @@ DESCRIPTION = "The customer chooses a product. The customer pays by card. The sh
 PASSAGE = "If a customer pays by card, the shop must give a receipt, unless the customer declines it."
 OTHER_PASSAGE = "A card means a payment card issued by a bank."
 
-SPLIT = {"if": ["a customer pays by card"], "then": "the shop must give a receipt",
+SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": ["the customer declines the receipt"]}
 CONFIRMED = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"},
                          {"id": "E1", "status": "not_stated", "quote": None}]}
@@ -33,7 +33,10 @@ NOT_STATED = {"results": [{"id": "C1", "status": "not_stated", "quote": None},
 RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card", "relevant": True,
             "process_step": "the customer pays by card", "description_quote": "The customer pays by card",
             "reason": "The process has a card payment step."}
-REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer."}
+REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer.",
+               "step_quote": "The customer pays by card", "triggers": []}
+BAD_REQUIREMENT = {"requirement": "The controller must give a receipt.", "step_quote": "The customer pays by card",
+                   "triggers": []}
 
 RUN_IDS = itertools.count()   # every agent gets its own log file (RunLogger never writes into an existing one)
 
@@ -67,7 +70,8 @@ def orchestrator(tmp_path, answers, passages=None):
 def test_valid_split(tmp_path):
     record, llm = first_look(tmp_path, [SPLIT, CONFIRMED])
     assert record["split_valid"] is True and record["split"] == SPLIT
-    assert [(c["id"], c["text"]) for c in record["conditions"]] == [("C1", "a customer pays by card")]
+    assert [(c["id"], c["kind"], c["text"]) for c in record["conditions"]] == \
+        [("R1", "role", "the duty is on: controller"), ("C1", "situation", "a customer pays by card")]
     assert [(e["id"], e["text"]) for e in record["exceptions"]] == [("E1", "the customer declines the receipt")]
     split_prompt, check_prompt = llm.prompts_received
     assert PASSAGE in split_prompt and DESCRIPTION not in split_prompt          # the split sees the law text only
@@ -85,30 +89,35 @@ def test_obligation_word_in_if_is_rejected(tmp_path):
 
 
 def test_empty_if_list(tmp_path):
-    record, llm = first_look(tmp_path, [dict(SPLIT, **{"if": []}), CONFIRMED])
-    assert (record["split_valid"], record["label"], record["conditions"]) == (True, INDETERMINATE, [])
-    assert len(llm.prompts_received) == 1                                        # nothing to check
-    assert ResolverV2().resolve(record)["label"] == INDETERMINATE
+    # round 3 (R1): a duty with no situation has only the role item; the controller role is decided by code (A1)
+    record, llm = first_look(tmp_path, [dict(SPLIT, **{"if": [], "exceptions": []})])
+    assert (record["split_valid"], record["label"], [c["id"] for c in record["conditions"]]) == (True, APPLICABLE, ["R1"])
+    assert record["conditions"][0]["decided_by"] == "code rule"
+    assert len(llm.prompts_received) == 1                                        # nothing needs a quote: no check call
+    assert ResolverV2().resolve(record)["label"] == APPLICABLE
+    record, llm = first_look(tmp_path, [dict(SPLIT, **{"if": [], "roles": ["other"], "exceptions": []})])
+    assert record["label"] == INDETERMINATE and record["conditions"][0]["status"] == "not_stated"
 
 
 # ---------- box 2: check-IF, quote check, first look ----------
 
 def test_real_quote_confirms_and_fake_quote_becomes_not_stated(tmp_path):
     record, _ = first_look(tmp_path, [SPLIT, CONFIRMED])
-    c1 = record["conditions"][0]
+    c1 = record["conditions"][1]
     assert (c1["status"], c1["quote_found"], c1["downgraded"], record["label"]) == ("confirmed", True, False, APPLICABLE)
+    assert c1["decided_by"] == "first look"
 
     fake = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays in cash"},
                         {"id": "E1", "status": "not_stated", "quote": None}]}
     record, _ = first_look(tmp_path, [SPLIT, fake])
-    c1 = record["conditions"][0]
+    c1 = record["conditions"][1]
     assert (c1["original_status"], c1["status"], c1["quote_found"], c1["downgraded"]) == \
         ("confirmed", "not_stated", False, True)
     assert record["label"] == INDETERMINATE
 
     no_quote = {"results": [{"id": "C1", "status": "confirmed", "quote": None}, NOT_STATED["results"][1]]}
     record, _ = first_look(tmp_path, [SPLIT, no_quote])
-    assert (record["conditions"][0]["status"], record["conditions"][0]["quote_found"]) == ("not_stated", None)
+    assert (record["conditions"][1]["status"], record["conditions"][1]["quote_found"]) == ("not_stated", None)
 
 
 def test_contradicted_gives_not_applicable(tmp_path):
@@ -145,12 +154,13 @@ def test_second_look_resolves(tmp_path):
     a = record["applicability"]
     assert (a["first_look_label"], a["look"], a["second_look_decided"], a["label"]) == \
         (INDETERMINATE, "second", True, APPLICABLE)
-    assert (a["conditions"][0]["first_look_status"], a["conditions"][0]["status"]) == ("not_stated", "confirmed")
+    assert (a["conditions"][1]["first_look_status"], a["conditions"][1]["status"]) == ("not_stated", "confirmed")
+    assert a["conditions"][1]["decided_by"] == "second look"
     assert record["label"] == APPLICABLE and record["requirement"]["requirement"] == REQUIREMENT["requirement"]
     second_prompt = llm.prompts_received[3]
     assert "[P-1] " + PASSAGE in second_prompt and "[P-2] " + OTHER_PASSAGE in second_prompt   # all passages
     assert DESCRIPTION in second_prompt and "C1: a customer pays by card" in second_prompt
-    assert "E1" not in second_prompt                                             # only the open IF conditions
+    assert "E1" not in second_prompt and "R1" not in second_prompt              # only open situational conditions
 
 
 def test_second_look_stays_indeterminate(tmp_path):
@@ -158,7 +168,7 @@ def test_second_look_stays_indeterminate(tmp_path):
     orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, NOT_STATED, second], passages=TWO_PASSAGES)
     record = orch.mediate_passage("c", DESCRIPTION, TWO_PASSAGES[0], TWO_PASSAGES)
     a = record["applicability"]
-    assert (a["look"], a["second_look_decided"], a["conditions"][0]["downgraded"]) == ("second", False, True)
+    assert (a["look"], a["second_look_decided"], a["conditions"][1]["downgraded"]) == ("second", False, True)
     assert record["label"] == INDETERMINATE and record["requirement"] is None
     assert len(llm.prompts_received) == 4                                        # no requirement call
 
@@ -172,16 +182,30 @@ def test_first_look_decision_has_no_second_look(tmp_path):
 
 # ---------- box 3: resolver ----------
 
+ROLE_OK = {"id": "R1", "kind": "role", "text": "the duty is on: controller", "status": "confirmed",
+           "decided_by": "code rule"}
+
+
 def test_resolver_with_exception():
-    conditions = [{"text": "a customer pays by card", "status": "confirmed"}]
-    applies = {"conditions": conditions, "exceptions": [{"text": "the customer declines", "status": "confirmed"}]}
-    result = ResolverV2().resolve(applies)
+    conditions = [ROLE_OK, {"id": "C1", "kind": "situation", "text": "a customer pays by card", "status": "confirmed",
+                            "quote_found": True, "decided_by": "first look"}]
+    declines = {"text": "the customer declines", "status": "confirmed", "quote_found": True}
+    result = ResolverV2().resolve({"conditions": conditions, "exceptions": [declines]})
     assert (result["label"], result["if_label"], result["exceptions_applying"]) == \
         (NOT_APPLICABLE, APPLICABLE, ["the customer declines"])
-    unknown = {"conditions": conditions, "exceptions": [{"text": "the customer declines", "status": "not_stated"}]}
+    assert result["decided_by"] == {"R1": "code rule", "C1": "first look"}
+    unknown = {"conditions": conditions, "exceptions": [dict(declines, status="not_stated", quote_found=None)]}
     assert ResolverV2().resolve(unknown)["label"] == APPLICABLE                  # an unstated exception does not block
-    open_if = {"conditions": [{"text": "x", "status": "not_stated"}], "exceptions": []}
+    open_if = {"conditions": [ROLE_OK, {"id": "C1", "text": "x", "status": "not_stated"}], "exceptions": []}
     assert ResolverV2().resolve(open_if)["label"] == INDETERMINATE
+
+
+def test_resolver_needs_quote_or_code_rule_and_a_role_item():
+    unchecked = {"id": "C1", "kind": "situation", "text": "x", "status": "confirmed", "quote_found": False}
+    assert ResolverV2().resolve({"conditions": [ROLE_OK, unchecked], "exceptions": []})["label"] == INDETERMINATE
+    no_role = {"id": "C1", "kind": "situation", "text": "x", "status": "confirmed", "quote_found": True}
+    result = ResolverV2().resolve({"conditions": [no_role], "exceptions": []})
+    assert (result["label"], result["reason"]) == (INDETERMINATE, "the IF list has no role item (R1)")
 
 
 def test_stated_exception_blocks_requirement_in_orchestrator(tmp_path):
@@ -257,17 +281,19 @@ REQ_INPUTS = dict(description=DESCRIPTION, passage_id="P-1", passage_text=PASSAG
                   process_step="the customer pays by card", description_quote="The customer pays by card")
 
 
-def test_split_prompt_has_role_rule_and_example():
+def test_split_prompt_has_role_field_and_examples():
+    # round 3 (R1): roles in their own field, every situational condition in "if"
     text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
-    assert '"the organisation acts as a processor"' in text
-    assert "EXAMPLE WITH NO SITUATIONAL CONDITION" in text and "the organisation acts as a carrier" in text
+    assert "Never put a role into \"if\"; roles go into \"roles\"" in text
+    assert "EXAMPLE WITH NO SITUATIONAL CONDITION" in text and '{{"roles": ["processor"], "if": []' in text
     assert 'must not contain the words "must", "shall" or "is required to"' in text   # obligation check unchanged
 
 
-def test_role_if_passes_obligation_check(tmp_path):
-    role_split = {"if": ["the organisation acts as a shop"], "then": "the shop must keep a list", "exceptions": []}
-    record, _ = first_look(tmp_path, [role_split, {"results": [{"id": "C1", "status": "not_stated", "quote": None}]}])
-    assert record["split_valid"] is True and record["conditions"][0]["text"] == "the organisation acts as a shop"
+def test_unknown_role_name_gets_the_json_retry(tmp_path):
+    record, llm = first_look(tmp_path, [dict(SPLIT, roles=["trader"]), SPLIT, CONFIRMED])
+    assert record["label"] == APPLICABLE and len(llm.prompts_received) == 3
+    record, llm = first_look(tmp_path, [dict(SPLIT, roles=[]), dict(SPLIT, roles=[])])
+    assert record["failed_step"] == "split"                                      # at least one role is required
 
 
 def test_checker_passes_plain_requirement():
@@ -313,7 +339,7 @@ def test_requirement_prompt_has_limits_and_no_check_note(tmp_path):
 
 
 def test_failed_check_gets_one_retry_with_reason(tmp_path):
-    bad = {"requirement": "The controller must give a receipt."}
+    bad = BAD_REQUIREMENT
     agent = RequirementAgentV2(mock([bad, REQUIREMENT]), logger(tmp_path))
     result = agent.write("x", **REQ_INPUTS)
     assert result["requirement"] == REQUIREMENT["requirement"] and result["requirement_invalid"] is False
@@ -323,7 +349,7 @@ def test_failed_check_gets_one_retry_with_reason(tmp_path):
 
 
 def test_failing_twice_gives_requirement_invalid_not_passed_on(tmp_path):
-    bad = {"requirement": "The controller must give a receipt."}
+    bad = BAD_REQUIREMENT
     orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, CONFIRMED, bad, bad])
     result = orch.mediate_case("c", DESCRIPTION)
     p = result["passages"][0]
@@ -335,7 +361,7 @@ def test_failing_twice_gives_requirement_invalid_not_passed_on(tmp_path):
 
 def test_round1_eval_counts(tmp_path):
     from src.c3_v2_round1_eval import log_calls, metrics
-    bad = {"requirement": "The controller must give a receipt."}
+    bad = BAD_REQUIREMENT
     orch, _ = orchestrator(tmp_path, ["bad", RELEVANT, SPLIT, CONFIRMED, bad, REQUIREMENT])
     record = {"set": "s", "case_id": "c"} | orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1",
                                                                                   "text": PASSAGE}, [])
@@ -354,21 +380,19 @@ ROLE_DEFINITIONS = ("- controller: an organisation that decides why and how pers
                     "decides why and how the data is used.")
 
 
-def test_split_prompt_has_public_body_rule_and_example():
+def test_split_prompt_has_public_body_role_and_example():
     text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
-    assert '"if" has exactly one item: "the organisation is <that body>"' in text
-    assert "the Commission, a supervisory authority or a Member State" in text
-    assert '{{"if": ["the organisation is a Member State"]' in text
+    assert '"public body": the Commission, a supervisory authority, a Member State' in text
+    assert '{{"roles": ["public body"]' in text
 
 
-def test_public_body_if_contradicted_gives_not_applicable(tmp_path):
-    split = {"if": ["the organisation is a supervisory authority"], "then": "the authority must publish a list",
-             "exceptions": []}
-    contradicted = {"results": [{"id": "C1", "status": "contradicted", "quote": "The shop sends the product"}]}
-    orch, llm = orchestrator(tmp_path, [RELEVANT, split, contradicted])
+def test_public_body_role_contradicted_by_code_gives_not_applicable(tmp_path):
+    split = {"roles": ["public body"], "if": [], "then": "the authority must publish a list", "exceptions": []}
+    orch, llm = orchestrator(tmp_path, [RELEVANT, split])
     p = orch.mediate_case("c", DESCRIPTION)["passages"][0]
     assert p["label"] == NOT_APPLICABLE and p["requirement"] is None
-    assert len(llm.prompts_received) == 3                                        # no second look, no requirement call
+    assert p["applicability"]["conditions"][0]["decided_by"] == "code rule"
+    assert len(llm.prompts_received) == 2                                        # no check, second look or requirement
 
 
 def test_check_prompt_has_fixed_role_definitions(tmp_path):
@@ -380,7 +404,7 @@ def test_check_prompt_has_fixed_role_definitions(tmp_path):
         prompts.append(llm.prompts_received[1])
     for prompt in prompts:                                                       # the same text for every case
         assert "ROLE DEFINITIONS (fixed, the same for every process)\n" + ROLE_DEFINITIONS in prompt
-        assert "never confirms it" in prompt and '"contradicted" if the description shows that the organisation is a business' in prompt
+        assert "never confirms it" in prompt
         assert '{"id": "C2", "status": "not_stated", "quote": null}' in prompt  # example: "processed" is no processor
 
 

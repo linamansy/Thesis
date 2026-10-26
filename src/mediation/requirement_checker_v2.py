@@ -6,11 +6,16 @@ A requirement passes only if
   - at most max_copied_share of its word sequences of length ngram also appear in the legal passage.
 All limits are in config.yaml c3_v2.requirement_checks. problems() returns the reasons a requirement fails (an empty
 list = it passes); the reasons are sent back to the model in the one retry of RequirementAgentV2.
+
+Round 3 (R6), quote_problems(): the step_quote must appear in the process description, every trigger in the THEN part
+and every kept_as in the requirement (QuoteChecker: whole words, same order). Whether the list names EVERY trigger is
+not checked by code; it is judged by reading (criterion 11).
 """
 
 import re
 
 from src.config import load_config
+from src.mediation.quote_checker import QuoteChecker
 
 WORD = re.compile(r"[a-z0-9]+(?:'[a-z]+)?")
 
@@ -35,6 +40,7 @@ class RequirementCheckerV2:
         self.max_copied_share = settings["max_copied_share"]
         alternatives = "|".join(re.escape(w) for w in self.banned_words)
         self.banned_pattern = re.compile(rf"\b({alternatives})s?\b", re.IGNORECASE)
+        self.quote_checker = QuoteChecker()
 
     def measure(self, requirement: str, passage_text: str) -> dict:
         """The numbers the checks use."""
@@ -60,4 +66,16 @@ class RequirementCheckerV2:
         if m["copied_share"] > self.max_copied_share:
             found.append(f"{m['n_copied_ngrams']} of its {m['n_ngrams']} sequences of {self.n} words are copied from "
                          f"the legal passage; use your own plain words")
+        return found
+
+    def quote_problems(self, output, description: str, then: str) -> list[str]:
+        """output: RequirementOutputV2 (requirement, step_quote, triggers)."""
+        found = []
+        if not self.quote_checker.found(output.step_quote, description):
+            found.append("the step_quote is not copied word for word from the process description")
+        for t in output.triggers:
+            if not self.quote_checker.found(t.trigger, then):
+                found.append(f'the trigger "{t.trigger}" is not copied word for word from the OBLIGATION')
+            if not self.quote_checker.found(t.kept_as, output.requirement):
+                found.append(f'the kept_as words "{t.kept_as}" are not copied word for word from the requirement')
         return found

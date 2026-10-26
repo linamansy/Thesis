@@ -317,6 +317,7 @@ paths:
   relevance_v2_dev_dir: results/diagnostics/relevance_v2_dev  # C3 v2: development test of RelevanceAgentV2, one folder per round
   c3_v2_round1_dir: results/diagnostics/c3_v2_round1   # C3 v2 round 1 fixes (section 7): agent-only evaluation, no generation
   c3_v2_round2_dir: results/diagnostics/c3_v2_round2   # C3 v2 round 2 (section 8): same evaluation, round 2 prompts
+  c3_v2_round3_dir: results/diagnostics/c3_v2_round3   # C3 v2 round 3 (section 9, final): same evaluation, round 3 logic
 
 study2_gdpr:
   # STUDY 2 only (GDPR corpus, added 24 Oct 2026). Separate paths so that nothing of Study 1 (data/knowledge/,
@@ -419,6 +420,17 @@ study2_laws:
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
   obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid
+  # Round 3 (section 9): roles and scope are decided by code (ApplicabilityAgentV2), fixed for every case and never
+  # passed to the generator.
+  roles:                          # the role names the split may give for the duty holder (R1, R3)
+    controller: assumed           # A1 below: confirmed by code, no quote
+    processor: needs_fact         # confirmed only if processor_fact is confirmed with a checked quote, else contradicted
+    public body: contradicted     # the Commission, a supervisory authority, a Member State: never a business process
+    other: not_stated             # any other duty holder: code cannot decide it
+  controller_assumption: "the organisation running the described process is the controller of the personal data it collects in that process"   # A1
+  processor_fact: "the organisation handles personal data on behalf of another organisation"   # checked like an IF item
+  scope_conditions:               # R2: passage id prefix -> scope IF item added by code to every passage of that law
+    "GDPR-": "the process handles information about identifiable people"
   requirement_checks:   # code checks of RequirementAgentV2's answer (section 7, criteria 4-6; src/mediation/requirement_checker_v2.py)
     max_words: 40
     max_sentences: 2
