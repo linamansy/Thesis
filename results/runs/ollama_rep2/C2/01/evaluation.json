@@ -1,0 +1,148 @@
+{
+  "run_id": "ollama_rep2",
+  "repetition": 2,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "01",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 50, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep2/C2/01/generated.bpmn, line 50)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 3,
+    "n_reference_tasks": 8,
+    "n_matched": 2,
+    "precision": 0.6666666666666666,
+    "recall": 0.25,
+    "f1": 0.36363636363636365,
+    "matched": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Provide Quote",
+        "reference_id": "Task_4",
+        "reference_label": "Provide quote",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Place Order",
+        "reference_id": "Task_6",
+        "reference_label": "Place order",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Record order in system"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Collect customer information"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Guide customer in selecting product/service"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Receive customer inquiry"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Address customer concerns or questions"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Send order confirmation to customer"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Collect Information"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 1,
+    "n_same": 1,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Provide quote",
+          "Place order"
+        ],
+        "generated_tasks": [
+          "Provide Quote",
+          "Place Order"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 1,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Collect Information",
+        "similarity_to_knowledge": 0.3108,
+        "similarity_to_description": 0.3871,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.6667,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2431,
+    "output_tokens": 2931,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 67.455,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 16,
+    "tasks": 8,
+    "gateways": 6,
+    "loops": 0,
+    "nesting_depth": 2,
+    "cfc": 5
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

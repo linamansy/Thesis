@@ -1,0 +1,206 @@
+{
+  "run_id": "ollama_rep2",
+  "repetition": 2,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "10",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 56, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep2/C1/10/generated.bpmn, line 56)"
+    ],
+    "bpmnlint_valid": false,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 7,
+    "n_reference_tasks": 9,
+    "n_matched": 3,
+    "precision": 0.42857142857142855,
+    "recall": 0.3333333333333333,
+    "f1": 0.375,
+    "matched": [
+      {
+        "generated_id": "t4",
+        "generated_label": "Install Solution",
+        "reference_id": "Task_1",
+        "reference_label": "Install the solution",
+        "similarity": 0.9249
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Test Solution",
+        "reference_id": "Task_6",
+        "reference_label": "Test solution",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Provide Training",
+        "reference_id": "Task_8",
+        "reference_label": "Provide training",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Assess compatibility"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Evaluate cost and resource needs"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Procure necessary tools or licenses"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Submit IT solution request"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Roll out solution to requesting department"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Provide support for troubleshooting"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Submit Request"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Assess Request"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Procure Solution"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Roll Out Solution"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 3,
+    "n_same": 3,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Install the solution",
+          "Test solution"
+        ],
+        "generated_tasks": [
+          "Install Solution",
+          "Test Solution"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Install the solution",
+          "Provide training"
+        ],
+        "generated_tasks": [
+          "Install Solution",
+          "Provide Training"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Test solution",
+          "Provide training"
+        ],
+        "generated_tasks": [
+          "Test Solution",
+          "Provide Training"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 4,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Submit Request",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Assess Request",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Procure Solution",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Roll Out Solution",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.4286,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1795,
+    "output_tokens": 3611,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 5,
+      "first_task_inserted": false
+    },
+    "seconds": 82.201,
+    "bpmnlint_valid": false
+  },
+  "reference_complexity": {
+    "flow_nodes": 23,
+    "tasks": 9,
+    "gateways": 12,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 10
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

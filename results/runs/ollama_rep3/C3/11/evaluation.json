@@ -1,0 +1,246 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C3",
+  "case_id": "11",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 50, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C3/11/generated.bpmn, line 50)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 6,
+    "n_reference_tasks": 12,
+    "n_matched": 4,
+    "precision": 0.6666666666666666,
+    "recall": 0.3333333333333333,
+    "f1": 0.4444444444444444,
+    "matched": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Generate Account",
+        "reference_id": "Task_4",
+        "reference_label": "Generate account",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Assign Access",
+        "reference_id": "Task_1",
+        "reference_label": "Assign access",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Trigger Billing Cycles",
+        "reference_id": "Task_11",
+        "reference_label": "Set automatic triggers for billing cycles",
+        "similarity": 0.888
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Apply Refunds or Charges",
+        "reference_id": "Task_8",
+        "reference_label": "apply refund",
+        "similarity": 0.8598
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Customer submits cancellation request"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "apply charges"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Send regular updates"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Deactivate subscription"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Settle final account balance"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Send renewal notifications"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Customer signs up"
+      },
+      {
+        "reference_id": "Task_12",
+        "reference_label": "Send product enhancements"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Submit Subscription Request"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Process Cancellation Request"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.8333333333333334,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 5,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Generate account",
+          "Assign access"
+        ],
+        "generated_tasks": [
+          "Generate Account",
+          "Assign Access"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate account",
+          "Set automatic triggers for billing cycles"
+        ],
+        "generated_tasks": [
+          "Generate Account",
+          "Trigger Billing Cycles"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate account",
+          "apply refund"
+        ],
+        "generated_tasks": [
+          "Generate Account",
+          "Apply Refunds or Charges"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Assign access",
+          "Set automatic triggers for billing cycles"
+        ],
+        "generated_tasks": [
+          "Assign Access",
+          "Trigger Billing Cycles"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Assign access",
+          "apply refund"
+        ],
+        "generated_tasks": [
+          "Assign Access",
+          "Apply Refunds or Charges"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Set automatic triggers for billing cycles",
+          "apply refund"
+        ],
+        "generated_tasks": [
+          "Trigger Billing Cycles",
+          "Apply Refunds or Charges"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 2,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Submit Subscription Request",
+        "similarity_to_knowledge": 0.2266,
+        "similarity_to_description": 0.5925,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Process Cancellation Request",
+        "similarity_to_knowledge": 0.3219,
+        "similarity_to_description": 0.6345,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.6667,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2238,
+    "output_tokens": 2973,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 68.004,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 26,
+    "tasks": 12,
+    "gateways": 12,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 10
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

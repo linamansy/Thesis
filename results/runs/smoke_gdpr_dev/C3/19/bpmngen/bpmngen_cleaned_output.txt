@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Choose Reward" sourceRef="t6" targetRef="se7"/>
+    <bpmn:messageFlow id="mf7" name="Reward Selected" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmed" sourceRef="t8" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf9" name="Delivery Request" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf10" name="Delivery" sourceRef="t10" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf11" name="Return Request" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf12" name="Return Accepted" sourceRef="t12" targetRef="se13"/>
+    <bpmn:messageFlow id="mf13" name="New Delivery" sourceRef="t13" targetRef="ice3"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward"/>
+    <bpmn:task id="t7" name="Confirm Reward Selection"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Receive Delivery"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="Confirm Return"/>
+    <bpmn:task id="t13" name="Request New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t10" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t12" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t13" targetRef="t9"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Login Request">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:startEvent id="se3" name="Select Items Request">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="se4" name="Set Payment Method Request">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="se5" name="Payment Request">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="se6" name="Installment Agreement Request">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="se7" name="Reward Selection Request">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Delivery Request">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:startEvent id="se10" name="Delivery Request">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:startEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Return Accepted">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:startEvent id="se12" name="Return Request">
+      <bpmn:messageEventDefinition id="med11"/>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="ee2" name="Delivery Complete"/>
+    <bpmn:endEvent id="ee3" name="Return Complete"/>
+    <bpmn:task id="t1_dup2" name="Validate Login"/>
+    <bpmn:task id="t2_dup2" name="Process Items Selection"/>
+    <bpmn:task id="t3_dup2" name="Process Payment Method"/>
+    <bpmn:task id="t4_dup2" name="Process Payment"/>
+    <bpmn:task id="t5_dup2" name="Process Installment Agreement"/>
+    <bpmn:task id="t6_dup2" name="Process Reward Selection"/>
+    <bpmn:task id="t7_dup2" name="Confirm Reward"/>
+    <bpmn:task id="t8_dup2" name="Process Order Confirmation"/>
+    <bpmn:task id="t9_dup2" name="Process Delivery"/>
+    <bpmn:task id="t10_dup2" name="Process Return"/>
+    <bpmn:task id="t11_dup2" name="Process New Delivery"/>
+    <bpmn:sequenceFlow id="f1_dup2" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2_dup2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3_dup2" sourceRef="se3" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4_dup2" sourceRef="se4" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f5_dup2" sourceRef="se5" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6_dup2" sourceRef="se6" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7_dup2" sourceRef="se7" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f8_dup2" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f9_dup2" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f10_dup2" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11_dup2" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f12_dup2" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f13_dup2" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14_dup2" sourceRef="ice2" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f15_dup2" sourceRef="se10" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16_dup2" sourceRef="t9" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f17_dup2" sourceRef="ice3" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se12" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t11" targetRef="se10"/>
+  
+    <bpmn:sequenceFlow id="auto_link_out_ice1_to_se3" sourceRef="ice1" targetRef="se3"/>
+    <bpmn:sequenceFlow id="auto_link_in_se3_to_se4" sourceRef="se3" targetRef="se4"/>
+    <bpmn:sequenceFlow id="auto_link_in_se4_to_se5" sourceRef="se4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="auto_link_in_se5_to_se6" sourceRef="se5" targetRef="se6"/>
+    <bpmn:sequenceFlow id="auto_link_in_se6_to_se7" sourceRef="se6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="auto_link_in_se7_to_ice2" sourceRef="se7" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="auto_link_in_se10_to_ice3" sourceRef="se10" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="auto_link_in_ice3_to_se12" sourceRef="ice3" targetRef="se12"/>
+    <bpmn:sequenceFlow id="auto_link_out_ee2_to_ee3" sourceRef="ee2" targetRef="ee3"/>
+    <bpmn:sequenceFlow id="auto_link_out_ee3_to_t1" sourceRef="ee3" targetRef="t1"/>
+    <bpmn:sequenceFlow id="auto_link_out_t8_to_t9" sourceRef="t8" targetRef="t9"/>
+  </bpmn:process>
+</bpmn:definitions>

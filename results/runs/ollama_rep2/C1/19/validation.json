@@ -1,0 +1,39 @@
+{
+  "case_id": "19",
+  "condition": "C1",
+  "run_id": "ollama_rep2",
+  "generation_succeeded": true,
+  "parses": false,
+  "valid": false,
+  "errors": [
+    "could not parse XML: error parsing attribute name, line 92, column 1 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep2/C1/19/generated.bpmn, line 92)"
+  ],
+  "counts": null,
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1827,
+    "output_tokens": 1857,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": true,
+    "think_tags_in_answer": 1,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 5,
+      "first_task_inserted": false
+    },
+    "seconds": 41.598,
+    "bpmnlint_valid": false
+  },
+  "thinking_detected": true,
+  "warnings": [
+    "the model produced thinking text despite think=False (0 chars in Ollama's thinking field, see bpmngen/raw_thinking.txt; 1 think tag(s) in the answer)"
+  ]
+}

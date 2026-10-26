@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Procurement Team" processRef="ProcurementProcess"/>
+    <bpmn:participant id="p2" name="Suppliers" processRef="SupplierProcess"/>
+    <bpmn:messageFlow id="mf1" name="RFP Sent" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Proposals Received" sourceRef="se2" targetRef="t2"/>
+    <bpmn:messageFlow id="mf3" name="Evaluation Results" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Site Visit Request" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Site Visit Confirmation" sourceRef="se5" targetRef="t5"/>
+    <bpmn:messageFlow id="mf6" name="Contract Terms" sourceRef="t6" targetRef="se6"/>
+    <bpmn:messageFlow id="mf7" name="Contract Signed" sourceRef="se6" targetRef="t7"/>
+    <bpmn:messageFlow id="mf8" name="Onboarding Confirmation" sourceRef="t7" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="ProcurementProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Need Identified"/>
+    <bpmn:task id="t1" name="Issue RFP"/>
+    <bpmn:task id="t2" name="Receive Proposals"/>
+    <bpmn:exclusiveGateway id="g1" name="Evaluate Proposals"/>
+    <bpmn:task id="t3" name="Conduct Site Visits"/>
+    <bpmn:task id="t4" name="Interview Suppliers"/>
+    <bpmn:task id="t5" name="Select Supplier"/>
+    <bpmn:task id="t6" name="Negotiate Contract"/>
+    <bpmn:task id="t7" name="Onboard Supplier"/>
+    <bpmn:endEvent id="ee1" name="Supplier Onboarded"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="g1" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t7" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SupplierProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="RFP Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Submit Proposal"/>
+    <bpmn:task id="t3" name="Prepare for Site Visit"/>
+    <bpmn:task id="t4" name="Conduct Site Visit"/>
+    <bpmn:task id="t5" name="Provide Interview Details"/>
+    <bpmn:task id="t6" name="Confirm Selection"/>
+    <bpmn:task id="t7" name="Sign Contract"/>
+    <bpmn:endEvent id="ee1" name="Onboarding Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequence,Flow id="f5" sourceRef="t5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t7" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="ProcurementProcess_1" bpmnElement="se1">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_2" bpmnElement="t1">
+        <dc:Bounds x="200" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_3" bpmnElement="t2">
+        <dc:Bounds x="300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_4" bpmnElement="g1">
+        <dc:Bounds x="400" y="100" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_5" bpmnElement="t3">
+        <dc:Bounds x="500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_6" bpmnElement="t4">
+        <dc:Bounds x="600" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_7" bpmnElement="t5">
+        <dc:Bounds x="700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_8" bpmnElement="t6">
+        <dc:Bounds x="800" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_9" bpmnElement="t7">
+        <dc:Bounds x="900" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_10" bpmnElement="ee1">
+        <dc:Bounds x="1000" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_1" bpmnElement="se2">
+        <dc:Bounds x="100" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_2" bpmnElement="t2">
+        <dc:Bounds x="200" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_3" bpmnElement="t3">
+        <dc:Bounds x="300" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_4" bpmnElement="t4">
+        <dc:Bounds x="400" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_5" bpmnElement="t5">
+        <dc:Bounds x="500" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_6" bpmnElement="t6">
+        <dc:Bounds x="600" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_7" bpmnElement="t7">
+        <dc:Bounds x="700" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_8" bpmnElement="ee1">
+        <dc:Bounds x="800" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f1" sourceRef="ProcurementProcess_1" targetRef="ProcurementProcess_2">
+        <di:waypoint x="150" y="140"/>
+        <di:waypoint x="250" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f2" sourceRef="ProcurementProcess_2" targetRef="ProcurementProcess_3">
+        <di:waypoint x="300" y="140"/>
+        <di:waypoint x="400" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f3" sourceRef="ProcurementProcess_3" targetRef="ProcurementProcess_4">
+        <di:waypoint x="450" y="140"/>
+        <di:waypoint x="500" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f4" sourceRef="ProcurementProcess_4" targetRef="ProcurementProcess_5">
+        <di:waypoint x="550" y="140"/>
+        <di:waypoint x="650" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f5" sourceRef="ProcurementProcess_5" targetRef="ProcurementProcess_6">
+        <di:waypoint x="700" y="140"/>
+        <di:waypoint x="800" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f6" sourceRef="ProcurementProcess_6" targetRef="ProcurementProcess_7">
+        <di:waypoint x="850" y="140"/>
+        <di:waypoint x="950" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f7" sourceRef="ProcurementProcess_7" targetRef="ProcurementProcess_8">
+        <di:waypoint x="1000" y="140"/>
+        <di:waypoint x="1100" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f8" sourceRef="ProcurementProcess_8" targetRef="ProcurementProcess_9">
+        <di:waypoint x="1150" y="140"/>
+        <di:waypoint x="1250" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="ProcurementProcess_f9" sourceRef="ProcurementProcess_9" targetRef="ProcurementProcess_10">
+        <di:waypoint x="1300" y="140"/>
+        <di:waypoint x="1400" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f1" sourceRef="SupplierProcess_1" targetRef="SupplierProcess_2">
+        <di:waypoint x="150" y="320"/>
+        <di:waypoint x="250" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f2" sourceRef="SupplierProcess_2" targetRef="SupplierProcess_3">
+        <di:waypoint x="300" y="320"/>
+        <di:waypoint x="400" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f3" sourceRef="SupplierProcess_3" targetRef="SupplierProcess_4">
+        <di:waypoint x="450" y="320"/>
+        <di:waypoint x="550" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f4" sourceRef="SupplierProcess_4" targetRef="SupplierProcess_5">
+        <di:waypoint x="600" y="320"/>
+        <di:waypoint x="700" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f5" sourceRef="SupplierProcess_5" targetRef="SupplierProcess_6">
+        <di:waypoint x="750" y="320"/>
+        <di:waypoint x="850" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f6" sourceRef="SupplierProcess_6" targetRef="SupplierProcess_7">
+        <di:waypoint x="900" y="320"/>
+        <di:waypoint x="1000" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SupplierProcess_f7" sourceRef="SupplierProcess_7" targetRef="SupplierProcess_8">
+        <di:waypoint x="1050" y="320"/>
+        <di:waypoint x="1150" y="320"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf1" sourceRef="ProcurementProcess_2" targetRef="SupplierProcess_1">
+        <di:waypoint x="300" y="100"/>
+        <di:waypoint x="100" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf2" sourceRef="SupplierProcess_2" targetRef="ProcurementProcess_3">
+        <di:waypoint x="200" y="260"/>
+        <di:waypoint x="300" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf3" sourceRef="ProcurementProcess_9" targetRef="SupplierProcess_8">
+        <di:waypoint x="1250" y="100"/>
+        <di:waypoint x="800" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf4" sourceRef="ProcurementProcess_5" targetRef="SupplierProcess_3">
+        <di:waypoint x="550" y="100"/>
+        <di:waypoint x="300" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf5" sourceRef="SupplierProcess_4" targetRef="ProcurementProcess_6">
+        <di:waypoint x="400" y="260"/>
+        <di:waypoint x="600" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf6" sourceRef="SupplierProcess_6" targetRef="ProcurementProcess_7">
+        <di:waypoint x="600" y="260"/>
+        <di:waypoint x="800" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf7" sourceRef="SupplierProcess_7" targetRef="ProcurementProcess_8">
+        <di:waypoint x="700" y="260"/>
+        <di:waypoint x="900" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf8" sourceRef="ProcurementProcess_10" targetRef="SupplierProcess_8">
+        <di:waypoint x="1400" y="100"/>
+        <di:waypoint x="800" y="260"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

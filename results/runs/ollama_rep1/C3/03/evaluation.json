@@ -1,0 +1,211 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C3",
+  "case_id": "03",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 51, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C3/03/generated.bpmn, line 51)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 6,
+    "n_reference_tasks": 11,
+    "n_matched": 3,
+    "precision": 0.5,
+    "recall": 0.2727272727272727,
+    "f1": 0.3529411764705882,
+    "matched": [
+      {
+        "generated_id": "t4",
+        "generated_label": "Inspect Stock",
+        "reference_id": "Task_3",
+        "reference_label": "Inspect stock for quality",
+        "similarity": 0.8587
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Record Stock",
+        "reference_id": "Task_11",
+        "reference_label": "Record stock in system",
+        "similarity": 0.8773
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Place on Shelves",
+        "reference_id": "Task_6",
+        "reference_label": "Place stock on shelves",
+        "similarity": 0.7651
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Update inventory levels"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Update inventory system with expected delivery dates"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Place order with suppliers"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Receive stock"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Check current inventory level"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Send a manual alert"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Send an automated alert"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Place stock in storage"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Check Stock Levels"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Place Order"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Ship Stock"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.3333333333333333,
+    "behavioral_computable": true,
+    "n_pairs": 3,
+    "n_same": 1,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Inspect stock for quality",
+          "Record stock in system"
+        ],
+        "generated_tasks": [
+          "Inspect Stock",
+          "Record Stock"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Inspect stock for quality",
+          "Place stock on shelves"
+        ],
+        "generated_tasks": [
+          "Inspect Stock",
+          "Place on Shelves"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Record stock in system",
+          "Place stock on shelves"
+        ],
+        "generated_tasks": [
+          "Record Stock",
+          "Place on Shelves"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 3,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Check Stock Levels",
+        "similarity_to_knowledge": 0.137,
+        "similarity_to_description": 0.4731,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Place Order",
+        "similarity_to_knowledge": 0.1438,
+        "similarity_to_description": 0.4112,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Ship Stock",
+        "similarity_to_knowledge": 0.1046,
+        "similarity_to_description": 0.4394,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.5,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1853,
+    "output_tokens": 3062,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 69.399,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 21,
+    "tasks": 11,
+    "gateways": 8,
+    "loops": 1,
+    "nesting_depth": 2,
+    "cfc": 7
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "21",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 58, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C1/21/generated.bpmn, line 58)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 11,
+    "n_reference_tasks": 7,
+    "n_matched": 4,
+    "precision": 0.36363636363636365,
+    "recall": 0.5714285714285714,
+    "f1": 0.4444444444444444,
+    "matched": [
+      {
+        "generated_id": "t7",
+        "generated_label": "Select Logistic Company",
+        "reference_id": "Task_5",
+        "reference_label": "Select logistic company and place order",
+        "similarity": 0.8376
+      },
+      {
+        "generated_id": "t11",
+        "generated_label": "Write Package Label",
+        "reference_id": "Task_2",
+        "reference_label": "Write package label",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t13",
+        "generated_label": "Take Parcel Insurance",
+        "reference_id": "Task_1",
+        "reference_label": "Insure parcel",
+        "similarity": 0.8443
+      },
+      {
+        "generated_id": "t15",
+        "generated_label": "Goods Packaged",
+        "reference_id": "Task_6",
+        "reference_label": "Package goods",
+        "similarity": 0.899
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Clarify shipment method"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Get 3 offers from logistic companies"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Prepare for picking up goods"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Clarify Shipping Responsibility"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Check Amount Size"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Invite Logistic Companies"
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Normal Post Shipment"
+      },
+      {
+        "generated_id": "t17",
+        "generated_label": "Prepare for Pickup"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Take Parcel Insurance"
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Pack Goods"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.0,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 0,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Select logistic company and place order",
+          "Write package label"
+        ],
+        "generated_tasks": [
+          "Select Logistic Company",
+          "Write Package Label"
+        ],
+        "reference_relation": "#",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Select logistic company and place order",
+          "Insure parcel"
+        ],
+        "generated_tasks": [
+          "Select Logistic Company",
+          "Take Parcel Insurance"
+        ],
+        "reference_relation": "#",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Select logistic company and place order",
+          "Package goods"
+        ],
+        "generated_tasks": [
+          "Select Logistic Company",
+          "Goods Packaged"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Write package label",
+          "Insure parcel"
+        ],
+        "generated_tasks": [
+          "Write Package Label",
+          "Take Parcel Insurance"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Write package label",
+          "Package goods"
+        ],
+        "generated_tasks": [
+          "Write Package Label",
+          "Goods Packaged"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Insure parcel",
+          "Package goods"
+        ],
+        "generated_tasks": [
+          "Take Parcel Insurance",
+          "Goods Packaged"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 7,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Clarify Shipping Responsibility",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Check Amount Size",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Invite Logistic Companies",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t9",
+        "label": "Normal Post Shipment",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t17",
+        "label": "Prepare for Pickup",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Take Parcel Insurance",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t4",
+        "label": "Pack Goods",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.3636,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1821,
+    "output_tokens": 4430,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 102.4,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 15,
+    "tasks": 7,
+    "gateways": 6,
+    "loops": 0,
+    "nesting_depth": 3,
+    "cfc": 6
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

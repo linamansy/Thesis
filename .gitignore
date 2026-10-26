@@ -10,8 +10,12 @@ __pycache__/
 # NLTK data (stopword list), downloaded automatically by src/retrieval/text_processing.py
 data/nltk_data/
 
-# All run outputs and LLM call logs (final runs will be saved elsewhere and committed on purpose)
-results/
+# Run outputs are committed (26 Oct 2026), EXCEPT the files that contain BPMNGen's private system prompt word for
+# word (Ulm's text, never uploaded): BPMNGen's request per case, the C1/C2/C3 call logs, preflight and discarded runs.
+results/**/ollama_request.json
+results/logs/C[123]_*.jsonl
+results/preflight/
+results/_discarded/
 
 # Original dataset archives (already extracted into data/raw/)
 data/raw/*.zip

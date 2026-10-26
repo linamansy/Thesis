@@ -1,0 +1,233 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "11",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 54, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C1/11/generated.bpmn, line 54)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 5,
+    "n_reference_tasks": 12,
+    "n_matched": 4,
+    "precision": 0.8,
+    "recall": 0.3333333333333333,
+    "f1": 0.47058823529411764,
+    "matched": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Receive Updates",
+        "reference_id": "Task_5",
+        "reference_label": "Send regular updates",
+        "similarity": 0.7829
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Submit Cancellation Request",
+        "reference_id": "Task_2",
+        "reference_label": "Customer submits cancellation request",
+        "similarity": 0.8943
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Generate Account",
+        "reference_id": "Task_4",
+        "reference_label": "Generate account",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Trigger Billing Cycles",
+        "reference_id": "Task_11",
+        "reference_label": "Set automatic triggers for billing cycles",
+        "similarity": 0.888
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Assign access"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "apply charges"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Deactivate subscription"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Settle final account balance"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "apply refund"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Send renewal notifications"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Customer signs up"
+      },
+      {
+        "reference_id": "Task_12",
+        "reference_label": "Send product enhancements"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Submit Subscription Request"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.3333333333333333,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 2,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Send regular updates",
+          "Customer submits cancellation request"
+        ],
+        "generated_tasks": [
+          "Receive Updates",
+          "Submit Cancellation Request"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Send regular updates",
+          "Generate account"
+        ],
+        "generated_tasks": [
+          "Receive Updates",
+          "Generate Account"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "||",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Send regular updates",
+          "Set automatic triggers for billing cycles"
+        ],
+        "generated_tasks": [
+          "Receive Updates",
+          "Trigger Billing Cycles"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "||",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Customer submits cancellation request",
+          "Generate account"
+        ],
+        "generated_tasks": [
+          "Submit Cancellation Request",
+          "Generate Account"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "||",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Customer submits cancellation request",
+          "Set automatic triggers for billing cycles"
+        ],
+        "generated_tasks": [
+          "Submit Cancellation Request",
+          "Trigger Billing Cycles"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "||",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Generate account",
+          "Set automatic triggers for billing cycles"
+        ],
+        "generated_tasks": [
+          "Generate Account",
+          "Trigger Billing Cycles"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 1,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Submit Subscription Request",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.8,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1803,
+    "output_tokens": 3001,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 1,
+      "first_task_inserted": false
+    },
+    "seconds": 67.83,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 26,
+    "tasks": 12,
+    "gateways": 12,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 10
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

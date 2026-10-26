@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Inventory System" processRef="InventorySystemProcess"/>
+    <bpmn:participant id="p4" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p5" name="Quality Control" processRef="QualityControlProcess"/>
+    <bpmn:participant id="p6" name="Packaging" processRef="PackagingProcess"/>
+    <bpmn:participant id="p7" name="Shipping Department" processRef="ShippingDepartmentProcess"/>
+    <bpmn:participant id="p8" name="Returns Department" processRef="ReturnsDepartmentProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Payment Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Payment Failed" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Availability" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Out of Stock" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:messageFlow id="mf6" name="Back-Order Received" sourceRef="ice3" targetRef="t7"/>
+    <bpmn:messageFlow id="mf7" name="Items Available" sourceRef="ice4" targetRef="t8"/>
+    <bpmn:messageFlow id="mf8" name="Picked Items" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf9" name="Quality Checked" sourceRef="ice5" targetRef="t11"/>
+    <bpmn:messageFlow id="mf10" name="Packaging Complete" sourceRef="ice6" targetRef="se12"/>
+    <bpmn:messageFlow id="mf11" name="Shipping Documents" sourceRef="t13" targetRef="se14"/>
+    <bpmn:messageFlow id="mf12" name="Customs Documentation" sourceRef="t14" targetRef="se15"/>
+    <bpmn:messageFlow id="mf13" name="Order Dispatched" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:messageFlow id="mf14" name="Shipping Confirmation" sourceRef="t17" targetRef="se18"/>
+    <bpmn:messageFlow id="mf15" name="Inventory Updated" sourceRef="ice8" targetRef="t19"/>
+    <bpmn:messageFlow id="mf16" name="Feedback Sent" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:messageFlow id="mf17" name="Issue Reported" sourceRef="ice10" targetRef="t21"/>
+    <bpmn:messageFlow id="mf18" name="Return Label" sourceRef="t22" targetRef="se23"/>
+    <bpmn:messageFlow id="mf19" name="Items Received" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:messageFlow id="mf20" name="Inspection Complete" sourceRef="ice12" targetRef="t25"/>
+    <bpmn:messageFlow id="mf21" name="Refund/Replacement" sourceRef="ice13" targetRef="se26"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Items Available">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatch, name="Order Dispatched">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Quality Checked">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Packaging Complete">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Order Dispatched">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Updated">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Feedback Sent">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice10" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="se2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="se6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="se6" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t7" targetRef="se8"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="se8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t9" targetRef="se10"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="se10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="se13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se15" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t16" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice7" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t17" targetRef="se18"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="se18" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t19" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice8" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t20" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="ice9" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="ice10" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t21" targetRef="se22"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="se22" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t22" targetRef="se23"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="se23" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t24" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="ice11" targetRef="t25"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="t25" targetRef="se26"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="se26" targetRef="t26"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t26" targetRef="ice13"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice13" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Payment"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Items Available">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Inventory Updated">
+      <bpmn:messageEvent, name="Inventory Updated">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="se6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="se6" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t7" targetRef="se8"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="se8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t9" targetRef="se10"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="se10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="se13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se15" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t16" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice7" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t17" targetRef="se18"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="se18" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t19" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice8" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t20" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="ice9" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="ice10" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t21" targetRef="se22"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="se22" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t22" targetRef="se23"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="se23" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t24" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="ice11" targetRef="t25"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="t25" targetRef="se26"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="se26" targetRef="t26"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t26" targetRef="ice13"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice13" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="InventorySystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se5" name="Stock Check">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t6" name="Check Stock Availability"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Items Available">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="End"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t6" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="ice3" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se8" name="Pick Items">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t9" name="Pick Items from Warehouse"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Quality Checked">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee4" name="End"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="se8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t9" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice5" targetRef="ee4"/>
+  </bpmn:process>
+  <bpmn:process id="QualityControlProcess" isExecutable="false">
+    <bpmn:startEvent id="se10" name="Quality Check">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t11" name="Perform Quality Control"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Quality Checked">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee5" name="End"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="se10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice5" targetRef="ee5"/>
+  </bpmn:process>
+  <bpmn:process id="PackagingProcess" isExecutable="false">
+    <bpmn:startEvent id="se13" name="Packaging Start">
+      <bpmn:messageEventDefinition id="med13"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t14" name="Pack Items"/>
+    <bpmn:intermediateCatchEvent id="ice6" name="Packaging Complete">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee6" name="End"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="se13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t14" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="ice6" targetRef="ee6"/>
+  </bpmn:process>
+  <bpmn:process id="ShippingDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se15" name="Prepare Shipping Documents">
+      <bpmn:messageEventDefinition id="med15"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t16" name="Prepare Shipping Documents and Labels"/>
+    <bpmn:intermediateCatchEvent id="ice7" name="Order Dispatched">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee7" name="End"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se15" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t16" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice7" targetRef="ee7"/>
+  </bpmn:process>
+  <bpmn:process id="ReturnsDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se22" name="Return Processing">
+      <bpmn:messageEventDefinition id="med22"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t21" name="Send Return Label"/>
+    <bpmn:intermediateCatchEvent id="ice10" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice11" name="Items Received">
+      <bpmn:messageEventDefinition id="med11"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice12" name="Inspection Complete">
+      <bpmn:messageEventDefinition id="med12"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice13" name="Refund/Replacement">
+      <bpmn:messageEventDefinition id="med13"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee8" name="End"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="se22" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t21" targetRef="se23"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="se23" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t22" targetRef="se24"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="se24" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="t24" targetRef="ice12"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="ice12" targetRef="t25"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t25" targetRef="ice13"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice13" targetRef="ee8"/>
+  </bpmn:process>
+</bpmn:definitions>
+<bpmndi:BPMNDiagram id="BPMNDiagram1">
+  <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+    <bpmndi:BPMNShape id="p1" bpmnElement="Customer" isHorizontal="true">
+      <dc:Bounds x="0" y="0" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p2" bpmnElement="System" isHorizontal="true">
+      <dc:Bounds x="0" y="160" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p3" bpmnElement="Inventory System" isHorizontal="true">
+      <dc:Bounds x="0" y="320" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p4" bpmnElement="Warehouse" isHorizontal="true">
+      <dc:Bounds x="0" y="480" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p5" bpmnElement="Quality Control" isHorizontal="true">
+      <dc:Bounds x="0" y="640" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p6" bpmnElement="Packaging" isHorizontal="true">
+      <dc:Bounds x="0" y="800" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p7" bpmnElement="Shipping Department" isHorizontal="true">
+      <dc:Bounds x="0" y="960" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="p8" bpmnElement="Returns Department" isHorizontal="true">
+      <dc:Bounds x="0" y="1120" width="160" height="160"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se1" bpmnElement="se1">
+      <dc:Bounds x="10" y="10" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t1" bpmnElement="t1">
+      <dc:Bounds x="120" y="10" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se2" bpmnElement="se2">
+      <dc:Bounds x="10" y="170" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t3" bpmnElement="t3">
+      <dc:Bounds x="120" y="170" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ice1" bpmnElement="ice1">
+      <dc:Bounds x="230" y="170" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t4" bpmnElement="t4">
+      <dc:Bounds x="340" y="170" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se5" bpmnElement="se5">
+      <dc:Bounds x="10" y="330" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t6" bpmnElement="t6">
+      <dc:Bounds x="120" y="330" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ice2" bpmnElement="ice2">
+      <dc:Bounds x="230" y="330" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t7" bpmnElement="t7">
+      <dc:Bounds x="340" y="330" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se6" bpmnElement="se6">
+      <dc:Bounds x="10" y="490" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t8" bpmnElement="t8">
+      <dc:Bounds x="120" y="490" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se8" bpmnElement="se8">
+      <dc:Bounds x="10" y="650" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t9" bpmnElement="t9">
+      <dc:Bounds x="120" y="650" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se10" bpmnElement="se10">
+      <dc:Bounds x="10" y="810" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t11" bpmnElement="t11">
+      <dc:Bounds x="120" y="810" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se13" bpmnElement="se13">
+      <dc:Bounds x="10" y="970" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t14" bpmnElement="t14">
+      <dc:Bounds x="120" y="970" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se15" bpmnElement="se15">
+      <dc:Bounds x="10" y="1130" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t16" bpmnElement="t16">
+      <dc:Bounds x="120" y="1130" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se22" bpmnElement="se22">
+      <dc:Bounds x="10" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t21" bpmnElement="t21">
+      <dc:Bounds x="120" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se23" bpmnElement="se23">
+      <dc:Bounds x="230" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t22" bpmnElement="t22">
+      <dc:Bounds x="340" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se24" bpmnElement="se24">
+      <dc:Bounds x="450" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="t23" bpmnElement="t23">
+      <dc:Bounds x="560" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="se26" bpmnElement="se26">
+      <dc:Bounds x="670" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee1" bpmnElement="ee1">
+      <dc:Bounds x="780" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee2" bpmnElement="ee2">
+      <dc:Bounds x="780" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee3" bpmnElement="ee3">
+      <dc:Bounds x="780" y="330" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee4" bpmnElement="ee4">
+      <dc:Bounds x="780" y="650" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee5" bpmnElement="ee5">
+      <dc:Bounds x="780" y="810" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee6" bpmnElement="ee6">
+      <dc:Bounds x="780" y="970" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee7" bpmnElement="ee7">
+      <dc:Bounds x="780" y="1130" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNShape id="ee8" bpmnElement="ee8">
+      <dc:Bounds x="780" y="1290" width="100" height="80"/>
+    </bpmndi:BPMNShape>
+    <bpmndi:BPMNEdge id="f1" bpmnElement="f1">
+      <di:waypoint x="110" y="10"/>
+      <di:waypoint x="110" y="90"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f2" bpmnElement="f2">
+      <di:waypoint x="220" y="10"/>
+      <di:waypoint x="220" y="90"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f3" bpmnElement="f3">
+      <di:waypoint x="110" y="170"/>
+      <di:waypoint x="110" y="250"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f4" bpmnElement="f4">
+      <di:waypoint x="220" y="170"/>
+      <di:waypoint x="220" y="250"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f5" bpmnElement="f5">
+      <di:waypoint x="330" y="170"/>
+      <di:waypoint x="330" y="250"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f6" bpmnElement="f6">
+      <di:waypoint x="440" y="170"/>
+      <di:waypoint x="440" y="250"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f7" bpmnElement="f7">
+      <di:waypoint x="110" y="330"/>
+      <di:waypoint x="110" y="410"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f8" bpmnElement="f8">
+      <di:waypoint x="220" y="330"/>
+      <di:waypoint x="220" y="410"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f9" bpmnElement="f9">
+      <di:waypoint x="330" y="330"/>
+      <di:waypoint x="330" y="410"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f10" bpmnElement="f10">
+      <di:waypoint x="440" y="330"/>
+      <di:waypoint x="440" y="410"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f11" bpmnElement="f11">
+      <di:waypoint x="110" y="490"/>
+      <di:waypoint x="110" y="570"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f12" bpmnElement="f12">
+      <di:waypoint x="220" y="490"/>
+      <di:waypoint x="220" y="570"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f13" bpmnElement="f13">
+      <di:waypoint x="330" y="490"/>
+      <di:waypoint x="330" y="570"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f14" bpmnElement="f14">
+      <di:waypoint x="440" y="490"/>
+      <di:waypoint x="440" y="570"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f15" bpmnElement="f15">
+      <di:waypoint x="110" y="650"/>
+      <di:waypoint x="110" y="730"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f16" bpmnElement="f16">
+      <di:waypoint x="220" y="650"/>
+      <di:waypoint x="220" y="730"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f17" bpmnElement="f17">
+      <di:waypoint x="330" y="650"/>
+      <di:waypoint x="330" y="730"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f18" bpmnElement="f18">
+      <di:waypoint x="440" y="650"/>
+      <di:waypoint x="440" y="730"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f19" bpmnElement="f19">
+      <di:waypoint x="110" y="810"/>
+      <di:waypoint x="110" y="890"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f20" bpmnElement="f20">
+      <di:waypoint x="220" y="810"/>
+      <di:waypoint x="220" y="890"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f21" bpmnElement="f21">
+      <di:waypoint x="330" y="810"/>
+      <di:waypoint x="330" y="890"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f22" bpmnElement="f22">
+      <di:waypoint x="440" y="810"/>
+      <di:waypoint x="440" y="890"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f23" bpmnElement="f23">
+      <di:waypoint x="110" y="970"/>
+      <di:waypoint x="110" y="1050"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f24" bpmnElement="f24">
+      <di:waypoint x="220" y="970"/>
+      <di:waypoint x="220" y="1050"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f25" bpmnElement="f25">
+      <di:waypoint x="330" y="970"/>
+      <di:waypoint x="330" y="1050"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f26" bpmnElement="f26">
+      <di:waypoint x="440" y="970"/>
+      <di:waypoint x="440" y="1050"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f27" bpmnElement="f27">
+      <di:waypoint x="110" y="1130"/>
+      <di:waypoint x="110" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f28" bpmnElement="f28">
+      <di:waypoint x="220" y="1130"/>
+      <di:waypoint x="220" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f29" bpmnElement="f29">
+      <di:waypoint x="330" y="1130"/>
+      <di:waypoint x="330" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f30" bpmnElement="f30">
+      <di:waypoint x="440" y="1130"/>
+      <di:waypoint x="440" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f31" bpmnElement="f31">
+      <di:waypoint x="550" y="1130"/>
+      <di:waypoint x="550" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f32" bpmnElement="f32">
+      <di:waypoint x="660" y="1130"/>
+      <di:waypoint x="660" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f33" bpmnElement="f33">
+      <di:waypoint x="770" y="1130"/>
+      <di:waypoint x="770" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f34" bpmnElement="f34">
+      <di:waypoint x="880" y="1130"/>
+      <di:waypoint x="880" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f35" bpmnElement="f35">
+      <di:waypoint x="990" y="1130"/>
+      <di:waypoint x="990" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f36" bpmnElement="f36">
+      <di:waypoint x="1100" y="1130"/>
+      <di:waypoint x="1100" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f37" bpmnElement="f37">
+      <di:waypoint x="1210" y="1130"/>
+      <di:waypoint x="1210" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f38" bpmnElement="f38">
+      <di:waypoint x="1320" y="1130"/>
+      <di:waypoint x="1320" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f39" bpmnElement="f39">
+      <di:waypoint x="1430" y="1130"/>
+      <di:waypoint x="1430" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f40" bpmnElement="f40">
+      <di:waypoint x="1540" y="1130"/>
+      <di:waypoint x="1540" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f41" bpmnElement="f41">
+      <di:waypoint x="1650" y="1130"/>
+      <di:waypoint x="1650" y="1210"/>
+    </bpmndi:BPMNEdge>
+    <bpmndi:BPMNEdge id="f42" bpmnElement="f42">
+      <di:waypoint x="1760" y="1130"/>
+      <di:waypoint x="1760" y="1210"/>
+    </bpmndi:BPMNEdge>
+  </bpmndi:BPMNPlane>
+</bpmndi:BPMNDiagram>

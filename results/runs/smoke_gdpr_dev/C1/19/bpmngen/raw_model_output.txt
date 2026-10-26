@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Choose Reward" sourceRef="t6" targetRef="se7"/>
+    <bpmn:messageFlow id="mf7" name="Confirm Reward" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmed" sourceRef="t8" targetRef="se9"/>
+    <bpmn:messageFlow id="mf9" name="Delivery" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf10" name="Return Request" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf11" name="Return Accepted" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf12" name="New Delivery" sourceRef="t12" targetRef="se13"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward"/>
+    <bpmn:task id="t7" name="Confirm Reward"/>
+    <bpmn:exclusiveGateway id="g1" name="Payment or Installment"/>
+    <bpmn:exclusiveGateway id="g2" name="Choose Reward"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Return Items"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="g1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="g1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t9" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="g2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t12" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Login Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Login Confirmed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Items Selected">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Payment Method Set">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Payment Received">
+      <bpmn:messageEventningEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Installment Agreement Received">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Reward Chosen">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Reward Confirmed">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Delivery Requested">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice10" name="Return Requested">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice11" name="Return Accepted">
+      <bpmn:messageEventDefinition id="med11"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="Delivery Complete"/>
+    <bpmn:task id="t1" name="Validate Login"/>
+    <bpmn:task id="t2" name="Process Items"/>
+    <bpmn:task id="t3" name="Store Payment Method"/>
+    <bpmn:task id="t4" name="Process Payment"/>
+    <bpmn:task id="t5" name="Process Installment Agreement"/>
+    <bpmn:task id="t6" name="Process Reward Selection"/>
+    <bpmn:task id="t7" name="Confirm Reward"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Process Delivery"/>
+    <bpmn:task id="t10" name="Process Return"/>
+    <bpmn:task id="t11" name="Process New Delivery"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="ice1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="t2"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Choose Reward" sourceRef="t6" targetRef="se7"/>
+    <bpmn:messageFlow id="mf7" name="Confirm Reward" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmed" sourceRef="t8" targetRef="se9"/>
+    <bpmn:messageFlow id="mf9" name="Delivery" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf10" name="Return Request" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf11" name="Return Accepted" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf12" name="New Delivery" sourceRef="t12" targetRef="se13"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward"/>
+    <bpmn:task id="t7" name="Confirm Reward"/>
+    <bpmn:exclusiveGateway id="g1" name="Payment or Installment"/>
+    <bpmn:exclusiveGateway id="g2" name="Choose Reward"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Return Items"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="g1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="g1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t9" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="g2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t12" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Login Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Login Confirmed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Items Selected">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Payment Method Set">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Payment Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Installment Agreement Received">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Reward Chosen">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Reward Confirmed">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Delivery Requested">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice10" name="Return Requested">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice11" name="Return Accepted">
+      <bpmn:messageEventDefinition id="med11"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="Delivery Complete"/>
+    <bpmn:task id="t1" name="Validate Login"/>
+    <bpmn:task id="t2" name="Process Items"/>
+    <bpmn:task id="t3" name="Store Payment Method"/>
+    <bpmn:task id="t4" name="Process Payment"/>
+    <bpmn:task id="t5" name="Process Installment Agreement"/>
+    <bpmn:task id="t6" name="Process Reward Selection"/>
+    <bpmn:task id="t7" name="Confirm Reward"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Process Delivery"/>
+    <bpmn:task id="t10" name="Process Return"/>
+    <bpmn:task id="t11" name="Process New Delivery"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="ice1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="ice3" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t3" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice4" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t4" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="ice5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t5" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice6" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t6" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t7" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t8" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="ice9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t9" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="ice10" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t10" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="ice11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t11" targetRef="ice9"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="p1_1" bpmnElement="p1" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2_1" bpmnElement="p2" isHorizontal="true">
+        <dc:Bounds x="400" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1_1" bpmnElement="se1">
+        <dc:Bounds x="50" y="150" width="100" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_1" bpmnElement="t1">
+        <dc:Bounds x="150" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2_1" bpmnElement="t2">
+        <dc:Bounds x="250" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3_1" bpmnElement="t3">
+        <dc:Bounds x="350" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="g1_1" bpmnElement="g1">
+        <dc:Bounds x="450" y="150" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4_1" bpmnElement="t4">
+        <dc:Bounds x="500" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t5_1" bpmnElement="t5">
+        <dc:Bounds x="600" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t8_1" bpmnElement="t8">
+        <dc:Bounds x="700" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t9_1" bpmnElement="t9">
+        <dc:Bounds x="800" y="150" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1_1" bpmnElement="ee1">
+        <dc:Bounds x="900" y="150" width="100" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="g2_1" bpmnElement="g2">
+        <dc:Bounds x="450" y="250" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t6_1" bpmnElement="t6">
+        <dc:Bounds x="500" y="250" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t7_1" bpmnElement="t7">
+        <dc:Bounds x="600" y="250" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t10_1" bpmnElement="t10">
+        <dc:Bounds x="700" y="250" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t11_1" bpmnElement="t11">
+        <dc:Bounds x="800" y="250" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t12_1" bpmnElement="t12">
+        <dc:Bounds x="900" y="250" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2_1" bpmnElement="se2">
+        <dc:Bounds x="100" y="100" width="100" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1_1" bpmnElement="ice1">
+        <dc:Bounds x="200" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_2" bpmnElement="t1">
+        <dc:Bounds x="300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice2_1" bpmnElement="ice2">
+        <dc:Bounds x="400" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2_2" bpmnElement="t2">
+        <dc:Bounds x="500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice3_1" bpmnElement="ice3">
+        <dc:Bounds x="600" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3_2" bpmnElement="t3">
+        <dc:Bounds x="700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice4_1" bpmnElement="ice4">
+        <dc:Bounds x="800" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4_2" bpmnElement="t4">
+        <dc:Bounds x="900" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice5_1" bpmnElement="ice5">
+        <dc:Bounds x="1000" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t5_2" bpmnElement="t5">
+        <dc:Bounds x="1100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice6_1" bpmnElement="ice6">
+        <dc:Bounds x="1200" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t6_2" bpmnElement="t6">
+        <dc:Bounds x="1300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice7_1" bpmnElement="ice7">
+        <dc:Bounds x="1400" y="100" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmnd
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="User" processRef="UserProcess"/>
+    <bpmn:participant id="p2" name="Online Shop" processRef="OnlineShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Select Items" sourceRef="t2" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Set Payment Method" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Payment" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Installment Agreement" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf6" name="Choose Reward" sourceRef="t6" targetRef="se7"/>
+    <bpmn:messageFlow id="mf7" name="Confirm Reward" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf8" name="Order Confirmed" sourceRef="t8" targetRef="se9"/>
+    <bpmn:messageFlow id="mf9" name="Delivery" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf10" name="Return Request" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf11" name="Return Accepted" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf12" name="New Delivery" sourceRef="t12" targetRef="se13"/>
+  </bpmn:collaboration>
+  <bpmn:process id="UserProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Process"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:task id="t2" name="Select Items"/>
+    <bpmn:task id="t3" name="Set Payment Method"/>
+    <bpmn:task id="t4" name="Pay"/>
+    <bpmn:task id="t5" name="Complete Installment Agreement"/>
+    <bpmn:task id="t6" name="Choose Reward"/>
+    <bpmn:task id="t7" name="Confirm Reward"/>
+    <bpmn:exclusiveGateway id="g1" name="Payment or Installment"/>
+    <bpmn:exclusiveGateway id="g2" name="Choose Reward"/>
+    <bpmn:task id="t8" name="Confirm Order"/>
+    <bpmn:task id="t9" name="Request Delivery"/>
+    <bpmn:task id="t10" name="Return Items"/>
+    <bpmn:task id="t11" name="Request Return"/>
+    <bpmn:task id="t12" name="New Delivery"/>
+    <bpmn:endEvent id="ee1" name="End Process"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="g1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="g1" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t4" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t8" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t9" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="g2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t12" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="OnlineShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Login Request"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Login Confirmed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Items Selected">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Payment Method Set">
+      <b

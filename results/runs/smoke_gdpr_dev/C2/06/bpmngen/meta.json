@@ -1,0 +1,73 @@
+{
+  "model": "qwen3:8b",
+  "base_url": "http://localhost:11434",
+  "mode": "quick",
+  "format": "xml",
+  "knowledge_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\runs\\smoke_gdpr_dev\\C2\\06\\knowledge_block.txt",
+  "knowledge_label": "[Domain information (it may or may not apply to this process):]",
+  "num_ctx": 16384,
+  "temperature": 0.3,
+  "think_param": false,
+  "ollama_model_reported": "qwen3:8b",
+  "prompt_tokens": 2469,
+  "output_tokens": 6367,
+  "done_reason": "stop",
+  "fits_context": true,
+  "cut_off_by_harness": false,
+  "raw_has_think_block": true,
+  "think_tags_in_answer": 1,
+  "thinking_chars": 0,
+  "auto_repairs": {
+    "auto_flows_added": 0,
+    "auto_links_added": 3,
+    "first_task_inserted": false
+  },
+  "repair_counts": {
+    "elements_raw": {
+      "task": 12,
+      "startEvent": 7,
+      "endEvent": 6,
+      "intermediateThrowEvent": 0,
+      "intermediateCatchEvent": 14,
+      "boundaryEvent": 0,
+      "exclusiveGateway": 0,
+      "parallelGateway": 0,
+      "inclusiveGateway": 0,
+      "eventBasedGateway": 0,
+      "complexGateway": 0,
+      "sequenceFlow": 28,
+      "messageFlow": 14,
+      "participant": 8,
+      "lane": 0,
+      "subProcess": 0
+    },
+    "elements_final": {
+      "task": 12,
+      "startEvent": 7,
+      "endEvent": 6,
+      "intermediateThrowEvent": 0,
+      "intermediateCatchEvent": 14,
+      "boundaryEvent": 0,
+      "exclusiveGateway": 0,
+      "parallelGateway": 0,
+      "inclusiveGateway": 0,
+      "eventBasedGateway": 0,
+      "complexGateway": 0,
+      "sequenceFlow": 31,
+      "messageFlow": 14,
+      "participant": 8,
+      "lane": 0,
+      "subProcess": 0
+    },
+    "changed_element_types": [
+      "sequenceFlow"
+    ],
+    "n_element_changes": 3,
+    "boundary_events_in_raw": 0,
+    "boundary_events_in_final": 0,
+    "raw_equals_cleaned": false
+  },
+  "valid": false,
+  "seconds": 155.697,
+  "timestamp": "2026-10-24T18:27:56.124Z"
+}

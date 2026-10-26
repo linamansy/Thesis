@@ -1,0 +1,253 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "46",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 70, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C2/46/generated.bpmn, line 70)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 7,
+    "n_reference_tasks": 11,
+    "n_matched": 4,
+    "precision": 0.5714285714285714,
+    "recall": 0.36363636363636365,
+    "f1": 0.4444444444444444,
+    "matched": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Read Order from System",
+        "reference_id": "ServiceTask_1",
+        "reference_label": "Read order",
+        "similarity": 0.8093
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Reorder Product",
+        "reference_id": "ServiceTask_3",
+        "reference_label": "Reorder from wholesaler",
+        "similarity": 0.7844
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Request Courier",
+        "reference_id": "ManualTask_6",
+        "reference_label": "Courier is requested",
+        "similarity": 0.943
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Pack Products",
+        "reference_id": "ManualTask_4",
+        "reference_label": "Packing the products",
+        "similarity": 0.7819
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "ServiceTask_2",
+        "reference_label": "Check if product is in stock"
+      },
+      {
+        "reference_id": "ServiceTask_4",
+        "reference_label": "Waiting until arrives (handling system)"
+      },
+      {
+        "reference_id": "ServiceTask_5",
+        "reference_label": "Demand delivery delay penalty from the wholesaler"
+      },
+      {
+        "reference_id": "ManualTask_1",
+        "reference_label": "Withdraw the Product from warehouse"
+      },
+      {
+        "reference_id": "ManualTask_2",
+        "reference_label": "Register in stock management system"
+      },
+      {
+        "reference_id": "ManualTask_3",
+        "reference_label": "Check if the whole order is ready for shipment"
+      },
+      {
+        "reference_id": "ManualTask_5",
+        "reference_label": "Shipping the order"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t4",
+        "generated_label": "Register Product in Stock"
+      },
+      {
+        "generated_id": "t8",
+        "generated_label": "Demand Penalty"
+      },
+      {
+        "generated_id": "t10",
+        "generated_label": "Ship Products"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.0,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 0,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Read order",
+          "Reorder from wholesaler"
+        ],
+        "generated_tasks": [
+          "Read Order from System",
+          "Reorder Product"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Read order",
+          "Courier is requested"
+        ],
+        "generated_tasks": [
+          "Read Order from System",
+          "Request Courier"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Read order",
+          "Packing the products"
+        ],
+        "generated_tasks": [
+          "Read Order from System",
+          "Pack Products"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Reorder from wholesaler",
+          "Courier is requested"
+        ],
+        "generated_tasks": [
+          "Reorder Product",
+          "Request Courier"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Reorder from wholesaler",
+          "Packing the products"
+        ],
+        "generated_tasks": [
+          "Reorder Product",
+          "Pack Products"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Courier is requested",
+          "Packing the products"
+        ],
+        "generated_tasks": [
+          "Request Courier",
+          "Pack Products"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 3,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t4",
+        "label": "Register Product in Stock",
+        "similarity_to_knowledge": 0.3229,
+        "similarity_to_description": 0.6943,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t8",
+        "label": "Demand Penalty",
+        "similarity_to_knowledge": 0.3647,
+        "similarity_to_description": 0.4441,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t10",
+        "label": "Ship Products",
+        "similarity_to_knowledge": 0.4177,
+        "similarity_to_description": 0.583,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.5714,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2775,
+    "output_tokens": 5412,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 129.081,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 20,
+    "tasks": 11,
+    "gateways": 7,
+    "loops": 1,
+    "nesting_depth": 2,
+    "cfc": 7
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

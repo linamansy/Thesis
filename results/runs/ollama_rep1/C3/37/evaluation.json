@@ -1,0 +1,231 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C3",
+  "case_id": "37",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": true,
+    "errors": [],
+    "bpmnlint_valid": true,
+    "di_stripped": false
+  },
+  "semantic": {
+    "n_generated_tasks": 10,
+    "n_reference_tasks": 10,
+    "n_matched": 2,
+    "precision": 0.2,
+    "recall": 0.2,
+    "f1": 0.20000000000000004,
+    "matched": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Query Shops",
+        "reference_id": "UserTask_1",
+        "reference_label": "Query the next shop",
+        "similarity": 0.7712
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Reorder Parts",
+        "reference_id": "ServiceTask_3",
+        "reference_label": "Reorder the part as fast as possible",
+        "similarity": 0.831
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "UserTask_2",
+        "reference_label": "Ask about quantity, price and deadline"
+      },
+      {
+        "reference_id": "ServiceTask_1",
+        "reference_label": "Create a list of the parts"
+      },
+      {
+        "reference_id": "ServiceTask_2",
+        "reference_label": "Reorder the cheapest part"
+      },
+      {
+        "reference_id": "ManualTask_1",
+        "reference_label": "Receive first batch of parts"
+      },
+      {
+        "reference_id": "ManualTask_2",
+        "reference_label": "Receive second batch of parts"
+      },
+      {
+        "reference_id": "ManualTask_3",
+        "reference_label": "Receive third batch of parts"
+      },
+      {
+        "reference_id": "ManualTask_4",
+        "reference_label": "Start/Continue building"
+      },
+      {
+        "reference_id": "ManualTask_5",
+        "reference_label": "Complain to the friends"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Order Parts"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Parts Arrived"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Stock Below 5"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Stock Below 3"
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Stock Zero"
+      },
+      {
+        "generated_id": "t8",
+        "generated_label": "Provide Parts Info"
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Provide Parts Info"
+      },
+      {
+        "generated_id": "t10",
+        "generated_label": "Provide Parts Info"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 1,
+    "n_same": 1,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Query the next shop",
+          "Reorder the part as fast as possible"
+        ],
+        "generated_tasks": [
+          "Query Shops",
+          "Reorder Parts"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 8,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t2",
+        "label": "Order Parts",
+        "similarity_to_knowledge": 0.0953,
+        "similarity_to_description": 0.6466,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Parts Arrived",
+        "similarity_to_knowledge": 0.1287,
+        "similarity_to_description": 0.5061,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Stock Below 5",
+        "similarity_to_knowledge": 0.0846,
+        "similarity_to_description": 0.6416,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Stock Below 3",
+        "similarity_to_knowledge": 0.068,
+        "similarity_to_description": 0.5795,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t7",
+        "label": "Stock Zero",
+        "similarity_to_knowledge": 0.1069,
+        "similarity_to_description": 0.4453,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t8",
+        "label": "Provide Parts Info",
+        "similarity_to_knowledge": 0.0614,
+        "similarity_to_description": 0.5534,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t9",
+        "label": "Provide Parts Info",
+        "similarity_to_knowledge": 0.0614,
+        "similarity_to_description": 0.5534,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t10",
+        "label": "Provide Parts Info",
+        "similarity_to_knowledge": 0.0614,
+        "similarity_to_description": 0.5534,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.2,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1921,
+    "output_tokens": 1923,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 44.603,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 23,
+    "tasks": 10,
+    "gateways": 11,
+    "loops": 2,
+    "nesting_depth": 2,
+    "cfc": 12
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

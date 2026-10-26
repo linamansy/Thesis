@@ -1,0 +1,35 @@
+{
+  "case_id": "10",
+  "condition": "C1",
+  "run_id": "ollama_rep2",
+  "generation_succeeded": true,
+  "parses": false,
+  "valid": false,
+  "errors": [
+    "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 56, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep2/C1/10/generated.bpmn, line 56)"
+  ],
+  "counts": null,
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1795,
+    "output_tokens": 3611,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 5,
+      "first_task_inserted": false
+    },
+    "seconds": 82.201,
+    "bpmnlint_valid": false
+  }
+}

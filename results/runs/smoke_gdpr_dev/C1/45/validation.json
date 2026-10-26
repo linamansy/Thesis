@@ -1,0 +1,39 @@
+{
+  "case_id": "45",
+  "condition": "C1",
+  "run_id": "smoke_gdpr_dev",
+  "generation_succeeded": true,
+  "parses": false,
+  "valid": false,
+  "errors": [
+    "could not parse XML: error parsing attribute name, line 67, column 1 (file:/C:/Users/user/Downloads/Thesis/results/runs/smoke_gdpr_dev/C1/45/generated.bpmn, line 67)"
+  ],
+  "counts": null,
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1887,
+    "output_tokens": 1306,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": true,
+    "think_tags_in_answer": 1,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 12,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 29.592,
+    "bpmnlint_valid": false
+  },
+  "thinking_detected": true,
+  "warnings": [
+    "the model produced thinking text despite think=False (0 chars in Ollama's thinking field, see bpmngen/raw_thinking.txt; 1 think tag(s) in the answer)"
+  ]
+}

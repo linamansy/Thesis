@@ -1,0 +1,48 @@
+{
+  "case_id": "37",
+  "condition": "C2",
+  "run_id": "ollama_rep1",
+  "generation_succeeded": true,
+  "parses": true,
+  "valid": false,
+  "errors": [
+    "sequence flow f1_dup2 has targetRef='t2', which is not an element",
+    "sequence flow f2_dup2 has sourceRef='t2', which is not an element",
+    "sequence flow f1_dup3 has targetRef='t2', which is not an element",
+    "sequence flow f2_dup3 has sourceRef='t2', which is not an element",
+    "sequence flow f2_dup3 has targetRef='ee2', which is not an element",
+    "sequence flow f1_dup4 has targetRef='t2', which is not an element",
+    "sequence flow f2_dup4 has sourceRef='t2', which is not an element",
+    "sequence flow f2_dup4 has targetRef='ee2', which is not an element"
+  ],
+  "counts": {
+    "start_events": 4,
+    "end_events": 4,
+    "tasks": 10,
+    "gateways": 3,
+    "sequence_flows": 19
+  },
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2604,
+    "output_tokens": 1484,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 34.438,
+    "bpmnlint_valid": true
+  }
+}

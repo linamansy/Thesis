@@ -1,0 +1,110 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "21",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: error parsing attribute name, line 52, column 1 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C2/21/generated.bpmn, line 52)"
+    ],
+    "bpmnlint_valid": false,
+    "di_stripped": false
+  },
+  "semantic": {
+    "n_generated_tasks": 0,
+    "n_reference_tasks": 7,
+    "n_matched": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "matched": [],
+    "extra": [],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Insure parcel"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Write package label"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Clarify shipment method"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Get 3 offers from logistic companies"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Select logistic company and place order"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Package goods"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Prepare for picking up goods"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.0,
+    "behavioral_computable": true,
+    "n_pairs": 0,
+    "n_same": 0,
+    "pairs": []
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 0,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": []
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.0,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2768,
+    "output_tokens": 2451,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": true,
+    "think_tags_in_answer": 1,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 4,
+      "first_task_inserted": false
+    },
+    "seconds": 57.968,
+    "bpmnlint_valid": false
+  },
+  "reference_complexity": {
+    "flow_nodes": 15,
+    "tasks": 7,
+    "gateways": 6,
+    "loops": 0,
+    "nesting_depth": 3,
+    "cfc": 6
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

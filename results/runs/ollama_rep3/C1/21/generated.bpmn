@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Secretary" processRef="SecretaryProcess"/>
+    <bpmn:participant id="p2" name="Logistics Department Head" processRef="LogisticsDepartmentHeadProcess"/>
+    <bpmn:participant id="p3" name="Warehousemen" processRef="WarehousemenProcess"/>
+    <bpmn:messageFlow id="mf1" name="Shipping Clarification" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Special Shipping Request" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf3" name="Offer Invitations" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf4" name="Offer Selection" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf5" name="Normal Post Shipment" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf6" name="Package Label" sourceRef="t11" targetRef="se12"/>
+    <bpmn:messageFlow id="mf7" name="Parcel Insurance" sourceRef="t13" targetRef="se14"/>
+    <bpmn:messageFlow id="mf8" name="Packaged Goods Ready" sourceRef="t15" targetRef="se16"/>
+  </bpmn:collaboration>
+  <bpmn:process id="SecretaryProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Goods to be Shipped"/>
+    <bpmn:task id="t1" name="Clarify Shipping Responsibility"/>
+    <bpmn:exclusiveGateway id="eg1" name="Shipping Type Decision"/>
+    <bpmn:task id="t3" name="Special Shipping Request"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="eg1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="eg1" targetRef="t3"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <bpmn:endEvent id="ee1" name="Shipment Complete"/>
+  
+    <bpmn:sequenceFlow id="auto_link_out_t3_to_ee1" sourceRef="t3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="LogisticsDepartmentHeadProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Special Shipping Request"/>
+    <bpmn:task id="t5" name="Invite Three Logistic Companies"/>
+    <bpmn:task id="t7" name="Select One Logistic Company"/>
+    <bpmn:endEvent id="se8" name="Offer Selection Complete"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se2" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t5" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t7" targetRef="se8"/>
+  </bpmn:process>
+  <bpmn:process id="WarehousemenProcess" isExecutable="false">
+    <bpmn:startEvent id="se10" name="Normal Post Shipment"/>
+    <bpmn:task id="t11" name="Write Package Label"/>
+    <bpmn:task id="t15" name="Packaged Goods Ready"/>
+    <bpmn:endEvent id="se16" name="Packaged Goods Prepared"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="se10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t11" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t15" targetRef="se16"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="SecretaryProcess_1" bpmnElement="se1" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_2" bpmnElement="t1" isHorizontal="true">
+        <dc:Bounds x="160" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_3" bpmnElement="eg1" isHorizontal="true">
+        <dc:Bounds x="260" y="0" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_4" bpmnElement="t3" isHorizontal="true">
+        <dc:Bounds x="310" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_5" bpmnElement="se2" isHorizontal="true">
+        <dc:Bounds x="410" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_6" bpmnElement="t5" isHorizontal="true">
+        <dc:Bounds x="570" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_7" bpmnElement="t7" isHorizontal="true">
+        <dc:Bounds x="670" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_8" bpmnElement="se8" isHorizontal="true">
+        <dc:Bounds x="770" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_9" bpmnElement="se10" isHorizontal="true">
+        <dc:Bounds x="930" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_10" bpmnElement="t11" isHorizontal="true">
+        <dc:Bounds x="1090" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_11" bpmnElement="t15" isHorizontal="true">
+        <dc:Bounds x="1190" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_12" bpmnElement="se16" isHorizontal="true">
+        <dc:Bounds x="1290" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_13" bpmnElement="ee1" isHorizontal="true">
+        <dc:Bounds x="1450" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_1" bpmnElement="se2" isHorizontal="true">
+        <dc:Bounds x="410" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_2" bpmnElement="t5" isHorizontal="true">
+        <dc:Bounds x="570" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_3" bpmnElement="t7" isHorizontal="true">
+        <dc:Bounds x="670" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_4" bpmnElement="se8" isHorizontal="true">
+        <dc:Bounds x="770" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_1" bpmnElement="se10" isHorizontal="true">
+        <dc:Bounds x="930" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_2" bpmnElement="t11" isHorizontal="true">
+        <dc:Bounds x="1090" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_3" bpmnElement="t15" isHorizontal="true">
+        <dc:Bounds x="1190" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_4" bpmnElement="se16" isHorizontal="true">
+        <dc:Bounds x="1290" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_5" bpmnElement="ee1" isHorizontal="true">
+        <dc:Bounds x="1450" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_14" bpmnElement="se1" isHorizontal="true">
+        <dc:Bounds x="0" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_15" bpmnElement="t1" isHorizontal="true">
+        <dc:Bounds x="160" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_16" bpmnElement="eg1" isHorizontal="true">
+        <dc:Bounds x="260" y="0" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_17" bpmnElement="t3" isHorizontal="true">
+        <dc:Bounds x="310" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_18" bpmnElement="se2" isHorizontal="true">
+        <dc:Bounds x="410" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_19" bpmnElement="t5" isHorizontal="true">
+        <dc:Bounds x="570" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_20" bpmnElement="t7" isHorizontal="true">
+        <dc:Bounds x="670" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_21" bpmnElement="se8" isHorizontal="true">
+        <dc:Bounds x="770" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_22" bpmnElement="se10" isHorizontal="true">
+        <dc:Bounds x="930" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_23" bpmnElement="t11" isHorizontal="true">
+        <dc:Bounds x="1090" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_24" bpmnElement="t15" isHorizontal="true">
+        <dc:Bounds x="1190" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_25" bpmnElement="se16" isHorizontal="true">
+        <dc:Bounds x="1290" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SecretaryProcess_26" bpmnElement="ee1" isHorizontal="true">
+        <dc:Bounds x="1450" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_5" bpmnElement="se2" isHorizontal="true">
+        <dc:Bounds x="410" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_6" bpmnElement="t5" isHorizontal="true">
+        <dc:Bounds x="570" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_7" bpmnElement="t7" isHorizontal="true">
+        <dc:Bounds x="670" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LogisticsDepartmentHeadProcess_8" bpmnElement="se8" isHorizontal="true">
+        <dc:Bounds x="770" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_5_dup2" bpmnElement="se10" isHorizontal="true">
+        <dc:Bounds x="930" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_6" bpmnElement="t11" isHorizontal="true">
+        <dc:Bounds x="1090" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_7" bpmnElement="t15" isHorizontal="true">
+        <dc:Bounds x="1190" y="0" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_8" bpmnElement="se16" isHorizontal="true">
+        <dc:Bounds x="1290" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WarehousemenProcess_9" bpmnElement="ee1" isHorizontal="true">
+        <dc:Bounds x="1450" y="0" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SecretaryProcess_27" sourceRef="se1" targetRef="t1">
+        <di:waypoint x="80" y="80"/>
+        <di:waypoint x="260" y="80"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_28" sourceRef="t1" targetRef="eg1">
+        <di:waypoint x="260" y="40"/>
+        <di:waypoint x="310" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_29" sourceRef="eg1" targetRef="t3">
+        <di:waypoint x="310" y="40"/>
+        <di:waypoint x="360" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_30" sourceRef="t3" targetRef="se2">
+        <di:waypoint x="410" y="40"/>
+        <di:waypoint x="410" y="80"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_31" sourceRef="eg1" targetRef="se4">
+        <di:waypoint x="310" y="40"/>
+        <di:waypoint x="410" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_32" sourceRef="se4" targetRef="t5">
+        <di:waypoint x="410" y="40"/>
+        <di:waypoint x="510" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_33" sourceRef="t5" targetRef="se6">
+        <di:waypoint x="570" y="40"/>
+        <di:waypoint x="670" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_34" sourceRef="se6" targetRef="t7">
+        <di:waypoint x="670" y="40"/>
+        <di:waypoint x="770" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_35" sourceRef="t7" targetRef="se8">
+        <di:waypoint x="770" y="40"/>
+        <di:waypoint x="870" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_36" sourceRef="se8" targetRef="se10">
+        <di:waypoint x="930" y="40"/>
+        <di:waypoint x="1030" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_37" sourceRef="se10" targetRef="t11">
+        <di:waypoint x="1090" y="40"/>
+        <di:waypoint x="1190" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_38" sourceRef="t11" targetRef="se12">
+        <di:waypoint x="1190" y="40"/>
+        <di:waypoint x="1290" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_39" sourceRef="se12" targetRef="t13">
+        <di:waypoint x="1290" y="40"/>
+        <di:waypoint x="1390" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_40" sourceRef="t13" targetRef="se14">
+        <di:waypoint x="1390" y="40"/>
+        <di:waypoint x="1490" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_41" sourceRef="se14" targetRef="t15">
+        <di:waypoint x="1490" y="40"/>
+        <di:waypoint x="1590" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_42" sourceRef="t15" targetRef="se16">
+        <di:waypoint x="1590" y="40"/>
+        <di:waypoint x="1690" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SecretaryProcess_43" sourceRef="se16" targetRef="ee1">
+        <di:waypoint x="1690" y="40"/>
+        <di:waypoint x="1790" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="LogisticsDepartmentHeadProcess_9" sourceRef="se2" targetRef="t5">
+        <di:waypoint x="410" y="40"/>
+        <di:waypoint x="510" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="LogisticsDepartmentHeadProcess_10" sourceRef="t5" targetRef="t7">
+        <di:waypoint x="570" y="40"/>
+        <di:waypoint x="670" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="LogisticsDepartmentHeadProcess_11" sourceRef="t7" targetRef="se8">
+        <di:waypoint x="670" y="40"/>
+        <di:waypoint x="770" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="WarehousemenProcess_10" sourceRef="se10" targetRef="t11">
+        <di:waypoint x="930" y="40"/>
+        <di:waypoint x="1030" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="WarehousemenProcess_11" sourceRef="t11" targetRef="t15">
+        <di:waypoint x="1090" y="40"/>
+        <di:waypoint x="1190" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="WarehousemenProcess_12" sourceRef="t15" targetRef="se16">
+        <di:waypoint x="1190" y="40"/>
+        <di:waypoint x="1290" y="40"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="WarehousemenProcess_13" sourceRef="se16" targetRef="ee1">
+        <di:waypoint x="1290" y="40"/>
+        <di:waypoint x="1390" y="40"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

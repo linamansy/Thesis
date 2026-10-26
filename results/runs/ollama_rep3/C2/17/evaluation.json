@@ -1,0 +1,182 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "17",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: error parsing attribute name, line 182, column 1 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C2/17/generated.bpmn, line 182)"
+    ],
+    "bpmnlint_valid": false,
+    "di_stripped": false
+  },
+  "semantic": {
+    "n_generated_tasks": 0,
+    "n_reference_tasks": 25,
+    "n_matched": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "matched": [],
+    "extra": [],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Process payment"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Confirm delivery"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Receive back-order"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Prepare documentation for international orders"
+      },
+      {
+        "reference_id": "Task_5",
+        "reference_label": "Initiate back-order"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Customer reports issue"
+      },
+      {
+        "reference_id": "Task_7",
+        "reference_label": "Perform quality control checks"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Dispatch order"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Check stock availability"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Prepare shipping documents and labels"
+      },
+      {
+        "reference_id": "Task_11",
+        "reference_label": "Process refund"
+      },
+      {
+        "reference_id": "Task_12",
+        "reference_label": "Inspect returned items"
+      },
+      {
+        "reference_id": "Task_13",
+        "reference_label": "Notify about failed payment"
+      },
+      {
+        "reference_id": "Task_14",
+        "reference_label": "Update inventory levels"
+      },
+      {
+        "reference_id": "Task_15",
+        "reference_label": "Gift wrap items"
+      },
+      {
+        "reference_id": "Task_16",
+        "reference_label": "Inform customer about delay"
+      },
+      {
+        "reference_id": "Task_17",
+        "reference_label": "Send return shipping label"
+      },
+      {
+        "reference_id": "Task_18",
+        "reference_label": "Process replacement"
+      },
+      {
+        "reference_id": "Task_19",
+        "reference_label": "Pick items from warehouse"
+      },
+      {
+        "reference_id": "Task_20",
+        "reference_label": "Send shipping confirmation to customer"
+      },
+      {
+        "reference_id": "Task_21",
+        "reference_label": "Package items"
+      },
+      {
+        "reference_id": "Task_22",
+        "reference_label": "Send follow-up email"
+      },
+      {
+        "reference_id": "Task_23",
+        "reference_label": "Record order details"
+      },
+      {
+        "reference_id": "Task_24",
+        "reference_label": "Receive returned items"
+      },
+      {
+        "reference_id": "Task_25",
+        "reference_label": "Place order"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.0,
+    "behavioral_computable": true,
+    "n_pairs": 0,
+    "n_same": 0,
+    "pairs": []
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 0,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": []
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.0,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2663,
+    "output_tokens": 3713,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": true,
+    "think_tags_in_answer": 1,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 3,
+      "first_task_inserted": false
+    },
+    "seconds": 86.591,
+    "bpmnlint_valid": false
+  },
+  "reference_complexity": {
+    "flow_nodes": 43,
+    "tasks": 25,
+    "gateways": 16,
+    "loops": 0,
+    "nesting_depth": 3,
+    "cfc": 14
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

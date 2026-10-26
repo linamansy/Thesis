@@ -1,0 +1,58 @@
+{
+  "case_id": "19",
+  "condition": "C2",
+  "run_id": "ollama_rep3",
+  "generation_succeeded": true,
+  "parses": true,
+  "valid": false,
+  "errors": [
+    "sequence flow f1_dup2 has targetRef='t1', which is not an element",
+    "sequence flow f2_dup2 has sourceRef='t1', which is not an element",
+    "sequence flow f2_dup2 has targetRef='t2', which is not an element",
+    "sequence flow f3_dup2 has sourceRef='t2', which is not an element",
+    "sequence flow f3_dup2 has targetRef='t3', which is not an element",
+    "sequence flow f4_dup2 has sourceRef='t2', which is not an element",
+    "sequence flow f4_dup2 has targetRef='t4', which is not an element",
+    "sequence flow f5_dup2 has sourceRef='t2', which is not an element",
+    "sequence flow f5_dup2 has targetRef='t5', which is not an element",
+    "sequence flow f6_dup2 has sourceRef='t5', which is not an element",
+    "sequence flow f6_dup2 has targetRef='t6', which is not an element",
+    "sequence flow auto_link_out_t3_to_t4 has sourceRef='t3', which is not an element",
+    "sequence flow auto_link_out_t3_to_t4 has targetRef='t4', which is not an element",
+    "sequence flow auto_link_out_t4_to_t5 has sourceRef='t4', which is not an element",
+    "sequence flow auto_link_out_t4_to_t5 has targetRef='t5', which is not an element",
+    "sequence flow auto_link_out_t6_to_t7 has sourceRef='t6', which is not an element",
+    "sequence flow auto_link_out_t6_to_t7 has targetRef='t7', which is not an element",
+    "sequence flow auto_link_out_t7_to_ee2 has sourceRef='t7', which is not an element"
+  ],
+  "counts": {
+    "start_events": 2,
+    "end_events": 2,
+    "tasks": 16,
+    "gateways": 3,
+    "sequence_flows": 31
+  },
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2551,
+    "output_tokens": 2096,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 8,
+      "first_task_inserted": false
+    },
+    "seconds": 48.248,
+    "bpmnlint_valid": true
+  }
+}

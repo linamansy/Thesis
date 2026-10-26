@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Sales Staff" processRef="SalesProcess"/>
+    <bpmn:messageFlow id="mf1" name="Inquiry" sourceRef="se1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Information" sourceRef="t1" targetRef="se3"/>
+    <bpmn:messageFlow id="mf3" name="Product Selection" sourceRef="t2" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Quote" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf5" name="Approval" sourceRef="ice2" targetRef="se5"/>
+    <bpmn:messageFlow id="mf6" name="Order Confirmation" sourceRef="t4" targetRef="ice3"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Inquiry"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Quote Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Quote Approved">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="ice1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice2" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SalesProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Inquiry Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Collect Information"/>
+    <bpmn:task id="t2" name="Guide Product Selection"/>
+    <bpmn:task id="t3" name="Provide Quote"/>
+    <bpmn:task id="t4" name="Record Order"/>
+    <bpmn:endEvent id="ee2" name="Done"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequence
+</think>
+
+
+    <bpmn:sequenceFlow id="auto_link_out_t3_to_t4" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="auto_link_out_t4_to_ee2" sourceRef="t4" targetRef="ee2"/>
+  </bpmn:process>
+</bpmn:definitions>

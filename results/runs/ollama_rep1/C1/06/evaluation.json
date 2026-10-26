@@ -1,0 +1,289 @@
+{
+  "run_id": "ollama_rep1",
+  "repetition": 1,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "06",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 66, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep1/C1/06/generated.bpmn, line 66)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 7,
+    "n_reference_tasks": 10,
+    "n_matched": 5,
+    "precision": 0.7142857142857143,
+    "recall": 0.5,
+    "f1": 0.588235294117647,
+    "matched": [
+      {
+        "generated_id": "t2",
+        "generated_label": "Generate Order Confirmation",
+        "reference_id": "Task_7",
+        "reference_label": "Generate and send order confirmation",
+        "similarity": 0.9355
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Pick and Pack Items",
+        "reference_id": "Task_6",
+        "reference_label": "Pick and pack items",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Generate Shipping Label",
+        "reference_id": "Task_9",
+        "reference_label": "Generate shipping label",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Send Tracking Info",
+        "reference_id": "Task_10",
+        "reference_label": "Send tracking information to customer",
+        "similarity": 0.8585
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Monitor Shipment",
+        "reference_id": "Task_5",
+        "reference_label": "Monitor shipment",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "Successful delivery"
+      },
+      {
+        "reference_id": "Task_2",
+        "reference_label": "Customer places order online"
+      },
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Hand over order to logistics provider"
+      },
+      {
+        "reference_id": "Task_4",
+        "reference_label": "Customer places order over the phone"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Process customer feedback or returns"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Place Order"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Ship Order"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.5,
+    "behavioral_computable": true,
+    "n_pairs": 10,
+    "n_same": 5,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Generate and send order confirmation",
+          "Pick and pack items"
+        ],
+        "generated_tasks": [
+          "Generate Order Confirmation",
+          "Pick and Pack Items"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate and send order confirmation",
+          "Generate shipping label"
+        ],
+        "generated_tasks": [
+          "Generate Order Confirmation",
+          "Generate Shipping Label"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate and send order confirmation",
+          "Send tracking information to customer"
+        ],
+        "generated_tasks": [
+          "Generate Order Confirmation",
+          "Send Tracking Info"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate and send order confirmation",
+          "Monitor shipment"
+        ],
+        "generated_tasks": [
+          "Generate Order Confirmation",
+          "Monitor Shipment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Pick and pack items",
+          "Generate shipping label"
+        ],
+        "generated_tasks": [
+          "Pick and Pack Items",
+          "Generate Shipping Label"
+        ],
+        "reference_relation": "||",
+        "generated_relation": "->",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Pick and pack items",
+          "Send tracking information to customer"
+        ],
+        "generated_tasks": [
+          "Pick and Pack Items",
+          "Send Tracking Info"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Pick and pack items",
+          "Monitor shipment"
+        ],
+        "generated_tasks": [
+          "Pick and Pack Items",
+          "Monitor Shipment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Generate shipping label",
+          "Send tracking information to customer"
+        ],
+        "generated_tasks": [
+          "Generate Shipping Label",
+          "Send Tracking Info"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Generate shipping label",
+          "Monitor shipment"
+        ],
+        "generated_tasks": [
+          "Generate Shipping Label",
+          "Monitor Shipment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "Send tracking information to customer",
+          "Monitor shipment"
+        ],
+        "generated_tasks": [
+          "Send Tracking Info",
+          "Monitor Shipment"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "#",
+        "same": false
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 2,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Place Order",
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Ship Order",
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.7143,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1804,
+    "output_tokens": 4090,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 93.773,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 20,
+    "tasks": 10,
+    "gateways": 8,
+    "loops": 1,
+    "nesting_depth": 1,
+    "cfc": 7
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

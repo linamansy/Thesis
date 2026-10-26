@@ -1,0 +1,39 @@
+{
+  "case_id": "46",
+  "condition": "C2",
+  "run_id": "ollama_rep3",
+  "generation_succeeded": true,
+  "parses": true,
+  "valid": true,
+  "errors": [],
+  "counts": {
+    "start_events": 5,
+    "end_events": 6,
+    "tasks": 16,
+    "gateways": 2,
+    "sequence_flows": 28
+  },
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2775,
+    "output_tokens": 6091,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 1,
+      "first_task_inserted": false
+    },
+    "seconds": 145.986,
+    "bpmnlint_valid": true
+  }
+}

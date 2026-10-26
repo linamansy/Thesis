@@ -1,0 +1,242 @@
+{
+  "run_id": "ollama_rep2",
+  "repetition": 2,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C3",
+  "case_id": "46",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 62, column 41 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep2/C3/46/generated.bpmn, line 62)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 6,
+    "n_reference_tasks": 11,
+    "n_matched": 4,
+    "precision": 0.6666666666666666,
+    "recall": 0.36363636363636365,
+    "f1": 0.4705882352941177,
+    "matched": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Read Order",
+        "reference_id": "ServiceTask_1",
+        "reference_label": "Read order",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Withdraw Product From Warehouse",
+        "reference_id": "ManualTask_1",
+        "reference_label": "Withdraw the Product from warehouse",
+        "similarity": 0.9788
+      },
+      {
+        "generated_id": "t4",
+        "generated_label": "Reorder From Wholesaler",
+        "reference_id": "ServiceTask_3",
+        "reference_label": "Reorder from wholesaler",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Demand Delivery Delay Penalty",
+        "reference_id": "ServiceTask_5",
+        "reference_label": "Demand delivery delay penalty from the wholesaler",
+        "similarity": 0.8894
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "ServiceTask_2",
+        "reference_label": "Check if product is in stock"
+      },
+      {
+        "reference_id": "ServiceTask_4",
+        "reference_label": "Waiting until arrives (handling system)"
+      },
+      {
+        "reference_id": "ManualTask_2",
+        "reference_label": "Register in stock management system"
+      },
+      {
+        "reference_id": "ManualTask_3",
+        "reference_label": "Check if the whole order is ready for shipment"
+      },
+      {
+        "reference_id": "ManualTask_4",
+        "reference_label": "Packing the products"
+      },
+      {
+        "reference_id": "ManualTask_5",
+        "reference_label": "Shipping the order"
+      },
+      {
+        "reference_id": "ManualTask_6",
+        "reference_label": "Courier is requested"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t5",
+        "generated_label": "Register Product In Stock"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Process Order"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 6,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Read order",
+          "Withdraw the Product from warehouse"
+        ],
+        "generated_tasks": [
+          "Read Order",
+          "Withdraw Product From Warehouse"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Read order",
+          "Reorder from wholesaler"
+        ],
+        "generated_tasks": [
+          "Read Order",
+          "Reorder From Wholesaler"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Read order",
+          "Demand delivery delay penalty from the wholesaler"
+        ],
+        "generated_tasks": [
+          "Read Order",
+          "Demand Delivery Delay Penalty"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Withdraw the Product from warehouse",
+          "Reorder from wholesaler"
+        ],
+        "generated_tasks": [
+          "Withdraw Product From Warehouse",
+          "Reorder From Wholesaler"
+        ],
+        "reference_relation": "#",
+        "generated_relation": "#",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Withdraw the Product from warehouse",
+          "Demand delivery delay penalty from the wholesaler"
+        ],
+        "generated_tasks": [
+          "Withdraw Product From Warehouse",
+          "Demand Delivery Delay Penalty"
+        ],
+        "reference_relation": "#",
+        "generated_relation": "#",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Reorder from wholesaler",
+          "Demand delivery delay penalty from the wholesaler"
+        ],
+        "generated_tasks": [
+          "Reorder From Wholesaler",
+          "Demand Delivery Delay Penalty"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 2,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": [
+      {
+        "generated_id": "t5",
+        "label": "Register Product In Stock",
+        "similarity_to_knowledge": 0.1333,
+        "similarity_to_description": 0.6943,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Process Order",
+        "similarity_to_knowledge": 0.3253,
+        "similarity_to_description": 0.5794,
+        "knowledge_traceable": false
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.6667,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1923,
+    "output_tokens": 4175,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 1,
+      "first_task_inserted": false
+    },
+    "seconds": 95.799,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 20,
+    "tasks": 11,
+    "gateways": 7,
+    "loops": 1,
+    "nesting_depth": 2,
+    "cfc": 7
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Procurement Team" processRef="ProcurementProcess"/>
+    <bpmn:participant id="p2" name="Suppliers" processRef="SupplierProcess"/>
+    <bpmn:messageFlow id="mf1" name="RFP Issued" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Proposals Received" sourceRef="se2" targetRef="t2"/>
+    <bpmn:messageFlow id="mf3" name="Evaluation Complete" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Supplier Selected" sourceRef="se4" targetRef="t4"/>
+    <bpmn:messageFlow id="mf5" name="Contract Signed" sourceRef="t5" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="ProcurementProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Need Identified"/>
+    <bpmn:task id="t1" name="Issue RFP"/>
+    <bpmn:task id="t2" name="Receive Proposals"/>
+    <bpmn:task id="t3" name="Evaluate Proposals"/>
+    <bpmn:task id="t4" name="Select Supplier"/>
+    <bpmn:task id="t5" name="Negotiate Contract"/>
+    <bpmn:endEvent id="ee1" name="Supplier Onboarded"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t5" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SupplierProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="RFP Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2_dup2" name="Submit Proposal"/>
+    <bpmn:task id="t3_dup2" name="Site Visit"/>
+    <bpmn:task id="t4_dup2" name="Interview"/>
+    <bpmn:task id="t5_dup2" name="Sign Contract"/>
+    <bpmn:endEvent id="ee1_dup2" name="Contract Executed"/>
+    <bpmn:sequenceFlow id="f2_dup2" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3_dup2" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4_dup2" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5_dup2" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f6_dup2" sourceRef="t5" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="ProcurementProcess_1" bpmnElement="se1">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_2" bpmnElement="t1">
+        <dc:Bounds x="200" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_3" bpmnElement="t2">
+        <dc:Bounds x="300" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_4" bpmnElement="t3">
+        <dc:Bounds x="400" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_5" bpmnElement="t4">
+        <dc:Bounds x="500" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_6" bpmnElement="t5">
+        <dc:Bounds x="600" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ProcurementProcess_7" bpmnElement="ee1">
+        <dc:Bounds x="700" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_1" bpmnElement="se2">
+        <dc:Bounds x="100" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_2" bpmnElement="t2">
+        <dc:Bounds x="200" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_3" bpmnElement="t3">
+        <dc:Bounds x="300" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_4" bpmnElement="t4">
+        <dc:Bounds x="400" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_5" bpmnElement="t5">
+        <dc:Bounds x="500" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SupplierProcess_6" bpmnElement="ee1">
+        <dc:Bounds x="600" y="260" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_dup2" sourceRef="se1" targetRef="t1">
+        <di:waypoint x="150" y="140"/>
+        <di:waypoint x="200" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_dup3" sourceRef="t1" targetRef="t2">
+        <di:waypoint x="250" y="140"/>
+        <di:waypoint x="300" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_dup3" sourceRef="t2" targetRef="t3">
+        <di:waypoint x="350" y="140"/>
+        <di:waypoint x="400" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4_dup3" sourceRef="t3" targetRef="t4">
+        <di:waypoint x="450" y="140"/>
+        <di:waypoint x="500" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_dup3" sourceRef="t4" targetRef="t5">
+        <di:waypoint x="550" y="140"/>
+        <di:waypoint x="600" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6_dup3" sourceRef="t5" targetRef="ee1">
+        <di:waypoint x="650" y="140"/>
+        <di:waypoint x="700" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf1_dup2" sourceRef="t1" targetRef="se2">
+        <di:waypoint x="250" y="140"/>
+        <di:waypoint x="100" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf2_dup2" sourceRef="se2" targetRef="t2">
+        <di:waypoint x="150" y="260"/>
+        <di:waypoint x="200" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf3_dup2" sourceRef="t2" targetRef="se4">
+        <di:waypoint x="250" y="260"/>
+        <di:waypoint x="250" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf4_dup2" sourceRef="se4" targetRef="t4">
+        <di:waypoint x="250" y="100"/>
+        <di:waypoint x="300" y="100"/>
+      </bpmndi:BPMNEdge>
+      <bpmnd0:BPMNEdge id="mf5_dup2" sourceRef="t5" targetRef="ee1">
+        <di:waypoint x="650" y="140"/>
+        <di:waypoint x="600" y="260"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

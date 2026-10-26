@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Consumer" processRef="ConsumerProcess"/>
+    <bpmn:participant id="p2" name="Web Shop 1" processRef="WebShop1Process"/>
+    <bpmn:participant id="p3" name="Web Shop 2" processRef="WebShop2Process"/>
+    <bpmn:participant id="p4" name="Web Shop 3" processRef="WebShop3Process"/>
+    <bpmn:messageFlow id="mf1" name="Query Shops" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Shop Responses" sourceRef="t2" targetRef="t3"/>
+    <bpmn:messageFlow id="mf3" name="Order Parts" sourceRef="t3" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Delivery Confirmation" sourceRef="t5" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf5" name="Stock Update" sourceRef="t6" targetRef="t7"/>
+    <bpmn:messageFlow id="mf6" name="Reorder Parts" sourceRef="t7" targetRef="se8"/>
+    <bpmn:messageFlow id="mf7" name="Stock Update" sourceRef="t8" targetRef="t9"/>
+    <bpmn:messageFlow id="mf8" name="Reorder Again" sourceRef="t9" targetRef="se10"/>
+    <bpmn:messageFlow id="mf9" name="Send Complaint" sourceRef="t11" targetRef="ee12"/>
+  </bpmn:collaboration>
+  <bpmn:process id="ConsumerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start Contract"/>
+    <bpmn:task id="t1" name="Query Web Shops"/>
+    <bpmn:exclusiveGateway id="g1" name="Select Cheapest Parts"/>
+    <bpmn:task id="t2" name="Create Order List"/>
+    <bpmn:task id="t3" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Parts Arrive">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t4" name="Update Stock"/>
+    <bpmn:exclusiveGateway id="g2" name="Check Stock Level"/>
+    <bpmn:task id="t5" name="Reorder Parts"/>
+    <bpmn:exclusiveGateway id="g3" name="Check Stock Level Again"/>
+    <bpmn:task id="t6" name="Update Stock Again"/>
+    <bpmn:task id="t7" name="Reorder Again"/>
+    <bpmn:task id="t8" name="Check Stock Level Again"/>
+    <bpmn:exclusiveGateway id="g4" name="Stock Below 3"/>
+    <bpmn:task id="t9" name="Reorder Again"/>
+    <bpmn:task id="t10" name="Send Complaint"/>
+    <bpmn:endEvent id="ee11" name="Contract Complete"/>
+    <bpmn:endEvent id="ee12" name="Send Complaint"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="g2" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="g3"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="g3" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t8" targetRef="g4"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="g4" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="ee11"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t9" targetRef="ee11"/>
+  
+    <bpmn:sequenceFlow id="auto_link_out_ee11_to_ee12" sourceRef="ee11" targetRef="ee12"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop1Process" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Receive Query"/>
+    <bpmn:task id="t4_dup2" name="Provide Part Info"/>
+    <bpmn:endEvent id="ee3" name="Send Response"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se2" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t4" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop2Process" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Receive Query"/>
+    <bpmn:task id="t5_dup2" name="Provide Part Info"/>
+    <bpmn:endEvent id="ee4" name="Send Response"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="se4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t5" targetRef="ee4"/>
+  </bpmn:process>
+  <bpmn:process id="WebShop3Process" isExecutable="false">
+    <bpmn:startEvent id="se5" name="Receive Query"/>
+    <bpmn:task id="t6_dup2" name="Provide Part Info"/>
+    <bpmn:endEvent id="ee5" name="Send Response"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t6" targetRef="ee5"/>
+  </bpmn:process>
+</bpmn:definitions>

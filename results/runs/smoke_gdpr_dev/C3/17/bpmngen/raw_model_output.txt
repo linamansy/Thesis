@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Inventory System" processRef="InventorySystemProcess"/>
+    <bpmn:participant id="p4" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p5" name="Quality Control" processRef="QualityControlProcess"/>
+    <bpmn:participant id="p6" name="Packaging" processRef="PackagingProcess"/>
+    <bpmn:participant id="p7" name="Shipping Department" processRef="ShippingDepartmentProcess"/>
+    <bpmn:participant id="p8" name="Returns Department" processRef="ReturnsDepartmentProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Payment Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Payment Failed" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Availability" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Out of Stock" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:messageFlow id="mf6" name="Back-Order Confirmation" sourceRef="t8" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf7" name="In Stock" sourceRef="ice3" targetRef="t9"/>
+    <bpmn:messageFlow id="mf8" name="Picked Items" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf9" name="Quality Check" sourceRef="t12" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf10" name="Packaging Complete" sourceRef="ice4" targetRef="se13"/>
+    <bpmn:messageFlow id="mf11" name="Gift Wrap" sourceRef="t14" targetRef="ice5"/>
+    <bpmn:messageFlow id="mf12" name="Shipping Documents" sourceRef="t15" targetRef="se16"/>
+    <bpmn:messageFlow id="mf13" name="Customs Documentation" sourceRef="t16" targetRef="ice6"/>
+    <bpmn:messageFlow id="mf14" name="Shipping Ready" sourceRef="ice6" targetRef="t17"/>
+    <bpmn:messageFlow id="mf15" name="Shipping Confirmation" sourceRef="t18" targetRef="ice7"/>
+    <bpmn:messageFlow id="mf16" name="Inventory Update" sourceRef="t19" targetRef="ice8"/>
+    <bpmn:messageFlow id="mf17" name="Feedback Request" sourceRef="ice8" targetRef="t20"/>
+    <bpmn:messageFlow id="mf18" name="Issue Reported" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:messageFlow id="mf19" name="Return Label" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:messageFlow id="mf20" name="Return Received" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:messageFlow id="mf21" name="Inspect Return" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:messageFlow id="mf22" name="Refund/Replacement" sourceRef="ice11" targetRef="ee21"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventningEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="se2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t9" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="ice4" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="se11"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se13" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t13" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice6" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="se15" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t15" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t16" targetRef="se17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="se17" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="t17" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="ice8" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="t18" targetRef="se19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="se19" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="t19" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="ice9" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="t20" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="se20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="t22" targetRef="se21"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="se21" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f47" sourceRef="t24" targetRef="ee21"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Payment"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Inventory System" processRef="InventorySystemProcess"/>
+    <bpmn:participant id="p4" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p5" name="Quality Control" processRef="QualityControlProcess"/>
+    <bpmn:participant id="p6" name="Packaging" processRef="PackagingProcess"/>
+    <bpmn:participant id="p7" name="Shipping Department" processRef="ShippingDepartmentProcess"/>
+    <bpmn:participant id="p8" name="Returns Department" processRef="ReturnsDepartmentProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Payment Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Payment Failed" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Availability" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Out of Stock" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:messageFlow id="mf6" name="Back-Order Confirmation" sourceRef="t8" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf7" name="In Stock" sourceRef="ice3" targetRef="t9"/>
+    <bpmn:messageFlow id="mf8" name="Picked Items" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf9" name="Quality Check" sourceRef="t12" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf10" name="Packaging Complete" sourceRef="ice4" targetRef="se13"/>
+    <bpmn:messageFlow id="mf11" name="Gift Wrap" sourceRef="t14" targetRef="ice5"/>
+    <bpmn:messageFlow id="mf12" name="Shipping Documents" sourceRef="t15" targetRef="se16"/>
+    <bpmn:messageFlow id="mf13" name="Customs Documentation" sourceRef="t16" targetRef="ice6"/>
+    <bpmn:messageFlow id="mf14" name="Shipping Ready" sourceRef="ice6" targetRef="t17"/>
+    <bpmn:messageFlow id="mf15" name="Shipping Confirmation" sourceRef="t18" targetRef="ice7"/>
+    <bpmn:messageFlow id="mf16" name="Inventory Update" sourceRef="t19" targetRef="ice8"/>
+    <bpmn:messageFlow id="mf17" name="Feedback Request" sourceRef="ice8" targetRef="t20"/>
+    <bpmn:messageFlow id="mf18" name="Issue Reported" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:messageFlow id="mf19" name="Return Label" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:messageFlow id="mf20" name="Return Received" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:messageFlow id="mf21" name="Inspect Return" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:messageFlow id="mf22" name="Refund/Replacement" sourceRef="ice11" targetRef="ee21"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="se2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t9" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="ice4" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="se11"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se13" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t13" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice6" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="se15" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t15" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t16" targetRef="se17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="se17" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="t17" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="ice8" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="t18" targetRef="se19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="se19" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="t19" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="ice9" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="t20" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="se20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="t22" targetRef="se21"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="se21" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f47" sourceRef="t24" targetRef="ee21"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Payment"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t9" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice4" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t10" targetRef="se11"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="se13" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t13" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="ice6" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="se15" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="t15" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="t16" targetRef="se17"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="se17" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="t17" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="ice8" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t18" targetRef="se19"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="se19" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t19" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="ice9" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t20" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="se20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="t22" targetRef="se21"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="se21" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="t24" targetRef="ee21"/>
+  </bpmn:process>
+  <bpmn:process id="InventorySystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se6" name="Stock Availability">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t5" name="Check Stock Availability"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Out of Stock">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="End"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se6" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t7" targetRef="se8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice3" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t9" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se9" name="Picked Items">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t10" name="Pick Items from Warehouse"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee4" name="End"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="se9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice4" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t11" targetRef="ee4"/>
+  </bpmn:process>
+  <bpmn:process id="QualityControlProcess" isExecutable="false">
+    <bpmn:startEvent id="se11" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t12" name="Quality Control Check"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee5" name="End"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t12" targetRef="ice4"/>
+    <bpmn:sequence
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Inventory System" processRef="InventorySystemProcess"/>
+    <bpmn:participant id="p4" name="Warehouse" processRef="WarehouseProcess"/>
+    <bpmn:participant id="p5" name="Quality Control" processRef="QualityControlProcess"/>
+    <bpmn:participant id="p6" name="Packaging" processRef="PackagingProcess"/>
+    <bpmn:participant id="p7" name="Shipping Department" processRef="ShippingDepartmentProcess"/>
+    <bpmn:participant id="p8" name="Returns Department" processRef="ReturnsDepartmentProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Payment Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Payment Failed" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:messageFlow id="mf4" name="Stock Availability" sourceRef="t5" targetRef="se6"/>
+    <bpmn:messageFlow id="mf5" name="Out of Stock" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:messageFlow id="mf6" name="Back-Order Confirmation" sourceRef="t8" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf7" name="In Stock" sourceRef="ice3" targetRef="t9"/>
+    <bpmn:messageFlow id="mf8" name="Picked Items" sourceRef="t10" targetRef="se11"/>
+    <bpmn:messageFlow id="mf9" name="Quality Check" sourceRef="t12" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf10" name="Packaging Complete" sourceRef="ice4" targetRef="se13"/>
+    <bpmn:messageFlow id="mf11" name="Gift Wrap" sourceRef="t14" targetRef="ice5"/>
+    <bpmn:messageFlow id="mf12" name="Shipping Documents" source, sourceRef="t15" targetRef="se16"/>
+    <bpmn:messageFlow id="mf13" name="Customs Documentation" sourceRef="t16" targetRef="ice6"/>
+    <bpmn:messageFlow id="mf14" name="Shipping Ready" sourceRef="ice6" targetRef="t17"/>
+    <bpmn:messageFlow id="mf15" name="Shipping Confirmation" sourceRef="t18" targetRef="ice7"/>
+    <bpmn:messageFlow id="mf16" name="Inventory Update" sourceRef="t19" targetRef="ice8"/>
+    <bpmn:messageFlow id="mf17" name="Feedback Request" sourceRef="ice8" targetRef="t20"/>
+    <bpmn:messageFlow id="mf18" name="Issue Reported" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:messageFlow id="mf19" name="Return Label" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:messageFlow id="mf20" name="Return Received" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:messageFlow id="mf21" name="Inspect Return" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:messageFlow id="mf22" name="Refund/Replacement" sourceRef="ice11" targetRef="ee21"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="se2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t9" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="ice4" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t10" targetRef="se11"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="se11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="se13" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t13" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice6" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="se15" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t15" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="t16" targetRef="se17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="se17" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="t17" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="ice8" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="t18" targetRef="se19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="se19" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="t19" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="ice9" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="t20" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="se20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="t22" targetRef="se21"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="se21" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f47" sourceRef="t24" targetRef="ee21"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Process Payment"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Payment Failed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Back-Order Confirmation">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Confirmation">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Inventory Update">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice9" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice1" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t4" targetRef="se5"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t6" targetRef="se7"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se7" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t7" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice3" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t8" targetRef="se9"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="se9" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t9" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice4" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t10" targetRef="se11"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se11" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t11" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="ice5" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t12" targetRef="se13"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="se13" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t13" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="ice6" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="t14" targetRef="se15"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="se15" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="t15" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="ice7" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="t16" targetRef="se17"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="se17" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="t17" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f32" sourceRef="ice8" targetRef="t18"/>
+    <bpmn:sequenceFlow id="f33" sourceRef="t18" targetRef="se19"/>
+    <bpmn:sequenceFlow id="f34" sourceRef="se19" targetRef="t19"/>
+    <bpmn:sequenceFlow id="f35" sourceRef="t19" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f36" sourceRef="ice9" targetRef="t20"/>
+    <bpmn:sequenceFlow id="f37" sourceRef="t20" targetRef="ee2"/>
+    <bpmn:sequenceFlow id="f38" sourceRef="ice9" targetRef="se20"/>
+    <bpmn:sequenceFlow id="f39" sourceRef="se20" targetRef="t21"/>
+    <bpmn:sequenceFlow id="f40" sourceRef="t21" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f41" sourceRef="ice10" targetRef="t22"/>
+    <bpmn:sequenceFlow id="f42" sourceRef="t22" targetRef="se21"/>
+    <bpmn:sequenceFlow id="f43" sourceRef="se21" targetRef="t23"/>
+    <bpmn:sequenceFlow id="f44" sourceRef="t23" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f45" sourceRef="ice11" targetRef="t24"/>
+    <bpmn:sequenceFlow id="f46" sourceRef="t24" targetRef="ee21"/>
+  </bpmn:process>
+  <bpmn:process id="InventorySystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se6" name="Stock Availability">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t5" name="Check Stock Availability"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Out of Stock">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="In Stock">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="End"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se6" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t5" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="ice2" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t7" targetRef="se8"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se8" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t8" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="ice3" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t9" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmn:process id="WarehouseProcess" isExecutable="false">
+    <bpmn:startEvent id="se9" name="Picked Items">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t10" name="Pick Items from Warehouse"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee4" name="End"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="se9" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="t10" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="ice4" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="t11" targetRef="ee4"/>
+  </bpmn:process>
+  <bpmn:process id="QualityControlProcess" isExecutable="false">
+    <bpmn:startEvent id="se11" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t12" name="Quality Control Check"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Quality Check">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee5" name="End"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="se11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="t12" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="ice4" targetRef="t13"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t13" targetRef="ee5"/>
+  </bpmn:process>
+  <bpmn:process id="PackagingProcess" isExecutable="false">
+    <bpmn:startEvent id="se13" name="Packaging Complete">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t14" name="Packaging"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Gift Wrap">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee6" name="End"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="se13" targetRef="t14"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="t14" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="ice5" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="t15" targetRef="ee6"/>
+  </bpmn:process>
+  <bpmn:process id="ShippingDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se16" name="Shipping Documents">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t15" name="Prepare Shipping Documents"/>
+    <bpmn:intermediateCatchEvent id="ice6" name="Shipping Ready">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice10" name="Customs Documentation">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee7" name="End"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="se16" targetRef="t15"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="t15" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="ice6" targetRef="t16"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="t16" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f30" sourceRef="ice10" targetRef="t17"/>
+    <bpmn:sequenceFlow id="f31" sourceRef="t17" targetRef="ee7"/>
+  </bpmn:process>
+  <bpmn:process id="ReturnsDepartmentProcess" isExecutable="false">
+    <bpmn:startEvent id="se20" name="Issue Reported">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t21" name="Generate Return Label"/>
+    <bpmn:intermediateCatchEvent id="ice10" name="Return Received">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t22" name="Inspect Return"/>
+    <bpmn:intermediateCatchEvent id="ice11" name="Inspect Return">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatch

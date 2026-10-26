@@ -1,0 +1,303 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C2",
+  "case_id": "45",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": true,
+    "errors": [],
+    "bpmnlint_valid": true,
+    "di_stripped": false
+  },
+  "semantic": {
+    "n_generated_tasks": 11,
+    "n_reference_tasks": 13,
+    "n_matched": 4,
+    "precision": 0.36363636363636365,
+    "recall": 0.3076923076923077,
+    "f1": 0.33333333333333337,
+    "matched": [
+      {
+        "generated_id": "t4",
+        "generated_label": "Save Product",
+        "reference_id": "ManualTask_4",
+        "reference_label": "customer saves product",
+        "similarity": 0.8365
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Enter Payment Data",
+        "reference_id": "ManualTask_6",
+        "reference_label": "customer enters payment data",
+        "similarity": 0.8761
+      },
+      {
+        "generated_id": "t8",
+        "generated_label": "Enter Shipping Address",
+        "reference_id": "ManualTask_7",
+        "reference_label": "customer enters shipping address",
+        "similarity": 0.8183
+      },
+      {
+        "generated_id": "t10",
+        "generated_label": "Check Credentials",
+        "reference_id": "ServiceTask_1",
+        "reference_label": "customer credentials being checked by system",
+        "similarity": 0.7523
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_1",
+        "reference_label": "customer waits until bank confirms payment"
+      },
+      {
+        "reference_id": "ServiceTask_2",
+        "reference_label": "Payment is prepared by system"
+      },
+      {
+        "reference_id": "ServiceTask_3",
+        "reference_label": "Shipment is prepared by system"
+      },
+      {
+        "reference_id": "ServiceTask_4",
+        "reference_label": "order is being finished by system"
+      },
+      {
+        "reference_id": "ManualTask_1",
+        "reference_label": "customer logs into E-Shop"
+      },
+      {
+        "reference_id": "ManualTask_2",
+        "reference_label": "customer selects a product"
+      },
+      {
+        "reference_id": "ManualTask_3",
+        "reference_label": "customer adds product to shopping cart"
+      },
+      {
+        "reference_id": "ManualTask_5",
+        "reference_label": "customer checks if product was already selected"
+      },
+      {
+        "reference_id": "ManualTask_8",
+        "reference_label": "customer enters an independent billing adress"
+      }
+    ],
+    "extra": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Login"
+      },
+      {
+        "generated_id": "t2",
+        "generated_label": "Select Product"
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Add to Cart"
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Check Products"
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Finish Order"
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Enter Billing Address"
+      },
+      {
+        "generated_id": "t11",
+        "generated_label": "Send Confirmation"
+      }
+    ]
+  },
+  "behavioral": {
+    "behavioral_similarity": 0.6666666666666666,
+    "behavioral_computable": true,
+    "n_pairs": 6,
+    "n_same": 4,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "customer enters payment data"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Enter Payment Data"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "customer enters shipping address"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Enter Shipping Address"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer saves product",
+          "customer credentials being checked by system"
+        ],
+        "generated_tasks": [
+          "Save Product",
+          "Check Credentials"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer enters payment data",
+          "customer enters shipping address"
+        ],
+        "generated_tasks": [
+          "Enter Payment Data",
+          "Enter Shipping Address"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "customer enters payment data",
+          "customer credentials being checked by system"
+        ],
+        "generated_tasks": [
+          "Enter Payment Data",
+          "Check Credentials"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "#",
+        "same": false
+      },
+      {
+        "reference_tasks": [
+          "customer enters shipping address",
+          "customer credentials being checked by system"
+        ],
+        "generated_tasks": [
+          "Enter Shipping Address",
+          "Check Credentials"
+        ],
+        "reference_relation": "<-",
+        "generated_relation": "<-",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 7,
+    "n_extra_knowledge_traceable": 1,
+    "extra_tasks": [
+      {
+        "generated_id": "t1",
+        "label": "Login",
+        "similarity_to_knowledge": 0.1204,
+        "similarity_to_description": 0.4019,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t2",
+        "label": "Select Product",
+        "similarity_to_knowledge": 0.2522,
+        "similarity_to_description": 0.5467,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t3",
+        "label": "Add to Cart",
+        "similarity_to_knowledge": 0.2745,
+        "similarity_to_description": 0.4265,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t5",
+        "label": "Check Products",
+        "similarity_to_knowledge": 0.2849,
+        "similarity_to_description": 0.4805,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t6",
+        "label": "Finish Order",
+        "similarity_to_knowledge": 0.3638,
+        "similarity_to_description": 0.5542,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t9",
+        "label": "Enter Billing Address",
+        "similarity_to_knowledge": 0.2715,
+        "similarity_to_description": 0.6121,
+        "knowledge_traceable": false
+      },
+      {
+        "generated_id": "t11",
+        "label": "Send Confirmation",
+        "similarity_to_knowledge": 0.5174,
+        "similarity_to_description": 0.3939,
+        "knowledge_traceable": true
+      }
+    ]
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 0.3636,
+    "n_unjustified_knowledge_additions": 1,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 2719,
+    "output_tokens": 5152,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 122.008,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 25,
+    "tasks": 13,
+    "gateways": 10,
+    "loops": 1,
+    "nesting_depth": 3,
+    "cfc": 8
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}

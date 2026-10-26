@@ -1,0 +1,341 @@
+{
+  "run_id": "ollama_rep3",
+  "repetition": 3,
+  "provider": "ollama",
+  "model": "qwen3:8b",
+  "condition": "C1",
+  "case_id": "03",
+  "syntactic": {
+    "generation_succeeded": true,
+    "valid": false,
+    "errors": [
+      "could not parse XML: Namespace prefix bpmndi on BPMNDiagram is not defined, line 56, column 40 (file:/C:/Users/user/Downloads/Thesis/results/runs/ollama_rep3/C1/03/generated.bpmn, line 56)"
+    ],
+    "bpmnlint_valid": true,
+    "di_stripped": true
+  },
+  "semantic": {
+    "n_generated_tasks": 6,
+    "n_reference_tasks": 11,
+    "n_matched": 6,
+    "precision": 1.0,
+    "recall": 0.5454545454545454,
+    "f1": 0.7058823529411764,
+    "matched": [
+      {
+        "generated_id": "t1",
+        "generated_label": "Check Inventory Levels",
+        "reference_id": "Task_7",
+        "reference_label": "Check current inventory level",
+        "similarity": 0.923
+      },
+      {
+        "generated_id": "t3",
+        "generated_label": "Place Order with Suppliers",
+        "reference_id": "Task_4",
+        "reference_label": "Place order with suppliers",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t5",
+        "generated_label": "Update Expected Delivery Dates",
+        "reference_id": "Task_2",
+        "reference_label": "Update inventory system with expected delivery dates",
+        "similarity": 0.8104
+      },
+      {
+        "generated_id": "t6",
+        "generated_label": "Receive Stock",
+        "reference_id": "Task_5",
+        "reference_label": "Receive stock",
+        "similarity": 1.0
+      },
+      {
+        "generated_id": "t7",
+        "generated_label": "Inspect and Record Stock",
+        "reference_id": "Task_11",
+        "reference_label": "Record stock in system",
+        "similarity": 0.7854
+      },
+      {
+        "generated_id": "t9",
+        "generated_label": "Update Inventory Levels",
+        "reference_id": "Task_1",
+        "reference_label": "Update inventory levels",
+        "similarity": 1.0
+      }
+    ],
+    "missing": [
+      {
+        "reference_id": "Task_3",
+        "reference_label": "Inspect stock for quality"
+      },
+      {
+        "reference_id": "Task_6",
+        "reference_label": "Place stock on shelves"
+      },
+      {
+        "reference_id": "Task_8",
+        "reference_label": "Send a manual alert"
+      },
+      {
+        "reference_id": "Task_9",
+        "reference_label": "Send an automated alert"
+      },
+      {
+        "reference_id": "Task_10",
+        "reference_label": "Place stock in storage"
+      }
+    ],
+    "extra": []
+  },
+  "behavioral": {
+    "behavioral_similarity": 1.0,
+    "behavioral_computable": true,
+    "n_pairs": 15,
+    "n_same": 15,
+    "pairs": [
+      {
+        "reference_tasks": [
+          "Check current inventory level",
+          "Place order with suppliers"
+        ],
+        "generated_tasks": [
+          "Check Inventory Levels",
+          "Place Order with Suppliers"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Check current inventory level",
+          "Update inventory system with expected delivery dates"
+        ],
+        "generated_tasks": [
+          "Check Inventory Levels",
+          "Update Expected Delivery Dates"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Check current inventory level",
+          "Receive stock"
+        ],
+        "generated_tasks": [
+          "Check Inventory Levels",
+          "Receive Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Check current inventory level",
+          "Record stock in system"
+        ],
+        "generated_tasks": [
+          "Check Inventory Levels",
+          "Inspect and Record Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Check current inventory level",
+          "Update inventory levels"
+        ],
+        "generated_tasks": [
+          "Check Inventory Levels",
+          "Update Inventory Levels"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Place order with suppliers",
+          "Update inventory system with expected delivery dates"
+        ],
+        "generated_tasks": [
+          "Place Order with Suppliers",
+          "Update Expected Delivery Dates"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Place order with suppliers",
+          "Receive stock"
+        ],
+        "generated_tasks": [
+          "Place Order with Suppliers",
+          "Receive Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Place order with suppliers",
+          "Record stock in system"
+        ],
+        "generated_tasks": [
+          "Place Order with Suppliers",
+          "Inspect and Record Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Place order with suppliers",
+          "Update inventory levels"
+        ],
+        "generated_tasks": [
+          "Place Order with Suppliers",
+          "Update Inventory Levels"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Update inventory system with expected delivery dates",
+          "Receive stock"
+        ],
+        "generated_tasks": [
+          "Update Expected Delivery Dates",
+          "Receive Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Update inventory system with expected delivery dates",
+          "Record stock in system"
+        ],
+        "generated_tasks": [
+          "Update Expected Delivery Dates",
+          "Inspect and Record Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Update inventory system with expected delivery dates",
+          "Update inventory levels"
+        ],
+        "generated_tasks": [
+          "Update Expected Delivery Dates",
+          "Update Inventory Levels"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Receive stock",
+          "Record stock in system"
+        ],
+        "generated_tasks": [
+          "Receive Stock",
+          "Inspect and Record Stock"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Receive stock",
+          "Update inventory levels"
+        ],
+        "generated_tasks": [
+          "Receive Stock",
+          "Update Inventory Levels"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      },
+      {
+        "reference_tasks": [
+          "Record stock in system",
+          "Update inventory levels"
+        ],
+        "generated_tasks": [
+          "Inspect and Record Stock",
+          "Update Inventory Levels"
+        ],
+        "reference_relation": "->",
+        "generated_relation": "->",
+        "same": true
+      }
+    ]
+  },
+  "extra_task_diagnostics": {
+    "n_extra_tasks": 0,
+    "n_extra_knowledge_traceable": 0,
+    "extra_tasks": []
+  },
+  "silver_legal_diagnostics": {
+    "n_required_steps": 0,
+    "requirement_coverage": null,
+    "n_extra_justified": 0,
+    "precision_adjusted": 1.0,
+    "n_unjustified_knowledge_additions": 0,
+    "required_step_matches": []
+  },
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1810,
+    "output_tokens": 3139,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 0,
+      "first_task_inserted": false
+    },
+    "seconds": 71.204,
+    "bpmnlint_valid": true
+  },
+  "reference_complexity": {
+    "flow_nodes": 21,
+    "tasks": 11,
+    "gateways": 8,
+    "loops": 1,
+    "nesting_depth": 2,
+    "cfc": 7
+  },
+  "settings": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "similarity_threshold": 0.75
+  }
+}
