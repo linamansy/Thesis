@@ -361,6 +361,10 @@ study2_gdpr:
   # After the mediation fixes (26 Oct 2026): C3 v2 round 3 final (tag c3v2-logic-final) on 01.1, C3 only, same
   # settings; frozen top 5 and oracle top 5 (src/run_variant_01_1.py RUNS)
   after_round3_run_ids: {after_round3_frozen: after_round3_frozen, after_round3_oracle: after_round3_oracle}
+  # Repetitions 2 and 3 of the oracle runs (26 Oct 2026): C2 and C3 v2 final on 01.1, oracle top 5, same settings.
+  # Repetition 1 = oracle_01.1/C2 and after_round3_oracle/C3 (src/run_variant_01_1.py REP_RUNS)
+  oracle_rep_run_ids: {oracle_rep2: oracle_01.1_rep2, oracle_rep3: oracle_01.1_rep3}
+  oracle_reps_report: results/diagnostics/variant_01.1/oracle_reps   # report.md + summary.json
   oracle_top5: data/retrieval_gdpr/oracle_01.1_top5.json
   oracle_replace: {case_id: "01.1", rank: 5, passage_id: GDPR-Art13-1}
   variant_report_dir: results/diagnostics/variant_01.1   # report.md + summary.json (src/run_variant_01_1.py --report)

@@ -15,6 +15,9 @@ The five runs (config.yaml study2_gdpr):
 After the mediation fixes (C3 v2 round 3 final, tag c3v2-logic-final), C3 only, C1 and C2 are not rerun:
   after_round3_frozen  C3  01.1   frozen top 5, mediated by C3 v2 (final)
   after_round3_oracle  C3  01.1   oracle top 5, mediated by C3 v2 (final)
+Repetitions 2 and 3 of the oracle runs (REP_RUNS; repetition 1 = oracle/C2 and after_round3_oracle/C3), same settings:
+  oracle_rep2  C2, C3  01.1   oracle top 5, repetition 2 (run id study2_gdpr.oracle_rep_run_ids)
+  oracle_rep3  C2, C3  01.1   oracle top 5, repetition 3; refused until both conditions of oracle_rep2 are complete
 The oracle top 5 is the frozen 01.1 top 5 with one rank replaced by the target passage (study2_gdpr.oracle_replace).
 It is written once with --build-oracle and committed before the runs.
 
@@ -25,6 +28,7 @@ Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m src.run_variant_01_1 --build-oracle
     .venv\\Scripts\\python.exe -m src.run_variant_01_1 --run main --condition C1
     .venv\\Scripts\\python.exe -m src.run_variant_01_1 --report
+    .venv\\Scripts\\python.exe -m src.run_variant_01_1 --oracle-reps-report
 """
 
 import argparse
@@ -52,9 +56,17 @@ RUNS = {"main": {"C1": "01", "C2": "01.1", "C3": "01.1"},
         "oracle": {"C2": "01.1", "C3": "01.1"},
         "after_round3_frozen": {"C3": "01.1"},
         "after_round3_oracle": {"C3": "01.1"}}
+# Repetitions 2 and 3 of the oracle runs (C3 = C3 v2 final); kept apart from RUNS, so --report is unchanged
+REP_RUNS = {"oracle_rep2": {"C2": "01.1", "C3": "01.1"},
+            "oracle_rep3": {"C2": "01.1", "C3": "01.1"}}
+REP_REPETITION = {"oracle_rep2": 2, "oracle_rep3": 3}
+# Repetition 1 of the oracle runs, per condition: the run that holds it
+ORACLE_REP1 = {"C2": "oracle", "C3": "after_round3_oracle"}
+ALL_RUNS = RUNS | REP_RUNS
 # The passage file of each run (a key of config.yaml study2_gdpr)
 RUN_PASSAGES = {"main": "frozen_variants_rerank", "oracle": "oracle_top5",
-                "after_round3_frozen": "frozen_variants_rerank", "after_round3_oracle": "oracle_top5"}
+                "after_round3_frozen": "frozen_variants_rerank", "after_round3_oracle": "oracle_top5",
+                "oracle_rep2": "oracle_top5", "oracle_rep3": "oracle_top5"}
 # Settings that must equal the development smoke run's run_info.json. The Ollama version is checked against
 # study2_gdpr.ollama_version instead (0.40.11; the smoke run ran on 0.40.8).
 SAME_AS_DEV = ["provider", "model", "temperature", "generator", "model_digest", "seed", "num_ctx", "think",
@@ -104,9 +116,9 @@ def build_oracle_file(config: dict) -> Path:
 def run_view(config: dict, run: str, condition: str) -> dict:
     """Study 2 config view for one run and condition: its one case and its passage file."""
     gdpr = config["study2_gdpr"]
-    if condition not in RUNS.get(run, {}):
-        raise ValueError(f"no condition {condition!r} in run {run!r} (runs: {RUNS})")
-    case_id = RUNS[run][condition]
+    if condition not in ALL_RUNS.get(run, {}):
+        raise ValueError(f"no condition {condition!r} in run {run!r} (runs: {ALL_RUNS})")
+    case_id = ALL_RUNS[run][condition]
     allowed = gdpr["development_ids"] + gdpr["variant_ids"]
     if case_id not in allowed or case_id in config["cases"]["test_ids"]:
         raise ValueError(f"case {case_id} is not a GDPR development or variant case")
@@ -118,7 +130,8 @@ def run_view(config: dict, run: str, condition: str) -> dict:
 
 def run_id(config: dict, run: str) -> str:
     gdpr = config["study2_gdpr"]
-    run_ids = {"main": gdpr["variant_run_id"], "oracle": gdpr["oracle_run_id"]} | gdpr["after_round3_run_ids"]
+    run_ids = ({"main": gdpr["variant_run_id"], "oracle": gdpr["oracle_run_id"]} | gdpr["after_round3_run_ids"]
+               | gdpr["oracle_rep_run_ids"])
     if run_ids[run] in config["statistics"]["runs"]:
         raise ValueError(f"run id {run_ids[run]!r} is a Study 1 run")
     return run_ids[run]
@@ -137,6 +150,16 @@ def check_same_as_dev(config: dict, settings: dict) -> None:
     if settings.get("ollama_version") != expected:
         raise ValueError(f"ollama_version is {settings.get('ollama_version')!r}, but study2_gdpr.ollama_version "
                          f"fixes {expected!r}")
+
+
+def check_previous_repetition(config: dict, run: str) -> None:
+    """oracle_rep3 starts only when both conditions of oracle_rep2 are complete (all of rep 2 before rep 3)."""
+    if REP_REPETITION.get(run) != 3:
+        return
+    folder = RunFolder(run_view(config, "oracle_rep2", "C2"), run_id(config, "oracle_rep2"), 2)
+    unfinished = [c for c in REP_RUNS["oracle_rep2"] if not folder.is_complete(c)]
+    if unfinished:
+        raise ValueError(f"oracle_rep2 is not complete yet (unfinished: {', '.join(unfinished)})")
 
 
 # ---------- C3 v2 in the runner ----------
@@ -170,8 +193,9 @@ def run(config: dict, run: str, condition: str) -> None:
         rid = run_id(config, run)
         settings = (ollama_settings(view) | bpmngen_file_settings(view, rid) | bpmngen_library_settings(view)
                     | {"c3_version": "v2", "frozen_retrieval": view["paths"]["frozen_retrieval"]})
-        folder = RunFolder(view, rid, REPETITION, settings)
+        folder = RunFolder(view, rid, REP_REPETITION.get(run, REPETITION), settings)
         check_same_as_dev(config, folder.settings)
+        check_previous_repetition(config, run)
         folder.check_can_start(condition)
         shared = {}
         agent_llms = {role: create_llm(view, role, shared) for role in MEDIATION_ROLES} if condition == "C3" else None
@@ -287,22 +311,94 @@ def markdown(summary: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+# ---------- oracle repetitions report ----------
+
+def oracle_rep_dirs(config: dict) -> list[tuple[str, int, str, Path]]:
+    """(condition, repetition, run id, case folder) of the oracle runs, repetitions 1-3, C2 first."""
+    runs_dir = project_path(config["paths"]["runs"])
+    rows = []
+    for condition in ("C2", "C3"):
+        for run, repetition in [(ORACLE_REP1[condition], 1)] + list(REP_REPETITION.items()):
+            rid = run_id(config, run)
+            rows.append((condition, repetition, rid, runs_dir / rid / condition / ALL_RUNS[run][condition]))
+    return rows
+
+
+def oracle_reps_report(config: dict, evaluator=None) -> dict:
+    """One row per oracle run and repetition, from the saved files only (no LLM call)."""
+    from src.bpmn_graph import BPMNGraph
+    from src.evaluate import Evaluator   # loads the embedding model; only needed here
+
+    paths = config["paths"]
+    reference = project_path(paths["cases"]) / "01.1" / paths["case_reference_file"]
+    expected_ref_id = "Task_9"   # the expected step's task in the 01.1 reference
+    expected_label = BPMNGraph.from_file(reference).task_labels()[expected_ref_id]
+    evaluator = evaluator or Evaluator(config)
+    rows, block_rep1 = [], None
+    for condition, repetition, rid, case_dir in oracle_rep_dirs(config):
+        validation = json.loads((case_dir / paths["validation_file"]).read_text(encoding="utf-8"))
+        row = {"run": f"{rid}/{condition}/01.1", "condition": condition, "repetition": repetition,
+               "valid": validation["valid"], "errors": validation["errors"]}
+        with tempfile.TemporaryDirectory() as work:
+            scored, rescued = evaluator.scored_model(validation, case_dir / paths["generated_bpmn_file"], Path(work))
+            row |= {"scorable": scored is not None, "di_stripped": rescued, "expected_step_present": None,
+                    "closest_label": None, "closest_similarity": None}
+            if scored is not None:
+                matched = evaluator.compare(scored, reference)["semantic"]["matched"]
+                row["expected_step_present"] = any(m["reference_id"] == expected_ref_id for m in matched)
+                labels = list(BPMNGraph.from_file(scored).task_labels().values())
+                if labels:   # the generated task closest in meaning to the expected step
+                    similarity = evaluator.matcher.similarity_matrix(labels, [expected_label])[:, 0]
+                    best = int(similarity.argmax())
+                    row |= {"closest_label": labels[best], "closest_similarity": round(float(similarity[best]), 4)}
+        if condition == "C3":
+            block = (case_dir / paths["knowledge_block_file"]).read_text(encoding="utf-8")
+            block_rep1 = block if repetition == 1 else block_rep1
+            row["c3_block_identical_to_rep1"] = block == block_rep1
+        rows.append(row)
+
+    out_dir = project_path(config["study2_gdpr"]["oracle_reps_report"])
+    out_dir.mkdir(parents=True, exist_ok=True)
+    summary = {"expected_step": expected_label, "match_threshold": evaluator.matcher.threshold, "rows": rows}
+    (out_dir / "summary.json").write_text(json.dumps(summary, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (out_dir / "report.md").write_text(oracle_reps_markdown(summary), encoding="utf-8")
+    return summary
+
+
+def oracle_reps_markdown(summary: dict) -> str:
+    lines = ["# Oracle runs on 01.1, repetitions 1-3", "",
+             f"Expected step: \"{summary['expected_step']}\" (01.1 reference Task_9, PROVISIONAL; label match at "
+             f"threshold {summary['match_threshold']}).", "",
+             "| run | rep | XML valid | scorable (di_stripped rule) | expected step present | closest task label + "
+             "similarity | C3 block identical to rep 1? |", "|---|---|---|---|---|---|---|"]
+    for r in summary["rows"]:
+        scorable = "no" if not r["scorable"] else "yes (di_stripped)" if r["di_stripped"] else "yes"
+        closest = f"\"{r['closest_label']}\" ({r['closest_similarity']:.2f})" if r["closest_label"] else "n/a"
+        block = yes_no(r["c3_block_identical_to_rep1"]) if "c3_block_identical_to_rep1" in r else "-"
+        lines.append(f"| {r['run']} | {r['repetition']} | {yes_no(r['valid'])} | {scorable} | "
+                     f"{yes_no(r['expected_step_present'])} | {closest} | {block} |")
+    return "\n".join(lines) + "\n"
+
+
 def main() -> None:
     config = load_config()
     parser = argparse.ArgumentParser(description="Variant 01.1 runs and the oracle diagnostic.")
     parser.add_argument("--build-oracle", action="store_true", help="write the oracle top 5 file (once)")
-    parser.add_argument("--run", choices=list(RUNS))
+    parser.add_argument("--run", choices=list(ALL_RUNS))
     parser.add_argument("--condition", choices=config["conditions"])
     parser.add_argument("--report", action="store_true", help="write the report from the saved runs")
+    parser.add_argument("--oracle-reps-report", action="store_true", help="table of the oracle runs, reps 1-3")
     args = parser.parse_args()
     if args.build_oracle:
         print(f"Written: {build_oracle_file(config)}")
     elif args.report:
         print(markdown(report(config)))
+    elif args.oracle_reps_report:
+        print(oracle_reps_markdown(oracle_reps_report(config)))
     elif args.run and args.condition:
         run(config, args.run, args.condition)
     else:
-        parser.error("use --build-oracle, --run with --condition, or --report")
+        parser.error("use --build-oracle, --run with --condition, --report or --oracle-reps-report")
 
 
 if __name__ == "__main__":
