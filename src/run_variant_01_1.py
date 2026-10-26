@@ -12,6 +12,9 @@ The five runs (config.yaml study2_gdpr):
   main     C3         01.1   the same frozen top 5, mediated by C3 v2 (src/orchestrator_v2.py)
   oracle   C2         01.1   oracle top 5 (study2_gdpr.oracle_top5)
   oracle   C3         01.1   the same oracle top 5, mediated by C3 v2
+After the mediation fixes (C3 v2 round 3 final, tag c3v2-logic-final), C3 only, C1 and C2 are not rerun:
+  after_round3_frozen  C3  01.1   frozen top 5, mediated by C3 v2 (final)
+  after_round3_oracle  C3  01.1   oracle top 5, mediated by C3 v2 (final)
 The oracle top 5 is the frozen 01.1 top 5 with one rank replaced by the target passage (study2_gdpr.oracle_replace).
 It is written once with --build-oracle and committed before the runs.
 
@@ -46,7 +49,12 @@ from src.study2_config import study2_view
 
 REPETITION = 1   # one repetition per run
 RUNS = {"main": {"C1": "01", "C2": "01.1", "C3": "01.1"},
-        "oracle": {"C2": "01.1", "C3": "01.1"}}
+        "oracle": {"C2": "01.1", "C3": "01.1"},
+        "after_round3_frozen": {"C3": "01.1"},
+        "after_round3_oracle": {"C3": "01.1"}}
+# The passage file of each run (a key of config.yaml study2_gdpr)
+RUN_PASSAGES = {"main": "frozen_variants_rerank", "oracle": "oracle_top5",
+                "after_round3_frozen": "frozen_variants_rerank", "after_round3_oracle": "oracle_top5"}
 # Settings that must equal the development smoke run's run_info.json. The Ollama version is checked against
 # study2_gdpr.ollama_version instead (0.40.11; the smoke run ran on 0.40.8).
 SAME_AS_DEV = ["provider", "model", "temperature", "generator", "model_digest", "seed", "num_ctx", "think",
@@ -104,13 +112,13 @@ def run_view(config: dict, run: str, condition: str) -> dict:
         raise ValueError(f"case {case_id} is not a GDPR development or variant case")
     view = copy.deepcopy(study2_view(config))
     view["cases"]["ids"] = [case_id]
-    view["paths"]["frozen_retrieval"] = gdpr["frozen_variants_rerank"] if run == "main" else gdpr["oracle_top5"]
+    view["paths"]["frozen_retrieval"] = gdpr[RUN_PASSAGES[run]]
     return view
 
 
 def run_id(config: dict, run: str) -> str:
     gdpr = config["study2_gdpr"]
-    run_ids = {"main": gdpr["variant_run_id"], "oracle": gdpr["oracle_run_id"]}
+    run_ids = {"main": gdpr["variant_run_id"], "oracle": gdpr["oracle_run_id"]} | gdpr["after_round3_run_ids"]
     if run_ids[run] in config["statistics"]["runs"]:
         raise ValueError(f"run id {run_ids[run]!r} is a Study 1 run")
     return run_ids[run]

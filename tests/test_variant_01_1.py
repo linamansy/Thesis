@@ -117,4 +117,17 @@ def test_c3_uses_c3_v2_and_writes_its_audit_trail(tmp_path):
 
 
 def test_runs_table():
-    assert RUNS == {"main": {"C1": "01", "C2": "01.1", "C3": "01.1"}, "oracle": {"C2": "01.1", "C3": "01.1"}}
+    assert RUNS == {"main": {"C1": "01", "C2": "01.1", "C3": "01.1"}, "oracle": {"C2": "01.1", "C3": "01.1"},
+                    "after_round3_frozen": {"C3": "01.1"}, "after_round3_oracle": {"C3": "01.1"}}
+
+
+def test_after_round3_runs_are_c3_only_with_their_own_run_ids():
+    frozen, oracle = run_view(CONFIG, "after_round3_frozen", "C3"), run_view(CONFIG, "after_round3_oracle", "C3")
+    assert frozen["cases"]["ids"] == oracle["cases"]["ids"] == ["01.1"]
+    assert frozen["paths"]["frozen_retrieval"] == GDPR["frozen_variants_rerank"]
+    assert oracle["paths"]["frozen_retrieval"] == GDPR["oracle_top5"]
+    assert run_id(CONFIG, "after_round3_frozen") == "after_round3_frozen"
+    assert run_id(CONFIG, "after_round3_oracle") == "after_round3_oracle"
+    for condition in ("C1", "C2"):
+        with pytest.raises(ValueError):
+            run_view(CONFIG, "after_round3_frozen", condition)

@@ -358,6 +358,9 @@ study2_gdpr:
                             # ran on 0.40.8, so the version is the one setting not compared with it
   variant_run_id: variant_01.1
   oracle_run_id: oracle_01.1
+  # After the mediation fixes (26 Oct 2026): C3 v2 round 3 final (tag c3v2-logic-final) on 01.1, C3 only, same
+  # settings; frozen top 5 and oracle top 5 (src/run_variant_01_1.py RUNS)
+  after_round3_run_ids: {after_round3_frozen: after_round3_frozen, after_round3_oracle: after_round3_oracle}
   oracle_top5: data/retrieval_gdpr/oracle_01.1_top5.json
   oracle_replace: {case_id: "01.1", rank: 5, passage_id: GDPR-Art13-1}
   variant_report_dir: results/diagnostics/variant_01.1   # report.md + summary.json (src/run_variant_01_1.py --report)
