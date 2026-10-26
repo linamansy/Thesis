@@ -289,6 +289,42 @@ tied to RelevanceAgentV2's process step), `src/orchestrator_v2.py` (audit trail 
 Prompts: `prompts/applicability_{split,check,second_look}_prompt_v2.txt`, `prompts/requirement_prompt_v2.txt`. Tests:
 `tests/test_c3_v2_boxes.py`. v1 files unchanged (C3 v1 hashes still match); not yet wired into `run_experiment.py`.
 
+### Section 7 fixes, round 1 (26 Oct 2026): split role rule, plain RequirementAgentV2
+
+**What changed.** The fixes and criteria of section 7: role rule + example in the split prompt, plain-language
+RequirementAgentV2 prompt, code checks on each requirement with one retry, agent-only evaluation runner.
+
+**Commits:** `581e2e2` (code, before the run), `22f9f8c` (REAL RUN). **Run folder:** `results/diagnostics/c3_v2_round1/`
+(qwen3:8b digest `500a1f06…`, Ollama 0.40.11, agent calls only, no BPMN generation; 7 GDPR development cases +
+variant 01.1 with the frozen and the oracle top 5; 45 passages, 151 calls).
+
+**Results against the section 7 criteria:**
+
+| # | Criterion | Result | Met |
+|---|---|---|---|
+| 1 | Usable split ≥ 90% | 45/45 = 100% | yes |
+| 2 | No "must" / "shall" / "is required to" in IF | 0 of 46 IF items | yes |
+| 3 | No situational condition: IF = the role | **9/14** | **no** |
+| 4 | Requirement ≤ 40 words, 1–2 sentences, plain, names the step | 14/14 within limits (max 24 words, 1 sentence) | yes |
+| 5 | No "shall" / "controller" / "data subject" / "processor" | 14/14 after the retry (3 needed it) | yes |
+| 6 | ≤ 50% copied 5-word sequences | 14/14 (max 26.7%) | yes |
+| 7 | States what is required, never instructs the generator to draw | 14/14 by reading | yes |
+| 8 | Valid JSON ≥ 95%, at most 1 retry | 151/151, 0 retries | yes |
+
+Round 1 does not meet all criteria (criterion 3 fails).
+
+**New problems seen in round 1 (not covered by the section 7 criteria):**
+
+- **Role IF items confirmed by word match.** The check-IF call confirmed role conditions from quotes that only share
+  a word with the role, e.g. "the organisation acts as a processor" ← "Payment processing begins." (case 17,
+  GDPR-Art30-2). 14 passages became Applicable; only 1 of the 7 Applicable on the 7 development cases is
+  silver-applicable (GDPR-Art32-2, case 11; the other 6 are silver indeterminate; silver is provisional).
+- **Some requirements change the rule's meaning.** GDPR-Art15-3 (case 11) lost "on request": "the customer is given a
+  copy of their personal data" before billing. GDPR-Art30-2 (case 17, variant/oracle 01.1) became a record "done for
+  its customers" / "for the customer", while the rule is about processing carried out on behalf of a controller.
+
+**Decision:** round 2 with the criteria of section 8, fixed before any code change.
+
 ---
 
 ## 4. Study 2: choosing the GDPR retrieval version (development cases)
@@ -428,3 +464,22 @@ Written 26 Oct 2026, before any code change for this round. Based on the case-01
 | 8 | Valid JSON for ≥ 95% of calls, at most 1 retry | from the log |
 
 **Rounds.** At most 3 rounds of changes (section 2.2); this is round 1.
+
+## 8. Round 2: criteria (committed before code)
+
+Written 26 Oct 2026, after the round 1 run (section 3, "Section 7 fixes, round 1") and before any code change for
+round 2. Same measurement as section 7: real agent calls only (qwen3:8b, Ollama 0.40.11, model digest unchanged), no
+BPMN generation, on the 7 development cases + variant 01.1.
+
+**Kept from section 7 (all still must hold):** criteria 1–8 of section 7, unchanged.
+
+**Added after round 1 because new failure modes were seen (all must hold):**
+
+| # | Criterion | How it is checked |
+|---|---|---|
+| 9 | A role condition is confirmed only if the quote shows the role's defining facts (controller = decides why and how data is used, for its own purposes; processor = handles data on behalf of another organisation), never by word match | false-applicable rate ≤ 20% on the development cases, with silver as provisional reference, plus Claude's reading listed per passage |
+| 10 | A duty on a public body (Commission, supervisory authority, Member State) → Not applicable for a business process | per passage |
+| 11 | The requirement keeps every trigger and condition of the THEN (e.g. "on request", "where applicable") | ≥ 90% of requirements by reading, listed per passage |
+| 12 | The role definitions are fixed text in the agent prompt, identical for all cases, and never passed to the generator | prompt files + knowledge block check |
+
+**Rounds.** This is round 2 of at most 3 (section 2.2).
