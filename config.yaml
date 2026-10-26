@@ -341,6 +341,10 @@ study2_gdpr:
   retrieval_version: rerank
   reranker_enabled: true
   frozen_retrieval: data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json   # = frozen_dev_rerank_restricted
+  # Synthetic variant cases (data/cases/<id>/variant.json; e.g. 01.1 = case 01 + added_text, written by Lina before
+  # any run). Retrieved with the same reranked setup (src/freeze_retrieval_gdpr_variants.py) into their own file.
+  variant_ids: ["01.1"]
+  frozen_variants_rerank: data/retrieval_gdpr/frozen_retrieval_variants_ch1-5_rerank.json
   # Development smoke run (src/run_gdpr_dev_smoke.py): Study 1's harness + qwen3:8b, unchanged, on the development
   # cases. The id starts with evaluation.smoke_run_prefix, so every Study 1 analysis ignores it. Its evaluation goes
   # only into paths.gdpr_dev_smoke_dir (src/evaluate_gdpr_dev_smoke.py), never into results/evaluation.csv.
