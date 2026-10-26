@@ -252,11 +252,16 @@ paths:
   generator_prompt: prompts/generator_prompt.txt       # legacy json_builder generator only (BPMNGen has its own prompt)
   relevance_prompt: prompts/relevance_prompt.txt       # C3 mediation agents
   relevance_prompt_v2: prompts/relevance_prompt_v2.txt # C3 v2 development only (RelevanceAgentV2); v1 above stays frozen
+  applicability_split_prompt_v2: prompts/applicability_split_prompt_v2.txt              # C3 v2 only (ApplicabilityAgentV2)
+  applicability_check_prompt_v2: prompts/applicability_check_prompt_v2.txt
+  applicability_second_look_prompt_v2: prompts/applicability_second_look_prompt_v2.txt
+  requirement_prompt_v2: prompts/requirement_prompt_v2.txt                              # C3 v2 only (RequirementAgentV2)
   applicability_prompt: prompts/applicability_prompt.txt
   requirement_prompt: prompts/requirement_prompt.txt
   silver_prompt: prompts/silver_annotation_prompt.txt  # evaluation reference only, NOT a C3 agent
   c1_no_knowledge: prompts/c1_no_knowledge.txt         # the knowledge block of C1 (same label and place as C2/C3)
   c3_block_template: prompts/c3_block_template.json    # layout of the C3 knowledge block (src/orchestrator.py)
+  c3_block_template_v2: prompts/c3_block_template_v2.json  # C3 v2 knowledge block (src/orchestrator_v2.py)
   json_retry_note: prompts/json_retry_note.json        # added to an agent prompt after an invalid JSON answer
   silver_reference: data/silver/silver_reference.json  # built once by src/build_silver_reference.py, then frozen
   mock_silver_response: data/mock/silver_response.json
@@ -391,6 +396,10 @@ study2_laws:
   gdpr_only_applicable: 3
   corpus: gdpr_only               # result of the decision rule (24 Oct 2026): combined 0 applicable, not higher
                                   # than 3, so Study 2 keeps study2_gdpr.frozen_retrieval (GDPR Chapters I-V, rerank)
+
+c3_v2:
+  # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
+  obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid
 
 c3_v2_dev:
   # C3 v2 development (docs/C3_V2_DEVELOPMENT.md): development test of RelevanceAgentV2 (src/relevance_v2_dev.py) on

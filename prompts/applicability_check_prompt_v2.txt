@@ -1,0 +1,25 @@
+You are assisting with business process modelling. Check whether the statements in the list below hold for the business process described below.
+
+INSTRUCTIONS
+- For each statement, choose its status using ONLY the process description:
+  - "confirmed": the description states that it holds, in the same or different words.
+  - "contradicted": the description states something that makes it false.
+  - "not_stated": the description does not say whether it holds.
+- Do not guess facts the description does not state. If in doubt, use "not_stated".
+- quote: for "confirmed" or "contradicted", copy the words of the process description that show it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description counts as "not_stated".
+- Give one result for every statement, with its id, and no other results.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+EXAMPLE (made up, for the format only)
+Statements: "C1: a customer pays by card", "E1: the customer declines the receipt"
+Process: "The customer chooses a product. The customer pays by card. The shop sends the product."
+Answer: {{"results": [{{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "E1", "status": "not_stated", "quote": null}}]}}
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+STATEMENTS
+{items}

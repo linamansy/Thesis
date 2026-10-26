@@ -1,0 +1,20 @@
+You are assisting with business process modelling. Split a rule from a legal text into its parts.
+
+INSTRUCTIONS
+- "if": the conditions that must hold for the rule to apply, for example who the parties are, what kind of situation or activity the rule is about, and what event triggers it. Write each condition as a short statement in the words of the rule. A condition says WHEN the rule applies, never what someone has to do.
+- "then": what the rule requires to be done when it applies, in the words of the rule.
+- "exceptions": the situations the rule itself names in which it does not apply (for example "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
+- Never put an obligation into "if". An "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
+- If the rule states no condition, "if" is an empty list.
+- Use only the legal passage below.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+EXAMPLE (made up, for the format only)
+Rule: "If a customer pays by card, the shop must give a receipt within one day, unless the customer declines it."
+Answer: {{"if": ["a customer pays by card"], "then": "the shop must give a receipt within one day", "exceptions": ["the customer declines the receipt"]}}
+
+JSON SCHEMA
+{schema}
+
+LEGAL PASSAGE
+{passage}

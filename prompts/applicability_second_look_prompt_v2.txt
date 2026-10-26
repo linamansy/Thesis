@@ -1,0 +1,24 @@
+You are assisting with business process modelling. A first check could not decide whether the conditions in the list below hold for the business process described below. They are conditions of the rule [{passage_id}]. Look again.
+
+INSTRUCTIONS
+- The legal passages below are all the rules found for this process. Use them only to understand what a condition means (for example a definition of a word). Whether a condition holds must still be shown by the process description.
+- For each condition, choose its status:
+  - "confirmed": the description states that it holds, in the same or different words.
+  - "contradicted": the description states something that makes it false.
+  - "not_stated": the description does not say whether it holds.
+- Do not guess facts the description does not state. If in doubt, use "not_stated".
+- quote: for "confirmed" or "contradicted", copy the words of the process description that show it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description counts as "not_stated".
+- Give one result for every condition, with its id, and no other results.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}
+
+LEGAL PASSAGES
+{passages}
+
+CONDITIONS
+{items}

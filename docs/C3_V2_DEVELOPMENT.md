@@ -277,6 +277,18 @@ criterion 6: at most 3 rounds; after round 3 the best round is kept and the shor
 3. **Resolver** (code): combines the statuses into Applicable / Not applicable / Indeterminate, as in v1.
 4. **RequirementAgent**: turns an Applicable rule's THEN part into a requirement.
 
+**Implemented (26 Oct 2026, boxes 2-4, mock tests only; nothing run on Ollama).** `src/agents/applicability_agent_v2.py`
+(split call on the law text only -> `{"if", "then", "exceptions"}`, an IF item with must / shall / is required to ->
+"Split invalid" (`config.yaml` `c3_v2.obligation_words`); check-IF call on the description + IF list and exceptions;
+code quote check; first look; second look for Indeterminate with the description + all 5 case passages + the open IF
+conditions, `look` = first / second; an empty IF list -> Indeterminate without a check call),
+`src/mediation/resolver_v2.py` (Applicable only if all IF confirmed and no exception confirmed by a verified quote; an
+exception the description does not mention does not block), `src/agents/requirement_agent_v2.py` (THEN -> 1-2 sentences
+tied to RelevanceAgentV2's process step), `src/orchestrator_v2.py` (audit trail per case with every step; knowledge block
+= confirmed requirements only, `prompts/c3_block_template_v2.json`, or C1's "No domain knowledge provided." when none).
+Prompts: `prompts/applicability_{split,check,second_look}_prompt_v2.txt`, `prompts/requirement_prompt_v2.txt`. Tests:
+`tests/test_c3_v2_boxes.py`. v1 files unchanged (C3 v1 hashes still match); not yet wired into `run_experiment.py`.
+
 ---
 
 ## 4. Study 2: choosing the GDPR retrieval version (development cases)

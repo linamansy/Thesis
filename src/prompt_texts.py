@@ -17,10 +17,11 @@ def load_no_knowledge_text(config: dict) -> str:
     return project_path(config["paths"]["c1_no_knowledge"]).read_text(encoding="utf-8").strip()
 
 
-def load_c3_block_template(config: dict) -> dict:
+def load_c3_block_template(config: dict, key: str = "c3_block_template") -> dict:
     """The parts of the C3 knowledge block: block, requirement_line, unconfirmed_rule_line,
-    unconfirmed_condition_line, empty_section, missing_value (keys starting with "_" are comments)."""
-    data = json.loads(project_path(config["paths"]["c3_block_template"]).read_text(encoding="utf-8"))
+    unconfirmed_condition_line, empty_section, missing_value (keys starting with "_" are comments).
+    key="c3_block_template_v2" gives the C3 v2 layout (block, requirement_line)."""
+    data = json.loads(project_path(config["paths"][key]).read_text(encoding="utf-8"))
     return {key: value for key, value in data.items() if not key.startswith("_")}
 
 
