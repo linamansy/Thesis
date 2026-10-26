@@ -6,14 +6,20 @@ INSTRUCTIONS
   - "contradicted": the description states something that makes it false.
   - "not_stated": the description does not say whether it holds.
 - Do not guess facts the description does not state. If in doubt, use "not_stated".
+- A statement about the organisation's role is "confirmed" only if the quoted words show the defining facts of that role in the ROLE DEFINITIONS below. A word that only looks like the role (for example "processing" or "processed" for a processor) never confirms it; then use "not_stated".
+- A statement that the organisation is a public body (the Commission, a supervisory authority or a Member State) is "contradicted" if the description shows that the organisation is a business, for example a company, shop or supplier that serves customers; quote the words that show it.
 - quote: for "confirmed" or "contradicted", copy the words of the process description that show it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description counts as "not_stated".
 - Give one result for every statement, with its id, and no other results.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
+ROLE DEFINITIONS (fixed, the same for every process)
+- controller: an organisation that decides why and how personal data is used, for its own purposes.
+- processor: an organisation that handles personal data on behalf of another organisation, which decides why and how the data is used.
+
 EXAMPLE (made up, for the format only)
-Statements: "C1: a customer pays by card", "E1: the customer declines the receipt"
-Process: "The customer chooses a product. The customer pays by card. The shop sends the product."
-Answer: {{"results": [{{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "E1", "status": "not_stated", "quote": null}}]}}
+Statements: "C1: a customer pays by card", "C2: the organisation acts as a processor", "E1: the customer declines the receipt"
+Process: "The customer chooses a product. The customer pays by card and the payment is processed. The shop sends the product."
+Answer: {{"results": [{{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "C2", "status": "not_stated", "quote": null}}, {{"id": "E1", "status": "not_stated", "quote": null}}]}}
 
 JSON SCHEMA
 {schema}

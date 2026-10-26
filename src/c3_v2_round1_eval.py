@@ -13,7 +13,7 @@ second look -> resolver -> requirement for Applicable rules). A passage marked i
 the pipeline; for the split criteria (1-3, "count over all passages") its split call is made on its own (the split
 sees the law text only, so it does not depend on the case).
 
-Writes only into paths.c3_v2_round1_dir:
+Writes only into paths.c3_v2_round<n>_dir (n = --round, default 1; round 2 = section 8 prompts, same passages):
   answers.json   one record per passage (the audit-trail record, plus split_only for irrelevant passages); written
                  after every case, a rerun skips finished cases
   logs/          every LLM call (RunLogger)
@@ -21,7 +21,7 @@ Writes only into paths.c3_v2_round1_dir:
   report.md      the same as tables, with every split and every requirement text (criteria 3, 4 and 7 are judged by
                  reading them)
 
-Run from the project root (Ollama running):  .venv\\Scripts\\python.exe -m src.c3_v2_round1_eval
+Run from the project root (Ollama running):  .venv\\Scripts\\python.exe -m src.c3_v2_round1_eval [--round 2]
 """
 
 import json
@@ -40,7 +40,7 @@ from src.orchestrator_v2 import OrchestratorV2
 from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
 from src.study2_config import study2_view
 
-LOG_CONDITION = "C3V2_ROUND1"
+LOG_CONDITION = "C3V2_ROUND{n}"   # n = the round
 ROLE_PATTERN = re.compile(r"\b(acts? as|organisation)\b", re.IGNORECASE)   # IF item written as a role (criterion 3)
 
 
@@ -103,8 +103,9 @@ def metrics(records: list[dict], obligation_pattern, log: dict, limits: dict) ->
         "c8_log": log}
 
 
-def report(m: dict, records: list[dict]) -> str:
-    lines = ["# C3 v2 round 1 fixes: agent-only evaluation (section 7)", "",
+def report(m: dict, records: list[dict], round_no: int = 1) -> str:
+    sections = "section 7" if round_no == 1 else "sections 7 and 8"
+    lines = [f"# C3 v2 round {round_no}: agent-only evaluation ({sections})", "",
              "Real calls (qwen3:8b, Ollama), no BPMN generation. Criteria 3, 4 (plain language, names the step) and 7 "
              "are judged by reading the texts below.", "", "## Counts", "", "| measure | value |", "|---|---|"]
     lines += [f"| {k} | {v} |" for k, v in m.items() if k != "c8_log"]
@@ -134,9 +135,10 @@ def report(m: dict, records: list[dict]) -> str:
 
 def main() -> None:
     from run_experiment import create_llm, ollama_settings
+    round_no = int(sys.argv[sys.argv.index("--round") + 1]) if "--round" in sys.argv else 1
     config = load_config()
     view = study2_view(config)
-    out_dir = project_path(config["paths"]["c3_v2_round1_dir"])
+    out_dir = project_path(config["paths"][f"c3_v2_round{round_no}_dir"])
     try:
         sets = passage_sets(config)
         settings = ollama_settings(view)    # model digest = model.ollama_model_digest, server settings
@@ -148,7 +150,8 @@ def main() -> None:
         sys.exit(f"Not started: {e}")
 
     log_dir = out_dir / "logs"
-    logger = RunLogger(log_dir, LOG_CONDITION, "round1", part=1 + len(list(log_dir.glob(f"{LOG_CONDITION}_*.jsonl"))))
+    condition = LOG_CONDITION.format(n=round_no)
+    logger = RunLogger(log_dir, condition, f"round{round_no}", part=1 + len(list(log_dir.glob(f"{condition}_*.jsonl"))))
     applicability = ApplicabilityAgentV2(llm, logger, config=view)
     answers_path = out_dir / "answers.json"
     records = json.loads(answers_path.read_text(encoding="utf-8")) if answers_path.exists() else []
@@ -178,7 +181,7 @@ def main() -> None:
                 config["c3_v2"]["requirement_checks"])
     m["ollama_version"], m["model_digest"] = settings["ollama_version"], settings["generator_digest"]
     (out_dir / "metrics.json").write_text(json.dumps(m, indent=2), encoding="utf-8")
-    (out_dir / "report.md").write_text(report(m, records), encoding="utf-8")
+    (out_dir / "report.md").write_text(report(m, records, round_no), encoding="utf-8")
     print(json.dumps(m, indent=2))
 
 

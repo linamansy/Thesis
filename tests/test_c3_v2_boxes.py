@@ -345,3 +345,55 @@ def test_round1_eval_counts(tmp_path):
     m = metrics([record], orch.applicability_agent.obligation_pattern, log, CONFIG["c3_v2"]["requirement_checks"])
     assert (m["c1_usable_split"], m["c2_if_items_with_obligation_word"], m["requirements_passed_on"],
             m["requirements_needing_check_retry"], m["c5_banned_word"]) == (1, 0, 1, 1, 0)
+
+
+# ---------- round 2 (section 8): public body, role definitions, triggers kept ----------
+
+ROLE_DEFINITIONS = ("- controller: an organisation that decides why and how personal data is used, for its own purposes.\n"
+                    "- processor: an organisation that handles personal data on behalf of another organisation, which "
+                    "decides why and how the data is used.")
+
+
+def test_split_prompt_has_public_body_rule_and_example():
+    text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
+    assert '"if" has exactly one item: "the organisation is <that body>"' in text
+    assert "the Commission, a supervisory authority or a Member State" in text
+    assert '{{"if": ["the organisation is a Member State"]' in text
+
+
+def test_public_body_if_contradicted_gives_not_applicable(tmp_path):
+    split = {"if": ["the organisation is a supervisory authority"], "then": "the authority must publish a list",
+             "exceptions": []}
+    contradicted = {"results": [{"id": "C1", "status": "contradicted", "quote": "The shop sends the product"}]}
+    orch, llm = orchestrator(tmp_path, [RELEVANT, split, contradicted])
+    p = orch.mediate_case("c", DESCRIPTION)["passages"][0]
+    assert p["label"] == NOT_APPLICABLE and p["requirement"] is None
+    assert len(llm.prompts_received) == 3                                        # no second look, no requirement call
+
+
+def test_check_prompt_has_fixed_role_definitions(tmp_path):
+    other = "The supplier receives an order. The supplier ships the goods."
+    prompts = []
+    for description in (DESCRIPTION, other):
+        llm = mock([SPLIT, NOT_STATED])
+        ApplicabilityAgentV2(llm, logger(tmp_path)).first_look("x", description, "P-1", PASSAGE)
+        prompts.append(llm.prompts_received[1])
+    for prompt in prompts:                                                       # the same text for every case
+        assert "ROLE DEFINITIONS (fixed, the same for every process)\n" + ROLE_DEFINITIONS in prompt
+        assert "never confirms it" in prompt and '"contradicted" if the description shows that the organisation is a business' in prompt
+        assert '{"id": "C2", "status": "not_stated", "quote": null}' in prompt  # example: "processed" is no processor
+
+
+def test_role_definitions_never_reach_the_generator(tmp_path):
+    orch, _ = orchestrator(tmp_path, [RELEVANT, SPLIT, CONFIRMED, REQUIREMENT])
+    block = orch.mediate_case("c", DESCRIPTION)["knowledge_block"]
+    assert REQUIREMENT["requirement"] in block
+    assert "ROLE DEFINITIONS" not in block and "on behalf of another organisation" not in block
+
+
+def test_requirement_prompt_keeps_triggers(tmp_path):
+    agent = RequirementAgentV2(mock([REQUIREMENT]), logger(tmp_path))
+    agent.write("x", **REQ_INPUTS)
+    prompt = agent.llm.prompts_received[0]
+    assert 'Keep every trigger and condition the obligation states, for example "on request"' in prompt
+    assert '"requirement": "If the customer asks, the customer is told in writing' in prompt

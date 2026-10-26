@@ -5,13 +5,14 @@ INSTRUCTIONS
 - State what is required as a fact about the process (for example "the customer is told ..."). Do not give instructions about a process model or diagram, such as adding, drawing or modelling a task.
 - Use your own plain words. Do not copy the legal text: at most a few words in a row may be the same as in the legal passage.
 - Name the people and departments as the process description names them. Do not use the words {banned_words}.
+- Keep every trigger and condition the obligation states, for example "on request", "where applicable" or "if the customer asks". The requirement must not apply in more situations than the obligation does.
 - Use only what the obligation says. Do not add any obligation, actor, deadline, condition, document or step that is not in it, and do not combine it with other rules or with general knowledge.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE (made up, for the format only)
-Obligation: "the supplier shall inform the purchaser in writing of the expected date of each instalment before the first delivery"
+Obligation: "the supplier shall, at the purchaser's request, inform the purchaser in writing of the expected date of each instalment before the first delivery"
 Process step: the warehouse ships the order ("The warehouse ships the order in several parcels")
-Answer: {{"requirement": "Before the warehouse ships the first parcel, the customer is told in writing when each parcel will arrive."}}
+Answer: {{"requirement": "If the customer asks, the customer is told in writing, before the warehouse ships the first parcel, when each parcel will arrive."}}
 
 JSON SCHEMA
 {schema}
