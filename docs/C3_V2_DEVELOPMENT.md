@@ -400,3 +400,31 @@ that were silver-applicable.
 ## 6. Ollama version
 
 26 Oct: Ollama auto-updated 0.40.8 → 0.40.11. Model digest unchanged (500a1f06…). smoke_gdpr_dev and RelevanceAgent v2 rounds 1–2 ran on 0.40.8; all Study 2 runs from the case-01 study onward use 0.40.11.
+
+## 7. Round 1 fixes after case-01 study: success criteria (committed before code)
+
+Written 26 Oct 2026, before any code change for this round. Based on the case-01 study
+(`results/diagnostics/variant_01.1/report.md`, `comparison.md`).
+
+**Problems found.**
+
+- (a) The split put the duty into IF for passages with no condition (GDPR-Art35-9, GDPR-Art30-2).
+- (b) RequirementAgent copied the legal obligation verbatim (GDPR-Art13-1 in `oracle_01.1/C3`).
+
+**Measurement.** Real agent calls only (qwen3:8b, Ollama 0.40.11, model digest unchanged), no BPMN generation, on the
+7 development cases + variant 01.1.
+
+**Success criteria (all must hold).**
+
+| # | Criterion | How it is checked |
+|---|---|---|
+| 1 | Usable split for ≥ 90% of passages | count over all passages |
+| 2 | IF never contains "must", "shall" or "is required to" | code check |
+| 3 | Passages with no situational condition: IF = the role the duty applies to (e.g. "the organisation acts as a processor") | per passage |
+| 4 | Requirement ≤ 40 words, 1–2 sentences, plain language, names the process step | word/sentence count by code; rest per requirement |
+| 5 | Requirement contains none of "shall", "controller", "data subject", "processor" | code check |
+| 6 | ≤ 50% of the requirement's 5-word sequences are copied from the passage | code check |
+| 7 | Requirement states what is required and NEVER instructs the generator to add or draw anything | per requirement |
+| 8 | Valid JSON for ≥ 95% of calls, at most 1 retry | from the log |
+
+**Rounds.** At most 3 rounds of changes (section 2.2); this is round 1.
