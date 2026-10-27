@@ -52,3 +52,9 @@ T4 and the held-out results have no target; they are reported only.
 ## 5. Run
 
 The task that runs these measurements must contain the keyword **REAL RUN**. This document makes no run.
+
+## 6. Note, 27 Oct 2026 (after the development and held-out runs; nothing above changed)
+
+- **(a) T5 wording correction:** step_quote is checked against the DESCRIPTION, as rule R6 says; by R6, T5 = 1/1.
+- **(b) Diagnostic:** same test, setting O, 8 development variants + base cases, with one stronger open-source model
+  on Groq; logic unchanged; result decides only whether the model is the bottleneck.
