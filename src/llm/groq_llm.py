@@ -48,17 +48,19 @@ class MissingGroqKeyError(RuntimeError):
 
 
 def wait_seconds(response: httpx.Response, default: float) -> float:
-    """How long Groq asks us to wait: the retry-after header, else the x-ratelimit-reset-* headers
-    (e.g. "2.114s", "1m26.4s"), else the default."""
+    """How long Groq asks us to wait: the retry-after header, else the x-ratelimit-reset-tokens header (the
+    per-minute window, e.g. "2.114s"), else x-ratelimit-reset-requests, else the default. Not the longer of the
+    two: the requests reset is the daily window and made the run sleep far longer than the token window needs."""
     if response.headers.get("retry-after"):
         try:
             return float(response.headers["retry-after"])
         except ValueError:
             pass
-    resets = [parse_duration(response.headers[h]) for h in ("x-ratelimit-reset-tokens", "x-ratelimit-reset-requests")
-              if response.headers.get(h)]
-    resets = [r for r in resets if r is not None]
-    return max(resets) if resets else default
+    for header in ("x-ratelimit-reset-tokens", "x-ratelimit-reset-requests"):   # per-minute tokens first
+        reset = parse_duration(response.headers[header]) if response.headers.get(header) else None
+        if reset is not None:
+            return reset
+    return default
 
 
 def parse_duration(text: str) -> float | None:

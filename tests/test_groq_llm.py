@@ -77,7 +77,7 @@ def test_rate_limit_wait_from_reset_headers():
     client, _ = fake_groq(reset, answer())
     llm, waits = make_llm(client)
     llm.complete("x")
-    assert waits == [62.0]                       # the longer of the two resets
+    assert waits == [7.5]                        # the token (per-minute) reset, not the longer requests reset
     assert parse_duration("1m26.4s") == pytest.approx(86.4) and parse_duration("850ms") == pytest.approx(0.85)
 
 
