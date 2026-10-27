@@ -20,42 +20,44 @@ no XHTML exists), as for the earlier corpora. GDPR, LPD and ECD reuse the files 
 
 ## 2. Rule (same for all five laws)
 
-**Keep** an operative article if it puts a duty on a business: a trader, seller, service provider, controller,
-processor, or a creditor/debtor undertaking. A duty is something the business must do, must not do, or must honour
-(a right of the consumer, buyer or data subject that the business has to grant). An article written as "Member
-States shall ensure that the trader ..." is judged by its substance: if the business is the one that must act, it
+> Correction 27 Oct before building: rule first limited to business duties; consumer duties (e.g. CRD Art. 14 returning goods) are process steps, so the rule was widened.
+
+**Keep** an operative article if it puts a duty on ANY party taking part in the process: trader, seller, service
+provider, consumer, buyer, recipient, debtor, creditor, controller or processor. A duty is something the party must
+do, must not do, or must honour (a right of another party that it has to grant). An article written as "Member
+States shall ensure that the trader ..." is judged by its substance: if a process party is the one that must act, it
 is kept.
 
-**Exclude**:
+**Exclude** only:
 - definitions;
 - subject matter, objectives and scope (incl. level of harmonisation);
-- duties of Member States, the Commission, supervisory authorities or the Board;
+- duties of Member States, the Commission or authorities (supervisory authorities, the Board);
 - penalties and fines;
 - transposition;
 - reports and review;
 - entry into force, addressees, repeals, amendments of other acts and other final provisions.
 
-Articles that put no duty on a business are excluded too: duties only on the consumer or another person, pure legal
-effects that need no action by the business, exceptions or exemptions that remove a duty, and rules for court
-disputes (remedies against authorities, liability for damages, burden of proof).
+An article that puts no duty on any process party fails the keep test and is therefore not kept either: pure legal
+effects that need no action by anyone, exceptions or exemptions that remove a duty, and rules for court disputes
+(remedies, liability for damages, burden of proof).
 
 The rule keeps or excludes whole articles.
 
 **Unit**: one passage per article paragraph, lettered points kept with their paragraph, as in the GDPR corpus
 (DirectiveChunker). Passages are built only after this selection is approved.
 
-## 3. Application of the rule (27 Oct 2026)
+## 3. Application of the rule (27 Oct 2026, re-applied after the correction)
 
 Article numbers and titles are read from the raw files of section 1 (ECD: from the legacy HTML, as listed in data/knowledge_study2/article_selection.json).
 
 | law | articles | kept | excluded |
 |---|---|---|---|
-| GDPR | 99 | 36 | 63 |
-| CRD | 36 | 13 | 23 |
-| LPD | 15 | 2 | 13 |
-| SGD | 27 | 11 | 16 |
+| GDPR | 99 | 37 | 62 |
+| CRD | 36 | 14 | 22 |
+| LPD | 15 | 3 | 12 |
+| SGD | 27 | 12 | 15 |
 | ECD | 24 | 5 | 19 |
-| total | 201 | 67 | 134 |
+| total | 201 | 71 | 130 |
 
 ### GDPR (EU) 2016/679
 
@@ -83,7 +85,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 20 | Right to data portability | keep | data-subject right (portability) the controller must honour |
 | 21 | Right to object | keep | data-subject right (objection) the controller must honour |
 | 22 | Automated individual decision-making, including profiling | keep | controller must not decide solely by automated processing; safeguards |
-| 23 | Restrictions | exclude | Union or Member-State law may restrict rights; no duty on a business |
+| 23 | Restrictions | exclude | Union or Member-State law may restrict rights; no duty on any process party |
 | 24 | Responsibility of the controller | keep | controller must implement measures and demonstrate compliance |
 | 25 | Data protection by design and by default | keep | controller must apply data protection by design and by default |
 | 26 | Joint controllers | keep | joint controllers must set out their responsibilities |
@@ -99,7 +101,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 36 | Prior consultation | keep | controller must consult the supervisory authority before high-risk processing |
 | 37 | Designation of the data protection officer | keep | controller and processor must designate a data protection officer |
 | 38 | Position of the data protection officer | keep | controller and processor must involve and support the data protection officer |
-| 39 | Tasks of the data protection officer | exclude | tasks of the data protection officer (a person), not a duty on the controller or processor |
+| 39 | Tasks of the data protection officer | keep | data protection officer (a process party within the controller/processor) must perform the listed tasks |
 | 40 | Codes of conduct | exclude | Member States, authorities, Board and Commission encourage and approve codes of conduct |
 | 41 | Monitoring of approved codes of conduct | exclude | duty on monitoring bodies and supervisory authorities |
 | 42 | Certification | exclude | voluntary certification; duties on Member States, authorities, Board and Commission |
@@ -108,7 +110,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 45 | Transfers on the basis of an adequacy decision | exclude | duty on the Commission (adequacy decisions); para 1 permits transfers, sets no duty |
 | 46 | Transfers subject to appropriate safeguards | keep | controller/processor may transfer only with appropriate safeguards |
 | 47 | Binding corporate rules | exclude | duty on supervisory authorities (approval of binding corporate rules) |
-| 48 | Transfers or disclosures not authorised by Union law | exclude | recognition of third-country court or authority decisions; no duty on a business |
+| 48 | Transfers or disclosures not authorised by Union law | exclude | recognition of third-country court or authority decisions; no duty on any process party |
 | 49 | Derogations for specific situations | keep | conditions for derogation transfers; controller must inform and document |
 | 50 | International cooperation for the protection of personal data | exclude | duty on the Commission and supervisory authorities (international cooperation) |
 | 51 | Supervisory authority | exclude | duty on the Member States (setting up supervisory authorities) |
@@ -179,7 +181,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 11 | Exercise of the right of withdrawal | keep | trader must accept the withdrawal and acknowledge online withdrawals |
 | 12 | Effects of withdrawal | exclude | legal effect of withdrawal (ends both parties' obligations); no action by the trader |
 | 13 | Obligations of the trader in the event of withdrawal | keep | trader must reimburse payments after withdrawal |
-| 14 | Obligations of the consumer in the event of withdrawal | exclude | duties on the consumer, not on a business |
+| 14 | Obligations of the consumer in the event of withdrawal | keep | consumer must return the goods within 14 days and bears the stated costs |
 | 15 | Effects of the exercise of the right of withdrawal on ancillary contracts | exclude | legal effect (ancillary contracts end automatically); duty on the Member States |
 | 16 | Exceptions from the right of withdrawal | exclude | exceptions that remove the right of withdrawal; no duty |
 | 17 | Scope | exclude | subject matter / scope |
@@ -209,7 +211,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 1 | Subject matter and scope | exclude | subject matter / scope |
 | 2 | Definitions | exclude | definitions |
 | 3 | Transactions between undertakings | keep | debtor undertaking must pay within the payment period or owe interest |
-| 4 | Transactions between undertakings and public authorities | exclude | duty on public authorities as debtors, not on a business |
+| 4 | Transactions between undertakings and public authorities | keep | public authority as debtor must pay within the payment period or owe interest |
 | 5 | Payment schedules | exclude | parties may agree payment schedules; no duty |
 | 6 | Compensation for recovery costs | keep | debtor must pay the creditor a fixed sum for recovery costs |
 | 7 | Unfair contractual terms and practices | exclude | legal effect (grossly unfair terms unenforceable); duty on the Member States |
@@ -237,7 +239,7 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 | 9 | Third-party rights | keep | seller must honour remedies for third-party rights restrictions |
 | 10 | Liability of the seller | keep | seller is liable for lack of conformity for two years |
 | 11 | Burden of proof | exclude | burden of proof (court disputes) |
-| 12 | Obligation to notify | exclude | Member States may require the consumer to notify; no duty on a business |
+| 12 | Obligation to notify | keep | consumer must notify the seller of a lack of conformity (where the Member State provides it) |
 | 13 | Remedies for lack of conformity | keep | remedies for lack of conformity the seller must honour |
 | 14 | Repair or replacement of the goods | keep | seller must repair or replace free of charge and take back goods |
 | 15 | Price reduction | keep | seller must honour price reduction |
@@ -285,7 +287,11 @@ Article numbers and titles are read from the raw files of section 1 (ECD: from t
 
 ## 4. Borderline decisions (for review)
 
+Changed by the correction of 27 Oct (exclude -> keep): GDPR 39, CRD 14, LPD 4, SGD 12.
+
 Decisions where the rule needed interpretation, listed so they can be checked:
-- Kept as rights the business must honour: GDPR 15-18, 20, 21; CRD 9, 10; SGD 8, 9, 13, 15.
-- Excluded as pure legal effects or duties of others: CRD 12, 14, 15, 16, 20, 27; LPD 4 (public-authority
-  debtors), 7, 9; SGD 11, 18; GDPR 39 (data protection officer), 42, 45, 48.
+- Kept as rights a party must honour: GDPR 15-18, 20, 21; CRD 9, 10; SGD 8, 9, 13, 15.
+- Kept although the duty depends on a Member-State option or falls on a public authority: SGD 12, LPD 4.
+- Not kept because no process party gets a duty (legal effects, exceptions, court rules): CRD 12, 15, 16, 20, 27;
+  LPD 5, 7, 9; SGD 11, 18; GDPR 23, 48, 79-82; ECD 12-14 (liability exemptions).
+- Excluded as duties of authorities or bodies outside the process: GDPR 40-43, 45, 47.
