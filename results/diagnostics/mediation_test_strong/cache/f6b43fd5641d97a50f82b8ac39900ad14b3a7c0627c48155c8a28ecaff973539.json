@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Split a rule from a legal text into its parts.\n\nINSTRUCTIONS\n- \"roles\": who the rule places its duty on, using only these names:\n  - \"debtor\": the debtor (the undertaking or public authority that has to pay the amount due for goods delivered or services provided),\n  - \"creditor\": the creditor (the undertaking or public authority that delivered the goods or provided the services and is to receive the amount due),\n  - \"public body\": a Member State, the Commission or another public body,\n  - \"other\": anyone else, or the rule names no one.\n  If the duty is on more than one of them (for example \"the debtor and the creditor\"), list each.\n- \"if\": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with \"where\", \"when\" or \"if\"). Write each as a short statement in the words of the rule. Never put a role into \"if\"; roles go into \"roles\". Use an empty list only if the rule names no situation at all and simply places a duty on someone.\n- A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into \"if\": an \"if\" item must not contain the words \"must\", \"shall\" or \"is required to\"; such an answer is rejected automatically.\n- \"then\": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example \"at the time when\", \"on request\", \"where applicable\").\n- \"exceptions\": the situations the rule itself names in which it does not apply (for example \"unless ...\" or \"this does not apply where ...\"), each as a short statement of that situation. Use an empty list if the rule names none.\n- Use only the legal passage below.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it.\"\nAnswer: {\"roles\": [\"other\"], \"if\": [\"a parcel is collected from a sender\"], \"then\": \"the carrier must give a receipt at the time of collection\", \"exceptions\": [\"the sender declines the receipt\"]}\n\nEXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)\nRule: \"Each processor shall keep a list of the parcels it handles on behalf of a controller.\"\nAnswer: {\"roles\": [\"processor\"], \"if\": [], \"then\": \"the processor must keep a list of the parcels it handles on behalf of a controller\", \"exceptions\": []}\n\nEXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)\nRule: \"Where a list of approved carriers changes, each Member State shall publish it.\"\nAnswer: {\"roles\": [\"public body\"], \"if\": [\"a list of approved carriers changes\"], \"then\": \"the Member State must publish the list\", \"exceptions\": []}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"roles\": {\n      \"description\": \"Who the rule places its duty on\",\n      \"items\": {\n        \"enum\": [\n          \"debtor\",\n          \"creditor\",\n          \"public body\",\n          \"other\"\n        ],\n        \"type\": \"string\"\n      },\n      \"minItems\": 1,\n      \"title\": \"Roles\",\n      \"type\": \"array\"\n    },\n    \"if\": {\n      \"description\": \"Every situational condition under which the rule applies (when it applies, never a role and never what must be done); empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"If\",\n      \"type\": \"array\"\n    },\n    \"then\": {\n      \"description\": \"What the rule requires to be done when it applies\",\n      \"title\": \"Then\",\n      \"type\": \"string\"\n    },\n    \"exceptions\": {\n      \"description\": \"Situations the rule itself names in which it does not apply; empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"Exceptions\",\n      \"type\": \"array\"\n    }\n  },\n  \"required\": [\n    \"roles\",\n    \"if\",\n    \"then\",\n    \"exceptions\"\n  ],\n  \"title\": \"SplitOutputV2\",\n  \"type\": \"object\"\n}\n\nLEGAL PASSAGE\n[LPD-Art3-1] Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-2b010e27-d1eb-4ba9-b212-c41781340d52",
+    "object": "chat.completion",
+    "created": 1793122100,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"roles\": [\n    \"public body\"\n  ],\n  \"if\": [\n    \"in commercial transactions between undertakings\",\n    \"the creditor has fulfilled its contractual and legal obligations\",\n    \"the creditor has not received the amount due on time\"\n  ],\n  \"then\": \"Member States shall ensure that the creditor is entitled to interest for late payment without the necessity of a reminder\",\n  \"exceptions\": [\n    \"the debtor is not responsible for the delay\"\n  ]\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.017148508,
+      "prompt_tokens": 1166,
+      "prompt_time": 0.101061053,
+      "completion_tokens": 114,
+      "completion_time": 0.236902365,
+      "total_tokens": 1280,
+      "total_time": 0.337963418
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_43dd1ea4ee",
+    "x_groq": {
+      "id": "req_01m5z6fs27ezysxftnp50c3s6p",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Decide whether a rule from a legal text is about something that the business process described below does.\n\nINSTRUCTIONS\n- First find what the rule is about: the kind of activity it deals with. Write it in law_focus, and copy the words of the passage that state it, word for word, into law_quote.\n- Then look for a step in the process description where that kind of activity happens. Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.\n- relevant is true if the rule is about something this process does. relevant is false if no step of the process does that kind of activity.\n- This is a broad judgement. Do NOT check the rule's conditions (\"if ...\"), trigger events, deadlines or exceptions; they are checked in a later step. Do not mark a passage irrelevant only because a specific event or condition from the rule is not described in the process.\n- Judge by what the process does, not by whether the two texts use similar words or sound like the same subject.\n- Use only the two texts below. Do not assume steps that the description does not state.\n- If relevant is false, process_step and description_quote are empty strings.\n- reason: one sentence explaining your decision.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"If a customer complains about a card payment, the shop must refund within 14 days.\"\nProcess: \"The customer chooses a product. The customer pays by card. The shop sends the product.\"\nAnswer: {\"law_focus\": \"card payments by customers\", \"law_quote\": \"a card payment\", \"relevant\": true, \"process_step\": \"the customer pays by card\", \"description_quote\": \"The customer pays by card\", \"reason\": \"The rule is about card payments, and the process has a card payment step; whether a complaint happens is checked later.\"}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"law_focus\": {\n      \"description\": \"What the rule is about: the kind of activity it deals with\",\n      \"title\": \"Law Focus\",\n      \"type\": \"string\"\n    },\n    \"law_quote\": {\n      \"description\": \"Exact words copied from the legal passage that state what the rule is about\",\n      \"title\": \"Law Quote\",\n      \"type\": \"string\"\n    },\n    \"relevant\": {\n      \"description\": \"true if the rule is about something this process does\",\n      \"title\": \"Relevant\",\n      \"type\": \"boolean\"\n    },\n    \"process_step\": {\n      \"description\": \"The step of the process where that kind of activity happens; empty string if none\",\n      \"title\": \"Process Step\",\n      \"type\": \"string\"\n    },\n    \"description_quote\": {\n      \"description\": \"Exact words copied from the process description that state this step; empty string if none\",\n      \"title\": \"Description Quote\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One sentence explaining the decision\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"law_focus\",\n    \"law_quote\",\n    \"relevant\",\n    \"process_step\",\n    \"description_quote\",\n    \"reason\"\n  ],\n  \"title\": \"RelevanceOutputV2\",\n  \"type\": \"object\"\n}\n\nPROCESS DESCRIPTION\nThis process begins when a customer places an order through an online platform or over the phone.\nThe system automatically generates an order confirmation and sends it to the customer.\nThe warehouse team picks and packs the items, and a shipping label is generated.\nThe order is then handed over to a logistics provider for delivery.\nTracking information is sent to the customer.\nThe process continues as the shipment is monitored until it reaches the customer's address.\nAfter successful delivery, the process ends, but customer feedback or returns may trigger further actions.\nThe shop sells kitchen items to private persons across the EU. Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.\n\nLEGAL PASSAGE\n[CRD-Art14-1] Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-1557fae8-81d9-4926-a850-4e3bb8123683",
+    "object": "chat.completion",
+    "created": 1793122241,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"law_focus\": \"returning goods by the consumer\",\n  \"law_quote\": \"the consumer shall send back the goods or hand them over to the trader\",\n  \"relevant\": true,\n  \"process_step\": \"customers change their mind shortly after the parcel arrives and send it back within two weeks\",\n  \"description_quote\": \"Some customers change their mind shortly after the parcel arrives and send it back within two weeks\",\n  \"reason\": \"The rule concerns the consumer's obligation to return goods, and the process description explicitly states that customers send items back.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.020486608,
+      "prompt_tokens": 1189,
+      "prompt_time": 0.105856175,
+      "completion_tokens": 125,
+      "completion_time": 0.268148536,
+      "total_tokens": 1314,
+      "total_time": 0.374004711
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_43dd1ea4ee",
+    "x_groq": {
+      "id": "req_01m5z6m2rxesw8fbwz533dtah6",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}
