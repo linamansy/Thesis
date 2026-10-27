@@ -518,6 +518,9 @@ rag_v2:
       G: {bge: true, enrich: true}
     simplicity_order: [E, F, G]   # section 8.4 tie-break 3
     baseline_m1: 2                # section 8.4: the winner replaces the freeze only if its M1 > this (of 8)
+    # DECIDED 27 Oct 2026 by section 8.4 (results/diagnostics/rag_v3_eval_exploratory): baseline 2/8 0.9143,
+    # E 2/8 0.8857, F 2/8 0.8857, G 1/8 0.8571 -> E (tie with F, simpler); M1 2 not > 2/8 -> current freeze kept,
+    # no v3 freeze. Non-dev M2 0.1667; held-out 0/5 (old), 1/5 (v3), all with the kept setting. EXPLORATORY.
     dense_index_dirs:             # own FAISS index per option (the e5 index of the current freeze is not touched)
       E: data/retrieval_study2_corpus/dense_index_v3_exploratory_E
       F: data/retrieval_study2_corpus/dense_index_v3_exploratory_F

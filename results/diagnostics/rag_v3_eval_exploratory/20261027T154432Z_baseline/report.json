@@ -1,0 +1,1228 @@
+{
+  "items": [
+    {
+      "case_id": "03.2",
+      "target": "LPD-Art3-4",
+      "in_top_k": false,
+      "rank": 13,
+      "in_candidates": true,
+      "via_expansion": null
+    },
+    {
+      "case_id": "05.2",
+      "target": "LPD-Art3-5",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "10.1",
+      "target": "GDPR-Art28-3-a",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "10.1",
+      "target": "GDPR-Art28-3-e",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "10.1",
+      "target": "GDPR-Art28-3-h",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "10.1",
+      "target": "GDPR-Art28-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "21.2",
+      "target": "CRD-Art18-1",
+      "in_top_k": true,
+      "rank": 2,
+      "in_candidates": true,
+      "via_expansion": null
+    },
+    {
+      "case_id": "46.2",
+      "target": "SGD-Art14-2",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    }
+  ],
+  "summary": {
+    "n_items": 8,
+    "n_in_top_k": 1,
+    "n_in_candidates": 2,
+    "hit_rate_at_5": 0.125
+  },
+  "variants": {
+    "per_variant": {
+      "03.2": {
+        "hit": false,
+        "best_rank": 13,
+        "targets": {
+          "LPD-Art3-4": 13
+        }
+      },
+      "05.2": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "LPD-Art3-5": null
+        }
+      },
+      "10.1": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "GDPR-Art28-3-a": null,
+          "GDPR-Art28-3-e": null,
+          "GDPR-Art28-3-h": null,
+          "GDPR-Art28-1": null
+        }
+      },
+      "21.2": {
+        "hit": true,
+        "best_rank": 2,
+        "targets": {
+          "CRD-Art18-1": 2
+        }
+      },
+      "46.2": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "SGD-Art14-2": null
+        }
+      }
+    },
+    "n_variants": 5,
+    "n_hit": 1
+  },
+  "settings": {
+    "items_file": "data/retrieval_study2_corpus/held_out_v3_test_set.json",
+    "m2_cases": [],
+    "frozen_file": null,
+    "sibling_expansion": false,
+    "extra_round_config": null,
+    "corpus": "data/knowledge_study2_corpus/passages.jsonl",
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "reranker": {
+      "enabled": false,
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "max_length": 512,
+      "batch_size": 32,
+      "candidates": 20,
+      "top_k": 5,
+      "queries": "sentences",
+      "aggregation": "mean"
+    },
+    "v3_option": "baseline",
+    "v3": {
+      "device": "cpu",
+      "dense_model": "BAAI/bge-m3",
+      "dense_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "dense_max_length": 8192,
+      "reranker_model": "BAAI/bge-reranker-v2-m3",
+      "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "options": {
+        "E": {
+          "bge": true,
+          "enrich": false
+        },
+        "F": {
+          "bge": false,
+          "enrich": true
+        },
+        "G": {
+          "bge": true,
+          "enrich": true
+        }
+      },
+      "simplicity_order": [
+        "E",
+        "F",
+        "G"
+      ],
+      "baseline_m1": 2,
+      "dense_index_dirs": {
+        "E": "data/retrieval_study2_corpus/dense_index_v3_exploratory_E",
+        "F": "data/retrieval_study2_corpus/dense_index_v3_exploratory_F",
+        "G": "data/retrieval_study2_corpus/dense_index_v3_exploratory_G"
+      },
+      "enrichment_prompt": "prompts/rag_v3_enrichment.txt",
+      "enrichment_dir": "results/rag_v3_enrichment_exploratory",
+      "enrichment_log_condition": "RAGV3_ENRICH_exploratory",
+      "enrichment_file": "data/retrieval_study2_corpus/rag_v3_enrichment_exploratory.jsonl",
+      "enrichment_manifest": "data/retrieval_study2_corpus/rag_v3_enrichment_exploratory_manifest.json",
+      "evaluation_dir": "results/diagnostics/rag_v3_eval_exploratory",
+      "frozen_retrieval": "data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory.json",
+      "frozen_manifest": "data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory_manifest.json"
+    }
+  },
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "retrievals": {
+    "03.2": {
+      "queries": [
+        "This process begins with monitoring inventory levels in a warehouse or store. When stock reaches a predefined threshold, an automated alert or manual check signals the need to reorder. The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability. Once the order is placed, the inventory system updates with expected delivery dates. Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage. The process ends when the inventory levels are updated after the restock is complete. The supplier agreements say that a bill is paid only once the arrived stock has passed the quality inspection. When the warehouse is busy, that inspection is sometimes finished only six weeks after the stock came in.",
+        "This process begins with monitoring inventory levels in a warehouse or store.",
+        "When stock reaches a predefined threshold, an automated alert or manual check signals the need to reorder.",
+        "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability.",
+        "Once the order is placed, the inventory system updates with expected delivery dates.",
+        "Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage.",
+        "The process ends when the inventory levels are updated after the restock is complete.",
+        "The supplier agreements say that a bill is paid only once the arrived stock has passed the quality inspection. When the warehouse is busy, that inspection is sometimes finished only six weeks after the stock came in."
+      ],
+      "reranker_queries": [
+        "This process begins with monitoring inventory levels in a warehouse or store.",
+        "When stock reaches a predefined threshold, an automated alert or manual check signals the need to reorder.",
+        "The procurement team then places an order with suppliers, considering factors like cost, delivery time, and supplier reliability.",
+        "Once the order is placed, the inventory system updates with expected delivery dates.",
+        "Upon receiving the stock, it is inspected for quality, recorded in the system, and placed on shelves or in storage.",
+        "The process ends when the inventory levels are updated after the restock is complete.",
+        "The supplier agreements say that a bill is paid only once the arrived stock has passed the quality inspection. When the warehouse is busy, that inspection is sometimes finished only six weeks after the stock came in."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.73280382156372,
+          "hybrid_rank": 9,
+          "fused_score": 0.10772719982068327,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.902041026524135,
+          "hybrid_rank": 4,
+          "fused_score": 0.13505678389116604,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -9.00568675994873,
+          "hybrid_rank": 11,
+          "fused_score": 0.10304163950216175,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -9.230562618800572,
+          "hybrid_rank": 3,
+          "fused_score": 0.13588493216181,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.454607486724854,
+          "hybrid_rank": 2,
+          "fused_score": 0.1437629057925161,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.73280382156372,
+          "hybrid_rank": 9,
+          "fused_score": 0.10772719982068327
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.902041026524135,
+          "hybrid_rank": 4,
+          "fused_score": 0.13505678389116604
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -9.00568675994873,
+          "hybrid_rank": 11,
+          "fused_score": 0.10304163950216175
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -9.230562618800572,
+          "hybrid_rank": 3,
+          "fused_score": 0.13588493216181
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.454607486724854,
+          "hybrid_rank": 2,
+          "fused_score": 0.1437629057925161
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -9.480365208217076,
+          "hybrid_rank": 16,
+          "fused_score": 0.08711500434940299
+        },
+        {
+          "rank": 7,
+          "passage_id": "SGD-Art6-1",
+          "rerank_score": -9.639778409685407,
+          "hybrid_rank": 8,
+          "fused_score": 0.11365600042763725
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -9.696403844015938,
+          "hybrid_rank": 10,
+          "fused_score": 0.10606668856000587
+        },
+        {
+          "rank": 9,
+          "passage_id": "SGD-Art7-3",
+          "rerank_score": -9.800791331699916,
+          "hybrid_rank": 1,
+          "fused_score": 0.15207623714927093
+        },
+        {
+          "rank": 10,
+          "passage_id": "SGD-Art7-1",
+          "rerank_score": -9.970437731061663,
+          "hybrid_rank": 17,
+          "fused_score": 0.08674876377662467
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -9.993701526096888,
+          "hybrid_rank": 12,
+          "fused_score": 0.10296968903858725
+        },
+        {
+          "rank": 12,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.010375704084124,
+          "hybrid_rank": 14,
+          "fused_score": 0.09816933183603355
+        },
+        {
+          "rank": 13,
+          "passage_id": "LPD-Art3-4",
+          "rerank_score": -10.037280900137764,
+          "hybrid_rank": 19,
+          "fused_score": 0.07453955122457381
+        },
+        {
+          "rank": 14,
+          "passage_id": "SGD-Art7-4",
+          "rerank_score": -10.135700362069267,
+          "hybrid_rank": 5,
+          "fused_score": 0.11923697555152282
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art32-2",
+          "rerank_score": -10.13742446899414,
+          "hybrid_rank": 18,
+          "fused_score": 0.07569186458923714
+        },
+        {
+          "rank": 16,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -10.19141183580671,
+          "hybrid_rank": 6,
+          "fused_score": 0.11720899163354406
+        },
+        {
+          "rank": 17,
+          "passage_id": "SGD-Art14-1",
+          "rerank_score": -10.266669409615654,
+          "hybrid_rank": 20,
+          "fused_score": 0.07221475042370565
+        },
+        {
+          "rank": 18,
+          "passage_id": "LPD-Art4-3",
+          "rerank_score": -10.301383427211217,
+          "hybrid_rank": 7,
+          "fused_score": 0.11440822333481901
+        },
+        {
+          "rank": 19,
+          "passage_id": "SGD-Art8-1",
+          "rerank_score": -10.370729037693568,
+          "hybrid_rank": 15,
+          "fused_score": 0.09613381869702109
+        },
+        {
+          "rank": 20,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -10.472779137747628,
+          "hybrid_rank": 13,
+          "fused_score": 0.10154898363196325
+        }
+      ]
+    },
+    "05.2": {
+      "queries": [
+        "The process begins when a company identifies the need for a new supplier or vendor. The procurement team issues a request for proposals (RFP) and receives responses from various suppliers. Each proposal is evaluated based on criteria like cost, quality, and delivery time. The team may also conduct site visits or interviews with suppliers. After careful analysis, a supplier is selected, and contract negotiations begin. Once both parties agree on the terms, the contract is signed. The process ends when the supplier is officially onboarded, and the contract is executed. During the negotiations, the procurement team asks each supplier to accept that its bills will be settled four months after they arrive.",
+        "The process begins when a company identifies the need for a new supplier or vendor.",
+        "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+        "Each proposal is evaluated based on criteria like cost, quality, and delivery time.",
+        "The team may also conduct site visits or interviews with suppliers.",
+        "After careful analysis, a supplier is selected, and contract negotiations begin.",
+        "Once both parties agree on the terms, the contract is signed.",
+        "The process ends when the supplier is officially onboarded, and the contract is executed.",
+        "During the negotiations, the procurement team asks each supplier to accept that its bills will be settled four months after they arrive."
+      ],
+      "reranker_queries": [
+        "The process begins when a company identifies the need for a new supplier or vendor.",
+        "The procurement team issues a request for proposals (RFP) and receives responses from various suppliers.",
+        "Each proposal is evaluated based on criteria like cost, quality, and delivery time.",
+        "The team may also conduct site visits or interviews with suppliers.",
+        "After careful analysis, a supplier is selected, and contract negotiations begin.",
+        "Once both parties agree on the terms, the contract is signed.",
+        "The process ends when the supplier is officially onboarded, and the contract is executed.",
+        "During the negotiations, the procurement team asks each supplier to accept that its bills will be settled four months after they arrive."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -7.466298848390579,
+          "hybrid_rank": 6,
+          "fused_score": 0.1172857738163403,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.035889387130737,
+          "hybrid_rank": 2,
+          "fused_score": 0.15120729564881571,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -8.064306408166885,
+          "hybrid_rank": 17,
+          "fused_score": 0.08611033196634602,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "rerank_score": -8.384426534175873,
+          "hybrid_rank": 8,
+          "fused_score": 0.11218755672515852,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n8. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make an express request and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-4",
+          "rerank_score": -8.480861485004425,
+          "hybrid_rank": 3,
+          "fused_score": 0.14833497303866292,
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -7.466298848390579,
+          "hybrid_rank": 6,
+          "fused_score": 0.1172857738163403
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.035889387130737,
+          "hybrid_rank": 2,
+          "fused_score": 0.15120729564881571
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -8.064306408166885,
+          "hybrid_rank": 17,
+          "fused_score": 0.08611033196634602
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "rerank_score": -8.384426534175873,
+          "hybrid_rank": 8,
+          "fused_score": 0.11218755672515852
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-4",
+          "rerank_score": -8.480861485004425,
+          "hybrid_rank": 3,
+          "fused_score": 0.14833497303866292
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art7-3",
+          "rerank_score": -8.498935639858246,
+          "hybrid_rank": 10,
+          "fused_score": 0.10798339942175558
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -8.572011232376099,
+          "hybrid_rank": 4,
+          "fused_score": 0.1372488703837545
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -8.754477441310883,
+          "hybrid_rank": 5,
+          "fused_score": 0.13077038772003052
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -8.759433805942535,
+          "hybrid_rank": 1,
+          "fused_score": 0.17866223622569966
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -8.759652256965637,
+          "hybrid_rank": 20,
+          "fused_score": 0.0604384003974168
+        },
+        {
+          "rank": 11,
+          "passage_id": "SGD-Art6-1",
+          "rerank_score": -9.048473358154297,
+          "hybrid_rank": 14,
+          "fused_score": 0.09579846452515021
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art8-4",
+          "rerank_score": -9.184529781341553,
+          "hybrid_rank": 19,
+          "fused_score": 0.07060281126717362
+        },
+        {
+          "rank": 13,
+          "passage_id": "LPD-Art4-3",
+          "rerank_score": -9.209685564041138,
+          "hybrid_rank": 7,
+          "fused_score": 0.1143978806108681
+        },
+        {
+          "rank": 14,
+          "passage_id": "LPD-Art4-5",
+          "rerank_score": -9.228480398654938,
+          "hybrid_rank": 16,
+          "fused_score": 0.08693080738014783
+        },
+        {
+          "rank": 15,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.245252192020416,
+          "hybrid_rank": 15,
+          "fused_score": 0.08732979793430613
+        },
+        {
+          "rank": 16,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -9.357490301132202,
+          "hybrid_rank": 13,
+          "fused_score": 0.10201816147518172
+        },
+        {
+          "rank": 17,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -9.36783230304718,
+          "hybrid_rank": 11,
+          "fused_score": 0.10471828379250953
+        },
+        {
+          "rank": 18,
+          "passage_id": "SGD-Art8-1",
+          "rerank_score": -9.993067383766174,
+          "hybrid_rank": 9,
+          "fused_score": 0.11194321278932597
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art28-7",
+          "rerank_score": -10.243237018585205,
+          "hybrid_rank": 18,
+          "fused_score": 0.08278965437506937
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art36-4",
+          "rerank_score": -10.483270168304443,
+          "hybrid_rank": 12,
+          "fused_score": 0.10428097987193691
+        }
+      ]
+    },
+    "10.1": {
+      "queries": [
+        "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware. IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs. If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment. After successful testing, the new solution is rolled out to the requesting department. Training may be provided, and IT support remains available for troubleshooting. The requested software is an online service run by an outside provider. It keeps the names, e-mail addresses and working hours of the department's staff on that provider's servers.",
+        "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+        "IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs.",
+        "If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment.",
+        "After successful testing, the new solution is rolled out to the requesting department.",
+        "Training may be provided, and IT support remains available for troubleshooting.",
+        "The requested software is an online service run by an outside provider. It keeps the names, e-mail addresses and working hours of the department's staff on that provider's servers."
+      ],
+      "reranker_queries": [
+        "The process starts when an employee or department submits a request for an IT solution, such as new software or hardware.",
+        "IT assesses the request, checking for compatibility with existing systems and evaluating cost and resource needs.",
+        "If approved, IT procures the necessary tools or licenses, installs the solution, and tests it in a controlled environment.",
+        "After successful testing, the new solution is rolled out to the requesting department.",
+        "Training may be provided, and IT support remains available for troubleshooting.",
+        "The requested software is an online service run by an outside provider. It keeps the names, e-mail addresses and working hours of the department's staff on that provider's servers."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art32-1",
+          "rerank_score": -9.729229609171549,
+          "hybrid_rank": 1,
+          "fused_score": 0.15076984578104435,
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n1. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate:\n(a) the pseudonymisation and encryption of personal data;\n(b) the ability to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services;\n(c) the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident;\n(d) a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "rerank_score": -9.892099062601725,
+          "hybrid_rank": 3,
+          "fused_score": 0.10942080992484218,
+          "text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-11",
+          "rerank_score": -9.911416371663412,
+          "hybrid_rank": 20,
+          "fused_score": 0.05626243126243126,
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n11. Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art30-4",
+          "rerank_score": -10.010547796885172,
+          "hybrid_rank": 5,
+          "fused_score": 0.10011881741318764,
+          "text": "General Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n4. The controller or the processor and, where applicable, the controller's or the processor's representative, shall make the record available to the supervisory authority on request."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art25-3",
+          "rerank_score": -10.012753327687582,
+          "hybrid_rank": 12,
+          "fused_score": 0.07292568878996114,
+          "text": "General Data Protection Regulation (2016/679) - Article 25: Data protection by design and by default\n3. An approved certification mechanism pursuant to Article 42 may be used as an element to demonstrate compliance with the requirements set out in paragraphs 1 and 2 of this Article."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art32-1",
+          "rerank_score": -9.729229609171549,
+          "hybrid_rank": 1,
+          "fused_score": 0.15076984578104435
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "rerank_score": -9.892099062601725,
+          "hybrid_rank": 3,
+          "fused_score": 0.10942080992484218
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-11",
+          "rerank_score": -9.911416371663412,
+          "hybrid_rank": 20,
+          "fused_score": 0.05626243126243126
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art30-4",
+          "rerank_score": -10.010547796885172,
+          "hybrid_rank": 5,
+          "fused_score": 0.10011881741318764
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art25-3",
+          "rerank_score": -10.012753327687582,
+          "hybrid_rank": 12,
+          "fused_score": 0.07292568878996114
+        },
+        {
+          "rank": 6,
+          "passage_id": "GDPR-Art49-6",
+          "rerank_score": -10.032663345336914,
+          "hybrid_rank": 15,
+          "fused_score": 0.06941451851608578
+        },
+        {
+          "rank": 7,
+          "passage_id": "GDPR-Art12-3",
+          "rerank_score": -10.13391892115275,
+          "hybrid_rank": 4,
+          "fused_score": 0.10786660962361143
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -10.163204034169516,
+          "hybrid_rank": 8,
+          "fused_score": 0.08872997331942056
+        },
+        {
+          "rank": 9,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -10.16416311264038,
+          "hybrid_rank": 10,
+          "fused_score": 0.07491353754940712
+        },
+        {
+          "rank": 10,
+          "passage_id": "GDPR-Art35-1",
+          "rerank_score": -10.174045085906982,
+          "hybrid_rank": 16,
+          "fused_score": 0.06355611601513242
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art32-3",
+          "rerank_score": -10.236026922861734,
+          "hybrid_rank": 6,
+          "fused_score": 0.09188583455369892
+        },
+        {
+          "rank": 12,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.24203872680664,
+          "hybrid_rank": 17,
+          "fused_score": 0.06247999779628473
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art36-2",
+          "rerank_score": -10.33317200342814,
+          "hybrid_rank": 13,
+          "fused_score": 0.07277030597926121
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art24-3",
+          "rerank_score": -10.37634309132894,
+          "hybrid_rank": 19,
+          "fused_score": 0.05928323749219272
+        },
+        {
+          "rank": 15,
+          "passage_id": "GDPR-Art28-5",
+          "rerank_score": -10.38254165649414,
+          "hybrid_rank": 7,
+          "fused_score": 0.08949677679251075
+        },
+        {
+          "rank": 16,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -10.452407360076904,
+          "hybrid_rank": 2,
+          "fused_score": 0.11114287485015907
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art39-1",
+          "rerank_score": -10.523133913675943,
+          "hybrid_rank": 18,
+          "fused_score": 0.0599509598560832
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -10.530166943868002,
+          "hybrid_rank": 11,
+          "fused_score": 0.07347616433907293
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.554366906483969,
+          "hybrid_rank": 14,
+          "fused_score": 0.07091363851869639
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art38-2",
+          "rerank_score": -10.586103439331055,
+          "hybrid_rank": 9,
+          "fused_score": 0.07591738658535821
+        }
+      ]
+    },
+    "21.2": {
+      "queries": [
+        "If goods shall be shipped, the secretary clarifies who will do the shipping. If you have large amounts, special shipping will be necessary. In these cases the secretary invites three logistic companies to make offers and she selects one of them. In case of small amounts, normal post shipment is used. Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary. In the meantime the goods can be already packaged by the warehousemen. If everything is ready, the packaged goods are prepared for being picked up by the logistic company. The goods are bought by private customers in the company's online shop, and no shipping date is promised to them. Finding a logistic company for large amounts sometimes takes the secretary five or six weeks.",
+        "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+        "If you have large amounts, special shipping will be necessary.",
+        "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+        "In case of small amounts, normal post shipment is used.",
+        "Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary.",
+        "In the meantime the goods can be already packaged by the warehousemen.",
+        "If everything is ready, the packaged goods are prepared for being picked up by the logistic company.",
+        "The goods are bought by private customers in the company's online shop, and no shipping date is promised to them. Finding a logistic company for large amounts sometimes takes the secretary five or six weeks."
+      ],
+      "reranker_queries": [
+        "If goods shall be shipped, the secretary clarifies who will do the shipping.",
+        "If you have large amounts, special shipping will be necessary.",
+        "In these cases the secretary invites three logistic companies to make offers and she selects one of them.",
+        "In case of small amounts, normal post shipment is used.",
+        "Therefore a package label is written by the secretary and a parcel insurance taken by the logistics department head if necessary.",
+        "In the meantime the goods can be already packaged by the warehousemen.",
+        "If everything is ready, the packaged goods are prepared for being picked up by the logistic company.",
+        "The goods are bought by private customers in the company's online shop, and no shipping date is promised to them. Finding a logistic company for large amounts sometimes takes the secretary five or six weeks."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.351299464702606,
+          "hybrid_rank": 5,
+          "fused_score": 0.11487177146825038,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.636675119400024,
+          "hybrid_rank": 3,
+          "fused_score": 0.13638450731995092,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "rerank_score": -8.960497617721558,
+          "hybrid_rank": 1,
+          "fused_score": 0.1536365074763757,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.070456087589264,
+          "hybrid_rank": 2,
+          "fused_score": 0.14637186839392724,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -9.206745743751526,
+          "hybrid_rank": 7,
+          "fused_score": 0.10454860377496979,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n4. The consumer shall not be liable to pay for normal use made of the replaced goods during the period prior to their replacement."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.351299464702606,
+          "hybrid_rank": 5,
+          "fused_score": 0.11487177146825038
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.636675119400024,
+          "hybrid_rank": 3,
+          "fused_score": 0.13638450731995092
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "rerank_score": -8.960497617721558,
+          "hybrid_rank": 1,
+          "fused_score": 0.1536365074763757
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.070456087589264,
+          "hybrid_rank": 2,
+          "fused_score": 0.14637186839392724
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -9.206745743751526,
+          "hybrid_rank": 7,
+          "fused_score": 0.10454860377496979
+        },
+        {
+          "rank": 6,
+          "passage_id": "SGD-Art5-1",
+          "rerank_score": -9.464199423789978,
+          "hybrid_rank": 6,
+          "fused_score": 0.11185067806929413
+        },
+        {
+          "rank": 7,
+          "passage_id": "SGD-Art14-2",
+          "rerank_score": -9.496650636196136,
+          "hybrid_rank": 16,
+          "fused_score": 0.07433728320266096
+        },
+        {
+          "rank": 8,
+          "passage_id": "SGD-Art10-6",
+          "rerank_score": -9.947787344455719,
+          "hybrid_rank": 15,
+          "fused_score": 0.08285741042479886
+        },
+        {
+          "rank": 9,
+          "passage_id": "SGD-Art7-3",
+          "rerank_score": -10.117661833763123,
+          "hybrid_rank": 4,
+          "fused_score": 0.1304438638072947
+        },
+        {
+          "rank": 10,
+          "passage_id": "ECD-Art10-3",
+          "rerank_score": -10.160978078842163,
+          "hybrid_rank": 12,
+          "fused_score": 0.08538045355128351
+        },
+        {
+          "rank": 11,
+          "passage_id": "SGD-Art17-2",
+          "rerank_score": -10.16794753074646,
+          "hybrid_rank": 19,
+          "fused_score": 0.07227593829334908
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art6a-1-a",
+          "rerank_score": -10.258318305015564,
+          "hybrid_rank": 17,
+          "fused_score": 0.0732352667383396
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -10.4655202627182,
+          "hybrid_rank": 8,
+          "fused_score": 0.10035911065624714
+        },
+        {
+          "rank": 14,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -10.527092218399048,
+          "hybrid_rank": 11,
+          "fused_score": 0.08667061111299953
+        },
+        {
+          "rank": 15,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -10.532564997673035,
+          "hybrid_rank": 13,
+          "fused_score": 0.08456302714698237
+        },
+        {
+          "rank": 16,
+          "passage_id": "SGD-Art7-4",
+          "rerank_score": -10.650686264038086,
+          "hybrid_rank": 14,
+          "fused_score": 0.0841368076633451
+        },
+        {
+          "rank": 17,
+          "passage_id": "LPD-Art4-3",
+          "rerank_score": -10.66309118270874,
+          "hybrid_rank": 18,
+          "fused_score": 0.072810591227953
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -10.797852516174316,
+          "hybrid_rank": 20,
+          "fused_score": 0.07160160537935155
+        },
+        {
+          "rank": 19,
+          "passage_id": "ECD-Art5-2",
+          "rerank_score": -10.835270285606384,
+          "hybrid_rank": 10,
+          "fused_score": 0.08769410736322501
+        },
+        {
+          "rank": 20,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -10.914646983146667,
+          "hybrid_rank": 9,
+          "fused_score": 0.08804987728341773
+        }
+      ]
+    },
+    "46.2": {
+      "queries": [
+        "Storage management First, the order is read from the automatic order management system. Then, it's checked if the first product from the order is in stock. If it's in stock then it's withdrawn from the warehouse. However, if it's not in stock then it's reordered from the wholesaler. Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler. After the ordered product has arrived it's registered in the stock management system. Finally, it's checked if the whole order is ready for shipment. If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped. If it isn't then the next product from the order is selected and the process starts again with checking if this order is in stock or not. The orders come from private customers. When a customer reports that a delivered product is faulty, the company sends a new one of the same product in the next shipment.",
+        "Storage management",
+        "First, the order is read from the automatic order management system.",
+        "Then, it's checked if the first product from the order is in stock.",
+        "If it's in stock then it's withdrawn from the warehouse.",
+        "However, if it's not in stock then it's reordered from the wholesaler.",
+        "Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler.",
+        "After the ordered product has arrived it's registered in the stock management system.",
+        "Finally, it's checked if the whole order is ready for shipment.",
+        "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped.",
+        "If it isn't then the next product from the order is selected and the process starts again with checking if this order is in stock or not.",
+        "The orders come from private customers. When a customer reports that a delivered product is faulty, the company sends a new one of the same product in the next shipment."
+      ],
+      "reranker_queries": [
+        "Storage management",
+        "First, the order is read from the automatic order management system.",
+        "Then, it's checked if the first product from the order is in stock.",
+        "If it's in stock then it's withdrawn from the warehouse.",
+        "However, if it's not in stock then it's reordered from the wholesaler.",
+        "Note, that if it was necessary to wait more then 10 days for the arrival of the product then a delivery delay penalty is automatically demanded from the wholesaler.",
+        "After the ordered product has arrived it's registered in the stock management system.",
+        "Finally, it's checked if the whole order is ready for shipment.",
+        "If the order is ready for shipment, a courier is requested and the products are packed simultaneously and finally shipped.",
+        "If it isn't then the next product from the order is selected and the process starts again with checking if this order is in stock or not.",
+        "The orders come from private customers. When a customer reports that a delivered product is faulty, the company sends a new one of the same product in the next shipment."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.048668037761342,
+          "hybrid_rank": 2,
+          "fused_score": 0.2534271478094314,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.217532959851352,
+          "hybrid_rank": 6,
+          "fused_score": 0.16710309879555163,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.38005525415594,
+          "hybrid_rank": 1,
+          "fused_score": 0.2609282644191665,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -8.55336297642101,
+          "hybrid_rank": 8,
+          "fused_score": 0.14825946213664,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.805757522583008,
+          "hybrid_rank": 4,
+          "fused_score": 0.21113857242473041,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -8.048668037761342,
+          "hybrid_rank": 2,
+          "fused_score": 0.2534271478094314
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.217532959851352,
+          "hybrid_rank": 6,
+          "fused_score": 0.16710309879555163
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.38005525415594,
+          "hybrid_rank": 1,
+          "fused_score": 0.2609282644191665
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -8.55336297642101,
+          "hybrid_rank": 8,
+          "fused_score": 0.14825946213664
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.805757522583008,
+          "hybrid_rank": 4,
+          "fused_score": 0.21113857242473041
+        },
+        {
+          "rank": 6,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.006016384471547,
+          "hybrid_rank": 9,
+          "fused_score": 0.1450909679919745
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art9-2-a",
+          "rerank_score": -9.18894642049616,
+          "hybrid_rank": 7,
+          "fused_score": 0.14937620513970445
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -9.4098069451072,
+          "hybrid_rank": 10,
+          "fused_score": 0.14166763547149513
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -9.790884017944336,
+          "hybrid_rank": 11,
+          "fused_score": 0.12987808513755217
+        },
+        {
+          "rank": 10,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -9.92561080239036,
+          "hybrid_rank": 19,
+          "fused_score": 0.09740026998244693
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art9-1a",
+          "rerank_score": -9.929313312877309,
+          "hybrid_rank": 13,
+          "fused_score": 0.11857921687736678
+        },
+        {
+          "rank": 12,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.961874701760031,
+          "hybrid_rank": 3,
+          "fused_score": 0.23151810502047426
+        },
+        {
+          "rank": 13,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -10.022899107499557,
+          "hybrid_rank": 5,
+          "fused_score": 0.20612097183126196
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art8-9",
+          "rerank_score": -10.091649619015781,
+          "hybrid_rank": 20,
+          "fused_score": 0.09737014818501512
+        },
+        {
+          "rank": 15,
+          "passage_id": "SGD-Art17-2",
+          "rerank_score": -10.145693518898703,
+          "hybrid_rank": 17,
+          "fused_score": 0.102604859398254
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -10.23990501057018,
+          "hybrid_rank": 16,
+          "fused_score": 0.10292934227558805
+        },
+        {
+          "rank": 17,
+          "passage_id": "SGD-Art6-1",
+          "rerank_score": -10.463427023454146,
+          "hybrid_rank": 15,
+          "fused_score": 0.10713723702633617
+        },
+        {
+          "rank": 18,
+          "passage_id": "SGD-Art7-3",
+          "rerank_score": -10.537756833163174,
+          "hybrid_rank": 18,
+          "fused_score": 0.10218306839605588
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art6-1",
+          "rerank_score": -10.607850594954057,
+          "hybrid_rank": 14,
+          "fused_score": 0.11759512232638894
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art9-2-h",
+          "rerank_score": -10.685561266812412,
+          "hybrid_rank": 12,
+          "fused_score": 0.12160076924223809
+        }
+      ]
+    }
+  }
+}

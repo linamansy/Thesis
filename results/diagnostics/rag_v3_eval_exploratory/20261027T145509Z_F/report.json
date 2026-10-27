@@ -1,0 +1,3578 @@
+{
+  "items": [
+    {
+      "case_id": "01.1",
+      "target": "GDPR-Art13-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "01.2",
+      "target": "LPD-Art3-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "06.1",
+      "target": "CRD-Art13-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "11.1",
+      "target": "GDPR-Art17-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "13.1",
+      "target": "SGD-Art14-1",
+      "in_top_k": false,
+      "rank": 15,
+      "in_candidates": true,
+      "via_expansion": null
+    },
+    {
+      "case_id": "17.1",
+      "target": "CRD-Art14-1",
+      "in_top_k": true,
+      "rank": 5,
+      "in_candidates": true,
+      "via_expansion": null
+    },
+    {
+      "case_id": "19.1",
+      "target": "ECD-Art11-1",
+      "in_top_k": false,
+      "rank": null,
+      "in_candidates": false,
+      "via_expansion": null
+    },
+    {
+      "case_id": "45.1",
+      "target": "ECD-Art10-1",
+      "in_top_k": true,
+      "rank": 5,
+      "in_candidates": true,
+      "via_expansion": null
+    }
+  ],
+  "summary": {
+    "n_items": 8,
+    "n_in_top_k": 2,
+    "n_in_candidates": 3,
+    "hit_rate_at_5": 0.25
+  },
+  "variants": {
+    "per_variant": {
+      "01.1": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "GDPR-Art13-1": null
+        }
+      },
+      "01.2": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "LPD-Art3-1": null
+        }
+      },
+      "06.1": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "CRD-Art13-1": null
+        }
+      },
+      "11.1": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "GDPR-Art17-1": null
+        }
+      },
+      "13.1": {
+        "hit": false,
+        "best_rank": 15,
+        "targets": {
+          "SGD-Art14-1": 15
+        }
+      },
+      "17.1": {
+        "hit": true,
+        "best_rank": 5,
+        "targets": {
+          "CRD-Art14-1": 5
+        }
+      },
+      "19.1": {
+        "hit": false,
+        "best_rank": null,
+        "targets": {
+          "ECD-Art11-1": null
+        }
+      },
+      "45.1": {
+        "hit": true,
+        "best_rank": 5,
+        "targets": {
+          "ECD-Art10-1": 5
+        }
+      }
+    },
+    "n_variants": 8,
+    "n_hit": 2
+  },
+  "m2": {
+    "per_case": {
+      "01": {
+        "top_k": [
+          "ECD-Art11-2",
+          "ECD-Art11-1",
+          "ECD-Art10-1",
+          "CRD-Art8-3",
+          "CRD-Art8-7"
+        ],
+        "laws": [
+          "ECD",
+          "ECD",
+          "ECD",
+          "CRD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "ECD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      },
+      "06": {
+        "top_k": [
+          "CRD-Art18-1",
+          "ECD-Art11-1",
+          "CRD-Art8-3",
+          "ECD-Art11-2",
+          "CRD-Art8-7"
+        ],
+        "laws": [
+          "CRD",
+          "ECD",
+          "CRD",
+          "ECD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "SGD",
+          "ECD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      },
+      "11": {
+        "top_k": [
+          "CRD-Art18-3",
+          "CRD-Art13-7",
+          "CRD-Art11-4",
+          "CRD-Art13-1",
+          "CRD-Art18-4"
+        ],
+        "laws": [
+          "CRD",
+          "CRD",
+          "CRD",
+          "CRD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      },
+      "13": {
+        "top_k": [
+          "SGD-Art13-7",
+          "CRD-Art13-1",
+          "CRD-Art18-3",
+          "CRD-Art14-3",
+          "CRD-Art22-1"
+        ],
+        "laws": [
+          "SGD",
+          "CRD",
+          "CRD",
+          "CRD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "SGD",
+          "GDPR"
+        ],
+        "n_expected": 1,
+        "share": 0.2
+      },
+      "17": {
+        "top_k": [
+          "CRD-Art13-3",
+          "ECD-Art11-1",
+          "SGD-Art16-3",
+          "CRD-Art14-1",
+          "CRD-Art13-1"
+        ],
+        "laws": [
+          "CRD",
+          "ECD",
+          "SGD",
+          "CRD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "SGD",
+          "ECD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      },
+      "19": {
+        "top_k": [
+          "CRD-Art18-1",
+          "CRD-Art13-3",
+          "CRD-Art8-3",
+          "SGD-Art16-3",
+          "CRD-Art18-4"
+        ],
+        "laws": [
+          "CRD",
+          "CRD",
+          "CRD",
+          "SGD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "SGD",
+          "ECD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      },
+      "45": {
+        "top_k": [
+          "CRD-Art8-3",
+          "ECD-Art11-1",
+          "ECD-Art11-2",
+          "CRD-Art22-1",
+          "CRD-Art13-1"
+        ],
+        "laws": [
+          "CRD",
+          "ECD",
+          "ECD",
+          "CRD",
+          "CRD"
+        ],
+        "expected_laws": [
+          "CRD",
+          "SGD",
+          "ECD",
+          "GDPR"
+        ],
+        "n_expected": 5,
+        "share": 1.0
+      }
+    },
+    "mean": 0.8857
+  },
+  "settings": {
+    "items_file": "data/retrieval_study2_corpus/retrieval_test_set.json",
+    "m2_cases": [
+      "01",
+      "06",
+      "11",
+      "13",
+      "17",
+      "19",
+      "45"
+    ],
+    "frozen_file": null,
+    "sibling_expansion": false,
+    "extra_round_config": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "bge": false,
+      "enrich": true,
+      "sibling_expansion": false,
+      "dense_model": "intfloat/e5-small-v2",
+      "dense_revision": null,
+      "dense_index_dir": "C:\\Users\\user\\Downloads\\Thesis\\data\\retrieval_study2_corpus\\dense_index_v3_exploratory_F",
+      "dense_index_fingerprint": "595b7992808e8785c97d06eace13babea9ff8b56744a5af2a02773d851fe9f3b",
+      "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "reranker_revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a"
+    },
+    "corpus": "data/knowledge_study2_corpus/passages.jsonl",
+    "retrieval": {
+      "dense_model": "intfloat/e5-small-v2",
+      "passage_prefix": "passage: ",
+      "query_prefix": "query: ",
+      "bm25_k1": 1.5,
+      "bm25_b": 0.75,
+      "stopwords_language": "english",
+      "top_k_per_retriever": 20,
+      "rrf_k": 60,
+      "final_top_k": 5
+    },
+    "reranker": {
+      "enabled": false,
+      "model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "max_length": 512,
+      "batch_size": 32,
+      "candidates": 20,
+      "top_k": 5,
+      "queries": "sentences",
+      "aggregation": "mean"
+    },
+    "v3_option": "F",
+    "v3": {
+      "device": "cpu",
+      "dense_model": "BAAI/bge-m3",
+      "dense_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "dense_max_length": 8192,
+      "reranker_model": "BAAI/bge-reranker-v2-m3",
+      "reranker_revision": "953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e",
+      "options": {
+        "E": {
+          "bge": true,
+          "enrich": false
+        },
+        "F": {
+          "bge": false,
+          "enrich": true
+        },
+        "G": {
+          "bge": true,
+          "enrich": true
+        }
+      },
+      "simplicity_order": [
+        "E",
+        "F",
+        "G"
+      ],
+      "baseline_m1": 2,
+      "dense_index_dirs": {
+        "E": "data/retrieval_study2_corpus/dense_index_v3_exploratory_E",
+        "F": "data/retrieval_study2_corpus/dense_index_v3_exploratory_F",
+        "G": "data/retrieval_study2_corpus/dense_index_v3_exploratory_G"
+      },
+      "enrichment_prompt": "prompts/rag_v3_enrichment.txt",
+      "enrichment_dir": "results/rag_v3_enrichment_exploratory",
+      "enrichment_log_condition": "RAGV3_ENRICH_exploratory",
+      "enrichment_file": "data/retrieval_study2_corpus/rag_v3_enrichment_exploratory.jsonl",
+      "enrichment_manifest": "data/retrieval_study2_corpus/rag_v3_enrichment_exploratory_manifest.json",
+      "evaluation_dir": "results/diagnostics/rag_v3_eval_exploratory",
+      "frozen_retrieval": "data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory.json",
+      "frozen_manifest": "data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory_manifest.json"
+    }
+  },
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "retrievals": {
+    "01.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed. The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed.",
+        "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+      ],
+      "reranker_queries": [
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed.",
+        "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.625802653176444,
+          "hybrid_rank": 3,
+          "fused_score": 0.13120659353154482,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -4.5435463445527215,
+          "hybrid_rank": 4,
+          "fused_score": 0.12533061920901722,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.132515123912266,
+          "hybrid_rank": 6,
+          "fused_score": 0.11664365244180235,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -5.382183074951172,
+          "hybrid_rank": 2,
+          "fused_score": 0.1384047817706799,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.4959679671696255,
+          "hybrid_rank": 1,
+          "fused_score": 0.1515559050219193,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.625802653176444,
+          "hybrid_rank": 3,
+          "fused_score": 0.13120659353154482
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -4.5435463445527215,
+          "hybrid_rank": 4,
+          "fused_score": 0.12533061920901722
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.132515123912266,
+          "hybrid_rank": 6,
+          "fused_score": 0.11664365244180235
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -5.382183074951172,
+          "hybrid_rank": 2,
+          "fused_score": 0.1384047817706799
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.4959679671696255,
+          "hybrid_rank": 1,
+          "fused_score": 0.1515559050219193
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -5.597354446138654,
+          "hybrid_rank": 7,
+          "fused_score": 0.10565902643108525
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art6-1-a",
+          "rerank_score": -6.236516373498099,
+          "hybrid_rank": 20,
+          "fused_score": 0.06032170268024313
+        },
+        {
+          "rank": 8,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -6.5416363307407925,
+          "hybrid_rank": 17,
+          "fused_score": 0.06789876906547078
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art7-5",
+          "rerank_score": -6.566243989127023,
+          "hybrid_rank": 16,
+          "fused_score": 0.07145698289533906
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -6.5872127669198175,
+          "hybrid_rank": 5,
+          "fused_score": 0.11979723738119262
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art6-2",
+          "rerank_score": -6.613542352403913,
+          "hybrid_rank": 18,
+          "fused_score": 0.06741510331435888
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art6-7",
+          "rerank_score": -6.789682422365461,
+          "hybrid_rank": 14,
+          "fused_score": 0.0750964353499158
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -6.869137968335833,
+          "hybrid_rank": 9,
+          "fused_score": 0.08837369545733201
+        },
+        {
+          "rank": 14,
+          "passage_id": "GDPR-Art30-4",
+          "rerank_score": -6.914350867271423,
+          "hybrid_rank": 11,
+          "fused_score": 0.08375356202990568
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art8-5",
+          "rerank_score": -7.030836037227085,
+          "hybrid_rank": 8,
+          "fused_score": 0.1019786807755774
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art6-9",
+          "rerank_score": -7.1948956080845425,
+          "hybrid_rank": 19,
+          "fused_score": 0.06137262016951679
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art35-9",
+          "rerank_score": -7.491990225655692,
+          "hybrid_rank": 13,
+          "fused_score": 0.07571996255427606
+        },
+        {
+          "rank": 18,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -7.73678047316415,
+          "hybrid_rank": 15,
+          "fused_score": 0.07243082874429217
+        },
+        {
+          "rank": 19,
+          "passage_id": "SGD-Art17-2",
+          "rerank_score": -8.30396134512765,
+          "hybrid_rank": 10,
+          "fused_score": 0.08405511614329741
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-4",
+          "rerank_score": -8.438083308083671,
+          "hybrid_rank": 12,
+          "fused_score": 0.08034846238515624
+        }
+      ]
+    },
+    "01.2": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed. Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed.",
+        "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+      ],
+      "reranker_queries": [
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed.",
+        "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.0709379059927806,
+          "hybrid_rank": 2,
+          "fused_score": 0.14632614346122133,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -3.5537542019571577,
+          "hybrid_rank": 3,
+          "fused_score": 0.14132250438602897,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -4.795986311776297,
+          "hybrid_rank": 4,
+          "fused_score": 0.1388504145692539,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.032735790525164,
+          "hybrid_rank": 1,
+          "fused_score": 0.18080495979610897,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.115937198911395,
+          "hybrid_rank": 5,
+          "fused_score": 0.13065571880680987,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.0709379059927806,
+          "hybrid_rank": 2,
+          "fused_score": 0.14632614346122133
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -3.5537542019571577,
+          "hybrid_rank": 3,
+          "fused_score": 0.14132250438602897
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -4.795986311776297,
+          "hybrid_rank": 4,
+          "fused_score": 0.1388504145692539
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.032735790525164,
+          "hybrid_rank": 1,
+          "fused_score": 0.18080495979610897
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.115937198911395,
+          "hybrid_rank": 5,
+          "fused_score": 0.13065571880680987
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -5.311064805303301,
+          "hybrid_rank": 7,
+          "fused_score": 0.1205662960937897
+        },
+        {
+          "rank": 7,
+          "passage_id": "SGD-Art16-1",
+          "rerank_score": -5.865087764603751,
+          "hybrid_rank": 19,
+          "fused_score": 0.058530959407779
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art7-5",
+          "rerank_score": -6.084730216435024,
+          "hybrid_rank": 12,
+          "fused_score": 0.07593866706769933
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -6.406049728393555,
+          "hybrid_rank": 8,
+          "fused_score": 0.11820574875409398
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -6.5233588218688965,
+          "hybrid_rank": 6,
+          "fused_score": 0.1219401256963819
+        },
+        {
+          "rank": 11,
+          "passage_id": "GDPR-Art30-4",
+          "rerank_score": -6.578350629125323,
+          "hybrid_rank": 9,
+          "fused_score": 0.09770644704443453
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -6.78766781943185,
+          "hybrid_rank": 14,
+          "fused_score": 0.06781556583286937
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -6.877568449292864,
+          "hybrid_rank": 17,
+          "fused_score": 0.06517937055911739
+        },
+        {
+          "rank": 14,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -7.012519632066999,
+          "hybrid_rank": 16,
+          "fused_score": 0.0658272419326083
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art14-4",
+          "rerank_score": -7.361808095659528,
+          "hybrid_rank": 20,
+          "fused_score": 0.05743102006688964
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -7.418555532182966,
+          "hybrid_rank": 13,
+          "fused_score": 0.07328548926827314
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art35-9",
+          "rerank_score": -7.4221616472516745,
+          "hybrid_rank": 10,
+          "fused_score": 0.0890532958876094
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art8-5",
+          "rerank_score": -7.7074951103755405,
+          "hybrid_rank": 18,
+          "fused_score": 0.061959704318244775
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art13-3",
+          "rerank_score": -8.051396574292864,
+          "hybrid_rank": 11,
+          "fused_score": 0.08497450262156145
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-4",
+          "rerank_score": -8.484779902866908,
+          "hybrid_rank": 15,
+          "fused_score": 0.06608851674641149
+        }
+      ]
+    },
+    "06.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions. The shop sells kitchen items to private persons across the EU. Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "The shop sells kitchen items to private persons across the EU. Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "The shop sells kitchen items to private persons across the EU. Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -5.054974632337689,
+          "hybrid_rank": 1,
+          "fused_score": 0.18370403463890356,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.143440425395966,
+          "hybrid_rank": 3,
+          "fused_score": 0.15265020583866926,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -6.22498582303524,
+          "hybrid_rank": 5,
+          "fused_score": 0.14567788354045627,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.426595967262983,
+          "hybrid_rank": 9,
+          "fused_score": 0.1190131999546404,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -6.597923591732979,
+          "hybrid_rank": 2,
+          "fused_score": 0.17691101437705853,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -5.054974632337689,
+          "hybrid_rank": 1,
+          "fused_score": 0.18370403463890356
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.143440425395966,
+          "hybrid_rank": 3,
+          "fused_score": 0.15265020583866926
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -6.22498582303524,
+          "hybrid_rank": 5,
+          "fused_score": 0.14567788354045627
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.426595967262983,
+          "hybrid_rank": 9,
+          "fused_score": 0.1190131999546404
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -6.597923591732979,
+          "hybrid_rank": 2,
+          "fused_score": 0.17691101437705853
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.487417489290237,
+          "hybrid_rank": 11,
+          "fused_score": 0.10573546659944184
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -7.557938098907471,
+          "hybrid_rank": 16,
+          "fused_score": 0.08867105117105117
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.670717895030975,
+          "hybrid_rank": 6,
+          "fused_score": 0.13025925261057253
+        },
+        {
+          "rank": 9,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -7.785304546356201,
+          "hybrid_rank": 7,
+          "fused_score": 0.12928541002726
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.786370933055878,
+          "hybrid_rank": 20,
+          "fused_score": 0.0703591586735987
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art11-2",
+          "rerank_score": -7.817160427570343,
+          "hybrid_rank": 18,
+          "fused_score": 0.07270262095448507
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -7.93813368678093,
+          "hybrid_rank": 12,
+          "fused_score": 0.09952848829959093
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art9-2-a",
+          "rerank_score": -7.943276643753052,
+          "hybrid_rank": 14,
+          "fused_score": 0.0900153750209743
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -7.948427140712738,
+          "hybrid_rank": 10,
+          "fused_score": 0.11724214166041039
+        },
+        {
+          "rank": 15,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -7.962794005870819,
+          "hybrid_rank": 13,
+          "fused_score": 0.09914966178553135
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -7.993645370006561,
+          "hybrid_rank": 4,
+          "fused_score": 0.14651444576928846
+        },
+        {
+          "rank": 17,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -8.834507822990417,
+          "hybrid_rank": 8,
+          "fused_score": 0.12590129231407002
+        },
+        {
+          "rank": 18,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -8.852719187736511,
+          "hybrid_rank": 15,
+          "fused_score": 0.08923721713609556
+        },
+        {
+          "rank": 19,
+          "passage_id": "SGD-Art17-2",
+          "rerank_score": -9.245490491390228,
+          "hybrid_rank": 17,
+          "fused_score": 0.0812987585253258
+        },
+        {
+          "rank": 20,
+          "passage_id": "SGD-Art10-2",
+          "rerank_score": -9.419583559036255,
+          "hybrid_rank": 19,
+          "fused_score": 0.07045427482733985
+        }
+      ]
+    },
+    "11.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled. The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.056141695805958,
+          "hybrid_rank": 10,
+          "fused_score": 0.09140973737182664,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -7.283266271863665,
+          "hybrid_rank": 8,
+          "fused_score": 0.0972319788335461,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -7.416413652045386,
+          "hybrid_rank": 1,
+          "fused_score": 0.11809369992801343,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n4. The burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.469804985182626,
+          "hybrid_rank": 2,
+          "fused_score": 0.11735414196494312,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art11-2",
+          "rerank_score": -7.572351625987461,
+          "hybrid_rank": 11,
+          "fused_score": 0.07661660962361143,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n2. The consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10 if the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.056141695805958,
+          "hybrid_rank": 10,
+          "fused_score": 0.09140973737182664
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -7.283266271863665,
+          "hybrid_rank": 8,
+          "fused_score": 0.0972319788335461
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -7.416413652045386,
+          "hybrid_rank": 1,
+          "fused_score": 0.11809369992801343
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.469804985182626,
+          "hybrid_rank": 2,
+          "fused_score": 0.11735414196494312
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art11-2",
+          "rerank_score": -7.572351625987461,
+          "hybrid_rank": 11,
+          "fused_score": 0.07661660962361143
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art11-3",
+          "rerank_score": -7.648542974676404,
+          "hybrid_rank": 12,
+          "fused_score": 0.07520175316509892
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art14-5",
+          "rerank_score": -7.695787651198251,
+          "hybrid_rank": 18,
+          "fused_score": 0.06855174412053508
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art13-8",
+          "rerank_score": -7.787837641579764,
+          "hybrid_rank": 4,
+          "fused_score": 0.11547295462335029
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art13-6",
+          "rerank_score": -7.792370029858181,
+          "hybrid_rank": 9,
+          "fused_score": 0.09561654215995619
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art14-4",
+          "rerank_score": -7.858434438705444,
+          "hybrid_rank": 6,
+          "fused_score": 0.11155732465372394
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art7-3",
+          "rerank_score": -7.915188772337777,
+          "hybrid_rank": 17,
+          "fused_score": 0.0692924807308369
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -7.927181788853237,
+          "hybrid_rank": 7,
+          "fused_score": 0.10309115916398237
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art8-8",
+          "rerank_score": -8.054854878357478,
+          "hybrid_rank": 3,
+          "fused_score": 0.11722174345735084
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art10-1",
+          "rerank_score": -8.099157077925545,
+          "hybrid_rank": 13,
+          "fused_score": 0.07165926701596055
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -9.146619524274554,
+          "hybrid_rank": 19,
+          "fused_score": 0.06758962685844763
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art6-1-e",
+          "rerank_score": -9.286586965833392,
+          "hybrid_rank": 5,
+          "fused_score": 0.11337861692493131
+        },
+        {
+          "rank": 17,
+          "passage_id": "CRD-Art8-4",
+          "rerank_score": -9.357316902705602,
+          "hybrid_rank": 20,
+          "fused_score": 0.0656861696245258
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art19-1",
+          "rerank_score": -10.165806361607142,
+          "hybrid_rank": 16,
+          "fused_score": 0.069524757171816
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -10.1976227079119,
+          "hybrid_rank": 15,
+          "fused_score": 0.07081298141748962
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art38-2",
+          "rerank_score": -10.90185832977295,
+          "hybrid_rank": 14,
+          "fused_score": 0.07153617785508354
+        }
+      ]
+    },
+    "13.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction. Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase. These customers usually ask for the appliance to be fixed or swapped for a new one.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction.",
+        "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase. These customers usually ask for the appliance to be fixed or swapped for a new one."
+      ],
+      "reranker_queries": [
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction.",
+        "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase. These customers usually ask for the appliance to be fixed or swapped for a new one."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "SGD-Art13-7",
+          "rerank_score": -6.077208348682949,
+          "hybrid_rank": 2,
+          "fused_score": 0.13699472750204306,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 13: Remedies for lack of conformity\n7. Member States may regulate whether and to what extent a contribution of the consumer to the lack of conformity affects the consumer's right to remedies."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -6.445074745586941,
+          "hybrid_rank": 5,
+          "fused_score": 0.12236969495924946,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -6.880400521414621,
+          "hybrid_rank": 1,
+          "fused_score": 0.16785028852385944,
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.0320722716195245,
+          "hybrid_rank": 3,
+          "fused_score": 0.13178028769722255,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.061698607036045,
+          "hybrid_rank": 15,
+          "fused_score": 0.07692346855653306,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "SGD-Art13-7",
+          "rerank_score": -6.077208348682949,
+          "hybrid_rank": 2,
+          "fused_score": 0.13699472750204306
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -6.445074745586941,
+          "hybrid_rank": 5,
+          "fused_score": 0.12236969495924946
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -6.880400521414621,
+          "hybrid_rank": 1,
+          "fused_score": 0.16785028852385944
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.0320722716195245,
+          "hybrid_rank": 3,
+          "fused_score": 0.13178028769722255
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.061698607036045,
+          "hybrid_rank": 15,
+          "fused_score": 0.07692346855653306
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -7.079455580030169,
+          "hybrid_rank": 7,
+          "fused_score": 0.10293403058834379
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.123660291944232,
+          "hybrid_rank": 4,
+          "fused_score": 0.12391288697641158
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -7.1575076920645575,
+          "hybrid_rank": 13,
+          "fused_score": 0.08854889763567637
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -7.165796109608242,
+          "hybrid_rank": 10,
+          "fused_score": 0.09668401096150457
+        },
+        {
+          "rank": 10,
+          "passage_id": "SGD-Art13-3",
+          "rerank_score": -7.259366035461426,
+          "hybrid_rank": 8,
+          "fused_score": 0.10291288079095368
+        },
+        {
+          "rank": 11,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -7.42073358808245,
+          "hybrid_rank": 9,
+          "fused_score": 0.09734815009379917
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art6-1-s",
+          "rerank_score": -7.579975877489362,
+          "hybrid_rank": 6,
+          "fused_score": 0.10373253722010994
+        },
+        {
+          "rank": 13,
+          "passage_id": "SGD-Art13-6",
+          "rerank_score": -7.835396902901786,
+          "hybrid_rank": 14,
+          "fused_score": 0.08347985347985348
+        },
+        {
+          "rank": 14,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -7.950869219643729,
+          "hybrid_rank": 11,
+          "fused_score": 0.09315831769501154
+        },
+        {
+          "rank": 15,
+          "passage_id": "SGD-Art14-1",
+          "rerank_score": -8.027164799826485,
+          "hybrid_rank": 17,
+          "fused_score": 0.07149203735494594
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art6-1-a",
+          "rerank_score": -8.203391551971436,
+          "hybrid_rank": 16,
+          "fused_score": 0.07331401435990183
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art16-1",
+          "rerank_score": -8.869784763881139,
+          "hybrid_rank": 18,
+          "fused_score": 0.06852897472207772
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art13-2-a",
+          "rerank_score": -8.901024341583252,
+          "hybrid_rank": 20,
+          "fused_score": 0.05894911955392486
+        },
+        {
+          "rank": 19,
+          "passage_id": "SGD-Art13-4",
+          "rerank_score": -9.315371581486293,
+          "hybrid_rank": 12,
+          "fused_score": 0.09262177716897482
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-5",
+          "rerank_score": -9.724501950400215,
+          "hybrid_rank": 19,
+          "fused_score": 0.06798228052820826
+        }
+      ]
+    },
+    "17.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement. The customers are private persons in several EU countries. Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement.",
+        "The customers are private persons in several EU countries. Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue."
+      ],
+      "reranker_queries": [
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement.",
+        "The customers are private persons in several EU countries. Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.629149751229719,
+          "hybrid_rank": 2,
+          "fused_score": 0.321941329384397,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.954709827899933,
+          "hybrid_rank": 5,
+          "fused_score": 0.2940559011404342,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.022522835568948,
+          "hybrid_rank": 10,
+          "fused_score": 0.2534137082493758,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.028306489641016,
+          "hybrid_rank": 13,
+          "fused_score": 0.22589980017071326,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.03167050805959,
+          "hybrid_rank": 11,
+          "fused_score": 0.23625735878217502,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.629149751229719,
+          "hybrid_rank": 2,
+          "fused_score": 0.321941329384397
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.954709827899933,
+          "hybrid_rank": 5,
+          "fused_score": 0.2940559011404342
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.022522835568948,
+          "hybrid_rank": 10,
+          "fused_score": 0.2534137082493758
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.028306489641016,
+          "hybrid_rank": 13,
+          "fused_score": 0.22589980017071326
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.03167050805959,
+          "hybrid_rank": 11,
+          "fused_score": 0.23625735878217502
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -8.08534295653755,
+          "hybrid_rank": 12,
+          "fused_score": 0.23526028265228177
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -8.400353556329554,
+          "hybrid_rank": 6,
+          "fused_score": 0.27274395364380694
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.475461824373765,
+          "hybrid_rank": 1,
+          "fused_score": 0.33134736701577416
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.548091140660373,
+          "hybrid_rank": 7,
+          "fused_score": 0.26684421568408395
+        },
+        {
+          "rank": 10,
+          "passage_id": "SGD-Art14-2",
+          "rerank_score": -8.60552127794786,
+          "hybrid_rank": 8,
+          "fused_score": 0.2583084672063196
+        },
+        {
+          "rank": 11,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.61433813788674,
+          "hybrid_rank": 3,
+          "fused_score": 0.31702036614195456
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art9-2-a",
+          "rerank_score": -8.726322109049017,
+          "hybrid_rank": 16,
+          "fused_score": 0.19552255466580037
+        },
+        {
+          "rank": 13,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -8.895257407968694,
+          "hybrid_rank": 18,
+          "fused_score": 0.1921451890701884
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.017841393297369,
+          "hybrid_rank": 19,
+          "fused_score": 0.19020843584692262
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -9.065464049577713,
+          "hybrid_rank": 4,
+          "fused_score": 0.2957169181522294
+        },
+        {
+          "rank": 16,
+          "passage_id": "SGD-Art14-1",
+          "rerank_score": -9.238610885360025,
+          "hybrid_rank": 15,
+          "fused_score": 0.19681434254912783
+        },
+        {
+          "rank": 17,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.331229637969624,
+          "hybrid_rank": 9,
+          "fused_score": 0.2539150067234985
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -9.506481831723994,
+          "hybrid_rank": 14,
+          "fused_score": 0.20275477485002413
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -9.705927420746196,
+          "hybrid_rank": 20,
+          "fused_score": 0.18189824798486157
+        },
+        {
+          "rank": 20,
+          "passage_id": "SGD-Art7-1",
+          "rerank_score": -9.927316513928501,
+          "hybrid_rank": 17,
+          "fused_score": 0.19515648526727222
+        }
+      ]
+    },
+    "19.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made. The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made.",
+        "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+      ],
+      "reranker_queries": [
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made.",
+        "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -6.960472440719604,
+          "hybrid_rank": 7,
+          "fused_score": 0.13317471540464987,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.573001646995545,
+          "hybrid_rank": 1,
+          "fused_score": 0.1947644731254313,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.153558659553529,
+          "hybrid_rank": 16,
+          "fused_score": 0.10375692776639481,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.184725284576416,
+          "hybrid_rank": 2,
+          "fused_score": 0.16789702621471567,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.320621490478516,
+          "hybrid_rank": 14,
+          "fused_score": 0.11246306015141633,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -6.960472440719604,
+          "hybrid_rank": 7,
+          "fused_score": 0.13317471540464987
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.573001646995545,
+          "hybrid_rank": 1,
+          "fused_score": 0.1947644731254313
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.153558659553529,
+          "hybrid_rank": 16,
+          "fused_score": 0.10375692776639481
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.184725284576416,
+          "hybrid_rank": 2,
+          "fused_score": 0.16789702621471567
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.320621490478516,
+          "hybrid_rank": 14,
+          "fused_score": 0.11246306015141633
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -8.453961110115051,
+          "hybrid_rank": 9,
+          "fused_score": 0.127638099189674
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art6a-1-a",
+          "rerank_score": -8.686555790901185,
+          "hybrid_rank": 10,
+          "fused_score": 0.1204874735903629
+        },
+        {
+          "rank": 8,
+          "passage_id": "SGD-Art16-2",
+          "rerank_score": -8.749921989440917,
+          "hybrid_rank": 12,
+          "fused_score": 0.11858903834710287
+        },
+        {
+          "rank": 9,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -9.01716992855072,
+          "hybrid_rank": 13,
+          "fused_score": 0.11756089724435281
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art11-3",
+          "rerank_score": -9.316783237457276,
+          "hybrid_rank": 4,
+          "fused_score": 0.15092913240685096
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -9.433985042572022,
+          "hybrid_rank": 6,
+          "fused_score": 0.14351861935307816
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art14-2",
+          "rerank_score": -9.505208706855774,
+          "hybrid_rank": 11,
+          "fused_score": 0.11869744420360455
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art13-6",
+          "rerank_score": -9.553344917297363,
+          "hybrid_rank": 8,
+          "fused_score": 0.13014310593601638
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -9.62377347946167,
+          "hybrid_rank": 3,
+          "fused_score": 0.15093806008021338
+        },
+        {
+          "rank": 15,
+          "passage_id": "SGD-Art13-6",
+          "rerank_score": -9.625543403625489,
+          "hybrid_rank": 19,
+          "fused_score": 0.1006715747448023
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art13-2",
+          "rerank_score": -9.88008942604065,
+          "hybrid_rank": 18,
+          "fused_score": 0.10166769312632967
+        },
+        {
+          "rank": 17,
+          "passage_id": "CRD-Art13-8",
+          "rerank_score": -9.896692991256714,
+          "hybrid_rank": 5,
+          "fused_score": 0.14934729931191498
+        },
+        {
+          "rank": 18,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -9.977955961227417,
+          "hybrid_rank": 17,
+          "fused_score": 0.103090348948194
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -10.014243030548096,
+          "hybrid_rank": 15,
+          "fused_score": 0.11214585489797159
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -10.494214820861817,
+          "hybrid_rank": 20,
+          "fused_score": 0.09990891957803724
+        }
+      ]
+    },
+    "45.1": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system. The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+      ],
+      "reranker_queries": [
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.887302446365356,
+          "hybrid_rank": 1,
+          "fused_score": 0.22720633909253765,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.990711581707001,
+          "hybrid_rank": 2,
+          "fused_score": 0.21536470135201655,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.115891481935978,
+          "hybrid_rank": 5,
+          "fused_score": 0.18533972870633367,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-9",
+          "rerank_score": -8.008153605461121,
+          "hybrid_rank": 16,
+          "fused_score": 0.0858968808968809,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n9. This Article shall be without prejudice to the provisions on the conclusion of e-contracts and the placing of e-orders set out in Articles 9 and 11 of Directive 2000/31/EC."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -8.43591058254242,
+          "hybrid_rank": 6,
+          "fused_score": 0.16521335388957986,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.887302446365356,
+          "hybrid_rank": 1,
+          "fused_score": 0.22720633909253765
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.990711581707001,
+          "hybrid_rank": 2,
+          "fused_score": 0.21536470135201655
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.115891481935978,
+          "hybrid_rank": 5,
+          "fused_score": 0.18533972870633367
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-9",
+          "rerank_score": -8.008153605461121,
+          "hybrid_rank": 16,
+          "fused_score": 0.0858968808968809
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -8.43591058254242,
+          "hybrid_rank": 6,
+          "fused_score": 0.16521335388957986
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -8.704810857772827,
+          "hybrid_rank": 10,
+          "fused_score": 0.1205961841174552
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -8.756690311431885,
+          "hybrid_rank": 17,
+          "fused_score": 0.08585170104157445
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.78639121055603,
+          "hybrid_rank": 12,
+          "fused_score": 0.11164491672887195
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -8.869544792175294,
+          "hybrid_rank": 3,
+          "fused_score": 0.19346998466220044
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -8.883823108673095,
+          "hybrid_rank": 4,
+          "fused_score": 0.19047244132845537
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -8.896353149414063,
+          "hybrid_rank": 9,
+          "fused_score": 0.12381582309247524
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -9.158015823364257,
+          "hybrid_rank": 8,
+          "fused_score": 0.1405467310828731
+        },
+        {
+          "rank": 13,
+          "passage_id": "LPD-Art3-4",
+          "rerank_score": -9.273080825805664,
+          "hybrid_rank": 20,
+          "fused_score": 0.08319707496589575
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art6a-1-a",
+          "rerank_score": -9.546641206741333,
+          "hybrid_rank": 14,
+          "fused_score": 0.08769359488932015
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art5-1-a",
+          "rerank_score": -9.648889541625977,
+          "hybrid_rank": 18,
+          "fused_score": 0.08472637966134107
+        },
+        {
+          "rank": 16,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -9.705499696731568,
+          "hybrid_rank": 7,
+          "fused_score": 0.14625482950663893
+        },
+        {
+          "rank": 17,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -9.724978351593018,
+          "hybrid_rank": 19,
+          "fused_score": 0.0842628909159456
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.801561737060547,
+          "hybrid_rank": 13,
+          "fused_score": 0.10205772995660836
+        },
+        {
+          "rank": 19,
+          "passage_id": "LPD-Art4-3",
+          "rerank_score": -9.857499694824218,
+          "hybrid_rank": 15,
+          "fused_score": 0.08751967924897107
+        },
+        {
+          "rank": 20,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.018972778320313,
+          "hybrid_rank": 11,
+          "fused_score": 0.11705017787126142
+        }
+      ]
+    },
+    "01": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a potential customer inquires about a product or service. Sales staff or customer support collects relevant information and addresses any concerns or questions. If the customer is interested, they are guided through selecting the appropriate product or service. Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement. The order is then recorded in the system, and the customer receives confirmation of their order. The process ends when the order is successfully placed and confirmed.",
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "reranker_queries": [
+        "This process begins when a potential customer inquires about a product or service.",
+        "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+        "If the customer is interested, they are guided through selecting the appropriate product or service.",
+        "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+        "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "The process ends when the order is successfully placed and confirmed."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.0957632859547934,
+          "hybrid_rank": 2,
+          "fused_score": 0.13304111930663196,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -3.838355461756388,
+          "hybrid_rank": 5,
+          "fused_score": 0.11195089063941524,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -4.830007036526998,
+          "hybrid_rank": 3,
+          "fused_score": 0.12369889941773875,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.086180170377095,
+          "hybrid_rank": 4,
+          "fused_score": 0.11756277008886117,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.312408645947774,
+          "hybrid_rank": 1,
+          "fused_score": 0.15302182261686914,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -3.0957632859547934,
+          "hybrid_rank": 2,
+          "fused_score": 0.13304111930663196
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -3.838355461756388,
+          "hybrid_rank": 5,
+          "fused_score": 0.11195089063941524
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -4.830007036526998,
+          "hybrid_rank": 3,
+          "fused_score": 0.12369889941773875
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -5.086180170377095,
+          "hybrid_rank": 4,
+          "fused_score": 0.11756277008886117
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -5.312408645947774,
+          "hybrid_rank": 1,
+          "fused_score": 0.15302182261686914
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -5.685262471437454,
+          "hybrid_rank": 9,
+          "fused_score": 0.08988300785901406
+        },
+        {
+          "rank": 7,
+          "passage_id": "SGD-Art16-1",
+          "rerank_score": -5.881430844465892,
+          "hybrid_rank": 12,
+          "fused_score": 0.07219643947183514
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art30-4",
+          "rerank_score": -6.461019853750865,
+          "hybrid_rank": 10,
+          "fused_score": 0.08592794776593525
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art7-5",
+          "rerank_score": -6.603602886199951,
+          "hybrid_rank": 16,
+          "fused_score": 0.058313908313908314
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -6.788431525230408,
+          "hybrid_rank": 6,
+          "fused_score": 0.10383980399180456
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -6.78941394885381,
+          "hybrid_rank": 7,
+          "fused_score": 0.10099313578103837
+        },
+        {
+          "rank": 12,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -6.97052542368571,
+          "hybrid_rank": 19,
+          "fused_score": 0.05316901408450704
+        },
+        {
+          "rank": 13,
+          "passage_id": "GDPR-Art35-9",
+          "rerank_score": -7.175619443257649,
+          "hybrid_rank": 8,
+          "fused_score": 0.09110457793889144
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.245854298273723,
+          "hybrid_rank": 20,
+          "fused_score": 0.05252114271101613
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art14-4",
+          "rerank_score": -7.524653514226277,
+          "hybrid_rank": 15,
+          "fused_score": 0.058563266443701224
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art8-5",
+          "rerank_score": -7.546469847361247,
+          "hybrid_rank": 11,
+          "fused_score": 0.0754732178317583
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art13-3",
+          "rerank_score": -7.983559449513753,
+          "hybrid_rank": 13,
+          "fused_score": 0.07026862026862027
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art12-6",
+          "rerank_score": -8.01226313908895,
+          "hybrid_rank": 18,
+          "fused_score": 0.05486279201053033
+        },
+        {
+          "rank": 19,
+          "passage_id": "GDPR-Art21-4",
+          "rerank_score": -8.184142430623373,
+          "hybrid_rank": 17,
+          "fused_score": 0.05497000419601039
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-4",
+          "rerank_score": -8.701091766357422,
+          "hybrid_rank": 14,
+          "fused_score": 0.06785599514389774
+        }
+      ]
+    },
+    "06": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a customer places an order through an online platform or over the phone. The system automatically generates an order confirmation and sends it to the customer. The warehouse team picks and packs the items, and a shipping label is generated. The order is then handed over to a logistics provider for delivery. Tracking information is sent to the customer. The process continues as the shipment is monitored until it reaches the customer's address. After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer places an order through an online platform or over the phone.",
+        "The system automatically generates an order confirmation and sends it to the customer.",
+        "The warehouse team picks and packs the items, and a shipping label is generated.",
+        "The order is then handed over to a logistics provider for delivery.",
+        "Tracking information is sent to the customer.",
+        "The process continues as the shipment is monitored until it reaches the customer's address.",
+        "After successful delivery, the process ends, but customer feedback or returns may trigger further actions."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -5.427139948521342,
+          "hybrid_rank": 3,
+          "fused_score": 0.15137639164328898,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -5.725820796830313,
+          "hybrid_rank": 4,
+          "fused_score": 0.1475885866806676,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.061142785208566,
+          "hybrid_rank": 2,
+          "fused_score": 0.1538851750941915,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.1242572367191315,
+          "hybrid_rank": 8,
+          "fused_score": 0.1190131999546404,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -6.604788712092808,
+          "hybrid_rank": 1,
+          "fused_score": 0.1645639864050305,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -5.427139948521342,
+          "hybrid_rank": 3,
+          "fused_score": 0.15137639164328898
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -5.725820796830313,
+          "hybrid_rank": 4,
+          "fused_score": 0.1475885866806676
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.061142785208566,
+          "hybrid_rank": 2,
+          "fused_score": 0.1538851750941915
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -6.1242572367191315,
+          "hybrid_rank": 8,
+          "fused_score": 0.1190131999546404
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -6.604788712092808,
+          "hybrid_rank": 1,
+          "fused_score": 0.1645639864050305
+        },
+        {
+          "rank": 6,
+          "passage_id": "SGD-Art16-1",
+          "rerank_score": -7.1834946019308905,
+          "hybrid_rank": 13,
+          "fused_score": 0.0823779230929314
+        },
+        {
+          "rank": 7,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -7.406774793352399,
+          "hybrid_rank": 5,
+          "fused_score": 0.1306246957415457
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.745326791490827,
+          "hybrid_rank": 10,
+          "fused_score": 0.11768675566307558
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art11-2",
+          "rerank_score": -7.870984963008335,
+          "hybrid_rank": 15,
+          "fused_score": 0.07208124564379742
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.951836109161377,
+          "hybrid_rank": 16,
+          "fused_score": 0.0703591586735987
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art8-6",
+          "rerank_score": -7.979158129010882,
+          "hybrid_rank": 9,
+          "fused_score": 0.11832275922138508
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -8.010241508483887,
+          "hybrid_rank": 11,
+          "fused_score": 0.11338548536554323
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -8.066041128976005,
+          "hybrid_rank": 19,
+          "fused_score": 0.05731429498215934
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -8.128199645451136,
+          "hybrid_rank": 6,
+          "fused_score": 0.13062224973003358
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art9-2-a",
+          "rerank_score": -8.39546264920916,
+          "hybrid_rank": 18,
+          "fused_score": 0.06013972901629604
+        },
+        {
+          "rank": 16,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.414346286228724,
+          "hybrid_rank": 12,
+          "fused_score": 0.0838016224969307
+        },
+        {
+          "rank": 17,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -8.734279564448766,
+          "hybrid_rank": 7,
+          "fused_score": 0.12709777718281626
+        },
+        {
+          "rank": 18,
+          "passage_id": "ECD-Art5-2",
+          "rerank_score": -8.756645338875908,
+          "hybrid_rank": 17,
+          "fused_score": 0.06873040035862994
+        },
+        {
+          "rank": 19,
+          "passage_id": "SGD-Art17-2",
+          "rerank_score": -9.408243519919258,
+          "hybrid_rank": 14,
+          "fused_score": 0.0812987585253258
+        },
+        {
+          "rank": 20,
+          "passage_id": "SGD-Art10-2",
+          "rerank_score": -9.79377978188651,
+          "hybrid_rank": 20,
+          "fused_score": 0.05574839247439867
+        }
+      ]
+    },
+    "11": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information. The system generates an account, assigns access, and triggers automated billing cycles. Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications. If the customer decides to cancel, they submit a cancellation request, which the support team processes. Depending on the terms, any refunds or charges are applied. The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "reranker_queries": [
+        "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+        "The system generates an account, assigns access, and triggers automated billing cycles.",
+        "Throughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.",
+        "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "Depending on the terms, any refunds or charges are applied.",
+        "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.3213653316100435,
+          "hybrid_rank": 8,
+          "fused_score": 0.09318737150240196,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -7.492562452952067,
+          "hybrid_rank": 9,
+          "fused_score": 0.08568435978592705,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -7.613574501127005,
+          "hybrid_rank": 2,
+          "fused_score": 0.10299073561759975,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n4. The burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -7.618421753247579,
+          "hybrid_rank": 18,
+          "fused_score": 0.057420323549355806,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.643066823482513,
+          "hybrid_rank": 3,
+          "fused_score": 0.10281039267240256,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -7.3213653316100435,
+          "hybrid_rank": 8,
+          "fused_score": 0.09318737150240196
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -7.492562452952067,
+          "hybrid_rank": 9,
+          "fused_score": 0.08568435978592705
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -7.613574501127005,
+          "hybrid_rank": 2,
+          "fused_score": 0.10299073561759975
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -7.618421753247579,
+          "hybrid_rank": 18,
+          "fused_score": 0.057420323549355806
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -7.643066823482513,
+          "hybrid_rank": 3,
+          "fused_score": 0.10281039267240256
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art11-2",
+          "rerank_score": -7.807025154431661,
+          "hybrid_rank": 16,
+          "fused_score": 0.06284535672192375
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art11-3",
+          "rerank_score": -7.820760756731033,
+          "hybrid_rank": 17,
+          "fused_score": 0.06273601418133337
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art14-5",
+          "rerank_score": -7.901547610759735,
+          "hybrid_rank": 14,
+          "fused_score": 0.0683715639403549
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art14-4",
+          "rerank_score": -7.96823255221049,
+          "hybrid_rank": 6,
+          "fused_score": 0.09764182585683417
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -7.975323597590129,
+          "hybrid_rank": 1,
+          "fused_score": 0.10337258879992021
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art13-6",
+          "rerank_score": -8.03903235991796,
+          "hybrid_rank": 11,
+          "fused_score": 0.08380328155539825
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art8-8",
+          "rerank_score": -8.164986064036688,
+          "hybrid_rank": 5,
+          "fused_score": 0.10094801148971319
+        },
+        {
+          "rank": 13,
+          "passage_id": "CRD-Art13-8",
+          "rerank_score": -8.202999830245972,
+          "hybrid_rank": 12,
+          "fused_score": 0.07237563958757183
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -8.981135686238607,
+          "hybrid_rank": 7,
+          "fused_score": 0.09360314037196116
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art6-1-e",
+          "rerank_score": -9.03198528289795,
+          "hybrid_rank": 4,
+          "fused_score": 0.10235666771170615
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -9.982552846272787,
+          "hybrid_rank": 15,
+          "fused_score": 0.0630728480153437
+        },
+        {
+          "rank": 17,
+          "passage_id": "LPD-Art6-3",
+          "rerank_score": -9.987638791402182,
+          "hybrid_rank": 19,
+          "fused_score": 0.05539334398204604
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -10.007232348124186,
+          "hybrid_rank": 20,
+          "fused_score": 0.0546172541821276
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -10.07860771814982,
+          "hybrid_rank": 10,
+          "fused_score": 0.08530573504067802
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art38-2",
+          "rerank_score": -10.877171993255615,
+          "hybrid_rank": 13,
+          "fused_score": 0.07180058821996985
+        }
+      ]
+    },
+    "13": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "The process begins when a customer files a complaint about a product or service. Customer service logs the complaint and assigns it to the relevant department for investigation. After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision. If a refund is approved, the financial team processes the reimbursement. The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected. After resolving the case, customers can provide feedback on their satisfaction.",
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "reranker_queries": [
+        "The process begins when a customer files a complaint about a product or service.",
+        "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+        "If a refund is approved, the financial team processes the reimbursement.",
+        "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.",
+        "After resolving the case, customers can provide feedback on their satisfaction."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "SGD-Art13-7",
+          "rerank_score": -5.605671564737956,
+          "hybrid_rank": 1,
+          "fused_score": 0.13699472750204306,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 13: Remedies for lack of conformity\n7. Member States may regulate whether and to what extent a contribution of the consumer to the lack of conformity affects the consumer's right to remedies."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -5.931697487831116,
+          "hybrid_rank": 3,
+          "fused_score": 0.12448447121801168,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -6.570380687713623,
+          "hybrid_rank": 9,
+          "fused_score": 0.09267884844234774,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -6.574487686157227,
+          "hybrid_rank": 7,
+          "fused_score": 0.10476056797512248,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n3. Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -6.628169616063436,
+          "hybrid_rank": 11,
+          "fused_score": 0.09014951305603892,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 22: Additional payments\nBefore the consumer is bound by the contract or offer, the trader shall seek the express consent of the consumer to any extra payment in addition to the remuneration agreed upon for the trader’s main contractual obligation. If the trader has not obtained the consumer’s express consent but has inferred it by using default options which the consumer is required to reject in order to avoid the additional payment, the consumer shall be entitled to reimbursement of this payment."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "SGD-Art13-7",
+          "rerank_score": -5.605671564737956,
+          "hybrid_rank": 1,
+          "fused_score": 0.13699472750204306
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -5.931697487831116,
+          "hybrid_rank": 3,
+          "fused_score": 0.12448447121801168
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -6.570380687713623,
+          "hybrid_rank": 9,
+          "fused_score": 0.09267884844234774
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -6.574487686157227,
+          "hybrid_rank": 7,
+          "fused_score": 0.10476056797512248
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -6.628169616063436,
+          "hybrid_rank": 11,
+          "fused_score": 0.09014951305603892
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -6.656921863555908,
+          "hybrid_rank": 6,
+          "fused_score": 0.10918153989212331
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -6.727518399556478,
+          "hybrid_rank": 4,
+          "fused_score": 0.11715719149517898
+        },
+        {
+          "rank": 8,
+          "passage_id": "GDPR-Art12-4",
+          "rerank_score": -6.759040594100952,
+          "hybrid_rank": 2,
+          "fused_score": 0.1348408006558311
+        },
+        {
+          "rank": 9,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -6.910602728525798,
+          "hybrid_rank": 8,
+          "fused_score": 0.09847596964267134
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art11-4",
+          "rerank_score": -6.921510974566142,
+          "hybrid_rank": 5,
+          "fused_score": 0.11017560176101675
+        },
+        {
+          "rank": 11,
+          "passage_id": "SGD-Art13-3",
+          "rerank_score": -7.135463237762451,
+          "hybrid_rank": 12,
+          "fused_score": 0.07445310030911437
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art6-1-s",
+          "rerank_score": -7.239073912302653,
+          "hybrid_rank": 10,
+          "fused_score": 0.09074552423309695
+        },
+        {
+          "rank": 13,
+          "passage_id": "SGD-Art13-6",
+          "rerank_score": -7.642361402511597,
+          "hybrid_rank": 13,
+          "fused_score": 0.07046703296703297
+        },
+        {
+          "rank": 14,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -7.844825824101766,
+          "hybrid_rank": 19,
+          "fused_score": 0.054269428806122656
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art13-4",
+          "rerank_score": -7.879735946655273,
+          "hybrid_rank": 20,
+          "fused_score": 0.05329588919514477
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art6-1-a",
+          "rerank_score": -7.9394568999608355,
+          "hybrid_rank": 17,
+          "fused_score": 0.0571962723861458
+        },
+        {
+          "rank": 17,
+          "passage_id": "GDPR-Art13-2-a",
+          "rerank_score": -8.643441597620646,
+          "hybrid_rank": 15,
+          "fused_score": 0.05894911955392486
+        },
+        {
+          "rank": 18,
+          "passage_id": "GDPR-Art16-1",
+          "rerank_score": -8.673748334248861,
+          "hybrid_rank": 18,
+          "fused_score": 0.055397262025491605
+        },
+        {
+          "rank": 19,
+          "passage_id": "LPD-Art6-3",
+          "rerank_score": -9.30303160349528,
+          "hybrid_rank": 16,
+          "fused_score": 0.05726873509447808
+        },
+        {
+          "rank": 20,
+          "passage_id": "GDPR-Art12-5",
+          "rerank_score": -9.788875579833984,
+          "hybrid_rank": 14,
+          "fused_score": 0.059027777777777776
+        }
+      ]
+    },
+    "17": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "An e-commerce company has a comprehensive order fulfillment process: When a customer places an order, the system records the order details. Payment processing begins. If the payment fails, the customer is notified, and the process ends. Upon successful payment, the inventory system checks stock availability. If items are out of stock, a back-order is initiated, and the customer is informed about the delay. The process continues once the back-order is received and all required items are available in stock. In-stock items are picked from the warehouse. Quality control checks are performed on the picked items. Packaging is done, including gift wrapping if the customer requested it. Meanwhile, the shipping department prepares shipping documents and labels. If the order is international, customs documentation is prepared. Once packaging and shipping documents are ready, the order is dispatched. The system sends a shipping confirmation to the customer. After dispatch, the system updates the inventory levels. A follow-up email for feedback is sent directly after confirming the successful delivery. If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "reranker_queries": [
+        "An e-commerce company has a comprehensive order fulfillment process:",
+        "When a customer places an order, the system records the order details.",
+        "Payment processing begins.",
+        "If the payment fails, the customer is notified, and the process ends.",
+        "Upon successful payment, the inventory system checks stock availability.",
+        "If items are out of stock, a back-order is initiated, and the customer is informed about the delay.",
+        "The process continues once the back-order is received and all required items are available in stock.",
+        "In-stock items are picked from the warehouse.",
+        "Quality control checks are performed on the picked items.",
+        "Packaging is done, including gift wrapping if the customer requested it.",
+        "Meanwhile, the shipping department prepares shipping documents and labels.",
+        "If the order is international, customs documentation is prepared.",
+        "Once packaging and shipping documents are ready, the order is dispatched.",
+        "The system sends a shipping confirmation to the customer.",
+        "After dispatch, the system updates the inventory levels.",
+        "A follow-up email for feedback is sent directly after confirming the successful delivery.",
+        "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+        "Sending a return shipping label.",
+        "Receiving returned items.",
+        "Inspecting returned items.",
+        "Processing a refund or replacement."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.701718001138596,
+          "hybrid_rank": 2,
+          "fused_score": 0.321941329384397,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.906540320033119,
+          "hybrid_rank": 3,
+          "fused_score": 0.29429955164412636,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.097466192075185,
+          "hybrid_rank": 10,
+          "fused_score": 0.25252885161855143,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.204626084793182,
+          "hybrid_rank": 16,
+          "fused_score": 0.1930876800707946,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.2414634454818,
+          "hybrid_rank": 13,
+          "fused_score": 0.19847442703638496,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.701718001138596,
+          "hybrid_rank": 2,
+          "fused_score": 0.321941329384397
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -7.906540320033119,
+          "hybrid_rank": 3,
+          "fused_score": 0.29429955164412636
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.097466192075185,
+          "hybrid_rank": 10,
+          "fused_score": 0.25252885161855143
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-1",
+          "rerank_score": -8.204626084793182,
+          "hybrid_rank": 16,
+          "fused_score": 0.1930876800707946
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.2414634454818,
+          "hybrid_rank": 13,
+          "fused_score": 0.19847442703638496
+        },
+        {
+          "rank": 6,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -8.284694367931003,
+          "hybrid_rank": 11,
+          "fused_score": 0.21913925090625003
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -8.607550365584236,
+          "hybrid_rank": 7,
+          "fused_score": 0.26013656955304687
+        },
+        {
+          "rank": 8,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -8.62882119133359,
+          "hybrid_rank": 1,
+          "fused_score": 0.3298408789624674
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.669136036010016,
+          "hybrid_rank": 6,
+          "fused_score": 0.26665909906061114
+        },
+        {
+          "rank": 10,
+          "passage_id": "SGD-Art14-2",
+          "rerank_score": -8.6939491885049,
+          "hybrid_rank": 8,
+          "fused_score": 0.25812335058284686
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -8.83040257862636,
+          "hybrid_rank": 4,
+          "fused_score": 0.28314834529151034
+        },
+        {
+          "rank": 12,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -9.004841679618472,
+          "hybrid_rank": 17,
+          "fused_score": 0.1921451890701884
+        },
+        {
+          "rank": 13,
+          "passage_id": "ECD-Art11-3",
+          "rerank_score": -9.071600229967208,
+          "hybrid_rank": 19,
+          "fused_score": 0.17148336110824572
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -9.154890528037434,
+          "hybrid_rank": 5,
+          "fused_score": 0.2820182880152431
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.222502265657697,
+          "hybrid_rank": 18,
+          "fused_score": 0.17432415357356637
+        },
+        {
+          "rank": 16,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -9.291891603242783,
+          "hybrid_rank": 9,
+          "fused_score": 0.2541710231085471
+        },
+        {
+          "rank": 17,
+          "passage_id": "SGD-Art14-1",
+          "rerank_score": -9.41377319608416,
+          "hybrid_rank": 20,
+          "fused_score": 0.16892972716451243
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -9.60349642662775,
+          "hybrid_rank": 12,
+          "fused_score": 0.20222827432352364
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -9.703701507477533,
+          "hybrid_rank": 15,
+          "fused_score": 0.19511558620219974
+        },
+        {
+          "rank": 20,
+          "passage_id": "SGD-Art7-1",
+          "rerank_score": -10.062694958278112,
+          "hybrid_rank": 14,
+          "fused_score": 0.19536352460474635
+        }
+      ]
+    },
+    "19": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "Consider a process for purchasing items from an online shop. The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method. Afterward, the user either pays or completes an installment agreement. After selecting the items, the user chooses between multiple options for a free reward. Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities. Finally, the items are delivered. The user has the right to return items for exchange. Every time items are returned, a new delivery is made.",
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "reranker_queries": [
+        "Consider a process for purchasing items from an online shop.",
+        "The user starts an order by logging in to their account.",
+        "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "Afterward, the user either pays or completes an installment agreement.",
+        "After selecting the items, the user chooses between multiple options for a free reward.",
+        "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "Finally, the items are delivered.",
+        "The user has the right to return items for exchange.",
+        "Every time items are returned, a new delivery is made."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -6.682410187191433,
+          "hybrid_rank": 8,
+          "fused_score": 0.12001682066780776,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.322510507371691,
+          "hybrid_rank": 1,
+          "fused_score": 0.19502048951047993,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.038411511315239,
+          "hybrid_rank": 5,
+          "fused_score": 0.13570603535103648,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.050882233513725,
+          "hybrid_rank": 14,
+          "fused_score": 0.11229655998491614,
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -8.17810951338874,
+          "hybrid_rank": 7,
+          "fused_score": 0.12660161494423453,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "rerank_score": -6.682410187191433,
+          "hybrid_rank": 8,
+          "fused_score": 0.12001682066780776
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -7.322510507371691,
+          "hybrid_rank": 1,
+          "fused_score": 0.19502048951047993
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -8.038411511315239,
+          "hybrid_rank": 5,
+          "fused_score": 0.13570603535103648
+        },
+        {
+          "rank": 4,
+          "passage_id": "SGD-Art16-3",
+          "rerank_score": -8.050882233513725,
+          "hybrid_rank": 14,
+          "fused_score": 0.11229655998491614
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-4",
+          "rerank_score": -8.17810951338874,
+          "hybrid_rank": 7,
+          "fused_score": 0.12660161494423453
+        },
+        {
+          "rank": 6,
+          "passage_id": "SGD-Art16-2",
+          "rerank_score": -8.51098042064243,
+          "hybrid_rank": 10,
+          "fused_score": 0.11884505473215151
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art6a-1-a",
+          "rerank_score": -8.5945336288876,
+          "hybrid_rank": 16,
+          "fused_score": 0.10435844133229838
+        },
+        {
+          "rank": 8,
+          "passage_id": "SGD-Art14-4",
+          "rerank_score": -8.827801439497206,
+          "hybrid_rank": 11,
+          "fused_score": 0.11756089724435281
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.12302663591173,
+          "hybrid_rank": 15,
+          "fused_score": 0.110699564617902
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art14-3",
+          "rerank_score": -9.264695909288195,
+          "hybrid_rank": 2,
+          "fused_score": 0.14415827820169222
+        },
+        {
+          "rank": 11,
+          "passage_id": "CRD-Art11-3",
+          "rerank_score": -9.270161416795519,
+          "hybrid_rank": 4,
+          "fused_score": 0.13622325005390978
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art14-2",
+          "rerank_score": -9.370685365464952,
+          "hybrid_rank": 9,
+          "fused_score": 0.11896185456849086
+        },
+        {
+          "rank": 13,
+          "passage_id": "SGD-Art13-6",
+          "rerank_score": -9.4806547164917,
+          "hybrid_rank": 19,
+          "fused_score": 0.1006715747448023
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art13-6",
+          "rerank_score": -9.541330973307291,
+          "hybrid_rank": 12,
+          "fused_score": 0.1156170070349175
+        },
+        {
+          "rank": 15,
+          "passage_id": "CRD-Art13-7",
+          "rerank_score": -9.566465271843803,
+          "hybrid_rank": 3,
+          "fused_score": 0.13778016534337129
+        },
+        {
+          "rank": 16,
+          "passage_id": "CRD-Art13-2",
+          "rerank_score": -9.768243630727133,
+          "hybrid_rank": 18,
+          "fused_score": 0.10333993392900527
+        },
+        {
+          "rank": 17,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -9.845446745554606,
+          "hybrid_rank": 17,
+          "fused_score": 0.10359001583693483
+        },
+        {
+          "rank": 18,
+          "passage_id": "CRD-Art13-8",
+          "rerank_score": -9.905661318037245,
+          "hybrid_rank": 6,
+          "fused_score": 0.13295385668896417
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -9.924053510030111,
+          "hybrid_rank": 13,
+          "fused_score": 0.1123862395133562
+        },
+        {
+          "rank": 20,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -10.444130367702908,
+          "hybrid_rank": 20,
+          "fused_score": 0.09990891957803724
+        }
+      ]
+    },
+    "45": {
+      "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+      "option": "F",
+      "queries": [
+        "Ordering in an Online Shop A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system). If the login was successful then the customer can continue to select products, else the shopping experience stops. After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared. For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment. While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address). Finally if the address and the payment steps are executed then the order will be finished by the system.",
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "reranker_queries": [
+        "Ordering in an Online Shop",
+        "A customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).",
+        "If the login was successful then the customer can continue to select products, else the shopping experience stops.",
+        "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+        "These steps repeat until all products were selected.",
+        "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+        "For the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.",
+        "While waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).",
+        "Finally if the address and the payment steps are executed then the order will be finished by the system."
+      ],
+      "passages": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.819908552699619,
+          "hybrid_rank": 5,
+          "fused_score": 0.18370802733680208,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -6.986867932809724,
+          "hybrid_rank": 4,
+          "fused_score": 0.18581321355481853,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -7.021702395545112,
+          "hybrid_rank": 1,
+          "fused_score": 0.19504013927927902,
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -8.473691251542833,
+          "hybrid_rank": 9,
+          "fused_score": 0.1205961841174552,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 22: Additional payments\nBefore the consumer is bound by the contract or offer, the trader shall seek the express consent of the consumer to any extra payment in addition to the remuneration agreed upon for the trader’s main contractual obligation. If the trader has not obtained the consumer’s express consent but has inferred it by using default options which the consumer is required to reject in order to avoid the additional payment, the consumer shall be entitled to reimbursement of this payment."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.570583078596327,
+          "hybrid_rank": 11,
+          "fused_score": 0.11164491672887195,
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        }
+      ],
+      "candidates": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "rerank_score": -6.819908552699619,
+          "hybrid_rank": 5,
+          "fused_score": 0.18370802733680208
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "rerank_score": -6.986867932809724,
+          "hybrid_rank": 4,
+          "fused_score": 0.18581321355481853
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "rerank_score": -7.021702395545112,
+          "hybrid_rank": 1,
+          "fused_score": 0.19504013927927902
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art22-1",
+          "rerank_score": -8.473691251542833,
+          "hybrid_rank": 9,
+          "fused_score": 0.1205961841174552
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-1",
+          "rerank_score": -8.570583078596327,
+          "hybrid_rank": 11,
+          "fused_score": 0.11164491672887195
+        },
+        {
+          "rank": 6,
+          "passage_id": "ECD-Art10-1",
+          "rerank_score": -8.578711695141262,
+          "hybrid_rank": 6,
+          "fused_score": 0.15151472375259356
+        },
+        {
+          "rank": 7,
+          "passage_id": "CRD-Art13-3",
+          "rerank_score": -8.607641696929932,
+          "hybrid_rank": 16,
+          "fused_score": 0.08637820156807498
+        },
+        {
+          "rank": 8,
+          "passage_id": "CRD-Art8-2",
+          "rerank_score": -8.674038251241049,
+          "hybrid_rank": 2,
+          "fused_score": 0.1934776159198317
+        },
+        {
+          "rank": 9,
+          "passage_id": "CRD-Art8-7",
+          "rerank_score": -8.73616001341078,
+          "hybrid_rank": 3,
+          "fused_score": 0.19075566742503763
+        },
+        {
+          "rank": 10,
+          "passage_id": "CRD-Art18-3",
+          "rerank_score": -8.819442219204372,
+          "hybrid_rank": 10,
+          "fused_score": 0.11310153737818952
+        },
+        {
+          "rank": 11,
+          "passage_id": "SGD-Art13-6",
+          "rerank_score": -8.982507334815132,
+          "hybrid_rank": 18,
+          "fused_score": 0.08277629622703922
+        },
+        {
+          "rank": 12,
+          "passage_id": "CRD-Art7-2",
+          "rerank_score": -9.063757843441433,
+          "hybrid_rank": 8,
+          "fused_score": 0.12408086499079826
+        },
+        {
+          "rank": 13,
+          "passage_id": "LPD-Art3-4",
+          "rerank_score": -9.095304754045275,
+          "hybrid_rank": 14,
+          "fused_score": 0.09569707496589575
+        },
+        {
+          "rank": 14,
+          "passage_id": "CRD-Art6a-1-a",
+          "rerank_score": -9.546730518341064,
+          "hybrid_rank": 20,
+          "fused_score": 0.07276822175499179
+        },
+        {
+          "rank": 15,
+          "passage_id": "LPD-Art3-3",
+          "rerank_score": -9.56765996085273,
+          "hybrid_rank": 7,
+          "fused_score": 0.13359660165853768
+        },
+        {
+          "rank": 16,
+          "passage_id": "SGD-Art12-1",
+          "rerank_score": -9.649284680684408,
+          "hybrid_rank": 17,
+          "fused_score": 0.08469551042708556
+        },
+        {
+          "rank": 17,
+          "passage_id": "CRD-Art18-2",
+          "rerank_score": -9.696251233418783,
+          "hybrid_rank": 12,
+          "fused_score": 0.10306498217256324
+        },
+        {
+          "rank": 18,
+          "passage_id": "LPD-Art4-3",
+          "rerank_score": -9.756484455532497,
+          "hybrid_rank": 15,
+          "fused_score": 0.08751967924897107
+        },
+        {
+          "rank": 19,
+          "passage_id": "CRD-Art6a-1-d",
+          "rerank_score": -9.971492926279703,
+          "hybrid_rank": 19,
+          "fused_score": 0.08243403559839796
+        },
+        {
+          "rank": 20,
+          "passage_id": "ECD-Art5-1-a",
+          "rerank_score": -10.247335645887587,
+          "hybrid_rank": 13,
+          "fused_score": 0.10044360651855781
+        }
+      ]
+    }
+  }
+}
