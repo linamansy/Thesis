@@ -484,6 +484,23 @@ rag_v2:
   test_set: data/retrieval_study2_corpus/retrieval_test_set.json   # the 8 variants (M1)
   frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_v2.json   # src/freeze_rag_v2.py (13 cases + 8 variants)
   frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_v2_manifest.json   # its SHA-256
+  extra_round:
+    # docs/RAG_V2_CRITERIA.md section 7 (the one extra round), src/rag_v2_extra.py. Every config keeps sibling
+    # expansion OFF and the corpus, embedding model and reranker above. The variants and the held-out set are
+    # given on the command line (src/evaluate_retrieval_v2.py --items), never read from here.
+    configs:                      # section 7.2; index_prefix = A, rewrite = B, pool = C
+      A: {index_prefix: true, rewrite: false, pool: 20}
+      B: {index_prefix: false, rewrite: true, pool: 20}
+      C: {index_prefix: false, rewrite: false, pool: 50}
+      D: {index_prefix: true, rewrite: true, pool: 50}
+    simplicity_order: [A, C, B, D]   # section 7.4 tie-break 3
+    baseline_m1: 2                # section 7.4: the winner replaces the freeze only if its M1 > this (of 8)
+    prefixed_dense_index_dir: data/retrieval_study2_corpus/dense_index_prefixed   # A and D: index of the prefixed text
+    rewrite_prompt: prompts/rag_v2_query_rewrite.txt   # section 7.3, byte-identical to the doc (tested)
+    rewrite_dir: results/rag_v2_rewrites   # one file per case: prompt, raw answer, parsed queries (made once, reused)
+    rewrite_log_condition: RAGV2_REWRITE   # RunLogger file results/logs/RAGV2_REWRITE_<time>.jsonl
+    frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_v2_round2.json   # only if the winner's M1 > 2/8
+    frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_v2_round2_manifest.json
 
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
