@@ -63,3 +63,7 @@ The task that runs these measurements must contain the keyword **REAL RUN**. Thi
   llama-3.1-8b-instant, llama-3.3-70b-versatile, openai/gpt-oss-20b, openai/gpt-oss-120b -> **`llama-3.3-70b-versatile`**
   (131,072 tokens context; JSON object mode). In `config.yaml c3_agents_llm.groq.model`; the agents' default stays
   Ollama (`c3_agents_llm.provider: ollama`). Script: `scripts/run_mediation_strong.py`.
+- **27 Oct: llama-3.3-70b-versatile not available (404); model chosen from the live list by the same rule.**
+  Live list (Groq `GET /models` with this account): the only text models that are not gpt-oss are `allam-2-7b`
+  (4,096 tokens context, below 16k) and `qwen/qwen3.8-27b` (131,072 tokens context, 16,384 max completion tokens)
+  -> **`qwen/qwen3.8-27b`**. One short JSON test call answered valid JSON with no reasoning text.

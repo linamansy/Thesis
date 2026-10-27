@@ -142,8 +142,11 @@ c3_agents_llm:
     # Model chosen by rule (27 Oct 2026, console.groq.com/docs/models): the largest PRODUCTION text model that is not
     # gpt-oss (the silver annotator's family), supports JSON output (JSON object mode: all Groq models) and >= 16k
     # context. Production text models: llama-3.1-8b-instant, llama-3.3-70b-versatile, openai/gpt-oss-20b,
-    # openai/gpt-oss-120b -> llama-3.3-70b-versatile (70B, 131,072 tokens context, 32,768 max completion tokens).
-    model: llama-3.3-70b-versatile
+    # openai/gpt-oss-120b -> llama-3.3-70b-versatile. 27 Oct: llama-3.3-70b-versatile not available (404); model
+    # chosen from the live list (GET /models) by the same rule: the only text models there that are not gpt-oss are
+    # allam-2-7b (4,096 context, < 16k) and qwen/qwen3.8-27b (131,072 context, 16,384 max completion tokens; JSON
+    # object mode confirmed by one test call) -> qwen/qwen3.8-27b.
+    model: qwen/qwen3.8-27b
     json_mode: true             # response_format {"type": "json_object"}
     base_url: https://api.groq.com/openai/v1
     timeout_seconds: 120
