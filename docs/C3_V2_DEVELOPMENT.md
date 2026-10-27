@@ -684,3 +684,18 @@ cases.
 
 **Bug fix 1 (not a round):** processor role confirmed via P1 was downgraded by ResolverV2, so R3 could never yield
 Applicable for processor duties. Found by logic test. Fixed in `385a461`.
+
+**R2 extended to the new laws (scope conditions added by code, fixed, same for all cases, never passed to the
+generator).** Approved 27 Oct 2026 with the Study 2 law corpus (docs/STUDY2_CORPUS_RULE.md, section 5), written
+before any code change. Code adds one scope item S1 to every passage of a law, by passage id prefix
+(`config.yaml c3_v2.scope_conditions`), quote-checked like every IF item (R4: contradicted -> Not applicable):
+
+| prefix | scope item S1 |
+|---|---|
+| CRD- | the buyer is a consumer (a private person, not buying for a business) |
+| SGD- | goods are sold to a consumer |
+| ECD- | the service is offered online / at a distance by electronic means |
+| LPD- | the payment is between two businesses (or a business and a public authority) |
+| GDPR- | the process handles information about identifiable people (unchanged, R2) |
+
+Definitions and subject-matter articles are not retrievable for C2 or C3 (the corpus holds the kept articles only).

@@ -295,3 +295,28 @@ Decisions where the rule needed interpretation, listed so they can be checked:
 - Not kept because no process party gets a duty (legal effects, exceptions, court rules): CRD 12, 15, 16, 20, 27;
   LPD 5, 7, 9; SGD 11, 18; GDPR 23, 48, 79-82; ECD 12-14 (liability exemptions).
 - Excluded as duties of authorities or bodies outside the process: GDPR 40-43, 45, 47.
+
+## 5. R2 extended to the new laws (scope conditions added by code, fixed, same for all cases, never passed to the generator)
+
+Approved 27 Oct 2026 together with the keep/exclude tables of section 3 (incl. the 27 Oct correction); written before
+the corpus is built and before any code change.
+
+The excluded scope articles (CRD 3, SGD 3, ECD 1, LPD 1, GDPR 2-3) say to whom each law applies. Since they are not in
+the corpus, C3's ApplicabilityAgentV2 adds one scope IF item S1 by code to every passage of a law, chosen by the
+passage id prefix (as R2 already does for the GDPR, docs/C3_V2_DEVELOPMENT.md section 9):
+
+| prefix | scope item S1 |
+|---|---|
+| CRD- | the buyer is a consumer (a private person, not buying for a business) |
+| SGD- | goods are sold to a consumer |
+| ECD- | the service is offered online / at a distance by electronic means |
+| LPD- | the payment is between two businesses (or a business and a public authority) |
+| GDPR- | the process handles information about identifiable people (unchanged, R2) |
+
+S1 is checked against the description like every other IF item (quote-checked by code): confirmed with a checked
+quote -> scope confirmed; contradicted with a checked quote (e.g. a CRD passage and a description stating a business
+buyer) -> Not applicable (R4); no checked quote -> not_stated -> at most Indeterminate. The texts are fixed in
+config.yaml (c3_v2.scope_conditions), identical for every case, and never reach the generator (only requirements of
+Applicable rules do). C2 gets no scope items: it receives the retrieved passages verbatim.
+
+Definitions and subject-matter articles are not retrievable for C2 or C3: the corpus holds the kept articles only.
