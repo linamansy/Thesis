@@ -434,6 +434,15 @@ study2_corpus:
   passages: data/knowledge_study2_corpus/passages.jsonl     # one passage per paragraph of a kept article
   manifest: data/knowledge_study2_corpus/manifest.json      # passage count per law + SHA-256 of passages
 
+rag_v2:
+  # STUDY 2 RAG v2 on the Study 2 corpus (study2_corpus.passages), added 27 Oct 2026, BUILD ONLY: nothing is frozen yet;
+  # measurement and freeze follow after the retrieval test set and criteria. Same embedding model, BM25, RRF and
+  # reranker settings as the frozen GDPR dev retrieval (retrieval + reranker sections, GdprDevFreezer); src/rag_v2.py.
+  dense_index_dir: data/retrieval_study2_corpus/dense_index   # own FAISS index for the Study 2 corpus
+  sibling_expansion: false      # ON: after the hybrid top 20 (reranker.candidates), every other paragraph of the same
+                                # article joins the candidates; all are reranked and reranker.top_k (5) are kept
+  evaluation_dir: results/diagnostics/rag_v2_eval   # src/evaluate_retrieval_v2.py, one folder per evaluation
+
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
   obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid

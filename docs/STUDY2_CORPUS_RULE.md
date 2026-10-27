@@ -324,3 +324,19 @@ config.yaml (c3_v2.scope_conditions), identical for every case, and never reach 
 Applicable rules do). C2 gets no scope items: it receives the retrieved passages verbatim.
 
 Definitions and subject-matter articles are not retrievable for C2 or C3: the corpus holds the kept articles only.
+
+## 6. RAG v2 (27 Oct 2026)
+
+RAG v2 sibling expansion built on the Study 2 corpus; measurement and freeze follow after the retrieval test set and
+criteria.
+
+- Dense index of the 289 passages (`data/retrieval_study2_corpus/dense_index`, config.yaml `rag_v2.dense_index_dir`),
+  built with the same embedding model (e5-small-v2, same prefixes) as the frozen GDPR development retrieval.
+- `src/rag_v2.py` (RagV2Retriever): the method of `data/retrieval_gdpr/frozen_retrieval_dev_ch1-5_rerank.json`
+  unchanged (hybrid top 20, cross-encoder reranker, sentence queries, mean score, top 5). Sibling expansion
+  (`rag_v2.sibling_expansion`, default OFF): every other paragraph of the same article as a first-stage candidate is
+  added (article read from the passage fields, so CRD-Art6a-1-a / CRD-Art9-1a work), all candidates are reranked and
+  the top 5 kept; rows record `via_expansion`. With the flag OFF it reproduces the frozen GDPR development file byte
+  for byte on the old GDPR corpus (`tests/test_rag_v2.py`).
+- `src/evaluate_retrieval_v2.py`: per (case or variant, target passage) in top 5 / rank / in candidate set, and the
+  hit rate @5. Not run yet. No frozen retrieval file was changed; nothing is frozen.
