@@ -434,6 +434,27 @@ study2_corpus:
   passages: data/knowledge_study2_corpus/passages.jsonl     # one passage per paragraph of a kept article
   manifest: data/knowledge_study2_corpus/manifest.json      # passage count per law + SHA-256 of passages
 
+study2_cases:
+  # STUDY 2 case set (fixed 27 Oct 2026, before any Study 2 run; docs/STUDY2_DATASET_PROTOCOL.md section 9): the same 13
+  # cases as Study 1. The 18 provisional test cases of section 4 are not used. Each case has a fixed label:
+  # development = used to develop C3 v2 (= study2_gdpr.development_ids); non-development = the other Study 1 cases.
+  # Results are reported for all 13 and separately for each label.
+  ids: ["01", "03", "05", "06", "10", "11", "13", "17", "19", "21", "37", "45", "46"]
+  labels:
+    "01": development
+    "03": non-development
+    "05": non-development
+    "06": development
+    "10": non-development
+    "11": development
+    "13": development
+    "17": development
+    "19": development
+    "21": non-development
+    "37": non-development
+    "45": development
+    "46": non-development
+
 rag_v2:
   # STUDY 2 RAG v2 on the Study 2 corpus (study2_corpus.passages), added 27 Oct 2026, BUILD ONLY: nothing is frozen yet;
   # measurement and freeze follow after the retrieval test set and criteria. Same embedding model, BM25, RRF and

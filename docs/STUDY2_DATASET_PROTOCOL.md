@@ -87,3 +87,18 @@ Same silver model and prompt as Study 1 (gpt-oss-120b via Groq, temperature 0), 
 - `data/study2/selection_screening_DRAFT.csv` — AI draft with reason and verbatim evidence quote per case; columns `lina_decision`, `lina_reason`, `second_rater_decision` are empty for you.
 - `data/study2/selection.csv` — final, after your screening (agreement between AI draft, you and a second rater reported as % agreement and Cohen's kappa).
 - `data/knowledge_gdpr/` — raw GDPR file, `sources.json`, passages, frozen retrieval with SHA-256 checksums (in the addendum).
+
+## 9. Study 2 case set (fixed 27 Oct 2026, before any Study 2 run)
+
+This section replaces the development/test split of section 5 for Study 2.
+
+- **Cases:** the same 13 cases as Study 1: 01, 03, 05, 06, 10, 11, 13, 17, 19, 21, 37, 45, 46. The 18 provisional test cases of section 4 are **not used**.
+- **Fixed label per case** (`config.yaml` `study2_cases.labels`):
+
+| Label | Meaning | Cases | n |
+|---|---|---|---|
+| development | used to develop C3 v2 | 01, 06, 11, 13, 17, 19, 45 | 7 |
+| non-development | not used to develop C3 v2 | 03, 05, 10, 21, 37, 46 | 6 |
+
+- **Reporting:** results are reported for all 13 cases and separately for the development and the non-development cases.
+- This split is fixed now, before any Study 2 run, and is not changed after seeing any Study 2 result.
