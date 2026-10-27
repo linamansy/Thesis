@@ -692,10 +692,86 @@ before any code change. Code adds one scope item S1 to every passage of a law, b
 
 | prefix | scope item S1 |
 |---|---|
-| CRD- | the buyer is a consumer (a private person, not buying for a business) |
-| SGD- | goods are sold to a consumer |
-| ECD- | the service is offered online / at a distance by electronic means |
-| LPD- | the payment is between two businesses (or a business and a public authority) |
+| CRD- | the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession) |
+| SGD- | goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession) |
+| ECD- | the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service) |
+| LPD- | the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration) |
 | GDPR- | the process handles information about identifiable people (unchanged, R2) |
 
+Wording aligned with the definition articles on 27 Oct 2026 (with "R3 extended to the new laws" below, before any
+retrieval or model run with these texts); sources and the first wording are listed there.
+
 Definitions and subject-matter articles are not retrievable for C2 or C3 (the corpus holds the kept articles only).
+
+**R3 extended to the new laws (roles decided by code, fixed, same for all cases, never passed to the generator).**
+Written 27 Oct 2026, before any code change, retrieval or model run. It completes R3 for the Study 2 corpus; it is not
+a tuning round (no model answer on the new laws has been seen). The GDPR roles, A1, P1 and every GDPR prompt stay
+unchanged (byte-identical).
+
+*Roles per law.* The split may name, for a passage of a law, only the roles of that law (config.yaml
+`c3_v2.roles`, by passage id prefix; a passage of any other prefix keeps the round 3 GDPR list). The split prompt
+gives each role the meaning below, worded as close to the law's definition article as possible:
+
+| prefix | role | meaning given to the split | derived from | decided by code |
+|---|---|---|---|---|
+| GDPR- | controller | the controller (the one who decides why and how personal data is used) | GDPR Art. 4(7) | A1: confirmed (unchanged) |
+| GDPR- | processor | the processor (the one who handles personal data on behalf of a controller) | GDPR Art. 4(8) | P1 (unchanged): confirmed only with a checked P1 quote, otherwise contradicted (A1) |
+| CRD- | trader | the trader (any natural or legal person acting for purposes relating to that person's trade, business, craft or profession) | CRD Art. 2(2) | A2 (T1) |
+| CRD- | consumer | the consumer (any natural person acting for purposes which are outside that person's trade, business, craft or profession) | CRD Art. 2(1) | the CRD scope item S1 |
+| SGD- | seller | the seller (any natural or legal person acting for purposes relating to that person's trade, business, craft or profession) | SGD Art. 2(3) | A2 (T1) |
+| SGD- | consumer | the consumer (any natural person acting for purposes which are outside that person's trade, business, craft or profession) | SGD Art. 2(2) | the SGD scope item S1 |
+| ECD- | service provider | the service provider (any natural or legal person providing an information society service) | ECD Art. 2(b) | A2 (T1) |
+| LPD- | debtor | the debtor (the undertaking or public authority that has to pay the amount due for goods delivered or services provided) | LPD Art. 2(1), 2(8), 3(1)(b) | D1 |
+| LPD- | creditor | the creditor (the undertaking or public authority that delivered the goods or provided the services and is to receive the amount due) | LPD Art. 2(1), 2(8), 3(1)(a)-(b) | D2 |
+| CRD-, SGD-, ECD-, LPD- | public body | a Member State, the Commission or another public body | - | contradicted (unchanged) |
+| all | other | anyone else, or the rule names no one | - | not_stated (unchanged) |
+
+The LPD has no definition of "creditor" or "debtor"; the two meanings use the words of Art. 2(1) ("commercial
+transactions"), Art. 2(8) ("amount due") and Art. 3(1)(a)-(b), where the creditor "has fulfilled its contractual and
+legal obligations" and "has not received the amount due". The ECD's consumer (Art. 2(e)) is not an ECD role here: the
+ECD scope item is about the service, not the buyer, so a duty on a consumer in an ECD passage is "other".
+
+*Role facts* (checked against the description in the check-IF call like P1: quote-checked by code, never looked at
+again in the second look):
+
+| id | fact | derived from | role it decides |
+|---|---|---|---|
+| T1 | the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession | CRD Art. 2(2), SGD Art. 2(3), ECD Art. 2(b) | trader, seller, service provider (A2) |
+| D1 | the organisation running the described process pays another undertaking or a public authority the amount due for goods delivered or services provided to it | LPD Art. 2(1), 2(8) | debtor |
+| D2 | another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided | LPD Art. 2(1), 2(8) | creditor |
+
+*Rules.*
+- A2: trader / seller / service provider = the organisation running the described process, IF the process involves it
+  selling goods or services to customers: confirmed only if T1 is confirmed with a checked quote; contradicted if T1
+  is contradicted with a checked quote; otherwise not_stated (unlike the processor, no assumption decides it).
+- Consumer (e.g. the duties of CRD Art. 14) = the customer in the process: confirmed only if the law's scope item S1
+  ("the buyer is a consumer ..." / "goods are sold to a consumer ...") is confirmed with a checked quote; contradicted
+  if S1 is contradicted; otherwise not_stated.
+- Debtor / creditor (LPD) = decided by who pays whom: debtor confirmed only if D1 is confirmed with a checked quote
+  (e.g. "the company pays the supplier" -> the organisation is the debtor), creditor only if D2 is; a fact
+  contradicted with a checked quote -> that role contradicted; otherwise not_stated.
+- Public bodies -> contradicted; other -> not_stated (unchanged). R1 is confirmed if any of its roles is confirmed,
+  contradicted if all are, otherwise not_stated (unchanged). A role confirmed through T1, D1, D2 or S1 keeps that
+  item's checked quote, so ResolverV2 counts it as confirmed (as for P1, bug fix 1).
+- The role meanings, T1, D1, D2 and the scope texts are fixed in config.yaml, identical for every case, and never
+  reach the generator (only requirements of Applicable rules do). C1 and C2 are not touched.
+
+*Scope wording (R2) aligned with the definition articles.* First wording (approved 27 Oct 2026 with the corpus) ->
+current wording (table above): CRD- "the buyer is a consumer (a private person, not buying for a business)" -> CRD
+Art. 2(1) ("his" written as "that person's", as in SGD Art. 2(2)); SGD- "goods are sold to a consumer" -> SGD Art.
+2(2), 3(1); ECD- "the service is offered online / at a distance by electronic means" -> ECD Art. 2(a), which refers to
+Directive 98/34/EC Art. 1(2), repeated in ECD recital 17 ("normally provided for remuneration, at a distance, by
+means of electronic equipment ... and at the individual request of a recipient of a service"); LPD- "the payment is
+between two businesses (or a business and a public authority)" -> LPD Art. 2(1). GDPR- unchanged (GDPR Art. 4(1),
+"personal data").
+
+*Prompts.* Only the role list of the split prompt is filled per law; for GDPR passages the split prompt stays
+byte-identical (SHA-256 checked by a test). The split prompt's made-up format examples and the check-IF prompt
+(including its controller / processor definitions) are unchanged.
+
+*Logic tests* (hand-written ideal answers, provisional, no model), final labels: CRD-Art13-1 (refund after
+withdrawal) + online shop selling to private customers, customer withdraws -> Applicable; same passage + business
+customer -> Not applicable (scope); CRD-Art14-1 (consumer returns goods) + consumer withdrawal stated -> Applicable;
+LPD-Art3-1 + "the company pays its supplier's invoice" -> Applicable, + no payment between businesses -> Indeterminate;
+ECD-Art11-1 (acknowledge the order) + online order stated -> Applicable; the GDPR tests of round 3 unchanged. Passage
+ids with a letter (CRD-Art6a-1-a, CRD-Art9-1a) are tested through the same code.

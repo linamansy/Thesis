@@ -307,11 +307,15 @@ passage id prefix (as R2 already does for the GDPR, docs/C3_V2_DEVELOPMENT.md se
 
 | prefix | scope item S1 |
 |---|---|
-| CRD- | the buyer is a consumer (a private person, not buying for a business) |
-| SGD- | goods are sold to a consumer |
-| ECD- | the service is offered online / at a distance by electronic means |
-| LPD- | the payment is between two businesses (or a business and a public authority) |
+| CRD- | the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession) |
+| SGD- | goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession) |
+| ECD- | the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service) |
+| LPD- | the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration) |
 | GDPR- | the process handles information about identifiable people (unchanged, R2) |
+
+Wording aligned with the definition articles on 27 Oct 2026, before any retrieval or model run with these texts
+(CRD Art. 2(1), SGD Art. 2(2) and 3(1), ECD Art. 2(a), LPD Art. 2(1); GDPR unchanged, Art. 4(1)); the first wording
+and the sources are in docs/C3_V2_DEVELOPMENT.md section 9, "R3 extended to the new laws".
 
 S1 is checked against the description like every other IF item (quote-checked by code): confirmed with a checked
 quote -> scope confirmed; contradicted with a checked quote (e.g. a CRD passage and a description stating a business
