@@ -26,6 +26,9 @@ Run from the project root:
   .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --frozen <frozen.json> --m2-cases 03 05 ...
   .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --config A|B|C|D --items <items.json> --m2-cases ...
     (extra round, criteria section 7: src/rag_v2_extra.py; B and D call qwen3:8b once per new description)
+  .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --v3 baseline|E|F|G --items <items.json> --m2-cases ...
+    (RAG v3, EXPLORATORY, criteria section 8: src/rag_v3.py; baseline = the current freeze's setting, run live;
+    reports go to rag_v2.v3.evaluation_dir and are labelled exploratory)
 """
 
 import argparse
@@ -97,9 +100,12 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--expansion", choices=["on", "off"], help="sibling expansion (default: config.yaml)")
     parser.add_argument("--frozen", help="read the retrievals from this frozen file instead of running retrieval")
     parser.add_argument("--config", choices=["A", "B", "C", "D"], help="extra-round config (criteria section 7)")
+    parser.add_argument("--v3", choices=["baseline", "E", "F", "G"], help="RAG v3 option (criteria section 8)")
     args = parser.parse_args(argv)
     if not args.items and not args.m2_cases:
         parser.error("give --items and/or --m2-cases")
+    if sum(bool(x) for x in (args.frozen, args.config, args.v3)) > 1:
+        parser.error("give at most one of --frozen, --config, --v3")
 
     config = load_config()
     items = json.loads(Path(args.items).read_text(encoding="utf-8"))["items"] if args.items else []
@@ -109,6 +115,11 @@ def main(argv: list[str] | None = None) -> None:
         retrievals = {case_id: frozen["cases"][case_id] for case_id in case_ids}
         expansion = frozen["rag_v2"]["sibling_expansion"]
         extra = None
+    elif args.v3 in ("E", "F", "G"):
+        from src.rag_v3 import build   # loads the v3 models only when really run
+        retriever = build(config, args.v3)
+        expansion, extra = False, retriever.describe()
+        retrievals = {case_id: retriever.retrieve_case_reranked(case_id) for case_id in case_ids}
     elif args.config:
         from src.rag_v2_extra import build   # loads the models (and qwen3:8b for B, D) only when really run
         retriever = build(config, args.config)
@@ -117,6 +128,10 @@ def main(argv: list[str] | None = None) -> None:
     else:
         from src.rag_v2 import RagV2Retriever, corpus_view   # loads the models only when really run
         expansion = None if args.expansion is None else args.expansion == "on"
+        if args.v3 == "baseline":
+            from src.rag_v3 import check_ollama_idle
+            check_ollama_idle(config)
+            expansion = False   # the current freeze's setting (rag_v2.sibling_expansion: false)
         retriever = RagV2Retriever(corpus_view(config), sibling_expansion=expansion)
         expansion, extra = retriever.sibling_expansion, None
         retrievals = {case_id: retriever.retrieve_case_reranked(case_id) for case_id in case_ids}
@@ -128,10 +143,15 @@ def main(argv: list[str] | None = None) -> None:
     report["settings"] = {"items_file": args.items, "m2_cases": args.m2_cases, "frozen_file": args.frozen,
                           "sibling_expansion": expansion, "extra_round_config": extra, "corpus": config["study2_corpus"]["passages"],
                           "retrieval": config["retrieval"], "reranker": config["reranker"]}
+    if args.v3:
+        report["label"] = "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)"
+        report["settings"]["v3_option"] = args.v3
+        report["settings"]["v3"] = config["rag_v2"]["v3"]
     report["retrievals"] = retrievals
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    out_dir = project_path(config["rag_v2"]["evaluation_dir"]) / stamp
+    out_root = config["rag_v2"]["v3"]["evaluation_dir"] if args.v3 else config["rag_v2"]["evaluation_dir"]
+    out_dir = project_path(out_root) / (f"{stamp}_{args.v3}" if args.v3 else stamp)
     out_dir.mkdir(parents=True, exist_ok=False)
     (out_dir / "report.json").write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     for row in report["items"]:
@@ -147,7 +167,9 @@ def main(argv: list[str] | None = None) -> None:
         for case_id, row in report["m2"]["per_case"].items():
             print(f"M2 {case_id:<4}{row['share']:<6}{' '.join(row['top_k'])}")
         print(f"M2 mean: {report['m2']['mean']}")
-    print(f"config: {args.config or '-'}  sibling expansion: {expansion}  ->  {out_dir / 'report.json'}")
+    if args.v3:
+        print("EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)")
+    print(f"config: {args.config or args.v3 or '-'}  sibling expansion: {expansion}  ->  {out_dir / 'report.json'}")
 
 
 if __name__ == "__main__":

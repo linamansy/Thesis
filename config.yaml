@@ -510,6 +510,27 @@ rag_v2:
     dense_max_length: 8192
     reranker_model: BAAI/bge-reranker-v2-m3                    # option E, G
     reranker_revision: 953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e   # Hugging Face commit at download (27 Oct 2026), fixed
+    # Section 8.2: bge = bge-m3 + bge-reranker-v2-m3 (else e5-small-v2 + ms-marco MiniLM, as the current freeze);
+    # enrich = index text is passage text + newline + qwen3:8b enrichment. All: expansion OFF, pool 20, top 5.
+    options:
+      E: {bge: true, enrich: false}
+      F: {bge: false, enrich: true}
+      G: {bge: true, enrich: true}
+    simplicity_order: [E, F, G]   # section 8.4 tie-break 3
+    baseline_m1: 2                # section 8.4: the winner replaces the freeze only if its M1 > this (of 8)
+    dense_index_dirs:             # own FAISS index per option (the e5 index of the current freeze is not touched)
+      E: data/retrieval_study2_corpus/dense_index_v3_exploratory_E
+      F: data/retrieval_study2_corpus/dense_index_v3_exploratory_F
+      G: data/retrieval_study2_corpus/dense_index_v3_exploratory_G
+    # Option F/G enrichment (section 8.3), made ONCE by src/rag_v3.py --enrich; never changed afterwards.
+    enrichment_prompt: prompts/rag_v3_enrichment.txt   # byte-identical to the section 8.3 block (tested)
+    enrichment_dir: results/rag_v3_enrichment_exploratory   # one file per passage: prompt, raw answer, finish reason
+    enrichment_log_condition: RAGV3_ENRICH_exploratory      # RunLogger file results/logs/RAGV3_ENRICH_exploratory_<time>.jsonl
+    enrichment_file: data/retrieval_study2_corpus/rag_v3_enrichment_exploratory.jsonl   # passage id -> enrichment
+    enrichment_manifest: data/retrieval_study2_corpus/rag_v3_enrichment_exploratory_manifest.json   # its SHA-256
+    evaluation_dir: results/diagnostics/rag_v3_eval_exploratory   # src/evaluate_retrieval_v2.py --v3, one folder per run
+    frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory.json   # only if the winner's M1 > 2/8
+    frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_v3_exploratory_manifest.json
 
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
