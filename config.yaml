@@ -439,20 +439,66 @@ c3_v2:
   obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid
   # Round 3 (section 9): roles and scope are decided by code (ApplicabilityAgentV2), fixed for every case and never
   # passed to the generator.
-  roles:                          # the role names the split may give for the duty holder (R1, R3)
-    controller: assumed           # A1 below: confirmed by code, no quote
-    processor: needs_fact         # confirmed only if processor_fact is confirmed with a checked quote, else contradicted
-    public body: contradicted     # the Commission, a supervisory authority, a Member State: never a business process
-    other: not_stated             # any other duty holder: code cannot decide it
+  # roles (R1, R3): passage id prefix -> the role names the split may give for the duty holder of a passage of that
+  # law. "default" (round 3, the GDPR) is used for GDPR- and every prefix not listed. Each role has "means" (its line in
+  # the split prompt, worded after the law's definition article) and "decide" (how code decides it):
+  #   assumed      confirmed by A1 (controller_assumption), no quote
+  #   fact         decided by the role fact "fact" (role_facts, checked with a quote): confirmed if it is confirmed;
+  #                otherwise "otherwise" (contradicted, with "because" naming the assumption, or not_stated; a fact
+  #                contradicted with a checked quote then makes the role contradicted)
+  #   scope        the status of the law's scope item S1 (scope_conditions)
+  #   contradicted / not_stated   always that status
+  # R3 extended to CRD, SGD, ECD, LPD on 27 Oct 2026 (docs/C3_V2_DEVELOPMENT.md section 9, "R3 extended to the new laws").
+  roles:
+    default:                      # GDPR Art. 4(7)-(8); the GDPR split prompt stays byte-identical
+      pair_example: the controller and the processor
+      names:
+        controller: {means: "the controller (the one who decides why and how personal data is used)", decide: assumed}
+        processor: {means: "the processor (the one who handles personal data on behalf of a controller)", decide: fact, fact: P1, otherwise: contradicted, because: A1}
+        public body: {means: "the Commission, a supervisory authority, a Member State or another public body", decide: contradicted}
+        other: {means: "anyone else, or the rule names no one", decide: not_stated}
+    "CRD-":                       # CRD Art. 2(1)-(2)
+      pair_example: the trader and the consumer
+      names:
+        trader: {means: "the trader (any natural or legal person acting for purposes relating to that person's trade, business, craft or profession)", decide: fact, fact: T1, otherwise: not_stated}
+        consumer: {means: "the consumer (any natural person acting for purposes which are outside that person's trade, business, craft or profession)", decide: scope}
+        public body: {means: "a Member State, the Commission or another public body", decide: contradicted}
+        other: {means: "anyone else, or the rule names no one", decide: not_stated}
+    "SGD-":                       # SGD Art. 2(2)-(3)
+      pair_example: the seller and the consumer
+      names:
+        seller: {means: "the seller (any natural or legal person acting for purposes relating to that person's trade, business, craft or profession)", decide: fact, fact: T1, otherwise: not_stated}
+        consumer: {means: "the consumer (any natural person acting for purposes which are outside that person's trade, business, craft or profession)", decide: scope}
+        public body: {means: "a Member State, the Commission or another public body", decide: contradicted}
+        other: {means: "anyone else, or the rule names no one", decide: not_stated}
+    "ECD-":                       # ECD Art. 2(b)
+      pair_example: the service provider and a Member State
+      names:
+        service provider: {means: "the service provider (any natural or legal person providing an information society service)", decide: fact, fact: T1, otherwise: not_stated}
+        public body: {means: "a Member State, the Commission or another public body", decide: contradicted}
+        other: {means: "anyone else, or the rule names no one", decide: not_stated}
+    "LPD-":                       # LPD Art. 2(1), 2(8), 3(1) (the LPD does not define creditor or debtor)
+      pair_example: the debtor and the creditor
+      names:
+        debtor: {means: "the debtor (the undertaking or public authority that has to pay the amount due for goods delivered or services provided)", decide: fact, fact: D1, otherwise: not_stated}
+        creditor: {means: "the creditor (the undertaking or public authority that delivered the goods or provided the services and is to receive the amount due)", decide: fact, fact: D2, otherwise: not_stated}
+        public body: {means: "a Member State, the Commission or another public body", decide: contradicted}
+        other: {means: "anyone else, or the rule names no one", decide: not_stated}
   controller_assumption: "the organisation running the described process is the controller of the personal data it collects in that process"   # A1
-  processor_fact: "the organisation handles personal data on behalf of another organisation"   # checked like an IF item
+  processor_fact: &processor_fact "the organisation handles personal data on behalf of another organisation"   # checked like an IF item
+  role_facts:                     # facts that decide a role, checked in the check-IF call with a quote (never second-looked)
+    P1: *processor_fact                                                                                            # GDPR Art. 4(8)
+    T1: "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession"   # A2; CRD Art. 2(2), SGD Art. 2(3), ECD Art. 2(b)
+    D1: "the organisation running the described process pays another undertaking or a public authority the amount due for goods delivered or services provided to it"   # LPD Art. 2(1), 2(8)
+    D2: "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided"   # LPD Art. 2(1), 2(8)
   scope_conditions:               # R2: passage id prefix -> scope IF item added by code to every passage of that law
-    "GDPR-": "the process handles information about identifiable people"
-    # R2 extended to the Study 2 corpus laws (27 Oct 2026, docs/STUDY2_CORPUS_RULE.md section 5); quote-checked like GDPR-
-    "CRD-": "the buyer is a consumer (a private person, not buying for a business)"
-    "SGD-": "goods are sold to a consumer"
-    "ECD-": "the service is offered online / at a distance by electronic means"
-    "LPD-": "the payment is between two businesses (or a business and a public authority)"
+    "GDPR-": "the process handles information about identifiable people"   # GDPR Art. 4(1)
+    # R2 extended to the Study 2 corpus laws (27 Oct 2026, docs/STUDY2_CORPUS_RULE.md section 5); quote-checked like GDPR-;
+    # wording aligned with the definition articles on 27 Oct 2026 (docs/C3_V2_DEVELOPMENT.md section 9)
+    "CRD-": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)"   # CRD Art. 2(1)
+    "SGD-": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)"   # SGD Art. 2(2), 3(1)
+    "ECD-": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)"   # ECD Art. 2(a) -> Directive 98/34/EC Art. 1(2)
+    "LPD-": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)"   # LPD Art. 2(1)
   requirement_checks:   # code checks of RequirementAgentV2's answer (section 7, criteria 4-6; src/mediation/requirement_checker_v2.py)
     max_words: 40
     max_sentences: 2

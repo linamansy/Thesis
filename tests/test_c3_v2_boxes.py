@@ -380,10 +380,13 @@ ROLE_DEFINITIONS = ("- controller: an organisation that decides why and how pers
                     "decides why and how the data is used.")
 
 
-def test_split_prompt_has_public_body_role_and_example():
-    text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
+def test_split_prompt_has_public_body_role_and_example(tmp_path):
+    # the role list is filled from config.yaml c3_v2.roles (default list for this passage id)
+    text = ApplicabilityAgentV2(mock(["{}"]), logger(tmp_path)).split_call.build_prompt(passage_id="P-1",
+                                                                                     passage_text=PASSAGE)
     assert '"public body": the Commission, a supervisory authority, a Member State' in text
-    assert '{{"roles": ["public body"]' in text
+    template = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
+    assert '{{"roles": ["public body"]' in template
 
 
 def test_public_body_role_contradicted_by_code_gives_not_applicable(tmp_path):

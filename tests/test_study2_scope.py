@@ -8,9 +8,9 @@ businesses, GDPR- identifiable people (unchanged). Real passages from the frozen
 Every agent answer is HAND-WRITTEN FOR LOGIC TESTING, PROVISIONAL: what an ideal agent would answer (MockLLM). The
 test shows what the code does with good answers; it says nothing about qwen3:8b.
 
-Known limitation shown here (not changed by this step): the split names the duty holder only as controller /
-processor / public body / other (R3 is written for the GDPR). A trader, seller, service provider or debtor is
-"other", which code leaves not_stated, so a rule of the new laws with its scope confirmed stays Indeterminate.
+The splits here name the duty holder "other", which code leaves not_stated, so a rule with its scope confirmed stays
+Indeterminate. The roles of the new laws (trader, seller, service provider, consumer, debtor, creditor; R3 extended)
+are tested in tests/test_study2_roles.py.
 """
 
 import itertools

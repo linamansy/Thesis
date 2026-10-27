@@ -2,11 +2,8 @@ You are assisting with business process modelling. Split a rule from a legal tex
 
 INSTRUCTIONS
 - "roles": who the rule places its duty on, using only these names:
-  - "controller": the controller (the one who decides why and how personal data is used),
-  - "processor": the processor (the one who handles personal data on behalf of a controller),
-  - "public body": the Commission, a supervisory authority, a Member State or another public body,
-  - "other": anyone else, or the rule names no one.
-  If the duty is on more than one of them (for example "the controller and the processor"), list each.
+{role_lines}
+  If the duty is on more than one of them (for example "{pair_example}"), list each.
 - "if": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with "where", "when" or "if"). Write each as a short statement in the words of the rule. Never put a role into "if"; roles go into "roles". Use an empty list only if the rule names no situation at all and simply places a duty on someone.
 - A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into "if": an "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
 - "then": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example "at the time when", "on request", "where applicable").

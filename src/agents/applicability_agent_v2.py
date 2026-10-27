@@ -6,33 +6,39 @@ Applicable (Problem 2 in docs/C3_V2_DEVELOPMENT.md). v2 makes the split its own 
 
 Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_V2_DEVELOPMENT.md section 9):
   a. split call (SplitCallV2, law text only)  -> {"roles": [...], "if": [...], "then": "...", "exceptions": [...]}
-     "roles" = who the duty is on (controller / processor / public body / other), "if" = the situational conditions.
+     "roles" = who the duty is on, using only the role names of the passage's law (config.yaml c3_v2.roles, by passage
+     id prefix; GDPR and any other prefix: controller / processor / public body / other; e.g. CRD: trader / consumer /
+     public body / other), "if" = the situational conditions.
      Code rejects the split if an IF item contains an obligation word (config.yaml c3_v2.obligation_words:
      must / shall / is required to) -> label "Split invalid", nothing else runs.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
-  c. check-IF call (CheckIfCallV2: the description + the items that need a quote, not the law text): S1, the
-     processor fact P1 (only if "processor" is a role), C1..., the exceptions E1... -> each item confirmed /
-     not_stated / contradicted, with a quote from the description.
+  c. check-IF call (CheckIfCallV2: the description + the items that need a quote, not the law text): S1, the role
+     facts of the named roles (c3_v2.role_facts: P1 for a processor, T1 for a trader / seller / service provider, D1
+     for a debtor, D2 for a creditor), C1..., the exceptions E1... -> each item confirmed / not_stated / contradicted,
+     with a quote from the description.
   d. code quote check (QuoteChecker): a confirmed or contradicted item whose quote is missing or not found in the
      description becomes not_stated (recorded as downgraded).
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
      processor -> confirmed only if P1 is confirmed with a checked quote, otherwise contradicted (A1: the organisation
-     is the controller); public body -> contradicted; other -> not_stated. R1 is confirmed if any of its roles is
-     confirmed, contradicted if all are, otherwise not_stated.
+     is the controller); trader / seller / service provider (A2) -> confirmed only if T1 is confirmed, debtor only if
+     D1 is, creditor only if D2 is (contradicted if that fact is contradicted, otherwise not_stated); consumer -> the
+     status of the scope item S1; public body -> contradicted; other -> not_stated. R1 is confirmed if any of its roles
+     is confirmed, contradicted if all are, otherwise not_stated.
   f. first look: the label from the statuses of R1, S1 and C1... (src/mediation/resolver_v2.look_label).
   g. second look (SecondLookCallV2), ONLY for Indeterminate, started by the OrchestratorV2, and ONLY for the
      situational conditions still not_stated (R5): the description + ALL 5 retrieved passages of the case. Same quote
      check. Roles and scope are never looked at again.
 Every IF item records "decided_by": "code rule", "first look" or "second look" (None while not_stated).
 The final label (with exceptions) is decided by ResolverV2 (src/mediation/resolver_v2.py), not here.
-A1, the processor fact and the scope texts are fixed in config.yaml, the same for every case, and never reach the
+A1, the role meanings, the role facts and the scope texts are fixed in config.yaml, the same for every case, and never reach the
 generator (only requirements of Applicable rules are passed on).
 
 Each call is its own BaseAgent subclass (own prompt file, own schema, the same JSON check and one retry).
 ApplicabilityAgentV2 runs them in order and does the code steps.
 """
 
+import functools
 import re
 from typing import Literal
 
@@ -50,18 +56,30 @@ Status = Literal["confirmed", "not_stated", "contradicted"]
 
 # ---------- schemas ----------
 
-Role = Literal["controller", "processor", "public body", "other"]   # the keys of config.yaml c3_v2.roles
+def law_roles(roles_config: dict, passage_id: str) -> dict:
+    """The role list of the passage's law (config.yaml c3_v2.roles), chosen by passage id prefix; "default" (the GDPR
+    list of round 3) for every prefix that has no list of its own."""
+    for prefix, law in roles_config.items():
+        if prefix != "default" and passage_id.startswith(prefix):
+            return law
+    return roles_config["default"]
 
 
-class SplitOutputV2(BaseModel):
-    model_config = ConfigDict(populate_by_name=True)
-    roles: list[Role] = Field(min_length=1, description="Who the rule places its duty on")
-    conditions: list[str] = Field(alias="if", description="Every situational condition under which the rule applies "
-                                                          "(when it applies, never a role and never what must be "
-                                                          "done); empty list if none")
-    then: str = Field(description="What the rule requires to be done when it applies")
-    exceptions: list[str] = Field(description="Situations the rule itself names in which it does not apply; empty "
-                                              "list if none")
+@functools.cache
+def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
+    """The schema of the split's answer, with "roles" limited to the role names of one law."""
+
+    class SplitOutputV2(BaseModel):
+        model_config = ConfigDict(populate_by_name=True)
+        roles: list[Literal[role_names]] = Field(min_length=1, description="Who the rule places its duty on")
+        conditions: list[str] = Field(alias="if", description="Every situational condition under which the rule "
+                                                              "applies (when it applies, never a role and never what "
+                                                              "must be done); empty list if none")
+        then: str = Field(description="What the rule requires to be done when it applies")
+        exceptions: list[str] = Field(description="Situations the rule itself names in which it does not apply; "
+                                                  "empty list if none")
+
+    return SplitOutputV2
 
 
 class ItemCheck(BaseModel):
@@ -77,11 +95,19 @@ class CheckOutputV2(BaseModel):
 # ---------- the three calls ----------
 
 class SplitCallV2(BaseAgent):
-    output_schema = SplitOutputV2
     prompt_key = "applicability_split_prompt_v2"
 
+    def __init__(self, llm, logger, max_retries: int | None = None):
+        super().__init__(llm, logger, max_retries)
+        self.roles_config = load_config()["c3_v2"]["roles"]
+
     def build_prompt(self, passage_id: str, passage_text: str) -> str:
-        return self.template.format(schema=self.schema_text(), passage=f"[{passage_id}] {passage_text.strip()}")
+        """The role list in the prompt and the allowed role names in the schema are those of the passage's law."""
+        law = law_roles(self.roles_config, passage_id)
+        self.output_schema = split_schema(tuple(law["names"]))   # also used by parse_output
+        role_lines = ",\n".join(f'  - "{name}": {role["means"]}' for name, role in law["names"].items()) + "."
+        return self.template.format(schema=self.schema_text(), role_lines=role_lines,
+                                    pair_example=law["pair_example"], passage=f"[{passage_id}] {passage_text.strip()}")
 
 
 class ItemCheckCall(BaseAgent):
@@ -133,9 +159,9 @@ class ApplicabilityAgentV2:
         words = "|".join(re.escape(w) for w in settings["obligation_words"])
         self.obligation_pattern = re.compile(rf"\b({words})\b", re.IGNORECASE)
         self.quote_checker = QuoteChecker()
-        self.role_rules = settings["roles"]            # role -> assumed / needs_fact / contradicted / not_stated (R3)
+        self.roles_config = settings["roles"]          # law -> role -> how code decides it (R3)
         self.controller_assumption = settings["controller_assumption"]   # A1
-        self.processor_fact = settings["processor_fact"]
+        self.role_facts = settings["role_facts"]       # P1, T1, D1, D2: facts that decide a role
         self.scope_conditions = settings["scope_conditions"]   # passage id prefix -> scope statement (R2)
 
     def first_look(self, case_id: str, description: str, passage_id: str, passage_text: str) -> dict:
@@ -164,8 +190,10 @@ class ApplicabilityAgentV2:
                  if passage_id.startswith(prefix)]
         situational = [{"id": f"C{i}", "kind": "situation", "text": t} for i, t in enumerate(split.conditions, 1)]
         record["conditions"] = [role_item] + scope + situational
-        if any(r["role"] == "processor" for r in role_item["roles"]):
-            record["role_facts"] = [{"id": "P1", "kind": "processor_fact", "text": self.processor_fact}]
+        rules = law_roles(self.roles_config, passage_id)["names"]
+        fact_ids = dict.fromkeys(rules[r["role"]]["fact"] for r in role_item["roles"]
+                                 if rules[r["role"]]["decide"] == "fact")
+        record["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
         record["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(split.exceptions, 1)]
 
         # c. check-IF call, d. quote check (only the items that need a quote from the description)
@@ -179,38 +207,55 @@ class ApplicabilityAgentV2:
             self.verify(items, check, description, "first look")
 
         # e. roles by code (R3), f. first look
-        self.decide_roles(role_item, record["role_facts"])
+        self.decide_roles(role_item, record["role_facts"], scope, rules)
         record["first_look_label"] = record["label"] = look_label([c["status"] for c in record["conditions"]])
         return record
 
-    def decide_roles(self, role_item: dict, role_facts: list[dict]) -> None:
-        """Step e (R3): the status of every role and of the role item R1, by code only."""
-        fact_confirmed = any(f["status"] == "confirmed" for f in role_facts)
+    def decide_roles(self, role_item: dict, role_facts: list[dict], scope: list[dict], rules: dict) -> None:
+        """Step e (R3): the status of every role and of the role item R1, by code only. rules: the role list of the
+        passage's law (config.yaml c3_v2.roles); role_facts and scope already have their checked status."""
+        facts = {f["id"]: f for f in role_facts}
+        source = {}                                    # role -> the checked item that confirmed it (role fact or S1)
         for r in role_item["roles"]:
-            rule = self.role_rules[r["role"]]
-            if rule == "assumed":
+            rule = rules[r["role"]]
+            if rule["decide"] == "assumed":
                 r.update(status="confirmed", decided_by="code rule", reason="A1: " + self.controller_assumption)
-            elif rule == "needs_fact" and fact_confirmed:
-                r.update(status="confirmed", decided_by="first look", reason="P1 confirmed with a checked quote")
-            elif rule == "needs_fact":
-                r.update(status="contradicted", decided_by="code rule",
-                         reason="P1 not confirmed with a checked quote; A1: " + self.controller_assumption)
-            elif rule == "contradicted":
+            elif rule["decide"] == "fact":
+                fact = facts[rule["fact"]]
+                if fact["status"] == "confirmed":
+                    r.update(status="confirmed", decided_by="first look",
+                             reason=f"{fact['id']} confirmed with a checked quote")
+                    source[r["role"]] = fact
+                elif rule["otherwise"] == "contradicted":
+                    r.update(status="contradicted", decided_by="code rule",
+                             reason=f"{fact['id']} not confirmed with a checked quote; A1: " + self.controller_assumption)
+                elif fact["status"] == "contradicted":
+                    r.update(status="contradicted", decided_by="first look",
+                             reason=f"{fact['id']} contradicted with a checked quote")
+                else:
+                    r.update(status="not_stated", decided_by=None, reason=f"{fact['id']} not stated")
+            elif rule["decide"] == "scope":
+                s1 = scope[0] if scope else {"status": "not_stated", "decided_by": None}
+                r.update(status=s1["status"], decided_by=s1["decided_by"], reason=f"the scope item S1 is {s1['status']}")
+                if s1["status"] == "confirmed":
+                    source[r["role"]] = s1
+            elif rule["decide"] == "contradicted":
                 r.update(status="contradicted", decided_by="code rule", reason="a public body is not a business")
             else:
                 r.update(status="not_stated", decided_by=None, reason="this role is not decided by code")
         statuses = [r["status"] for r in role_item["roles"]]
-        if "confirmed" in statuses:
-            first = next(r for r in role_item["roles"] if r["status"] == "confirmed")
+        first = next((r for r in role_item["roles"] if r["status"] == "confirmed"), None)
+        if first:
             role_item.update(status="confirmed", decided_by=first["decided_by"])
         elif all(s == "contradicted" for s in statuses):
-            role_item.update(status="contradicted", decided_by="code rule")
+            by_code = all(r["decided_by"] == "code rule" for r in role_item["roles"])
+            role_item.update(status="contradicted", decided_by="code rule" if by_code else "first look")
         else:
             role_item.update(status="not_stated", decided_by=None)
-        # a role confirmed through P1 keeps P1's checked quote, so ResolverV2 counts it as confirmed (bug fix 1)
-        fact = next((f for f in role_facts if f["status"] == "confirmed"), None)
-        if role_item["status"] == "confirmed" and role_item["decided_by"] == "first look" and fact:
-            role_item.update(quote=fact["quote"], quote_found=True, downgraded=False)
+        # a role confirmed through a role fact or S1 keeps that item's checked quote, so ResolverV2 counts it as
+        # confirmed (bug fix 1)
+        if first and first["role"] in source:
+            role_item.update(quote=source[first["role"]]["quote"], quote_found=True, downgraded=False)
         else:
             role_item.update(quote=None, quote_found=None, downgraded=False)
 
