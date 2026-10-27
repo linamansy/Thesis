@@ -501,6 +501,15 @@ rag_v2:
     rewrite_log_condition: RAGV2_REWRITE   # RunLogger file results/logs/RAGV2_REWRITE_<time>.jsonl
     frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_v2_round2.json   # only if the winner's M1 > 2/8
     frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_v2_round2_manifest.json
+  v3:
+    # RAG v3, EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8). Every v3 output is labelled exploratory.
+    # Section 8.2 note (27 Oct): E/G run on CPU in fp32 (project PyTorch is CPU-only); same models, no dependency change.
+    device: cpu
+    dense_model: BAAI/bge-m3                                   # option E, G: dense vectors only, normalised, no prefix
+    dense_revision: 5617a9f61b028005a4858fdac845db406aefb181   # Hugging Face commit at download (27 Oct 2026), fixed
+    dense_max_length: 8192
+    reranker_model: BAAI/bge-reranker-v2-m3                    # option E, G
+    reranker_revision: 953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e   # Hugging Face commit at download (27 Oct 2026), fixed
 
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)

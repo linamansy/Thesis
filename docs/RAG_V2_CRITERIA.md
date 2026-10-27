@@ -194,6 +194,10 @@ enrichment text affect only the search.
 
 Note, 27 Oct, before any v3 run: E/G run on CPU in fp32 (project PyTorch is CPU-only); same models, no dependency change.
 
+Model versions (Hugging Face commit hashes at download, 27 Oct, before any v3 run; never changed):
+`BAAI/bge-m3` = `5617a9f61b028005a4858fdac845db406aefb181`;
+`BAAI/bge-reranker-v2-m3` = `953dc6f6f85a1b2dbfca4c34a2796e7dde08d41e`.
+
 ### 8.3 Enrichment prompt (option F and G, fixed)
 
 `{passage_text}` is replaced by the passage's `text` field from the corpus file, verbatim. Nothing else is changed.
