@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Decide whether a rule from a legal text is about something that the business process described below does.\n\nINSTRUCTIONS\n- First find what the rule is about: the kind of activity it deals with. Write it in law_focus, and copy the words of the passage that state it, word for word, into law_quote.\n- Then look for a step in the process description where that kind of activity happens. Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.\n- relevant is true if the rule is about something this process does. relevant is false if no step of the process does that kind of activity.\n- This is a broad judgement. Do NOT check the rule's conditions (\"if ...\"), trigger events, deadlines or exceptions; they are checked in a later step. Do not mark a passage irrelevant only because a specific event or condition from the rule is not described in the process.\n- Judge by what the process does, not by whether the two texts use similar words or sound like the same subject.\n- Use only the two texts below. Do not assume steps that the description does not state.\n- If relevant is false, process_step and description_quote are empty strings.\n- reason: one sentence explaining your decision.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"If a customer complains about a card payment, the shop must refund within 14 days.\"\nProcess: \"The customer chooses a product. The customer pays by card. The shop sends the product.\"\nAnswer: {\"law_focus\": \"card payments by customers\", \"law_quote\": \"a card payment\", \"relevant\": true, \"process_step\": \"the customer pays by card\", \"description_quote\": \"The customer pays by card\", \"reason\": \"The rule is about card payments, and the process has a card payment step; whether a complaint happens is checked later.\"}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"law_focus\": {\n      \"description\": \"What the rule is about: the kind of activity it deals with\",\n      \"title\": \"Law Focus\",\n      \"type\": \"string\"\n    },\n    \"law_quote\": {\n      \"description\": \"Exact words copied from the legal passage that state what the rule is about\",\n      \"title\": \"Law Quote\",\n      \"type\": \"string\"\n    },\n    \"relevant\": {\n      \"description\": \"true if the rule is about something this process does\",\n      \"title\": \"Relevant\",\n      \"type\": \"boolean\"\n    },\n    \"process_step\": {\n      \"description\": \"The step of the process where that kind of activity happens; empty string if none\",\n      \"title\": \"Process Step\",\n      \"type\": \"string\"\n    },\n    \"description_quote\": {\n      \"description\": \"Exact words copied from the process description that state this step; empty string if none\",\n      \"title\": \"Description Quote\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One sentence explaining the decision\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"law_focus\",\n    \"law_quote\",\n    \"relevant\",\n    \"process_step\",\n    \"description_quote\",\n    \"reason\"\n  ],\n  \"title\": \"RelevanceOutputV2\",\n  \"type\": \"object\"\n}\n\nPROCESS DESCRIPTION\nAn e-commerce company has a comprehensive order fulfillment process:\nWhen a customer places an order, the system records the order details.\nPayment processing begins.\nIf the payment fails, the customer is notified, and the process ends.\nUpon successful payment, the inventory system checks stock availability.\nIf items are out of stock, a back-order is initiated, and the customer is informed about the delay.\nThe process continues once the back-order is received and all required items are available in stock.\nIn-stock items are picked from the warehouse.\nQuality control checks are performed on the picked items.\nPackaging is done, including gift wrapping if the customer requested it.\nMeanwhile, the shipping department prepares shipping documents and labels.\nIf the order is international, customs documentation is prepared.\nOnce packaging and shipping documents are ready, the order is dispatched.\nThe system sends a shipping confirmation to the customer.\nAfter dispatch, the system updates the inventory levels.\nA follow-up email for feedback is sent directly after confirming the successful delivery.\nIf the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement.\n\nLEGAL PASSAGE\n[CRD-Art18-1] Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-78f12506-0801-4025-bdaa-daccf9cc81e3",
+    "object": "chat.completion",
+    "created": 1793123028,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"law_focus\": \"delivery of goods\",\n  \"law_quote\": \"deliver the goods\",\n  \"relevant\": true,\n  \"process_step\": \"the order is dispatched\",\n  \"description_quote\": \"the order is dispatched\",\n  \"reason\": \"The rule concerns the delivery of goods, and the process includes a step where the order is dispatched, which constitutes the act of delivering the goods to the consumer.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.021019749,
+      "prompt_tokens": 1151,
+      "prompt_time": 0.099646951,
+      "completion_tokens": 95,
+      "completion_time": 0.186825803,
+      "total_tokens": 1246,
+      "total_time": 0.286472754
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_43dd1ea4ee",
+    "x_groq": {
+      "id": "req_01m5z7c3cze5wsjvy9j2fm24ay",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

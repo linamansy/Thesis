@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Decide whether a rule from a legal text is about something that the business process described below does.\n\nINSTRUCTIONS\n- First find what the rule is about: the kind of activity it deals with. Write it in law_focus, and copy the words of the passage that state it, word for word, into law_quote.\n- Then look for a step in the process description where that kind of activity happens. Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.\n- relevant is true if the rule is about something this process does. relevant is false if no step of the process does that kind of activity.\n- This is a broad judgement. Do NOT check the rule's conditions (\"if ...\"), trigger events, deadlines or exceptions; they are checked in a later step. Do not mark a passage irrelevant only because a specific event or condition from the rule is not described in the process.\n- Judge by what the process does, not by whether the two texts use similar words or sound like the same subject.\n- Use only the two texts below. Do not assume steps that the description does not state.\n- If relevant is false, process_step and description_quote are empty strings.\n- reason: one sentence explaining your decision.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"If a customer complains about a card payment, the shop must refund within 14 days.\"\nProcess: \"The customer chooses a product. The customer pays by card. The shop sends the product.\"\nAnswer: {\"law_focus\": \"card payments by customers\", \"law_quote\": \"a card payment\", \"relevant\": true, \"process_step\": \"the customer pays by card\", \"description_quote\": \"The customer pays by card\", \"reason\": \"The rule is about card payments, and the process has a card payment step; whether a complaint happens is checked later.\"}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"law_focus\": {\n      \"description\": \"What the rule is about: the kind of activity it deals with\",\n      \"title\": \"Law Focus\",\n      \"type\": \"string\"\n    },\n    \"law_quote\": {\n      \"description\": \"Exact words copied from the legal passage that state what the rule is about\",\n      \"title\": \"Law Quote\",\n      \"type\": \"string\"\n    },\n    \"relevant\": {\n      \"description\": \"true if the rule is about something this process does\",\n      \"title\": \"Relevant\",\n      \"type\": \"boolean\"\n    },\n    \"process_step\": {\n      \"description\": \"The step of the process where that kind of activity happens; empty string if none\",\n      \"title\": \"Process Step\",\n      \"type\": \"string\"\n    },\n    \"description_quote\": {\n      \"description\": \"Exact words copied from the process description that state this step; empty string if none\",\n      \"title\": \"Description Quote\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One sentence explaining the decision\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"law_focus\",\n    \"law_quote\",\n    \"relevant\",\n    \"process_step\",\n    \"description_quote\",\n    \"reason\"\n  ],\n  \"title\": \"RelevanceOutputV2\",\n  \"type\": \"object\"\n}\n\nPROCESS DESCRIPTION\nThis process begins when a potential customer inquires about a product or service.\nSales staff or customer support collects relevant information and addresses any concerns or questions.\nIf the customer is interested, they are guided through selecting the appropriate product or service.\nNext, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.\nThe order is then recorded in the system, and the customer receives confirmation of their order.\nThe process ends when the order is successfully placed and confirmed.\nThe company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.\n\nLEGAL PASSAGE\n[ECD-Art11-1] e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-a00190f3-e404-4f11-8124-abbae5fad91e",
+    "object": "chat.completion",
+    "created": 1793121776,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"law_focus\": \"acknowledgement of receipt of an order placed through technological means\",\n  \"law_quote\": \"the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means\",\n  \"relevant\": true,\n  \"process_step\": \"the customer receives confirmation of their order\",\n  \"description_quote\": \"the customer receives confirmation of their order\",\n  \"reason\": \"The rule concerns the provider's obligation to acknowledge receipt of an order, and the process includes a step where the customer receives confirmation of their order, which serves as that acknowledgement.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.096231653,
+      "prompt_tokens": 1081,
+      "prompt_time": 0.083017169,
+      "completion_tokens": 130,
+      "completion_time": 0.287388835,
+      "total_tokens": 1211,
+      "total_time": 0.370406004
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m5z65w6tep1azh47d1xrff92",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Split a rule from a legal text into its parts.\n\nINSTRUCTIONS\n- \"roles\": who the rule places its duty on, using only these names:\n  - \"trader\": the trader (any natural or legal person acting for purposes relating to that person's trade, business, craft or profession),\n  - \"consumer\": the consumer (any natural person acting for purposes which are outside that person's trade, business, craft or profession),\n  - \"public body\": a Member State, the Commission or another public body,\n  - \"other\": anyone else, or the rule names no one.\n  If the duty is on more than one of them (for example \"the trader and the consumer\"), list each.\n- \"if\": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with \"where\", \"when\" or \"if\"). Write each as a short statement in the words of the rule. Never put a role into \"if\"; roles go into \"roles\". Use an empty list only if the rule names no situation at all and simply places a duty on someone.\n- A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into \"if\": an \"if\" item must not contain the words \"must\", \"shall\" or \"is required to\"; such an answer is rejected automatically.\n- \"then\": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example \"at the time when\", \"on request\", \"where applicable\").\n- \"exceptions\": the situations the rule itself names in which it does not apply (for example \"unless ...\" or \"this does not apply where ...\"), each as a short statement of that situation. Use an empty list if the rule names none.\n- Use only the legal passage below.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it.\"\nAnswer: {\"roles\": [\"other\"], \"if\": [\"a parcel is collected from a sender\"], \"then\": \"the carrier must give a receipt at the time of collection\", \"exceptions\": [\"the sender declines the receipt\"]}\n\nEXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)\nRule: \"Each processor shall keep a list of the parcels it handles on behalf of a controller.\"\nAnswer: {\"roles\": [\"processor\"], \"if\": [], \"then\": \"the processor must keep a list of the parcels it handles on behalf of a controller\", \"exceptions\": []}\n\nEXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)\nRule: \"Where a list of approved carriers changes, each Member State shall publish it.\"\nAnswer: {\"roles\": [\"public body\"], \"if\": [\"a list of approved carriers changes\"], \"then\": \"the Member State must publish the list\", \"exceptions\": []}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"roles\": {\n      \"description\": \"Who the rule places its duty on\",\n      \"items\": {\n        \"enum\": [\n          \"trader\",\n          \"consumer\",\n          \"public body\",\n          \"other\"\n        ],\n        \"type\": \"string\"\n      },\n      \"minItems\": 1,\n      \"title\": \"Roles\",\n      \"type\": \"array\"\n    },\n    \"if\": {\n      \"description\": \"Every situational condition under which the rule applies (when it applies, never a role and never what must be done); empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"If\",\n      \"type\": \"array\"\n    },\n    \"then\": {\n      \"description\": \"What the rule requires to be done when it applies\",\n      \"title\": \"Then\",\n      \"type\": \"string\"\n    },\n    \"exceptions\": {\n      \"description\": \"Situations the rule itself names in which it does not apply; empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"Exceptions\",\n      \"type\": \"array\"\n    }\n  },\n  \"required\": [\n    \"roles\",\n    \"if\",\n    \"then\",\n    \"exceptions\"\n  ],\n  \"title\": \"SplitOutputV2\",\n  \"type\": \"object\"\n}\n\nLEGAL PASSAGE\n[CRD-Art14-1] Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-63599886-37a2-41f0-82fe-07dfd04eaf83",
+    "object": "chat.completion",
+    "created": 1793122253,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"roles\": [\n    \"consumer\",\n    \"trader\"\n  ],\n  \"if\": [\n    \"the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11\",\n    \"the trader has not offered to collect the goods himself\",\n    \"the contract is an off-premises contract\",\n    \"the goods have been delivered to the consumer’s home at the time of the conclusion of the contract\",\n    \"by their nature, those goods cannot normally be returned by post\"\n  ],\n  \"then\": \"the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11, and the trader shall at his own expense collect the goods\",\n  \"exceptions\": [\n    \"the trader has offered to collect the goods himself\",\n    \"the trader has agreed to bear the direct cost of returning the goods\",\n    \"the trader failed to inform the consumer that the consumer has to bear the direct cost of returning the goods\"\n  ]\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.017193827,
+      "prompt_tokens": 1292,
+      "prompt_time": 0.092102324,
+      "completion_tokens": 272,
+      "completion_time": 0.554954075,
+      "total_tokens": 1564,
+      "total_time": 0.647056399
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m5z6me5pe1bb97axhs3qsfz2",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

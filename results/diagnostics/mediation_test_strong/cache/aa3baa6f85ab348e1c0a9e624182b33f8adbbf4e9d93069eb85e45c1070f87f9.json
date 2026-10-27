@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. A legal rule has been confirmed to apply to the business process described below. Write, in plain language, what the rule requires at one step of the process.\n\nINSTRUCTIONS\n- requirement: one or two short, plain sentences, at most 40 words in total, that say what is required at the process step below and whether it is required before, at or after that step.\n- State what is required as a fact about the process (for example \"the customer is told ...\"). Do not give instructions about a process model or diagram, such as adding, drawing or modelling a task.\n- Use your own plain words. Do not copy the legal text: at most a few words in a row may be the same as in the legal passage.\n- Name the people and departments as the process description names them. Do not use the words \"shall\", \"controller\", \"data subject\" or \"processor\".\n- Keep every trigger and condition the obligation states, for example \"on request\", \"where applicable\" or \"if the customer asks\". The requirement must not apply in more situations than the obligation does.\n- Use only what the obligation says. Do not add any obligation, actor, deadline, condition, document or step that is not in it, and do not combine it with other rules or with general knowledge.\n- step_quote: copy, exactly and word for word, the words of the process description that name the step where the requirement applies. It is checked automatically.\n- triggers: one entry for every trigger or condition the obligation states. \"trigger\": its words copied exactly from the OBLIGATION; \"kept_as\": the words of your requirement, copied exactly, that keep it. Both are checked automatically. Use an empty list if the obligation states none.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nObligation: \"the supplier shall, at the purchaser's request, inform the purchaser in writing of the expected date of each instalment before the first delivery\"\nProcess step: the warehouse ships the order (\"The warehouse ships the order in several parcels\")\nAnswer: {\"requirement\": \"If the customer asks, the customer is told in writing, before the warehouse ships the first parcel, when each parcel will arrive.\", \"step_quote\": \"The warehouse ships the order in several parcels\", \"triggers\": [{\"trigger\": \"at the purchaser's request\", \"kept_as\": \"If the customer asks\"}, {\"trigger\": \"before the first delivery\", \"kept_as\": \"before the warehouse ships the first parcel\"}]}\n\nJSON SCHEMA\n{\n  \"$defs\": {\n    \"TriggerKept\": {\n      \"properties\": {\n        \"trigger\": {\n          \"description\": \"A trigger or condition of the obligation, copied exactly from the OBLIGATION\",\n          \"title\": \"Trigger\",\n          \"type\": \"string\"\n        },\n        \"kept_as\": {\n          \"description\": \"The words of the requirement, copied exactly, that keep this trigger\",\n          \"title\": \"Kept As\",\n          \"type\": \"string\"\n        }\n      },\n      \"required\": [\n        \"trigger\",\n        \"kept_as\"\n      ],\n      \"title\": \"TriggerKept\",\n      \"type\": \"object\"\n    }\n  },\n  \"properties\": {\n    \"requirement\": {\n      \"description\": \"One or two sentences: what the rule requires, tied to the process step\",\n      \"title\": \"Requirement\",\n      \"type\": \"string\"\n    },\n    \"step_quote\": {\n      \"description\": \"Exact words copied from the process description that name the step\",\n      \"title\": \"Step Quote\",\n      \"type\": \"string\"\n    },\n    \"triggers\": {\n      \"description\": \"Every trigger or condition the obligation states; empty list if none\",\n      \"items\": {\n        \"$ref\": \"#/$defs/TriggerKept\"\n      },\n      \"title\": \"Triggers\",\n      \"type\": \"array\"\n    }\n  },\n  \"required\": [\n    \"requirement\",\n    \"step_quote\",\n    \"triggers\"\n  ],\n  \"title\": \"RequirementOutputV2\",\n  \"type\": \"object\"\n}\n\nPROCESS DESCRIPTION\nThe process begins when a customer files a complaint about a product or service.\nCustomer service logs the complaint and assigns it to the relevant department for investigation.\nAfter reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.\nIf a refund is approved, the financial team processes the reimbursement.\nThe complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected.\nAfter resolving the case, customers can provide feedback on their satisfaction.\nMost complaints come from private persons whose kitchen appliance stopped working a few months after purchase. These customers usually ask for the appliance to be fixed or swapped for a new one.\n\nLEGAL PASSAGE\n[SGD-Art14-1] Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n1. Repairs or replacements shall be carried out:\n(a) free of charge;\n(b) within a reasonable period of time from the moment the seller has been informed by the consumer about the lack of conformity; and\n(c) without any significant inconvenience to the consumer, taking into account the nature of the goods and the purpose for which the consumer required the goods.\n\nOBLIGATION\nrepairs or replacements shall be carried out free of charge, within a reasonable period of time from the moment the seller has been informed by the consumer about the lack of conformity, and without any significant inconvenience to the consumer, taking into account the nature of the goods and the purpose for which the consumer required the goods\n\nPROCESS STEP\ncustomers usually ask for the appliance to be fixed or swapped for a new one (\"These customers usually ask for the appliance to be fixed or swapped for a new one.\")\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-00a364a7-6854-486e-a1c5-19a9d8c17d12",
+    "object": "chat.completion",
+    "created": 1793122663,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"requirement\": \"When customers ask for the appliance to be fixed or swapped, the repair or replacement is done free of charge, within a reasonable time, and without significant inconvenience.\",\n  \"step_quote\": \"These customers usually ask for the appliance to be fixed or swapped for a new one.\",\n  \"triggers\": [\n    {\n      \"trigger\": \"from the moment the seller has been informed by the consumer about the lack of conformity\",\n      \"kept_as\": \"When customers ask for the appliance to be fixed or swapped\"\n    }\n  ]\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.271284586,
+      "prompt_tokens": 1330,
+      "prompt_time": 0.09805195,
+      "completion_tokens": 125,
+      "completion_time": 0.249548515,
+      "total_tokens": 1455,
+      "total_time": 0.347600465
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m5z70yvhekk8scng5f1yemge",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}
