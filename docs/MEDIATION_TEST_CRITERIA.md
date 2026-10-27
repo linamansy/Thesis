@@ -67,3 +67,4 @@ The task that runs these measurements must contain the keyword **REAL RUN**. Thi
   Live list (Groq `GET /models` with this account): the only text models that are not gpt-oss are `allam-2-7b`
   (4,096 tokens context, below 16k) and `qwen/qwen3.8-27b` (131,072 tokens context, 16,384 max completion tokens)
   -> **`qwen/qwen3.8-27b`**. One short JSON test call answered valid JSON with no reasoning text.
+- **27 Oct 2026 (note):** Diagnostic reduced to the target passage only (variant + base case, setting O, other 4 passages still given to the second look) because of Groq free-tier rate limits; T3/T4 not measured here.
