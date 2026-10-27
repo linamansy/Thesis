@@ -1,0 +1,1197 @@
+{
+  "created_at": "2026-10-27T16:08:00.696159+00:00",
+  "note": "Mediation test (docs/MEDIATION_TEST_CRITERIA.md): R = frozen RAG top 5; O = ORACLE diagnostic, R with rank 5 replaced by the target if absent (not a retrieval result). The base case gets the same top 5 as its variant in each setting.",
+  "variants": {
+    "01.1": {
+      "group": "dev",
+      "base_case": "01",
+      "target_passage_id": "GDPR-Art13-1",
+      "accepted_target_ids": [
+        "GDPR-Art13-1"
+      ],
+      "added_text": "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art8-7",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-7",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art13-1",
+          "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available.",
+          "replaces": "CRD-Art8-7"
+        }
+      ]
+    },
+    "01.2": {
+      "group": "dev",
+      "base_case": "01",
+      "target_passage_id": "LPD-Art3-1",
+      "accepted_target_ids": [
+        "LPD-Art3-1"
+      ],
+      "added_text": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art8-2",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-7",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-7",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-1",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.",
+          "replaces": "CRD-Art8-2"
+        }
+      ]
+    },
+    "06.1": {
+      "group": "dev",
+      "base_case": "06",
+      "target_passage_id": "CRD-Art13-1",
+      "accepted_target_ids": [
+        "CRD-Art13-1"
+      ],
+      "added_text": "The shop sells kitchen items to private persons across the EU. Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art8-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement.",
+          "replaces": "CRD-Art8-3"
+        }
+      ]
+    },
+    "11.1": {
+      "group": "dev",
+      "base_case": "11",
+      "target_passage_id": "GDPR-Art17-1",
+      "accepted_target_ids": [
+        "GDPR-Art17-1"
+      ],
+      "added_text": "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art7-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art6-1-e",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(e) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided;\n(ea) where applicable, that the price was personalised on the basis of automated decision-making;\n(f) the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate;"
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art14-4",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-4",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-7",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art7-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n3. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make such an express request on a durable medium and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art6-1-e",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(e) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided;\n(ea) where applicable, that the price was personalised on the basis of automated decision-making;\n(f) the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate;"
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art14-4",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-4",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art13-7",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art17-1",
+          "text": "General Data Protection Regulation (2016/679) - Article 17: Right to erasure (‘right to be forgotten’)\n1. The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies:\n(a) the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed;\n(b) the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing;\n(c) the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2);\n(d) the personal data have been unlawfully processed;\n(e) the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject;\n(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1).",
+          "replaces": "CRD-Art7-3"
+        }
+      ]
+    },
+    "13.1": {
+      "group": "dev",
+      "base_case": "13",
+      "target_passage_id": "SGD-Art14-1",
+      "accepted_target_ids": [
+        "SGD-Art14-1"
+      ],
+      "added_text": "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase. These customers usually ask for the appliance to be fixed or swapped for a new one.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art6-1-s",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art6-1-g",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(g) the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy;\n(h) where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B);\n(i) where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods;\n(j) that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3);\n(k) where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal;"
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art12-4",
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art22-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 22: Additional payments\nBefore the consumer is bound by the contract or offer, the trader shall seek the express consent of the consumer to any extra payment in addition to the remuneration agreed upon for the trader’s main contractual obligation. If the trader has not obtained the consumer’s express consent but has inferred it by using default options which the consumer is required to reject in order to avoid the additional payment, the consumer shall be entitled to reimbursement of this payment."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art6-1-s",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(s) where applicable, any relevant compatibility and interoperability of goods with digital elements, digital content and digital services that the trader is aware of or can reasonably be expected to have been aware of;\n(t) where applicable, the possibility of having recourse to an out-of-court complaint and redress mechanism, to which the trader is subject, and the methods for having access to it."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art13-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art6-1-g",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(g) the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy;\n(h) where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B);\n(i) where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods;\n(j) that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3);\n(k) where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal;"
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art12-4",
+          "text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art22-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 22: Additional payments\nBefore the consumer is bound by the contract or offer, the trader shall seek the express consent of the consumer to any extra payment in addition to the remuneration agreed upon for the trader’s main contractual obligation. If the trader has not obtained the consumer’s express consent but has inferred it by using default options which the consumer is required to reject in order to avoid the additional payment, the consumer shall be entitled to reimbursement of this payment."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-1",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n1. Repairs or replacements shall be carried out:\n(a) free of charge;\n(b) within a reasonable period of time from the moment the seller has been informed by the consumer about the lack of conformity; and\n(c) without any significant inconvenience to the consumer, taking into account the nature of the goods and the purpose for which the consumer required the goods.",
+          "replaces": "CRD-Art6-1-s"
+        }
+      ]
+    },
+    "17.1": {
+      "group": "dev",
+      "base_case": "17",
+      "target_passage_id": "CRD-Art14-1",
+      "accepted_target_ids": [
+        "CRD-Art14-1"
+      ],
+      "added_text": "The customers are private persons in several EU countries. Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": null,
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "SGD-Art16-3",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "SGD-Art16-3",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        }
+      ]
+    },
+    "19.1": {
+      "group": "dev",
+      "base_case": "19",
+      "target_passage_id": "ECD-Art11-1",
+      "accepted_target_ids": [
+        "ECD-Art11-1"
+      ],
+      "added_text": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": "CRD-Art13-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art6-1-g",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(g) the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy;\n(h) where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B);\n(i) where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods;\n(j) that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3);\n(k) where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal;"
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art13-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art16-3",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art6-1-g",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(g) the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy;\n(h) where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B);\n(i) where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods;\n(j) that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3);\n(k) where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal;"
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them.",
+          "replaces": "CRD-Art13-3"
+        }
+      ]
+    },
+    "45.1": {
+      "group": "dev",
+      "base_case": "45",
+      "target_passage_id": "ECD-Art10-1",
+      "accepted_target_ids": [
+        "ECD-Art10-1"
+      ],
+      "added_text": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+      "R_source": "data/retrieval_study2_corpus/frozen_retrieval_v2.json",
+      "O_replaced": null,
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-3",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art10-3",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them."
+        },
+        {
+          "rank": 5,
+          "passage_id": "ECD-Art10-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract."
+        }
+      ]
+    },
+    "03.1": {
+      "group": "heldout",
+      "base_case": "03",
+      "target_passage_id": "LPD-Art3-1",
+      "accepted_target_ids": [
+        "LPD-Art3-1"
+      ],
+      "added_text": "The suppliers are other companies, and each delivery comes with a bill that names a fixed date for paying it. Sometimes the procurement team settles such a bill only weeks after that date.",
+      "R_source": "results/diagnostics/rag_v2_eval/20261027T133151Z/report.json",
+      "O_replaced": "CRD-Art18-2",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-1",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.",
+          "replaces": "CRD-Art18-2"
+        }
+      ]
+    },
+    "05.1": {
+      "group": "heldout",
+      "base_case": "05",
+      "target_passage_id": "LPD-Art3-3",
+      "accepted_target_ids": [
+        "LPD-Art3-3",
+        "LPD-Art3-1"
+      ],
+      "added_text": "The signed contract sets the day by which each supplier bill is to be paid. Now and then the finance team pays a supplier bill after that day has passed.",
+      "R_source": "results/diagnostics/rag_v2_eval/20261027T133151Z/report.json",
+      "O_replaced": "CRD-Art7-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n8. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make an express request and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art7-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 7: Formal requirements for off-premises contracts\n3. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make such an express request on a durable medium and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n8. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make an express request and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-3",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n3. Where the conditions set out in paragraph 1 are satisfied, Member States shall ensure the following:\n(a) that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract;\n(b) where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date.",
+          "replaces": "CRD-Art7-3"
+        }
+      ]
+    },
+    "21.1": {
+      "group": "heldout",
+      "base_case": "21",
+      "target_passage_id": "GDPR-Art14-1",
+      "accepted_target_ids": [
+        "GDPR-Art14-1"
+      ],
+      "added_text": "Before the pickup, the chosen logistic company e-mails the secretary the name, mobile number and ID card number of the driver who will come. The secretary keeps these details in the shipping file.",
+      "R_source": "results/diagnostics/rag_v2_eval/20261027T133151Z/report.json",
+      "O_replaced": "SGD-Art14-4",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-4",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n4. The consumer shall not be liable to pay for normal use made of the replaced goods during the period prior to their replacement."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art14-1",
+          "text": "General Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n1. Where personal data have not been obtained from the data subject, the controller shall provide the data subject with the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) the categories of personal data concerned;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, that the controller intends to transfer personal data to a recipient in a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means to obtain a copy of them or where they have been made available.",
+          "replaces": "SGD-Art14-4"
+        }
+      ]
+    },
+    "37.1": {
+      "group": "heldout",
+      "base_case": "37",
+      "target_passage_id": "CRD-Art9-1",
+      "accepted_target_ids": [
+        "CRD-Art9-1",
+        "CRD-Art11-1"
+      ],
+      "added_text": "You buy the parts as a private person for a hobby project. When a part turns out to be one you do not need after all, you return it to the web shop just because you changed your mind.",
+      "R_source": "results/diagnostics/rag_v2_eval/20261027T133151Z/report.json",
+      "O_replaced": "CRD-Art6-5",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art6-5",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n5. The information referred to in paragraph 1 shall form an integral part of the distance or off-premises contract and shall not be altered unless the contracting parties expressly agree otherwise."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-3",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art9-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n1. Save where the exceptions provided for in Article 16 apply, the consumer shall have a period of 14 days to withdraw from a distance or off-premises contract, without giving any reason, and without incurring any costs other than those provided for in Article 13(2) and Article 14.",
+          "replaces": "CRD-Art6-5"
+        }
+      ]
+    },
+    "46.1": {
+      "group": "heldout",
+      "base_case": "46",
+      "target_passage_id": "LPD-Art6-1",
+      "accepted_target_ids": [
+        "LPD-Art6-1",
+        "LPD-Art3-1"
+      ],
+      "added_text": "The wholesaler is a separate business that bills the company for every reordered product. Sometimes the company settles such a bill after the agreed date.",
+      "R_source": "results/diagnostics/rag_v2_eval/20261027T133151Z/report.json",
+      "O_replaced": "CRD-Art8-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art6-1",
+          "text": "Late Payment Directive (2011/7/EU) - Article 6: Compensation for recovery costs\n1. Member States shall ensure that, where interest for late payment becomes payable in commercial transactions in accordance with Article 3 or 4, the creditor is entitled to obtain from the debtor, as a minimum, a fixed sum of EUR 40.",
+          "replaces": "CRD-Art8-3"
+        }
+      ]
+    },
+    "03.2": {
+      "group": "heldout",
+      "base_case": "03",
+      "target_passage_id": "LPD-Art3-4",
+      "accepted_target_ids": [
+        "LPD-Art3-4"
+      ],
+      "added_text": "The supplier agreements say that a bill is paid only once the arrived stock has passed the quality inspection. When the warehouse is busy, that inspection is sometimes finished only six weeks after the stock came in.",
+      "R_source": "results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json",
+      "O_replaced": "CRD-Art18-2",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-4",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+          "replaces": "CRD-Art18-2"
+        }
+      ]
+    },
+    "05.2": {
+      "group": "heldout",
+      "base_case": "05",
+      "target_passage_id": "LPD-Art3-5",
+      "accepted_target_ids": [
+        "LPD-Art3-5"
+      ],
+      "added_text": "During the negotiations, the procurement team asks each supplier to accept that its bills will be settled four months after they arrive.",
+      "R_source": "results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json",
+      "O_replaced": "LPD-Art3-4",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n8. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make an express request and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-4",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        },
+        {
+          "rank": 3,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art8-8",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n8. Where a consumer wants the performance of services, or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, to begin during the withdrawal period provided for in Article 9(2), and the contract places the consumer under an obligation to pay, the trader shall require that the consumer make an express request and request the consumer to acknowledge that, once the contract has been fully performed by the trader, the consumer will no longer have the right of withdrawal."
+        },
+        {
+          "rank": 5,
+          "passage_id": "LPD-Art3-5",
+          "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n5. Member States shall ensure that the period for payment fixed in the contract does not exceed 60 calendar days, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+          "replaces": "LPD-Art3-4"
+        }
+      ]
+    },
+    "10.1": {
+      "group": "heldout",
+      "base_case": "10",
+      "target_passage_id": "GDPR-Art28-3-a",
+      "accepted_target_ids": [
+        "GDPR-Art28-3-a",
+        "GDPR-Art28-3-e",
+        "GDPR-Art28-3-h",
+        "GDPR-Art28-1"
+      ],
+      "added_text": "The requested software is an online service run by an outside provider. It keeps the names, e-mail addresses and working hours of the department's staff on that provider's servers.",
+      "R_source": "results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json",
+      "O_replaced": "GDPR-Art25-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art32-1",
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n1. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate:\n(a) the pseudonymisation and encryption of personal data;\n(b) the ability to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services;\n(c) the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident;\n(d) a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-11",
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n11. Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art30-4",
+          "text": "General Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n4. The controller or the processor and, where applicable, the controller's or the processor's representative, shall make the record available to the supervisory authority on request."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art25-3",
+          "text": "General Data Protection Regulation (2016/679) - Article 25: Data protection by design and by default\n3. An approved certification mechanism pursuant to Article 42 may be used as an element to demonstrate compliance with the requirements set out in paragraphs 1 and 2 of this Article."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "GDPR-Art32-1",
+          "text": "General Data Protection Regulation (2016/679) - Article 32: Security of processing\n1. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate:\n(a) the pseudonymisation and encryption of personal data;\n(b) the ability to ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services;\n(c) the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident;\n(d) a process for regularly testing, assessing and evaluating the effectiveness of technical and organisational measures for ensuring the security of the processing."
+        },
+        {
+          "rank": 2,
+          "passage_id": "GDPR-Art15-3",
+          "text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form."
+        },
+        {
+          "rank": 3,
+          "passage_id": "GDPR-Art35-11",
+          "text": "General Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n11. Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations."
+        },
+        {
+          "rank": 4,
+          "passage_id": "GDPR-Art30-4",
+          "text": "General Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n4. The controller or the processor and, where applicable, the controller's or the processor's representative, shall make the record available to the supervisory authority on request."
+        },
+        {
+          "rank": 5,
+          "passage_id": "GDPR-Art28-3-a",
+          "text": "General Data Protection Regulation (2016/679) - Article 28: Processor\n3. Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor:\n(a) processes the personal data only on documented instructions from the controller, including with regard to transfers of personal data to a third country or an international organisation, unless required to do so by Union or Member State law to which the processor is subject; in such a case, the processor shall inform the controller of that legal requirement before processing, unless that law prohibits such information on important grounds of public interest;\n(b) ensures that persons authorised to process the personal data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality;\n(c) takes all measures required pursuant to Article 32;\n(d) respects the conditions referred to in paragraphs 2 and 4 for engaging another processor;",
+          "replaces": "GDPR-Art25-3"
+        }
+      ]
+    },
+    "21.2": {
+      "group": "heldout",
+      "base_case": "21",
+      "target_passage_id": "CRD-Art18-1",
+      "accepted_target_ids": [
+        "CRD-Art18-1"
+      ],
+      "added_text": "The goods are bought by private customers in the company's online shop, and no shipping date is promised to them. Finding a logistic company for large amounts sometimes takes the secretary five or six weeks.",
+      "R_source": "results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json",
+      "O_replaced": null,
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-4",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n4. The consumer shall not be liable to pay for normal use made of the replaced goods during the period prior to their replacement."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "CRD-Art14-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "SGD-Art7-1",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-4",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n4. The consumer shall not be liable to pay for normal use made of the replaced goods during the period prior to their replacement."
+        }
+      ]
+    },
+    "46.2": {
+      "group": "heldout",
+      "base_case": "46",
+      "target_passage_id": "SGD-Art14-2",
+      "accepted_target_ids": [
+        "SGD-Art14-2"
+      ],
+      "added_text": "The orders come from private customers. When a customer reports that a delivered product is faulty, the company sends a new one of the same product in the next shipment.",
+      "R_source": "results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json",
+      "O_replaced": "CRD-Art8-3",
+      "R": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "CRD-Art8-3",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+        }
+      ],
+      "O": [
+        {
+          "rank": 1,
+          "passage_id": "ECD-Art11-1",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+        },
+        {
+          "rank": 2,
+          "passage_id": "CRD-Art18-1",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+        },
+        {
+          "rank": 3,
+          "passage_id": "ECD-Art11-2",
+          "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+        },
+        {
+          "rank": 4,
+          "passage_id": "CRD-Art18-2",
+          "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+        },
+        {
+          "rank": 5,
+          "passage_id": "SGD-Art14-2",
+          "text": "Sale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n2. Where the lack of conformity is to be remedied by repair or replacement of the goods, the consumer shall make the goods available to the seller. The seller shall take back the replaced goods at the seller's expense.",
+          "replaces": "CRD-Art8-3"
+        }
+      ]
+    }
+  }
+}

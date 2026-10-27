@@ -621,3 +621,21 @@ c3_v2_dev:
     evidence: 0.90            # share of non-empty law_quote / description_quote values found by the code check
     stability: 0.95           # share of answers that are valid JSON after the 1 retry
   max_rounds: 3
+
+mediation_test:
+  # STUDY 2 mediation test (docs/MEDIATION_TEST_CRITERIA.md, commit e01ef1c), src/mediation_test.py. C3 v2 agents only,
+  # no BPMN generation. Cases and settings copied from the criteria section 1.
+  development_variants: ["01.1", "01.2", "06.1", "11.1", "13.1", "17.1", "19.1", "45.1"]
+  held_out_variants:
+    old: ["03.1", "05.1", "21.1", "37.1", "46.1"]
+    v3: ["03.2", "05.2", "10.1", "21.2", "46.2"]
+  # R = frozen RAG top 5. The development variants are in rag_v2.frozen_retrieval; the held-out variants are not, so
+  # their top 5 is read from the one measurement with the kept (frozen) setting (the same run reproduces the frozen
+  # file byte for byte on the development variants)
+  held_out_r_reports:
+    old: results/diagnostics/rag_v2_eval/20261027T133151Z/report.json
+    v3: results/diagnostics/rag_v3_eval_exploratory/20261027T154432Z_baseline/report.json
+  oracle_rank: 5                # O = R with this rank replaced by the variant's target passage if it is absent
+  top5_file: data/retrieval_study2_corpus/mediation_test_top5.json   # R and O lists, written once (step 1)
+  output_dir: results/diagnostics/mediation_test   # <group>/answers.json, logs/, metrics.json, report.md
+  log_condition: MEDIATION_TEST
