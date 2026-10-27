@@ -192,6 +192,8 @@ enrichment text affect only the search.
 | **F** | Passage enrichment: for each of the 289 passages, qwen3:8b (Ollama 0.40.11, digest of `model.ollama_model_digest`, temperature 0, seed 42, think false, num_ctx 16384) writes 1–2 plain business-language sentences on when the passage applies in a business process, with the fixed prompt in 8.3. Input = the passage text only (never a case, variant or description). Generated **once**, saved with every prompt and raw answer (log as for all LLM calls), and the enrichment file is SHA-256 hashed in a manifest before any retrieval run with it. Index text = passage text + newline + enrichment; used for BM25, the dense index (own index folder) and the reranker. Models as in the current freeze. |
 | **G** | E + F together (bge-m3 and bge-reranker-v2-m3 on the enriched index text). |
 
+Note, 27 Oct, before any v3 run: E/G run on CPU in fp32 (project PyTorch is CPU-only); same models, no dependency change.
+
 ### 8.3 Enrichment prompt (option F and G, fixed)
 
 `{passage_text}` is replaced by the passage's `text` field from the corpus file, verbatim. Nothing else is changed.
