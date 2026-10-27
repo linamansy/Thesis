@@ -1,0 +1,14 @@
+{
+  "case_id": "46.2",
+  "base_case": "46",
+  "added_text": "The orders come from private customers. When a customer reports that a delivered product is faulty, the company sends a new one of the same product in the next shipment.",
+  "target_passage_id": "SGD-Art14-2",
+  "accepted_target_ids": [
+    "SGD-Art14-2"
+  ],
+  "expected_step": "Collect the faulty product from the customer at the company's cost",
+  "author": "drafted by Claude, approved by Lina",
+  "note": "synthetic HELD-OUT variant of a non-development case for RAG v3 (docs/RAG_V2_CRITERIA.md 8.5), written before any RAG v3 run; never used for selection",
+  "description": "case 46 description.txt + newline + added_text",
+  "reference": "case 46 reference.bpmn + one task (Task_1, expected_step) on flow SequenceFlow_13 after 'Shipping the order'; PROVISIONAL"
+}

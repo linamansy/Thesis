@@ -1,0 +1,14 @@
+{
+  "case_id": "03.2",
+  "base_case": "03",
+  "added_text": "The supplier agreements say that a bill is paid only once the arrived stock has passed the quality inspection. When the warehouse is busy, that inspection is sometimes finished only six weeks after the stock came in.",
+  "target_passage_id": "LPD-Art3-4",
+  "accepted_target_ids": [
+    "LPD-Art3-4"
+  ],
+  "expected_step": "Finish the quality inspection within 30 days of the stock's arrival",
+  "author": "drafted by Claude, approved by Lina",
+  "note": "synthetic HELD-OUT variant of a non-development case for RAG v3 (docs/RAG_V2_CRITERIA.md 8.5), written before any RAG v3 run; never used for selection",
+  "description": "case 03 description.txt + newline + added_text",
+  "reference": "case 03 reference.bpmn + one task (Task_12, expected_step) on flow SequenceFlow_9 after 'Inspect stock for quality'; PROVISIONAL"
+}
