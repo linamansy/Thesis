@@ -101,3 +101,6 @@ def test_failing_boxes_names_the_unconfirmed_items():
     boxes = failing_boxes(rec)
     assert boxes[0].startswith("quote check (S1") and boxes[1].startswith("check-IF (C1")
     assert failing_boxes(dict(rec, label="Irrelevant")) == ["relevance"]
+    rec["applicability"]["conditions"][0].update(status="contradicted", decided_by="code rule",
+                                                 roles=[{"role": "public body"}])
+    assert failing_boxes(rec)[0] == "split + scope/role rule (R1 contradicted: split named public body)"

@@ -157,8 +157,13 @@ def failing_boxes(record: dict | None) -> list[str]:
             continue
         if c.get("downgraded"):
             boxes.append(f"quote check ({c['id']}: model said {c.get('original_status')}, quote not found)")
-        elif c["kind"] in ("role", "scope", "role_fact"):
-            boxes.append(f"scope/role rule ({c['id']} {c.get('status')})")
+        elif c["kind"] == "role":
+            # R1 is set by the role rule (R3) from the split's roles and the role facts / S1 (named on their own)
+            if c.get("decided_by") == "code rule":
+                roles = ", ".join(r["role"] for r in c.get("roles", []))
+                boxes.append(f"split + scope/role rule (R1 {c.get('status')}: split named {roles})")
+        elif c["kind"] in ("scope", "role_fact"):
+            boxes.append(f"check-IF ({c['id']} {c.get('status')}, first look; {c['kind']} item)")
         else:
             look = "second look" if c.get("first_look_status") else "first look"
             boxes.append(f"check-IF ({c['id']} {c.get('status')}, {look})")
