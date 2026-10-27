@@ -343,8 +343,8 @@ def write_outputs(config: dict, group: str, records: list[dict], top5: dict, out
 # ---------- steps 2 and 4: real run ----------
 
 def run(config: dict, group: str, llm=None, out_dir: Path | None = None, run_settings: tuple = SETTINGS,
-        model_label: str = "qwen3:8b") -> dict:
-    """llm, out_dir, run_settings, model_label: given only by the stronger-model diagnostic
+        model_label: str = "qwen3:8b", target_only: bool = False) -> dict:
+    """llm, out_dir, run_settings, model_label, target_only: given only by the stronger-model diagnostic
     (scripts/run_mediation_strong.py, docs/MEDIATION_TEST_CRITERIA.md section 6). Without them: qwen3:8b on Ollama
     with its digest and version checks, settings R and O, as in steps 2 and 4."""
     from run_experiment import create_llm, ollama_settings
@@ -397,6 +397,8 @@ def run(config: dict, group: str, llm=None, out_dir: Path | None = None, run_set
                     continue
                 description = (cases_dir / case_id / config["paths"]["case_description_file"]).read_text(encoding="utf-8")
                 for p in passages:
+                    if target_only and p["passage_id"] not in v["accepted_target_ids"]:
+                        continue    # diagnostic: only the target is mediated; all passages are still given to the second look
                     record = orch.mediate_passage(case_id, description, p, passages)
                     records.append({"group": group, "variant": vid, "setting": setting, "role": role,
                                     "case_id": case_id} | record)
