@@ -1,0 +1,35 @@
+{
+  "case_id": "01",
+  "created_at": "2026-10-27T13:26:06+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 2.67,
+  "description_sha256": "c87eb0417c0b21a108beec7b3e9e91911eb27913db685664c04551464943d74f",
+  "prompt_sha256": "981e616ebf250cac7c77b1da0a0b0cb8a84f0dca675d3e2c8cc4d6c6fa212644",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nThis process begins when a potential customer inquires about a product or service.\nSales staff or customer support collects relevant information and addresses any concerns or questions.\nIf the customer is interested, they are guided through selecting the appropriate product or service.\nNext, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.\nThe order is then recorded in the system, and the customer receives confirmation of their order.\nThe process ends when the order is successfully placed and confirmed.\n",
+  "raw_output": "customer inquiry  \npre-contractual information  \nproduct selection  \nquote and approval  \norder placement  \norder confirmation  \nsales process  \ncustomer guidance",
+  "queries": [
+    "customer inquiry",
+    "pre-contractual information",
+    "product selection",
+    "quote and approval",
+    "order placement",
+    "order confirmation",
+    "sales process",
+    "customer guidance"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}

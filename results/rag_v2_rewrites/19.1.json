@@ -1,0 +1,35 @@
+{
+  "case_id": "19.1",
+  "created_at": "2026-10-27T13:25:45+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 3.84,
+  "description_sha256": "07c38fe037fca4182cf2f5ede8134b70d7098b950ded2356d6010650c68ccf7b",
+  "prompt_sha256": "1d4a63da31a9dc46fd29e7e9116096136786cbc237b6f50b8d4a621efca880d7",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nConsider a process for purchasing items from an online shop.\nThe user starts an order by logging in to their account.\nThen, the user simultaneously selects the items to purchase and sets a payment method.\nAfterward, the user either pays or completes an installment agreement.\nAfter selecting the items, the user chooses between multiple options for a free reward.\nSince the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.\nFinally, the items are delivered.\nThe user has the right to return items for exchange.\nEvery time items are returned, a new delivery is made.\nThe shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.\n",
+  "raw_output": "online shop, private consumer, distance contract, right of withdrawal  \npayment method, commercial transaction, order confirmation  \nfree reward, purchase value, information society service  \nreturn of goods, exchange, delivery of goods  \ndistance contract, data subject, controller  \ndelivery, return, new delivery  \nconsumer, trader, late payment, interest for late payment  \ninformation society service, order confirmation, pre-contractual information",
+  "queries": [
+    "online shop, private consumer, distance contract, right of withdrawal",
+    "payment method, commercial transaction, order confirmation",
+    "free reward, purchase value, information society service",
+    "return of goods, exchange, delivery of goods",
+    "distance contract, data subject, controller",
+    "delivery, return, new delivery",
+    "consumer, trader, late payment, interest for late payment",
+    "information society service, order confirmation, pre-contractual information"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}

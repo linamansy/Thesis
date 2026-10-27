@@ -1,0 +1,28 @@
+{
+  "case_id": "17",
+  "created_at": "2026-10-27T13:26:31+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.69,
+  "description_sha256": "265c63b42a76729378e1bcc6b1ce8a2f3bd665ad0316abd469a711af5b95dda9",
+  "prompt_sha256": "de02c194533a24bee29f8568a8d64e89be1ef9f6979708fa7c5e6c856dab9508",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nAn e-commerce company has a comprehensive order fulfillment process:\nWhen a customer places an order, the system records the order details.\nPayment processing begins.\nIf the payment fails, the customer is notified, and the process ends.\nUpon successful payment, the inventory system checks stock availability.\nIf items are out of stock, a back-order is initiated, and the customer is informed about the delay.\nThe process continues once the back-order is received and all required items are available in stock.\nIn-stock items are picked from the warehouse.\nQuality control checks are performed on the picked items.\nPackaging is done, including gift wrapping if the customer requested it.\nMeanwhile, the shipping department prepares shipping documents and labels.\nIf the order is international, customs documentation is prepared.\nOnce packaging and shipping documents are ready, the order is dispatched.\nThe system sends a shipping confirmation to the customer.\nAfter dispatch, the system updates the inventory levels.\nA follow-up email for feedback is sent directly after confirming the successful delivery.\nIf the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement.\n",
+  "raw_output": "order confirmation, payment processing, right of withdrawal, distance contract, pre-contractual information, back-order, stock availability, conformity of goods, information society service, shipping confirmation, data subject, personal data, customs documentation, returns process, refund process, quality control, order dispatch, inventory update, feedback follow-up, return shipping label, inspection of returned goods, replacement process",
+  "queries": [
+    "order confirmation, payment processing, right of withdrawal, distance contract, pre-contractual information, back-order, stock availability, conformity of goods, information society service, shipping confirmation, data subject, personal data, customs documentation, returns process, refund process, quality control, order dispatch, inventory update, feedback follow-up, return shipping label, inspection of returned goods, replacement process"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}

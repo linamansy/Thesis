@@ -1,0 +1,35 @@
+{
+  "case_id": "45",
+  "created_at": "2026-10-27T13:26:51+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 3.14,
+  "description_sha256": "7c06038dfc6a9149ad0614929c317d23be8ec398099ca56b8adbb997aa192f54",
+  "prompt_sha256": "273f61fe0ab610bbc99d65785f26808c87fe4a5f2c43135a061103497df3b874",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nTitle: Ordering in an Online Shop  \n\nA customer that logs into an E-Shop system and has to wait for its login confirmation (its credentials are checked by the system).\nIf the login was successful then the customer can continue to select products, else the shopping experience stops.\nAfter selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.\nThese steps repeat until all products were selected.\nThen the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.\nFor the payment the customer has to enter its payment data and has to wait until the bank confirms the payment.\nWhile waiting for the payment confirmation the customer can enter its shipping address (an independent billing address can be entered if the shipping address is not equal to the billing address).\nFinally if the address and the payment steps are executed then the order will be finished by the system.\n",
+  "raw_output": "customer login confirmation  \nproduct selection and cart management  \norder placement and payment initiation  \npayment data entry and confirmation  \nshipping address input and billing address  \npayment confirmation and order completion  \ndistance contract and pre-contractual information  \ninformation society service and order confirmation",
+  "queries": [
+    "customer login confirmation",
+    "product selection and cart management",
+    "order placement and payment initiation",
+    "payment data entry and confirmation",
+    "shipping address input and billing address",
+    "payment confirmation and order completion",
+    "distance contract and pre-contractual information",
+    "information society service and order confirmation"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}

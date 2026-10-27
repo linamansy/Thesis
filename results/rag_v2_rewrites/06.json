@@ -1,0 +1,31 @@
+{
+  "case_id": "06",
+  "created_at": "2026-10-27T13:26:12+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.11,
+  "description_sha256": "7bf44800284018ecd7380286aefbf970a6b80bd82c7f82523a62a85aed86d45f",
+  "prompt_sha256": "4ea03804ac455ab1809aa3369045276deeb6d3e675bfa8e022eb834920a69ab2",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nThis process begins when a customer places an order through an online platform or over the phone.\nThe system automatically generates an order confirmation and sends it to the customer.\nThe warehouse team picks and packs the items, and a shipping label is generated.\nThe order is then handed over to a logistics provider for delivery.\nTracking information is sent to the customer.\nThe process continues as the shipment is monitored until it reaches the customer's address.\nAfter successful delivery, the process ends, but customer feedback or returns may trigger further actions.\n",
+  "raw_output": "online contract, order confirmation, distance contract, information society service  \norder processing, logistics service, delivery service, shipment tracking  \ncustomer communication, delivery confirmation, return process, after-sales service  \ndata subject, personal data, order data, transaction record",
+  "queries": [
+    "online contract, order confirmation, distance contract, information society service",
+    "order processing, logistics service, delivery service, shipment tracking",
+    "customer communication, delivery confirmation, return process, after-sales service",
+    "data subject, personal data, order data, transaction record"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}

@@ -1,0 +1,35 @@
+{
+  "case_id": "11",
+  "created_at": "2026-10-27T13:26:18+00:00",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.88,
+  "description_sha256": "ccc76d998b044ee49d88bdfef7df40caea072d29a0fe3d31f9102a61bd9ed8a8",
+  "prompt_sha256": "9a5d8d24a17a567e7ea430f6a7b6a974c179a5852720ca6785dda26823ffb1ab",
+  "prompt": "/no_think\nYou help a search engine find relevant passages of EU law for a business process.\n\nBelow is a description of a business process. Rewrite it as short search queries in the vocabulary of EU law\n(for example: consumer, trader, distance contract, right of withdrawal, pre-contractual information, commercial\ntransaction, late payment, interest for late payment, personal data, data subject, controller, conformity of goods,\ninformation society service, order confirmation).\n\nRules:\n- Write between 3 and 8 queries.\n- Each query is at most 12 words.\n- Use only concepts that the process description supports. Do not name directives, articles or numbers.\n- Write one query per line. No numbering, no explanations, no other text.\n\nProcess description:\nThis process begins when a customer signs up for a subscription service, entering personal and payment information.\nThe system generates an account, assigns access, and triggers automated billing cycles.\nThroughout the subscription, the customer receives regular updates, product enhancements, or renewal notifications.\nIf the customer decides to cancel, they submit a cancellation request, which the support team processes.\nDepending on the terms, any refunds or charges are applied.\nThe process concludes when the subscription is deactivated by the support team and the final account balance is settled.\n",
+  "raw_output": "subscription, customer, personal data, data subject, controller  \naccount, access, automated billing, payment information  \nregular updates, product enhancements, information society service  \ncancellation request, refund, charge, terms and conditions  \nsubscription deactivation, final account balance, settlement  \ndistance contract, consumer, trader, right of withdrawal  \npre-contractual information, order confirmation, commercial transaction  \nlate payment, interest for late payment, billing cycle",
+  "queries": [
+    "subscription, customer, personal data, data subject, controller",
+    "account, access, automated billing, payment information",
+    "regular updates, product enhancements, information society service",
+    "cancellation request, refund, charge, terms and conditions",
+    "subscription deactivation, final account balance, settlement",
+    "distance contract, consumer, trader, right of withdrawal",
+    "pre-contractual information, order confirmation, commercial transaction",
+    "late payment, interest for late payment, billing cycle"
+  ],
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV2_REWRITE_20261027T132436Z.jsonl"
+}
