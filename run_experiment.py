@@ -58,6 +58,7 @@ from src.generator import BPMNGenerator, format_passages
 from src.llm.anthropic_llm import AnthropicLLM, MissingAPIKeyError
 from src.llm.base_llm import LLMClient, LLMUnavailableError
 from src.llm.gemini_llm import GeminiLLM, MissingGeminiKeyError
+from src.llm.groq_llm import GroqLLM
 from src.llm.mock_llm import MockLLM
 from src.llm.ollama_llm import OllamaLLM
 from src.llm.openrouter_llm import OpenRouterLLM
@@ -70,6 +71,7 @@ from src.run_folder import RunFolder, default_run_id
 from src.validator import BPMNValidator
 
 MEDIATION_ROLES = ["relevance", "applicability", "requirement"]
+AGENT_PROVIDER_DEFAULT = "ollama"   # c3_agents_llm.provider: "ollama" = the agents use the model block, as always
 PROVIDERS = ["mock", "ollama", "gemini", "anthropic"]
 STUDY2_PROVIDERS = ["openrouter"]   # only with generator.type bpmngen_server (see check_same_model)
 GENERATOR_TYPES = ["bpmngen", "bpmngen_server", "json_builder"]
@@ -100,6 +102,18 @@ def create_llm(config: dict, role: str = "generator", shared: dict | None = None
     if provider == "mock":
         answer = project_path(config["paths"][f"mock_{role}_response"]).read_text(encoding="utf-8")
         return MockLLM([answer], temperature=llm_config["temperature"])
+    agents_provider = config.get("c3_agents_llm", {}).get("provider", AGENT_PROVIDER_DEFAULT)
+    if role in MEDIATION_ROLES and agents_provider != AGENT_PROVIDER_DEFAULT:
+        # stronger-model mediation diagnostic only (docs/MEDIATION_TEST_CRITERIA.md section 6); default "ollama": below
+        if agents_provider != "groq":
+            raise ValueError(f"c3_agents_llm.provider must be {AGENT_PROVIDER_DEFAULT!r} or 'groq', "
+                             f"not {agents_provider!r}")
+        if shared is not None and "c3_agents_groq" in shared:
+            return shared["c3_agents_groq"]
+        llm = GroqLLM.from_agent_config(config)
+        if shared is not None:
+            shared["c3_agents_groq"] = llm
+        return llm
     if provider not in PROVIDERS + STUDY2_PROVIDERS:
         raise ValueError(f"model.provider must be one of {PROVIDERS} (Study 2 also: {STUDY2_PROVIDERS}), "
                          f"not {provider!r}")

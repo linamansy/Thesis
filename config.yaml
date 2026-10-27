@@ -131,6 +131,28 @@ openrouter:
   api_max_retries: 5          # extra attempts on rate limits (429), server errors, timeouts (waits 2, 4, 8, ... s)
   reasoning_enabled: false    # sent as OpenRouter's reasoning switch {"enabled": false}: thinking off, as model.think
 
+c3_agents_llm:
+  # Provider switch for the C3 mediation agents ONLY (run_experiment.create_llm; the generator is never affected).
+  # "ollama" (default, every study run) = the agents use the model block above, exactly as before.
+  # "groq" = stronger-model mediation diagnostic only (docs/MEDIATION_TEST_CRITERIA.md section 6,
+  # scripts/run_mediation_strong.py, which sets it in memory; this file keeps ollama). Same prompts; temperature,
+  # seed and max_tokens from llm; GROQ_API_KEY from .env.
+  provider: ollama
+  groq:
+    # Model chosen by rule (27 Oct 2026, console.groq.com/docs/models): the largest PRODUCTION text model that is not
+    # gpt-oss (the silver annotator's family), supports JSON output (JSON object mode: all Groq models) and >= 16k
+    # context. Production text models: llama-3.1-8b-instant, llama-3.3-70b-versatile, openai/gpt-oss-20b,
+    # openai/gpt-oss-120b -> llama-3.3-70b-versatile (70B, 131,072 tokens context, 32,768 max completion tokens).
+    model: llama-3.3-70b-versatile
+    json_mode: true             # response_format {"type": "json_object"}
+    base_url: https://api.groq.com/openai/v1
+    timeout_seconds: 120
+    api_max_retries: 5          # server errors and timeouts (waits 2, 4, 8, ... s)
+    max_rate_limit_wait_seconds: 900   # 429: wait as Groq asks and resend (recorded as a connection retry); longer = stop
+    max_rate_limit_waits: 100
+    cache_dir: results/diagnostics/mediation_test_strong/cache   # one file per request (SHA-256 of the request body)
+    output_dir: results/diagnostics/mediation_test_strong        # <model id>/dev/: answers, logs, metrics, report
+
 mediation:
   # C3 mediation version (fix C2, 19 Oct 2026). v1 = Study 1 (git tag c3-v1-study1 = commit aa1ca1e). The SHA-256 of
   # every C3 prompt part (agent prompts, output schemas, retry note, block template) is stored in c3_hashes_file;

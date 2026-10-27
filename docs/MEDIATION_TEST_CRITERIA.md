@@ -58,3 +58,8 @@ The task that runs these measurements must contain the keyword **REAL RUN**. Thi
 - **(a) T5 wording correction:** step_quote is checked against the DESCRIPTION, as rule R6 says; by R6, T5 = 1/1.
 - **(b) Diagnostic:** same test, setting O, 8 development variants + base cases, with one stronger open-source model
   on Groq; logic unchanged; result decides only whether the model is the bottleneck.
+- **Model (picked by rule, 27 Oct 2026, from console.groq.com/docs/models):** the largest production text model on
+  Groq that is not gpt-oss (silver), supports JSON output and has >= 16k context. Production text models:
+  llama-3.1-8b-instant, llama-3.3-70b-versatile, openai/gpt-oss-20b, openai/gpt-oss-120b -> **`llama-3.3-70b-versatile`**
+  (131,072 tokens context; JSON object mode). In `config.yaml c3_agents_llm.groq.model`; the agents' default stays
+  Ollama (`c3_agents_llm.provider: ollama`). Script: `scripts/run_mediation_strong.py`.

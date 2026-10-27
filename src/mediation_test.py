@@ -287,12 +287,12 @@ def metrics(records: list[dict], top5: dict, config: dict) -> dict:
 
 # ---------- report ----------
 
-def report(m: dict, group: str, targets: bool) -> str:
+def report(m: dict, group: str, targets: bool, model_label: str = "qwen3:8b") -> str:
     s = m["summary"]
     n = s["n_variants"]
     title = "development set" if group == "dev" else "held-out set (measured once, report only)"
     lines = [f"# Mediation test, {title}", "",
-             "docs/MEDIATION_TEST_CRITERIA.md (commit e01ef1c). C3 v2 agents only, qwen3:8b, no BPMN generation.", "",
+             "docs/MEDIATION_TEST_CRITERIA.md (commit e01ef1c). C3 v2 agents only, " + model_label + ", no BPMN generation.", "",
              "## T1-T5", "", "| measure | result | target |", "|---|---|---|",
              f"| T1 target hit (O) | {s['T1_hits']}/{n} | {'>= 6/8' if targets else 'none (report only)'} |",
              f"| T2 control (O) | {s['T2_pass']}/{n} | {'>= 7/8' if targets else 'none (report only)'} |",
@@ -331,17 +331,22 @@ def report(m: dict, group: str, targets: bool) -> str:
     return "\n".join(lines) + "\n"
 
 
-def write_outputs(config: dict, group: str, records: list[dict], top5: dict, out_dir: Path, extra: dict) -> dict:
+def write_outputs(config: dict, group: str, records: list[dict], top5: dict, out_dir: Path, extra: dict,
+                  model_label: str = "qwen3:8b") -> dict:
     m = metrics(records, top5, config)
     m["summary"].update(extra)
     (out_dir / "metrics.json").write_text(json.dumps(m, indent=2, ensure_ascii=False), encoding="utf-8")
-    (out_dir / "report.md").write_text(report(m, group, group == "dev"), encoding="utf-8")
+    (out_dir / "report.md").write_text(report(m, group, group == "dev", model_label), encoding="utf-8")
     return m
 
 
 # ---------- steps 2 and 4: real run ----------
 
-def run(config: dict, group: str) -> None:
+def run(config: dict, group: str, llm=None, out_dir: Path | None = None, run_settings: tuple = SETTINGS,
+        model_label: str = "qwen3:8b") -> dict:
+    """llm, out_dir, run_settings, model_label: given only by the stronger-model diagnostic
+    (scripts/run_mediation_strong.py, docs/MEDIATION_TEST_CRITERIA.md section 6). Without them: qwen3:8b on Ollama
+    with its digest and version checks, settings R and O, as in steps 2 and 4."""
     from run_experiment import create_llm, ollama_settings
     from src.agents.applicability_agent_v2 import ApplicabilityAgentV2
     from src.agents.relevance_agent_v2 import RelevanceAgentV2
@@ -354,19 +359,23 @@ def run(config: dict, group: str) -> None:
 
     mt = config["mediation_test"]
     base_dir = project_path(mt["output_dir"])
-    out_dir = base_dir / group
+    out_dir = out_dir or base_dir / group
     if group == "heldout" and not (base_dir / "dev" / "metrics.json").exists():
         sys.exit("Not started: the held-out set runs only after the development metrics (step 3)")
     top5 = json.loads(project_path(mt["top5_file"]).read_text(encoding="utf-8"))
     view = study2_view(config)
-    try:
-        settings = ollama_settings(view)    # model digest = model.ollama_model_digest, server settings
-        expected = str(config["study2_gdpr"]["ollama_version"])
-        if settings.get("ollama_version") != expected:
-            raise ValueError(f"Ollama is {settings.get('ollama_version')!r}, study2_gdpr.ollama_version is {expected!r}")
-        llm = create_llm(view, "relevance", {})
-    except (ValueError, FileNotFoundError, LLMUnavailableError) as e:
-        sys.exit(f"Not started: {e}")
+    if llm is None:
+        try:
+            settings = ollama_settings(view)    # model digest = model.ollama_model_digest, server settings
+            expected = str(config["study2_gdpr"]["ollama_version"])
+            if settings.get("ollama_version") != expected:
+                raise ValueError(f"Ollama is {settings.get('ollama_version')!r}, study2_gdpr.ollama_version is {expected!r}")
+            llm = create_llm(view, "relevance", {})
+        except (ValueError, FileNotFoundError, LLMUnavailableError) as e:
+            sys.exit(f"Not started: {e}")
+        extra = {"ollama_version": settings["ollama_version"], "model_digest": settings["generator_digest"]}
+    else:
+        extra = {"model": llm.model}
 
     log_dir = out_dir / "logs"
     condition = f"{mt['log_condition']}_{group}"
@@ -381,7 +390,7 @@ def run(config: dict, group: str) -> None:
     cases_dir = project_path(config["paths"]["cases"])
     for vid in group_variants(config, group):
         v = top5["variants"][vid]
-        for setting in SETTINGS:
+        for setting in run_settings:
             passages = sorted(v[setting], key=lambda p: p["rank"])
             for role, case_id in (("variant", vid), ("base", v["base_case"])):
                 if (vid, setting, role) in done:
@@ -396,9 +405,9 @@ def run(config: dict, group: str) -> None:
                 out_dir.mkdir(parents=True, exist_ok=True)
                 answers_path.write_text(json.dumps(records, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    extra = {"ollama_version": settings["ollama_version"], "model_digest": settings["generator_digest"]}
-    m = write_outputs(config, group, records, top5, out_dir, extra)
+    m = write_outputs(config, group, records, top5, out_dir, extra, model_label)
     print(json.dumps(m["summary"], indent=2))
+    return m
 
 
 def main(argv: list[str] | None = None) -> None:
