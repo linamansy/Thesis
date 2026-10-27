@@ -1,0 +1,76 @@
+{
+  "description": "Study 2 law corpus: the five laws of docs/STUDY2_CORPUS_RULE.md section 1, searched together for every case. Only the articles kept by the approved table (section 3 of that file) become passages (src/build_study2_corpus.py).",
+  "format_note": "Same fields as data/knowledge/sources.json (list key 'directives', so DirectiveChunker can read it), plus: raw_dir (the folder of the raw file; GDPR, LPD and ECD reuse the files already in the repository), format (xhtml = Official Journal XHTML, read by DirectiveChunker; consolidated_xhtml = consolidated EUR-Lex XHTML, read by src/consolidated_xhtml_study2.py; legacy_html = old EUR-Lex HTML, read through src/legacy_html_study2_laws.py), version, and selection_heading (the heading of the law's table in docs/STUDY2_CORPUS_RULE.md). short_name and number are those of the earlier corpora, so the passage headings are the same.",
+  "directives": [
+    {
+      "id_prefix": "GDPR",
+      "short_name": "General Data Protection Regulation",
+      "number": "2016/679",
+      "celex": "32016R0679",
+      "version": "original OJ text (OJ L 119, 4.5.2016), no amending acts",
+      "file": "GDPR_2016_679.html",
+      "raw_dir": "data/knowledge_gdpr/raw",
+      "format": "xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/32016R0679",
+      "download_date": "2026-10-24",
+      "sha256": "962539af03738bf552319ff4ce42d69e5f95a576307c4dfed7bf87e81b646b9d",
+      "selection_heading": "### GDPR (EU) 2016/679"
+    },
+    {
+      "id_prefix": "CRD",
+      "short_name": "Consumer Rights Directive",
+      "number": "2011/83/EU",
+      "celex": "02011L0083-20220528",
+      "version": "consolidated text 02011L0083-20220528 (incl. Directive (EU) 2015/2302 and (EU) 2019/2161), 28.5.2022",
+      "file": "CRD_2011_83_consolidated_20220528.html",
+      "raw_dir": "data/knowledge_study2_corpus/raw",
+      "format": "consolidated_xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/02011L0083-20220528",
+      "download_date": "2026-10-27",
+      "sha256": "23b2e4199b115ac65876ec315cdf623abea24db69580f41e32b651e155540cfe",
+      "selection_heading": "### Consumer Rights Directive 2011/83/EU (consolidated 28.5.2022)"
+    },
+    {
+      "id_prefix": "LPD",
+      "short_name": "Late Payment Directive",
+      "number": "2011/7/EU",
+      "celex": "32011L0007",
+      "version": "original OJ text (OJ L 48, 23.2.2011)",
+      "file": "LPD_2011_7.html",
+      "raw_dir": "data/knowledge/raw",
+      "format": "xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/32011L0007",
+      "download_date": "2026-10-14",
+      "sha256": "629ef52ec778231f930dc82d7c5a0698bb6f6385b1d051e741451541cb03be01",
+      "selection_heading": "### Late Payment Directive 2011/7/EU"
+    },
+    {
+      "id_prefix": "SGD",
+      "short_name": "Sale of Goods Directive",
+      "number": "(EU) 2019/771",
+      "celex": "32019L0771",
+      "version": "original OJ text (OJ L 136, 22.5.2019)",
+      "file": "SGD_2019_771.html",
+      "raw_dir": "data/knowledge_study2_corpus/raw",
+      "format": "xhtml",
+      "requested_url": "https://publications.europa.eu/resource/celex/32019L0771",
+      "download_date": "2026-10-27",
+      "sha256": "b40ba573f6a1800cf766c0a89fd894e99c45a2ff7e1418ff76a77a1b3e9632d6",
+      "selection_heading": "### Sale of Goods Directive (EU) 2019/771"
+    },
+    {
+      "id_prefix": "ECD",
+      "short_name": "e-Commerce Directive",
+      "number": "2000/31/EC",
+      "celex": "32000L0031",
+      "version": "original OJ text (OJ L 178, 17.7.2000), legacy HTML",
+      "file": "ECD_2000_31.html",
+      "raw_dir": "data/knowledge_study2/raw",
+      "format": "legacy_html",
+      "requested_url": "https://publications.europa.eu/resource/celex/32000L0031",
+      "download_date": "2026-10-24",
+      "sha256": "ace6f4c0e50a12845be213ad6094ce38f06a5dd2784fdf07b91b7d2e19f0eaaf",
+      "selection_heading": "### e-Commerce Directive 2000/31/EC"
+    }
+  ]
+}

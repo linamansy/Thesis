@@ -425,6 +425,15 @@ study2_laws:
   corpus: gdpr_only               # result of the decision rule (24 Oct 2026): combined 0 applicable, not higher
                                   # than 3, so Study 2 keeps study2_gdpr.frozen_retrieval (GDPR Chapters I-V, rerank)
 
+study2_corpus:
+  # STUDY 2 law corpus (added 27 Oct 2026): GDPR + CRD (consolidated 28.5.2022) + LPD + SGD + ECD, kept articles only
+  # (rule and approved keep/exclude tables: docs/STUDY2_CORPUS_RULE.md). Built and frozen by src/build_study2_corpus.py;
+  # the Study 1 corpus and the GDPR-only corpus are only read. Not used by any retrieval yet.
+  sources: data/knowledge_study2_corpus/sources.json       # the five laws, their raw files and SHA-256
+  selection_doc: docs/STUDY2_CORPUS_RULE.md                 # section 3 tables = which articles are kept
+  passages: data/knowledge_study2_corpus/passages.jsonl     # one passage per paragraph of a kept article
+  manifest: data/knowledge_study2_corpus/manifest.json      # passage count per law + SHA-256 of passages
+
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)
   obligation_words: [must, shall, is required to]   # an IF item of the split containing one of these -> Split invalid
@@ -439,6 +448,11 @@ c3_v2:
   processor_fact: "the organisation handles personal data on behalf of another organisation"   # checked like an IF item
   scope_conditions:               # R2: passage id prefix -> scope IF item added by code to every passage of that law
     "GDPR-": "the process handles information about identifiable people"
+    # R2 extended to the Study 2 corpus laws (27 Oct 2026, docs/STUDY2_CORPUS_RULE.md section 5); quote-checked like GDPR-
+    "CRD-": "the buyer is a consumer (a private person, not buying for a business)"
+    "SGD-": "goods are sold to a consumer"
+    "ECD-": "the service is offered online / at a distance by electronic means"
+    "LPD-": "the payment is between two businesses (or a business and a public authority)"
   requirement_checks:   # code checks of RequirementAgentV2's answer (section 7, criteria 4-6; src/mediation/requirement_checker_v2.py)
     max_words: 40
     max_sentences: 2

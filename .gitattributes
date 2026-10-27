@@ -3,7 +3,11 @@
 data/knowledge/raw/*.html -text
 data/knowledge_gdpr/raw/*.html -text
 data/knowledge_study2/raw/*.html -text
+data/knowledge_study2_corpus/raw/*.html -text
 
 # Keep run outputs byte-for-byte identical, so their SHA-256 hashes in results/MANIFEST*.csv stay valid.
 results/** -text
 data/knowledge_study2/article_selection.json -text
+# The frozen Study 2 law corpus: its SHA-256 is in data/knowledge_study2_corpus/manifest.json.
+data/knowledge_study2_corpus/passages.jsonl -text
+data/knowledge_study2_corpus/sources.json -text
