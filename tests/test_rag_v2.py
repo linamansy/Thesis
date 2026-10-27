@@ -10,7 +10,7 @@ import json
 import pytest
 
 from src.config import load_config, project_path
-from src.evaluate_retrieval_v2 import evaluate
+from src.evaluate_retrieval_v2 import evaluate, expected_law_share, law_of
 from src.freeze_retrieval_gdpr import GdprDevFreezer
 from src.rag_v2 import RagV2Retriever, corpus_view
 from src.retrieval.cross_encoder_reranker import CrossEncoderReranker
@@ -174,3 +174,24 @@ def test_evaluation_with_expansion_off_has_no_via_expansion():
     retrievals = {"01": {"passages": [{"passage_id": "A-1"}], "candidates": [{"rank": 1, "passage_id": "A-1"}]}}
     report = evaluate(retrievals, [{"case_id": "01", "targets": ["A-1"]}], top_k=5)
     assert report["items"][0]["via_expansion"] is None and report["summary"]["hit_rate_at_5"] == 1.0
+
+
+# ---------- M2, expected-law share ----------
+
+def test_expected_law_share_per_case_and_mean():
+    retrievals = {"01": case(["CRD-Art9-1", "GDPR-Art13-1", "LPD-Art3-1", "ECD-Art10-1", "SGD-Art14-1"], []),
+                  "10": case(["GDPR-Art32-1"] * 5, [])}
+    m2 = expected_law_share(retrievals, {"01": ["CRD", "ECD", "GDPR"], "10": ["GDPR"]}, ["01", "10"], top_k=5)
+    assert m2["per_case"]["01"]["laws"] == ["CRD", "GDPR", "LPD", "ECD", "SGD"]
+    assert m2["per_case"]["01"]["share"] == 0.6 and m2["per_case"]["10"]["share"] == 1.0 and m2["mean"] == 0.8
+    assert law_of("CRD-Art6a-1-a") == "CRD"
+
+
+def test_expected_laws_in_config_equal_the_criteria_doc_table():
+    doc = project_path("docs/RAG_V2_CRITERIA.md").read_text(encoding="utf-8")
+    table = {}
+    for line in doc.splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) == 3 and cells[0].isdigit():
+            table[cells[0]] = [law.strip() for law in cells[2].split(",")]
+    assert table == CONFIG["rag_v2"]["expected_laws"] and len(table) == 13

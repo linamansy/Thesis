@@ -460,9 +460,30 @@ rag_v2:
   # measurement and freeze follow after the retrieval test set and criteria. Same embedding model, BM25, RRF and
   # reranker settings as the frozen GDPR dev retrieval (retrieval + reranker sections, GdprDevFreezer); src/rag_v2.py.
   dense_index_dir: data/retrieval_study2_corpus/dense_index   # own FAISS index for the Study 2 corpus
+  # DECIDED 27 Oct 2026 by docs/RAG_V2_CRITERIA.md section 3 (results/diagnostics/rag_v2_eval/20261027T123459Z = OFF,
+  # 20261027T123725Z = ON): M1 OFF 2/8, ON 1/8 -> M1 does not rise -> OFF. Mean M2 OFF 0.9143, ON 0.8857.
   sibling_expansion: false      # ON: after the hybrid top 20 (reranker.candidates), every other paragraph of the same
                                 # article joins the candidates; all are reranked and reranker.top_k (5) are kept
   evaluation_dir: results/diagnostics/rag_v2_eval   # src/evaluate_retrieval_v2.py, one folder per evaluation
+  # M2 (docs/RAG_V2_CRITERIA.md section 1, written before any retrieval run; copied here unchanged, tested against
+  # the doc): case -> the laws (passage id prefix) expected for that case
+  expected_laws:
+    "01": [CRD, ECD, GDPR]
+    "06": [CRD, SGD, ECD, GDPR]
+    "11": [CRD, GDPR]
+    "13": [SGD, GDPR]
+    "17": [CRD, SGD, ECD, GDPR]
+    "19": [CRD, SGD, ECD, GDPR]
+    "45": [CRD, SGD, ECD, GDPR]
+    "03": [LPD, GDPR]
+    "05": [LPD, GDPR]
+    "21": [LPD, GDPR]
+    "46": [LPD, GDPR]
+    "10": [GDPR]
+    "37": [GDPR]
+  test_set: data/retrieval_study2_corpus/retrieval_test_set.json   # the 8 variants (M1)
+  frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_v2.json   # src/freeze_rag_v2.py (13 cases + 8 variants)
+  frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_v2_manifest.json   # its SHA-256
 
 c3_v2:
   # C3 v2 mediation boxes 2-4 (docs/C3_V2_DEVELOPMENT.md; src/agents/applicability_agent_v2.py, src/orchestrator_v2.py)

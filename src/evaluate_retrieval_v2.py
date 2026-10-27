@@ -9,13 +9,19 @@ Every (case, target passage) pair is one evaluated item:
   rank            its rank among ALL reranked candidates (1 = best), or None if it is not a candidate
   in_candidates   it is in the candidate set (hybrid top 20, plus siblings if sibling expansion is ON)
   via_expansion   it entered the candidates through sibling expansion (None when expansion is OFF)
-Summary: hit rate @5 = items with in_top_k / all items.
+Summary: hit rate @5 = items with in_top_k / all items (M1 of docs/RAG_V2_CRITERIA.md section 2).
 
-evaluate() only counts (no model; tested in tests/test_rag_v2.py). main() runs RagV2Retriever (src/rag_v2.py) on the
-Study 2 corpus and writes report.json into a new folder under rag_v2.evaluation_dir. Nothing is frozen.
+M2, expected-law share (criteria section 2): for each real case given with --m2-cases, the share of its top 5
+passages whose law (passage id prefix, e.g. "CRD") is an expected law of the case (config.yaml rag_v2.expected_laws),
+and the mean over those cases.
 
-Run from the project root (not run yet; the retrieval test set and criteria come first):
-  .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --items <items.json> [--expansion on|off]
+evaluate() and expected_law_share() only count (no model; tested in tests/test_rag_v2.py). main() runs RagV2Retriever
+(src/rag_v2.py) on the Study 2 corpus, or with --frozen only reads a frozen file (no model), and writes report.json
+into a new folder under rag_v2.evaluation_dir. Nothing is frozen here.
+
+Run from the project root:
+  .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --items <items.json> --m2-cases 01 06 ... [--expansion on|off]
+  .venv\\Scripts\\python.exe -m src.evaluate_retrieval_v2 --frozen <frozen.json> --m2-cases 03 05 ...
 """
 
 import argparse
@@ -48,25 +54,55 @@ def evaluate(retrievals: dict[str, dict], items: list[dict], top_k: int) -> dict
     return {"items": rows, "summary": summary}
 
 
+def law_of(passage_id: str) -> str:
+    """The law of a passage = its id prefix ("CRD-Art9-1" -> "CRD")."""
+    return passage_id.split("-", 1)[0]
+
+
+def expected_law_share(retrievals: dict[str, dict], expected_laws: dict[str, list[str]], case_ids: list[str],
+                       top_k: int) -> dict:
+    """M2: per case, the share of its top_k passages from an expected law; and the mean over the cases."""
+    per_case = {}
+    for case_id in case_ids:
+        top = [p["passage_id"] for p in retrievals[case_id]["passages"]][:top_k]
+        laws = [law_of(pid) for pid in top]
+        n_expected = sum(law in expected_laws[case_id] for law in laws)
+        per_case[case_id] = {"top_k": top, "laws": laws, "expected_laws": expected_laws[case_id],
+                             "n_expected": n_expected, "share": round(n_expected / len(top), 4)}
+    shares = [c["n_expected"] / len(c["top_k"]) for c in per_case.values()]
+    return {"per_case": per_case, "mean": round(sum(shares) / len(shares), 4) if shares else None}
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Evaluate RAG v2 retrieval against target passages.")
-    parser.add_argument("--items", required=True, help="JSON file with the items (case_id + targets)")
+    parser.add_argument("--items", help="JSON file with the items (case_id + targets), for M1")
+    parser.add_argument("--m2-cases", nargs="+", default=[], help="real case ids for M2 (expected-law share)")
     parser.add_argument("--expansion", choices=["on", "off"], help="sibling expansion (default: config.yaml)")
+    parser.add_argument("--frozen", help="read the retrievals from this frozen file instead of running retrieval")
     args = parser.parse_args(argv)
-
-    from src.rag_v2 import RagV2Retriever, corpus_view   # loads the models only when really run
+    if not args.items and not args.m2_cases:
+        parser.error("give --items and/or --m2-cases")
 
     config = load_config()
-    items = json.loads(Path(args.items).read_text(encoding="utf-8"))["items"]
-    expansion = None if args.expansion is None else args.expansion == "on"
-    retriever = RagV2Retriever(corpus_view(config), sibling_expansion=expansion)
-    case_ids = list(dict.fromkeys(item["case_id"] for item in items))
-    retrievals = {case_id: retriever.retrieve_case_reranked(case_id) for case_id in case_ids}
+    items = json.loads(Path(args.items).read_text(encoding="utf-8"))["items"] if args.items else []
+    case_ids = list(dict.fromkeys([item["case_id"] for item in items] + args.m2_cases))
+    if args.frozen:
+        frozen = json.loads(Path(args.frozen).read_text(encoding="utf-8"))
+        retrievals = {case_id: frozen["cases"][case_id] for case_id in case_ids}
+        expansion = frozen["rag_v2"]["sibling_expansion"]
+    else:
+        from src.rag_v2 import RagV2Retriever, corpus_view   # loads the models only when really run
+        expansion = None if args.expansion is None else args.expansion == "on"
+        retriever = RagV2Retriever(corpus_view(config), sibling_expansion=expansion)
+        expansion = retriever.sibling_expansion
+        retrievals = {case_id: retriever.retrieve_case_reranked(case_id) for case_id in case_ids}
     top_k = config["reranker"]["top_k"]
     report = evaluate(retrievals, items, top_k)
-    report["settings"] = {"items_file": args.items, "sibling_expansion": retriever.sibling_expansion,
-                          "corpus": config["study2_corpus"]["passages"], "retrieval": config["retrieval"],
-                          "reranker": config["reranker"]}
+    if args.m2_cases:
+        report["m2"] = expected_law_share(retrievals, config["rag_v2"]["expected_laws"], args.m2_cases, top_k)
+    report["settings"] = {"items_file": args.items, "m2_cases": args.m2_cases, "frozen_file": args.frozen,
+                          "sibling_expansion": expansion, "corpus": config["study2_corpus"]["passages"],
+                          "retrieval": config["retrieval"], "reranker": config["reranker"]}
     report["retrievals"] = retrievals
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
@@ -76,7 +112,14 @@ def main(argv: list[str] | None = None) -> None:
     for row in report["items"]:
         print(f"{row['case_id']:<6}{row['target']:<20}top{top_k}={'yes' if row['in_top_k'] else 'no ':<4}"
               f"rank={row['rank']}  candidate={'yes' if row['in_candidates'] else 'no'}")
-    print(f"\nhit rate @{top_k}: {report['summary'][f'hit_rate_at_{top_k}']}  ->  {out_dir / 'report.json'}")
+    if items:
+        print(f"\nM1 hit rate @{top_k}: {report['summary']['n_in_top_k']}/{report['summary']['n_items']} "
+              f"({report['summary'][f'hit_rate_at_{top_k}']})")
+    if args.m2_cases:
+        for case_id, row in report["m2"]["per_case"].items():
+            print(f"M2 {case_id:<4}{row['share']:<6}{' '.join(row['top_k'])}")
+        print(f"M2 mean: {report['m2']['mean']}")
+    print(f"sibling expansion: {expansion}  ->  {out_dir / 'report.json'}")
 
 
 if __name__ == "__main__":
