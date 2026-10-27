@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art46-5",
+  "created_at": "2026-10-27T14:49:37+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.94,
+  "passage_text_sha256": "b25c3cf8974f53380c7c7cda267dc6a9c903e288fec10bc2cef2cf069b222918",
+  "prompt_sha256": "8729bc0ab973510cf59a93b1ef742e266b73d47c6a35d4cbecbdf9a4791531a0",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 46: Transfers subject to appropriate safeguards\n5. Authorisations by a Member State or supervisory authority on the basis of Article 26(2) of Directive 95/46/EC shall remain valid until amended, replaced or repealed, if necessary, by that supervisory authority. Decisions adopted by the Commission on the basis of Article 26(4) of Directive 95/46/EC shall remain in force until amended, replaced or repealed, if necessary, by a Commission Decision adopted in accordance with paragraph 2 of this Article.\n",
+  "raw_output": "This applies when a business transfers customer data to another country, especially if they have received approval from a data protection authority. The approval remains valid unless changed by the authority or a new decision from the Commission.",
+  "enrichment": "This applies when a business transfers customer data to another country, especially if they have received approval from a data protection authority. The approval remains valid unless changed by the authority or a new decision from the Commission.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

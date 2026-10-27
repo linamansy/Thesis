@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art6-1-e",
+  "created_at": "2026-10-27T14:49:51+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.11,
+  "passage_text_sha256": "7ce535857be051400dd45ebbbb863fd7b0f7c742d0d44d673ac33c362d4bb025",
+  "prompt_sha256": "a051cd734a793c5b8098fd8d34fa7ebbfb216d84fa5020bfcd9bb8647c3cdae6",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(e) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided;\n(ea) where applicable, that the price was personalised on the basis of automated decision-making;\n(f) the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate;\n",
+  "raw_output": "When a business sells goods or services online or by phone, they must clearly state all costs, including taxes and delivery charges, before the customer agrees to the purchase. This applies when a customer places an order and the business is involved.",
+  "enrichment": "When a business sells goods or services online or by phone, they must clearly state all costs, including taxes and delivery charges, before the customer agrees to the purchase. This applies when a customer places an order and the business is involved.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

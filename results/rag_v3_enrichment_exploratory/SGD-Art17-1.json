@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art17-1",
+  "created_at": "2026-10-27T14:51:43+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.11,
+  "passage_text_sha256": "67324a92e08385218ef15e10a0aef117a867b41403cb5b99baf5879141680677",
+  "prompt_sha256": "46b4f3781ad8bcbb9838ecbbc0d8dd70635d219587657ccbe16fc6d459058ee8",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 17: Commercial guarantees\n1. Any commercial guarantee shall be binding on the guarantor under the conditions laid down in the commercial guarantee statement and associated advertising available at the time, or before the conclusion, of the contract. Under the conditions laid down in this Article and without prejudice to any other applicable provisions of Union or national law, where a producer offers to the consumer a commercial guarantee of durability for certain goods for a certain period of time, the producer shall be liable directly to the consumer, during the entire period of the commercial guarantee of durability for repair or replacement of the goods in accordance with Article 14. The producer may offer to the consumer more favourable conditions in the commercial guarantee of durability statement.\nIf the conditions laid out in the commercial guarantee statement are less advantageous to the consumer than those laid down in the associated advertising, the commercial guarantee shall be binding under the conditions laid down in the advertising relating to the commercial guarantee, unless, before the conclusion of the contract, the associated advertising was corrected in the same way or in a comparable way to that in which it was made.\n",
+  "raw_output": "When a business sells products with a warranty, the warranty terms must match the advertised conditions, and the producer is directly responsible for repairs or replacements during the warranty period. This applies when a customer requests a repair or replacement under the warranty.",
+  "enrichment": "When a business sells products with a warranty, the warranty terms must match the advertised conditions, and the producer is directly responsible for repairs or replacements during the warranty period. This applies when a customer requests a repair or replacement under the warranty.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

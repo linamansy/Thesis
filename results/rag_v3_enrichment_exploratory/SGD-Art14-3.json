@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art14-3",
+  "created_at": "2026-10-27T14:51:37+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.14,
+  "passage_text_sha256": "4c6177899d379800d905b65b81bdde097e8db6e45449f07afb8bba96cf93ff6d",
+  "prompt_sha256": "9eff90415dd5a20a2dc715faaa25d761fd06591d1f9f25df70fd784aab90fea8",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n3. Where a repair requires the removal of goods that had been installed in a manner consistent with their nature and purpose before the lack of conformity became apparent, or where such goods are to be replaced, the obligation to repair or replace the goods shall include the removal of the non-conforming goods, and the installation of replacement goods or repaired goods, or bearing the costs of that removal and installation.\n",
+  "raw_output": "When a customer returns faulty installed goods, the business must remove the faulty items and install replacements or repaired goods, or cover the costs of that removal and installation. This applies during the repair or replacement step in customer service, involving the customer and the business.",
+  "enrichment": "When a customer returns faulty installed goods, the business must remove the faulty items and install replacements or repaired goods, or cover the costs of that removal and installation. This applies during the repair or replacement step in customer service, involving the customer and the business.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

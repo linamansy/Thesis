@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art7-3",
+  "created_at": "2026-10-27T14:51:15+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.88,
+  "passage_text_sha256": "828ce25452c0f50fc8d2a43d0cf5cd33995f7a0f5960a1163e8868aa72e8b369",
+  "prompt_sha256": "050ccc6f3080c8bcb2f58655579e8b483d96081be9699bf370cc688f3166a348",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n3. In the case of goods with digital elements, the seller shall ensure that the consumer is informed of and supplied with updates, including security updates, that are necessary to keep those goods in conformity, for the period of time:\n(a) that the consumer may reasonably expect given the type and purpose of the goods and the digital elements, and taking into account the circumstances and nature of the contract, where the sales contract provides for a single act of supply of the digital content or digital service; or\n(b) indicated in Article 10(2) or (5), as applicable, where the sales contract provides for a continuous supply of the digital content or digital service over a period of time.\n",
+  "raw_output": "This applies to businesses selling digital products or services. When a customer buys a digital item or service, the seller must provide necessary updates, including security updates, for the expected time period.",
+  "enrichment": "This applies to businesses selling digital products or services. When a customer buys a digital item or service, the seller must provide necessary updates, including security updates, for the expected time period.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

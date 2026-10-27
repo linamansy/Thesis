@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art16-2",
+  "created_at": "2026-10-27T14:51:41+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.2,
+  "passage_text_sha256": "676bb283dceac816d9c7e2a7b53ddd414023cecb6bb8a4b87750245c4f784dbc",
+  "prompt_sha256": "7d438a7d3abdd4b786319050178d4a9825b5f0614e2931505c320a25ba902994",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n2. Where the lack of conformity relates to only some of the goods delivered under the sales contract and there is a ground for termination of the sales contract pursuant to Article 13, the consumer may terminate the sales contract only in relation to those goods, and in relation to any other goods which the consumer acquired together with the non-conforming goods if the consumer cannot reasonably be expected to accept to keep only the conforming goods.\n",
+  "raw_output": "If a customer orders multiple items and one is faulty, they can cancel the whole order but must keep the good items if they can't reasonably keep just the faulty ones. This applies when a customer returns goods because some items in the order don't meet the agreed standards.",
+  "enrichment": "If a customer orders multiple items and one is faulty, they can cancel the whole order but must keep the good items if they can't reasonably keep just the faulty ones. This applies when a customer returns goods because some items in the order don't meet the agreed standards.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

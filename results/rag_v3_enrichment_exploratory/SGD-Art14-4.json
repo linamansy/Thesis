@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art14-4",
+  "created_at": "2026-10-27T14:51:38+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.14,
+  "passage_text_sha256": "62533b32b6851d318a4f224a514e2913e64448b6cb5fa5ad1724f811173394a5",
+  "prompt_sha256": "2fb02d4609426b52b8bb69841a428ddc224a67fba5e67025158bd0aa0a33f829",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n4. The consumer shall not be liable to pay for normal use made of the replaced goods during the period prior to their replacement.\n",
+  "raw_output": "When a customer returns a faulty product for repair or replacement, the business should not charge for normal use of the replaced item during the time before it was fixed. This applies when the customer is handling a return and the business is responsible for the repair or replacement.",
+  "enrichment": "When a customer returns a faulty product for repair or replacement, the business should not charge for normal use of the replaced item during the time before it was fixed. This applies when the customer is handling a return and the business is responsible for the repair or replacement.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

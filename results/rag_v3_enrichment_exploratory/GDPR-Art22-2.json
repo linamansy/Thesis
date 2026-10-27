@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art22-2",
+  "created_at": "2026-10-27T14:48:07+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.84,
+  "passage_text_sha256": "06139227bac4df46bdc6127642b5dd048b414335b8eab708d9a244a671ff34f9",
+  "prompt_sha256": "6266d7d6f5726883c83a03f56ea521d9d347178d51efb44f18bd684830e39df2",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 22: Automated individual decision-making, including profiling\n2. Paragraph 1 shall not apply if the decision:\n(a) is necessary for entering into, or performance of, a contract between the data subject and a data controller;\n(b) is authorised by Union or Member State law to which the controller is subject and which also lays down suitable measures to safeguard the data subject's rights and freedoms and legitimate interests; or\n(c) is based on the data subject's explicit consent.\n",
+  "raw_output": "This applies when a business uses automated decisions, like approving credit or sending targeted ads, based on customer data. It involves the company making the decision and the customer whose data is used.",
+  "enrichment": "This applies when a business uses automated decisions, like approving credit or sending targeted ads, based on customer data. It involves the company making the decision and the customer whose data is used.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

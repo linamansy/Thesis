@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art25-2",
+  "created_at": "2026-10-27T14:48:15+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.34,
+  "passage_text_sha256": "f695d4e01a7dd2e45082aba9292b0c5b600a7e81672bdbc95a043537778782bc",
+  "prompt_sha256": "c5a7c9eb56b1c9bc115678d63a04aa73229d0446a91b3bf84f8cb318fda38a40",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 25: Data protection by design and by default\n2. The controller shall implement appropriate technical and organisational measures for ensuring that, by default, only personal data which are necessary for each specific purpose of the processing are processed. That obligation applies to the amount of personal data collected, the extent of their processing, the period of their storage and their accessibility. In particular, such measures shall ensure that by default personal data are not made accessible without the individual's intervention to an indefinite number of natural persons.\n",
+  "raw_output": "When a business collects customer information, it must only gather and keep the minimum necessary data needed for each purpose, and ensure that data is not easily shared with many people without the customer's permission. This applies to companies handling customer data in their daily operations, such as when taking orders or sending invoices.",
+  "enrichment": "When a business collects customer information, it must only gather and keep the minimum necessary data needed for each purpose, and ensure that data is not easily shared with many people without the customer's permission. This applies to companies handling customer data in their daily operations, such as when taking orders or sending invoices.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

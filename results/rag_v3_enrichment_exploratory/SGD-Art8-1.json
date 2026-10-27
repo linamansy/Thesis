@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art8-1",
+  "created_at": "2026-10-27T14:51:18+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.0,
+  "passage_text_sha256": "0a66107cbd0d6ca9a04514eef17c7fe0dea033b4b2304e18c3fcf0c43384a682",
+  "prompt_sha256": "2e6992ce0aff0dc6661b9c55dfeb1eba1be085029fd005de89fb2fe5b00c96cb",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 8: Incorrect installation of the goods\nAny lack of conformity resulting from the incorrect installation of the goods shall be regarded as lack of conformity of the goods, if:\n(a) the installation forms part of the sales contract and was carried out by the seller or under the seller's responsibility; or\n(b) the installation, intended to be carried out by the consumer, was done by the consumer and the incorrect installation was due to shortcomings in the installation instructions provided by the seller or, in the case of goods with digital elements, provided by the seller or by the supplier of the digital content or digital service.\n",
+  "raw_output": "This applies when a business sells products that need to be installed, such as electronics or home appliances. If the installation is done incorrectly because the seller provided poor instructions, the business is responsible for any issues that arise.",
+  "enrichment": "This applies when a business sells products that need to be installed, such as electronics or home appliances. If the installation is done incorrectly because the seller provided poor instructions, the business is responsible for any issues that arise.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

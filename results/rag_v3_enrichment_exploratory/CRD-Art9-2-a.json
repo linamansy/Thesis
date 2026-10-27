@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art9-2-a",
+  "created_at": "2026-10-27T14:50:26+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.05,
+  "passage_text_sha256": "9044c8be349dbf3c2d4afab7e16d7698efba3ff5df319398ed0342c33b4b753c",
+  "prompt_sha256": "4a39149a8b1bd6cbb05c4e07377810628bfda06c4b721cdffe9d0037af4467f1",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n2. Without prejudice to Article 10, the withdrawal period referred to in paragraph 1 of this Article shall expire after 14 days or, in cases where Member States have adopted rules in accordance with paragraph 1a of this Article, 30 days from:\n(a) in the case of service contracts, the day of the conclusion of the contract;\n(b) in the case of sales contracts, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the goods or:\n(i) in the case of multiple goods ordered by the consumer in one order and delivered separately, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last good;\n(ii) in the case of delivery of a good consisting of multiple lots or pieces, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last lot or piece;\n(iii) in the case of contracts for regular delivery of goods during defined period of time, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the first good;\n",
+  "raw_output": "This rule applies to online retailers when a customer receives goods, especially when multiple items are shipped together or in separate deliveries. The customer has 14 days from receiving the last item to change their mind and return it.",
+  "enrichment": "This rule applies to online retailers when a customer receives goods, especially when multiple items are shipped together or in separate deliveries. The customer has 14 days from receiving the last item to change their mind and return it.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

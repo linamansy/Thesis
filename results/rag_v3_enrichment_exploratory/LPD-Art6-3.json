@@ -1,0 +1,27 @@
+{
+  "passage_id": "LPD-Art6-3",
+  "created_at": "2026-10-27T14:51:10+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.01,
+  "passage_text_sha256": "d50181ac6ba323e85a290f77fe1b4164f2e709c36518ffd00cedecfdefec5096",
+  "prompt_sha256": "5e0541b82a400c4f2c1d4c4bd081076767c9410eec5f84909066ed765c9c2abe",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nLate Payment Directive (2011/7/EU) - Article 6: Compensation for recovery costs\n3. The creditor shall, in addition to the fixed sum referred to in paragraph 1, be entitled to obtain reasonable compensation from the debtor for any recovery costs exceeding that fixed sum and incurred due to the debtor’s late payment. This could include expenses incurred, inter alia, in instructing a lawyer or employing a debt collection agency.\n",
+  "raw_output": "When a business is owed money and the customer delays payment, the business can charge the customer for reasonable costs like legal fees or debt collection agency fees. This applies when the customer is late in paying an invoice or settling a debt.",
+  "enrichment": "When a business is owed money and the customer delays payment, the business can charge the customer for reasonable costs like legal fees or debt collection agency fees. This applies when the customer is late in paying an invoice or settling a debt.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

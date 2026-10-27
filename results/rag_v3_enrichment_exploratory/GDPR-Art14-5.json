@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art14-5",
+  "created_at": "2026-10-27T14:47:42+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.36,
+  "passage_text_sha256": "e0133d224be0844749fae6c816cd234eafbc82ff01bc0286616161ba4f0ea822",
+  "prompt_sha256": "f8006c82a86be6a2e666dd46e5520ec292ffc8621294d2d026db61cebe7e3977",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n5. Paragraphs 1 to 4 shall not apply where and insofar as:\n(a) the data subject already has the information;\n(b) the provision of such information proves impossible or would involve a disproportionate effort, in particular for processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes, subject to the conditions and safeguards referred to in Article 89(1) or in so far as the obligation referred to in paragraph 1 of this Article is likely to render impossible or seriously impair the achievement of the objectives of that processing. In such cases the controller shall take appropriate measures to protect the data subject's rights and freedoms and legitimate interests, including making the information publicly available;\n(c) obtaining or disclosure is expressly laid down by Union or Member State law to which the controller is subject and which provides appropriate measures to protect the data subject's legitimate interests; or\n(d) where the personal data must remain confidential subject to an obligation of professional secrecy regulated by Union or Member State law, including a statutory obligation of secrecy.\n",
+  "raw_output": "When a business collects customer data from a third party, not directly from the customer, they must still ensure the data subject's rights are protected. This applies when the data is used for public records, research, or statistics, and the business must make the information available to the public if required.",
+  "enrichment": "When a business collects customer data from a third party, not directly from the customer, they must still ensure the data subject's rights are protected. This applies when the data is used for public records, research, or statistics, and the business must make the information available to the public if required.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

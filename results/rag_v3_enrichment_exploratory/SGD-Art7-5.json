@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art7-5",
+  "created_at": "2026-10-27T14:51:17+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.12,
+  "passage_text_sha256": "f69c77f5cabc3f19100fa52b9c9ba16c5426eb2b85970bc4761f307ae18bde56",
+  "prompt_sha256": "ae33e8959fd42ec3c15768ffcdd97afd08846fbe0a73365a657f1ef9ab233804",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n5. There shall be no lack of conformity within the meaning of paragraph 1 or 3 if, at the time of the conclusion of the sales contract, the consumer was specifically informed that a particular characteristic of the goods was deviating from the objective requirements for conformity laid down in paragraph 1 or 3 and the consumer expressly and separately accepted that deviation when concluding the sales contract.\n",
+  "raw_output": "When a business sells products, if they inform the customer about a specific flaw in the product before the sale and the customer agrees to it, then the product is considered compliant. This applies during the sales process when the customer is making a purchase decision.",
+  "enrichment": "When a business sells products, if they inform the customer about a specific flaw in the product before the sale and the customer agrees to it, then the product is considered compliant. This applies during the sales process when the customer is making a purchase decision.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

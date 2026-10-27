@@ -1,0 +1,27 @@
+{
+  "passage_id": "LPD-Art4-3",
+  "created_at": "2026-10-27T14:51:04+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.99,
+  "passage_text_sha256": "7c46dfdaf90f072bc73edd3322f1824aa2feb1ffc44e75ba57c04e7c98558fc0",
+  "prompt_sha256": "c3de4cca48ef5f0508bff926e641ef29600e0903a0d3c8a87d40fb422ae08540",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nLate Payment Directive (2011/7/EU) - Article 4: Transactions between undertakings and public authorities\n3. Member States shall ensure that in commercial transactions where the debtor is a public authority:\n(a) the period for payment does not exceed any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of the receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date;\n(b) the date of receipt of the invoice is not subject to a contractual agreement between debtor and creditor.\n",
+  "raw_output": "This applies when a public authority receives goods or services from a business and is invoiced. The business must get paid within 30 days of receiving the invoice or the goods/services, whichever comes first.",
+  "enrichment": "This applies when a public authority receives goods or services from a business and is invoiced. The business must get paid within 30 days of receiving the invoice or the goods/services, whichever comes first.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

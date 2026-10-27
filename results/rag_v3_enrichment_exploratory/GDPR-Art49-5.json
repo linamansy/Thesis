@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art49-5",
+  "created_at": "2026-10-27T14:49:43+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.03,
+  "passage_text_sha256": "2563667d13760db94f1e0a7f456caee76884a238e9d08c03ab72b97bcc4d9521",
+  "prompt_sha256": "3932bc30304d8efb3b2a37a3cd13ef0388d109ebdd77235aebc9cbede71e1957",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 49: Derogations for specific situations\n5. In the absence of an adequacy decision, Union or Member State law may, for important reasons of public interest, expressly set limits to the transfer of specific categories of personal data to a third country or an international organisation. Member States shall notify such provisions to the Commission.\n",
+  "raw_output": "When a company transfers customer data to a country without an adequacy decision, they must check if their country's laws allow such transfers for public interest reasons. The company and the data protection authority are involved in ensuring this is done.",
+  "enrichment": "When a company transfers customer data to a country without an adequacy decision, they must check if their country's laws allow such transfers for public interest reasons. The company and the data protection authority are involved in ensuring this is done.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

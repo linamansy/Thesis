@@ -1,0 +1,27 @@
+{
+  "passage_id": "ECD-Art5-1-g",
+  "created_at": "2026-10-27T14:51:48+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.09,
+  "passage_text_sha256": "fbbfc35ab27c59b9383aaf91d62af5e0276e591cf5edb122398d59c5d69183d8",
+  "prompt_sha256": "d1a9db79eeb4de3c8345e8ae07e7de81f856a1b32cbf178e800f14247e481cdf",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\ne-Commerce Directive (2000/31/EC) - Article 5: General information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure that the service provider shall render easily, directly and permanently accessible to the recipients of the service and competent authorities, at least the following information:\n(g) where the service provider undertakes an activity that is subject to VAT, the identification number referred to in Article 22(1) of the sixth Council Directive 77/388/EEC of 17 May 1977 on the harmonisation of the laws of the Member States relating to turnover taxes - Common system of value added tax: uniform basis of assessment.\n",
+  "raw_output": "When a business sells goods or services online and is registered for VAT, they must display their VAT identification number on their website. This applies during the process of providing service details to customers and is handled by the business owner and their accounting team.",
+  "enrichment": "When a business sells goods or services online and is registered for VAT, they must display their VAT identification number on their website. This applies during the process of providing service details to customers and is handled by the business owner and their accounting team.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

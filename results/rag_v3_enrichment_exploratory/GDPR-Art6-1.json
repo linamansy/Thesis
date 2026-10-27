@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art6-1",
+  "created_at": "2026-10-27T14:47:00+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.16,
+  "passage_text_sha256": "c16f40c35247bb1902ac22abb840f571c07f52885f6b3d79387cb1058829454b",
+  "prompt_sha256": "0e417a28ac604adc417644b844919c0b21e7422470206bf768e5edca5cfc077b",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 6: Lawfulness of processing\n1. Processing shall be lawful only if and to the extent that at least one of the following applies:\n(a) the data subject has given consent to the processing of his or her personal data for one or more specific purposes;\n(b) processing is necessary for the performance of a contract to which the data subject is party or in order to take steps at the request of the data subject prior to entering into a contract;\n(c) processing is necessary for compliance with a legal obligation to which the controller is subject;\n(d) processing is necessary in order to protect the vital interests of the data subject or of another natural person;\n(e) processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller;\n(f) processing is necessary for the purposes of the legitimate interests pursued by the controller or by a third party, except where such interests are overridden by the interests or fundamental rights and freedoms of the data subject which require protection of personal data, in particular where the data subject is a child.\nPoint (f) of the first subparagraph shall not apply to processing carried out by public authorities in the performance of their tasks.\n",
+  "raw_output": "This applies when a company uses customer data for its own business purposes, like sending marketing emails, as long as it's not overriding the customer's rights. It also applies when a business processes data for a legal reason, such as tax reporting.",
+  "enrichment": "This applies when a company uses customer data for its own business purposes, like sending marketing emails, as long as it's not overriding the customer's rights. It also applies when a business processes data for a legal reason, such as tax reporting.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

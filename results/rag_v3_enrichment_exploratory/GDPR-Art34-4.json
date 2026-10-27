@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art34-4",
+  "created_at": "2026-10-27T14:48:58+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.05,
+  "passage_text_sha256": "c2b5c097cac6909d7eeed80a5f16fb87264e5c1dae5a2189ad7e7c8378c54d14",
+  "prompt_sha256": "eba81916272dc77f94130fcc9dbe1c453cde1f0870303de391698734e82e4f41",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 34: Communication of a personal data breach to the data subject\n4. If the controller has not already communicated the personal data breach to the data subject, the supervisory authority, having considered the likelihood of the personal data breach resulting in a high risk, may require it to do so or may decide that any of the conditions referred to in paragraph 3 are met.\n",
+  "raw_output": "When a company experiences a data breach, they must inform affected customers if the breach poses a high risk. This applies during data handling steps like storing or sharing customer information, and involves the company's data team and the customers affected.",
+  "enrichment": "When a company experiences a data breach, they must inform affected customers if the breach poses a high risk. This applies during data handling steps like storing or sharing customer information, and involves the company's data team and the customers affected.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

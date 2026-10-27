@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art17-3",
+  "created_at": "2026-10-27T14:51:45+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.78,
+  "passage_text_sha256": "cbaf639f8218a2784c7d60de875a274212c156bd7affe86cd91aa5b07266efbf",
+  "prompt_sha256": "378ffe6b49f127367b3b0b6354fde8013047c6508913a5cb89ef3599bddc8b69",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 17: Commercial guarantees\n3. Non-compliance with paragraph 2 shall not affect the binding nature of the commercial guarantee for the guarantor.\n",
+  "raw_output": "This applies when a business provides a warranty or guarantee for a product. It affects the relationship between the seller and the customer if the product doesn't meet the promised quality.",
+  "enrichment": "This applies when a business provides a warranty or guarantee for a product. It affects the relationship between the seller and the customer if the product doesn't meet the promised quality.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

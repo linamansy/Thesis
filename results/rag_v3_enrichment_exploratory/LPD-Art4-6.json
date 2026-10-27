@@ -1,0 +1,27 @@
+{
+  "passage_id": "LPD-Art4-6",
+  "created_at": "2026-10-27T14:51:07+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.86,
+  "passage_text_sha256": "b2689f66602fdca8aaf722b0a87ea0ef322eb967a6e275d7813e3bc6b9cb93f2",
+  "prompt_sha256": "3ada4f63f54ecd2664bf51422df61f665fdae4f26f46ca3fd25147bf8116b3f8",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nLate Payment Directive (2011/7/EU) - Article 4: Transactions between undertakings and public authorities\n6. Member States shall ensure that the period for payment fixed in the contract does not exceed the time limits provided for in paragraph 3, unless otherwise expressly agreed in the contract and provided it is objectively justified in the light of the particular nature or features of the contract, and that it in any event does not exceed 60 calendar days.\n",
+  "raw_output": "This applies when a business is contracted to provide goods or services to a public authority. The payment period for the contract must not be longer than 60 days unless agreed otherwise and justified.",
+  "enrichment": "This applies when a business is contracted to provide goods or services to a public authority. The payment period for the contract must not be longer than 60 days unless agreed otherwise and justified.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

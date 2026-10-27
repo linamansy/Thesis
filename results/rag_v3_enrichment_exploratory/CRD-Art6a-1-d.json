@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art6a-1-d",
+  "created_at": "2026-10-27T14:50:06+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.19,
+  "passage_text_sha256": "8c44eba6743b0a11320457c8d1d8f0dccaf4363763df447b05f461753b2813b1",
+  "prompt_sha256": "b60c64f2620cd2b5d14342c1b65a63215be93f9ae492ea6e6cda4a9bed4c0049",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 6a: Additional specific information requirements for contracts concluded on online marketplaces\n1. Before a consumer is bound by a distance contract, or any corresponding offer, on an online marketplace, the provider of the online marketplace shall, without prejudice to Directive 2005/29/EC, provide the consumer with the following information in a clear and comprehensible manner and in a way appropriate to the means of distance communication:\n(d) where applicable, how the obligations related to the contract are shared between the third party offering the goods, services or digital content and the provider of the online marketplace, such information being without prejudice to any responsibility that the provider of the online marketplace or the third-party trader has in relation to the contract under other Union or national law.\n",
+  "raw_output": "When a business sells goods or services online through a marketplace, the marketplace must clearly explain how responsibilities between the seller and the marketplace are shared before the customer agrees to the contract. This applies during the order process when a customer is about to finalize a purchase on the marketplace.",
+  "enrichment": "When a business sells goods or services online through a marketplace, the marketplace must clearly explain how responsibilities between the seller and the marketplace are shared before the customer agrees to the contract. This applies during the order process when a customer is about to finalize a purchase on the marketplace.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

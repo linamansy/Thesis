@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art30-2",
+  "created_at": "2026-10-27T14:48:40+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.12,
+  "passage_text_sha256": "3b6b8dea427393e60425ff6fc5a64faa8346652206f0bf9d0f4a186faffe33e6",
+  "prompt_sha256": "1c49f8dbebabaa8eff23f3311236b68410e3b6811dd3278b7cbe0e0c18ba5189",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n2. Each processor and, where applicable, the processor's representative shall maintain a record of all categories of processing activities carried out on behalf of a controller, containing:\n(a) the name and contact details of the processor or processors and of each controller on behalf of which the processor is acting, and, where applicable, of the controller's or the processor's representative, and the data protection officer;\n(b) the categories of processing carried out on behalf of each controller;\n(c) where applicable, transfers of personal data to a third country or an international organisation, including the identification of that third country or international organisation and, in the case of transfers referred to in the second subparagraph of Article 49(1), the documentation of suitable safeguards;\n(d) where possible, a general description of the technical and organisational security measures referred to in Article 32(1).\n",
+  "raw_output": "When a company handles customer data, they must keep a record of all data processing activities they do for their clients. This applies to any business that processes personal data on behalf of another company, like a service provider handling data for a retailer.",
+  "enrichment": "When a company handles customer data, they must keep a record of all data processing activities they do for their clients. This applies to any business that processes personal data on behalf of another company, like a service provider handling data for a retailer.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

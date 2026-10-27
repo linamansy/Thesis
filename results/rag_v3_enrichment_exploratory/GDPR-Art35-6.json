@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art35-6",
+  "created_at": "2026-10-27T14:49:04+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.89,
+  "passage_text_sha256": "62c0827dbc103f3a44335cfc6bb46aadc9c620ac3ddc97da123474687544d346",
+  "prompt_sha256": "2ca1c34ac83d05f19eb6bfb7a427b7e26fae785b517f7227b402c0bec3e8dd81",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n6. Prior to the adoption of the lists referred to in paragraphs 4 and 5, the competent supervisory authority shall apply the consistency mechanism referred to in Article 63 where such lists involve processing activities which are related to the offering of goods or services to data subjects or to the monitoring of their behaviour in several Member States, or may substantially affect the free movement of personal data within the Union.\n",
+  "raw_output": "This applies when a business handles customer data across multiple countries and plans to use it for marketing or tracking behavior. The data protection authority must check if the data processing could affect data flow between EU countries.",
+  "enrichment": "This applies when a business handles customer data across multiple countries and plans to use it for marketing or tracking behavior. The data protection authority must check if the data processing could affect data flow between EU countries.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

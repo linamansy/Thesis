@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art9-1",
+  "created_at": "2026-10-27T14:50:24+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.06,
+  "passage_text_sha256": "8b58aa649a2f72e78eafc9716aa5aa67d8e07c054508e097e124dc4a3a7f06ba",
+  "prompt_sha256": "a0d0fe074af5c1702ab6c799f16e5e0a2d159a6d7a0e8ddf524870b07391d3e9",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n1. Save where the exceptions provided for in Article 16 apply, the consumer shall have a period of 14 days to withdraw from a distance or off-premises contract, without giving any reason, and without incurring any costs other than those provided for in Article 13(2) and Article 14.\n",
+  "raw_output": "When a customer buys goods online or by phone, they can cancel the order within 14 days without giving a reason, as long as the return is not restricted by specific exceptions. The customer and the business are involved in this process.",
+  "enrichment": "When a customer buys goods online or by phone, they can cancel the order within 14 days without giving a reason, as long as the return is not restricted by specific exceptions. The customer and the business are involved in this process.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

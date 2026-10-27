@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art49-1-a",
+  "created_at": "2026-10-27T14:49:38+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.19,
+  "passage_text_sha256": "67db20440ccac87134af4188b54b925aed1aff8f108fc4477338922a4a1349fd",
+  "prompt_sha256": "c09b1f53aaf8da75b60b07eefaa54d9b7c82d8ba63857ce8103abbe09c8c7cab",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 49: Derogations for specific situations\n1. In the absence of an adequacy decision pursuant to Article 45(3), or of appropriate safeguards pursuant to Article 46, including binding corporate rules, a transfer or a set of transfers of personal data to a third country or an international organisation shall take place only on one of the following conditions:\n(a) the data subject has explicitly consented to the proposed transfer, after having been informed of the possible risks of such transfers for the data subject due to the absence of an adequacy decision and appropriate safeguards;\n(b) the transfer is necessary for the performance of a contract between the data subject and the controller or the implementation of pre-contractual measures taken at the data subject's request;\n(c) the transfer is necessary for the conclusion or performance of a contract concluded in the interest of the data subject between the controller and another natural or legal person;\n(d) the transfer is necessary for important reasons of public interest;\n(e) the transfer is necessary for the establishment, exercise or defence of legal claims;\n(f) the transfer is necessary in order to protect the vital interests of the data subject or of other persons, where the data subject is physically or legally incapable of giving consent;\n",
+  "raw_output": "When a business sends customer data to a country without proper data protection standards, this applies during data transfers, especially when the customer has given clear consent or when the transfer is needed for a contract or legal reasons. It involves the business and the customer.",
+  "enrichment": "When a business sends customer data to a country without proper data protection standards, this applies during data transfers, especially when the customer has given clear consent or when the transfer is needed for a contract or legal reasons. It involves the business and the customer.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

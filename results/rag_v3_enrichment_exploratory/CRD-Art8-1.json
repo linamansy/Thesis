@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art8-1",
+  "created_at": "2026-10-27T14:50:13+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.23,
+  "passage_text_sha256": "a58d70912077f9c671d9ac76acbc65b494809f8328c63dc24eeed7e6e09df516",
+  "prompt_sha256": "8737030cbd1c306e7443bcfe3338739dce201cb03df59452488b5b840bb5ec4a",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n1. With respect to distance contracts, the trader shall give the information provided for in Article 6(1) or make that information available to the consumer in a way appropriate to the means of distance communication used in plain and intelligible language. In so far as that information is provided on a durable medium, it shall be legible.\n",
+  "raw_output": "When a business sells goods or services online, by phone, or through a catalog, they must provide clear and easy-to-read information about the product or service before the customer agrees to buy. This applies to the step where the customer places an order, and the business is involved.",
+  "enrichment": "When a business sells goods or services online, by phone, or through a catalog, they must provide clear and easy-to-read information about the product or service before the customer agrees to buy. This applies to the step where the customer places an order, and the business is involved.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

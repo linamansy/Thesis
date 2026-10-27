@@ -1,0 +1,27 @@
+{
+  "passage_id": "LPD-Art4-4",
+  "created_at": "2026-10-27T14:51:05+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.0,
+  "passage_text_sha256": "63515f415fc039ccab972b648d0ed8a49e4d624c4a2c79e6eb1c1925ee9957e8",
+  "prompt_sha256": "0cb14493aa84ae71ef98a080265fc791f4098eb46ece0b409cde132d26be25d5",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nLate Payment Directive (2011/7/EU) - Article 4: Transactions between undertakings and public authorities\n4. Member States may extend the time limits referred to in point (a) of paragraph 3 up to a maximum of 60 calendar days for:\n(a) any public authority which carries out economic activities of an industrial or commercial nature by offering goods or services on the market and which is subject, as a public undertaking, to the transparency requirements laid down in Commission Directive 2006/111/EC of 16 November 2006 on the transparency of financial relations between Member States and public undertakings as well as on financial transparency within certain undertakings ;\n(b) public entities providing healthcare which are duly recognised for that purpose.\nIf a Member State decides to extend the time limits in accordance with this paragraph, it shall send a report on such extension to the Commission by 16 March 2018.\nOn that basis, the Commission shall submit a report to the European Parliament and the Council indicating which Member States have extended the time limits in accordance with this paragraph and taking into account the impact on the functioning of the internal market, in particular on SMEs. That report shall be accompanied by any appropriate proposals.\n",
+  "raw_output": "This applies to businesses that provide goods or services to public authorities acting as commercial entities. It affects the payment terms when a public authority delays paying for goods or services, involving the business and the public authority.",
+  "enrichment": "This applies to businesses that provide goods or services to public authorities acting as commercial entities. It affects the payment terms when a public authority delays paying for goods or services, involving the business and the public authority.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,31 @@
+{
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "description": "qwen3:8b passage enrichment for RAG v3 options F and G (src/rag_v3.py --enrich); made once, never changed. Input = the passage text only.",
+  "file": "data/retrieval_study2_corpus/rag_v3_enrichment_exploratory.jsonl",
+  "sha256": "94ec1f06a36400e2fd78826205d600439151972608ee23ca0a1872ab778bb32e",
+  "created_at": "2026-10-27T14:51:58+00:00",
+  "prompt_file": "prompts/rag_v3_enrichment.txt",
+  "prompt_sha256": "1cf229336347c72c7586bb8b7ec63f40295904d086299537304fa3305d3238e1",
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.40.11",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "n_passages": 289,
+  "n_empty": 0,
+  "n_max_tokens": 0,
+  "finish_reasons": [
+    "STOP"
+  ],
+  "per_passage_dir": "results/rag_v3_enrichment_exploratory",
+  "log_files": [
+    "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art18-2",
+  "created_at": "2026-10-27T14:47:53+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.33,
+  "passage_text_sha256": "d7d7acdac5e73fc0e65314f79405eb9b381c3f2e03408c8816f995ee4b7b5d2e",
+  "prompt_sha256": "4233f485edae0f7d8de96a37bbd28b24e1f3807a82ea91f7b7755eb787b5b59f",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 18: Right to restriction of processing\n2. Where processing has been restricted under paragraph 1, such personal data shall, with the exception of storage, only be processed with the data subject's consent or for the establishment, exercise or defence of legal claims or for the protection of the rights of another natural or legal person or for reasons of important public interest of the Union or of a Member State.\n",
+  "raw_output": "When a customer requests to limit how their personal data is used, the business can only continue processing that data with the customer's permission, to handle legal matters, protect others' rights, or for important public interest reasons. This applies when handling customer data during data management or response to data subject requests.",
+  "enrichment": "When a customer requests to limit how their personal data is used, the business can only continue processing that data with the customer's permission, to handle legal matters, protect others' rights, or for important public interest reasons. This applies when handling customer data during data management or response to data subject requests.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

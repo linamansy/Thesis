@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art6-8",
+  "created_at": "2026-10-27T14:50:03+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.14,
+  "passage_text_sha256": "fd3fda06ead8806b774225b39fbafe64961d1949dd668b2e9335e238d04d0ff6",
+  "prompt_sha256": "ed35e7665db4a498692164d076e58829ba564ce1a23660cb4f66d99c70c3427a",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n8. The information requirements laid down in this Directive are in addition to information requirements contained in Directive 2006/123/EC and Directive 2000/31/EC and do not prevent Member States from imposing additional information requirements in accordance with those Directives.\nWithout prejudice to the first subparagraph, if a provision of Directive 2006/123/EC or Directive 2000/31/EC on the content and the manner in which the information is to be provided conflicts with a provision of this Directive, the provision of this Directive shall prevail.\n",
+  "raw_output": "When a business sells goods or services online or by phone, they must provide clear information to customers during the order process. This applies when the business is handling a sale that isn't face-to-face, and the customer is the one receiving the information.",
+  "enrichment": "When a business sells goods or services online or by phone, they must provide clear information to customers during the order process. This applies when the business is handling a sale that isn't face-to-face, and the customer is the one receiving the information.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

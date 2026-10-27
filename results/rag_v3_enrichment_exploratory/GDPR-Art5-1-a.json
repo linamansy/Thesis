@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art5-1-a",
+  "created_at": "2026-10-27T14:46:56+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 13.19,
+  "passage_text_sha256": "e3da995a86fb395774856db1a8bb45a4b1d371f1a62654036e866c4c45f6d258",
+  "prompt_sha256": "3fe6f3cc638821c3a9f20f26012611266f965bfe958911a10f684d116d86b041",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 5: Principles relating to processing of personal data\n1. Personal data shall be:\n(a) processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency’);\n(b) collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes; further processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes shall, in accordance with Article 89(1), not be considered to be incompatible with the initial purposes (‘purpose limitation’);\n(c) adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed (‘data minimisation’);\n(d) accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay (‘accuracy’);\n",
+  "raw_output": "When a business collects customer information, it must ensure the data is collected for clear reasons and used only for those purposes. The business must also keep the data accurate and not hold more than is needed.",
+  "enrichment": "When a business collects customer information, it must ensure the data is collected for clear reasons and used only for those purposes. The business must also keep the data accurate and not hold more than is needed.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

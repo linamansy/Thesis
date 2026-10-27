@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art8-6",
+  "created_at": "2026-10-27T14:50:19+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.94,
+  "passage_text_sha256": "1b89f98b1d00e8eac201170f24c7a058ff62dc9010913a2e99419b2e7f57e6ef",
+  "prompt_sha256": "e7e8f1d7c86d2951dc642b94d02f7155987778452302f43f4eafa2b106b6243a",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium.\n",
+  "raw_output": "This applies when a business sells goods or services over the phone. The seller must confirm the order in writing or through a durable medium, and the customer is only bound once they sign or send their written agreement.",
+  "enrichment": "This applies when a business sells goods or services over the phone. The seller must confirm the order in writing or through a durable medium, and the customer is only bound once they sign or send their written agreement.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

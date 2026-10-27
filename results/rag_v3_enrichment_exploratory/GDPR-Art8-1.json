@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art8-1",
+  "created_at": "2026-10-27T14:47:09+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.02,
+  "passage_text_sha256": "58c597e1bfc9991f77f9b27fc4c558cfc3541cd1d82a0b2813762cbf5545dbf0",
+  "prompt_sha256": "6a1cbf4c584775d2d3a5b636e5a33b8c95be16527b23411e46f3eb40a86cfffb",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 8: Conditions applicable to child's consent in relation to information society services\n1. Where point (a) of Article 6(1) applies, in relation to the offer of information society services directly to a child, the processing of the personal data of a child shall be lawful where the child is at least 16 years old. Where the child is below the age of 16 years, such processing shall be lawful only if and to the extent that consent is given or authorised by the holder of parental responsibility over the child.\nMember States may provide by law for a lower age for those purposes provided that such lower age is not below 13 years.\n",
+  "raw_output": "When a business collects personal data from a child, they must get consent from a parent or guardian if the child is under 16. If the child is 16 or older, their own consent is enough.",
+  "enrichment": "When a business collects personal data from a child, they must get consent from a parent or guardian if the child is under 16. If the child is 16 or older, their own consent is enough.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art44-1",
+  "created_at": "2026-10-27T14:49:32+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.33,
+  "passage_text_sha256": "d0851ac6392272cac97690948631fa4b827ccf748aebceec7f8ea2c115da935b",
+  "prompt_sha256": "bf12f0e8e62d7957809fc575edf2d6a42842aa70725f602c330b68aaba67d4fd",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 44: General principle for transfers\nAny transfer of personal data which are undergoing processing or are intended for processing after transfer to a third country or to an international organisation shall take place only if, subject to the other provisions of this Regulation, the conditions laid down in this Chapter are complied with by the controller and processor, including for onward transfers of personal data from the third country or an international organisation to another third country or to another international organisation. All provisions in this Chapter shall be applied in order to ensure that the level of protection of natural persons guaranteed by this Regulation is not undermined.\n",
+  "raw_output": "When a company sends customer data to another country or international organization, they must ensure the data is protected as well as it would be within the EU. This applies when transferring data to a third country or international body, and involves the company sending the data and any recipients in that country or organization.",
+  "enrichment": "When a company sends customer data to another country or international organization, they must ensure the data is protected as well as it would be within the EU. This applies when transferring data to a third country or international body, and involves the company sending the data and any recipients in that country or organization.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

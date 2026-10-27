@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art19-1",
+  "created_at": "2026-10-27T14:50:54+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.23,
+  "passage_text_sha256": "42158be74ebb0ea8d6ee01413ddc3387153bf4132520153d0641eeb2d5bcf65c",
+  "prompt_sha256": "19e8a7bec7bcafe6d1285a6462911bf5005ca453f527f570b365e5c2af94c85a",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 19: Fees for the use of means of payment\nMember States shall prohibit traders from charging consumers, in respect of the use of a given means of payment, fees that exceed the cost borne by the trader for the use of such means.\n",
+  "raw_output": "When a business charges customers for using a payment method, such as a credit card or bank transfer, during a sale, the business cannot charge more than the actual cost they incur for that payment method. This applies when a customer pays for goods or services using a specific payment method.",
+  "enrichment": "When a business charges customers for using a payment method, such as a credit card or bank transfer, during a sale, the business cannot charge more than the actual cost they incur for that payment method. This applies when a customer pays for goods or services using a specific payment method.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

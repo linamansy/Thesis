@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art24-2",
+  "created_at": "2026-10-27T14:48:11+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.91,
+  "passage_text_sha256": "035d15ddf121e7afd20c79e06125141f8a4b2ef48c43b66940cdd64fa3fd7418",
+  "prompt_sha256": "ebf7fc4d706c4f2cc15e88b980e18dc72e7fedc49b1191eae93d43e1f3511fc6",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 24: Responsibility of the controller\n2. Where proportionate in relation to processing activities, the measures referred to in paragraph 1 shall include the implementation of appropriate data protection policies by the controller.\n",
+  "raw_output": "This applies when a business handles customer data, such as collecting or storing personal information. The company that owns the data, like an online store or service provider, must have proper data protection policies in place.",
+  "enrichment": "This applies when a business handles customer data, such as collecting or storing personal information. The company that owns the data, like an online store or service provider, must have proper data protection policies in place.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

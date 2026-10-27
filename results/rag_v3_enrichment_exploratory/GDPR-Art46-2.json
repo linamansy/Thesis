@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art46-2",
+  "created_at": "2026-10-27T14:49:34+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.08,
+  "passage_text_sha256": "39bccabe76ca53cb6b9ceedfb69af71445fa4b8d03e1b7cf8bc1e18e852539ab",
+  "prompt_sha256": "8a181c8f0a1aa1bf4ed9a9b9644c8603ded0fbb59f6ec4262dd872877f6ad9e5",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 46: Transfers subject to appropriate safeguards\n2. The appropriate safeguards referred to in paragraph 1 may be provided for, without requiring any specific authorisation from a supervisory authority, by:\n(a) a legally binding and enforceable instrument between public authorities or bodies;\n(b) binding corporate rules in accordance with Article 47;\n(c) standard data protection clauses adopted by the Commission in accordance with the examination procedure referred to in Article 93(2);\n(d) standard data protection clauses adopted by a supervisory authority and approved by the Commission pursuant to the examination procedure referred to in Article 93(2);\n(e) an approved code of conduct pursuant to Article 40 together with binding and enforceable commitments of the controller or processor in the third country to apply the appropriate safeguards, including as regards data subjects' rights; or\n(f) an approved certification mechanism pursuant to Article 42 together with binding and enforceable commitments of the controller or processor in the third country to apply the appropriate safeguards, including as regards data subjects' rights.\n",
+  "raw_output": "When a company sends customer data to another country, they must use approved methods like binding corporate rules or standard data protection clauses to ensure the data is protected. This applies when transferring data between businesses in different EU countries or to third countries.",
+  "enrichment": "When a company sends customer data to another country, they must use approved methods like binding corporate rules or standard data protection clauses to ensure the data is protected. This applies when transferring data between businesses in different EU countries or to third countries.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

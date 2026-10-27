@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art8-2",
+  "created_at": "2026-10-27T14:47:10+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.14,
+  "passage_text_sha256": "ff9bd60f595fa41dfdd5cb08b99a6aefb7dccbb580e8a52dfa5be4c308af1f8f",
+  "prompt_sha256": "fb8d8c2c4afe228de963d665b34ad4bfcffc2d939f1cb75599b1fe8bf5607233",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 8: Conditions applicable to child's consent in relation to information society services\n2. The controller shall make reasonable efforts to verify in such cases that consent is given or authorised by the holder of parental responsibility over the child, taking into consideration available technology.\n",
+  "raw_output": "When a business collects personal data from a child, they must check that a parent or guardian has given permission, using reasonable methods to confirm this. This applies when a company is handling customer data, especially during data collection steps like signing up or making a purchase.",
+  "enrichment": "When a business collects personal data from a child, they must check that a parent or guardian has given permission, using reasonable methods to confirm this. This applies when a company is handling customer data, especially during data collection steps like signing up or making a purchase.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

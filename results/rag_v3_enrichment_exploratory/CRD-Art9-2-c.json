@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art9-2-c",
+  "created_at": "2026-10-27T14:50:28+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.25,
+  "passage_text_sha256": "e45eff5ddaa2534d5610110f13d0a6e0e817eea56dbe3d14a2ce4165f9198f58",
+  "prompt_sha256": "70e0fd12ffa076ec5f8ce2f988ec622b765e36da7750db2eda567a2b1214da97",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n2. Without prejudice to Article 10, the withdrawal period referred to in paragraph 1 of this Article shall expire after 14 days or, in cases where Member States have adopted rules in accordance with paragraph 1a of this Article, 30 days from:\n(c) in the case of contracts for the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, of district heating or of digital content which is not supplied on a tangible medium, the day of the conclusion of the contract.\n",
+  "raw_output": "This rule applies when a business sells water, gas, electricity, district heating, or digital content without a set quantity. The customer can cancel the contract within 14 days, or 30 days if the country allows it, starting from the day the contract is made.",
+  "enrichment": "This rule applies when a business sells water, gas, electricity, district heating, or digital content without a set quantity. The customer can cancel the contract within 14 days, or 30 days if the country allows it, starting from the day the contract is made.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

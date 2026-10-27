@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art7-4",
+  "created_at": "2026-10-27T14:51:15+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.84,
+  "passage_text_sha256": "2ae1ccae5dd0594119e1030e09f2a35ee287ac6946360b32a545b3205f286551",
+  "prompt_sha256": "af5290b8aa7395525bd4fb88a7912ddc7ed69aa0f80106f133c9258e4c2042e5",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n4. Where the consumer fails to install within a reasonable time updates supplied in accordance with paragraph 3, the seller shall not be liable for any lack of conformity resulting solely from the lack of the relevant update, provided that:\n(a) the seller informed the consumer about the availability of the update and the consequences of the failure of the consumer to install it; and\n(b) the failure of the consumer to install or the incorrect installation by the consumer of the update was not due to shortcomings in the installation instructions provided to the consumer.\n",
+  "raw_output": "This applies when a customer doesn't install a software update provided by the seller. It relates to handling a return or resolving a product issue, and involves the seller and the customer.",
+  "enrichment": "This applies when a customer doesn't install a software update provided by the seller. It relates to handling a return or resolving a product issue, and involves the seller and the customer.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

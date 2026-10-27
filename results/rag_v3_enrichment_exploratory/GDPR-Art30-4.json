@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art30-4",
+  "created_at": "2026-10-27T14:48:42+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.03,
+  "passage_text_sha256": "a112d403235fcb9e4f0a29ec463f9e9f524cc40dcbc14cb70b9ec97ce0737977",
+  "prompt_sha256": "c540ca67850c4a289d12de89a19c0e0692ac198c645004634e98927a781bcc0b",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 30: Records of processing activities\n4. The controller or the processor and, where applicable, the controller's or the processor's representative, shall make the record available to the supervisory authority on request.\n",
+  "raw_output": "When a company collects customer data, they must keep a record of how they handle that data and share it with the relevant authority if asked. This applies to businesses that process personal data, such as when taking customer orders or sending invoices.",
+  "enrichment": "When a company collects customer data, they must keep a record of how they handle that data and share it with the relevant authority if asked. This applies to businesses that process personal data, such as when taking customer orders or sending invoices.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

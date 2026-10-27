@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art35-11",
+  "created_at": "2026-10-27T14:49:10+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.19,
+  "passage_text_sha256": "99f921963dbe39b68d53e2e5e3b1cfb9c6966d628d8946dd59839d9bd61ca951",
+  "prompt_sha256": "c790437b5d184cdef3d5f97f1a442fdc8da30c465cd8afa1aaf4bfeeb3fd3db6",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 35: Data protection impact assessment\n11. Where necessary, the controller shall carry out a review to assess if processing is performed in accordance with the data protection impact assessment at least when there is a change of the risk represented by processing operations.\n",
+  "raw_output": "When a business changes how it handles customer data, such as updating data collection methods or changing data storage practices, it should check if its data protection measures are still appropriate. This applies to any business that processes customer data, especially when adjusting processes that could affect data risks.",
+  "enrichment": "When a business changes how it handles customer data, such as updating data collection methods or changing data storage practices, it should check if its data protection measures are still appropriate. This applies to any business that processes customer data, especially when adjusting processes that could affect data risks.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

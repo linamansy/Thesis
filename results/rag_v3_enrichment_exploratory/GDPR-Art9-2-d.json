@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art9-2-d",
+  "created_at": "2026-10-27T14:47:14+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.91,
+  "passage_text_sha256": "51092de01945bfeceea13413450c9697e10b7cac07525487ef1c069e7da122b9",
+  "prompt_sha256": "832855e8f877b958b264e0f89ee1bcc81cc6ed6cfa3cfdb4b5a74685da0f4785",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 9: Processing of special categories of personal data\n2. Paragraph 1 shall not apply if one of the following applies:\n(d) processing is carried out in the course of its legitimate activities with appropriate safeguards by a foundation, association or any other not-for-profit body with a political, philosophical, religious or trade union aim and on condition that the processing relates solely to the members or to former members of the body or to persons who have regular contact with it in connection with its purposes and that the personal data are not disclosed outside that body without the consent of the data subjects;\n(e) processing relates to personal data which are manifestly made public by the data subject;\n(f) processing is necessary for the establishment, exercise or defence of legal claims or whenever courts are acting in their judicial capacity;\n(g) processing is necessary for reasons of substantial public interest, on the basis of Union or Member State law which shall be proportionate to the aim pursued, respect the essence of the right to data protection and provide for suitable and specific measures to safeguard the fundamental rights and the interests of the data subject;\n",
+  "raw_output": "This applies when a non-profit organization handles personal data of its members or contacts for their activities. It applies during data collection and processing steps, involving the organization and its members or contacts.",
+  "enrichment": "This applies when a non-profit organization handles personal data of its members or contacts for their activities. It applies during data collection and processing steps, involving the organization and its members or contacts.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

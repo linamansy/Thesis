@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art7-2",
+  "created_at": "2026-10-27T14:51:14+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.27,
+  "passage_text_sha256": "0da964c78e00c070833669569b5da26eb807896b7d7a89ed789d41fc628e13fe",
+  "prompt_sha256": "f6e4d3b812d8cc18db3481e74ed3558f15586b57bda15de9486ec30508128fea",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n2. The seller shall not be bound by public statements, as referred to in point (d) of paragraph 1 if the seller shows that:\n(a) the seller was not, and could not reasonably have been, aware of the public statement in question;\n(b) by the time of conclusion of the contract, the public statement had been corrected in the same way as, or in a way comparable to how, it had been made; or\n(c) the decision to buy the goods could not have been influenced by the public statement.\n",
+  "raw_output": "This applies when a seller is selling goods and a customer claims the product doesn't meet expectations based on a public statement. The seller can avoid responsibility if they didn't know about the statement, it was corrected before the sale, or the customer's decision wasn't influenced by it.",
+  "enrichment": "This applies when a seller is selling goods and a customer claims the product doesn't meet expectations based on a public statement. The seller can avoid responsibility if they didn't know about the statement, it was corrected before the sale, or the customer's decision wasn't influenced by it.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art17-3",
+  "created_at": "2026-10-27T14:47:51+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.17,
+  "passage_text_sha256": "b95c630e8eb8fa5b1cebfdaf28e30651bf7839a7c7b42e65ec64a14249578cc3",
+  "prompt_sha256": "7f02341e850942f8d464484073de50caed3acf2c68027265f273c89ee86b6373",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 17: Right to erasure (‘right to be forgotten’)\n3. Paragraphs 1 and 2 shall not apply to the extent that processing is necessary:\n(a) for exercising the right of freedom of expression and information;\n(b) for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller;\n(c) for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3);\n(d) for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing; or\n(e) for the establishment, exercise or defence of legal claims.\n",
+  "raw_output": "When a customer requests to delete their personal data, the business must check if there's a legal reason to keep it, such as complying with a law, protecting public health, or defending a legal claim. This applies when handling data deletion requests from customers.",
+  "enrichment": "When a customer requests to delete their personal data, the business must check if there's a legal reason to keep it, such as complying with a law, protecting public health, or defending a legal claim. This applies when handling data deletion requests from customers.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

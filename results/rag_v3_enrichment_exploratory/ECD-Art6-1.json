@@ -1,0 +1,27 @@
+{
+  "passage_id": "ECD-Art6-1",
+  "created_at": "2026-10-27T14:51:50+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.02,
+  "passage_text_sha256": "1c8764530b3be1427f7b5edbbbc23ed0709a1de045f81564667f3b078f488888",
+  "prompt_sha256": "61d9788ca7dac72d6dd9a9eea37fdd4fbb6447f378e4c2eceee5c86464be46de",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\ne-Commerce Directive (2000/31/EC) - Article 6: Information to be provided\nIn addition to other information requirements established by Community law, Member States shall ensure that commercial communications which are part of, or constitute, an information society service comply at least with the following conditions:\n(a) the commercial communication shall be clearly identifiable as such;\n(b) the natural or legal person on whose behalf the commercial communication is made shall be clearly identifiable;\n(c) promotional offers, such as discounts, premiums and gifts, where permitted in the Member State where the service provider is established, shall be clearly identifiable as such, and the conditions which are to be met to qualify for them shall be easily accessible and be presented clearly and unambiguously;\n(d) promotional competitions or games, where permitted in the Member State where the service provider is established, shall be clearly identifiable as such, and the conditions for participation shall be easily accessible and be presented clearly and unambiguously.\n",
+  "raw_output": "When a business sends an online advertisement or promotion, they must clearly show it's an ad and provide clear details about any discounts or competitions. This applies to marketers and their agencies when creating and sharing online marketing materials.",
+  "enrichment": "When a business sends an online advertisement or promotion, they must clearly show it's an ad and provide clear details about any discounts or competitions. This applies to marketers and their agencies when creating and sharing online marketing materials.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

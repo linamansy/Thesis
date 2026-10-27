@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art6-1-l",
+  "created_at": "2026-10-27T14:49:54+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.14,
+  "passage_text_sha256": "49048bf6a0355c9ac99429e2b290c29f308907f9fbdfcad082d64cb73806dc5e",
+  "prompt_sha256": "bb71e0ca51714a4ab37e63a862be4ba8271c239c02cb5c7317b2c897c314a7fd",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(l) a reminder of the existence of a legal guarantee of conformity for goods, digital content and digital services;\n(m) where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees;\n(n) the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable;\n(o) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(p) where applicable, the minimum duration of the consumer’s obligations under the contract;\n(q) where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader;\n(r) where applicable, the functionality, including applicable technical protection measures, of goods with digital elements, digital content and digital services;\n",
+  "raw_output": "When a business sells goods or services online or by phone, they must clearly explain the legal rights and conditions of the contract before the customer agrees, involving the seller and the customer. This applies during the order process or when offering a service remotely.",
+  "enrichment": "When a business sells goods or services online or by phone, they must clearly explain the legal rights and conditions of the contract before the customer agrees, involving the seller and the customer. This applies during the order process or when offering a service remotely.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

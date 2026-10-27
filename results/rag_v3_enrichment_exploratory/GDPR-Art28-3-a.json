@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art28-3-a",
+  "created_at": "2026-10-27T14:48:27+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.19,
+  "passage_text_sha256": "914578c3a503c6bfed3e2ed7ecc33ff35eea159e91f5732a250a82fdbd33ad13",
+  "prompt_sha256": "a3c52fc05e4ec7fa6c4b2a57dec5c3730ff9da61508f4b5514432ee2cb54f22d",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 28: Processor\n3. Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor:\n(a) processes the personal data only on documented instructions from the controller, including with regard to transfers of personal data to a third country or an international organisation, unless required to do so by Union or Member State law to which the processor is subject; in such a case, the processor shall inform the controller of that legal requirement before processing, unless that law prohibits such information on important grounds of public interest;\n(b) ensures that persons authorised to process the personal data have committed themselves to confidentiality or are under an appropriate statutory obligation of confidentiality;\n(c) takes all measures required pursuant to Article 32;\n(d) respects the conditions referred to in paragraphs 2 and 4 for engaging another processor;\n",
+  "raw_output": "When a company hires another business to handle customer data, the contract between them must clearly define the data processing tasks and ensure the hired business only acts on the company's instructions. This applies when transferring data to another country or when sharing data with third parties.",
+  "enrichment": "When a company hires another business to handle customer data, the contract between them must clearly define the data processing tasks and ensure the hired business only acts on the company's instructions. This applies when transferring data to another country or when sharing data with third parties.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

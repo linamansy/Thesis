@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art13-2",
+  "created_at": "2026-10-27T14:51:28+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.27,
+  "passage_text_sha256": "b00529c91cddbf2b162d9ae04c9109a009c79807dc309f932faf267dfe97187b",
+  "prompt_sha256": "134f983180d201f25078ddbdca1f9f936aa9d2d09ffc0af1bb1c708e5d18096e",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 13: Remedies for lack of conformity\n2. In order to have the goods brought into conformity, the consumer may choose between repair and replacement, unless the remedy chosen would be impossible or, compared to the other remedy, would impose costs on the seller that would be disproportionate, taking into account all circumstances, including:\n(a) the value the goods would have if there were no lack of conformity;\n(b) the significance of the lack of conformity; and\n(c) whether the alternative remedy could be provided without significant inconvenience to the consumer.\n",
+  "raw_output": "If a product doesn't meet the agreed standards, the customer can ask for it to be fixed or replaced. The seller must choose the most reasonable option, considering the product's value, the seriousness of the issue, and how easy it is for the customer to get the other solution.",
+  "enrichment": "If a product doesn't meet the agreed standards, the customer can ask for it to be fixed or replaced. The seller must choose the most reasonable option, considering the product's value, the seriousness of the issue, and how easy it is for the customer to get the other solution.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

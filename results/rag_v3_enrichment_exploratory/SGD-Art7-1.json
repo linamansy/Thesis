@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art7-1",
+  "created_at": "2026-10-27T14:51:12+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.12,
+  "passage_text_sha256": "a66fc8db58b8b54e187705772eadaba9aca91882fedf032f738c4d921558694c",
+  "prompt_sha256": "3959e489d31608e7d57ce4afdd5ed3cb1b10fc0ca00d28b0dd74b513c4d8c630",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling.\n",
+  "raw_output": "When a business sells products to customers, this applies during the delivery and description of goods. The seller must ensure the items match the expected quality, function, and description, and include necessary instructions or packaging as a consumer would reasonably expect.",
+  "enrichment": "When a business sells products to customers, this applies during the delivery and description of goods. The seller must ensure the items match the expected quality, function, and description, and include necessary instructions or packaging as a consumer would reasonably expect.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art14-4",
+  "created_at": "2026-10-27T14:47:41+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.81,
+  "passage_text_sha256": "738cf0b119d6888eda34c488fbac8c4d84fff5570176d619452d6f10a2d9b1b6",
+  "prompt_sha256": "1802c2ec100a8f17c986869f07d6d84a4b6a00297eefe1511cb786ec4e1f0707",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n4. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were obtained, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2.\n",
+  "raw_output": "When a company wants to use customer data for a new purpose, they must inform the customer before doing so. This applies when handling customer data during processes like sending invoices or marketing.",
+  "enrichment": "When a company wants to use customer data for a new purpose, they must inform the customer before doing so. This applies when handling customer data during processes like sending invoices or marketing.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

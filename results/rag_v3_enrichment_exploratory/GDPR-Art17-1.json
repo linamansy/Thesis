@@ -1,0 +1,27 @@
+{
+  "passage_id": "GDPR-Art17-1",
+  "created_at": "2026-10-27T14:47:48+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.51,
+  "passage_text_sha256": "641b3fe218eb98b0cfc201dbea5dc4cd9b7dbc9e45aa1f45f46c7b8e2c030377",
+  "prompt_sha256": "521c213e19b406d5c44c39c87832fa650461f0914e7e0e53d87061b328283c86",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nGeneral Data Protection Regulation (2016/679) - Article 17: Right to erasure (‘right to be forgotten’)\n1. The data subject shall have the right to obtain from the controller the erasure of personal data concerning him or her without undue delay and the controller shall have the obligation to erase personal data without undue delay where one of the following grounds applies:\n(a) the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed;\n(b) the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing;\n(c) the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2);\n(d) the personal data have been unlawfully processed;\n(e) the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject;\n(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1).\n",
+  "raw_output": "When a customer requests to delete their personal data, businesses that collect and process customer information must remove it without delay if the data is no longer needed, the customer withdraws consent, or the data was collected for an online service. This applies when a customer asks to be forgotten, and the business is involved in handling that request.",
+  "enrichment": "When a customer requests to delete their personal data, businesses that collect and process customer information must remove it without delay if the data is no longer needed, the customer withdraws consent, or the data was collected for an online service. This applies when a customer asks to be forgotten, and the business is involved in handling that request.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

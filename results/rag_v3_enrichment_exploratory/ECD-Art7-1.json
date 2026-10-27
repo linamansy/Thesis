@@ -1,0 +1,27 @@
+{
+  "passage_id": "ECD-Art7-1",
+  "created_at": "2026-10-27T14:51:50+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 0.81,
+  "passage_text_sha256": "e7fc280ed961e89241111fa98a4c7f7641c01ae9d6c01b04780d9e4053cd9cea",
+  "prompt_sha256": "859aaf390c94161207603fad667d37586e8c921752755ac9dfd77bffc123a3b2",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\ne-Commerce Directive (2000/31/EC) - Article 7: Unsolicited commercial communication\n1. In addition to other requirements established by Community law, Member States which permit unsolicited commercial communication by electronic mail shall ensure that such commercial communication by a service provider established in their territory shall be identifiable clearly and unambiguously as such as soon as it is received by the recipient.\n",
+  "raw_output": "When a business sends promotional emails to customers, they must clearly identify the email as an advertisement. This applies to companies using email marketing and involves the sender and the recipient.",
+  "enrichment": "When a business sends promotional emails to customers, they must clearly identify the email as an advertisement. This applies to companies using email marketing and involves the sender and the recipient.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art13-3",
+  "created_at": "2026-10-27T14:50:37+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.11,
+  "passage_text_sha256": "c96df28c59a711ea748d5bbae14cd5e6bb337471254c0fb608a257db9f34de0b",
+  "prompt_sha256": "40e88c18fd066d1cac6c57a595394ddeb6d8c9749c2faacb6efcb66b2f446eb7",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest.\n",
+  "raw_output": "When a customer returns goods, the business can wait to refund the money until the items are received back or the customer proves they've sent them back, whichever comes first. This applies to online or in-store purchases where the customer initiates the return.",
+  "enrichment": "When a customer returns goods, the business can wait to refund the money until the items are received back or the customer proves they've sent them back, whichever comes first. This applies to online or in-store purchases where the customer initiates the return.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

@@ -1,0 +1,27 @@
+{
+  "passage_id": "SGD-Art14-1",
+  "created_at": "2026-10-27T14:51:35+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.11,
+  "passage_text_sha256": "9787b83269a61218d728bd18b63343e655e895c849b0c3204155e1e5fdbbb47c",
+  "prompt_sha256": "9271fb504f85befe6454e56e85fb82c02b53bf855c23b4bf536c2244b85d5dda",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nSale of Goods Directive ((EU) 2019/771) - Article 14: Repair or replacement of the goods\n1. Repairs or replacements shall be carried out:\n(a) free of charge;\n(b) within a reasonable period of time from the moment the seller has been informed by the consumer about the lack of conformity; and\n(c) without any significant inconvenience to the consumer, taking into account the nature of the goods and the purpose for which the consumer required the goods.\n",
+  "raw_output": "When a customer reports a product defect, the seller must repair or replace the item free of charge, within a reasonable time, and without causing significant inconvenience to the customer. This applies during the after-sales service step, involving the customer and the seller.",
+  "enrichment": "When a customer reports a product defect, the seller must repair or replace the item free of charge, within a reasonable time, and without causing significant inconvenience to the customer. This applies during the after-sales service step, involving the customer and the seller.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}

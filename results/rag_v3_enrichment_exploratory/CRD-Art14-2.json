@@ -1,0 +1,27 @@
+{
+  "passage_id": "CRD-Art14-2",
+  "created_at": "2026-10-27T14:50:45+00:00",
+  "label": "EXPLORATORY (docs/RAG_V2_CRITERIA.md section 8)",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "settings": {
+    "temperature": 0,
+    "seed": 42,
+    "num_ctx": 16384,
+    "think": false,
+    "max_tokens": 8192
+  },
+  "ollama_version": "0.40.11",
+  "ollama_server_env": {
+    "OLLAMA_FLASH_ATTENTION": "1",
+    "OLLAMA_KV_CACHE_TYPE": "q8_0"
+  },
+  "finish_reason": "STOP",
+  "duration_seconds": 1.05,
+  "passage_text_sha256": "eb873e7e8a44e3765b51325fa9c4254f4a0f5a91b0761b1607bcea1773bb1fc7",
+  "prompt_sha256": "66786d78867a2479269494bbd1e3dac489529790d5ce4a155138e6f73d278811",
+  "prompt": "/no_think\nYou help a search engine connect EU law with business processes.\n\nBelow is one passage of EU law. Write 1 or 2 short sentences in plain business language that say when this passage\napplies in a business process: which kind of business, which step or situation (for example taking an order, sending\nan invoice, paying a supplier, delivering goods, handling a return, collecting customer data), and who is involved.\n\nRules:\n- Use everyday business words, not legal terms. Do not name directives, articles or numbers.\n- Say only what the passage supports. Do not add obligations that are not in the passage.\n- Write only the 1 or 2 sentences. No list, no heading, no other text.\n\nPassage:\nConsumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2. The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods. The consumer shall in any event not be liable for diminished value of the goods where the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1).\n",
+  "raw_output": "If a customer returns a product, they are not responsible for any decrease in value unless they mishandled the item beyond checking its condition. The business must have clearly informed the customer of their right to withdraw before the purchase was finalized.",
+  "enrichment": "If a customer returns a product, they are not responsible for any decrease in value unless they mishandled the item beyond checking its condition. The business must have clearly informed the customer of their right to withdraw before the purchase was finalized.",
+  "log_file": "C:\\Users\\user\\Downloads\\Thesis\\results\\logs\\RAGV3_ENRICH_exploratory_20261027T144643Z.jsonl"
+}
