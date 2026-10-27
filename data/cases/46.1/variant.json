@@ -1,0 +1,15 @@
+{
+  "case_id": "46.1",
+  "base_case": "46",
+  "added_text": "The wholesaler is a separate business that bills the company for every reordered product. Sometimes the company settles such a bill after the agreed date.",
+  "target_passage_id": "LPD-Art6-1",
+  "accepted_target_ids": [
+    "LPD-Art6-1",
+    "LPD-Art3-1"
+  ],
+  "expected_step": "Pay the wholesaler the fixed EUR 40 recovery fee",
+  "author": "drafted by Claude, approved by Lina",
+  "note": "synthetic HELD-OUT variant of a non-development case (docs/RAG_V2_CRITERIA.md 7.8), written before any retrieval run; never used for selection",
+  "description": "case 46 description.txt + newline + added_text",
+  "reference": "case 46 reference.bpmn + one task (Task_1, expected_step) on flow SequenceFlow_11 after 'Register in stock management system'; PROVISIONAL"
+}

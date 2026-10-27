@@ -1,0 +1,14 @@
+{
+  "case_id": "03.1",
+  "base_case": "03",
+  "added_text": "The suppliers are other companies, and each delivery comes with a bill that names a fixed date for paying it. Sometimes the procurement team settles such a bill only weeks after that date.",
+  "target_passage_id": "LPD-Art3-1",
+  "accepted_target_ids": [
+    "LPD-Art3-1"
+  ],
+  "expected_step": "Pay the supplier interest on the overdue invoice",
+  "author": "drafted by Claude, approved by Lina",
+  "note": "synthetic HELD-OUT variant of a non-development case (docs/RAG_V2_CRITERIA.md 7.8), written before any retrieval run; never used for selection",
+  "description": "case 03 description.txt + newline + added_text",
+  "reference": "case 03 reference.bpmn + one task (Task_12, expected_step) on flow SequenceFlow_11 after 'Record stock in system'; PROVISIONAL"
+}

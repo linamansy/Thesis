@@ -59,3 +59,32 @@ def test_rag_v2_retrieval_test_set_is_consistent():
         assert result["valid"] and result["counts"]["tasks"] == base_result["counts"]["tasks"] + 1
         text = (CASES / case_id / "reference.bpmn").read_text(encoding="utf-8")
         assert f'name="{meta["expected_step"]}"' in text and "PROVISIONAL" in text
+
+
+def test_rag_v2_held_out_set_is_consistent_and_not_used_for_selection():
+    # data/retrieval_study2_corpus/held_out_test_set.json (docs/RAG_V2_CRITERIA.md 7.8): 5 variants of NON-development
+    # cases, accepted targets per variant (first = variant.json target); never in the selection test set, and no
+    # code or config refers to the file (it is measured only once, after the freeze)
+    held_out = json.loads(project_path("data/retrieval_study2_corpus/held_out_test_set.json").read_text(encoding="utf-8"))
+    test_set = json.loads(project_path(CONFIG["rag_v2"]["test_set"]).read_text(encoding="utf-8"))
+    corpus = {json.loads(line)["id"] for line in project_path(CONFIG["study2_corpus"]["passages"])
+              .read_text(encoding="utf-8").splitlines() if line.strip()}
+    non_development = {case for case, label in CONFIG["study2_cases"]["labels"].items() if label == "non-development"}
+    ids = [item["case_id"] for item in held_out["items"]]
+    assert ids == ["03.1", "05.1", "21.1", "37.1", "46.1"]
+    assert not set(ids) & {item["case_id"] for item in test_set["items"]}
+    for item in held_out["items"]:
+        meta = json.loads((CASES / item["case_id"] / "variant.json").read_text(encoding="utf-8"))
+        assert meta["base_case"] in non_development and meta["author"] == "drafted by Claude, approved by Lina"
+        assert item["targets"] == meta["accepted_target_ids"] and item["targets"][0] == meta["target_passage_id"]
+        assert set(item["targets"]) <= corpus
+        base = (CASES / meta["base_case"] / "description.txt").read_text(encoding="utf-8")
+        assert (CASES / item["case_id"] / "description.txt").read_text(encoding="utf-8") == base + "\n" + meta["added_text"]
+        assert not any(word in meta["added_text"].lower().split() for word in ("must", "shall", "should"))
+        result = BPMNValidator().validate(CASES / item["case_id"] / "reference.bpmn")
+        base_result = BPMNValidator().validate(CASES / meta["base_case"] / "reference.bpmn")
+        assert result["valid"] and result["counts"]["tasks"] == base_result["counts"]["tasks"] + 1
+        text = (CASES / item["case_id"] / "reference.bpmn").read_text(encoding="utf-8")
+        assert f'name="{meta["expected_step"]}"' in text and "PROVISIONAL" in text
+    for path in [project_path("config.yaml"), *project_path("src").rglob("*.py")]:
+        assert "held_out_test_set" not in path.read_text(encoding="utf-8")

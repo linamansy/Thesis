@@ -1,0 +1,15 @@
+{
+  "case_id": "05.1",
+  "base_case": "05",
+  "added_text": "The signed contract sets the day by which each supplier bill is to be paid. Now and then the finance team pays a supplier bill after that day has passed.",
+  "target_passage_id": "LPD-Art3-3",
+  "accepted_target_ids": [
+    "LPD-Art3-3",
+    "LPD-Art3-1"
+  ],
+  "expected_step": "Pay interest from the day after the contractual payment date",
+  "author": "drafted by Claude, approved by Lina",
+  "note": "synthetic HELD-OUT variant of a non-development case (docs/RAG_V2_CRITERIA.md 7.8), written before any retrieval run; never used for selection",
+  "description": "case 05 description.txt + newline + added_text",
+  "reference": "case 05 reference.bpmn + one task (Task_12, expected_step) on flow SequenceFlow_5 after 'Execute contract'; PROVISIONAL"
+}
