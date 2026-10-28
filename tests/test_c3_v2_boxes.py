@@ -7,7 +7,7 @@ import json
 
 from src.agents.applicability_agent_v2 import SPLIT_INVALID, ApplicabilityAgentV2
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
-from src.agents.requirement_agent_v2 import RequirementAgentV2, RequirementOutputV2
+from src.agents.requirement_agent_v2 import DutyKept, RequirementAgentV2, RequirementOutputV2, TriggerKept
 from src.c3_version import changed_items
 from src.config import load_config, project_path
 from src.llm.mock_llm import MockLLM
@@ -33,10 +33,14 @@ NOT_STATED = {"results": [{"id": "C1", "status": "not_stated", "quote": None},
 RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card", "relevant": True,
             "process_step": "the customer pays by card", "description_quote": "The customer pays by card",
             "reason": "The process has a card payment step."}
+DUTY = {"from_then": "give a receipt", "kept_as": "a receipt is handed"}
 REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer.",
-               "step_quote": "The customer pays by card", "triggers": []}
+               "step_quote": "The customer pays by card",
+               "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}],
+               "duty": DUTY}
 BAD_REQUIREMENT = {"requirement": "The controller must give a receipt.", "step_quote": "The customer pays by card",
-                   "triggers": []}
+                   "triggers": [{"trigger": "a customer pays by card", "kept_as": "give a receipt"}],
+                   "duty": {"from_then": "give a receipt", "kept_as": "give a receipt"}}
 
 RUN_IDS = itertools.count()   # every agent gets its own log file (RunLogger never writes into an existing one)
 
@@ -432,24 +436,25 @@ def trigger_output(trigger: str, kept_as: str) -> RequirementOutputV2:
     """A requirement answer whose only open point is the one trigger."""
     return RequirementOutputV2(requirement=f"After the customer pays, a receipt is handed over {kept_as}.",
                                step_quote="The customer pays by card",
-                               triggers=[{"trigger": trigger, "kept_as": kept_as}])
+                               triggers=[{"trigger": trigger, "kept_as": kept_as}],
+                               duty={"from_then": "give a receipt", "kept_as": "a receipt is handed over"})
 
 
 def test_trigger_from_the_if_part_is_accepted():
     # "a customer pays by card" is in the passage's IF part, not in its THEN part
     assert "a customer pays by card" not in REQ_INPUTS["then"]
     output = trigger_output("a customer pays by card", "after the customer pays")
-    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == []
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, REQ_INPUTS["then"]) == []
 
 
 def test_trigger_from_the_then_part_is_still_accepted():
     output = trigger_output("the shop must give a receipt", "a receipt is handed over")
-    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == []
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, REQ_INPUTS["then"]) == []
 
 
 def test_trigger_not_in_the_passage_is_still_rejected():
     output = trigger_output("within fourteen days", "within fourteen days")
-    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == [
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, REQ_INPUTS["then"]) == [
         'the trigger "within fourteen days" is not copied word for word from the legal passage']
 
 
@@ -457,7 +462,8 @@ def test_requirement_agent_checks_triggers_against_the_passage(tmp_path):
     # the same answer through RequirementAgentV2.write: the IF trigger must not make the requirement invalid
     answer = {"requirement": "After the customer pays by card, a receipt is handed over.",
               "step_quote": "The customer pays by card",
-              "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}]}
+              "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}],
+              "duty": {"from_then": "give a receipt", "kept_as": "a receipt is handed over"}}
     result = RequirementAgentV2(mock([answer]), logger(tmp_path)).write("x", **REQ_INPUTS)
     assert result["requirement_invalid"] is False and result["attempts"][0]["problems"] == []
 
@@ -485,3 +491,78 @@ def test_a_failed_call_stores_its_step_as_the_cause(tmp_path):
     orch, _ = orchestrator(tmp_path, ["not json", "not json"])
     record = orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1", "text": PASSAGE}, [])
     assert record["label"] == MEDIATION_FAILED and record["label_cause"].startswith("failed at relevance: ")
+
+
+# ---------- duty check (28 Oct 2026): the requirement must keep the duty; no empty triggers for situation rules ----
+
+THEN = REQ_INPUTS["then"]                  # "the shop must give a receipt"
+SITUATION_IF = [{"id": "R1", "kind": "role"}, {"id": "S1", "kind": "scope"},
+                {"id": "C1", "kind": "situation", "text": "a customer pays by card"}]
+ROLE_ONLY_IF = [{"id": "R1", "kind": "role"}, {"id": "S1", "kind": "scope"}]
+
+
+def duty_output(duty, triggers=None) -> RequirementOutputV2:
+    """A requirement answer whose only open point is the duty (or the missing triggers)."""
+    answer = dict(REQUIREMENT, duty=duty, triggers=triggers if triggers is not None else REQUIREMENT["triggers"])
+    return RequirementOutputV2.model_construct(
+        requirement=answer["requirement"], step_quote=answer["step_quote"],
+        triggers=[TriggerKept(**t) for t in answer["triggers"]],
+        duty=DutyKept(**answer["duty"]) if answer["duty"] else None)
+
+
+def test_duty_kept_passes():
+    output = duty_output({"from_then": "give a receipt", "kept_as": "a receipt is handed"})
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, THEN, SITUATION_IF) == []
+
+
+def test_duty_missing_fails():
+    problems = CHECKER.quote_problems(duty_output(None), DESCRIPTION, PASSAGE, THEN, SITUATION_IF)
+    assert len(problems) == 1 and problems[0].startswith("duty missing")
+    # an empty from_then counts as missing too; two words are too few
+    short = duty_output({"from_then": "", "kept_as": "a receipt is handed"})
+    assert CHECKER.quote_problems(short, DESCRIPTION, PASSAGE, THEN, SITUATION_IF)[0].startswith("duty missing")
+    two = duty_output({"from_then": "a receipt", "kept_as": "a receipt is handed"})
+    assert any("fewer than 3 words" in p for p in CHECKER.quote_problems(two, DESCRIPTION, PASSAGE, THEN,
+                                                                         SITUATION_IF))
+
+
+def test_duty_from_then_not_in_the_then_part_fails():
+    output = duty_output({"from_then": "refund the customer within 14 days", "kept_as": "a receipt is handed"})
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, THEN, SITUATION_IF) == [
+        'the duty from_then "refund the customer within 14 days" is not copied word for word from the OBLIGATION']
+
+
+def test_duty_kept_as_not_in_the_requirement_fails():
+    # the requirement only restates the process step: the duty is nowhere in it (GDPR-Art13-2-a, case 01.1)
+    output = duty_output({"from_then": "give a receipt", "kept_as": "a receipt is printed by the till"})
+    assert any("does not state the duty" in p for p in
+               CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, THEN, SITUATION_IF))
+
+
+def test_empty_triggers_rejected_when_the_if_part_has_a_situation():
+    output = duty_output({"from_then": "give a receipt", "kept_as": "a receipt is handed"}, triggers=[])
+    problems = CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, THEN, SITUATION_IF)
+    assert len(problems) == 1 and problems[0].startswith("triggers missing")
+
+
+def test_empty_triggers_allowed_for_a_role_only_rule():
+    output = duty_output({"from_then": "give a receipt", "kept_as": "a receipt is handed"}, triggers=[])
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, THEN, ROLE_ONLY_IF) == []
+
+
+def test_requirement_agent_rejects_a_requirement_without_the_duty(tmp_path):
+    no_duty = dict(REQUIREMENT, duty={"from_then": "give a receipt", "kept_as": "a receipt is printed by the till"})
+    agent = RequirementAgentV2(mock([no_duty, REQUIREMENT]), logger(tmp_path))
+    result = agent.write("x", if_items=SITUATION_IF, **REQ_INPUTS)
+    assert [bool(a["problems"]) for a in result["attempts"]] == [True, False]
+    assert "does not state the duty" in agent.llm.prompts_received[1]        # the retry gets the reason
+    assert result["requirement"] == REQUIREMENT["requirement"] and result["attempts"][1]["duty"] == DUTY
+
+
+def test_orchestrator_gives_the_if_items_to_the_requirement_check(tmp_path):
+    # SPLIT has one situational condition, so an answer with an empty triggers list must be rejected
+    empty = dict(REQUIREMENT, triggers=[])
+    orch, _ = orchestrator(tmp_path, [RELEVANT, SPLIT, CONFIRMED, empty, empty])
+    record = orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1", "text": PASSAGE}, [])
+    assert record["label"] == APPLICABLE and record["requirement"]["requirement_invalid"] is True
+    assert record["label_cause"].startswith("requirement invalid: triggers missing")

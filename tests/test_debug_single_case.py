@@ -17,7 +17,9 @@ SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "th
          "exceptions": []}
 CONFIRMED = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}]}
 REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer.",
-               "step_quote": "The customer pays by card", "triggers": []}
+               "step_quote": "The customer pays by card",
+               "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}],
+               "duty": {"from_then": "give a receipt", "kept_as": "a receipt is handed"}}
 
 
 def toy_case():

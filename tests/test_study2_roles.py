@@ -153,7 +153,9 @@ ART13_REQUIREMENT = {
     "requirement": "When the customer withdraws from the purchase, the shop pays back everything the customer paid, "
                    "delivery included, within 14 days.",
     "step_quote": "The shop refunds the payment to the customer's card",
-    "triggers": [{"trigger": "not later than 14 days", "kept_as": "within 14 days"}]}
+    "triggers": [{"trigger": "not later than 14 days", "kept_as": "within 14 days"}],
+    "duty": {"from_then": "reimburse all payments received from the consumer",
+             "kept_as": "the shop pays back everything the customer paid"}}
 
 
 def test_crd_art13_trader_selling_to_private_customers_applicable(tmp_path):
@@ -199,7 +201,8 @@ def test_crd_art14_consumer_withdrawal_applicable(tmp_path):
     requirement = {"requirement": "After telling the shop about the withdrawal, the customer sends the jacket back "
                                   "within 14 days.",
                    "step_quote": "The customer sends the jacket back",
-                   "triggers": [{"trigger": "not later than 14 days", "kept_as": "within 14 days"}]}
+                   "triggers": [{"trigger": "not later than 14 days", "kept_as": "within 14 days"}],
+                   "duty": {"from_then": "send back the goods", "kept_as": "the customer sends the jacket back"}}
     answers = [relevant("the consumer shall send back the goods", "the customer sends the jacket back",
                         "The customer sends the jacket back"), split, check, requirement]
     record, knowledge, llm = run_case(tmp_path, SHOP, "CRD-Art14-1", answers)
@@ -230,7 +233,10 @@ def test_lpd_art3_company_pays_supplier_applicable(tmp_path):
     requirement = {"requirement": "When the company pays the supplier's invoice after the agreed date, it also pays "
                                   "the supplier interest for the late payment, even without a reminder.",
                    "step_quote": "The company pays its supplier's invoice",
-                   "triggers": [{"trigger": "without the necessity of a reminder", "kept_as": "even without a reminder"}]}
+                   "triggers": [{"trigger": "without the necessity of a reminder",
+                                 "kept_as": "even without a reminder"}],
+                   "duty": {"from_then": "entitled to interest for late payment",
+                            "kept_as": "it also pays the supplier interest for the late payment"}}
     answers = [relevant("the creditor is entitled to interest for late payment", "the company pays the invoice",
                         "The company pays its supplier's invoice"), LPD_SPLIT, check, requirement]
     record, knowledge, llm = run_case(tmp_path, SUPPLY, "LPD-Art3-1", answers)
@@ -270,7 +276,9 @@ def test_ecd_art11_online_order_applicable(tmp_path):
                                   "that it has received the order.",
                    "step_quote": "The shop confirms the order by email",
                    "triggers": [{"trigger": "without undue delay", "kept_as": "without delay"},
-                                {"trigger": "by electronic means", "kept_as": "by email"}]}
+                                {"trigger": "by electronic means", "kept_as": "by email"}],
+                   "duty": {"from_then": "acknowledge the receipt of the recipient's order",
+                            "kept_as": "the shop confirms by email without delay that it has received the order"}}
     answers = [relevant("the service provider has to acknowledge the receipt of the recipient's order",
                         "the shop confirms the order", "The shop confirms the order by email"), split, check, requirement]
     record, knowledge, llm = run_case(tmp_path, SHOP, "ECD-Art11-1", answers)
@@ -310,7 +318,10 @@ def test_letter_id_art6a_applicable_and_in_the_block(tmp_path):
                                   "offers are ranked.",
                    "step_quote": "the website shows who the seller is and how the offers are ranked",
                    "triggers": [{"trigger": "before a consumer is bound by a distance contract",
-                                 "kept_as": "Before the customer places an order"}]}
+                                 "kept_as": "Before the customer places an order"}],
+                   "duty": {"from_then": "provide the consumer with general information on the main parameters "
+                                         "determining ranking of offers",
+                            "kept_as": "the website explains in plain words how the offers are ranked"}}
     answers = [relevant("the provider of the online marketplace shall", "the website shows the offers",
                         "the website shows who the seller is"), split, check, requirement]
     record, knowledge, llm = run_case(tmp_path, MARKETPLACE, "CRD-Art6a-1-a", answers)

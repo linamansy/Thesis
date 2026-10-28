@@ -17,6 +17,11 @@ name the step) and a triggers list (each trigger of the THEN part, copied from i
 that keep it). The code check (RequirementCheckerV2.quote_problems) finds the step_quote in the description, each
 trigger in the full legal passage (fix A, 28 Oct 2026: the split moves triggers into the IF part) and each kept_as
 in the requirement; a failure is handled like the other checks.
+
+Duty check (28 Oct 2026): the answer also has a duty ("from_then": the words of the THEN part that say what must be
+done, "kept_as": the words of the requirement that keep them). Without it a requirement could pass every check while
+only restating the process step and stating no duty at all (GDPR-Art13-2-a, case 01.1). The checker also rejects an
+empty triggers list when the IF part has situational conditions; a role-only rule may leave it empty.
 """
 
 from pydantic import BaseModel, Field
@@ -31,11 +36,18 @@ class TriggerKept(BaseModel):
     kept_as: str = Field(description="The words of the requirement, copied exactly, that keep this trigger")
 
 
+class DutyKept(BaseModel):
+    from_then: str = Field(description="The words of the OBLIGATION that say what must be done, copied exactly "
+                                       "(at least 3 words)")
+    kept_as: str = Field(description="The words of the requirement, copied exactly, that say the same thing")
+
+
 class RequirementOutputV2(BaseModel):
     requirement: str = Field(description="One or two sentences: what the rule requires, tied to the process step")
     step_quote: str = Field(description="Exact words copied from the process description that name the step")
     triggers: list[TriggerKept] = Field(description="Every trigger or condition the obligation states; empty list "
                                                     "if none")
+    duty: DutyKept = Field(description="The duty of the obligation, and the words of the requirement that keep it")
 
 
 class RequirementAgentV2(BaseAgent):
@@ -59,8 +71,12 @@ class RequirementAgentV2(BaseAgent):
                                       max_words=self.checker.max_words, banned_words=banned_text)
         return prompt + self.check_note
 
-    def write(self, case_id: str, **inputs) -> dict | None:
+    def write(self, case_id: str, if_items: list[dict] | None = None, **inputs) -> dict | None:
         """The requirement after the code checks, or None if no answer was valid JSON (after the JSON retry).
+
+        if_items: the IF items of the split (the applicability record's "conditions", each with its "kind").
+        They are not part of the prompt; the checker only uses them to see whether the rule has situational
+        conditions, because only a role-only rule may leave the triggers list empty.
 
         Returns {"requirement": text or None, "requirement_invalid": bool, "attempts": [...]}; each attempt keeps the
         answer, its measurements and the problems found."""
@@ -72,9 +88,12 @@ class RequirementAgentV2(BaseAgent):
                 self.check_note = ""
                 return None
             problems = (self.checker.problems(output.requirement, inputs["passage_text"])
-                        + self.checker.quote_problems(output, inputs["description"], inputs["passage_text"]))
+                        + self.checker.quote_problems(output, inputs["description"], inputs["passage_text"],
+                                                      inputs["then"], if_items))
+            duty = getattr(output, "duty", None)
             attempts.append({"requirement": output.requirement, "step_quote": output.step_quote,
-                             "triggers": [t.model_dump() for t in output.triggers], "problems": problems,
+                             "triggers": [t.model_dump() for t in output.triggers],
+                             "duty": duty.model_dump() if duty else None, "problems": problems,
                              "measures": self.checker.measure(output.requirement, inputs["passage_text"])})
             if not problems:
                 break

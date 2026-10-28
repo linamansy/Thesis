@@ -113,7 +113,9 @@ ART13_1_REQUIREMENT = {
     "step_quote": CONTACT_QUOTE,
     "triggers": [{"trigger": "at the time when personal data are obtained",
                   "kept_as": "When the sales staff write down the customer's name"},
-                 {"trigger": "if any", "kept_as": "if anyone"}]}
+                 {"trigger": "if any", "kept_as": "if anyone"}],
+    "duty": {"from_then": "provide the data subject with the identity and the contact details",
+             "kept_as": "the customer is told who the company is"}}
 
 ART30_2_RELEVANT = relevant("shall maintain a record of all categories of processing activities",
                             "the contact details are stored in the system", "store them in the system")
@@ -276,7 +278,9 @@ def test_processor_confirmed_by_on_behalf_quote_applicable(tmp_path):
         "requirement": "When the payroll staff enter the employee details, the company keeps a list of every kind of "
                        "data handling it carries out for its client.",
         "step_quote": PAYROLL_STEP,
-        "triggers": [{"trigger": "carried out on behalf of a controller", "kept_as": "it carries out for its client"}]}
+        "triggers": [{"trigger": "carried out on behalf of a controller", "kept_as": "it carries out for its client"}],
+        "duty": {"from_then": "maintain a record of all categories of processing activities",
+                 "kept_as": "the company keeps a list of every kind of data handling"}}
     answers = [relevant("shall maintain a record of all categories of processing activities",
                         "the payroll staff enter the employee details", PAYROLL_STEP),
                ART30_2_SPLIT, check, requirement]
@@ -348,7 +352,9 @@ ART30_4_KEPT = {
     "requirement": "When the contact details are stored in the system, the company shows its list of this data "
                    "handling to the data protection authority if the authority asks.",
     "step_quote": "store them in the system",
-    "triggers": [{"trigger": "on request", "kept_as": "if the authority asks"}]}
+    "triggers": [{"trigger": "on request", "kept_as": "if the authority asks"}],
+    "duty": {"from_then": "make the record available to the supervisory authority",
+             "kept_as": "the company shows its list of this data handling to the data protection authority"}}
 ART30_4_DROPPED = {**ART30_4_KEPT,       # "on request" is gone from the requirement, so its kept_as is not found
                    "requirement": "When the contact details are stored in the system, the company shows its list of "
                                   "this data handling to the data protection authority."}

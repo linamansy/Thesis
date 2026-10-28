@@ -119,7 +119,8 @@ class OrchestratorV2:
         record["requirement"] = self._step(record, "requirement", lambda: self.requirement_agent.write(
             case_id, description=description, passage_id=passage_id, passage_text=text,
             then=applicability["split"]["then"], process_step=record["relevance"]["process_step"],
-            description_quote=record["relevance"]["description_quote"]))
+            description_quote=record["relevance"]["description_quote"],
+            if_items=applicability["conditions"]))
         if record["requirement"] and record["requirement"]["requirement_invalid"]:
             record["label_cause"] = ("requirement invalid: "
                                      + "; ".join(record["requirement"]["attempts"][-1]["problems"]))

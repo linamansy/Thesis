@@ -8,13 +8,14 @@ INSTRUCTIONS
 - Keep every trigger and condition the obligation states, for example "on request", "where applicable" or "if the customer asks". The requirement must not apply in more situations than the obligation does.
 - Use only what the obligation says. Do not add any obligation, actor, deadline, condition, document or step that is not in it, and do not combine it with other rules or with general knowledge.
 - step_quote: copy, exactly and word for word, the words of the process description that name the step where the requirement applies. It is checked automatically.
+- duty: the duty itself must stay in the requirement. "from_then": the words of the OBLIGATION that say what must be done, copied exactly, at least 3 words; "kept_as": the words of your requirement, copied exactly, that say the same thing. Both are checked automatically.
 - triggers: one entry for every trigger or condition the obligation states. "trigger": its words copied exactly from the OBLIGATION; "kept_as": the words of your requirement, copied exactly, that keep it. Both are checked automatically. Use an empty list if the obligation states none.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE (made up, for the format only)
 Obligation: "the supplier shall, at the purchaser's request, inform the purchaser in writing of the expected date of each instalment before the first delivery"
 Process step: the warehouse ships the order ("The warehouse ships the order in several parcels")
-Answer: {{"requirement": "If the customer asks, the customer is told in writing, before the warehouse ships the first parcel, when each parcel will arrive.", "step_quote": "The warehouse ships the order in several parcels", "triggers": [{{"trigger": "at the purchaser's request", "kept_as": "If the customer asks"}}, {{"trigger": "before the first delivery", "kept_as": "before the warehouse ships the first parcel"}}]}}
+Answer: {{"requirement": "If the customer asks, the customer is told in writing, before the warehouse ships the first parcel, when each parcel will arrive.", "step_quote": "The warehouse ships the order in several parcels", "triggers": [{{"trigger": "at the purchaser's request", "kept_as": "If the customer asks"}}, {{"trigger": "before the first delivery", "kept_as": "before the warehouse ships the first parcel"}}], "duty": {{"from_then": "inform the purchaser in writing of the expected date of each instalment", "kept_as": "the customer is told in writing"}}}}
 
 JSON SCHEMA
 {schema}
