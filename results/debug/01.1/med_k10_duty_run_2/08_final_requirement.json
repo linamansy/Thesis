@@ -1,0 +1,211 @@
+{
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "ECD-Art11-1",
+      "final_label": "Not applicable",
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "ECD-Art11-2",
+      "final_label": "Split invalid",
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "GDPR-Art13-3",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "GDPR-Art13-2-f",
+      "final_label": "Irrelevant",
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "ECD-Art11-3",
+      "final_label": "Irrelevant",
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "GDPR-Art13-1",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "At the time when personal data are obtained, the customer is told the identity and contact details of the controller and, where applicable, the controller's representative.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "At the time when personal data are obtained"
+              }
+            ],
+            "duty": {
+              "from_then": "provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative",
+              "kept_as": "the customer is told the identity and contact details of the controller and, where applicable, the controller's representative"
+            },
+            "problems": [
+              "the requirement uses the word(s) controller, which are not allowed",
+              "the step_quote is not copied word for word from the process description"
+            ],
+            "measures": {
+              "n_words": 26,
+              "n_sentences": 1,
+              "banned_found": [
+                "controller"
+              ],
+              "n_ngrams": 22,
+              "n_copied_ngrams": 8,
+              "copied_share": 0.3636
+            }
+          },
+          {
+            "requirement": "At the time the customer's details are collected, the customer is told the controller's identity and contact details, and the purposes of the data processing.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "At the time the customer's details are collected"
+              }
+            ],
+            "duty": {
+              "from_then": "provide the data subject with all of the following information",
+              "kept_as": "the customer is told the controller's identity and contact details, and the purposes of the data processing"
+            },
+            "problems": [
+              "the requirement uses the word(s) controller, which are not allowed"
+            ],
+            "measures": {
+              "n_words": 25,
+              "n_sentences": 1,
+              "banned_found": [
+                "controller"
+              ],
+              "n_ngrams": 21,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 7,
+      "passage_id": "GDPR-Art12-1",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "When requested by the customer, the customer is told in writing, or by other means, including electronic means, about the processing of their data.",
+            "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+            "triggers": [
+              {
+                "trigger": "When requested by the data subject",
+                "kept_as": "When requested by the customer"
+              }
+            ],
+            "duty": {
+              "from_then": "provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+              "kept_as": "the customer is told in writing, or by other means"
+            },
+            "problems": [
+              "the duty from_then \"provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language\" is not copied word for word from the OBLIGATION"
+            ],
+            "measures": {
+              "n_words": 24,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 20,
+              "n_copied_ngrams": 3,
+              "copied_share": 0.15
+            }
+          },
+          {
+            "requirement": "The controller provides information about processing in a clear, plain language form, using writing or electronic means. If the customer asks, it may be given orally if identity is proven by other means.",
+            "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+            "triggers": [
+              {
+                "trigger": "When requested by the data subject",
+                "kept_as": "If the customer asks"
+              }
+            ],
+            "duty": {
+              "from_then": "provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+              "kept_as": "The controller provides information about processing in a clear, plain language form"
+            },
+            "problems": [
+              "the requirement uses the word(s) controller, which are not allowed",
+              "the duty from_then \"provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language\" is not copied word for word from the OBLIGATION"
+            ],
+            "measures": {
+              "n_words": 33,
+              "n_sentences": 2,
+              "banned_found": [
+                "controller"
+              ],
+              "n_ngrams": 29,
+              "n_copied_ngrams": 1,
+              "copied_share": 0.0345
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 8,
+      "passage_id": "GDPR-Art13-2-a",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": "During the inquiry, the customer is told the period personal data will be stored or the criteria used, and whether data is required for a contract, and the consequences of not providing it.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "During the inquiry, the customer is told the period personal data will be stored or the criteria used, and whether data is required for a contract, and the consequences of not providing it.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "During the inquiry"
+              }
+            ],
+            "duty": {
+              "from_then": "provide the data subject with the following further information necessary to ensure fair and transparent processing",
+              "kept_as": "the customer is told the period personal data will be stored or the criteria used, and whether data is required for a contract, and the consequences of not providing it"
+            },
+            "problems": [],
+            "measures": {
+              "n_words": 33,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 29,
+              "n_copied_ngrams": 2,
+              "copied_share": 0.069
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art14-4",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "CRD-Art6-1-a",
+      "final_label": "Indeterminate",
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art13-2-a] During the inquiry, the customer is told the period personal data will be stored or the criteria used, and whether data is required for a contract, and the consequences of not providing it."
+}
