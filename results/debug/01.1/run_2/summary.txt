@@ -1,0 +1,39 @@
+DEBUG SUMMARY, case 01.1, frozen RAG v2 + C3 v2
+Answer key: target GDPR-Art13-1; expected step "Inform customer about how their contact details will be used"
+
+Target passage:
+  in the hybrid top 20 (before reranking): NOT present  -> retrieval never reaches it; mediation cannot help
+  position among the 20 after reranking:   NOT present
+  in the top 5 after reranking:            NOT present
+
+Frozen top 5 (rank, passage, rerank score, hybrid rank):
+  1. ECD-Art11-2     -5.594  hybrid #1
+  2. ECD-Art11-1     -5.912  hybrid #6
+  3. ECD-Art10-1     -7.390  hybrid #2
+  4. CRD-Art8-3      -7.598  hybrid #4
+  5. CRD-Art8-7      -7.704  hybrid #3
+
+Final status per passage:
+  run_1:
+    1. ECD-Art11-2    Split invalid
+    2. ECD-Art11-1    Not applicable
+    3. ECD-Art10-1    Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    4. CRD-Art8-3     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    5. CRD-Art8-7     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    block: (none, C1 text)
+  run_2:
+    1. ECD-Art11-2    Split invalid
+    2. ECD-Art11-1    Not applicable
+    3. ECD-Art10-1    Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    4. CRD-Art8-3     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    5. CRD-Art8-7     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    block: (none, C1 text)
+  run_3:
+    1. ECD-Art11-2    Split invalid
+    2. ECD-Art11-1    Not applicable
+    3. ECD-Art10-1    Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    4. CRD-Art8-3     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    5. CRD-Art8-7     Indeterminate [first look Indeterminate, second look -> Indeterminate]
+    block: (none, C1 text)
+
+Labels identical in all runs: yes

@@ -1,0 +1,474 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art11-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+        ],
+        "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": false,
+      "rejected_if": [
+        "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+      ],
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Split invalid",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art11-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body"
+        ],
+        "if": [
+          "the recipient of the service places his order through technological means"
+        ],
+        "then": "the Member State shall ensure that the service provider acknowledges the receipt of the recipient's order without undue delay and by electronic means, and that the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "E1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "contradicted",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service places his order through technological means",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "when otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "first_look_label": "Not applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art10-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "a service provider provides an information society service",
+          "the recipient of the service places an order"
+        ],
+        "then": "the service provider must give the following information clearly, comprehensibly and unambiguously prior to the order being placed: (a) the different technical steps to follow to conclude the contract; (b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible; (c) the technical means for identifying and correcting input errors prior to the placing of the order; (d) the languages offered for the conclusion of the contract",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "confirmed",
+            "quote": "The process ends when the order is successfully placed and confirmed."
+          },
+          {
+            "id": "E1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a service provider provides an information society service",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "second look",
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the recipient of the service places an order",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The process ends when the order is successfully placed and confirmed.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "when otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art8-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          "a trading website is involved in a distance contract"
+        ],
+        "then": "the trading website must indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a trading website is involved in a distance contract",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "second look",
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "CRD-Art8-7",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          "a distance contract is concluded"
+        ],
+        "then": "the trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include: all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a distance contract is concluded",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  }
+]
