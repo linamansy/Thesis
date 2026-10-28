@@ -1,0 +1,17 @@
+You are assisting with business process modelling. List the steps of the business process described below.
+
+INSTRUCTIONS
+- A step is one thing that an actor does in the process. Use only what the description states. Do not add steps that the description does not state.
+- Give every step: step_id (S1, S2, ... in the order of the description), actor (who does it), activity (what is done, in a few words), data_or_object (the data, document or object the step handles; empty string if none) and quote.
+- quote: copy the words of the description that state the step, word for word. Do not change, shorten in the middle or rephrase the words.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+EXAMPLE (made up, for the format only)
+Description: "The customer chooses a product. The shop sends the product and an invoice."
+Answer: {{"steps": [{{"step_id": "S1", "actor": "customer", "activity": "choose a product", "data_or_object": "product", "quote": "The customer chooses a product"}}, {{"step_id": "S2", "actor": "shop", "activity": "send the product and an invoice", "data_or_object": "product, invoice", "quote": "The shop sends the product and an invoice"}}]}}
+
+JSON SCHEMA
+{schema}
+
+PROCESS DESCRIPTION
+{description}

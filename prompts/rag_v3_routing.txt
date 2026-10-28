@@ -1,0 +1,24 @@
+You are assisting with business process modelling. Below is one step of a business process and a list of articles of legal texts. Choose the articles that could contain rules about what this step does or handles.
+
+INSTRUCTIONS
+- Choose at most 3 articles. Choose fewer, or none, if fewer fit.
+- Use only the article ids from the list, written exactly as in the list.
+- For each chosen article give a reason: one short sentence about how the article relates to the step.
+- Judge by what the step does and the data or objects it handles, not by similar words alone.
+- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+EXAMPLE (made up, for the format only)
+Step: actor "shop", activity "send the product", data_or_object "product"
+Articles: "ABC-Art1: Scope", "ABC-Art2: Delivery of goods", "ABC-Art3: Complaints"
+Answer: {{"routes": [{{"article_id": "ABC-Art2", "reason": "The article is about delivery of goods and the step sends a product."}}]}}
+
+JSON SCHEMA
+{schema}
+
+STEP
+actor: {actor}
+activity: {activity}
+data_or_object: {data_or_object}
+
+ARTICLES
+{articles}

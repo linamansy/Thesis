@@ -1,0 +1,36 @@
+{
+  "method": "RAG step routing (SR), src/rag_v3_steps.py (not the exploratory RAG v3)",
+  "case_id": "01.1",
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "n_passages": 289,
+  "agent_settings": {
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "ollama_timeout_seconds": 900,
+    "ollama_api_max_retries": 5,
+    "max_retries": 1,
+    "api_initial_wait_seconds": 2,
+    "api_max_retries": 5,
+    "gemini_api_max_retries": 5,
+    "gemini_pause_between_calls_seconds": 10
+  },
+  "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "reranker_revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.40.11",
+  "run": "rag_sr_run_3",
+  "answer_key": {
+    "target_passage_id": "GDPR-Art13-1",
+    "accepted_target_ids": [
+      "GDPR-Art13-1"
+    ],
+    "expected_step": "Inform customer about how their contact details will be used"
+  },
+  "pass_rules": {
+    "(a)": "GDPR-Art13 routed for at least one step",
+    "(b)": "GDPR-Art13-1 in the S4 top 5"
+  }
+}

@@ -1,0 +1,85 @@
+RAG STEP ROUTING (SR) DEBUG, case 01.1
+Answer key: target GDPR-Art13-1. Rules: (a) GDPR-Art13 routed for >= 1 step; (b) GDPR-Art13-1 in the S4 top 5.
+
+=== rag_sr_run_1 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] places the order | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] sends confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14
+  S3: CRD-Art6, GDPR-Art12, GDPR-Art13
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24
+  S8: GDPR-Art12, GDPR-Art14, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art14, GDPR-Art12
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=3, S3=7, S4=-, S5=-, S6=-, S7=4, S8=-, S9=4, S10=1
+S4 rank of GDPR-Art13-1 (full merge): 9; top 5: GDPR-Art12-1, GDPR-Art12-6, GDPR-Art12-5, GDPR-Art13-3, GDPR-Art12-7
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_2 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] places the order | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] sends confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24
+  S8: GDPR-Art12, GDPR-Art14, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art12, GDPR-Art6
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=3, S3=-, S4=-, S5=-, S6=-, S7=4, S8=-, S9=4, S10=1
+S4 rank of GDPR-Art13-1 (full merge): 17; top 5: GDPR-Art12-1, GDPR-Art12-6, GDPR-Art12-5, GDPR-Art6-3, GDPR-Art12-7
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_3 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] places the order | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] sends confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24
+  S8: GDPR-Art12, GDPR-Art14, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art12, GDPR-Art6
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=3, S3=-, S4=-, S5=-, S6=-, S7=4, S8=-, S9=4, S10=1
+S4 rank of GDPR-Art13-1 (full merge): 17; top 5: GDPR-Art12-1, GDPR-Art12-6, GDPR-Art12-5, GDPR-Art6-3, GDPR-Art12-7
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+Runs: rag_sr_run_1 FAIL, rag_sr_run_2 FAIL, rag_sr_run_3 FAIL  (0/3 pass)
