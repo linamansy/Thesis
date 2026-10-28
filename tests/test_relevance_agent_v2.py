@@ -155,3 +155,56 @@ def test_mock_run_writes_only_its_round_folder(tmp_path):
     assert len(answers) == 65 and all(a["valid_json"] for a in answers)
     with pytest.raises(ValueError, match="round must be"):
         RelevanceV2Dev(config, 4, MockLLM(["{}"]))
+
+
+# ---------- fix B (28 Oct 2026): a law quote with an ellipsis is checked fragment by fragment ----------
+
+LONG_PASSAGE = ("The controller shall take appropriate measures to provide any information referred to in Articles 13 "
+                "and 14 to the data subject in a concise, transparent, intelligible and easily accessible form, using "
+                "clear and plain language.")
+CHECKER = RelevanceV2Checker()
+
+
+def law_found(quote: str) -> bool | None:
+    return CHECKER.law_quote_found(quote, LONG_PASSAGE)
+
+
+def test_ellipsis_quote_with_verbatim_fragments_in_order_is_found():
+    assert law_found("The controller shall take appropriate measures ... using clear and plain language") is True
+    assert law_found("The controller shall take appropriate measures … using clear and plain language") is True
+    assert law_found("The controller shall take appropriate measures ... to the data subject in a concise "
+                     "... using clear and plain language") is True
+
+
+def test_ellipsis_fragments_in_the_wrong_order_are_not_found():
+    assert law_found("using clear and plain language ... The controller shall take appropriate measures") is False
+
+
+def test_an_ellipsis_fragment_shorter_than_four_words_is_not_found():
+    assert law_found("The controller shall take appropriate measures ... plain language") is False
+
+
+def test_an_invented_ellipsis_fragment_is_not_found():
+    assert law_found("The controller shall take appropriate measures ... within fourteen calendar days") is False
+
+
+def test_a_quote_without_an_ellipsis_is_checked_exactly_as_before():
+    assert law_found("take appropriate measures to provide any information") is True
+    assert law_found("the shop must refund the customer") is False
+    assert law_found("") is None and law_found("...") is None
+
+
+def test_description_quote_is_not_ellipsis_aware(tmp_path):
+    # the fix is for the law quote only: an ellipsis in the description quote still fails
+    answer = dict(REAL, description_quote="The customer chooses a product ... The shop sends the product")
+    result = run_and_check(tmp_path, answer)
+    assert (result["description_quote_found"], result["final_relevant"]) == (False, False)
+
+
+# ---------- fix B: the label cause is code-decided, never the model's own reason ----------
+
+def test_cause_names_the_check_that_failed(tmp_path):
+    assert run_and_check(tmp_path, REAL)["cause"] == "relevant"
+    assert run_and_check(tmp_path, FAKE_LAW_QUOTE)["cause"] == "law_quote not found"
+    assert run_and_check(tmp_path, FAKE_DESCRIPTION_QUOTE)["cause"] == "description_quote not found"
+    assert run_and_check(tmp_path, EMPTY_STEP)["cause"] == "the model said not relevant, description_quote empty"

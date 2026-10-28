@@ -52,14 +52,14 @@ def next_med_dir(case_dir: Path, label: str) -> Path:
 
 
 def reason(record: dict) -> str:
-    """Why a passage did not end Applicable (empty for Applicable)."""
-    if record["label"] == "Applicable":
+    """The CODE's cause of the label (fix B): empty only for an Applicable rule that also has its requirement.
+
+    Never the model's own reason, so the printed cause can no longer contradict the label the code decided.
+    """
+    cause = str(record.get("label_cause") or "")
+    if record["label"] == "Applicable" and not cause.startswith("requirement invalid"):
         return ""
-    if record["failed_step"]:
-        return f"failed at {record['failed_step']}"
-    if record["label"] == "Irrelevant":
-        return str((record["relevance"] or {}).get("reason") or "not relevant")
-    return str((record["resolution"] or {}).get("reason") or "")
+    return cause
 
 
 def summary_text(label: str, runs: list[dict]) -> str:
@@ -69,8 +69,9 @@ def summary_text(label: str, runs: list[dict]) -> str:
         for r in run["records"]:
             why = reason(r)
             lines.append(f"  {r['passage_id']:<16} {r['label']}" + (f"  ({why})" if why else ""))
-            if r["requirement"] is not None and r["label"] == "Applicable":
-                lines.append(f"      requirement: {r['requirement'].get('requirement')}")
+            # only a requirement that passed the code checks is printed; a failed one is named in the cause above
+            if r["label"] == "Applicable" and (r["requirement"] or {}).get("requirement"):
+                lines.append(f"      requirement: {r['requirement']['requirement']}")
     return "\n".join(lines) + "\n"
 
 

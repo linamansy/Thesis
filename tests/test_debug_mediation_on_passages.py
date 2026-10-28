@@ -44,3 +44,22 @@ def test_mock_run_writes_stage_files_and_summary(tmp_path):
     text = summary_text("t", [out])
     assert "P-1" in text and "Applicable" in text and "requirement:" in text
     assert reason(out["records"][0]) == ""
+
+
+# ---------- fix B (28 Oct 2026): the printed cause is the code's, never the model's reason ----------
+
+def test_printed_cause_is_the_code_cause_not_the_model_reason():
+    model_reason = "The rule is about transparent information, which the process does."
+    record = {"passage_id": "P-1", "label": "Irrelevant", "failed_step": None, "requirement": None,
+              "label_cause": "law_quote not found", "relevance": {"reason": model_reason}, "resolution": None}
+    assert reason(record) == "law_quote not found"
+    assert model_reason not in summary_text("t", [{"run": "r", "records": [record]}])
+
+
+def test_applicable_without_a_valid_requirement_shows_the_failed_check():
+    record = {"passage_id": "P-1", "label": "Applicable", "failed_step": None, "relevance": None, "resolution": None,
+              "label_cause": 'requirement invalid: the trigger "where applicable" is not copied word for word',
+              "requirement": {"requirement": None, "requirement_invalid": True}}
+    assert reason(record).startswith("requirement invalid: ")
+    text = summary_text("t", [{"run": "r", "records": [record]}])
+    assert "Applicable  (requirement invalid: " in text and "requirement: None" not in text

@@ -19,7 +19,9 @@ layout as C1. The neutral label in front of the block is added by the generator,
 
 Audit trail (by code): output_dir/<case_id>.json with every intermediate step per passage (relevance answer and quote
 check, split, check-IF answer, verified conditions and exceptions, first-look label, second-look answer, look,
-resolver result, requirement) and the knowledge block. Written only when the case is complete; an existing file is
+resolver result, requirement) and the knowledge block. Fix B (28 Oct 2026) adds "label_cause": the CODE's reason for
+the label (e.g. "law_quote not found", "requirement invalid: ..."), so a report never shows the model's own reason next
+to a label the code decided. Written only when the case is complete; an existing file is
 reused and no agent is called again (resumed run).
 """
 
@@ -76,8 +78,8 @@ class OrchestratorV2:
         """The four boxes for one passage. Returns its audit-trail record."""
         passage_id, text = passage["passage_id"], passage["text"]
         record = {"rank": passage["rank"], "passage_id": passage_id, "passage_text": text, "label": None,
-                  "failed_step": None, "error": None, "relevance": None, "applicability": None, "resolution": None,
-                  "requirement": None}
+                  "label_cause": None, "failed_step": None, "error": None, "relevance": None, "applicability": None,
+                  "resolution": None, "requirement": None}
 
         # Box 1: relevance
         relevance = self._step(record, "relevance", lambda: self.relevance_agent.run(
@@ -87,6 +89,7 @@ class OrchestratorV2:
         record["relevance"] = self.relevance_checker.check(relevance, text, description)
         if not record["relevance"]["final_relevant"]:
             record["label"] = IRRELEVANT
+            record["label_cause"] = record["relevance"]["cause"]
             return record
 
         # Box 2: applicability, first look and (only for Indeterminate) second look
@@ -102,11 +105,13 @@ class OrchestratorV2:
             return self._failed(record, applicability["failed_step"], "no valid output after retry (see the log file)")
         if applicability["label"] == SPLIT_INVALID:
             record["label"] = SPLIT_INVALID
+            record["label_cause"] = "obligation word in the IF item(s): " + "; ".join(applicability["rejected_if"])
             return record
 
         # Box 3: resolver (code)
         record["resolution"] = self.resolver.resolve(applicability)
         record["label"] = record["resolution"]["label"]
+        record["label_cause"] = record["resolution"]["reason"]
         if record["label"] != APPLICABLE:
             return record
 
@@ -115,6 +120,9 @@ class OrchestratorV2:
             case_id, description=description, passage_id=passage_id, passage_text=text,
             then=applicability["split"]["then"], process_step=record["relevance"]["process_step"],
             description_quote=record["relevance"]["description_quote"]))
+        if record["requirement"] and record["requirement"]["requirement_invalid"]:
+            record["label_cause"] = ("requirement invalid: "
+                                     + "; ".join(record["requirement"]["attempts"][-1]["problems"]))
         return record
 
     def _step(self, record: dict, step: str, call):
@@ -132,7 +140,7 @@ class OrchestratorV2:
 
     @staticmethod
     def _failed(record: dict, step: str, error: str) -> dict:
-        record.update(label=MEDIATION_FAILED, failed_step=step, error=error)
+        record.update(label=MEDIATION_FAILED, failed_step=step, error=error, label_cause=f"failed at {step}: {error}")
         return record
 
     # ---------- knowledge block ----------

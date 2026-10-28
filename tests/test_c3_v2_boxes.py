@@ -460,3 +460,28 @@ def test_requirement_agent_checks_triggers_against_the_passage(tmp_path):
               "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}]}
     result = RequirementAgentV2(mock([answer]), logger(tmp_path)).write("x", **REQ_INPUTS)
     assert result["requirement_invalid"] is False and result["attempts"][0]["problems"] == []
+
+
+# ---------- fix B (28 Oct 2026): the audit trail stores the code's cause of the label ----------
+
+def test_audit_trail_stores_the_code_cause_of_every_label(tmp_path):
+    fake_law = dict(RELEVANT, law_quote="the shop must refund the customer")
+    for answers, label, cause in [
+            ([fake_law], IRRELEVANT, "law_quote not found"),
+            ([RELEVANT, dict(SPLIT, **{"if": ["the shop must give a receipt"]})], SPLIT_INVALID,
+             "obligation word in the IF item(s): the shop must give a receipt"),
+            ([RELEVANT, SPLIT, NOT_STATED, {"results": [NOT_STATED["results"][0]]}], INDETERMINATE,
+             "not every IF item is confirmed"),
+            ([RELEVANT, SPLIT, CONFIRMED, REQUIREMENT], APPLICABLE,
+             "every IF item confirmed and no stated exception applies"),
+            ([RELEVANT, SPLIT, CONFIRMED, BAD_REQUIREMENT, BAD_REQUIREMENT], APPLICABLE,
+             "requirement invalid: the requirement uses the word(s) controller, which are not allowed")]:
+        orch, _ = orchestrator(tmp_path, answers)
+        record = orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1", "text": PASSAGE}, [])
+        assert (record["label"], record["label_cause"]) == (label, cause)
+
+
+def test_a_failed_call_stores_its_step_as_the_cause(tmp_path):
+    orch, _ = orchestrator(tmp_path, ["not json", "not json"])
+    record = orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1", "text": PASSAGE}, [])
+    assert record["label"] == MEDIATION_FAILED and record["label_cause"].startswith("failed at relevance: ")
