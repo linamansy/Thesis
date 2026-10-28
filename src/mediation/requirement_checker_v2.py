@@ -7,9 +7,14 @@ A requirement passes only if
 All limits are in config.yaml c3_v2.requirement_checks. problems() returns the reasons a requirement fails (an empty
 list = it passes); the reasons are sent back to the model in the one retry of RequirementAgentV2.
 
-Round 3 (R6), quote_problems(): the step_quote must appear in the process description, every trigger in the THEN part
-and every kept_as in the requirement (QuoteChecker: whole words, same order). Whether the list names EVERY trigger is
-not checked by code; it is judged by reading (criterion 11).
+Round 3 (R6), quote_problems(): the step_quote must appear in the process description, every trigger in the FULL
+legal passage and every kept_as in the requirement (QuoteChecker: whole words, same order). Whether the list names
+EVERY trigger is not checked by code; it is judged by reading (criterion 11).
+
+Fix A (28 Oct 2026): a trigger used to be checked against the THEN part only. But the IF/THEN split moves triggers
+("at the time when personal data are obtained") into the IF part by design, so valid triggers were rejected and the
+rule lost its requirement (GDPR-Art13-2-a, case 01.1). A trigger is therefore checked against the whole passage
+(IF and THEN together); a trigger that is nowhere in the passage is still rejected.
 """
 
 import re
@@ -68,14 +73,16 @@ class RequirementCheckerV2:
                          f"the legal passage; use your own plain words")
         return found
 
-    def quote_problems(self, output, description: str, then: str) -> list[str]:
-        """output: RequirementOutputV2 (requirement, step_quote, triggers)."""
+    def quote_problems(self, output, description: str, passage_text: str) -> list[str]:
+        """output: RequirementOutputV2 (requirement, step_quote, triggers).
+
+        passage_text is the FULL legal passage (see fix A above), not only its THEN part."""
         found = []
         if not self.quote_checker.found(output.step_quote, description):
             found.append("the step_quote is not copied word for word from the process description")
         for t in output.triggers:
-            if not self.quote_checker.found(t.trigger, then):
-                found.append(f'the trigger "{t.trigger}" is not copied word for word from the OBLIGATION')
+            if not self.quote_checker.found(t.trigger, passage_text):
+                found.append(f'the trigger "{t.trigger}" is not copied word for word from the legal passage')
             if not self.quote_checker.found(t.kept_as, output.requirement):
                 found.append(f'the kept_as words "{t.kept_as}" are not copied word for word from the requirement')
         return found

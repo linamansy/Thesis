@@ -15,7 +15,8 @@ requirement is marked requirement_invalid and the orchestrator does not pass it 
 Round 3 (docs/C3_V2_DEVELOPMENT.md section 9, R6): the answer also has a step_quote (the words of the description that
 name the step) and a triggers list (each trigger of the THEN part, copied from it, with the words of the requirement
 that keep it). The code check (RequirementCheckerV2.quote_problems) finds the step_quote in the description, each
-trigger in the THEN part and each kept_as in the requirement; a failure is handled like the other checks.
+trigger in the full legal passage (fix A, 28 Oct 2026: the split moves triggers into the IF part) and each kept_as
+in the requirement; a failure is handled like the other checks.
 """
 
 from pydantic import BaseModel, Field
@@ -71,7 +72,7 @@ class RequirementAgentV2(BaseAgent):
                 self.check_note = ""
                 return None
             problems = (self.checker.problems(output.requirement, inputs["passage_text"])
-                        + self.checker.quote_problems(output, inputs["description"], inputs["then"]))
+                        + self.checker.quote_problems(output, inputs["description"], inputs["passage_text"]))
             attempts.append({"requirement": output.requirement, "step_quote": output.step_quote,
                              "triggers": [t.model_dump() for t in output.triggers], "problems": problems,
                              "measures": self.checker.measure(output.requirement, inputs["passage_text"])})

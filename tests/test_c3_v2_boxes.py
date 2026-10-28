@@ -424,3 +424,39 @@ def test_requirement_prompt_keeps_triggers(tmp_path):
     prompt = agent.llm.prompts_received[0]
     assert 'Keep every trigger and condition the obligation states, for example "on request"' in prompt
     assert '"requirement": "If the customer asks, the customer is told in writing' in prompt
+
+
+# ---------- fix A (28 Oct 2026): a trigger is checked against the FULL passage, not only the THEN part ----------
+
+def trigger_output(trigger: str, kept_as: str) -> RequirementOutputV2:
+    """A requirement answer whose only open point is the one trigger."""
+    return RequirementOutputV2(requirement=f"After the customer pays, a receipt is handed over {kept_as}.",
+                               step_quote="The customer pays by card",
+                               triggers=[{"trigger": trigger, "kept_as": kept_as}])
+
+
+def test_trigger_from_the_if_part_is_accepted():
+    # "a customer pays by card" is in the passage's IF part, not in its THEN part
+    assert "a customer pays by card" not in REQ_INPUTS["then"]
+    output = trigger_output("a customer pays by card", "after the customer pays")
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == []
+
+
+def test_trigger_from_the_then_part_is_still_accepted():
+    output = trigger_output("the shop must give a receipt", "a receipt is handed over")
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == []
+
+
+def test_trigger_not_in_the_passage_is_still_rejected():
+    output = trigger_output("within fourteen days", "within fourteen days")
+    assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE) == [
+        'the trigger "within fourteen days" is not copied word for word from the legal passage']
+
+
+def test_requirement_agent_checks_triggers_against_the_passage(tmp_path):
+    # the same answer through RequirementAgentV2.write: the IF trigger must not make the requirement invalid
+    answer = {"requirement": "After the customer pays by card, a receipt is handed over.",
+              "step_quote": "The customer pays by card",
+              "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}]}
+    result = RequirementAgentV2(mock([answer]), logger(tmp_path)).write("x", **REQ_INPUTS)
+    assert result["requirement_invalid"] is False and result["attempts"][0]["problems"] == []
