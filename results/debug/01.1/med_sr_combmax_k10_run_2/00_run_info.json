@@ -1,0 +1,32 @@
+{
+  "case_id": "01.1",
+  "mode": "mediation on given passages (no retrieval)",
+  "label": "sr_combmax_k10",
+  "given_passage_ids": [
+    "ECD-Art11-1",
+    "ECD-Art11-2",
+    "GDPR-Art13-3",
+    "GDPR-Art13-2-f",
+    "ECD-Art11-3",
+    "GDPR-Art13-1",
+    "GDPR-Art12-1",
+    "GDPR-Art13-2-a",
+    "GDPR-Art14-4",
+    "CRD-Art6-1-a"
+  ],
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "c3_version": "v2",
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.40.11",
+  "run": "med_sr_combmax_k10_run_2",
+  "started_at": "2026-10-28T18:59:31+00:00",
+  "answer_key": {
+    "target_passage_id": "GDPR-Art13-1",
+    "accepted_target_ids": [
+      "GDPR-Art13-1"
+    ],
+    "expected_step": "Inform customer about how their contact details will be used"
+  }
+}

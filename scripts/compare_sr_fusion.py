@@ -18,6 +18,7 @@ comparable (rules 2 and 4).
 Run from the project root:  .venv\\Scripts\\python.exe -m scripts.compare_sr_fusion
 """
 
+import argparse
 import json
 
 from src.config import load_config, project_path
@@ -86,13 +87,13 @@ def run_dirs(debug_dir):
     return sorted(dirs, key=lambda p: int(p.name.rsplit("_", 1)[-1]))
 
 
-def table(results: dict) -> str:
-    lines = [f"SR fusion comparison, case 01.1. Pass rule: {TARGET} in the top 5. Cap = {MAX_PER_ARTICLE} per article.",
-             "", f"{'rule':<13}{'run':<6}{'top 5':<76}{'rank':<6}result", "-" * 107]
+def table(results: dict, k: int = 5) -> str:
+    lines = [f"SR fusion comparison, case 01.1. Pass rule: {TARGET} in the top {k}. Cap = {MAX_PER_ARTICLE} per article.",
+             "", f"{'rule':<13}{'run':<6}{f'top {k}':<{15 * k + 1}}{'rank':<6}result", "-" * (15 * k + 31)]
     for rule in RULES:
         for run, per_rule in results.items():
             r = per_rule[rule]
-            lines.append(f"{rule:<13}{run.rsplit('_', 1)[-1]:<6}{', '.join(r['top5']):<76}{r['rank'] or '-':<6}"
+            lines.append(f"{rule:<13}{run.rsplit('_', 1)[-1]:<6}{', '.join(r['top5']):<{15 * k + 1}}{r['rank'] or '-':<6}"
                          f"{'PASS' if r['pass'] else 'FAIL'}")
         lines.append("")
     lines.append("Passes: " + ", ".join(f"{rule} {sum(per[rule]['pass'] for per in results.values())}/{len(results)}"
@@ -101,6 +102,9 @@ def table(results: dict) -> str:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Compare SR fusion rules on saved step lists (no LLM).")
+    parser.add_argument("--k", type=int, default=5, help="size of the top list that is checked (default 5)")
+    k = parser.parse_args().k
     config = load_config()
     top_k, rrf_k = config["reranker"]["top_k"], config["retrieval"]["rrf_k"]
     debug_dir = project_path(config["paths"]["runs"]).parent / "debug" / "01.1"
@@ -109,11 +113,11 @@ def main() -> None:
         s3 = json.loads((run_dir / "03_step_rankings.json").read_text(encoding="utf-8"))
         orders = fusion_orders(step_lists(s3), rrf_k)
         check_reproduction(run_dir, orders, top_k)
-        results[run_dir.name] = {rule: evaluate(order, top_k) for rule, order in orders.items()}
+        results[run_dir.name] = {rule: evaluate(order, k) for rule, order in orders.items()}
     if not results:
         raise SystemExit(f"No rag_sr_run_<n> folders in {debug_dir}")
     print("Rule 1 reproduces every saved 04_merged_top5.json exactly.\n")
-    print(table(results))
+    print(table(results, k))
 
 
 if __name__ == "__main__":

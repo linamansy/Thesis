@@ -1,0 +1,167 @@
+{
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "ECD-Art11-1",
+      "final_label": "Not applicable",
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "ECD-Art11-2",
+      "final_label": "Split invalid",
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "GDPR-Art13-3",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "GDPR-Art13-2-f",
+      "final_label": "Irrelevant",
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "ECD-Art11-3",
+      "final_label": "Irrelevant",
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "GDPR-Art13-1",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "At the time the customer's details are collected, the customer is told the controller's identity, contact details, and the purpose of data processing.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "At the time the customer's details are collected"
+              }
+            ],
+            "problems": [
+              "the requirement uses the word(s) controller, which are not allowed"
+            ],
+            "measures": {
+              "n_words": 23,
+              "n_sentences": 1,
+              "banned_found": [
+                "controller"
+              ],
+              "n_ngrams": 19,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "When the customer's details are collected"
+              }
+            ],
+            "problems": [],
+            "measures": {
+              "n_words": 22,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 18,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 7,
+      "passage_id": "GDPR-Art12-1",
+      "final_label": "Irrelevant",
+      "requirement": null
+    },
+    {
+      "rank": 8,
+      "passage_id": "GDPR-Art13-2-a",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "The customer is told the period personal data will be stored or the criteria used, the right to access and erase data, the right to withdraw consent, the right to complain, and if data is required by law or contract.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "during the inquiry"
+              }
+            ],
+            "problems": [
+              "the trigger \"at the time when personal data are obtained\" is not copied word for word from the OBLIGATION",
+              "the kept_as words \"during the inquiry\" are not copied word for word from the requirement"
+            ],
+            "measures": {
+              "n_words": 40,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 36,
+              "n_copied_ngrams": 3,
+              "copied_share": 0.0833
+            }
+          },
+          {
+            "requirement": "The customer is told the period personal data will be stored or the criteria used, the rights to access, rectify, erase, restrict, object, and data portability, the right to withdraw consent, the right to complain, and if data is required by law or contract.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "during the inquiry"
+              },
+              {
+                "trigger": "where applicable",
+                "kept_as": "if data is required by law or contract"
+              }
+            ],
+            "problems": [
+              "the requirement has 44 words; at most 40 are allowed",
+              "the trigger \"at the time when personal data are obtained\" is not copied word for word from the OBLIGATION",
+              "the kept_as words \"during the inquiry\" are not copied word for word from the requirement",
+              "the trigger \"where applicable\" is not copied word for word from the OBLIGATION"
+            ],
+            "measures": {
+              "n_words": 44,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 40,
+              "n_copied_ngrams": 3,
+              "copied_share": 0.075
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art14-4",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "CRD-Art6-1-a",
+      "final_label": "Indeterminate",
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art13-1] When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data."
+}
