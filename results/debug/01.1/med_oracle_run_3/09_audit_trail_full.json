@@ -1,0 +1,159 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art13-1",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available.",
+    "label": "Applicable",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "personal data collected from the data subject",
+      "law_quote": "personal data relating to a data subject are collected from the data subject",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about collecting personal data from the data subject, and the process includes a step where sales staff collect and store customer information.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "personal data relating to a data subject are collected from the data subject"
+        ],
+        "then": "the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "personal data relating to a data subject are collected from the data subject",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Applicable",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable",
+      "if_label": "Applicable",
+      "exceptions_applying": [],
+      "reason": "every IF item confirmed and no stated exception applies",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": "first look"
+      }
+    },
+    "requirement": {
+      "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+      "requirement_invalid": false,
+      "attempts": [
+        {
+          "requirement": "When personal data are obtained, the customer is told the controller's identity, contact details, and the purposes of the processing.",
+          "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "triggers": [
+            {
+              "trigger": "at the time when personal data are obtained",
+              "kept_as": "When personal data are obtained"
+            }
+          ],
+          "problems": [
+            "the requirement uses the word(s) controller, which are not allowed"
+          ],
+          "measures": {
+            "n_words": 20,
+            "n_sentences": 1,
+            "banned_found": [
+              "controller"
+            ],
+            "n_ngrams": 16,
+            "n_copied_ngrams": 2,
+            "copied_share": 0.125
+          }
+        },
+        {
+          "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+          "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "triggers": [
+            {
+              "trigger": "at the time when personal data are obtained",
+              "kept_as": "When the customer's details are collected"
+            }
+          ],
+          "problems": [],
+          "measures": {
+            "n_words": 22,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 18,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  }
+]

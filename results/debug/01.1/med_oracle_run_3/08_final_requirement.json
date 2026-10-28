@@ -1,0 +1,58 @@
+{
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "GDPR-Art13-1",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "When personal data are obtained, the customer is told the controller's identity, contact details, and the purposes of the processing.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "When personal data are obtained"
+              }
+            ],
+            "problems": [
+              "the requirement uses the word(s) controller, which are not allowed"
+            ],
+            "measures": {
+              "n_words": 20,
+              "n_sentences": 1,
+              "banned_found": [
+                "controller"
+              ],
+              "n_ngrams": 16,
+              "n_copied_ngrams": 2,
+              "copied_share": 0.125
+            }
+          },
+          {
+            "requirement": "When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "When the customer's details are collected"
+              }
+            ],
+            "problems": [],
+            "measures": {
+              "n_words": 22,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 18,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art13-1] When the customer's details are collected, the company tells the customer about its identity, contact info, and why it's collecting the data."
+}
