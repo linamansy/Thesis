@@ -9,6 +9,7 @@ INSTRUCTIONS
 - Use only what the obligation says. Do not add any obligation, actor, deadline, condition, document or step that is not in it, and do not combine it with other rules or with general knowledge.
 - step_quote: copy, exactly and word for word, the words of the process description that name the step where the requirement applies. It is checked automatically.
 - duty: the duty itself must stay in the requirement. "from_then": the words of the OBLIGATION that say what must be done, copied exactly, at least 3 words; "kept_as": the words of your requirement, copied exactly, that say the same thing. Both are checked automatically.
+- Only duty.from_then copies the law's words. The requirement and duty.kept_as MUST use plain everyday words and MUST NOT contain any banned word, even if the law uses it.
 - triggers: one entry for every trigger or condition the obligation states. "trigger": its words copied exactly from the OBLIGATION; "kept_as": the words of your requirement, copied exactly, that keep it. Both are checked automatically. Use an empty list if the obligation states none.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
