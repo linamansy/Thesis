@@ -22,12 +22,19 @@ write down the customer's name ..."). duty_problems() therefore requires the ans
 least MIN_DUTY_WORDS words copied from the THEN part (the obligation), kept_as must be copied from the requirement
 itself. An empty triggers list is accepted only for a rule whose IF part has no situational condition (a role-only
 rule); otherwise the reason "triggers missing" is returned.
+
+Fix (b) (29 Oct 2026): a long obligation is often quoted with an ellipsis, so duty.from_then was rejected although
+every fragment was verbatim (GDPR-Art12-1, case 01.1). from_then is therefore checked with the SAME ellipsis-aware
+function fix B wrote for the law quote (RelevanceV2Checker.law_quote_found: split at "..." / "…", every fragment at
+least 4 words, verbatim and in order). It is imported and reused, never copied, so both checks can never drift apart;
+a from_then without an ellipsis is checked exactly as before. duty.kept_as is unchanged (plain QuoteChecker).
 """
 
 import re
 
 from src.config import load_config
 from src.mediation.quote_checker import QuoteChecker
+from src.mediation.relevance_v2_checker import RelevanceV2Checker
 
 WORD = re.compile(r"[a-z0-9]+(?:'[a-z]+)?")
 MIN_DUTY_WORDS = 3   # shortest duty quote accepted (fixed by the task of 28 Oct 2026, not a config parameter)
@@ -54,6 +61,8 @@ class RequirementCheckerV2:
         alternatives = "|".join(re.escape(w) for w in self.banned_words)
         self.banned_pattern = re.compile(rf"\b({alternatives})s?\b", re.IGNORECASE)
         self.quote_checker = QuoteChecker()
+        # fix (b): fix B's ellipsis-aware quote check, reused unchanged for duty.from_then (no second copy of it)
+        self.fragment_checker = RelevanceV2Checker()
 
     def measure(self, requirement: str, passage_text: str) -> dict:
         """The numbers the checks use."""
@@ -107,7 +116,8 @@ class RequirementCheckerV2:
         """The duty check (28 Oct 2026): the requirement must keep the duty of the obligation.
 
         duty.from_then must be at least MIN_DUTY_WORDS words copied from the THEN part, duty.kept_as must be copied
-        from the requirement itself. Every reason names the check that failed."""
+        from the requirement itself. Every reason names the check that failed. A from_then with an ellipsis is checked
+        fragment by fragment with fix B's law_quote_found (see the module docstring, fix (b))."""
         duty = getattr(output, "duty", None)
         if duty is None or not words(duty.from_then or ""):
             return ["duty missing: give the words of the OBLIGATION that say what must be done (duty.from_then) and "
@@ -116,7 +126,7 @@ class RequirementCheckerV2:
         if len(words(duty.from_then)) < MIN_DUTY_WORDS:
             found.append(f'the duty from_then "{duty.from_then}" has fewer than {MIN_DUTY_WORDS} words; quote the '
                          f'words of the OBLIGATION that say what must be done')
-        if not self.quote_checker.found(duty.from_then, then):
+        if not self.fragment_checker.law_quote_found(duty.from_then, then):
             found.append(f'the duty from_then "{duty.from_then}" is not copied word for word from the OBLIGATION')
         if not self.quote_checker.found(duty.kept_as, output.requirement):
             found.append(f'the duty kept_as words "{duty.kept_as}" are not copied word for word from the requirement, '

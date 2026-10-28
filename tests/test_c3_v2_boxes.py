@@ -566,3 +566,29 @@ def test_orchestrator_gives_the_if_items_to_the_requirement_check(tmp_path):
     record = orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1", "text": PASSAGE}, [])
     assert record["label"] == APPLICABLE and record["requirement"]["requirement_invalid"] is True
     assert record["label_cause"].startswith("requirement invalid: triggers missing")
+# ---------- fix (b) (29 Oct 2026): duty.from_then may use an ellipsis (fix B's fragment check, reused) ----------
+
+LONG_THEN = "the shop must give a receipt to the customer and must keep a copy for two years"
+
+
+def test_duty_from_then_with_an_ellipsis_passes():
+    # both spellings of the ellipsis; every fragment has >= 4 words, is verbatim in the OBLIGATION and keeps its order
+    for dots in ("...", "…"):
+        output = duty_output({"from_then": f"the shop must give a receipt {dots} must keep a copy",
+                              "kept_as": "a receipt is handed"})
+        assert CHECKER.quote_problems(output, DESCRIPTION, PASSAGE, LONG_THEN, SITUATION_IF) == []
+
+
+def test_duty_from_then_fragments_in_the_wrong_order_fail():
+    from_then = "must keep a copy ... the shop must give a receipt"
+    problems = CHECKER.quote_problems(duty_output({"from_then": from_then, "kept_as": "a receipt is handed"}),
+                                      DESCRIPTION, PASSAGE, LONG_THEN, SITUATION_IF)
+    assert problems == [f'the duty from_then "{from_then}" is not copied word for word from the OBLIGATION']
+
+
+def test_duty_from_then_with_a_fragment_under_four_words_fails():
+    # "two years" is verbatim in the OBLIGATION but too short to identify the duty
+    from_then = "the shop must give a receipt ... two years"
+    problems = CHECKER.quote_problems(duty_output({"from_then": from_then, "kept_as": "a receipt is handed"}),
+                                      DESCRIPTION, PASSAGE, LONG_THEN, SITUATION_IF)
+    assert problems == [f'the duty from_then "{from_then}" is not copied word for word from the OBLIGATION']
