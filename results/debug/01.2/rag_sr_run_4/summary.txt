@@ -1,0 +1,85 @@
+RAG STEP ROUTING (SR) DEBUG, case 01.2
+Answer key: target LPD-Art3-1. Rules: (a) LPD-Art3 routed for >= 1 step; (b) LPD-Art3-1 in the S4 top 5.
+
+=== rag_sr_run_4 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, CRD-Art9
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art30, CRD-Art11
+  S8: GDPR-Art12, CRD-Art11
+  S9: GDPR-Art6, CRD-Art18, GDPR-Art12
+  S10: GDPR-Art6, GDPR-Art24, CRD-Art9
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=-
+S4 rank of LPD-Art3-1 (full merge): not in any list; top 5: GDPR-Art12-1, GDPR-Art6-3, GDPR-Art12-5, GDPR-Art12-6, GDPR-Art6-2
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_5 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art30, CRD-Art11
+  S8: GDPR-Art12, CRD-Art11
+  S9: GDPR-Art6, CRD-Art18, GDPR-Art12
+  S10: GDPR-Art6, GDPR-Art24, CRD-Art9
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=-
+S4 rank of LPD-Art3-1 (full merge): not in any list; top 5: GDPR-Art12-1, GDPR-Art6-3, GDPR-Art12-5, GDPR-Art12-6, GDPR-Art6-2
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_6 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14
+  S3: CRD-Art6, GDPR-Art12, GDPR-Art13
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11
+  S7: GDPR-Art6, GDPR-Art30, CRD-Art11
+  S8: GDPR-Art12, CRD-Art11
+  S9: GDPR-Art6, CRD-Art18, GDPR-Art12
+  S10: GDPR-Art6, GDPR-Art24, CRD-Art9
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=-
+S4 rank of LPD-Art3-1 (full merge): not in any list; top 5: GDPR-Art12-1, GDPR-Art6-3, GDPR-Art12-5, GDPR-Art12-6, GDPR-Art6-2
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+Runs: rag_sr_run_4 FAIL, rag_sr_run_5 FAIL, rag_sr_run_6 FAIL  (0/3 pass)
