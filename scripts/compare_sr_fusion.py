@@ -23,33 +23,11 @@ import argparse
 import json
 
 from src.config import load_config, project_path
-from src.rag_v3_steps import article_id_of, merge_rankings
+from src.rag_v3_steps import article_id_of, combmax_order, rrf_order, step_lists   # rules 1 and 2 live in the module
 
 TARGET = "GDPR-Art13-1"
 MAX_PER_ARTICLE = 2
 RULES = ("rrf", "combmax", "rrf_cap2", "combmax_cap2")
-
-
-def step_lists(s3: dict) -> dict[str, list[dict]]:
-    """{step id: its ranked rows (passage_id, rerank_score), best first}."""
-    return {step: v["ranking"] for step, v in s3["per_step"].items()}
-
-
-def rrf_order(lists: dict[str, list[dict]], rrf_k: int) -> list[dict]:
-    """Rule 1: the full RRF order as [{passage_id, rrf_score}]."""
-    full = merge_rankings({s: [r["passage_id"] for r in rows] for s, rows in lists.items()}, rrf_k, 10 ** 6)
-    return [{"passage_id": row["passage_id"], "rrf_score": row["rrf_score"]} for row in full]
-
-
-def combmax_order(lists: dict[str, list[dict]], rrf_k: int) -> list[dict]:
-    """Rule 2: highest reranker score over the steps; ties by RRF score, then passage id."""
-    best = {}
-    for rows in lists.values():
-        for r in rows:
-            best[r["passage_id"]] = max(best.get(r["passage_id"], r["rerank_score"]), r["rerank_score"])
-    rrf = {row["passage_id"]: row["rrf_score"] for row in rrf_order(lists, rrf_k)}
-    order = sorted(best, key=lambda pid: (-best[pid], -rrf[pid], pid))
-    return [{"passage_id": pid, "max_rerank_score": best[pid], "rrf_score": rrf[pid]} for pid in order]
 
 
 def cap_per_article(order: list[dict], limit: int = MAX_PER_ARTICLE) -> list[dict]:

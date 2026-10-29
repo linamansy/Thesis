@@ -6,8 +6,8 @@ Two routing views of the same steps: runs 4-6 = title-only routing, runs 7-9 = l
   0. the S1 steps (01_steps.json "steps") of the two runs must be identical; if not, the script STOPS;
   1. per step, the two runs' S3 lists are merged: union of paragraphs, each with its best reranker score of the two,
      best first;
-  2. CombMAX over the merged step lists (scripts/compare_sr_fusion.combmax_order, unchanged), top 10;
-  3. parent expansion of that top 10 (scripts/parent_expansion_sr.expand, unchanged): all paragraphs of the included
+  2. CombMAX over the merged step lists (src/rag_v3_steps.combmax_order), top 10;
+  3. parent expansion of that top 10 (src/rag_v3_steps.expand): all paragraphs of the included
      articles, ordered by the article's best score, cap 20.
 
 PASS RULE (fixed before the first run of this script): the target (01.1 GDPR-Art13-1, 01.2 LPD-Art3-1, from the answer
@@ -18,10 +18,10 @@ Run from the project root:  .venv\\Scripts\\python.exe -m scripts.route_union_ex
 
 import json
 
-from scripts.compare_sr_fusion import combmax_order, step_lists
 from scripts.debug_single_case import load_answer_key
-from scripts.parent_expansion_sr import TOP_K, expand
 from src.config import load_config, project_path
+from src.rag_v3_steps import COMBMAX_TOP as TOP_K
+from src.rag_v3_steps import combmax_order, expand, step_lists
 from src.retrieval.passage import load_passages
 
 VARIANTS = ("01.1", "01.2")

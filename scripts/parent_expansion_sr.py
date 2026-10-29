@@ -1,7 +1,7 @@
 """Offline test of parent-document expansion on saved RAG step routing (SR) runs. NO LLM, NO retrieval.
 
 For each run it reads the saved S3 step lists (results/debug/<variant>/rag_sr_run_<n>/03_step_rankings.json), builds
-the CombMAX order (scripts/compare_sr_fusion.combmax_order, unchanged) and takes its top 10. Then:
+the CombMAX order (src/rag_v3_steps.combmax_order) and takes its top 10. Then:
   1. the articles present in that top 10, ordered by each article's best CombMAX score (= the rank of its best
      paragraph in the top 10);
   2. ALL paragraphs of these articles, from the corpus (data/knowledge_study2_corpus/passages.jsonl), article by
@@ -18,20 +18,11 @@ Run from the project root:
 import argparse
 import json
 
-from scripts.compare_sr_fusion import combmax_order, step_lists
 from src.config import load_config, project_path
-from src.rag_v3_steps import article_id_of
+from src.rag_v3_steps import COMBMAX_TOP as TOP_K   # the CombMAX top list that is expanded
+from src.rag_v3_steps import EXPANSION_CAP as CAP   # the most passages after expansion
+from src.rag_v3_steps import combmax_order, expand, step_lists
 from src.retrieval.passage import load_passages
-
-TOP_K = 10   # the CombMAX top list that is expanded
-CAP = 20     # the most passages after expansion
-
-
-def expand(top_ids: list[str], corpus_ids: list[str], cap: int = CAP) -> dict:
-    """The expanded set of one run: articles in order of their best paragraph in top_ids, all their paragraphs."""
-    articles = list(dict.fromkeys(article_id_of(pid) for pid in top_ids))
-    full = [pid for article in articles for pid in corpus_ids if article_id_of(pid) == article]
-    return {"articles": articles, "passages": full[:cap], "cut": full[cap:]}
 
 
 def main() -> None:

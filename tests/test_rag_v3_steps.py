@@ -10,7 +10,7 @@ from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
 from src.rag_v3_steps import (RoutingAgent, StepRouter, StepsAgent, article_id_of, article_index, article_lines,
                               articles_text, first_sentence,
-                              check_routes, check_steps, merge_rankings, step_query)
+                              check_routes, check_steps, expand, merge_rankings, step_query)
 from src.retrieval.passage import Passage
 from src.retrieval.search_result import SearchResult
 
@@ -218,3 +218,106 @@ def test_run_folders_are_numbered_and_never_reused(tmp_path):
     (tmp_path / "rag_sr_run_4").mkdir()
     (tmp_path / "run_9").mkdir()   # the other debug runner's folders do not count
     assert next_run_dir(tmp_path).name == "rag_sr_run_5"
+
+
+# ---------- options: two_view, fusion="combmax", parent_expansion (defaults = the original SR) ----------
+
+def test_defaults_keep_the_original_sr(tmp_path):
+    r, llm = router(tmp_path, two_step_answers("CRD-Art9"))
+    assert (r.two_view, r.fusion, r.parent_expansion) == (False, "rrf", False)
+    out = r.run("c", DESCRIPTION)
+    assert len(llm.prompts_received) == 3   # S1 + one routing call per step
+    assert set(out["S4"]) == {"stage", "rrf_k", "top_k", "passages"} and out["S4"]["top_k"] == 5
+    assert set(out["S2"]["per_step"]["S1"]) == {"failed", "raw_routes", "routes", "dropped"}
+
+
+def test_unknown_fusion_is_refused():
+    import pytest
+    with pytest.raises(ValueError):
+        StepRouter(CONFIG, None, None, PASSAGES, None, None, None, fusion="combsum")
+
+
+def test_two_view_routes_with_both_lists_and_takes_the_union(tmp_path):
+    answers = [{"steps": [STEP1]},
+               {"routes": [{"article_id": "GDPR-Art13", "reason": "title view"}]},
+               {"routes": [{"article_id": "CRD-Art8", "reason": "f1"}, {"article_id": "GDPR-Art13", "reason": "f1"},
+                           {"article_id": "XYZ-Art1", "reason": "f1"}]}]
+    llm = MockLLM([json.dumps(a) for a in answers])
+    log = RunLogger(tmp_path, "SR", "tv")
+    order = [p.id for p in PASSAGES]
+    r = StepRouter(CONFIG, StepsAgent(llm, log), RoutingAgent(llm, log), PASSAGES, FakeRetriever(order),
+                   FakeRetriever(order[::-1]), FakeReranker(order), two_view=True)
+    out = r.run("c", DESCRIPTION)
+    title_prompt, f1_prompt = llm.prompts_received[1], llm.prompts_received[2]
+    assert "GDPR-Art13: Information to be provided\n" in title_prompt and "text of GDPR-Art13-1" not in title_prompt
+    assert "GDPR-Art13: text of GDPR-Art13-1 – Information to be provided" in f1_prompt
+    s1 = out["S2"]["per_step"]["S1"]
+    assert [(x["article_id"], x["views"]) for x in s1["routes"]] == [
+        ("GDPR-Art13", ["title", "law_title_sentence"]), ("CRD-Art8", ["law_title_sentence"])]
+    assert s1["routes"][0]["reason"] == "title view"   # a repeated id keeps its first route
+    assert s1["dropped"] == [{"article_id": "XYZ-Art1", "reason": "f1", "dropped_because": "article id not in the corpus",
+                              "view": "law_title_sentence"}]
+    assert set(s1["views"]) == {"title", "law_title_sentence"} and not s1["failed"]
+    assert out["S3"]["per_step"]["S1"]["routed_articles"] == ["GDPR-Art13", "CRD-Art8"]   # S3 searches the union
+
+
+def numbered_passages(n_articles, per_article):
+    return [passage(f"L-Art{a}-{p}") for a in range(1, n_articles + 1) for p in range(1, per_article + 1)]
+
+
+def s3_of(lists):
+    return {"per_step": {s: {"ranking": [{"passage_id": pid, "rerank_score": score} for pid, score in rows]}
+                         for s, rows in lists.items()}}
+
+
+def test_combmax_keeps_the_top_10_by_highest_reranker_score():
+    passages = numbered_passages(12, 1)
+    r = StepRouter(CONFIG, None, None, passages, None, None, None, fusion="combmax")
+    s3 = s3_of({"S1": [(f"L-Art{i}-1", float(i)) for i in range(1, 13)],
+                "S2": [("L-Art1-1", 50.0)]})
+    s4 = r.merge_with_options(s3, {p.id: p.text for p in passages})
+    ids = [row["passage_id"] for row in s4["passages"]]
+    assert len(ids) == 10 and ids[0] == "L-Art1-1"   # its max (50) over S1 and S2 wins
+    assert ids[1:] == [f"L-Art{i}-1" for i in range(12, 3, -1)]
+    assert s4["fusion"] == "combmax" and s4["top_k"] == 10 and s4["passages"][0]["text"] == "text of L-Art1-1"
+    assert [row["rank"] for row in s4["passages"]] == list(range(1, 11))
+
+
+def test_expand_orders_articles_by_their_best_paragraph_and_cuts_at_20():
+    corpus = [p.id for p in numbered_passages(3, 9)]
+    out = expand(["L-Art3-5", "L-Art1-2", "L-Art3-1"], corpus)
+    assert out["articles"] == ["L-Art3", "L-Art1"]
+    assert out["passages"] == [f"L-Art3-{i}" for i in range(1, 10)] + [f"L-Art1-{i}" for i in range(1, 10)]
+    out = expand(["L-Art2-1", "L-Art3-1", "L-Art1-1"], corpus)
+    assert len(out["passages"]) == 20 and out["cut"] == [f"L-Art1-{i}" for i in range(3, 10)]
+
+
+def test_parent_expansion_replaces_the_fused_list_by_all_paragraphs_of_its_articles():
+    passages = numbered_passages(3, 3)
+    r = StepRouter(CONFIG, None, None, passages, None, None, None, fusion="combmax", parent_expansion=True)
+    s4 = r.merge_with_options(s3_of({"S1": [("L-Art2-3", 5.0), ("L-Art1-1", 4.0)]}), {p.id: p.text for p in passages})
+    assert [row["passage_id"] for row in s4["fused"]] == ["L-Art2-3", "L-Art1-1"]
+    assert s4["articles"] == ["L-Art2", "L-Art1"] and s4["cut"] == []
+    assert [(row["passage_id"], row["fused_rank"]) for row in s4["passages"]] == [
+        ("L-Art2-1", None), ("L-Art2-2", None), ("L-Art2-3", 1), ("L-Art1-1", 2), ("L-Art1-2", None), ("L-Art1-3", None)]
+    assert s4["passages"][0]["text"] == "text of L-Art2-1"
+
+
+def test_all_options_together_in_a_run_and_rule_b_checks_the_final_set(tmp_path):
+    answers = [{"steps": [STEP1]}, {"routes": [{"article_id": "GDPR-Art5", "reason": "r"}]},
+               {"routes": [{"article_id": "GDPR-Art13", "reason": "r"}]}]
+    counter = iter("xyz")
+
+    def factory(logger):
+        llm = MockLLM([json.dumps(a) for a in answers])
+        order = [p.id for p in PASSAGES]
+        reranker = FakeReranker(["GDPR-Art13-2", "GDPR-Art5-1-a", "GDPR-Art13-1"])
+        return StepRouter(CONFIG, StepsAgent(llm, logger), RoutingAgent(llm, logger), PASSAGES, FakeRetriever(order),
+                          FakeRetriever(order[::-1]), reranker, two_view=True, fusion="combmax", parent_expansion=True)
+
+    run = run_once(CONFIG, factory, DESCRIPTION, {"target_passage_id": "GDPR-Art13-1"}, tmp_path / "rag_sr_run_1", {})
+    s4 = run["stages"]["S4"]
+    assert [row["passage_id"] for row in s4["passages"]] == ["GDPR-Art13-1", "GDPR-Art13-2", "GDPR-Art5-1-a"]
+    assert run["rules"]["rule_b_pass"] and run["rules"]["s4_top5"] == [row["passage_id"] for row in s4["passages"]]
+    info = json.loads((tmp_path / "rag_sr_run_1" / "00_run_info.json").read_text(encoding="utf-8"))
+    assert info["pass_rules"]["(b)"] == "GDPR-Art13-1 in the final S4 set"

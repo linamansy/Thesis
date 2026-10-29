@@ -20,6 +20,16 @@ reused as they are.
   S4 merge      The steps' reranked lists are merged with RRF (retrieval.rrf_k, 60) and the best reranker.top_k (5)
                 are kept.
 
+Options of StepRouter (29 Oct 2026; the defaults give exactly the behaviour above, so earlier runs stay reproducible):
+  two_view          S2 runs twice per step: once with title-only lines ("id: title", the pre-F1 list) and once with the
+                    F1 lines; the step's routes are the union of both (title view first, a repeated id once). S3 then
+                    searches the paragraphs of all routed articles.
+  fusion="combmax"  S4: a paragraph's score is its highest reranker score over the step lists; ties by its RRF score,
+                    then passage id; the best COMBMAX_TOP (10) are kept (moved from scripts/compare_sr_fusion.py).
+  parent_expansion  S4: the articles of the fused list, ordered by their best paragraph, are replaced by ALL their
+                    paragraphs (corpus order within an article), cut at EXPANSION_CAP (20) passages (moved from
+                    scripts/parent_expansion_sr.py).
+
 The agents use the same model and settings as the C3 agents (config.yaml model and llm). No frozen file is written.
 """
 
@@ -37,6 +47,9 @@ from src.retrieval.search_result import SearchResult
 
 MAX_ROUTES = 3
 OPENING_WORDS = 40   # S2 article line: the article's first sentence is cut at this many words
+COMBMAX_TOP = 10     # fusion="combmax": the passages kept after CombMAX
+EXPANSION_CAP = 20   # parent_expansion: the most passages after expansion
+FUSIONS = ("rrf", "combmax")
 STEPS_PROMPT = "prompts/rag_v3_steps.txt"
 ROUTING_PROMPT = "prompts/rag_v3_routing.txt"
 
@@ -177,10 +190,55 @@ def merge_rankings(rankings: dict[str, list[str]], rrf_k: int, top_k: int) -> li
             for rank, pid in enumerate(order, start=1)]
 
 
-class StepRouter:
-    """S1-S4 for one description. dense, sparse, reranker: the existing retrievers (or fakes in tests)."""
+def step_lists(s3: dict) -> dict[str, list[dict]]:
+    """{step id: its ranked rows (passage_id, rerank_score), best first} from an S3 result."""
+    return {step: v["ranking"] for step, v in s3["per_step"].items()}
 
-    def __init__(self, config: dict, steps_agent, routing_agent, passages: list[Passage], dense, sparse, reranker):
+
+def rrf_order(lists: dict[str, list[dict]], rrf_k: int) -> list[dict]:
+    """The full RRF order of the step lists as [{passage_id, rrf_score}]."""
+    full = merge_rankings({s: [r["passage_id"] for r in rows] for s, rows in lists.items()}, rrf_k, 10 ** 6)
+    return [{"passage_id": row["passage_id"], "rrf_score": row["rrf_score"]} for row in full]
+
+
+def combmax_order(lists: dict[str, list[dict]], rrf_k: int) -> list[dict]:
+    """CombMAX: highest reranker score over the steps; ties by RRF score, then passage id."""
+    best = {}
+    for rows in lists.values():
+        for r in rows:
+            best[r["passage_id"]] = max(best.get(r["passage_id"], r["rerank_score"]), r["rerank_score"])
+    rrf = {row["passage_id"]: row["rrf_score"] for row in rrf_order(lists, rrf_k)}
+    order = sorted(best, key=lambda pid: (-best[pid], -rrf[pid], pid))
+    return [{"passage_id": pid, "max_rerank_score": best[pid], "rrf_score": rrf[pid]} for pid in order]
+
+
+def expand(top_ids: list[str], corpus_ids: list[str], cap: int = EXPANSION_CAP) -> dict:
+    """Parent expansion: the articles in order of their best paragraph in top_ids, ALL their paragraphs (corpus order
+    within an article), cut at cap."""
+    articles = list(dict.fromkeys(article_id_of(pid) for pid in top_ids))
+    full = [pid for article in articles for pid in corpus_ids if article_id_of(pid) == article]
+    return {"articles": articles, "passages": full[:cap], "cut": full[cap:]}
+
+
+def union_routes(views: dict[str, list[dict]]) -> list[dict]:
+    """two_view: the kept routes of all views in view order; an id routed by several views is kept once (its first
+    route), with the list of views that routed it."""
+    union = {}
+    for view, routes in views.items():
+        for route in routes:
+            union.setdefault(route["article_id"], dict(route, views=[]))["views"].append(view)
+    return list(union.values())
+
+
+class StepRouter:
+    """S1-S4 for one description. dense, sparse, reranker: the existing retrievers (or fakes in tests).
+    two_view, fusion, parent_expansion: see the module text; the defaults are the original SR."""
+
+    def __init__(self, config: dict, steps_agent, routing_agent, passages: list[Passage], dense, sparse, reranker,
+                 two_view: bool = False, fusion: str = "rrf", parent_expansion: bool = False):
+        if fusion not in FUSIONS:
+            raise ValueError(f"fusion must be one of {FUSIONS}, not {fusion!r}")
+        self.two_view, self.fusion, self.parent_expansion = two_view, fusion, parent_expansion
         self.steps_agent, self.routing_agent = steps_agent, routing_agent
         self.passages = passages
         self.dense, self.sparse, self.reranker = dense, sparse, reranker
@@ -195,15 +253,28 @@ class StepRouter:
         kept, dropped = check_steps(raw or [], description)
         return {"stage": "S1 steps", "failed": out is None, "raw_steps": raw, "steps": kept, "dropped": dropped}
 
+    def route_once(self, case_id: str, step: dict, articles: str) -> dict:
+        out = self.routing_agent.run(case_id, step=step, articles=articles)
+        raw = [r.model_dump() for r in out.routes] if out else None
+        kept, dropped = check_routes(raw or [], self.index)
+        return {"failed": out is None, "raw_routes": raw, "routes": kept, "dropped": dropped}
+
     def route(self, case_id: str, steps: list[dict]) -> dict:
-        articles = articles_text(article_lines(self.passages))
+        lines = articles_text(article_lines(self.passages))
+        if not self.two_view:
+            per_step = {step["step_id"]: self.route_once(case_id, step, lines) for step in steps}
+            return {"stage": "S2 article routing", "n_articles_offered": len(self.index), "per_step": per_step}
+        texts = {"title": articles_text(self.index), "law_title_sentence": lines}
         per_step = {}
         for step in steps:
-            out = self.routing_agent.run(case_id, step=step, articles=articles)
-            raw = [r.model_dump() for r in out.routes] if out else None
-            kept, dropped = check_routes(raw or [], self.index)
-            per_step[step["step_id"]] = {"failed": out is None, "raw_routes": raw, "routes": kept, "dropped": dropped}
-        return {"stage": "S2 article routing", "n_articles_offered": len(self.index), "per_step": per_step}
+            views = {view: self.route_once(case_id, step, text) for view, text in texts.items()}
+            per_step[step["step_id"]] = {
+                "failed": any(v["failed"] for v in views.values()),
+                "routes": union_routes({view: v["routes"] for view, v in views.items()}),
+                "dropped": [dict(d, view=view) for view, v in views.items() for d in v["dropped"]],
+                "views": views}
+        return {"stage": "S2 article routing (two views, union of routes)", "n_articles_offered": len(self.index),
+                "views": list(texts), "per_step": per_step}
 
     def rank_step(self, step: dict, article_ids: list[str]) -> dict:
         """S3 for one step: hybrid search restricted to the routed articles, then the reranker."""
@@ -235,13 +306,33 @@ class StepRouter:
             else:
                 skipped.append(step["step_id"])
         s3 = {"stage": "S3 paragraph ranking", "per_step": ranked, "steps_without_route": skipped}
+        texts = {p.id: p.text for p in self.passages}
+        if self.fusion != "rrf" or self.parent_expansion:
+            return s3, self.merge_with_options(s3, texts)
         top = merge_rankings({s: [r["passage_id"] for r in v["ranking"]] for s, v in ranked.items()},
                              self.rrf_k, self.top_k)
-        texts = {p.id: p.text for p in self.passages}
         for row in top:
             row["text"] = texts[row["passage_id"]]
         s4 = {"stage": "S4 merge (RRF over the steps)", "rrf_k": self.rrf_k, "top_k": self.top_k, "passages": top}
         return s3, s4
+
+    def merge_with_options(self, s3: dict, texts: dict[str, str]) -> dict:
+        """S4 with fusion="combmax" and/or parent_expansion. "fused" = the fused list, "passages" = the final set."""
+        if self.fusion == "combmax":
+            top_k, order = COMBMAX_TOP, combmax_order(step_lists(s3), self.rrf_k)
+        else:
+            top_k, order = self.top_k, rrf_order(step_lists(s3), self.rrf_k)
+        fused = [dict(row, rank=rank) for rank, row in enumerate(order[:top_k], start=1)]
+        s4 = {"stage": f"S4 merge ({self.fusion} over the steps" + (", parent expansion)" if self.parent_expansion
+                                                                    else ")"),
+              "fusion": self.fusion, "rrf_k": self.rrf_k, "top_k": top_k, "fused": fused}
+        if not self.parent_expansion:
+            return s4 | {"passages": [dict(row, text=texts[row["passage_id"]]) for row in fused]}
+        out = expand([row["passage_id"] for row in fused], [p.id for p in self.passages])
+        fused_rank = {row["passage_id"]: row["rank"] for row in fused}
+        return s4 | {"expansion_cap": EXPANSION_CAP, "articles": out["articles"], "cut": out["cut"],
+                     "passages": [{"rank": rank, "passage_id": pid, "fused_rank": fused_rank.get(pid),
+                                   "text": texts[pid]} for rank, pid in enumerate(out["passages"], start=1)]}
 
     def run(self, case_id: str, description: str) -> dict:
         s1 = self.steps(case_id, description)

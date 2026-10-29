@@ -18,6 +18,9 @@ answer key, for 01.1 GDPR-Art13 / GDPR-Art13-1) (a new folder every time; nothin
 
 Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m scripts.debug_rag_v3_steps --runs 3
+Options (StepRouter, default off; recorded in 00_run_info.json "sr_options" when used; with combmax or expansion,
+04_merged_top5.json holds the final S4 set and rule (b) checks that set):
+    --two-view --fusion combmax --parent-expansion
 """
 
 import argparse
@@ -28,7 +31,8 @@ from pathlib import Path
 
 from scripts.debug_single_case import CASE_ID, load_answer_key, make_llm, write_json
 from src.config import load_config, project_path
-from src.rag_v3_steps import RoutingAgent, StepRouter, StepsAgent, article_id_of, build_retrievers, merge_rankings
+from src.rag_v3_steps import (FUSIONS, RoutingAgent, StepRouter, StepsAgent, article_id_of, build_retrievers,
+                              merge_rankings)
 
 RULE_A_ARTICLE = "GDPR-Art13"
 RULE_B_PASSAGE = "GDPR-Art13-1"
@@ -94,7 +98,8 @@ def run_once(config: dict, router_factory, description: str, key: dict, run_dir:
     stages = router.run(case_id, description)
     target = key["target_passage_id"]
     rules = check_rules(stages, config["retrieval"]["rrf_k"], target)
-    rules_text = {"(a)": f"{article_id_of(target)} routed for at least one step", "(b)": f"{target} in the S4 top 5"}
+    s4_name = "S4 top 5" if (router.fusion, router.parent_expansion) == ("rrf", False) else "final S4 set"
+    rules_text = {"(a)": f"{article_id_of(target)} routed for at least one step", "(b)": f"{target} in the {s4_name}"}
     write_json(run_dir / "00_run_info.json", run_info | {"run": run_dir.name, "answer_key": key, "pass_rules": rules_text})
     for name, stage in (("01_steps", "S1"), ("02_routes", "S2"), ("03_step_rankings", "S3"), ("04_merged_top5", "S4")):
         write_json(run_dir / f"{name}.json", stages[stage])
@@ -106,6 +111,9 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Debug runner for RAG step routing (SR) on one variant.")
     parser.add_argument("--variant", default=CASE_ID, help=f"case variant (default {CASE_ID}); target from its answer key")
     parser.add_argument("--runs", type=int, default=1, help="how many separate runs to make (default 1)")
+    parser.add_argument("--two-view", action="store_true", help="S2 with title-only and F1 lines, union of routes")
+    parser.add_argument("--fusion", choices=FUSIONS, default="rrf", help="S4 fusion (default rrf)")
+    parser.add_argument("--parent-expansion", action="store_true", help="S4: all paragraphs of the fused articles")
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be at least 1")
@@ -128,9 +136,13 @@ def main(argv: list[str] | None = None) -> None:
                 "corpus_sha256": hashlib.sha256(corpus.read_bytes()).hexdigest(), "n_passages": len(passages),
                 "agent_settings": config["llm"], "reranker_model": reranker.model_name,
                 "reranker_revision": reranker.revision, **llm_info}
+    options = {"two_view": args.two_view, "fusion": args.fusion, "parent_expansion": args.parent_expansion}
+    if options != {"two_view": False, "fusion": "rrf", "parent_expansion": False}:
+        run_info["sr_options"] = options
 
     def router_factory(logger):
-        return StepRouter(config, StepsAgent(llm, logger), RoutingAgent(llm, logger), passages, dense, sparse, reranker)
+        return StepRouter(config, StepsAgent(llm, logger), RoutingAgent(llm, logger), passages, dense, sparse, reranker,
+                          **options)
 
     case_dir = project_path(config["paths"]["runs"]).parent / "debug" / case_id
     runs = []
