@@ -4,6 +4,7 @@ The JSON agents of Study 2 send their output schema as Ollama's "format"; every 
 annotator, legacy generator) sends no "format" key; the BPMNGen generator request is not touched.
 """
 
+import json
 import re
 from pathlib import Path
 
@@ -96,3 +97,49 @@ def test_generator_request_is_unchanged():
     harness = Path(__file__).resolve().parents[1] / "bpmngen_harness" / "run_bpmngen.ts"
     text = harness.read_text(encoding="utf-8")
     assert re.findall(r"(?<![\w.])body\.(\w+)\s*=(?!=)", text) == ["think"]
+
+
+def sent_schema(agent):
+    """The schema a JSON agent sends (Ollama "format") and the one pasted into its prompt ({schema})."""
+    if isinstance(agent, SplitCallV2):
+        agent.build_prompt(passage_id="GDPR-Art13-1", passage_text="text")   # sets the law's output_schema
+    return agent.format_schema(), json.loads(agent.schema_text())
+
+
+def class_descriptions(schema: dict) -> list:
+    return [d["description"] for d in [schema, *schema.get("$defs", {}).values()] if "description" in d]
+
+
+@pytest.mark.parametrize("agent_class", JSON_AGENTS)
+def test_sent_schema_has_no_class_docstring(tmp_path, agent_class):
+    # fix nodoc: no class-level description (a docstring) in the format schema or the prompt text, for every JSON agent
+    agent = agent_class(MockLLM(["{}"]), RunLogger(tmp_path, "C3", "test"), max_retries=0)
+    for schema in sent_schema(agent):
+        assert class_descriptions(schema) == []
+
+
+@pytest.mark.parametrize("agent_class", JSON_AGENTS)
+def test_sent_schema_keeps_every_field_definition(tmp_path, agent_class):
+    agent = agent_class(MockLLM(["{}"]), RunLogger(tmp_path, "C3", "test"), max_retries=0)
+    format_schema, prompt_schema = sent_schema(agent)
+    full = agent.output_schema.model_json_schema()
+    assert format_schema == prompt_schema
+    assert format_schema["properties"] == full["properties"]
+    for name, definition in full.get("$defs", {}).items():
+        assert format_schema["$defs"][name] == {k: v for k, v in definition.items() if k != "description"}
+
+
+def test_item_check_docstring_never_reaches_the_model(tmp_path):
+    from src.agents.applicability_agent_v2 import ItemCheck
+    assert "Field order" in ItemCheck.model_json_schema()["description"]   # the docstring is still in the class
+    llm = MockLLM(["{}"])
+    agent = CheckIfCallV2(llm, RunLogger(tmp_path, "C3", "test"), max_retries=0)
+    agent.run(case_id="01", description="d", items=[{"id": "C1", "text": "t"}])
+    assert "Field order" not in llm.prompts_received[0] and "Field order" not in json.dumps(llm.schemas_received[0])
+    assert "copied word for word" in llm.prompts_received[0]                      # field descriptions stay
+
+
+def test_study1_agents_schema_text_unchanged(tmp_path):
+    for agent_class in (RelevanceAgent, ApplicabilityAgent, RequirementAgent, SilverAnnotator):
+        agent = agent_class(MockLLM(["{}"]), RunLogger(tmp_path, "C3", "test"), max_retries=0)
+        assert agent.schema_text() == json.dumps(agent.output_schema.model_json_schema(), indent=2)

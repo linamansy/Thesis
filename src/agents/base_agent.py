@@ -50,14 +50,25 @@ class BaseAgent(ABC):
             template_path = project_path(config["paths"][self.prompt_key])
         self.template = Path(template_path).read_text(encoding="utf-8") if template_path else None
 
+    def model_schema(self) -> dict:
+        """output_schema as a JSON schema. For a json_format agent without any class-level description (Pydantic
+        copies a class docstring into it; fix nodoc, 29 Oct 2026): a docstring is a note for the code reader, never
+        text for the model. Field descriptions are kept. Other agents (Study 1, frozen): unchanged."""
+        schema = self.output_schema.model_json_schema()
+        if self.json_format:
+            schema.pop("description", None)
+            for definition in schema.get("$defs", {}).values():
+                definition.pop("description", None)
+        return schema
+
     def schema_text(self) -> str:
         """The output schema as indented JSON, for the {schema} part of a prompt template."""
-        return json.dumps(self.output_schema.model_json_schema(), indent=2)
+        return json.dumps(self.model_schema(), indent=2)
 
     def format_schema(self) -> dict | None:
-        """The JSON schema sent with the call: exactly output_schema (the fields parse_output expects), or None."""
+        """The JSON schema sent with the call: output_schema (the fields parse_output expects), or None."""
         if self.json_format and self.llm.accepts_format_schema:
-            return self.output_schema.model_json_schema()
+            return self.model_schema()
         return None
 
     @abstractmethod
