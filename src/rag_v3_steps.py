@@ -8,8 +8,10 @@ reused as they are.
   S1 steps      StepsAgent lists the steps of the description: {step_id, actor, activity, data_or_object, quote}.
                 Code (QuoteChecker) checks that each quote is in the description; a step whose quote fails is dropped
                 and logged.
-  S2 routing    For every step RoutingAgent gets the list of ALL articles of the corpus (id + title, built by code from
-                the corpus file, nothing hand-written) and returns at most 3 article ids with a one-line reason.
+  S2 routing    For every step RoutingAgent gets the list of ALL articles of the corpus, one line each:
+                "id: <law full name> – <title> – <first sentence of the article's first paragraph, cut at 40 words>"
+                (fix F1, 29 Oct 2026; before: "id: title"), built by code from the corpus file, nothing
+                hand-written, and returns at most 3 article ids with a one-line reason.
                 Code checks that every id exists in the corpus; unknown ids are dropped and logged.
   S3 ranking    Per step, the existing hybrid search (dense + BM25, RRF) is restricted to the paragraphs of the routed
                 articles, the best reranker.candidates are re-scored by the existing cross-encoder, with the step text
@@ -22,6 +24,7 @@ The agents use the same model and settings as the C3 agents (config.yaml model a
 """
 
 import copy
+import re
 
 from pydantic import BaseModel, Field
 
@@ -33,6 +36,7 @@ from src.retrieval.passage import Passage
 from src.retrieval.search_result import SearchResult
 
 MAX_ROUTES = 3
+OPENING_WORDS = 40   # S2 article line: the article's first sentence is cut at this many words
 STEPS_PROMPT = "prompts/rag_v3_steps.txt"
 ROUTING_PROMPT = "prompts/rag_v3_routing.txt"
 
@@ -55,6 +59,29 @@ def article_index(passages: list[Passage]) -> dict[str, str]:
 
 def articles_text(index: dict[str, str]) -> str:
     return "\n".join(f"{article_id}: {title}" for article_id, title in index.items())
+
+
+def first_sentence(passage: Passage, max_words: int = OPENING_WORDS) -> str:
+    """The first sentence of a passage's body (after its header line, without a paragraph number such as "1."), cut
+    at max_words words."""
+    body = passage.text.split("\n", 1)[1] if "\n" in passage.text else passage.text
+    body = re.sub(r"^\(?\d+[a-z]?[.)]\s+", "", " ".join(body.split()))
+    sentence = re.split(r"(?<=[.!?])\s", body, maxsplit=1)[0]
+    words = sentence.split()
+    return " ".join(words[:max_words]) + (" ..." if len(words) > max_words else "")
+
+
+def article_lines(passages: list[Passage]) -> dict[str, str]:
+    """{article id: "<law full name> – <title> – <first sentence of its first paragraph>"} in corpus order, built from
+    the corpus only: the law name is the passage header before " - Article", the first paragraph is the article's
+    first passage in the corpus."""
+    lines = {}
+    for p in passages:
+        article_id = article_id_of(p.id)
+        if article_id not in lines:
+            law = p.text.split(" - Article", 1)[0].strip()
+            lines[article_id] = f"{law} – {p.title} – {first_sentence(p)}"
+    return lines
 
 
 # ---------- S1 steps ----------
@@ -169,7 +196,7 @@ class StepRouter:
         return {"stage": "S1 steps", "failed": out is None, "raw_steps": raw, "steps": kept, "dropped": dropped}
 
     def route(self, case_id: str, steps: list[dict]) -> dict:
-        articles = articles_text(self.index)
+        articles = articles_text(article_lines(self.passages))
         per_step = {}
         for step in steps:
             out = self.routing_agent.run(case_id, step=step, articles=articles)

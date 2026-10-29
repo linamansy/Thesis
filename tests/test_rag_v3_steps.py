@@ -8,7 +8,8 @@ from scripts.debug_rag_v3_steps import check_rules, next_run_dir, run_once, summ
 from src.config import load_config
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
-from src.rag_v3_steps import (RoutingAgent, StepRouter, StepsAgent, article_id_of, article_index, articles_text,
+from src.rag_v3_steps import (RoutingAgent, StepRouter, StepsAgent, article_id_of, article_index, article_lines,
+                              articles_text, first_sentence,
                               check_routes, check_steps, merge_rankings, step_query)
 from src.retrieval.passage import Passage
 from src.retrieval.search_result import SearchResult
@@ -79,6 +80,26 @@ def test_real_corpus_article_list_has_every_article_once():
     passages = load_passages(project_path(CONFIG["study2_corpus"]["passages"]))
     index = article_index(passages)
     assert "GDPR-Art13" in index and len(index) == len({article_id_of(p.id) for p in passages})
+    assert list(article_lines(passages)) == list(index)
+
+
+def law_passage(pid, text, title="Delivery"):
+    return Passage(id=pid, directive="d", article=1, paragraph=1, title=title, text=text, n_chars=len(text))
+
+
+def test_article_line_is_law_name_title_and_first_sentence_from_the_corpus():
+    first = law_passage("ABC-Art2-1", "Made-up Directive (1/2) - Article 2: Delivery\n1. The shop shall deliver the "
+                                      "goods.\nIt shall do so on time. Second sentence.")
+    second = law_passage("ABC-Art2-2", "Made-up Directive (1/2) - Article 2: Delivery\n2. Not the first paragraph.")
+    assert article_lines([first, second]) == {
+        "ABC-Art2": "Made-up Directive (1/2) – Delivery – The shop shall deliver the goods."}
+
+
+def test_first_sentence_is_cut_at_40_words():
+    long = law_passage("ABC-Art3-1", "Made-up Directive (1/2) - Article 3: Delivery\n" + " ".join(["word"] * 60) + ".")
+    assert first_sentence(long) == " ".join(["word"] * 40) + " ..."
+    assert first_sentence(law_passage("ABC-Art4-1", "Header\n(a) free of charge; (b) on time.")) == \
+        "(a) free of charge; (b) on time."
 
 
 # ---------- S1 / S2 checks ----------
@@ -110,6 +131,7 @@ def test_routing_prompt_lists_all_articles_and_no_hint(tmp_path):
     prompt = llm.prompts_received[1]
     for article in ("GDPR-Art13", "GDPR-Art5", "CRD-Art8", "CRD-Art9"):
         assert article in prompt
+    assert "GDPR-Art13: text of GDPR-Art13-1 – Information to be provided – text of GDPR-Art13-1" in prompt
     assert "data protection" not in prompt.lower() and "personal data" not in prompt.lower()
 
 
