@@ -167,3 +167,11 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Only make changes the task asks for. No extra files, refactors, or features.
 - Stop and ask before: deleting files, adding dependencies, changing DB schema, or editing frozen retrieval/silver files.
 - End every task with only: ✅ files changed, test summary (passed/failed), commit hash. Max 15 lines.
+
+## Standing rules (Study 2 debugging)
+- Work only on study2-bpmngen-server. NEVER push.
+- Every fix is GENERAL: no case words, article numbers or law names in code or prompts; same rule for all agents/laws.
+- After any fix: full test suite, then rerun all dev variants tested so far (currently 01.1, 01.2). Pass rules are given in the task.
+- NEVER change the BPMNGen generator call, config.yaml, or the corpus unless the task says so.
+- Each fix = own commit. Do not commit debug results unless asked.
+- Stop and ask before deleting files or adding dependencies.
