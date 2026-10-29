@@ -412,19 +412,19 @@ def test_check_prompt_has_fixed_role_definitions(tmp_path):
     for prompt in prompts:                                                       # the same text for every case
         assert "ROLE DEFINITIONS (fixed, the same for every process)\n" + ROLE_DEFINITIONS in prompt
         assert "never confirms it" in prompt
-        assert ('{"id": "C2", "closest_sentence": "The customer pays by card and the payment is processed.", '
-                '"status": "not_stated", "quote": null}') in prompt   # example: "processed" is no processor
+        assert '{"id": "C2", "status": "not_stated", "quote": null}' in prompt   # example: "processed" is no processor
 
 
 def test_item_check_field_order_search_first(tmp_path):
-    # fix C: id, closest_sentence, status, quote, in the schema of both calls and in the examples of both prompts
+    # fix C: id, closest_sentence, status, quote in the schema of both calls; the made-up examples stay as in
+    # oracle setting C (no closest_sentence), restored 29 Oct 2026
     from src.agents.applicability_agent_v2 import CheckIfCallV2, CheckOutputV2, SecondLookCallV2
     order = ["id", "closest_sentence", "status", "quote"]
     for call in (CheckIfCallV2, SecondLookCallV2):
         item = call.output_schema.model_json_schema()["$defs"]["ItemCheck"]
         assert list(item["properties"]) == order and item["required"] == order
         prompt = call(mock([NOT_STATED]), logger(tmp_path)).template
-        assert 'closest_sentence "The harbour master tells the captain that the ship may leave.", status "confirmed", '                'quote "The harbour master' in prompt
+        assert 'Result: "confirmed", quote "The harbour master' in prompt and "closest_sentence" not in prompt
     parsed = CheckOutputV2.model_validate({"results": [{"id": "C1", "closest_sentence": "The customer pays by card.",
                                                          "status": "confirmed", "quote": "pays by card"}]})
     assert parsed.results[0].closest_sentence == "The customer pays by card."

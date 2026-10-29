@@ -19,12 +19,12 @@ ROLE DEFINITIONS (fixed, the same for every process)
 EXAMPLE (made up, for the format only)
 Statements: "C1: a customer pays by card", "C2: the organisation handles personal data on behalf of another organisation", "E1: the customer declines the receipt"
 Process: "The customer chooses a product. The customer pays by card and the payment is processed. The shop sends the product."
-Answer: {{"results": [{{"id": "C1", "closest_sentence": "The customer pays by card and the payment is processed.", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "C2", "closest_sentence": "The customer pays by card and the payment is processed.", "status": "not_stated", "quote": null}}, {{"id": "E1", "closest_sentence": null, "status": "not_stated", "quote": null}}]}}
+Answer: {{"results": [{{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "C2", "status": "not_stated", "quote": null}}, {{"id": "E1", "status": "not_stated", "quote": null}}]}}
 
 EXAMPLE OF EVERYDAY WORDS (made up, from another domain)
 Statement: "C1: the vessel has obtained clearance for departure from the port authority"
 Description sentence: "The harbour master tells the captain that the ship may leave."
-Result: closest_sentence "The harbour master tells the captain that the ship may leave.", status "confirmed", quote "The harbour master tells the captain that the ship may leave" (the same fact in everyday words). The sentence "The crew loads the cargo." speaks about a different event and would not confirm it.
+Result: "confirmed", quote "The harbour master tells the captain that the ship may leave" (the same fact in everyday words). The sentence "The crew loads the cargo." speaks about a different event and would not confirm it.
 
 JSON SCHEMA
 {schema}
