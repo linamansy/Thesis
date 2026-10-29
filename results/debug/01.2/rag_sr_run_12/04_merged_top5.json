@@ -1,0 +1,208 @@
+{
+  "stage": "S4 merge (combmax over the steps, parent expansion)",
+  "fusion": "combmax",
+  "rrf_k": 60,
+  "top_k": 10,
+  "fused": [
+    {
+      "passage_id": "ECD-Art11-1",
+      "max_rerank_score": 2.1657238006591797,
+      "rrf_score": 0.01639344262295082,
+      "rank": 1
+    },
+    {
+      "passage_id": "LPD-Art3-5",
+      "max_rerank_score": -1.923335313796997,
+      "rrf_score": 0.01639344262295082,
+      "rank": 2
+    },
+    {
+      "passage_id": "LPD-Art3-3",
+      "max_rerank_score": -2.2139453887939453,
+      "rrf_score": 0.016129032258064516,
+      "rank": 3
+    },
+    {
+      "passage_id": "LPD-Art3-4",
+      "max_rerank_score": -2.275496482849121,
+      "rrf_score": 0.015873015873015872,
+      "rank": 4
+    },
+    {
+      "passage_id": "ECD-Art11-2",
+      "max_rerank_score": -2.7908926010131836,
+      "rrf_score": 0.016129032258064516,
+      "rank": 5
+    },
+    {
+      "passage_id": "GDPR-Art13-3",
+      "max_rerank_score": -4.098912239074707,
+      "rrf_score": 0.029551337359792925,
+      "rank": 6
+    },
+    {
+      "passage_id": "CRD-Art8-7",
+      "max_rerank_score": -4.161865234375,
+      "rrf_score": 0.01639344262295082,
+      "rank": 7
+    },
+    {
+      "passage_id": "GDPR-Art30-4",
+      "max_rerank_score": -4.509769439697266,
+      "rrf_score": 0.01639344262295082,
+      "rank": 8
+    },
+    {
+      "passage_id": "GDPR-Art30-1",
+      "max_rerank_score": -4.829399585723877,
+      "rrf_score": 0.016129032258064516,
+      "rank": 9
+    },
+    {
+      "passage_id": "GDPR-Art30-5",
+      "max_rerank_score": -5.07542610168457,
+      "rrf_score": 0.015873015873015872,
+      "rank": 10
+    }
+  ],
+  "expansion_cap": 20,
+  "articles": [
+    "ECD-Art11",
+    "LPD-Art3",
+    "GDPR-Art13",
+    "CRD-Art8",
+    "GDPR-Art30"
+  ],
+  "cut": [
+    "CRD-Art8-8",
+    "CRD-Art8-9",
+    "CRD-Art8-10",
+    "GDPR-Art30-1",
+    "GDPR-Art30-2",
+    "GDPR-Art30-3",
+    "GDPR-Art30-4",
+    "GDPR-Art30-5"
+  ],
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "ECD-Art11-1",
+      "fused_rank": 1,
+      "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+    },
+    {
+      "rank": 2,
+      "passage_id": "ECD-Art11-2",
+      "fused_rank": 5,
+      "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+    },
+    {
+      "rank": 3,
+      "passage_id": "ECD-Art11-3",
+      "fused_rank": null,
+      "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+    },
+    {
+      "rank": 4,
+      "passage_id": "LPD-Art3-1",
+      "fused_rank": null,
+      "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay."
+    },
+    {
+      "rank": 5,
+      "passage_id": "LPD-Art3-2",
+      "fused_rank": null,
+      "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n2. Member States shall ensure that the applicable reference rate:\n(a) for the first semester of the year concerned shall be the rate in force on 1 January of that year;\n(b) for the second semester of the year concerned shall be the rate in force on 1 July of that year."
+    },
+    {
+      "rank": 6,
+      "passage_id": "LPD-Art3-3",
+      "fused_rank": 3,
+      "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n3. Where the conditions set out in paragraph 1 are satisfied, Member States shall ensure the following:\n(a) that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract;\n(b) where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date."
+    },
+    {
+      "rank": 7,
+      "passage_id": "LPD-Art3-4",
+      "fused_rank": 4,
+      "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7."
+    },
+    {
+      "rank": 8,
+      "passage_id": "LPD-Art3-5",
+      "fused_rank": 2,
+      "text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n5. Member States shall ensure that the period for payment fixed in the contract does not exceed 60 calendar days, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7."
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art13-1",
+      "fused_rank": null,
+      "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available."
+    },
+    {
+      "rank": 10,
+      "passage_id": "GDPR-Art13-2-a",
+      "fused_rank": null,
+      "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;"
+    },
+    {
+      "rank": 11,
+      "passage_id": "GDPR-Art13-2-f",
+      "fused_rank": null,
+      "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(f) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject."
+    },
+    {
+      "rank": 12,
+      "passage_id": "GDPR-Art13-3",
+      "fused_rank": 6,
+      "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n3. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2."
+    },
+    {
+      "rank": 13,
+      "passage_id": "GDPR-Art13-4",
+      "fused_rank": null,
+      "text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n4. Paragraphs 1, 2 and 3 shall not apply where and insofar as the data subject already has the information."
+    },
+    {
+      "rank": 14,
+      "passage_id": "CRD-Art8-1",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n1. With respect to distance contracts, the trader shall give the information provided for in Article 6(1) or make that information available to the consumer in a way appropriate to the means of distance communication used in plain and intelligible language. In so far as that information is provided on a durable medium, it shall be legible."
+    },
+    {
+      "rank": 15,
+      "passage_id": "CRD-Art8-2",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order."
+    },
+    {
+      "rank": 16,
+      "passage_id": "CRD-Art8-3",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted."
+    },
+    {
+      "rank": 17,
+      "passage_id": "CRD-Art8-4",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n4. If the contract is concluded through a means of distance communication which allows limited space or time to display the information, the trader shall provide, on or through that particular means prior to the conclusion of such a contract, at least the pre-contractual information regarding the main characteristics of the goods or services, the identity of the trader, the total price, the right of withdrawal, the duration of the contract and, if the contract is of indeterminate duration, the conditions for terminating the contract, as referred to, respectively, in points (a), (b), (e), (h) and (o) of Article 6(1) except the model withdrawal form set out in Annex I(B) referred to in point (h). The other information referred to in Article 6(1), including the model withdrawal form, shall be provided by the trader to the consumer in an appropriate way in accordance with paragraph 1 of this Article."
+    },
+    {
+      "rank": 18,
+      "passage_id": "CRD-Art8-5",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n5. Without prejudice to paragraph 4, if the trader makes a telephone call to the consumer with a view to concluding a distance contract, he shall, at the beginning of the conversation with the consumer, disclose his identity and, where applicable, the identity of the person on whose behalf he makes that call, and the commercial purpose of the call."
+    },
+    {
+      "rank": 19,
+      "passage_id": "CRD-Art8-6",
+      "fused_rank": null,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium."
+    },
+    {
+      "rank": 20,
+      "passage_id": "CRD-Art8-7",
+      "fused_rank": 7,
+      "text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16."
+    }
+  ]
+}

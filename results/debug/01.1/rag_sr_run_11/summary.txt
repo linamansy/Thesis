@@ -1,0 +1,93 @@
+RAG STEP ROUTING (SR) DEBUG, case 01.1
+Answer key: target GDPR-Art13-1. Rules: (a) GDPR-Art13 routed for >= 1 step; (b) GDPR-Art13-1 in the S4 top 5.
+
+=== rag_sr_run_10 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] moves to order placement | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] receives confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6, GDPR-Art5
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14, GDPR-Art5, CRD-Art9
+  S3: CRD-Art6, GDPR-Art12, GDPR-Art13, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, CRD-Art6, CRD-Art9, GDPR-Art12
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, CRD-Art9, GDPR-Art5, GDPR-Art24, SGD-Art5
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24, GDPR-Art5
+  S8: GDPR-Art6, GDPR-Art12, CRD-Art9, GDPR-Art5, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art14, GDPR-Art12, GDPR-Art5
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13, GDPR-Art5
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=4, S3=9, S4=-, S5=-, S6=-, S7=5, S8=-, S9=4, S10=1
+S4 rank of GDPR-Art13-1 (full merge): 8; top 5: GDPR-Art13-1, GDPR-Art13-2-a, GDPR-Art13-2-f, GDPR-Art13-3, GDPR-Art13-4, GDPR-Art5-1-a, GDPR-Art5-1-e, GDPR-Art5-2, GDPR-Art12-1, GDPR-Art12-2, GDPR-Art12-3, GDPR-Art12-4, GDPR-Art12-5, GDPR-Art12-6, GDPR-Art12-7, GDPR-Art12-8, GDPR-Art14-1, GDPR-Art14-2-a, GDPR-Art14-2-g, GDPR-Art14-3
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+=== rag_sr_run_11 ===
+S1 steps: 12 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] moves to order placement | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] receives confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+  S11: [customer] receives confirmation of their order | -
+  S12: [system] confirms the order | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6, GDPR-Art5
+  S2: GDPR-Art12, GDPR-Art13, CRD-Art9, GDPR-Art5, CRD-Art6
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, CRD-Art9, GDPR-Art5, GDPR-Art24
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24, GDPR-Art5
+  S8: GDPR-Art6, GDPR-Art12, CRD-Art9, GDPR-Art5, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art14, GDPR-Art12, GDPR-Art5
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13, GDPR-Art5
+  S11: GDPR-Art12, CRD-Art11, CRD-Art8, SGD-Art5, ECD-Art10
+  S12: GDPR-Art6, GDPR-Art12, CRD-Art11, GDPR-Art5
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=4, S3=-, S4=-, S5=-, S6=-, S7=5, S8=-, S9=4, S10=1, S11=-, S12=-
+S4 rank of GDPR-Art13-1 (full merge): 22; top 5: GDPR-Art13-1, GDPR-Art13-2-a, GDPR-Art13-2-f, GDPR-Art13-3, GDPR-Art13-4, CRD-Art8-1, CRD-Art8-2, CRD-Art8-3, CRD-Art8-4, CRD-Art8-5, CRD-Art8-6, CRD-Art8-7, CRD-Art8-8, CRD-Art8-9, CRD-Art8-10, GDPR-Art5-1-a, GDPR-Art5-1-e, GDPR-Art5-2, GDPR-Art12-1, GDPR-Art12-2
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+=== rag_sr_run_12 ===
+S1 steps: 12 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [sales representative] moves to order placement | -
+  S7: [sales representative] records the order in the system | -
+  S8: [sales representative] receives confirmation of the order | -
+  S9: [sales staff] writes down the customer's name, phone number and email address | customer's name, phone number and email address
+  S10: [sales staff] stores the customer's information in the system | customer's name, phone number and email address
+  S11: [customer] receives confirmation of their order | -
+  S12: [system] confirms the order | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6, GDPR-Art5
+  S2: GDPR-Art12, GDPR-Art13, CRD-Art9, GDPR-Art5, CRD-Art6
+  S3: CRD-Art6, CRD-Art9, GDPR-Art12, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, CRD-Art9, GDPR-Art5, GDPR-Art24
+  S7: GDPR-Art6, GDPR-Art13, GDPR-Art24, GDPR-Art5
+  S8: GDPR-Art6, GDPR-Art12, CRD-Art9, GDPR-Art5, CRD-Art6
+  S9: GDPR-Art13, GDPR-Art14, GDPR-Art12, GDPR-Art5
+  S10: GDPR-Art6, GDPR-Art12, GDPR-Art13, GDPR-Art5
+  S11: GDPR-Art12, CRD-Art11, CRD-Art8, SGD-Art5, ECD-Art10
+  S12: GDPR-Art6, GDPR-Art12, CRD-Art11, GDPR-Art5
+S3 rank of GDPR-Art13-1 per step list: S1=-, S2=4, S3=-, S4=-, S5=-, S6=-, S7=5, S8=-, S9=4, S10=1, S11=-, S12=-
+S4 rank of GDPR-Art13-1 (full merge): 22; top 5: GDPR-Art13-1, GDPR-Art13-2-a, GDPR-Art13-2-f, GDPR-Art13-3, GDPR-Art13-4, CRD-Art8-1, CRD-Art8-2, CRD-Art8-3, CRD-Art8-4, CRD-Art8-5, CRD-Art8-6, CRD-Art8-7, CRD-Art8-8, CRD-Art8-9, CRD-Art8-10, GDPR-Art5-1-a, GDPR-Art5-1-e, GDPR-Art5-2, GDPR-Art12-1, GDPR-Art12-2
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+Runs: rag_sr_run_10 PASS, rag_sr_run_11 PASS, rag_sr_run_12 PASS  (3/3 pass)
