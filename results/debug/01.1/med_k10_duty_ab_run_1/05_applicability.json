@@ -1,0 +1,674 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art11-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body"
+        ],
+        "if": [
+          "the recipient of the service places his order through technological means"
+        ],
+        "then": "the Member State shall ensure that the service provider acknowledges the receipt of the recipient's order without undue delay and by electronic means, and that the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them",
+        "exceptions": [
+          "otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "E1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "contradicted",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service places his order through technological means",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "first_look_label": "Not applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art11-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+        ],
+        "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": false,
+      "rejected_if": [
+        "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+      ],
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Split invalid",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "GDPR-Art13-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected"
+        ],
+        "then": "the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "GDPR-Art13-2-f",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "ECD-Art11-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "GDPR-Art13-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "personal data relating to a data subject are collected from the data subject"
+        ],
+        "then": "the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "personal data relating to a data subject are collected from the data subject",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 7,
+    "passage_id": "GDPR-Art12-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller processes personal data"
+        ],
+        "then": "the controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means.",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller processes personal data",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "second look",
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": true,
+      "label": "Applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 8,
+    "passage_id": "GDPR-Art13-2-a",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "personal data are obtained"
+        ],
+        "then": "the controller shall provide the data subject with the following further information necessary to ensure fair and transparent processing: the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period; the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability; where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal; the right to lodge a complaint with a supervisory authority; whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "personal data are obtained",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 9,
+    "passage_id": "GDPR-Art14-4",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller intends to further process the personal data for a purpose other than that for which the personal data were obtained"
+        ],
+        "then": "the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were obtained",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 10,
+    "passage_id": "CRD-Art6-1-a",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader",
+          "consumer"
+        ],
+        "if": [
+          "before the consumer is bound by a distance or off-premises contract, or any corresponding offer"
+        ],
+        "then": "the trader shall provide the consumer with the following information in a clear and comprehensible manner: (a) the main characteristics of the goods or services, to the extent appropriate to the medium and to the goods or services; (b) the identity of the trader, such as his trading name; (c) the geographical address at which the trader is established as well as the trader’s telephone number and email address; in addition, where the trader provides other means of online communication which guarantee that the consumer can keep any written correspondence, including the date and time of such correspondence, with the trader on a durable medium, the information shall also include details of those other means; all those means of communication provided by the trader shall enable the consumer to contact the trader quickly and communicate with him efficiently; where applicable, the trader shall also provide the geographical address and identity of the trader on whose behalf he is acting; (d) if different from the address provided in accordance with point (c), the geographical address of the place of business of the trader, and, where applicable, that of the trader on whose behalf he is acting, where the consumer can address any complaints",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader or consumer",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  }
+]
