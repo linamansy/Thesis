@@ -1,0 +1,1394 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art5-1-a",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 5: Principles relating to processing of personal data\n1. Personal data shall be:\n(a) processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency’);\n(b) collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes; further processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes shall, in accordance with Article 89(1), not be considered to be incompatible with the initial purposes (‘purpose limitation’);\n(c) adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed (‘data minimisation’);\n(d) accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay (‘accuracy’);",
+    "label": "Irrelevant",
+    "label_cause": "law_quote not found",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "processing of personal data",
+      "law_quote": "Personal data shall be: processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency’)",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about processing personal data, and the process has a step where personal data is collected and stored.",
+      "law_quote_found": false,
+      "description_quote_found": true,
+      "final_relevant": false,
+      "cause": "law_quote not found"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "GDPR-Art12-1",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n1. The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "transparent information and communication for data subjects",
+      "law_quote": "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about providing transparent information to data subjects, and the process includes storing customer data, which is part of the data processing activity described in the legal passage.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller provides information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing"
+        ],
+        "then": "the controller shall take appropriate measures to provide the information in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller provides information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing",
+          "text_sent": "the organisation running the described process provides information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language.",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language."
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art6-1-a",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(a) the main characteristics of the goods or services, to the extent appropriate to the medium and to the goods or services;\n(b) the identity of the trader, such as his trading name;\n(c) the geographical address at which the trader is established as well as the trader’s telephone number and email address; in addition, where the trader provides other means of online communication which guarantee that the consumer can keep any written correspondence, including the date and time of such correspondence, with the trader on a durable medium, the information shall also include details of those other means; all those means of communication provided by the trader shall enable the consumer to contact the trader quickly and communicate with him efficiently; where applicable, the trader shall also provide the geographical address and identity of the trader on whose behalf he is acting;\n(d) if different from the address provided in accordance with point (c), the geographical address of the place of business of the trader, and, where applicable, that of the trader on whose behalf he is acting, where the consumer can address any complaints;",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "information requirements for distance and off-premises contracts",
+      "law_quote": "the trader shall provide the consumer with the following information in a clear and comprehensible manner",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about providing information to consumers in distance and off-premises contracts, and the process includes collecting and storing customer contact details during the inquiry phase.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader",
+          "consumer"
+        ],
+        "if": [
+          "before the consumer is bound by a distance or off-premises contract, or any corresponding offer"
+        ],
+        "then": "the trader shall provide the consumer with the following information in a clear and comprehensible manner: (a) the main characteristics of the goods or services, to the extent appropriate to the medium and to the goods or services; (b) the identity of the trader, such as his trading name; (c) the geographical address at which the trader is established as well as the trader’s telephone number and email address; in addition, where the trader provides other means of online communication which guarantee that the consumer can keep any written correspondence, including the date and time of such correspondence, with the trader on a durable medium, the information shall also include details of those other means; all those means of communication provided by the trader shall enable the consumer to contact the trader quickly and communicate with him efficiently; where applicable, the trader shall also provide the geographical address and identity of the trader on whose behalf he is acting; (d) if different from the address provided in accordance with point (c), the geographical address of the place of business of the trader, and, where applicable, that of the trader on whose behalf he is acting, where the consumer can address any complaints",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader or consumer",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "text_sent": "before its customer is bound by a distance or off-premises contract, or any corresponding offer",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer"
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art6-1-e",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(e) the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided;\n(ea) where applicable, that the price was personalised on the basis of automated decision-making;\n(f) the cost of using the means of distance communication for the conclusion of the contract where that cost is calculated other than at the basic rate;",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "total price of the goods or services inclusive of taxes",
+      "law_quote": "the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated",
+      "relevant": true,
+      "process_step": "the sales representative provides a quote",
+      "description_quote": "the sales representative provides a quote",
+      "reason": "The rule is about providing the total price of goods or services, and the process includes a step where a quote is provided, which is part of the pricing information.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader",
+          "consumer"
+        ],
+        "if": [
+          "a distance or off-premises contract is concluded",
+          "the consumer is bound by a distance or off-premises contract",
+          "any corresponding offer is accepted by the consumer"
+        ],
+        "then": "the trader shall provide the consumer with the following information in a clear and comprehensible manner: the total price of the goods or services inclusive of taxes, or where the nature of the goods or services is such that the price cannot reasonably be calculated in advance, the manner in which the price is to be calculated, as well as, where applicable, all additional freight, delivery or postal charges and any other costs or, where those charges cannot reasonably be calculated in advance, the fact that such additional charges may be payable. In the case of a contract of indeterminate duration or a contract containing a subscription, the total price shall include the total costs per billing period. Where such contracts are charged at a fixed rate, the total price shall also mean the total monthly costs. Where the total costs cannot be reasonably calculated in advance, the manner in which the price is to be calculated shall be provided",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C3",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader or consumer",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a distance or off-premises contract is concluded",
+          "text_sent": "a distance or off-premises contract is concluded",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the consumer is bound by a distance or off-premises contract",
+          "text_sent": "its customer is bound by a distance or off-premises contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "any corresponding offer is accepted by the consumer",
+          "text_sent": "any corresponding offer is accepted by its customer",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C3",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null,
+        "C2": null,
+        "C3": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "GDPR-Art12-5",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n5. Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge. Where requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character, the controller may either:\n(a) charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or\n(b) refuse to act on the request.\nThe controller shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "providing information free of charge",
+      "law_quote": "Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge",
+      "relevant": true,
+      "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+      "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+      "reason": "The rule is about providing information free of charge, and the process includes steps where information is communicated to the customer.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character"
+        ],
+        "then": "the controller may either charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or refuse to act on the request",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character",
+          "text_sent": "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "GDPR-Art12-6",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "confirming the identity of the data subject",
+      "law_quote": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about confirming the identity of the data subject, and the process includes collecting and storing customer information during the inquiry.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21"
+        ],
+        "then": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21",
+          "text_sent": "the organisation running the described process has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 7,
+    "passage_id": "GDPR-Art12-7",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n7. The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "transparent information and communication for data subjects",
+      "law_quote": "transparent information, communication and modalities for the exercise of the rights of the data subject",
+      "relevant": true,
+      "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "reason": "The rule is about transparent information and communication for data subjects, and the process includes storing customer data in the system, which is a form of data processing that requires transparency.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided"
+        ],
+        "then": "the information may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "confirmed",
+            "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system"
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided",
+          "text_sent": "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons...",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons..."
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 8,
+    "passage_id": "CRD-Art6-1-g",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(g) the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy;\n(h) where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B);\n(i) where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods;\n(j) that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3);\n(k) where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal;",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy",
+      "law_quote": "the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy",
+      "relevant": true,
+      "process_step": "The sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+      "description_quote": "The sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+      "reason": "The rule is about providing information on payment, delivery, and complaint handling, and the process includes a step where the sales representative provides a quote, which is part of the information required.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader",
+          "consumer"
+        ],
+        "if": [
+          "a distance or off-premises contract is concluded",
+          "the consumer is bound by a distance or off-premises contract",
+          "the consumer is bound by any corresponding offer"
+        ],
+        "then": "the trader shall provide the consumer with the following information in a clear and comprehensible manner: the arrangements for payment, delivery, performance, the time by which the trader undertakes to deliver the goods or to perform the services and, where applicable, the trader’s complaint handling policy; where a right of withdrawal exists, the conditions, time limit and procedures for exercising that right in accordance with Article 11(1), as well as the model withdrawal form set out in Annex I(B); where applicable, that the consumer will have to bear the cost of returning the goods in case of withdrawal and, for distance contracts, if the goods, by their nature, cannot normally be returned by post, the cost of returning the goods; that, if the consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall be liable to pay the trader reasonable costs in accordance with Article 14(3); where a right of withdrawal is not provided for in accordance with Article 16, the information that the consumer will not benefit from a right of withdrawal or, where applicable, the circumstances under which the consumer loses his right of withdrawal",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C3",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader or consumer",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a distance or off-premises contract is concluded",
+          "text_sent": "a distance or off-premises contract is concluded",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the consumer is bound by a distance or off-premises contract",
+          "text_sent": "its customer is bound by a distance or off-premises contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "the consumer is bound by any corresponding offer",
+          "text_sent": "its customer is bound by any corresponding offer",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C3",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null,
+        "C2": null,
+        "C3": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 9,
+    "passage_id": "CRD-Art6-1-l",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(l) a reminder of the existence of a legal guarantee of conformity for goods, digital content and digital services;\n(m) where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees;\n(n) the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable;\n(o) the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract;\n(p) where applicable, the minimum duration of the consumer’s obligations under the contract;\n(q) where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader;\n(r) where applicable, the functionality, including applicable technical protection measures, of goods with digital elements, digital content and digital services;",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "information requirements for distance and off-premises contracts",
+      "law_quote": "Information requirements for distance and off-premises contracts",
+      "relevant": true,
+      "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+      "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+      "reason": "The rule is about providing information for distance and off-premises contracts, and the process includes collecting relevant information during the inquiry phase.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader",
+          "consumer"
+        ],
+        "if": [
+          "before the consumer is bound by a distance or off-premises contract, or any corresponding offer"
+        ],
+        "then": "the trader shall provide the consumer with the following information in a clear and comprehensible manner: a reminder of the existence of a legal guarantee of conformity for goods, digital content and digital services; where applicable, the existence and the conditions of after sale customer assistance, after-sales services and commercial guarantees; the existence of relevant codes of conduct, as defined in point (f) of Article 2 of Directive 2005/29/EC, and how copies of them can be obtained, where applicable; the duration of the contract, where applicable, or, if the contract is of indeterminate duration or is to be extended automatically, the conditions for terminating the contract; where applicable, the minimum duration of the consumer’s obligations under the contract; where applicable, the existence and the conditions of deposits or other financial guarantees to be paid or provided by the consumer at the request of the trader; where applicable, the functionality, including applicable technical protection measures, of goods with digital elements, digital content and digital services",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader or consumer",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "text_sent": "before its customer is bound by a distance or off-premises contract, or any corresponding offer",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "confirmed",
+            "quote": "before the consumer is bound by a distance or off-premises contract, or any corresponding offer"
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 10,
+    "passage_id": "CRD-Art6-1-s",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 6: Information requirements for distance and off-premises contracts\n1. Before the consumer is bound by a distance or off-premises contract, or any corresponding offer, the trader shall provide the consumer with the following information in a clear and comprehensible manner:\n(s) where applicable, any relevant compatibility and interoperability of goods with digital elements, digital content and digital services that the trader is aware of or can reasonably be expected to have been aware of;\n(t) where applicable, the possibility of having recourse to an out-of-court complaint and redress mechanism, to which the trader is subject, and the methods for having access to it.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "information requirements for distance and off-premises contracts",
+      "law_quote": "Information requirements for distance and off-premises contracts",
+      "relevant": true,
+      "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+      "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+      "reason": "The rule is about providing information for distance and off-premises contracts, and the process includes collecting relevant information during the inquiry phase.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          "a distance or off-premises contract is concluded",
+          "the trader is aware of or can reasonably be expected to have been aware of any relevant compatibility and interoperability of goods with digital elements, digital content and digital services"
+        ],
+        "then": "the trader must provide the consumer with the information referred to in (s) and (t) in a clear and comprehensible manner",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "T1",
+            "status": "confirmed",
+            "quote": "The company is based in Germany and sells to customers across the EU."
+          },
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a distance or off-premises contract is concluded",
+          "text_sent": "a distance or off-premises contract is concluded",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader is aware of or can reasonably be expected to have been aware of any relevant compatibility and interoperability of goods with digital elements, digital content and digital services",
+          "text_sent": "the organisation running the described process is aware of or can reasonably be expected to have been aware of any relevant compatibility and interoperability of goods with digital elements, digital content and digital services",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quote": "the trader is aware of or can reasonably be expected to have been aware of any relevant compatibility and interoperability of goods with digital elements, digital content and digital services",
+          "quote_found": false,
+          "downgraded": true,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "The company is based in Germany and sells to customers across the EU.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "status": "confirmed",
+            "quote": "the trader is aware of or can reasonably be expected to have been aware of any relevant compatibility and interoperability of goods with digital elements, digital content and digital services"
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null,
+        "C2": null
+      }
+    },
+    "requirement": null
+  }
+]

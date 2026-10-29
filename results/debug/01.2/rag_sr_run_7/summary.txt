@@ -1,0 +1,85 @@
+RAG STEP ROUTING (SR) DEBUG, case 01.2
+Answer key: target LPD-Art3-1. Rules: (a) LPD-Art3 routed for >= 1 step; (b) LPD-Art3-1 in the S4 top 5.
+
+=== rag_sr_run_7 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art5, GDPR-Art12, ECD-Art10
+  S2: GDPR-Art5, GDPR-Art12, CRD-Art6
+  S3: CRD-Art6, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art6, GDPR-Art7, CRD-Art9
+  S6: CRD-Art6, SGD-Art5, ECD-Art11
+  S7: GDPR-Art5, GDPR-Art6, GDPR-Art24
+  S8: CRD-Art6, SGD-Art5, ECD-Art10
+  S9: GDPR-Art6, GDPR-Art12, CRD-Art18
+  S10: LPD-Art3, LPD-Art6
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=8
+S4 rank of LPD-Art3-1 (full merge): 55; top 5: CRD-Art6-1-a, CRD-Art6-1-l, CRD-Art6-1-g, CRD-Art6-1-s, CRD-Art6-4
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_8 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art5, GDPR-Art12, ECD-Art10
+  S2: GDPR-Art5, GDPR-Art12, CRD-Art6
+  S3: CRD-Art6, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art6, GDPR-Art7, CRD-Art9
+  S6: CRD-Art6, SGD-Art5, ECD-Art11
+  S7: GDPR-Art5, GDPR-Art6, GDPR-Art24
+  S8: CRD-Art6, SGD-Art5, ECD-Art10
+  S9: GDPR-Art6, GDPR-Art12, CRD-Art18
+  S10: LPD-Art3, LPD-Art6
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=8
+S4 rank of LPD-Art3-1 (full merge): 55; top 5: CRD-Art6-1-a, CRD-Art6-1-l, CRD-Art6-1-g, CRD-Art6-1-s, CRD-Art6-4
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+=== rag_sr_run_9 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art5, GDPR-Art12, ECD-Art10
+  S2: GDPR-Art5, GDPR-Art12, CRD-Art6
+  S3: CRD-Art6, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art6, GDPR-Art7, CRD-Art9
+  S6: CRD-Art6, SGD-Art5, ECD-Art11
+  S7: GDPR-Art5, GDPR-Art6, GDPR-Art24
+  S8: CRD-Art6, SGD-Art5, ECD-Art10
+  S9: GDPR-Art6, GDPR-Art12, CRD-Art18
+  S10: LPD-Art3, LPD-Art6
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=8
+S4 rank of LPD-Art3-1 (full merge): 55; top 5: CRD-Art6-1-a, CRD-Art6-1-l, CRD-Art6-1-g, CRD-Art6-1-s, CRD-Art6-4
+Rule (a) PASS   Rule (b) FAIL   -> run FAIL
+
+Runs: rag_sr_run_7 FAIL, rag_sr_run_8 FAIL, rag_sr_run_9 FAIL  (0/3 pass)
