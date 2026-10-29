@@ -63,3 +63,22 @@ def test_applicable_without_a_valid_requirement_shows_the_failed_check():
     assert reason(record).startswith("requirement invalid: ")
     text = summary_text("t", [{"run": "r", "records": [record]}])
     assert "Applicable  (requirement invalid: " in text and "requirement: None" not in text
+
+
+# ---------- --think-calls (debug only, same as scripts/oracle_o2.py) ----------
+
+def test_think_calls_send_only_the_named_calls_through_the_thinking_client(tmp_path):
+    passages = [{"rank": 1, "passage_id": "P-1", "text": PASSAGE, "rerank_score": None, "hybrid_rank": None}]
+    base = MockLLM([json.dumps(a) for a in (RELEVANT, SPLIT, REQUIREMENT)])
+    think = MockLLM([json.dumps(CONFIRMED)])
+    key = {"target_passage_id": "P-1", "accepted_target_ids": ["P-1"], "expected_step": "x"}
+    out = debug_run(CONFIG, given_case(passages, DESCRIPTION), DESCRIPTION, key, base, tmp_path / "med_t_run_1",
+                    {"model": "mock"}, "01.1", ["CheckIfCallV2"], think)
+    assert out["records"][0]["label"] == "Applicable"
+    assert len(think.prompts_received) == 1 and len(base.prompts_received) == 3   # only the check-IF call thinks
+
+
+def test_think_calls_option_defaults_to_none():
+    import scripts.debug_mediation_on_passages as med
+    source = open(med.__file__, encoding="utf-8").read()
+    assert '"--think-calls", default=""' in source and "if think_calls:" in source

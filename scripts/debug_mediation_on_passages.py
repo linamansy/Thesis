@@ -8,6 +8,9 @@ instead of being read from the frozen retrieval. Files 01-03 of a run folder the
 Output: results/debug/<variant>/med_<label>_run_<n>/ with the same stage files as debug_single_case.py.
 
     .venv\\Scripts\\python.exe -m scripts.debug_mediation_on_passages --variant 01.1 --label oracle --passages GDPR-Art13-1 --runs 3
+
+--think-calls (debug only, same as scripts/oracle_o2.py): the named LLM calls of ApplicabilityAgentV2 (class names, e.g.
+CheckIfCallV2,SecondLookCallV2) get their own Ollama client with think: true; default none.
 """
 
 import argparse
@@ -82,7 +85,10 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--label", required=True, help="name of the set, used in the folder names")
     parser.add_argument("--runs", type=int, default=3)
     add_fresh_option(parser)
+    parser.add_argument("--think-calls", default="",
+                        help="comma-separated ApplicabilityAgentV2 call classes sent with think: true (default none)")
     args = parser.parse_args(argv)
+    think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
     if args.runs < 1:
         parser.error("--runs must be at least 1")
 
@@ -96,9 +102,14 @@ def main(argv: list[str] | None = None) -> None:
         llm, llm_info = make_llm(config)
     except Exception as e:
         sys.exit(f"Not started: {e}")
+    think_llm = None
+    if think_calls:
+        from scripts.oracle_o2 import thinking_llm
+        think_llm = thinking_llm(config)
     run_info = {"case_id": args.variant, "mode": "mediation on given passages (no retrieval)", "label": args.label,
                 "given_passage_ids": ids, "corpus_file": config["study2_corpus"]["passages"],
-                "corpus_sha256": corpus_sha, "c3_version": "v2", "fresh": args.fresh, **llm_info}
+                "corpus_sha256": corpus_sha, "c3_version": "v2", "fresh": args.fresh, "think_calls": think_calls,
+                **llm_info}
 
     case_dir = project_path(config["paths"]["runs"]).parent / "debug" / args.variant
     case = given_case(passages, description)
@@ -108,7 +119,8 @@ def main(argv: list[str] | None = None) -> None:
         if args.fresh:
             unload_model(config)
         print(f"{run_dir} ...", flush=True)
-        runs.append(debug_run(config, case, description, key, llm, run_dir, run_info, args.variant))
+        runs.append(debug_run(config, case, description, key, llm, run_dir, run_info, args.variant,
+                              think_calls, think_llm))
     text = summary_text(args.label, runs, args.variant)
     for run in runs:
         (case_dir / run["run"] / "summary.txt").write_text(text, encoding="utf-8")

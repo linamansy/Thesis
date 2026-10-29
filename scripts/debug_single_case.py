@@ -126,8 +126,10 @@ def write_json(path: Path, data) -> None:
 
 
 def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_dir: Path, run_info: dict,
-              case_id: str = CASE_ID) -> dict:
-    """Write all stage files of one run into run_dir (new folder) and return the summary data."""
+              case_id: str = CASE_ID, think_calls=(), think_llm=None) -> dict:
+    """Write all stage files of one run into run_dir (new folder) and return the summary data.
+    think_calls / think_llm (debug only, scripts/oracle_o2.py --think-calls): the named ApplicabilityAgentV2 calls
+    send their requests through think_llm; default none, so the requests are unchanged."""
     from src.agents.applicability_agent_v2 import ApplicabilityAgentV2
     from src.agents.relevance_agent_v2 import RelevanceAgentV2
     from src.agents.requirement_agent_v2 import RequirementAgentV2
@@ -139,7 +141,11 @@ def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_di
     run_dir.mkdir(parents=True)   # raises if it exists: nothing is overwritten
     view = study2_view(config)
     logger = RunLogger(run_dir / "logs", "DEBUG", run_dir.name)
-    orch = OrchestratorV2(RelevanceAgentV2(llm, logger), ApplicabilityAgentV2(llm, logger, config=view),
+    applicability = ApplicabilityAgentV2(llm, logger, config=view)
+    if think_calls:
+        from scripts.oracle_o2 import give_thinking
+        give_thinking(applicability, list(think_calls), think_llm)
+    orch = OrchestratorV2(RelevanceAgentV2(llm, logger), applicability,
                           RequirementAgentV2(llm, logger), {}, run_dir / "unused",
                           load_c3_block_template(view, "c3_block_template_v2"), load_no_knowledge_text(view))
     passages = sorted(case["passages"], key=lambda p: p["rank"])
