@@ -95,6 +95,8 @@ class RequirementAgentV2(BaseAgent):
             attempts.append({"requirement": output.requirement, "step_quote": output.step_quote,
                              "triggers": [t.model_dump() for t in output.triggers],
                              "duty": duty.model_dump() if duty else None, "problems": problems,
+                             "canonical_quotes": self.checker.canonical_quotes(output, inputs["description"],
+                                                                               inputs["passage_text"], inputs["then"]),
                              "measures": self.checker.measure(output.requirement, inputs["passage_text"])})
             if not problems:
                 break

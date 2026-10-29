@@ -275,8 +275,8 @@ def test_ecd_art11_online_order_applicable(tmp_path):
     requirement = {"requirement": "When the customer orders on the website, the shop confirms by email without delay "
                                   "that it has received the order.",
                    "step_quote": "The shop confirms the order by email",
-                   "triggers": [{"trigger": "without undue delay", "kept_as": "without delay"},
-                                {"trigger": "by electronic means", "kept_as": "by email"}],
+                   "triggers": [{"trigger": "without undue delay", "kept_as": "by email without delay"},
+                                {"trigger": "by electronic means", "kept_as": "shop confirms by email"}],
                    "duty": {"from_then": "acknowledge the receipt of the recipient's order",
                             "kept_as": "the shop confirms by email without delay that it has received the order"}}
     answers = [relevant("the service provider has to acknowledge the receipt of the recipient's order",

@@ -24,8 +24,9 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      it refers to in the process (role_binding: a duty role decided by a role fact or A1 -> the organisation running
      the described process; a role decided by the scope item -> its customer; other roles unchanged). The saved
      item keeps its original "text" and records the sent "text_sent". The second look gets the same text_sent (fix 2).
-  d. code quote check (QuoteChecker): a confirmed or contradicted item whose quote is missing or not found in the
-     description becomes not_stated (recorded as downgraded).
+  d. code quote check (match_quote, tolerant since fix tolquote, 30 Oct 2026: plural -s, at most 1 extra word per 6
+     quote words, at least 3 words): a confirmed or contradicted item whose quote is missing or not found in the
+     description becomes not_stated (recorded as downgraded). The matched exact span is saved as quote_canonical.
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
      processor -> confirmed only if P1 is confirmed with a checked quote, otherwise contradicted (A1: the organisation
      is the controller); trader / seller / service provider (A2) -> confirmed only if T1 is confirmed, debtor only if
@@ -55,7 +56,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from src.agents.base_agent import BaseAgent
 from src.config import load_config
 from src.mediation.applicability_resolver import INDETERMINATE
-from src.mediation.quote_checker import QuoteChecker
+from src.mediation.quote_checker import match_quote
 from src.mediation.resolver_v2 import look_label
 
 SPLIT_INVALID = "Split invalid"
@@ -238,7 +239,6 @@ class ApplicabilityAgentV2:
         settings = config["c3_v2"]
         words = "|".join(re.escape(w) for w in settings["obligation_words"])
         self.obligation_pattern = re.compile(rf"\b({words})\b", re.IGNORECASE)
-        self.quote_checker = QuoteChecker()
         self.roles_config = settings["roles"]          # law -> role -> how code decides it (R3)
         self.controller_assumption = settings["controller_assumption"]   # A1
         self.role_facts = settings["role_facts"]       # P1, T1, D1, D2: facts that decide a role
@@ -377,8 +377,8 @@ class ApplicabilityAgentV2:
         by_id = {r.id: r for r in answer.results}
         for item in items:
             result = by_id[item["id"]]
-            found = self.quote_checker.found(result.quote, description)   # None = no quote given
+            found, canonical = match_quote(result.quote, description)   # None = no quote given
             downgraded = result.status != "not_stated" and not found
             status = "not_stated" if downgraded else result.status
             item.update(status=status, original_status=result.status, quote=result.quote, quote_found=found,
-                        downgraded=downgraded, decided_by=look if status != "not_stated" else None)
+                        quote_canonical=canonical, downgraded=downgraded, decided_by=look if status != "not_stated" else None)

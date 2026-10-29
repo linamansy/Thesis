@@ -113,7 +113,7 @@ ART13_1_REQUIREMENT = {
     "step_quote": CONTACT_QUOTE,
     "triggers": [{"trigger": "at the time when personal data are obtained",
                   "kept_as": "When the sales staff write down the customer's name"},
-                 {"trigger": "if any", "kept_as": "if anyone"}],
+                 {"trigger": "personal data, if any", "kept_as": "who receives them, if anyone"}],
     "duty": {"from_then": "provide the data subject with the identity and the contact details",
              "kept_as": "the customer is told who the company is"}}
 
@@ -352,10 +352,10 @@ ART30_4_KEPT = {
     "requirement": "When the contact details are stored in the system, the company shows its list of this data "
                    "handling to the data protection authority if the authority asks.",
     "step_quote": "store them in the system",
-    "triggers": [{"trigger": "on request", "kept_as": "if the authority asks"}],
+    "triggers": [{"trigger": "authority on request", "kept_as": "if the authority asks"}],
     "duty": {"from_then": "make the record available to the supervisory authority",
              "kept_as": "the company shows its list of this data handling to the data protection authority"}}
-ART30_4_DROPPED = {**ART30_4_KEPT,       # "on request" is gone from the requirement, so its kept_as is not found
+ART30_4_DROPPED = {**ART30_4_KEPT,       # "if the authority asks" is gone from the requirement, so its kept_as is not found
                    "requirement": "When the contact details are stored in the system, the company shows its list of "
                                   "this data handling to the data protection authority."}
 DROPPED_PROBLEM = 'the kept_as words "if the authority asks" are not copied word for word from the requirement'

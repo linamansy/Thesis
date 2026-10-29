@@ -28,12 +28,17 @@ every fragment was verbatim (GDPR-Art12-1, case 01.1). from_then is therefore ch
 function fix B wrote for the law quote (RelevanceV2Checker.law_quote_found: split at "..." / "…", every fragment at
 least 4 words, verbatim and in order). It is imported and reused, never copied, so both checks can never drift apart;
 a from_then without an ellipsis is checked exactly as before. duty.kept_as is unchanged (plain QuoteChecker).
+
+Fix tolquote (30 Oct 2026): every quote check here (step_quote, triggers, kept_as, duty.kept_as, and duty.from_then
+through law_quote_found) uses the ONE tolerant function match_quote of src/mediation/quote_checker.py (plural -s, at
+most 1 extra word per 6 quote words, at least 3 words). canonical_quotes() returns the matched exact spans, which
+RequirementAgentV2 saves with each attempt.
 """
 
 import re
 
 from src.config import load_config
-from src.mediation.quote_checker import QuoteChecker
+from src.mediation.quote_checker import match_quote
 from src.mediation.relevance_v2_checker import RelevanceV2Checker
 
 WORD = re.compile(r"[a-z0-9]+(?:'[a-z]+)?")
@@ -60,7 +65,6 @@ class RequirementCheckerV2:
         self.max_copied_share = settings["max_copied_share"]
         alternatives = "|".join(re.escape(w) for w in self.banned_words)
         self.banned_pattern = re.compile(rf"\b({alternatives})s?\b", re.IGNORECASE)
-        self.quote_checker = QuoteChecker()
         # fix (b): fix B's ellipsis-aware quote check, reused unchanged for duty.from_then (no second copy of it)
         self.fragment_checker = RelevanceV2Checker()
 
@@ -99,18 +103,28 @@ class RequirementCheckerV2:
         "kind"), used only for the empty-triggers rule. if_items None = the rule's IF part is unknown, so that
         rule is not checked."""
         found = []
-        if not self.quote_checker.found(output.step_quote, description):
+        if not match_quote(output.step_quote, description)[0]:
             found.append("the step_quote is not copied word for word from the process description")
         found += self.duty_problems(output, then)
         if not output.triggers and any(item.get("kind") == "situation" for item in (if_items or [])):
             found.append("triggers missing: the rule applies only under situational conditions, so the triggers list "
                          "must not be empty")
         for t in output.triggers:
-            if not self.quote_checker.found(t.trigger, passage_text):
+            if not match_quote(t.trigger, passage_text)[0]:
                 found.append(f'the trigger "{t.trigger}" is not copied word for word from the legal passage')
-            if not self.quote_checker.found(t.kept_as, output.requirement):
+            if not match_quote(t.kept_as, output.requirement)[0]:
                 found.append(f'the kept_as words "{t.kept_as}" are not copied word for word from the requirement')
         return found
+
+    def canonical_quotes(self, output, description: str, passage_text: str, then: str = "") -> dict:
+        """The exact source spans the quotes matched (None for a quote that was not found)."""
+        duty = getattr(output, "duty", None)
+        return {"step_quote": match_quote(output.step_quote, description)[1],
+                "triggers": [{"trigger": match_quote(t.trigger, passage_text)[1],
+                              "kept_as": match_quote(t.kept_as, output.requirement)[1]} for t in output.triggers],
+                "duty": None if duty is None else
+                {"from_then": self.fragment_checker.law_quote_match(duty.from_then, then)[1],
+                 "kept_as": match_quote(duty.kept_as, output.requirement)[1]}}
 
     def duty_problems(self, output, then: str) -> list[str]:
         """The duty check (28 Oct 2026): the requirement must keep the duty of the obligation.
@@ -128,7 +142,7 @@ class RequirementCheckerV2:
                          f'words of the OBLIGATION that say what must be done')
         if not self.fragment_checker.law_quote_found(duty.from_then, then):
             found.append(f'the duty from_then "{duty.from_then}" is not copied word for word from the OBLIGATION')
-        if not self.quote_checker.found(duty.kept_as, output.requirement):
+        if not match_quote(duty.kept_as, output.requirement)[0]:
             found.append(f'the duty kept_as words "{duty.kept_as}" are not copied word for word from the requirement, '
                          f'so the requirement does not state the duty')
         return found
