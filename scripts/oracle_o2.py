@@ -1,69 +1,90 @@
-"""Oracle experiment O2: 01.2, LPD-Art3-1 only, settings A-D, 3 runs each (results/debug/01.2/med_o2_*).
+"""Oracle experiment O2: 01.2, LPD-Art3-1 only, 3 runs (results/debug/01.2/med_o2_<label>_run_<n>).
 
-Run on commit da013b1, before fix C. Setting C won and became the real fix (commit 7e5680b), so after that commit
-setting A already has the search-first schema and the ORDER patch below changes nothing.
+History: settings A-D were run on commit da013b1 with a redefined item schema (setting C won and became fix C, commit
+7e5680b). Since fix nodoc (29 Oct 2026) the oracle uses the REAL classes only: the agents, prompts and schemas of
+src/agents/ unchanged, no patch, no redefined schema.
 
-
-A current (fix 2); B think on for CheckIfCallV2 + SecondLookCallV2; C closest_sentence before status/quote in the item
-schema of both calls; D = B + C. Everything else is scripts.debug_mediation_on_passages unchanged.
-Usage (from the project folder): .venv/Scripts/python.exe <this file> A|B|C|D
+Input: the target passage, and as its case passages the target + ALL other paragraphs of its article from the frozen
+Study 2 corpus (so the second look sees exactly what fix sameart gives it when the whole article is retrieved). Only
+the target passage is mediated. Everything else is scripts.debug_single_case.debug_run's setup and files.
+Usage (from the project folder): .venv/Scripts/python.exe scripts/oracle_o2.py [label, default nodoc]
 """
 import json
 import sys
 import time
+from datetime import datetime, timezone
 
 sys.path.insert(0, ".")
-from pydantic import BaseModel, Field
-
 import scripts.debug_mediation_on_passages as med
-from src.agents import applicability_agent_v2 as ap
-from src.llm.ollama_llm import FINISH_REASONS, OllamaLLM
+from scripts.debug_single_case import load_answer_key, make_llm, mediation_stages, retrieval_stages, write_json
+from src.agents.applicability_agent_v2 import ApplicabilityAgentV2, article_of
+from src.agents.relevance_agent_v2 import RelevanceAgentV2
+from src.agents.requirement_agent_v2 import RequirementAgentV2
+from src.config import load_config, project_path
+from src.logger import RunLogger
+from src.orchestrator_v2 import OrchestratorV2
+from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
+from src.study2_config import study2_view
 
-setting = sys.argv[1]
-THINK = setting in ("B", "D")
-ORDER = setting in ("C", "D")
-
-
-# B: OllamaLLM.complete that also keeps Ollama's thinking text (logged as "reasoning")
-def complete(self, prompt, format_schema=None):
-    if self.model_digest is None:
-        self.check_model()
-    data = self._send("POST", "/api/chat", self.request_body(prompt, format_schema))
-    self.last_response_model = data.get("model") or self.model
-    self.last_prompt_tokens = data.get("prompt_eval_count")
-    reason = data.get("done_reason")
-    self.last_finish_reason = FINISH_REASONS.get(reason, reason.upper() if reason else None)
-    self.last_reasoning = data.get("message", {}).get("thinking")
-    return data.get("message", {}).get("content") or ""
+VARIANT = "01.2"
+TARGET = "LPD-Art3-1"
+RUNS = 3
 
 
-OllamaLLM.complete = complete
+def article_ids(config: dict, passage_id: str) -> list[str]:
+    """The target first, then every other paragraph of its article, in corpus order."""
+    path = project_path(config["study2_corpus"]["passages"])
+    ids = [json.loads(line)["id"] for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return [passage_id] + [i for i in ids if i != passage_id and article_of(i) == article_of(passage_id)]
 
-if THINK:
-    original_run = ap.ItemCheckCall.run
 
-    def run_with_think(self, case_id, **inputs):
-        self.llm.think = True
-        try:
-            return original_run(self, case_id, **inputs)
-        finally:
-            self.llm.think = False
+def oracle_run(config, case, description, key, llm, run_dir, run_info) -> dict:
+    """debug_run for the target passage only; the other article paragraphs are its case passages."""
+    run_dir.mkdir(parents=True)   # raises if it exists: nothing is overwritten
+    view = study2_view(config)
+    logger = RunLogger(run_dir / "logs", "DEBUG", run_dir.name)
+    orch = OrchestratorV2(RelevanceAgentV2(llm, logger), ApplicabilityAgentV2(llm, logger, config=view),
+                          RequirementAgentV2(llm, logger), {}, run_dir / "unused",
+                          load_c3_block_template(view, "c3_block_template_v2"), load_no_knowledge_text(view))
+    started = datetime.now(timezone.utc)
+    record = orch.mediate_passage(VARIANT, description, case["passages"][0], case["passages"])
+    print(f"  {run_dir.name} {record['passage_id']}: {record['label']}", flush=True)
+    block = orch.knowledge_block([record])
+    files = retrieval_stages(case, description, key, VARIANT) | mediation_stages([record], block)
+    files = {"00_run_info.json": run_info | {"run": run_dir.name, "started_at": started.isoformat(timespec="seconds"),
+                                             "answer_key": key}} | files
+    for name, data in files.items():
+        write_json(run_dir / name, data)
+    return {"run": run_dir.name, "records": [record], "knowledge_block": block}
 
-    ap.ItemCheckCall.run = run_with_think
 
-if ORDER:
-    class ItemCheck(BaseModel):
-        id: str = Field(description="The id of the item, as given in the list")
-        closest_sentence: str | None = Field(description="The sentence of the process description that comes closest "
-                                                         "to the statement, copied word for word, or null if none")
-        status: ap.Status = Field(description="confirmed, contradicted or not_stated, judged from the description only")
-        quote: str | None = Field(description="Exact words copied from the process description, or null for not_stated")
+def main() -> None:
+    label = "o2_" + (sys.argv[1] if len(sys.argv) > 1 else "nodoc")
+    config = load_config()
+    ids = article_ids(config, TARGET)
+    passages, corpus_sha = med.load_corpus_passages(config, ids)
+    key = load_answer_key(config, VARIANT)
+    description = (project_path(config["paths"]["cases"]) / VARIANT / config["paths"]["case_description_file"]
+                   ).read_text(encoding="utf-8")
+    llm, llm_info = make_llm(config)
+    run_info = {"case_id": VARIANT, "mode": "oracle O2: target mediated, other article paragraphs as case passages",
+                "label": label, "mediated_passage_id": TARGET, "given_passage_ids": ids,
+                "corpus_file": config["study2_corpus"]["passages"], "corpus_sha256": corpus_sha, "c3_version": "v2",
+                **llm_info}
+    case_dir = project_path(config["paths"]["runs"]).parent / "debug" / VARIANT
+    case = med.given_case(passages, description)
+    start = time.perf_counter()
+    runs = []
+    for _ in range(RUNS):
+        run_dir = med.next_med_dir(case_dir, label)
+        print(f"{run_dir} ...", flush=True)
+        runs.append(oracle_run(config, case, description, key, llm, run_dir, run_info))
+    text = med.summary_text(label, runs, VARIANT)
+    for run in runs:
+        (case_dir / run["run"] / "summary.txt").write_text(text, encoding="utf-8")
+    print("\n" + text)
+    print(json.dumps({"label": label, "given_passage_ids": ids, "seconds": round(time.perf_counter() - start, 1)}))
 
-    class CheckOutputV2(BaseModel):
-        results: list[ItemCheck] = Field(description="One result for every item of the list")
 
-    ap.ItemCheckCall.output_schema = CheckOutputV2
-
-start = time.perf_counter()
-med.main(["--variant", "01.2", "--label", f"o2_{setting}", "--passages", "LPD-Art3-1", "--runs", "3"])
-print(json.dumps({"setting": setting, "seconds": round(time.perf_counter() - start, 1)}))
+if __name__ == "__main__":
+    main()
