@@ -36,6 +36,7 @@ class RelevanceOutputV2(BaseModel):
 
 class RelevanceAgentV2(BaseAgent):
     output_schema = RelevanceOutputV2
+    json_format = True
     prompt_key = "relevance_prompt_v2"
 
     def build_prompt(self, description: str, passage_id: str, passage_text: str) -> str:

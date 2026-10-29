@@ -73,6 +73,7 @@ class StepsOutput(BaseModel):
 
 class StepsAgent(BaseAgent):
     output_schema = StepsOutput
+    json_format = True
 
     def __init__(self, llm, logger, max_retries: int | None = None):
         super().__init__(llm, logger, max_retries, template_path=project_path(STEPS_PROMPT))
@@ -114,6 +115,7 @@ class RoutingOutput(BaseModel):
 
 class RoutingAgent(BaseAgent):
     output_schema = RoutingOutput
+    json_format = True
 
     def __init__(self, llm, logger, max_retries: int | None = None):
         super().__init__(llm, logger, max_retries, template_path=project_path(ROUTING_PROMPT))

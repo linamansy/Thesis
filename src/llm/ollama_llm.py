@@ -68,9 +68,12 @@ class OllamaLLM(LLMClient):
                    model["think"], model["ollama_model_digest"], model["ollama_url"], llm["ollama_timeout_seconds"],
                    llm["ollama_api_max_retries"], llm["api_initial_wait_seconds"], client=client)
 
-    def request_body(self, prompt: str) -> dict:
-        """The exact request sent to /api/chat for every call."""
-        return {
+    accepts_format_schema = True
+
+    def request_body(self, prompt: str, format_schema: dict | None = None) -> dict:
+        """The exact request sent to /api/chat for every call. With format_schema, Ollama's "format" is added so the
+        answer must follow that JSON schema (structured output); without it the request is unchanged."""
+        body = {
             "model": self.model,
             "messages": [{"role": "user", "content": prompt}],
             "stream": False,      # one complete answer instead of pieces
@@ -78,6 +81,9 @@ class OllamaLLM(LLMClient):
             "options": {"temperature": self.temperature, "seed": self.seed,
                         "num_ctx": self.num_ctx, "num_predict": self.max_tokens},
         }
+        if format_schema is not None:
+            body["format"] = format_schema
+        return body
 
     def _send(self, method: str, path: str, body: dict | None = None) -> dict:
         """One HTTP request to Ollama, with retries on temporary errors. Returns the JSON answer."""
@@ -109,10 +115,10 @@ class OllamaLLM(LLMClient):
                                       f"{self.expected_digest} (model.ollama_model_digest). The model was changed.")
         self.model_digest = digest
 
-    def complete(self, prompt: str) -> str:
+    def complete(self, prompt: str, format_schema: dict | None = None) -> str:
         if self.model_digest is None:
             self.check_model()   # once, before the first call
-        data = self._send("POST", "/api/chat", self.request_body(prompt))
+        data = self._send("POST", "/api/chat", self.request_body(prompt, format_schema))
         self.last_response_model = data.get("model") or self.model
         self.last_prompt_tokens = data.get("prompt_eval_count")   # prompt length in the model's own tokens
         reason = data.get("done_reason")

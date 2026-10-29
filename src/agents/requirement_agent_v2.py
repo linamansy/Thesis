@@ -52,6 +52,7 @@ class RequirementOutputV2(BaseModel):
 
 class RequirementAgentV2(BaseAgent):
     output_schema = RequirementOutputV2
+    json_format = True
     prompt_key = "requirement_prompt_v2"
 
     def __init__(self, llm, logger, max_retries: int | None = None, config: dict | None = None):

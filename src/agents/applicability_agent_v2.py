@@ -96,6 +96,7 @@ class CheckOutputV2(BaseModel):
 
 class SplitCallV2(BaseAgent):
     prompt_key = "applicability_split_prompt_v2"
+    json_format = True
 
     def __init__(self, llm, logger, max_retries: int | None = None):
         super().__init__(llm, logger, max_retries)
@@ -113,6 +114,7 @@ class SplitCallV2(BaseAgent):
 class ItemCheckCall(BaseAgent):
     """Shared by the check-IF call and the second look: the answer must have exactly one result per item id."""
     output_schema = CheckOutputV2
+    json_format = True
 
     def parse_output(self, raw_output: str):
         parsed, error = super().parse_output(raw_output)

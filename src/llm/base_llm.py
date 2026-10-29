@@ -36,6 +36,9 @@ class LLMClient(ABC):
         # Reasoning text a reasoning model returned next to its answer (Groq's gpt-oss); written to the log.
         self.last_reasoning: str | None = None
 
+    # True for providers whose complete() takes format_schema (a JSON schema the answer must follow).
+    accepts_format_schema = False
+
     @property
     def model_for_log(self) -> str:
         """The model name written to the log: the provider's answer if known, else the requested name."""

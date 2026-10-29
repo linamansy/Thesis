@@ -23,9 +23,13 @@ class MockLLM(LLMClient):
             raise ValueError("MockLLM needs at least one response")
         self.responses = list(responses)
         self.prompts_received: list[str] = []  # lets tests check what was sent
+        self.schemas_received: list[dict | None] = []  # the format_schema of every call (None = none sent)
 
-    def complete(self, prompt: str) -> str:
+    accepts_format_schema = True
+
+    def complete(self, prompt: str, format_schema: dict | None = None) -> str:
         self.prompts_received.append(prompt)
+        self.schemas_received.append(format_schema)
         # Use the next response; once the list is used up, keep repeating the last one.
         index = min(len(self.prompts_received) - 1, len(self.responses) - 1)
         return self.responses[index]

@@ -33,6 +33,9 @@ class BaseAgent(ABC):
     output_schema: type[BaseModel]
     # Key under "paths" in config.yaml that points to the agent's prompt template file.
     prompt_key: str | None = None
+    # True: the LLM is given output_schema as a JSON schema its answer must follow (Ollama's "format"), when the
+    # provider supports it. False (Study 1 agents, silver annotator, legacy generator): nothing changes.
+    json_format = False
 
     def __init__(self, llm: LLMClient, logger: RunLogger, max_retries: int | None = None,
                  template_path: Path | None = None):
@@ -51,6 +54,12 @@ class BaseAgent(ABC):
         """The output schema as indented JSON, for the {schema} part of a prompt template."""
         return json.dumps(self.output_schema.model_json_schema(), indent=2)
 
+    def format_schema(self) -> dict | None:
+        """The JSON schema sent with the call: exactly output_schema (the fields parse_output expects), or None."""
+        if self.json_format and self.llm.accepts_format_schema:
+            return self.output_schema.model_json_schema()
+        return None
+
     @abstractmethod
     def build_prompt(self, **inputs) -> str:
         """Turn the agent's inputs into the prompt text. Defined by each subclass."""
@@ -67,7 +76,9 @@ class BaseAgent(ABC):
 
         for attempt in range(self.max_retries + 1):
             start = time.perf_counter()
-            raw_output = self.llm.complete(current_prompt)
+            schema = self.format_schema()
+            raw_output = (self.llm.complete(current_prompt) if schema is None
+                          else self.llm.complete(current_prompt, format_schema=schema))
             duration = time.perf_counter() - start
 
             parsed, error = self.parse_output(raw_output)
