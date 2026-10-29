@@ -1,0 +1,189 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "LPD-Art3-1",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "transactions between undertakings",
+      "law_quote": "Transactions between undertakings",
+      "relevant": true,
+      "process_step": "the company sends them a bill",
+      "description_quote": "the company sends them a bill",
+      "reason": "The rule is about transactions between undertakings, and the process includes a step where a company sends a bill to another company, which is a transaction between undertakings.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "creditor"
+        ],
+        "if": [
+          "the creditor has fulfilled its contractual and legal obligations",
+          "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay"
+        ],
+        "then": "the creditor is entitled to interest for late payment without the necessity of a reminder",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most customers are other companies",
+            "status": "confirmed",
+            "quote": "Most customers are other companies"
+          },
+          {
+            "id": "D2",
+            "closest_sentence": "the company sends them a bill",
+            "status": "confirmed",
+            "quote": "the company sends them a bill"
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "some customers pay later than the agreed date",
+            "status": "confirmed",
+            "quote": "some customers pay later than the agreed date"
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: creditor",
+          "roles": [
+            {
+              "role": "creditor",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "D2 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quote": "the company sends them a bill",
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "Most customers are other companies",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the creditor has fulfilled its contractual and legal obligations",
+          "text_sent": "the organisation running the described process has fulfilled its contractual and legal obligations",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the creditor has not received the amount due on time",
+          "original_text": "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "text_sent": "the organisation running the described process has not received the amount due on time",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "some customers pay later than the agreed date",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "D2",
+          "kind": "role_fact",
+          "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "the company sends them a bill",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look"
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "unless the debtor is not responsible for the delay",
+          "original_text": "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "split_from": "C2",
+          "text_sent": "unless the debtor is not responsible for the delay",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "creditor": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null,
+        "C2": "first look"
+      }
+    },
+    "requirement": null
+  }
+]
