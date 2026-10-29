@@ -2,10 +2,11 @@ You are assisting with business process modelling. Check whether the statements 
 
 INSTRUCTIONS
 - For each statement, choose its status using ONLY the process description:
-  - "confirmed": the description states that it holds, in the same or different words.
+  - "confirmed": the description states that it holds. A statement in legal terms is "confirmed" when the description states the same fact in everyday words.
   - "contradicted": the description states something that makes it false.
-  - "not_stated": the description does not say whether it holds.
-- Do not guess facts the description does not state. If in doubt, use "not_stated".
+  - "not_stated": use this only when no sentence of the description speaks to the statement.
+- "confirmed" needs a quote that itself states that fact; a sentence about a different event never confirms it.
+- Do not guess facts the description does not state.
 - A statement that the organisation handles personal data on behalf of another organisation is "confirmed" only if the quoted words show that another organisation decides why and how the data is used (see the ROLE DEFINITIONS below). A word that only looks like a role (for example "processing" or "processed" for a processor) never confirms it; then use "not_stated".
 - quote: for "confirmed" or "contradicted", copy the words of the process description that show it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description counts as "not_stated".
 - Give one result for every statement, with its id, and no other results.
@@ -19,6 +20,11 @@ EXAMPLE (made up, for the format only)
 Statements: "C1: a customer pays by card", "C2: the organisation handles personal data on behalf of another organisation", "E1: the customer declines the receipt"
 Process: "The customer chooses a product. The customer pays by card and the payment is processed. The shop sends the product."
 Answer: {{"results": [{{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}}, {{"id": "C2", "status": "not_stated", "quote": null}}, {{"id": "E1", "status": "not_stated", "quote": null}}]}}
+
+EXAMPLE OF EVERYDAY WORDS (made up, from another domain)
+Statement: "C1: the vessel has obtained clearance for departure from the port authority"
+Description sentence: "The harbour master tells the captain that the ship may leave."
+Result: "confirmed", quote "The harbour master tells the captain that the ship may leave" (the same fact in everyday words). The sentence "The crew loads the cargo." speaks about a different event and would not confirm it.
 
 JSON SCHEMA
 {schema}

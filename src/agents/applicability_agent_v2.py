@@ -20,7 +20,7 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      Role binding (fix F2, 29 Oct 2026): in the C and E items sent to this call, a role name is replaced by the actor
      it refers to in the process (role_binding: a duty role decided by a role fact or A1 -> the organisation running
      the described process; a role decided by the scope item -> its customer; other roles unchanged). The saved
-     item keeps its original "text" and records the sent "text_sent". The second look gets the original text.
+     item keeps its original "text" and records the sent "text_sent". The second look gets the same text_sent (fix 2).
   d. code quote check (QuoteChecker): a confirmed or contradicted item whose quote is missing or not found in the
      description becomes not_stated (recorded as downgraded).
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
@@ -154,7 +154,8 @@ class ItemCheckCall(BaseAgent):
         return parsed, error
 
     def item_lines(self, items: list[dict], key: str = "text") -> str:
-        """key: the item field whose text is sent ("text_sent" for the check-IF call, with "text" as fallback)."""
+        """key: the item field whose text is sent ("text_sent" for the check-IF call and the second look, with "text"
+        as fallback)."""
         self.expected_ids = [item["id"] for item in items]   # checked by parse_output
         return "\n".join(f'{item["id"]}: {item.get(key, item["text"])}' for item in items)
 
@@ -172,10 +173,11 @@ class SecondLookCallV2(ItemCheckCall):
     prompt_key = "applicability_second_look_prompt_v2"
 
     def build_prompt(self, description: str, passages: list[dict], passage_id: str, items: list[dict]) -> str:
-        """passages: all retrieved passages of the case (dicts with passage_id and text, in rank order)."""
+        """passages: all retrieved passages of the case (dicts with passage_id and text, in rank order). The items are
+        sent with the same role-bound text_sent as in the check-IF call (fix 2)."""
         passage_lines = "\n\n".join(f"[{p['passage_id']}] {p['text'].strip()}" for p in passages)
         return self.template.format(schema=self.schema_text(), description=description.strip(),
-                                    passages=passage_lines, passage_id=passage_id, items=self.item_lines(items))
+                                    passages=passage_lines, passage_id=passage_id, items=self.item_lines(items, key="text_sent"))
 
 
 # ---------- the agent ----------

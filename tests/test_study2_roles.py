@@ -361,7 +361,7 @@ def test_bind_roles_replaces_whole_role_names_only():
     assert bind_roles("the consumers and the provider", binding) == "the consumers and the provider"
 
 
-def test_check_call_gets_bound_items_and_the_original_text_is_kept(tmp_path):
+def test_check_and_second_look_get_bound_items_and_the_original_text_is_kept(tmp_path):
     split = dict(LPD_SPLIT, roles=["creditor"], exceptions=[])
     check = {"results": [result(i, "not_stated") for i in ("S1", "D2", "C1", "C2")]}
     second = {"results": [result("C1", "not_stated"), result("C2", "not_stated")]}
@@ -372,5 +372,21 @@ def test_check_call_gets_bound_items_and_the_original_text_is_kept(tmp_path):
     assert c2["text"] == "the creditor has not received the amount due on time"
     assert c2["text_sent"] == "the organisation running the described process has not received the amount due on time"
     assert "C2: " + c2["text_sent"] in llm.prompts_received[2]                 # check-IF: bound text
-    assert "C2: " + c2["text"] in llm.prompts_received[3]                      # second look: unchanged
+    assert "C2: " + c2["text_sent"] in llm.prompts_received[3]                 # second look: same bound text (fix 2)
+    assert "C2: " + c2["text"] not in llm.prompts_received[3]
     assert record["applicability"]["role_binding"] == {"creditor": "the organisation running the described process"}
+
+
+def test_check_and_second_look_prompts_share_the_everyday_words_rules():
+    """Fix 2: the same wording on legal terms vs everyday words, quotes and not_stated in both prompts."""
+    config = load_config()
+    texts = [project_path(config["paths"][k]).read_text(encoding="utf-8")
+             for k in ("applicability_check_prompt_v2", "applicability_second_look_prompt_v2")]
+    rules = ['A statement in legal terms is "confirmed" when the description states the same fact in everyday words.',
+             '"confirmed" needs a quote that itself states that fact; a sentence about a different event never confirms it.',
+             '"not_stated": use this only when no sentence of the description speaks to the statement.',
+             "EXAMPLE OF EVERYDAY WORDS (made up, from another domain)"]
+    for rule in rules:
+        assert all(rule in t for t in texts), rule
+    example = texts[0][texts[0].index("EXAMPLE OF EVERYDAY WORDS"):texts[0].index("JSON SCHEMA")]
+    assert example in texts[1]
