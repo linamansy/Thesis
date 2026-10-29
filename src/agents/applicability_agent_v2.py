@@ -17,6 +17,10 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      facts of the named roles (c3_v2.role_facts: P1 for a processor, T1 for a trader / seller / service provider, D1
      for a debtor, D2 for a creditor), C1..., the exceptions E1... -> each item confirmed / not_stated / contradicted,
      with a quote from the description.
+     Role binding (fix F2, 29 Oct 2026): in the C and E items sent to this call, a role name is replaced by the actor
+     it refers to in the process (role_binding: a duty role decided by a role fact or A1 -> the organisation running
+     the described process; a role decided by the scope item -> its customer; other roles unchanged). The saved
+     item keeps its original "text" and records the sent "text_sent". The second look gets the original text.
   d. code quote check (QuoteChecker): a confirmed or contradicted item whose quote is missing or not found in the
      description becomes not_stated (recorded as downgraded).
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
@@ -63,6 +67,31 @@ def law_roles(roles_config: dict, passage_id: str) -> dict:
         if prefix != "default" and passage_id.startswith(prefix):
             return law
     return roles_config["default"]
+
+
+# Role binding (fix F2, 29 Oct 2026): the actor a role name refers to in the described process. The organisation phrase
+# is the one the role facts use (c3_v2.role_facts); the customer is the other side of the customer scope item.
+ORGANISATION = "the organisation running the described process"
+CUSTOMER = "its customer"
+
+
+def role_binding(duty_roles: list[str], rules: dict) -> dict[str, str]:
+    """{role name: actor} for one passage. rules: the role list of its law (config.yaml c3_v2.roles).
+    A role the rule places its duty on (R1) that code decides by a role fact or by assumption A1 -> the organisation
+    (exactly what R1 checks); a role decided by the scope item (the customer side) -> its customer. Every other role
+    is left as it is."""
+    binding = {r: ORGANISATION for r in dict.fromkeys(duty_roles) if rules[r]["decide"] in ("fact", "assumed")}
+    binding.update({name: CUSTOMER for name, rule in rules.items()
+                    if rule["decide"] == "scope" and name not in binding})
+    return binding
+
+
+def bind_roles(text: str, binding: dict[str, str]) -> str:
+    """Replace each bound role name in an item text (with a leading "the" / "a" / "an", whole words, any case) by its
+    actor. Longer role names first, so "service provider" is replaced before a shorter name inside it."""
+    for role in sorted(binding, key=len, reverse=True):
+        text = re.sub(rf"\b(?:(?:the|a|an)\s+)?{re.escape(role)}\b", binding[role], text, flags=re.IGNORECASE)
+    return text
 
 
 @functools.cache
@@ -124,17 +153,19 @@ class ItemCheckCall(BaseAgent):
                 return None, f"the results must have exactly these ids, once each: {', '.join(self.expected_ids)}"
         return parsed, error
 
-    def item_lines(self, items: list[dict]) -> str:
+    def item_lines(self, items: list[dict], key: str = "text") -> str:
+        """key: the item field whose text is sent ("text_sent" for the check-IF call, with "text" as fallback)."""
         self.expected_ids = [item["id"] for item in items]   # checked by parse_output
-        return "\n".join(f'{item["id"]}: {item["text"]}' for item in items)
+        return "\n".join(f'{item["id"]}: {item.get(key, item["text"])}' for item in items)
 
 
 class CheckIfCallV2(ItemCheckCall):
     prompt_key = "applicability_check_prompt_v2"
 
     def build_prompt(self, description: str, items: list[dict]) -> str:
+        """C and E items are sent with their role names bound (text_sent, fix F2); the other items as they are."""
         return self.template.format(schema=self.schema_text(), description=description.strip(),
-                                    items=self.item_lines(items))
+                                    items=self.item_lines(items, key="text_sent"))
 
 
 class SecondLookCallV2(ItemCheckCall):
@@ -197,6 +228,9 @@ class ApplicabilityAgentV2:
                                  if rules[r["role"]]["decide"] == "fact")
         record["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
         record["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(split.exceptions, 1)]
+        record["role_binding"] = binding = role_binding(split.roles, rules)
+        for item in situational + record["exceptions"]:
+            item["text_sent"] = bind_roles(item["text"], binding)
 
         # c. check-IF call, d. quote check (only the items that need a quote from the description)
         items = scope + record["role_facts"] + situational + record["exceptions"]

@@ -340,3 +340,37 @@ def test_letter_id_art9_1a_public_body_not_applicable(tmp_path):
     assert record["passage_id"] == "CRD-Art9-1a" and items(record)["R1"] == ("contradicted", "code rule")
     assert record["label"] == NOT_APPLICABLE and len(llm.prompts_received) == 3
     assert knowledge == NO_KNOWLEDGE
+
+
+# ---------- fix F2: role names in C and E items bound to the actor in the process ----------
+
+def test_role_binding_comes_from_the_role_config():
+    from src.agents.applicability_agent_v2 import CUSTOMER, ORGANISATION, role_binding
+    roles = SETTINGS["roles"]
+    assert ORGANISATION in SETTINGS["role_facts"]["D2"] and ORGANISATION in SETTINGS["role_facts"]["T1"]
+    assert role_binding(["creditor"], roles["LPD-"]["names"]) == {"creditor": ORGANISATION}
+    assert role_binding(["trader"], roles["CRD-"]["names"]) == {"trader": ORGANISATION, "consumer": CUSTOMER}
+    assert role_binding(["controller"], roles["default"]["names"]) == {"controller": ORGANISATION}
+    assert role_binding(["public body", "other"], roles["CRD-"]["names"]) == {"consumer": CUSTOMER}
+
+
+def test_bind_roles_replaces_whole_role_names_only():
+    from src.agents.applicability_agent_v2 import bind_roles
+    binding = {"service provider": "the organisation", "consumer": "its customer"}
+    assert bind_roles("The service provider informs a consumer", binding) == "the organisation informs its customer"
+    assert bind_roles("the consumers and the provider", binding) == "the consumers and the provider"
+
+
+def test_check_call_gets_bound_items_and_the_original_text_is_kept(tmp_path):
+    split = dict(LPD_SPLIT, roles=["creditor"], exceptions=[])
+    check = {"results": [result(i, "not_stated") for i in ("S1", "D2", "C1", "C2")]}
+    second = {"results": [result("C1", "not_stated"), result("C2", "not_stated")]}
+    answers = [relevant("the creditor is entitled to interest for late payment", "the customer pays",
+                        "The customer pays at the counter"), split, check, second]
+    record, _, llm = run_case(tmp_path, BAKERY, "LPD-Art3-1", answers)
+    c2 = record["applicability"]["conditions"][3]
+    assert c2["text"] == "the creditor has not received the amount due on time"
+    assert c2["text_sent"] == "the organisation running the described process has not received the amount due on time"
+    assert "C2: " + c2["text_sent"] in llm.prompts_received[2]                 # check-IF: bound text
+    assert "C2: " + c2["text"] in llm.prompts_received[3]                      # second look: unchanged
+    assert record["applicability"]["role_binding"] == {"creditor": "the organisation running the described process"}
