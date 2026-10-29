@@ -1,0 +1,24 @@
+Rule 1 reproduces every saved 04_merged_top5.json exactly.
+
+SR fusion comparison, case 01.2. Pass rule: LPD-Art3-1 in the top 10. Cap = 2 per article.
+
+rule         run   top 10                                                                                                                                                 rank  result
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+rrf          1                                                                                                                                                            -     FAIL
+rrf          2                                                                                                                                                            -     FAIL
+rrf          3                                                                                                                                                            -     FAIL
+
+combmax      1                                                                                                                                                            -     FAIL
+combmax      2                                                                                                                                                            -     FAIL
+combmax      3                                                                                                                                                            -     FAIL
+
+rrf_cap2     1                                                                                                                                                            -     FAIL
+rrf_cap2     2                                                                                                                                                            -     FAIL
+rrf_cap2     3                                                                                                                                                            -     FAIL
+
+combmax_cap2 1                                                                                                                                                            -     FAIL
+combmax_cap2 2                                                                                                                                                            -     FAIL
+combmax_cap2 3                                                                                                                                                            -     FAIL
+
+Passes: rrf 0/3, combmax 0/3, rrf_cap2 0/3, combmax_cap2 0/3
+
