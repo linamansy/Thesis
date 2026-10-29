@@ -56,7 +56,7 @@ def test_oracle_unloads_before_every_run_only_with_fresh(monkeypatch, fresh):
     monkeypatch.setattr(oracle, "make_llm", lambda config: (None, {"model": MODEL}))
     monkeypatch.setattr(oracle, "unload_model", lambda config: events.append("unload"))
 
-    def fake_run(config, case, description, key, llm, run_dir, run_info):
+    def fake_run(config, case, description, key, llm, run_dir, run_info, think_calls=(), think_llm=None):
         run_dir.mkdir(parents=True)
         events.append(("run", run_info["fresh"]))
         return {"run": run_dir.name, "records": [{"passage_id": oracle.TARGET, "label": "Indeterminate",
