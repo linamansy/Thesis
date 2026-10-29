@@ -1,0 +1,130 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "LPD-Art3-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "creditor"
+        ],
+        "if": [
+          "the creditor has fulfilled its contractual and legal obligations",
+          "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay"
+        ],
+        "then": "the creditor is entitled to interest for late payment without the necessity of a reminder",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "D2",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+            "status": "not_stated",
+            "quote": null
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "not_stated",
+            "quote": null
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: creditor",
+          "roles": [
+            {
+              "role": "creditor",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "D2 not stated"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the creditor has fulfilled its contractual and legal obligations",
+          "text_sent": "the organisation running the described process has fulfilled its contractual and legal obligations",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "text_sent": "the organisation running the described process has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quote": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "second look",
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "D2",
+          "kind": "role_fact",
+          "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quote": null,
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "creditor": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  }
+]
