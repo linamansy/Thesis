@@ -55,7 +55,7 @@ def load_answer_key(config: dict, case_id: str = CASE_ID) -> dict:
             "expected_step": variant["expected_step"]}
 
 
-def retrieval_stages(case: dict, description: str, key: dict) -> dict:
+def retrieval_stages(case: dict, description: str, key: dict, case_id: str = CASE_ID) -> dict:
     """Files 01-03 as dicts. Candidates are listed in hybrid order (before reranking); each row also says where the
     reranker put it. The list is the 'candidates' of the frozen file, which is in reranker order."""
     accepted = set(key["accepted_target_ids"])
@@ -67,7 +67,7 @@ def retrieval_stages(case: dict, description: str, key: dict) -> dict:
     top5 = [{"rank": p["rank"], "passage_id": p["passage_id"], "rerank_score": p["rerank_score"],
              "hybrid_rank": p["hybrid_rank"], "is_target": p["passage_id"] in accepted, "text": p["text"]}
             for p in case["passages"]]
-    return {"01_query.json": {"case_id": CASE_ID, "description": description, "queries": case["queries"],
+    return {"01_query.json": {"case_id": case_id, "description": description, "queries": case["queries"],
                               "reranker_queries": case["reranker_queries"]},
             "02_top20_before_rerank.json": {"note": "hybrid retrieval (BM25 + dense, RRF k 60), before the reranker",
                                             "target": key["accepted_target_ids"], "candidates": top20},
@@ -122,7 +122,8 @@ def write_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_dir: Path, run_info: dict) -> dict:
+def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_dir: Path, run_info: dict,
+              case_id: str = CASE_ID) -> dict:
     """Write all stage files of one run into run_dir (new folder) and return the summary data."""
     from src.agents.applicability_agent_v2 import ApplicabilityAgentV2
     from src.agents.relevance_agent_v2 import RelevanceAgentV2
@@ -142,12 +143,12 @@ def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_di
     started = datetime.now(timezone.utc)
     records = []
     for p in passages:
-        record = orch.mediate_passage(CASE_ID, description, p, passages)
+        record = orch.mediate_passage(case_id, description, p, passages)
         records.append(record)
         print(f"  {run_dir.name} rank {p['rank']} {p['passage_id']}: {record['label']}", flush=True)
     block = orch.knowledge_block(records)
 
-    files = retrieval_stages(case, description, key) | mediation_stages(records, block)
+    files = retrieval_stages(case, description, key, case_id) | mediation_stages(records, block)
     files = {"00_run_info.json": run_info | {"run": run_dir.name, "started_at": started.isoformat(timespec="seconds"),
                                              "answer_key": key}} | files
     for name, data in files.items():

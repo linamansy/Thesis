@@ -1,11 +1,11 @@
-"""Mediation of GIVEN passages for ONE case (variant 01.1), no retrieval and no BPMN.
+"""Mediation of GIVEN passages for ONE case (--variant, default 01.1), no retrieval and no BPMN.
 
 It uses scripts/debug_single_case.py by import (debug_run, make_llm, load_answer_key, ...), so every passage goes through
 OrchestratorV2.mediate_passage with the same agents, prompts, settings and digest check as debug_single_case.py. The only
 difference: the passages are looked up by ID in the frozen Study 2 corpus (its SHA-256 must equal the corpus manifest)
 instead of being read from the frozen retrieval. Files 01-03 of a run folder therefore only say that the passages were given.
 
-Output: results/debug/01.1/med_<label>_run_<n>/ with the same stage files as debug_single_case.py.
+Output: results/debug/<variant>/med_<label>_run_<n>/ with the same stage files as debug_single_case.py.
 
     .venv\\Scripts\\python.exe -m scripts.debug_mediation_on_passages --variant 01.1 --label oracle --passages GDPR-Art13-1 --runs 3
 """
@@ -62,8 +62,8 @@ def reason(record: dict) -> str:
     return cause
 
 
-def summary_text(label: str, runs: list[dict]) -> str:
-    lines = [f"MEDIATION ON GIVEN PASSAGES, set {label}, case 01.1", ""]
+def summary_text(label: str, runs: list[dict], case_id: str = "01.1") -> str:
+    lines = [f"MEDIATION ON GIVEN PASSAGES, set {label}, case {case_id}", ""]
     for run in runs:
         lines.append(f"{run['run']}:")
         for r in run["records"]:
@@ -76,21 +76,19 @@ def summary_text(label: str, runs: list[dict]) -> str:
 
 
 def main(argv: list[str] | None = None) -> None:
-    parser = argparse.ArgumentParser(description="Mediate given passages of variant 01.1 (no retrieval).")
-    parser.add_argument("--variant", required=True, help="only 01.1 is supported")
+    parser = argparse.ArgumentParser(description="Mediate given passages of one variant (no retrieval).")
+    parser.add_argument("--variant", default="01.1", help="case variant (default 01.1)")
     parser.add_argument("--passages", required=True, help="comma-separated passage IDs")
     parser.add_argument("--label", required=True, help="name of the set, used in the folder names")
     parser.add_argument("--runs", type=int, default=3)
     args = parser.parse_args(argv)
-    if args.variant != "01.1":
-        parser.error("only variant 01.1 is supported")
     if args.runs < 1:
         parser.error("--runs must be at least 1")
 
     config = load_config()
     ids = [i.strip() for i in args.passages.split(",") if i.strip()]
     passages, corpus_sha = load_corpus_passages(config, ids)
-    key = load_answer_key(config)
+    key = load_answer_key(config, args.variant)
     description = (project_path(config["paths"]["cases"]) / args.variant / config["paths"]["case_description_file"]
                    ).read_text(encoding="utf-8")
     try:
@@ -107,8 +105,8 @@ def main(argv: list[str] | None = None) -> None:
     for _ in range(args.runs):
         run_dir = next_med_dir(case_dir, args.label)
         print(f"{run_dir} ...", flush=True)
-        runs.append(debug_run(config, case, description, key, llm, run_dir, run_info))
-    text = summary_text(args.label, runs)
+        runs.append(debug_run(config, case, description, key, llm, run_dir, run_info, args.variant))
+    text = summary_text(args.label, runs, args.variant)
     for run in runs:
         (case_dir / run["run"] / "summary.txt").write_text(text, encoding="utf-8")
     print("\n" + text)

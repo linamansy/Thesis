@@ -1,5 +1,6 @@
 """Compare four ways to merge the per-step lists of RAG step routing (SR) on 01.1. NO LLM, NO retrieval: it reads the
-saved S3 lists (03_step_rankings.json) of results/debug/01.1/rag_sr_run_<n>/ and recomputes the top 5.
+saved S3 lists (03_step_rankings.json) of results/debug/<variant>/rag_sr_run_<n>/ and recomputes the top 5
+(--variant, default 01.1; with another variant TARGET is that variant's answer-key passage).
 
 PASS RULE (fixed before the first run of this script): GDPR-Art13-1 is in the top 5 of the rule.
 
@@ -87,8 +88,8 @@ def run_dirs(debug_dir):
     return sorted(dirs, key=lambda p: int(p.name.rsplit("_", 1)[-1]))
 
 
-def table(results: dict, k: int = 5) -> str:
-    lines = [f"SR fusion comparison, case 01.1. Pass rule: {TARGET} in the top {k}. Cap = {MAX_PER_ARTICLE} per article.",
+def table(results: dict, k: int = 5, case_id: str = "01.1") -> str:
+    lines = [f"SR fusion comparison, case {case_id}. Pass rule: {TARGET} in the top {k}. Cap = {MAX_PER_ARTICLE} per article.",
              "", f"{'rule':<13}{'run':<6}{f'top {k}':<{15 * k + 1}}{'rank':<6}result", "-" * (15 * k + 31)]
     for rule in RULES:
         for run, per_rule in results.items():
@@ -104,10 +105,16 @@ def table(results: dict, k: int = 5) -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Compare SR fusion rules on saved step lists (no LLM).")
     parser.add_argument("--k", type=int, default=5, help="size of the top list that is checked (default 5)")
-    k = parser.parse_args().k
+    parser.add_argument("--variant", default="01.1", help="case variant (default 01.1); target = its answer key")
+    args = parser.parse_args()
+    k = args.k
     config = load_config()
+    if args.variant != "01.1":
+        from scripts.debug_single_case import load_answer_key
+        global TARGET
+        TARGET = load_answer_key(config, args.variant)["target_passage_id"]
     top_k, rrf_k = config["reranker"]["top_k"], config["retrieval"]["rrf_k"]
-    debug_dir = project_path(config["paths"]["runs"]).parent / "debug" / "01.1"
+    debug_dir = project_path(config["paths"]["runs"]).parent / "debug" / args.variant
     results = {}
     for run_dir in run_dirs(debug_dir):
         s3 = json.loads((run_dir / "03_step_rankings.json").read_text(encoding="utf-8"))
@@ -117,7 +124,7 @@ def main() -> None:
     if not results:
         raise SystemExit(f"No rag_sr_run_<n> folders in {debug_dir}")
     print("Rule 1 reproduces every saved 04_merged_top5.json exactly.\n")
-    print(table(results, k))
+    print(table(results, k, args.variant))
 
 
 if __name__ == "__main__":
