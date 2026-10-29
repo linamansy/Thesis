@@ -5,7 +5,7 @@ RequirementAgentV2, the C3 v2 knowledge block and the OrchestratorV2 audit trail
 import itertools
 import json
 
-from src.agents.applicability_agent_v2 import SPLIT_INVALID, ApplicabilityAgentV2
+from src.agents.applicability_agent_v2 import SPLIT_INVALID, ApplicabilityAgentV2, split_exceptions
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
 from src.agents.requirement_agent_v2 import DutyKept, RequirementAgentV2, RequirementOutputV2, TriggerKept
 from src.c3_version import changed_items
@@ -607,3 +607,51 @@ def test_duty_from_then_with_a_fragment_under_four_words_fails():
     problems = CHECKER.quote_problems(duty_output({"from_then": from_then, "kept_as": "a receipt is handed"}),
                                       DESCRIPTION, PASSAGE, LONG_THEN, SITUATION_IF)
     assert problems == [f'the duty from_then "{from_then}" is not copied word for word from the OBLIGATION']
+
+
+# ---------- fix exc (30 Oct 2026): exception splitting of IF items by code ----------
+
+UNLESS_SPLIT = dict(SPLIT, **{"if": ["a customer pays by card, unless the customer declines it"]})
+UNLESS_ANSWER = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays by card"},
+                             {"id": "E1", "closest_sentence": None, "status": "not_stated", "quote": None},
+                             {"id": "E2", "closest_sentence": None, "status": "not_stated", "quote": None}]}
+
+
+def test_split_exceptions_cuts_at_each_marker():
+    for marker in ["unless", "except where", "Except When"]:
+        situational, split_off = split_exceptions(["a customer pays", f"the shop is open, {marker} it is a holiday"])
+        assert [(c["id"], c["text"]) for c in situational] == [("C1", "a customer pays"), ("C2", "the shop is open")]
+        assert "original_text" not in situational[0]
+        assert situational[1]["original_text"] == f"the shop is open, {marker} it is a holiday"
+        assert split_off == [{"text": f"{marker} it is a holiday", "split_from": "C2",
+                              "original_text": f"the shop is open, {marker} it is a holiday"}]
+
+
+def test_split_exceptions_whole_words_and_leading_marker():
+    situational, split_off = split_exceptions(["the exceptional case", "unlessly"])
+    assert [c["text"] for c in situational] == ["the exceptional case", "unlessly"] and split_off == []
+    situational, split_off = split_exceptions(["unless the customer declines"])
+    assert situational == [] and split_off[0]["text"] == "unless the customer declines"
+    assert split_off[0]["split_from"] is None
+
+
+def test_first_look_turns_unless_clause_into_exception(tmp_path):
+    record, llm = first_look(tmp_path, [UNLESS_SPLIT, UNLESS_ANSWER])
+    c1 = record["conditions"][1]
+    assert (c1["id"], c1["text"], c1["original_text"]) == \
+        ("C1", "a customer pays by card", "a customer pays by card, unless the customer declines it")
+    assert [(e["id"], e["text"]) for e in record["exceptions"]] == \
+        [("E1", "the customer declines the receipt"), ("E2", "unless the customer declines it")]
+    assert record["exceptions"][1]["split_from"] == "C1"
+    assert record["split"]["if"] == UNLESS_SPLIT["if"]                          # the model's answer is kept as it was
+    check_prompt = llm.prompts_received[1]
+    assert "C1: a customer pays by card\n" in check_prompt and "E2: unless the customer declines it" in check_prompt
+    # read-only check of the task: a not_stated exception does not block the rule
+    assert record["label"] == APPLICABLE and ResolverV2().resolve(record)["label"] == APPLICABLE
+
+
+def test_confirmed_split_off_exception_blocks_the_rule(tmp_path):
+    holds = {"results": UNLESS_ANSWER["results"][:2] +
+             [{"id": "E2", "closest_sentence": None, "status": "confirmed", "quote": "The shop sends the product"}]}
+    record, _ = first_look(tmp_path, [UNLESS_SPLIT, holds])
+    assert ResolverV2().resolve(record)["label"] == NOT_APPLICABLE

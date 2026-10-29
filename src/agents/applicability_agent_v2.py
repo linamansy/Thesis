@@ -13,6 +13,9 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      must / shall / is required to) -> label "Split invalid", nothing else runs.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
+     Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
+     cut by code; the part before stays the C item, the clause from the marker on becomes an extra exception E item
+     (both keep the model's item as "original_text"). An exception that is not_stated does not block the rule.
   c. check-IF call (CheckIfCallV2: the description + the items that need a quote, not the law text): S1, the role
      facts of the named roles (c3_v2.role_facts: P1 for a processor, T1 for a trader / seller / service provider, D1
      for a debtor, D2 for a creditor), C1..., the exceptions E1... -> each item confirmed / not_stated / contradicted,
@@ -106,6 +109,30 @@ def bind_roles(text: str, binding: dict[str, str]) -> str:
     for role in sorted(binding, key=len, reverse=True):
         text = re.sub(rf"\b(?:(?:the|a|an)\s+)?{re.escape(role)}\b", binding[role], text, flags=re.IGNORECASE)
     return text
+
+
+# Exception splitting (fix exc, 30 Oct 2026): words that start an exception inside an IF item.
+EXCEPTION_MARKERS = ("unless", "except where", "except when")
+EXCEPTION_PATTERN = re.compile(r"\b(?:" + "|".join(re.escape(m) for m in EXCEPTION_MARKERS) + r")\b", re.IGNORECASE)
+
+
+def split_exceptions(conditions: list[str]) -> tuple[list[dict], list[dict]]:
+    """The situational IF items C1, C2, ... and the exceptions split off them by code. An IF item with an exception
+    marker (EXCEPTION_MARKERS) is cut at the first marker: the part before stays the IF item, the clause from the
+    marker on becomes an exception (numbered by the caller after the split's own exceptions). Both keep the
+    model's item as "original_text". An item that starts with a marker becomes an exception only."""
+    situational, split_off = [], []
+    for text in conditions:
+        match = EXCEPTION_PATTERN.search(text)
+        if not match:
+            situational.append({"text": text})
+            continue
+        before = text[:match.start()].strip().rstrip(",;:").strip()
+        if before:
+            situational.append({"text": before, "original_text": text})
+        split_off.append({"text": text[match.start():].strip(), "original_text": text,
+                          "split_from": f"C{len(situational)}" if before else None})
+    return ([{"id": f"C{i}", "kind": "situation", **c} for i, c in enumerate(situational, 1)], split_off)
 
 
 @functools.cache
@@ -241,13 +268,15 @@ class ApplicabilityAgentV2:
                      "roles": [{"role": r} for r in dict.fromkeys(split.roles)]}
         scope = [{"id": "S1", "kind": "scope", "text": text} for prefix, text in self.scope_conditions.items()
                  if passage_id.startswith(prefix)]
-        situational = [{"id": f"C{i}", "kind": "situation", "text": t} for i, t in enumerate(split.conditions, 1)]
+        situational, split_off = split_exceptions(split.conditions)
         record["conditions"] = [role_item] + scope + situational
         rules = law_roles(self.roles_config, passage_id)["names"]
         fact_ids = dict.fromkeys(rules[r["role"]]["fact"] for r in role_item["roles"]
                                  if rules[r["role"]]["decide"] == "fact")
         record["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
         record["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(split.exceptions, 1)]
+        for i, e in enumerate(split_off, len(record["exceptions"]) + 1):
+            record["exceptions"].append({"id": f"E{i}", **e})
         record["role_binding"] = binding = role_binding(split.roles, rules)
         for item in situational + record["exceptions"]:
             item["text_sent"] = bind_roles(item["text"], binding)
