@@ -29,7 +29,7 @@ import json
 import sys
 from pathlib import Path
 
-from scripts.debug_single_case import CASE_ID, load_answer_key, make_llm, write_json
+from scripts.debug_single_case import CASE_ID, add_fresh_option, load_answer_key, make_llm, unload_model, write_json
 from src.config import load_config, project_path
 from src.rag_v3_steps import (FUSIONS, RoutingAgent, StepRouter, StepsAgent, article_id_of, build_retrievers,
                               merge_rankings)
@@ -114,6 +114,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--two-view", action="store_true", help="S2 with title-only and F1 lines, union of routes")
     parser.add_argument("--fusion", choices=FUSIONS, default="rrf", help="S4 fusion (default rrf)")
     parser.add_argument("--parent-expansion", action="store_true", help="S4: all paragraphs of the fused articles")
+    add_fresh_option(parser)
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be at least 1")
@@ -135,7 +136,7 @@ def main(argv: list[str] | None = None) -> None:
                 "corpus_file": config["study2_corpus"]["passages"],
                 "corpus_sha256": hashlib.sha256(corpus.read_bytes()).hexdigest(), "n_passages": len(passages),
                 "agent_settings": config["llm"], "reranker_model": reranker.model_name,
-                "reranker_revision": reranker.revision, **llm_info}
+                "reranker_revision": reranker.revision, "fresh": args.fresh, **llm_info}
     options = {"two_view": args.two_view, "fusion": args.fusion, "parent_expansion": args.parent_expansion}
     if options != {"two_view": False, "fusion": "rrf", "parent_expansion": False}:
         run_info["sr_options"] = options
@@ -148,6 +149,8 @@ def main(argv: list[str] | None = None) -> None:
     runs = []
     for _ in range(args.runs):
         run_dir = next_run_dir(case_dir)
+        if args.fresh:
+            unload_model(config)
         print(f"{run_dir} ...", flush=True)
         runs.append(run_once(config, router_factory, description, key, run_dir, run_info, case_id))
     text = summary_text(runs, key, case_id)

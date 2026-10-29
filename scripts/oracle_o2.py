@@ -7,8 +7,9 @@ src/agents/ unchanged, no patch, no redefined schema.
 Input: the target passage, and as its case passages the target + ALL other paragraphs of its article from the frozen
 Study 2 corpus (so the second look sees exactly what fix sameart gives it when the whole article is retrieved). Only
 the target passage is mediated. Everything else is scripts.debug_single_case.debug_run's setup and files.
-Usage (from the project folder): .venv/Scripts/python.exe scripts/oracle_o2.py [label, default nodoc]
+Usage (from the project folder): .venv/Scripts/python.exe scripts/oracle_o2.py [label, default nodoc] [--fresh]
 """
+import argparse
 import json
 import sys
 import time
@@ -16,7 +17,8 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, ".")
 import scripts.debug_mediation_on_passages as med
-from scripts.debug_single_case import load_answer_key, make_llm, mediation_stages, retrieval_stages, write_json
+from scripts.debug_single_case import (add_fresh_option, load_answer_key, make_llm, mediation_stages, retrieval_stages,
+                                       unload_model, write_json)
 from src.agents.applicability_agent_v2 import ApplicabilityAgentV2, article_of
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
 from src.agents.requirement_agent_v2 import RequirementAgentV2
@@ -58,8 +60,12 @@ def oracle_run(config, case, description, key, llm, run_dir, run_info) -> dict:
     return {"run": run_dir.name, "records": [record], "knowledge_block": block}
 
 
-def main() -> None:
-    label = "o2_" + (sys.argv[1] if len(sys.argv) > 1 else "nodoc")
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description=f"Oracle O2: {VARIANT}, {TARGET} only, {RUNS} runs.")
+    parser.add_argument("label", nargs="?", default="nodoc", help="name of the setting (default nodoc)")
+    add_fresh_option(parser)
+    args = parser.parse_args(argv)
+    label = "o2_" + args.label
     config = load_config()
     ids = article_ids(config, TARGET)
     passages, corpus_sha = med.load_corpus_passages(config, ids)
@@ -70,20 +76,22 @@ def main() -> None:
     run_info = {"case_id": VARIANT, "mode": "oracle O2: target mediated, other article paragraphs as case passages",
                 "label": label, "mediated_passage_id": TARGET, "given_passage_ids": ids,
                 "corpus_file": config["study2_corpus"]["passages"], "corpus_sha256": corpus_sha, "c3_version": "v2",
-                **llm_info}
+                "fresh": args.fresh, **llm_info}
     case_dir = project_path(config["paths"]["runs"]).parent / "debug" / VARIANT
     case = med.given_case(passages, description)
     start = time.perf_counter()
     runs = []
     for _ in range(RUNS):
         run_dir = med.next_med_dir(case_dir, label)
+        if args.fresh:
+            unload_model(config)
         print(f"{run_dir} ...", flush=True)
         runs.append(oracle_run(config, case, description, key, llm, run_dir, run_info))
     text = med.summary_text(label, runs, VARIANT)
     for run in runs:
         (case_dir / run["run"] / "summary.txt").write_text(text, encoding="utf-8")
     print("\n" + text)
-    print(json.dumps({"label": label, "given_passage_ids": ids, "seconds": round(time.perf_counter() - start, 1)}))
+    print(json.dumps({"label": label, "fresh": args.fresh, "given_passage_ids": ids, "seconds": round(time.perf_counter() - start, 1)}))
 
 
 if __name__ == "__main__":

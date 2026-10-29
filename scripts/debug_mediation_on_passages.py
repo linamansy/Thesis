@@ -16,7 +16,7 @@ import json
 import sys
 from pathlib import Path
 
-from scripts.debug_single_case import debug_run, load_answer_key, make_llm
+from scripts.debug_single_case import add_fresh_option, debug_run, load_answer_key, make_llm, unload_model
 from src.config import load_config, project_path
 
 
@@ -81,6 +81,7 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--passages", required=True, help="comma-separated passage IDs")
     parser.add_argument("--label", required=True, help="name of the set, used in the folder names")
     parser.add_argument("--runs", type=int, default=3)
+    add_fresh_option(parser)
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be at least 1")
@@ -97,13 +98,15 @@ def main(argv: list[str] | None = None) -> None:
         sys.exit(f"Not started: {e}")
     run_info = {"case_id": args.variant, "mode": "mediation on given passages (no retrieval)", "label": args.label,
                 "given_passage_ids": ids, "corpus_file": config["study2_corpus"]["passages"],
-                "corpus_sha256": corpus_sha, "c3_version": "v2", **llm_info}
+                "corpus_sha256": corpus_sha, "c3_version": "v2", "fresh": args.fresh, **llm_info}
 
     case_dir = project_path(config["paths"]["runs"]).parent / "debug" / args.variant
     case = given_case(passages, description)
     runs = []
     for _ in range(args.runs):
         run_dir = next_med_dir(case_dir, args.label)
+        if args.fresh:
+            unload_model(config)
         print(f"{run_dir} ...", flush=True)
         runs.append(debug_run(config, case, description, key, llm, run_dir, run_info, args.variant))
     text = summary_text(args.label, runs, args.variant)

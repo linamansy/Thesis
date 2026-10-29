@@ -27,8 +27,11 @@ Run from the project root (Ollama running):
 import argparse
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
+
+import httpx
 
 from src.config import load_config, project_path
 
@@ -227,9 +230,33 @@ def make_llm(config: dict) -> tuple:
     return create_llm(view, "relevance", {}), info
 
 
+def unload_model(config: dict, client: httpx.Client | None = None, sleep=time.sleep, wait_seconds: int = 30) -> None:
+    """--fresh: unload the model from Ollama (keep_alive 0), so the next run starts with an empty prompt cache.
+
+    While the model stays loaded, Ollama keeps the KV cache of earlier prompts and reuses a shared prefix; with the
+    q8_0 cache the answers then depend on what ran before. Unloading drops that cache. The model is loaded again by
+    the next call. Stops (RuntimeError) if Ollama still lists the model as loaded after wait_seconds.
+    """
+    model = config["model"]
+    client = client or httpx.Client(base_url=model["ollama_url"], timeout=60)
+    client.post("/api/generate", json={"model": model["name"], "keep_alive": 0}).raise_for_status()
+    for _ in range(wait_seconds):
+        loaded = [m.get("name") for m in client.get("/api/ps").json().get("models", [])]
+        if model["name"] not in loaded:
+            return
+        sleep(1)
+    raise RuntimeError(f"{model['name']} is still loaded in Ollama after {wait_seconds} s (--fresh)")
+
+
+def add_fresh_option(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--fresh", action="store_true",
+                        help="unload the model from Ollama before each run (empty prompt cache); default off")
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=f"Debug runner for variant {CASE_ID} (frozen RAG v2 + C3 v2).")
     parser.add_argument("--runs", type=int, default=1, help="how many separate runs to make (default 1)")
+    add_fresh_option(parser)
     args = parser.parse_args(argv)
     if args.runs < 1:
         parser.error("--runs must be at least 1")
@@ -244,12 +271,14 @@ def main(argv: list[str] | None = None) -> None:
     except Exception as e:
         sys.exit(f"Not started: {e}")
     run_info = {"case_id": CASE_ID, "frozen_retrieval": config["rag_v2"]["frozen_retrieval"], "frozen_sha256": sha,
-                "c3_version": "v2", "c3_block_template": "prompts/c3_block_template_v2.json", **llm_info}
+                "c3_version": "v2", "c3_block_template": "prompts/c3_block_template_v2.json", "fresh": args.fresh, **llm_info}
 
     case_dir = project_path(config["paths"]["runs"]).parent / "debug" / CASE_ID
     runs = []
     for _ in range(args.runs):
         run_dir = next_run_dir(case_dir)
+        if args.fresh:
+            unload_model(config)
         print(f"{run_dir} ...")
         runs.append(debug_run(config, case, description, key, llm, run_dir, run_info))
     text = summary_text(key, target_ranks(case, key), runs, case)
