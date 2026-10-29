@@ -65,7 +65,7 @@ def relevant(law_quote: str, step: str, description_quote: str) -> dict:
 
 
 def result(item_id: str, status: str, quote: str | None = None) -> dict:
-    return {"id": item_id, "status": status, "quote": quote}
+    return {"id": item_id, "closest_sentence": None, "status": status, "quote": quote}
 
 
 def run_case(tmp_path, desc: str, passage_id: str, answers: list[dict]):

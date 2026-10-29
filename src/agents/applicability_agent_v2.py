@@ -112,7 +112,11 @@ def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
 
 
 class ItemCheck(BaseModel):
+    """Field order (fix C, 29 Oct 2026, oracle O2 in scripts/oracle_o2.py): the model first copies the closest
+    sentence of the description, then decides the status and the quote (search first, then judge)."""
     id: str = Field(description="The id of the item, as given in the list")
+    closest_sentence: str | None = Field(description="The sentence of the process description that comes closest "
+                                                     "to the statement, copied word for word, or null if none")
     status: Status = Field(description="confirmed, contradicted or not_stated, judged from the description only")
     quote: str | None = Field(description="Exact words copied from the process description, or null for not_stated")
 

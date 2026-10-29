@@ -103,9 +103,9 @@ ART13_1_SPLIT = {"roles": ["controller"],
                          "recipients of the personal data if any",
                  "exceptions": []}
 ART13_1_CHECK_01_1 = {"results": [
-    {"id": "S1", "status": "confirmed",
+    {"id": "S1", "closest_sentence": None, "status": "confirmed",
      "quote": "the sales staff write down the customer's name, phone number and email address"},
-    {"id": "C1", "status": "confirmed", "quote": "name, phone number and email"}]}
+    {"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "name, phone number and email"}]}
 ART13_1_REQUIREMENT = {
     "requirement": "When the sales staff write down the customer's name, phone number and email address, the customer "
                    "is told who the company is, how to reach it, why the details are kept and who receives them, if "
@@ -123,8 +123,8 @@ ART30_2_SPLIT = {"roles": ["processor"], "if": [],
                  "then": "the processor must maintain a record of all categories of processing activities carried out "
                          "on behalf of a controller", "exceptions": []}
 ART30_2_CHECK_01_1 = {"results": [
-    {"id": "S1", "status": "confirmed", "quote": "write down the customer's name, phone number and email address"},
-    {"id": "P1", "status": "not_stated", "quote": None}]}     # the company keeps the data for itself
+    {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "write down the customer's name, phone number and email address"},
+    {"id": "P1", "closest_sentence": None, "status": "not_stated", "quote": None}]}     # the company keeps the data for itself
 
 ART35_9_RELEVANT = relevant("seek the views of data subjects or their representatives on the intended processing",
                             "the contact details are stored in the system", "store them in the system")
@@ -132,9 +132,9 @@ ART35_9_SPLIT = {"roles": ["controller"], "if": ["it is appropriate to seek the 
                  "then": "the controller must seek the views of data subjects or their representatives on the "
                          "intended processing", "exceptions": []}
 ART35_9_CHECK_01_1 = {"results": [
-    {"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
-    {"id": "C1", "status": "not_stated", "quote": None}]}
-SECOND_LOOK_NOT_STATED = {"results": [{"id": "C1", "status": "not_stated", "quote": None}]}
+    {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+    {"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
+SECOND_LOOK_NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
 
 
 # ---------- single passages ----------
@@ -170,8 +170,8 @@ def test_01_1_art13_3_indeterminate_new_purpose_not_stated(tmp_path):
                     "which the personal data were collected"],
              "then": "the controller must provide the data subject, prior to that further processing, with information "
                      "on that other purpose", "exceptions": []}
-    check = {"results": [{"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
-                         {"id": "C1", "status": "not_stated", "quote": None}]}
+    check = {"results": [{"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+                         {"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     answers = [relevant("further process the personal data for a purpose other than that for which the personal data "
                         "were collected", "the contact details are stored in the system", "store them in the system"),
                split, check, SECOND_LOOK_NOT_STATED]
@@ -188,8 +188,8 @@ def test_01_art35_6_not_applicable_public_body(tmp_path):
                     "subjects in several Member States"],
              "then": "the competent supervisory authority must apply the consistency mechanism prior to the adoption "
                      "of the lists", "exceptions": []}
-    check = {"results": [{"id": "S1", "status": "not_stated", "quote": None},
-                         {"id": "C1", "status": "not_stated", "quote": None}]}
+    check = {"results": [{"id": "S1", "closest_sentence": None, "status": "not_stated", "quote": None},
+                         {"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     answers = [relevant("processing activities which are related to the offering of goods or services",
                         "the customer inquires about a product or service",
                         "a potential customer inquires about a product or service"), split, check]
@@ -204,8 +204,8 @@ def test_01_art13_1_indeterminate_no_identifiable_people(tmp_path):
     # 01's frozen top 5 with rank 5 replaced by GDPR-Art13-1 (as the oracle set of 01.1)
     case_passages = frozen("frozen_retrieval", "01")[:4] + [{"rank": 5, "passage_id": "GDPR-Art13-1",
                                                              "text": PASSAGES["GDPR-Art13-1"]}]
-    check = {"results": [{"id": "S1", "status": "not_stated", "quote": None},
-                         {"id": "C1", "status": "not_stated", "quote": None}]}
+    check = {"results": [{"id": "S1", "closest_sentence": None, "status": "not_stated", "quote": None},
+                         {"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     answers = [relevant("Where personal data relating to a data subject are collected from the data subject",
                         "sales staff collect information from the customer",
                         "Sales staff or customer support collects relevant information"),
@@ -231,10 +231,10 @@ def test_stated_exception_gives_not_applicable(tmp_path):
              "then": "the controller must communicate the rectification, erasure or restriction to each recipient",
              "exceptions": ["communicating it to each recipient proves impossible or involves disproportionate effort"]}
     check = {"results": [
-        {"id": "S1", "status": "confirmed", "quote": "entering personal and payment information"},
-        {"id": "C1", "status": "confirmed", "quote": "the customer's personal data are erased"},
-        {"id": "C2", "status": "confirmed", "quote": "The customer's data were earlier passed on to partner companies"},
-        {"id": "E1", "status": "confirmed", "quote": "telling each partner about the erasure is impossible"}]}
+        {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "entering personal and payment information"},
+        {"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's personal data are erased"},
+        {"id": "C2", "closest_sentence": None, "status": "confirmed", "quote": "The customer's data were earlier passed on to partner companies"},
+        {"id": "E1", "closest_sentence": None, "status": "confirmed", "quote": "telling each partner about the erasure is impossible"}]}
     answers = [relevant("communicate any rectification or erasure of personal data",
                         "the subscription is deactivated", "the subscription is deactivated by the support team"),
                split, check]
@@ -271,8 +271,8 @@ PAYROLL_STEP = "the payroll staff enter each employee's name and bank account nu
 
 def test_processor_confirmed_by_on_behalf_quote_applicable(tmp_path):
     check = {"results": [
-        {"id": "S1", "status": "confirmed", "quote": "each employee's name and bank account number"},
-        {"id": "P1", "status": "confirmed",
+        {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "each employee's name and bank account number"},
+        {"id": "P1", "closest_sentence": None, "status": "confirmed",
          "quote": "handles the salary data of employees on behalf of another organisation"}]}
     requirement = {
         "requirement": "When the payroll staff enter the employee details, the company keeps a list of every kind of "
@@ -295,8 +295,8 @@ def test_processor_confirmed_by_on_behalf_quote_applicable(tmp_path):
 
 def test_scope_not_stated_indeterminate_although_role_holds(tmp_path):
     check = {"results": [
-        {"id": "S1", "status": "not_stated", "quote": None},       # temperatures, no identifiable people
-        {"id": "P1", "status": "confirmed",
+        {"id": "S1", "closest_sentence": None, "status": "not_stated", "quote": None},       # temperatures, no identifiable people
+        {"id": "P1", "closest_sentence": None, "status": "confirmed",
          "quote": "measures the temperature in warehouses on behalf of another organisation"}]}
     answers = [relevant("shall maintain a record of all categories of processing activities",
                         "the sensors write the readings", "the sensors write the readings into the monitoring system"),
@@ -311,12 +311,12 @@ def test_scope_not_stated_indeterminate_although_role_holds(tmp_path):
 
 
 ART13_1_CHECK_C1_OPEN = {"results": [
-    {"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
-    {"id": "C1", "status": "not_stated", "quote": None}]}
+    {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+    {"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
 
 
 def test_second_look_resolves_situation_applicable(tmp_path):
-    second = {"results": [{"id": "C1", "status": "confirmed",
+    second = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed",
                            "quote": "write down the customer's name, phone number and email address"}]}
     answers = [ART13_1_RELEVANT, ART13_1_SPLIT, ART13_1_CHECK_C1_OPEN, second, ART13_1_REQUIREMENT]
     record, knowledge, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art13-1", answers)
@@ -346,8 +346,8 @@ ART30_4_ANSWERS = [
     {"roles": ["controller", "processor"], "if": [],
      "then": "the controller or the processor must make the record available to the supervisory authority on request",
      "exceptions": []},
-    {"results": [{"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
-                 {"id": "P1", "status": "not_stated", "quote": None}]}]
+    {"results": [{"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+                 {"id": "P1", "closest_sentence": None, "status": "not_stated", "quote": None}]}]
 ART30_4_KEPT = {
     "requirement": "When the contact details are stored in the system, the company shows its list of this data "
                    "handling to the data protection authority if the authority asks.",
@@ -403,10 +403,10 @@ def test_or_conditions_art2_1_known_limitation(tmp_path):
                     "personal data processed other than by automated means form part of a filing system"],
              "then": "the processing falls under the Regulation", "exceptions": []}
     check = {"results": [
-        {"id": "S1", "status": "confirmed", "quote": "the customer's name, phone number and email address"},
-        {"id": "C1", "status": "confirmed", "quote": "store them in the system"},
-        {"id": "C2", "status": "not_stated", "quote": None}]}
-    second = {"results": [{"id": "C2", "status": "not_stated", "quote": None}]}
+        {"id": "S1", "closest_sentence": None, "status": "confirmed", "quote": "the customer's name, phone number and email address"},
+        {"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "store them in the system"},
+        {"id": "C2", "closest_sentence": None, "status": "not_stated", "quote": None}]}
+    second = {"results": [{"id": "C2", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     answers = [relevant("the processing of personal data wholly or partly by automated means",
                         "the contact details are stored in the system", "store them in the system"),
                split, check, second]

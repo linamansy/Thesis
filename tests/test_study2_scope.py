@@ -88,8 +88,8 @@ def split(law: dict) -> dict:
 
 
 def check(s1_status: str, s1_quote: str | None, c1_status: str, c1_quote: str | None) -> dict:
-    return {"results": [{"id": "S1", "status": s1_status, "quote": s1_quote},
-                        {"id": "C1", "status": c1_status, "quote": c1_quote}]}
+    return {"results": [{"id": "S1", "closest_sentence": None, "status": s1_status, "quote": s1_quote},
+                        {"id": "C1", "closest_sentence": None, "status": c1_status, "quote": c1_quote}]}
 
 
 def run_case(tmp_path, desc: str, passage_id: str, answers: list[dict]):
@@ -182,7 +182,7 @@ def test_scope_not_stated_gives_indeterminate(tmp_path):
     # the bakery description says nothing about payments between businesses
     rule = LAWS["LPD"]
     answers = [relevant(rule, "the customer pays when collecting the cake"), split(rule),
-               check("not_stated", None, "not_stated", None), {"results": [{"id": "C1", "status": "not_stated",
+               check("not_stated", None, "not_stated", None), {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated",
                                                                              "quote": None}]}]
     record, knowledge, llm = run_case(tmp_path, COUNTER, rule["passage"], answers)
     assert items(record)["S1"] == ("not_stated", None)

@@ -26,10 +26,10 @@ OTHER_PASSAGE = "A card means a payment card issued by a bank."
 
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": ["the customer declines the receipt"]}
-CONFIRMED = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"},
-                         {"id": "E1", "status": "not_stated", "quote": None}]}
-NOT_STATED = {"results": [{"id": "C1", "status": "not_stated", "quote": None},
-                          {"id": "E1", "status": "not_stated", "quote": None}]}
+CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays by card"},
+                         {"id": "E1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
+NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quote": None},
+                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
 RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card", "relevant": True,
             "process_step": "the customer pays by card", "description_quote": "The customer pays by card",
             "reason": "The process has a card payment step."}
@@ -111,15 +111,15 @@ def test_real_quote_confirms_and_fake_quote_becomes_not_stated(tmp_path):
     assert (c1["status"], c1["quote_found"], c1["downgraded"], record["label"]) == ("confirmed", True, False, APPLICABLE)
     assert c1["decided_by"] == "first look"
 
-    fake = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays in cash"},
-                        {"id": "E1", "status": "not_stated", "quote": None}]}
+    fake = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays in cash"},
+                        {"id": "E1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     record, _ = first_look(tmp_path, [SPLIT, fake])
     c1 = record["conditions"][1]
     assert (c1["original_status"], c1["status"], c1["quote_found"], c1["downgraded"]) == \
         ("confirmed", "not_stated", False, True)
     assert record["label"] == INDETERMINATE
 
-    no_quote = {"results": [{"id": "C1", "status": "confirmed", "quote": None}, NOT_STATED["results"][1]]}
+    no_quote = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": None}, NOT_STATED["results"][1]]}
     record, _ = first_look(tmp_path, [SPLIT, no_quote])
     assert (record["conditions"][1]["status"], record["conditions"][1]["quote_found"]) == ("not_stated", None)
 
@@ -127,8 +127,8 @@ def test_real_quote_confirms_and_fake_quote_becomes_not_stated(tmp_path):
 def test_contradicted_gives_not_applicable(tmp_path):
     split = dict(SPLIT, **{"if": ["a customer pays by card", "the customer collects the product in the shop"]})
     answer = {"results": [CONFIRMED["results"][0],
-                          {"id": "C2", "status": "contradicted", "quote": "The shop sends the product"},
-                          {"id": "E1", "status": "not_stated", "quote": None}]}
+                          {"id": "C2", "closest_sentence": None, "status": "contradicted", "quote": "The shop sends the product"},
+                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quote": None}]}
     record, _ = first_look(tmp_path, [split, answer])
     assert record["first_look_label"] == NOT_APPLICABLE
     assert ResolverV2().resolve(record)["label"] == NOT_APPLICABLE
@@ -138,7 +138,7 @@ def test_malformed_json_gets_one_retry(tmp_path):
     record, llm = first_look(tmp_path, ["not json", SPLIT, CONFIRMED])
     assert record["label"] == APPLICABLE and len(llm.prompts_received) == 3
     assert "not valid JSON" in llm.prompts_received[1]                           # the retry note
-    wrong_ids = {"results": [{"id": "C9", "status": "confirmed", "quote": "The customer pays by card"}]}
+    wrong_ids = {"results": [{"id": "C9", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays by card"}]}
     record, llm = first_look(tmp_path, [SPLIT, wrong_ids, CONFIRMED])            # missing ids also count as invalid
     assert record["label"] == APPLICABLE and "C1, E1" in llm.prompts_received[2]
     record, _ = first_look(tmp_path, ["not json", "still not"])
@@ -152,7 +152,7 @@ TWO_PASSAGES = [{"rank": 1, "passage_id": "P-1", "text": PASSAGE},
 
 
 def test_second_look_resolves(tmp_path):
-    second = {"results": [{"id": "C1", "status": "confirmed", "quote": "pays by card"}]}
+    second = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "pays by card"}]}
     orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, NOT_STATED, second, REQUIREMENT], passages=TWO_PASSAGES)
     record = orch.mediate_passage("c", DESCRIPTION, TWO_PASSAGES[0], TWO_PASSAGES)
     a = record["applicability"]
@@ -168,7 +168,7 @@ def test_second_look_resolves(tmp_path):
 
 
 def test_second_look_stays_indeterminate(tmp_path):
-    second = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays in cash"}]}   # fake quote
+    second = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays in cash"}]}   # fake quote
     orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, NOT_STATED, second], passages=TWO_PASSAGES)
     record = orch.mediate_passage("c", DESCRIPTION, TWO_PASSAGES[0], TWO_PASSAGES)
     a = record["applicability"]
@@ -214,7 +214,7 @@ def test_resolver_needs_quote_or_code_rule_and_a_role_item():
 
 def test_stated_exception_blocks_requirement_in_orchestrator(tmp_path):
     exception_holds = {"results": [CONFIRMED["results"][0],
-                                   {"id": "E1", "status": "confirmed", "quote": "The shop sends the product"}]}
+                                   {"id": "E1", "closest_sentence": None, "status": "confirmed", "quote": "The shop sends the product"}]}
     orch, llm = orchestrator(tmp_path, [RELEVANT, SPLIT, exception_holds, REQUIREMENT])
     result = orch.mediate_case("c", DESCRIPTION)
     assert result["passages"][0]["label"] == NOT_APPLICABLE and result["passages"][0]["requirement"] is None
@@ -412,7 +412,22 @@ def test_check_prompt_has_fixed_role_definitions(tmp_path):
     for prompt in prompts:                                                       # the same text for every case
         assert "ROLE DEFINITIONS (fixed, the same for every process)\n" + ROLE_DEFINITIONS in prompt
         assert "never confirms it" in prompt
-        assert '{"id": "C2", "status": "not_stated", "quote": null}' in prompt  # example: "processed" is no processor
+        assert ('{"id": "C2", "closest_sentence": "The customer pays by card and the payment is processed.", '
+                '"status": "not_stated", "quote": null}') in prompt   # example: "processed" is no processor
+
+
+def test_item_check_field_order_search_first(tmp_path):
+    # fix C: id, closest_sentence, status, quote, in the schema of both calls and in the examples of both prompts
+    from src.agents.applicability_agent_v2 import CheckIfCallV2, CheckOutputV2, SecondLookCallV2
+    order = ["id", "closest_sentence", "status", "quote"]
+    for call in (CheckIfCallV2, SecondLookCallV2):
+        item = call.output_schema.model_json_schema()["$defs"]["ItemCheck"]
+        assert list(item["properties"]) == order and item["required"] == order
+        prompt = call(mock([NOT_STATED]), logger(tmp_path)).template
+        assert 'closest_sentence "The harbour master tells the captain that the ship may leave.", status "confirmed", '                'quote "The harbour master' in prompt
+    parsed = CheckOutputV2.model_validate({"results": [{"id": "C1", "closest_sentence": "The customer pays by card.",
+                                                         "status": "confirmed", "quote": "pays by card"}]})
+    assert parsed.results[0].closest_sentence == "The customer pays by card."
 
 
 def test_role_definitions_never_reach_the_generator(tmp_path):

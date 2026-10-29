@@ -15,7 +15,7 @@ RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card"
             "reason": "The process has a card payment step."}
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": []}
-CONFIRMED = {"results": [{"id": "C1", "status": "confirmed", "quote": "The customer pays by card"}]}
+CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays by card"}]}
 REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer.",
                "step_quote": "The customer pays by card",
                "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}],
