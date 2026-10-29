@@ -31,8 +31,9 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      is confirmed, contradicted if all are, otherwise not_stated.
   f. first look: the label from the statuses of R1, S1 and C1... (src/mediation/resolver_v2.look_label).
   g. second look (SecondLookCallV2), ONLY for Indeterminate, started by the OrchestratorV2, and ONLY for the
-     situational conditions still not_stated (R5): the description + ALL 5 retrieved passages of the case. Same quote
-     check. Roles and scope are never looked at again.
+     situational conditions still not_stated (R5): the description + ONLY the other retrieved paragraphs of the SAME
+     article as the passage being checked (none if there are none; fix sameart, 29 Oct 2026: with all retrieved
+     passages the call was distracted by unrelated rules). Same quote check. Roles and scope are never looked at again.
 Every IF item records "decided_by": "code rule", "first look" or "second look" (None while not_stated).
 The final label (with exceptions) is decided by ResolverV2 (src/mediation/resolver_v2.py), not here.
 A1, the role meanings, the role facts and the scope texts are fixed in config.yaml, the same for every case, and never reach the
@@ -59,6 +60,19 @@ Status = Literal["confirmed", "not_stated", "contradicted"]
 
 
 # ---------- schemas ----------
+
+def article_of(passage_id: str) -> str:
+    """The article part of a passage id: "GDPR-Art13-2-a" -> "GDPR-Art13"."""
+    match = re.match(r"^(.+?-Art\d+)(?:-|$)", passage_id)
+    return match.group(1) if match else passage_id
+
+
+def same_article_passages(passage_id: str, case_passages: list[dict]) -> list[dict]:
+    """The other retrieved paragraphs of the same article as this passage (in rank order), the only extra context of
+    the second look (fix sameart). Empty if there are none."""
+    article = article_of(passage_id)
+    return [p for p in case_passages if p["passage_id"] != passage_id and article_of(p["passage_id"]) == article]
+
 
 def law_roles(roles_config: dict, passage_id: str) -> dict:
     """The role list of the passage's law (config.yaml c3_v2.roles), chosen by passage id prefix; "default" (the GDPR
@@ -177,8 +191,8 @@ class SecondLookCallV2(ItemCheckCall):
     prompt_key = "applicability_second_look_prompt_v2"
 
     def build_prompt(self, description: str, passages: list[dict], passage_id: str, items: list[dict]) -> str:
-        """passages: all retrieved passages of the case (dicts with passage_id and text, in rank order). The items are
-        sent with the same role-bound text_sent as in the check-IF call (fix 2)."""
+        """passages: the other retrieved paragraphs of the same article (dicts with passage_id and text, in rank order;
+        may be empty). The items are sent with the same role-bound text_sent as in the check-IF call (fix 2)."""
         passage_lines = "\n\n".join(f"[{p['passage_id']}] {p['text'].strip()}" for p in passages)
         return self.template.format(schema=self.schema_text(), description=description.strip(),
                                     passages=passage_lines, passage_id=passage_id, items=self.item_lines(items, key="text_sent"))
@@ -311,7 +325,8 @@ class ApplicabilityAgentV2:
         no valid answer after its retry, "failed_step" is "second_look"."""
         open_items = self.open_conditions(record)
         record["look"] = "second"
-        answer = self.second_look_call.run(case_id, description=description, passages=case_passages,
+        answer = self.second_look_call.run(case_id, description=description,
+                                           passages=same_article_passages(passage_id, case_passages),
                                            passage_id=passage_id, items=open_items)
         if answer is None:
             record["failed_step"] = "second_look"

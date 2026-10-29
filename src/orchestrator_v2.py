@@ -5,7 +5,8 @@ For every passage of the case, in rank order:
      not final_relevant        -> label "Irrelevant", stop
   2. ApplicabilityAgentV2, first look: split (law only) -> check-IF -> quote check -> first-look label
      split with an obligation word in an IF item -> label "Split invalid", stop
-     Indeterminate with open IF conditions -> second look, with the description + ALL retrieved passages of the case
+     Indeterminate with open IF conditions -> second look, with the description + only the other retrieved
+     paragraphs of the same article (fix sameart)
   3. ResolverV2 (code): Applicable only if all IF conditions are confirmed AND no stated exception applies
   4. RequirementAgentV2, ONLY for Applicable: the THEN part -> 1-2 plain sentences tied to RelevanceAgentV2's process
      step, checked by code (RequirementCheckerV2); failing twice -> requirement_invalid, never passed on

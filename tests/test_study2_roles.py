@@ -390,3 +390,43 @@ def test_check_and_second_look_prompts_share_the_everyday_words_rules():
         assert all(rule in t for t in texts), rule
     example = texts[0][texts[0].index("EXAMPLE OF EVERYDAY WORDS"):texts[0].index("JSON SCHEMA")]
     assert example in texts[1]
+
+
+# ---------- fix sameart: the second look sees only the other paragraphs of the same article ----------
+
+def test_article_of_and_same_article_passages():
+    from src.agents.applicability_agent_v2 import article_of, same_article_passages
+    assert article_of("GDPR-Art13-2-a") == "GDPR-Art13" and article_of("LPD-Art3-1") == "LPD-Art3"
+    found = [{"passage_id": i} for i in ("GDPR-Art13-1", "GDPR-Art1-2", "GDPR-Art13-2-a", "GDPR-Art131-1", "LPD-Art13-1")]
+    assert same_article_passages("GDPR-Art13-1", found) == [{"passage_id": "GDPR-Art13-2-a"}]
+    assert same_article_passages("GDPR-Art1-2", found) == []
+
+
+def run_second_look(tmp_path, ids: list[str]):
+    """BAKERY with LPD-Art3-1 checked (rank 1) and the other ids retrieved too; every other passage is irrelevant."""
+    split = dict(LPD_SPLIT, roles=["creditor"], exceptions=[])
+    check = {"results": [result(i, "not_stated") for i in ("S1", "D2", "C1", "C2")]}
+    second = {"results": [result("C1", "not_stated"), result("C2", "not_stated")]}
+    other = dict(relevant("x", "y", "z"), relevant=False)
+    answers = [relevant("the creditor is entitled to interest for late payment", "the customer pays",
+                        "The customer pays at the counter"), split, check, second] + [other] * (len(ids) - 1)
+    case_passages = [{"rank": n, "passage_id": i, "text": PASSAGES[i]} for n, i in enumerate(ids, 1)]
+    llm = MockLLM([json.dumps(a) for a in answers])
+    log = RunLogger(tmp_path, "C3V2ROLES", f"t{next(RUN_IDS)}")
+    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log), RequirementAgentV2(llm, log),
+                          {"c": {"passages": case_passages}}, tmp_path / "mediation",
+                          load_c3_block_template(CONFIG, "c3_block_template_v2"), NO_KNOWLEDGE)
+    orch.mediate_case("c", BAKERY)
+    return llm.prompts_received[3]
+
+
+def test_second_look_gets_only_the_other_paragraphs_of_the_same_article(tmp_path):
+    prompt = run_second_look(tmp_path, ["LPD-Art3-1", "CRD-Art9-1", "LPD-Art3-3", "LPD-Art4-1"])
+    passages = prompt[prompt.index("LEGAL PASSAGES"):prompt.index("CONDITIONS")]
+    assert "[LPD-Art3-3] " + PASSAGES["LPD-Art3-3"].strip() in passages
+    assert "[LPD-Art3-1]" not in passages and "[CRD-Art9-1]" not in passages and "[LPD-Art4-1]" not in passages
+
+
+def test_second_look_gets_no_passage_when_its_article_has_no_other_paragraph(tmp_path):
+    prompt = run_second_look(tmp_path, ["LPD-Art3-1", "CRD-Art9-1"])
+    assert prompt[prompt.index("LEGAL PASSAGES"):prompt.index("CONDITIONS")].strip() == "LEGAL PASSAGES"

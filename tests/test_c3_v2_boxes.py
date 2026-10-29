@@ -162,7 +162,7 @@ def test_second_look_resolves(tmp_path):
     assert a["conditions"][1]["decided_by"] == "second look"
     assert record["label"] == APPLICABLE and record["requirement"]["requirement"] == REQUIREMENT["requirement"]
     second_prompt = llm.prompts_received[3]
-    assert "[P-1] " + PASSAGE in second_prompt and "[P-2] " + OTHER_PASSAGE in second_prompt   # all passages
+    assert "[P-1] " + PASSAGE not in second_prompt and "[P-2]" not in second_prompt   # fix sameart: no other paragraph of its article
     assert DESCRIPTION in second_prompt and "C1: a customer pays by card" in second_prompt
     assert "E1" not in second_prompt and "R1" not in second_prompt              # only open situational conditions
 
