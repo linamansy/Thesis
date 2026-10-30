@@ -1,0 +1,209 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art10-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body",
+          "service provider"
+        ],
+        "if": [
+          "the recipient of the service is about to place an order"
+        ],
+        "then": "Member States shall ensure that the service provider gives the following information clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service: (a) the different technical steps to follow to conclude the contract; (b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible; (c) the technical means for identifying and correcting input errors prior to the placing of the order; (d) the languages offered for the conclusion of the contract",
+        "exceptions": [
+          "otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "status": "confirmed",
+            "quotes": [
+              "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body or service provider",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            },
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences describe the shop's location, target audience, and languages, but do not explicitly state that it is an information society service or provide the specific legal criteria (remuneration, distance, electronic means, individual request) required to verify the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service is about to place an order",
+          "text_sent": "the recipient of the service is about to place an order",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes the completion of an order and preparation of payment/shipment, which occurs after the order has been placed, not the act of placing it."
+          },
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence states the E-Shop belongs to a company and sells to private persons, which confirms the organization sells goods to customers for business purposes."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "otherwise agreed by parties who are not consumers",
+          "text_sent": "otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art10-2",
+    "applicability": null,
+    "failed_step": "relevance"
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art10-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "ECD-Art10-4",
+    "applicability": null,
+    "failed_step": null
+  }
+]

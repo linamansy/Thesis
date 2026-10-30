@@ -1,0 +1,237 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art13-1",
+    "applicability": null,
+    "failed_step": "relevance"
+  },
+  {
+    "rank": 2,
+    "passage_id": "GDPR-Art13-2-a",
+    "applicability": null,
+    "failed_step": "relevance"
+  },
+  {
+    "rank": 3,
+    "passage_id": "GDPR-Art13-2-f",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "GDPR-Art13-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected"
+        ],
+        "then": "the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+            "status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions storing a customer's name, phone number, and email address, which are identifiers for identifiable people."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+          "text_sent": "the organisation running the described process intends to further process the personal data for a purpose other than that for which the personal data were collected",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "GDPR-Art13-4",
+    "applicability": {
+      "split": {
+        "roles": [
+          "other"
+        ],
+        "if": [],
+        "then": "Paragraphs 1, 2 and 3 shall not apply",
+        "exceptions": [
+          "the data subject already has the information"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+            "status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "This process begins when a potential customer inquires about a product or service.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: other",
+          "roles": [
+            {
+              "role": "other",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "this role is not decided by code"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions storing a customer's name, phone number, and email address, which are identifiers for identifiable people."
+          }
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "the data subject already has the information",
+          "text_sent": "the data subject already has the information",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {}
+    },
+    "failed_step": null
+  }
+]

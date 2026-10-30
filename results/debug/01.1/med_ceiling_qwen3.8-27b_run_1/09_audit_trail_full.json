@@ -1,0 +1,341 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art13-1",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available.",
+    "label": "Mediation failed",
+    "label_cause": "failed at relevance: no valid output after retry (see the log file)",
+    "failed_step": "relevance",
+    "error": "no valid output after retry (see the log file)",
+    "relevance": null,
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "GDPR-Art13-2-a",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;",
+    "label": "Mediation failed",
+    "label_cause": "failed at relevance: no valid output after retry (see the log file)",
+    "failed_step": "relevance",
+    "error": "no valid output after retry (see the log file)",
+    "relevance": null,
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "GDPR-Art13-2-f",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(f) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "information about automated decision-making and profiling",
+      "law_quote": "the existence of automated decision-making, including profiling",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The rule concerns providing information about automated decision-making, but the process description only mentions manual data collection and order placement without any reference to automated decision-making or profiling.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "the existence of automated decision-making, including profiling",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "GDPR-Art13-3",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n3. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "providing information to data subjects when personal data are collected",
+      "law_quote": "Information to be provided where personal data are collected from the data subject",
+      "relevant": true,
+      "process_step": "sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+      "reason": "The rule concerns the provision of information when personal data is collected, and the process explicitly describes the collection of personal data (name, phone, email) from the customer.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Information to be provided where personal data are collected from the data subject",
+      "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected"
+        ],
+        "then": "the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+            "status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions storing a customer's name, phone number, and email address, which are identifiers for identifiable people."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+          "text_sent": "the organisation running the described process intends to further process the personal data for a purpose other than that for which the personal data were collected",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "GDPR-Art13-4",
+    "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n4. Paragraphs 1, 2 and 3 shall not apply where and insofar as the data subject already has the information.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "provision of information where personal data are collected",
+      "law_quote": "Information to be provided where personal data are collected from the data subject",
+      "relevant": true,
+      "process_step": "sales staff write down the customer's name, phone number and email address and store them in the system",
+      "description_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+      "reason": "The rule concerns the provision of information when personal data is collected, and the process explicitly describes the collection of personal data (name, phone, email) from the customer.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Information to be provided where personal data are collected from the data subject",
+      "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "other"
+        ],
+        "if": [],
+        "then": "Paragraphs 1, 2 and 3 shall not apply",
+        "exceptions": [
+          "the data subject already has the information"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+            "status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "This process begins when a potential customer inquires about a product or service.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: other",
+          "roles": [
+            {
+              "role": "other",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "this role is not decided by code"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions storing a customer's name, phone number, and email address, which are identifiers for identifiable people."
+          }
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "the data subject already has the information",
+          "text_sent": "the data subject already has the information",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {}
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": null,
+        "S1": "first look"
+      }
+    },
+    "requirement": null
+  }
+]

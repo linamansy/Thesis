@@ -43,6 +43,7 @@ class FakeRunner(AllDevRunner):
 
     def __init__(self, config, fail_retrieval=False):
         self.config, self.fresh, self.think_calls, self.groq_model = config, False, [], None
+        self.groq_json = "schema"
         self.messages, self.calls = [], []
         self.log = self.messages.append
         self.corpus_ids = ["GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art5-1-a", "GDPR-Art13-3"]
@@ -179,3 +180,13 @@ def test_ceiling_comparison_report():
     assert "C1  situation  contradicted -> confirmed" in text and "requirement strong: Acknowledge." in text
     assert 'quotes qwen:     ["We ship"]' in text and "verifier qwen:   shipping is not ordering" in text
     assert "45.1 " in text and "run missing" in text
+
+
+def test_ceiling_json_object_option(monkeypatch):
+    from src.llm.groq_llm import GroqLLM
+    from src.study2_config import study2_view
+    monkeypatch.setenv("GROQ_API_KEY", "test-key")
+    assert run_all_dev.ceiling_label("qwen/qwen3.8-27b", "object") == "ceiling_qwen3.8-27b_jsonobject"
+    llm = GroqLLM.from_agent_config(study2_view(run_all_dev.ceiling_config(load_config(), "qwen/qwen3.8-27b", "object")))
+    assert llm.json_mode and not llm.json_schema and not llm.accepts_format_schema
+    assert llm.request_body("x")["response_format"] == {"type": "json_object"}

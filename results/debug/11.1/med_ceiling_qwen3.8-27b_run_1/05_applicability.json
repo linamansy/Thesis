@@ -1,0 +1,460 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art17-1",
+    "applicability": null,
+    "failed_step": "relevance"
+  },
+  {
+    "rank": 2,
+    "passage_id": "GDPR-Art17-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "the controller has made the personal data public",
+          "the controller is obliged pursuant to paragraph 1 to erase the personal data"
+        ],
+        "then": "the controller, taking account of available technology and the cost of implementation, shall take reasonable steps, including technical measures, to inform controllers which are processing the personal data that the data subject has requested the erasure by such controllers of any links to, or copy or replication of, those personal data",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly states that the process involves entering personal information, which constitutes information about identifiable people."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller has made the personal data public",
+          "text_sent": "the organisation running the described process has made the personal data public",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the controller is obliged pursuant to paragraph 1 to erase the personal data",
+          "text_sent": "the organisation running the described process is obliged pursuant to paragraph 1 to erase the personal data",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "GDPR-Art17-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          "processing is necessary for exercising the right of freedom of expression and information",
+          "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+          "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "processing is necessary for the establishment, exercise or defence of legal claims"
+        ],
+        "then": "Paragraphs 1 and 2 shall not apply",
+        "exceptions": [
+          "processing is necessary for exercising the right of freedom of expression and information",
+          "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+          "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "processing is necessary for the establishment, exercise or defence of legal claims"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C4",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C5",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E4",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E5",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly states that the process involves entering personal information, which constitutes information about identifiable people."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "processing is necessary for exercising the right of freedom of expression and information",
+          "text_sent": "processing is necessary for exercising the right of freedom of expression and information",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+          "text_sent": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the organisation running the described process is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the organisation running the described process",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "text_sent": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C4",
+          "kind": "situation",
+          "text": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "text_sent": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C5",
+          "kind": "situation",
+          "text": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "text_sent": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "processing is necessary for exercising the right of freedom of expression and information",
+          "text_sent": "processing is necessary for exercising the right of freedom of expression and information",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E2",
+          "text": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+          "text_sent": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the organisation running the described process is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the organisation running the described process",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E3",
+          "text": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "text_sent": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E4",
+          "text": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "text_sent": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E5",
+          "text": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "text_sent": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  }
+]

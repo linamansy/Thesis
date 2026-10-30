@@ -1,0 +1,101 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling. Split a rule from a legal text into its parts.\n\nINSTRUCTIONS\n- \"roles\": who the rule places its duty on, using only these names:\n  - \"debtor\": the debtor (the undertaking or public authority that has to pay the amount due for goods delivered or services provided),\n  - \"creditor\": the creditor (the undertaking or public authority that delivered the goods or provided the services and is to receive the amount due),\n  - \"public body\": a Member State, the Commission or another public body,\n  - \"other\": anyone else, or the rule names no one.\n  If the duty is on more than one of them (for example \"the debtor and the creditor\"), list each.\n- \"if\": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with \"where\", \"when\" or \"if\"). Write each as a short statement in the words of the rule. Never put a role into \"if\"; roles go into \"roles\". Use an empty list only if the rule names no situation at all and simply places a duty on someone.\n- A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into \"if\": an \"if\" item must not contain the words \"must\", \"shall\" or \"is required to\"; such an answer is rejected automatically.\n- \"then\": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example \"at the time when\", \"on request\", \"where applicable\").\n- \"exceptions\": the situations the rule itself names in which it does not apply (for example \"unless ...\" or \"this does not apply where ...\"), each as a short statement of that situation. Use an empty list if the rule names none.\n- Use only the legal passage below.\n- Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nEXAMPLE (made up, for the format only)\nRule: \"Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it.\"\nAnswer: {\"roles\": [\"other\"], \"if\": [\"a parcel is collected from a sender\"], \"then\": \"the carrier must give a receipt at the time of collection\", \"exceptions\": [\"the sender declines the receipt\"]}\n\nEXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)\nRule: \"Each processor shall keep a list of the parcels it handles on behalf of a controller.\"\nAnswer: {\"roles\": [\"processor\"], \"if\": [], \"then\": \"the processor must keep a list of the parcels it handles on behalf of a controller\", \"exceptions\": []}\n\nEXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)\nRule: \"Where a list of approved carriers changes, each Member State shall publish it.\"\nAnswer: {\"roles\": [\"public body\"], \"if\": [\"a list of approved carriers changes\"], \"then\": \"the Member State must publish the list\", \"exceptions\": []}\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"roles\": {\n      \"description\": \"Who the rule places its duty on\",\n      \"items\": {\n        \"enum\": [\n          \"debtor\",\n          \"creditor\",\n          \"public body\",\n          \"other\"\n        ],\n        \"type\": \"string\"\n      },\n      \"minItems\": 1,\n      \"title\": \"Roles\",\n      \"type\": \"array\"\n    },\n    \"if\": {\n      \"description\": \"Every situational condition under which the rule applies (when it applies, never a role and never what must be done); empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"If\",\n      \"type\": \"array\"\n    },\n    \"then\": {\n      \"description\": \"What the rule requires to be done when it applies\",\n      \"title\": \"Then\",\n      \"type\": \"string\"\n    },\n    \"exceptions\": {\n      \"description\": \"Situations the rule itself names in which it does not apply; empty list if none\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"title\": \"Exceptions\",\n      \"type\": \"array\"\n    }\n  },\n  \"required\": [\n    \"roles\",\n    \"if\",\n    \"then\",\n    \"exceptions\"\n  ],\n  \"title\": \"SplitOutputV2\",\n  \"type\": \"object\"\n}\n\nLEGAL PASSAGE\n[LPD-Art3-3] Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n3. Where the conditions set out in paragraph 1 are satisfied, Member States shall ensure the following:\n(a) that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract;\n(b) where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date.\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "output",
+        "schema": {
+          "properties": {
+            "roles": {
+              "description": "Who the rule places its duty on",
+              "items": {
+                "enum": [
+                  "debtor",
+                  "creditor",
+                  "public body",
+                  "other"
+                ],
+                "type": "string"
+              },
+              "minItems": 1,
+              "title": "Roles",
+              "type": "array"
+            },
+            "if": {
+              "description": "Every situational condition under which the rule applies (when it applies, never a role and never what must be done); empty list if none",
+              "items": {
+                "type": "string"
+              },
+              "title": "If",
+              "type": "array"
+            },
+            "then": {
+              "description": "What the rule requires to be done when it applies",
+              "title": "Then",
+              "type": "string"
+            },
+            "exceptions": {
+              "description": "Situations the rule itself names in which it does not apply; empty list if none",
+              "items": {
+                "type": "string"
+              },
+              "title": "Exceptions",
+              "type": "array"
+            }
+          },
+          "required": [
+            "roles",
+            "if",
+            "then",
+            "exceptions"
+          ],
+          "title": "SplitOutputV2",
+          "type": "object"
+        }
+      }
+    }
+  },
+  "response": {
+    "id": "chatcmpl-d455c79f-05c8-4690-ac08-55d391673de5",
+    "object": "chat.completion",
+    "created": 1793400934,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"exceptions\": [], \"if\": [\"the conditions set out in paragraph 1 are satisfied\"], \"roles\": [\"public body\"], \"then\": \"Member States shall ensure that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract; where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits: (i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment; (ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services; (iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services; (iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date\"}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.030172591,
+      "prompt_tokens": 1359,
+      "prompt_time": 0.113191794,
+      "completion_tokens": 278,
+      "completion_time": 0.608591451,
+      "total_tokens": 1637,
+      "total_time": 0.721783245
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_43dd1ea4ee",
+    "x_groq": {
+      "id": "req_01m67gd2yjesxrn4mrg1qfyr6f",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

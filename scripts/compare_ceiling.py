@@ -7,7 +7,7 @@ id, kind, status qwen -> status strong, the item text (both if they differ), quo
 Item ids come from each model's own split, so the same id can name different texts; the texts are shown to check.
 
 Output: printed and written to results/debug/ceiling_<model>_comparison.txt.
-    .venv\\Scripts\\python.exe -m scripts.compare_ceiling --groq-model qwen/qwen3.8-27b
+    .venv\\Scripts\\python.exe -m scripts.compare_ceiling --groq-model qwen/qwen3.8-27b [--groq-json object]
 """
 
 import argparse
@@ -54,9 +54,9 @@ def item_lines(weak: dict | None, strong: dict | None) -> list[str]:
     return lines
 
 
-def compare(config: dict, model: str, variants, n: int = 1) -> str:
+def compare(config: dict, model: str, variants, n: int = 1, json: str = "schema") -> str:
     debug = project_path(config["paths"]["runs"]).parent / "debug"
-    label = ceiling_label(model)
+    label = ceiling_label(model, json)
     header = f"{'variant':<8}{'target':<16}{'qwen3:8b oracle':<18}{model + ' oracle':<28}"
     table, details = [header, "-" * len(header)], []
     for variant in variants:
@@ -75,7 +75,7 @@ def compare(config: dict, model: str, variants, n: int = 1) -> str:
                 details.append(f"    requirement {name}: {req['requirement']}")
         details += item_lines(weak, strong)
     return "\n".join([f"CEILING TEST: oracle run {n}, qwen3:8b (alldev, think on CheckIf/SecondLook/Verifier) vs "
-                      f"{model} on Groq (all C3 calls, json_schema, no thinking)", "", *table, "",
+                      f"{model} on Groq (all C3 calls, json_{json}, no thinking)", "", *table, "",
                       "Letters: A Applicable, A* Applicable with invalid requirement, I Indeterminate, N Not "
                       "applicable, X Irrelevant, S Split invalid, F failed step, ? run missing", "",
                       "VARIANTS WHERE THE LABELS DIFFER OR NEITHER IS A", *(details or ["(none)"])]) + "\n"
@@ -86,10 +86,12 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--groq-model", required=True)
     parser.add_argument("--variants", default=",".join(VARIANTS))
     parser.add_argument("--run", type=int, default=1)
+    parser.add_argument("--groq-json", choices=("schema", "object"), default="schema")
     args = parser.parse_args(argv)
     config = load_config()
-    text = compare(config, args.groq_model, [v.strip() for v in args.variants.split(",") if v.strip()], args.run)
-    out = project_path(config["paths"]["runs"]).parent / "debug" / f"{ceiling_label(args.groq_model)}_comparison.txt"
+    text = compare(config, args.groq_model, [v.strip() for v in args.variants.split(",") if v.strip()], args.run,
+                   args.groq_json)
+    out = project_path(config["paths"]["runs"]).parent / "debug" / f"{ceiling_label(args.groq_model, args.groq_json)}_comparison.txt"
     out.write_text(text, encoding="utf-8")
     print(text)
 

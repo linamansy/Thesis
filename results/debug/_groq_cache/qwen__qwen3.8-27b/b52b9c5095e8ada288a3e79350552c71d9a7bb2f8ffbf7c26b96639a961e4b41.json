@@ -1,0 +1,77 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling.\n\nSENTENCES\n- The shop sells kitchen items to private persons across the EU\n\nSTATEMENT\nthe organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession\n\nDo these sentences, on their own and taken together, state that the statement is true? Answer yes or no with one line of reason.\nAnswer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"answer\": {\n      \"description\": \"yes if the sentence on its own states it, otherwise no\",\n      \"enum\": [\n        \"yes\",\n        \"no\"\n      ],\n      \"title\": \"Answer\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One line of reason\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"answer\",\n    \"reason\"\n  ],\n  \"title\": \"VerifierOutputV2\",\n  \"type\": \"object\"\n}\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "output",
+        "schema": {
+          "properties": {
+            "answer": {
+              "description": "yes if the sentence on its own states it, otherwise no",
+              "enum": [
+                "yes",
+                "no"
+              ],
+              "title": "Answer",
+              "type": "string"
+            },
+            "reason": {
+              "description": "One line of reason",
+              "title": "Reason",
+              "type": "string"
+            }
+          },
+          "required": [
+            "answer",
+            "reason"
+          ],
+          "title": "VerifierOutputV2",
+          "type": "object"
+        }
+      }
+    }
+  },
+  "response": {
+    "id": "chatcmpl-33a6f66e-8141-4185-a366-2e6dc0effdcf",
+    "object": "chat.completion",
+    "created": 1793401034,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"answer\": \"yes\", \"reason\": \"Selling kitchen items to private persons constitutes selling goods to customers for trade purposes.\"}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.021127457,
+      "prompt_tokens": 271,
+      "prompt_time": 0.02114008,
+      "completion_tokens": 29,
+      "completion_time": 0.05867282,
+      "total_tokens": 300,
+      "total_time": 0.0798129
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m67gg64eef6a8ss9w5pea9m8",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

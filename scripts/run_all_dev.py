@@ -14,6 +14,9 @@ ceiling_<model> (folder med_ceiling_<model>_run_<n>), with every C3 agent call o
 same prompts and code, temperature/seed/max_tokens from llm, the agents' output schema sent as Groq json_schema,
 429 waits as Groq asks, answers cached in results/debug/_groq_cache/<model>/). No retrieval, no Ollama, no thinking
 (Groq returns no reasoning in its JSON modes), so --fresh and --think-calls are refused. The silver model is refused.
+--groq-json object: Groq json_object mode instead of json_schema (no schema sent; the prompts still carry it), label
+ceiling_<model>_jsonobject. Added 31 Oct 2026: with json_schema, qwen/qwen3.8-27b put a junk token after the opening
+brace in 27 of 150 calls (Groq json_validate_failed); json_object had 0 unparseable answers in 146 earlier calls.
 
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
@@ -76,29 +79,30 @@ def oracle_ids(target: str, corpus_ids: list[str]) -> list[str]:
     return [target] + [pid for pid in corpus_ids if article_id_of(pid) == article and pid != target]
 
 
-def ceiling_label(model: str) -> str:
-    return f"ceiling_{model.split('/')[-1]}"
+def ceiling_label(model: str, json: str = "schema") -> str:
+    return f"ceiling_{model.split('/')[-1]}" + ("_jsonobject" if json == "object" else "")
 
 
-def ceiling_config(config: dict, model: str) -> dict:
-    """A copy of the config with the C3 agents on the Groq model (json_schema on, own cache). In memory only."""
+def ceiling_config(config: dict, model: str, json: str = "schema") -> dict:
+    """A copy of the config with the C3 agents on the Groq model (json_schema, or json_object if json is "object";
+    own cache). In memory only."""
     if model == config["silver"]["model"]:
         raise ValueError(f"{model} is the silver annotator's model; it must never be used for C3")
     config = copy.deepcopy(config)
     config["c3_agents_llm"]["provider"] = "groq"
     groq = config["c3_agents_llm"]["groq"]
-    groq.update(model=model, json_schema=True,
+    groq.update(model=model, json_schema=json == "schema", json_mode=True,
                 cache_dir=str(project_path(config["paths"]["runs"]).parent / "debug" / "_groq_cache"
                               / model.replace("/", "__")))
     return config
 
 
-def groq_llm(config: dict, model: str) -> tuple:
+def groq_llm(config: dict, model: str, json: str = "schema") -> tuple:
     """The Groq client for every C3 agent call (ceiling test); returns (client, run-info part)."""
     from run_experiment import create_llm
     from src.study2_config import study2_view
-    config = ceiling_config(config, model)
-    info = {"model": model, "provider": "groq", "groq_response_format": "json_schema (agents' output schema)",
+    config = ceiling_config(config, model, json)
+    info = {"model": model, "provider": "groq", "groq_response_format": ("json_schema (agents' output schema)" if json == "schema" else "json_object"),
             "thinking": "none (Groq returns no reasoning in JSON modes)", "agent_settings": config["llm"]}
     return create_llm(study2_view(config), "relevance", {}), info
 
@@ -110,10 +114,11 @@ def retrieved_ids(run_dir: Path) -> list[str]:
 
 
 class AllDevRunner:
-    def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None):
+    def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None,
+                 groq_json: str = "schema"):
         self.config, self.fresh, self.think_calls, self.log = config, fresh, think_calls, log
-        self.groq_model = groq_model
-        self.llm, self.llm_info = groq_llm(config, groq_model) if groq_model else make_llm(config)
+        self.groq_model, self.groq_json = groq_model, groq_json
+        self.llm, self.llm_info = groq_llm(config, groq_model, groq_json) if groq_model else make_llm(config)
         self.think_llm = None
         if think_calls:
             from scripts.oracle_o2 import thinking_llm
@@ -186,7 +191,7 @@ class AllDevRunner:
         case_dir = project_path(self.config["paths"]["runs"]).parent / "debug" / variant
         target = load_answer_key(self.config, variant)["target_passage_id"]
         if self.groq_model:   # ceiling test: the oracle step only
-            label = ceiling_label(self.groq_model)
+            label = ceiling_label(self.groq_model, self.groq_json)
             ceiling = med_dir(case_dir, label, n)
             self.step(f"{variant} run {n} {label}", ceiling,
                       lambda: self.mediation(variant, ceiling, label, oracle_ids(target, self.corpus_ids),
@@ -225,17 +230,19 @@ def main(argv: list[str] | None = None) -> None:
                         help="comma-separated ApplicabilityAgentV2 call classes sent with think: true (default none)")
     parser.add_argument("--groq-model", default=None,
                         help="ceiling test: oracle step only, every C3 agent call on this Groq model")
+    parser.add_argument("--groq-json", choices=("schema", "object"), default="schema",
+                        help="Groq JSON output: json_schema (default) or json_object")
     args = parser.parse_args(argv)
     if args.groq_model and (args.fresh or args.think_calls):
         parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
-    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model)
+    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model, args.groq_json)
     numbers = [args.only_run] if args.only_run else range(1, args.runs + 1)
     variants = [v.strip() for v in args.variants.split(",") if v.strip()]
     log(f"run_all_dev: variants {variants}, runs {list(numbers)}, fresh {args.fresh}, think_calls {think_calls}, "
-        f"groq_model {args.groq_model}")
+        f"groq_model {args.groq_model}, groq_json {args.groq_json}")
     for variant in variants:
         for n in numbers:
             runner.run_variant(variant, n)

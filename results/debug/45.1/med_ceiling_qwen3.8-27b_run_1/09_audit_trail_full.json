@@ -1,0 +1,298 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art10-1",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "information to be provided prior to the order being placed, including languages offered",
+      "law_quote": "at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service: ... (d) the languages offered for the conclusion of the contract.",
+      "relevant": true,
+      "process_step": "the website is available in German and English",
+      "description_quote": "its website is available in German and English",
+      "reason": "The rule requires providing information about the languages offered for the contract, and the process description explicitly states the languages available on the website.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service ... d) the languages offered for the conclusion of the contract",
+      "description_quote_canonical": "its website is available in German and English",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body",
+          "service provider"
+        ],
+        "if": [
+          "the recipient of the service is about to place an order"
+        ],
+        "then": "Member States shall ensure that the service provider gives the following information clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service: (a) the different technical steps to follow to conclude the contract; (b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible; (c) the technical means for identifying and correcting input errors prior to the placing of the order; (d) the languages offered for the conclusion of the contract",
+        "exceptions": [
+          "otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "status": "confirmed",
+            "quotes": [
+              "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body or service provider",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            },
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences describe the shop's location, target audience, and languages, but do not explicitly state that it is an information society service or provide the specific legal criteria (remuneration, distance, electronic means, individual request) required to verify the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service is about to place an order",
+          "text_sent": "the recipient of the service is about to place an order",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes the completion of an order and preparation of payment/shipment, which occurs after the order has been placed, not the act of placing it."
+          },
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence states the E-Shop belongs to a company and sells to private persons, which confirms the organization sells goods to customers for business purposes."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "otherwise agreed by parties who are not consumers",
+          "text_sent": "otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+            "status": "confirmed",
+            "quotes": [
+              "Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared."
+            ]
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art10-2",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider indicates any relevant codes of conduct to which he subscribes and information on how those codes can be consulted electronically.",
+    "label": "Mediation failed",
+    "label_cause": "failed at relevance: no valid output after retry (see the log file)",
+    "failed_step": "relevance",
+    "error": "no valid output after retry (see the log file)",
+    "relevance": null,
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art10-3",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "making contract terms and general conditions available for storage and reproduction",
+      "law_quote": "Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them.",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The process description details the steps of logging in, selecting products, and processing payment and shipping, but it does not mention any step involving the provision, storage, or reproduction of contract terms or general conditions.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "ECD-Art10-4",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n4. Paragraphs 1 and 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "exclusion of information obligations for contracts concluded by email",
+      "law_quote": "Paragraphs 1 and 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+      "relevant": false,
+      "process_step": "the order is finished by the shopping system",
+      "description_quote": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+      "reason": "The rule concerns the conclusion of contracts via electronic mail, whereas the process describes an online shop transaction where the order is finished by the system, not by email exchange.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Paragraphs 1 and 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "description_quote_canonical": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English",
+      "final_relevant": false,
+      "cause": "the model said not relevant"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  }
+]
