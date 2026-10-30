@@ -1,0 +1,962 @@
+{
+  "stage": "S2 article routing (two views, union of routes)",
+  "n_articles_offered": 71,
+  "views": [
+    "title",
+    "law_title_sentence"
+  ],
+  "per_step": {
+    "S1": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which is relevant when a customer places an order involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant when a customer places an order and later decides to withdraw it.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "ECD-Art11",
+          "reason": "The article specifies the process for placing an order, which directly relates to the step of the customer placing an order.",
+          "title": "Placing of the order",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves the customer placing an order.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods, and the step involves the customer placing an order which may relate to the delivery of goods.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when a customer places an order involving personal data."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant when a customer places an order and later decides to withdraw it."
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article specifies the process for placing an order, which directly relates to the step of the customer placing an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when a customer places an order involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant when a customer places an order and later decides to withdraw it.",
+              "title": "Exercise of the right of withdrawal"
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article specifies the process for placing an order, which directly relates to the step of the customer placing an order.",
+              "title": "Placing of the order"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves the customer placing an order."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves the customer placing an order which may relate to the delivery of goods."
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article is about placing an order through technological means, and the step involves the customer placing an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves the customer placing an order.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves the customer placing an order which may relate to the delivery of goods.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article is about placing an order through technological means, and the step involves the customer placing an order.",
+              "title": "Placing of the order"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S2": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which applies to sending an order confirmation.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply to order confirmations containing personal data.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article covers delivery obligations, which may include sending an order confirmation as part of the delivery process.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided to the data subject when personal data are collected, and the order confirmation may contain personal data.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which applies to sending an order confirmation."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply to order confirmations containing personal data."
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article covers delivery obligations, which may include sending an order confirmation as part of the delivery process."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which applies to sending an order confirmation.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply to order confirmations containing personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article covers delivery obligations, which may include sending an order confirmation as part of the delivery process.",
+              "title": "Delivery"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves sending an order confirmation which is a form of transparent communication."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided to the data subject when personal data are collected, and the order confirmation may contain personal data."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided to the data subject when personal data have not been obtained from them, which could apply if the order confirmation includes personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves sending an order confirmation which is a form of transparent communication.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided to the data subject when personal data are collected, and the order confirmation may contain personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided to the data subject when personal data have not been obtained from them, which could apply if the order confirmation includes personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S3": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and the step generates a shipping label which may involve personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art32",
+          "reason": "The article addresses security of processing, which is relevant to handling a shipping label that may contain sensitive information.",
+          "title": "Security of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art12",
+          "reason": "The article requires notification obligations, which could apply if the shipping label involves goods with compliance requirements.",
+          "title": "Obligation to notify",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step generates a shipping label which may contain personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article relates to the responsibility of the controller and the step involves generating a shipping label which may require data protection measures.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art30",
+          "reason": "The article relates to records of processing activities and the step involves generating a shipping label which may be part of data processing activities.",
+          "title": "Records of processing activities",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step generates a shipping label which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses security of processing, which is relevant to handling a shipping label that may contain sensitive information."
+            },
+            {
+              "article_id": "SGD-Art12",
+              "reason": "The article requires notification obligations, which could apply if the shipping label involves goods with compliance requirements."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step generates a shipping label which may involve personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses security of processing, which is relevant to handling a shipping label that may contain sensitive information.",
+              "title": "Security of processing"
+            },
+            {
+              "article_id": "SGD-Art12",
+              "reason": "The article requires notification obligations, which could apply if the shipping label involves goods with compliance requirements.",
+              "title": "Obligation to notify"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step generates a shipping label which may contain personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller and the step involves generating a shipping label which may require data protection measures."
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article relates to records of processing activities and the step involves generating a shipping label which may be part of data processing activities."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step generates a shipping label which may contain personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller and the step involves generating a shipping label which may require data protection measures.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article relates to records of processing activities and the step involves generating a shipping label which may be part of data processing activities.",
+              "title": "Records of processing activities"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S4": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article is about delivery and the step involves delivering an order.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article is about repair or replacement of goods and the step involves delivering an order.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art10",
+          "reason": "The article is about liability of the seller and the step involves delivering an order.",
+          "title": "Liability of the seller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step involves delivering an order.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article is about remedies for lack of conformity and the step involves delivering an order.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery and the step involves delivering an order."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering an order."
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller and the step involves delivering an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery and the step involves delivering an order.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering an order.",
+              "title": "Repair or replacement of the goods"
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller and the step involves delivering an order.",
+              "title": "Liability of the seller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves delivering an order."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves delivering an order."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves delivering an order.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves delivering an order.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering an order.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S5": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and the step involves sending tracking information which may require transparency.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article addresses information to be provided where data is not obtained directly from the data subject, which may apply to tracking information sent by the system.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art34",
+          "reason": "The article deals with communication of a personal data breach to the data subject, which could be relevant if tracking information involves personal data.",
+          "title": "Communication of a personal data breach to the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves sending tracking information which may be personal data.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves sending tracking information which may require transparency."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where data is not obtained directly from the data subject, which may apply to tracking information sent by the system."
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article deals with communication of a personal data breach to the data subject, which could be relevant if tracking information involves personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves sending tracking information which may require transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where data is not obtained directly from the data subject, which may apply to tracking information sent by the system.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article deals with communication of a personal data breach to the data subject, which could be relevant if tracking information involves personal data.",
+              "title": "Communication of a personal data breach to the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves sending tracking information which may require transparency."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves sending tracking information which may be personal data."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, and the step involves sending tracking information which may be personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves sending tracking information which may require transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves sending tracking information which may be personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, and the step involves sending tracking information which may be personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S6": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art32",
+          "reason": "The article addresses security of processing, which relates to monitoring shipment data.",
+          "title": "Security of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art34",
+          "reason": "The article covers communication of a personal data breach, which may be relevant if shipment monitoring involves personal data.",
+          "title": "Communication of a personal data breach to the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art12",
+          "reason": "The article requires an obligation to notify, which could apply if shipment monitoring involves product issues.",
+          "title": "Obligation to notify",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article is about delivery of goods and the step monitors the shipment until it reaches the customer's address.",
+          "title": "Delivery",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step ensures the goods are delivered as agreed.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article is about repair or replacement of goods and the step ensures the goods are delivered properly.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses security of processing, which relates to monitoring shipment data."
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article covers communication of a personal data breach, which may be relevant if shipment monitoring involves personal data."
+            },
+            {
+              "article_id": "SGD-Art12",
+              "reason": "The article requires an obligation to notify, which could apply if shipment monitoring involves product issues."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses security of processing, which relates to monitoring shipment data.",
+              "title": "Security of processing"
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article covers communication of a personal data breach, which may be relevant if shipment monitoring involves personal data.",
+              "title": "Communication of a personal data breach to the data subject"
+            },
+            {
+              "article_id": "SGD-Art12",
+              "reason": "The article requires an obligation to notify, which could apply if shipment monitoring involves product issues.",
+              "title": "Obligation to notify"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step monitors the shipment until it reaches the customer's address."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step ensures the goods are delivered as agreed."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step ensures the goods are delivered properly."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step monitors the shipment until it reaches the customer's address.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step ensures the goods are delivered as agreed.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step ensures the goods are delivered properly.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S7": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article is about delivery and the step involves receiving a parcel.",
+          "title": "Delivery",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article is about repair or replacement of goods and the step involves receiving a parcel.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article is about remedies for lack of conformity and the step involves receiving a parcel.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step involves the customer receiving the parcel.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery and the step involves receiving a parcel."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves receiving a parcel."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves receiving a parcel."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery and the step involves receiving a parcel.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves receiving a parcel.",
+              "title": "Repair or replacement of the goods"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves receiving a parcel.",
+              "title": "Remedies for lack of conformity"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step involves the customer receiving the parcel."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves the customer receiving the parcel."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves the customer receiving the parcel."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step involves the customer receiving the parcel.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves the customer receiving the parcel.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves the customer receiving the parcel.",
+              "title": "Remedies for lack of conformity"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S8": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is relevant when a customer sends back a parcel.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art34",
+          "reason": "The article addresses communication of a personal data breach, which may be relevant if the parcel contains personal data.",
+          "title": "Communication of a personal data breach to the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article outlines the exercise of the right of withdrawal, which could be related to the customer returning a parcel.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art14",
+          "reason": "The article is about the obligations of the consumer in the event of withdrawal and the step involves returning the parcel.",
+          "title": "Obligations of the consumer in the event of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article is about remedies for lack of conformity and the step involves returning a product that may not meet quality standards.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article is about repair or replacement of goods and the step involves returning a product for potential repair or replacement.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is relevant when a customer sends back a parcel."
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article addresses communication of a personal data breach, which may be relevant if the parcel contains personal data."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could be related to the customer returning a parcel."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is relevant when a customer sends back a parcel.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art34",
+              "reason": "The article addresses communication of a personal data breach, which may be relevant if the parcel contains personal data.",
+              "title": "Communication of a personal data breach to the data subject"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could be related to the customer returning a parcel.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art14",
+              "reason": "The article is about the obligations of the consumer in the event of withdrawal and the step involves returning the parcel."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves returning a product that may not meet quality standards."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves returning a product for potential repair or replacement."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art14",
+              "reason": "The article is about the obligations of the consumer in the event of withdrawal and the step involves returning the parcel.",
+              "title": "Obligations of the consumer in the event of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves returning a product that may not meet quality standards.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves returning a product for potential repair or replacement.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    }
+  }
+}

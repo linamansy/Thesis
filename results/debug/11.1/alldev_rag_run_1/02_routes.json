@@ -1,0 +1,1565 @@
+{
+  "stage": "S2 article routing (two views, union of routes)",
+  "n_articles_offered": 71,
+  "views": [
+    "title",
+    "law_title_sentence"
+  ],
+  "per_step": {
+    "S1": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article addresses conditions for consent, which is relevant when a customer signs up for a subscription service.",
+          "title": "Conditions for consent",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article covers the lawfulness of processing, which applies to the customer's subscription sign-up activity.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the subscription can be canceled.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article addresses conditions for consent, which is relevant when a customer signs up for a subscription service."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article covers the lawfulness of processing, which applies to the customer's subscription sign-up activity."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the subscription can be canceled."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article addresses conditions for consent, which is relevant when a customer signs up for a subscription service.",
+              "title": "Conditions for consent"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article covers the lawfulness of processing, which applies to the customer's subscription sign-up activity.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the subscription can be canceled.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the customer giving consent to sign up for a subscription service."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent, and the step involves the customer providing consent to sign up for a subscription service."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal, and the step involves the customer entering into a contract, which may be subject to withdrawal rights."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the customer giving consent to sign up for a subscription service.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent, and the step involves the customer providing consent to sign up for a subscription service.",
+              "title": "Conditions for consent"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal, and the step involves the customer entering into a contract, which may be subject to withdrawal rights.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S2": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which is relevant when generating an account that involves personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to the system generating an account.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art25",
+          "reason": "The article covers data protection by design and by default, which is relevant when creating a new account system.",
+          "title": "Data protection by design and by default",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves generating an account which may involve personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when generating an account that involves personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system generating an account."
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant when creating a new account system."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when generating an account that involves personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system generating an account.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant when creating a new account system.",
+              "title": "Data protection by design and by default"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves generating an account which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step generates an account which may require lawful processing of personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller and the step involves generating an account which may require implementing appropriate measures to ensure data protection."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves generating an account which may involve personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step generates an account which may require lawful processing of personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller and the step involves generating an account which may require implementing appropriate measures to ensure data protection.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S3": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to assigning access to personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which is relevant when assigning access to personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to assigning access to personal data.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to lawfulness, fairness, and transparency in processing personal data, which is relevant to assigning access.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article addresses conditions for consent, which is relevant to assigning access to personal data.",
+          "title": "Conditions for consent",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to assigning access to personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when assigning access to personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to assigning access to personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to assigning access to personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when assigning access to personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to assigning access to personal data.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to lawfulness, fairness, and transparency in processing personal data, which is relevant to assigning access."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article specifies the lawfulness of processing, which is directly related to assigning access to personal data."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article addresses conditions for consent, which is relevant to assigning access to personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to lawfulness, fairness, and transparency in processing personal data, which is relevant to assigning access.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article specifies the lawfulness of processing, which is directly related to assigning access to personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article addresses conditions for consent, which is relevant to assigning access to personal data.",
+              "title": "Conditions for consent"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S4": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which is relevant to automated billing cycles involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to the system triggering automated billing cycles.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art25",
+          "reason": "The article covers data protection by design and by default, which is relevant to ensuring compliance in automated billing processes.",
+          "title": "Data protection by design and by default",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves automated billing which may handle personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which is relevant to automated billing cycles involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system triggering automated billing cycles."
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant to ensuring compliance in automated billing processes."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which is relevant to automated billing cycles involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system triggering automated billing cycles.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant to ensuring compliance in automated billing processes.",
+              "title": "Data protection by design and by default"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves automated billing which may handle personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves automated billing which may require compliance with data protection measures."
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant to automated billing processes that handle personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves automated billing which may handle personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves automated billing which may require compliance with data protection measures.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art25",
+              "reason": "The article covers data protection by design and by default, which is relevant to automated billing processes that handle personal data.",
+              "title": "Data protection by design and by default"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S5": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is required when the customer receives regular updates.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply if the updates involve personal data.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article outlines the exercise of the right of withdrawal, which could be relevant if the updates are part of a contractual relationship with the customer.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves receiving updates which may involve personal data.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is required when the customer receives regular updates."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply if the updates involve personal data."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could be relevant if the updates are part of a contractual relationship with the customer."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is required when the customer receives regular updates.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided where personal data have not been obtained from the data subject, which may apply if the updates involve personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could be relevant if the updates are part of a contractual relationship with the customer.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves receiving regular updates which may require transparency."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves receiving updates which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, and the step involves receiving updates which may involve personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves receiving regular updates which may require transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves receiving updates which may involve personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, and the step involves receiving updates which may involve personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S6": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and the step involves receiving product enhancements which may require informing the customer.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article addresses delivery obligations and the step involves receiving product enhancements which may relate to delivery.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article covers repair or replacement of goods and the step involves receiving product enhancements which may relate to product quality.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step involves receiving product enhancements.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article is about remedies for lack of conformity and the step involves receiving product enhancements.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves receiving product enhancements which may require informing the customer."
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article addresses delivery obligations and the step involves receiving product enhancements which may relate to delivery."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article covers repair or replacement of goods and the step involves receiving product enhancements which may relate to product quality."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves receiving product enhancements which may require informing the customer.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article addresses delivery obligations and the step involves receiving product enhancements which may relate to delivery.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article covers repair or replacement of goods and the step involves receiving product enhancements which may relate to product quality.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves receiving product enhancements."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves receiving product enhancements."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves receiving product enhancements."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves receiving product enhancements.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves receiving product enhancements.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves receiving product enhancements.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S7": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is needed for renewal notifications.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may apply to renewal notifications.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article addresses the responsibility of the controller, which is relevant to managing renewal notifications.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article is about information to be provided when personal data are collected from the data subject, which relates to the customer receiving renewal notifications.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed for renewal notifications."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may apply to renewal notifications."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which is relevant to managing renewal notifications."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed for renewal notifications.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may apply to renewal notifications.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which is relevant to managing renewal notifications.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves notifying the customer about renewal notifications."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, which relates to the customer receiving renewal notifications."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, which could apply to the customer receiving renewal notifications."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves notifying the customer about renewal notifications.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, which relates to the customer receiving renewal notifications.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article is about information to be provided when personal data have not been obtained from the data subject, which could apply to the customer receiving renewal notifications.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S8": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article addresses the exercise of the right of withdrawal, which relates to the customer's decision to cancel.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art17",
+          "reason": "The article covers the right to erasure, which is relevant when a customer decides to cancel and request data deletion.",
+          "title": "Right to erasure (‘right to be forgotten’)",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art16",
+          "reason": "The article is about termination of the sales contract and the step involves the customer deciding to cancel.",
+          "title": "Termination of the sales contract",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art11",
+          "reason": "The article is about placing of the order and the step involves the customer deciding to cancel.",
+          "title": "Placing of the order",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to the customer's decision to cancel."
+            },
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article covers the right to erasure, which is relevant when a customer decides to cancel and request data deletion."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to the customer's decision to cancel.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article covers the right to erasure, which is relevant when a customer decides to cancel and request data deletion.",
+              "title": "Right to erasure (‘right to be forgotten’)"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves the customer deciding to cancel."
+            },
+            {
+              "article_id": "SGD-Art16",
+              "reason": "The article is about termination of the sales contract and the step involves the customer deciding to cancel."
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article is about placing of the order and the step involves the customer deciding to cancel."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves the customer deciding to cancel.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art16",
+              "reason": "The article is about termination of the sales contract and the step involves the customer deciding to cancel.",
+              "title": "Termination of the sales contract"
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article is about placing of the order and the step involves the customer deciding to cancel.",
+              "title": "Placing of the order"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S9": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article addresses the exercise of the right of withdrawal, which aligns with the customer submitting a cancellation request.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art13",
+          "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to handling a cancellation request.",
+          "title": "Obligations of the trader in the event of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article is about the exercise of the right of withdrawal and the step involves submitting a cancellation request.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which aligns with the customer submitting a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to handling a cancellation request."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which aligns with the customer submitting a cancellation request.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to handling a cancellation request.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article is about the exercise of the right of withdrawal and the step involves submitting a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article is about the obligations of the trader in the event of withdrawal and the step involves a cancellation request."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves a cancellation request.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article is about the exercise of the right of withdrawal and the step involves submitting a cancellation request.",
+              "title": "Exercise of the right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article is about the obligations of the trader in the event of withdrawal and the step involves a cancellation request.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S10": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is needed when processing a cancellation request.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art15",
+          "reason": "The article provides the right of access, which may be relevant when handling a cancellation request.",
+          "title": "Right of access by the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article outlines the exercise of the right of withdrawal, which is directly related to processing a cancellation request.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art13",
+          "reason": "The article outlines obligations of the trader in the event of withdrawal, which relates to processing a cancellation request.",
+          "title": "Obligations of the trader in the event of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art14",
+          "reason": "The article specifies obligations of the consumer in the event of withdrawal, which is relevant to the cancellation request process.",
+          "title": "Obligations of the consumer in the event of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed when processing a cancellation request."
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article provides the right of access, which may be relevant when handling a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which is directly related to processing a cancellation request."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed when processing a cancellation request.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article provides the right of access, which may be relevant when handling a cancellation request.",
+              "title": "Right of access by the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which is directly related to processing a cancellation request.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step processes a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which relates to processing a cancellation request."
+            },
+            {
+              "article_id": "CRD-Art14",
+              "reason": "The article specifies obligations of the consumer in the event of withdrawal, which is relevant to the cancellation request process."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step processes a cancellation request.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which relates to processing a cancellation request.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art14",
+              "reason": "The article specifies obligations of the consumer in the event of withdrawal, which is relevant to the cancellation request process.",
+              "title": "Obligations of the consumer in the event of withdrawal"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S11": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to applying refunds or charges involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which is relevant when applying refunds or charges that involve personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to the system when handling refunds or charges involving personal data.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art19",
+          "reason": "The article is about notification obligations regarding rectification or erasure of personal data, and the step involves applying refunds or charges which may affect personal data processing.",
+          "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to applying refunds or charges involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when applying refunds or charges that involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system when handling refunds or charges involving personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to applying refunds or charges involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when applying refunds or charges that involve personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the system when handling refunds or charges involving personal data.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves applying refunds or charges which may relate to personal data processing."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication, and the step involves applying refunds or charges which may require clear communication to data subjects."
+            },
+            {
+              "article_id": "GDPR-Art19",
+              "reason": "The article is about notification obligations regarding rectification or erasure of personal data, and the step involves applying refunds or charges which may affect personal data processing."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves applying refunds or charges which may relate to personal data processing.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication, and the step involves applying refunds or charges which may require clear communication to data subjects.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art19",
+              "reason": "The article is about notification obligations regarding rectification or erasure of personal data, and the step involves applying refunds or charges which may affect personal data processing.",
+              "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S12": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art17",
+          "reason": "The article relates to the right to erasure, which may apply when deactivating a subscription involving personal data.",
+          "title": "Right to erasure (‘right to be forgotten’)",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article addresses the responsibility of the controller, which applies when the support team deactivates a subscription.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information requirements, which may be relevant when deactivating a subscription and informing the data subject.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art30",
+          "reason": "The article requires records of processing activities, which may be relevant when handling subscription deactivation.",
+          "title": "Records of processing activities",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure, which may apply when deactivating a subscription involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which applies when the support team deactivates a subscription."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information requirements, which may be relevant when deactivating a subscription and informing the data subject."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure, which may apply when deactivating a subscription involving personal data.",
+              "title": "Right to erasure (‘right to be forgotten’)"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which applies when the support team deactivates a subscription.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information requirements, which may be relevant when deactivating a subscription and informing the data subject.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure, which is relevant when deactivating a subscription that involves personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which applies to the support team deactivating a subscription."
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires records of processing activities, which may be relevant when handling subscription deactivation."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure, which is relevant when deactivating a subscription that involves personal data.",
+              "title": "Right to erasure (‘right to be forgotten’)"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller, which applies to the support team deactivating a subscription.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires records of processing activities, which may be relevant when handling subscription deactivation.",
+              "title": "Records of processing activities"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S13": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which relates to settling account balances involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to the support team handling account balances.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, relevant when finalizing account balances.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves settling an account balance which may involve personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art30",
+          "reason": "The article requires maintaining records of processing activities and the step involves settling an account balance which may involve personal data processing activities.",
+          "title": "Records of processing activities",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to settling account balances involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the support team handling account balances."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant when finalizing account balances."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to settling account balances involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the support team handling account balances.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant when finalizing account balances.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves settling an account balance which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves settling an account balance which may require ensuring compliance with data protection requirements."
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires maintaining records of processing activities and the step involves settling an account balance which may involve personal data processing activities."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves settling an account balance which may involve personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves settling an account balance which may require ensuring compliance with data protection requirements.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires maintaining records of processing activities and the step involves settling an account balance which may involve personal data processing activities.",
+              "title": "Records of processing activities"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S14": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art17",
+          "reason": "The article relates to the right to erasure (‘right to be forgotten’), which aligns with the customer's request to remove personal information.",
+          "title": "Right to erasure (‘right to be forgotten’)",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information and communication for data subject rights, which includes the right to remove personal information.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art15",
+          "reason": "The article addresses the right of access by the data subject, which is related to managing and removing personal information.",
+          "title": "Right of access by the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure (‘right to be forgotten’), which aligns with the customer's request to remove personal information."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication for data subject rights, which includes the right to remove personal information."
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article addresses the right of access by the data subject, which is related to managing and removing personal information."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article relates to the right to erasure (‘right to be forgotten’), which aligns with the customer's request to remove personal information.",
+              "title": "Right to erasure (‘right to be forgotten’)"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication for data subject rights, which includes the right to remove personal information.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article addresses the right of access by the data subject, which is related to managing and removing personal information.",
+              "title": "Right of access by the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article is about the right to erasure and the step involves removing personal information."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves informing the data subject about their rights."
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article is about the right to access and the step involves handling personal data requests."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art17",
+              "reason": "The article is about the right to erasure and the step involves removing personal information.",
+              "title": "Right to erasure (‘right to be forgotten’)"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves informing the data subject about their rights.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article is about the right to access and the step involves handling personal data requests.",
+              "title": "Right of access by the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    }
+  }
+}

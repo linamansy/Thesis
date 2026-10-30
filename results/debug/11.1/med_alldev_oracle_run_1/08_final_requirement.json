@@ -1,0 +1,102 @@
+{
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "GDPR-Art17-1",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "GDPR-Art17-2",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "GDPR-Art17-3",
+      "final_label": "Applicable",
+      "requirement": {
+        "requirement": "If the customer asks, the customer is told their data will not be removed if it is needed for legal reasons or to comply with laws.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer asks, the customer's name, address, and card details are removed from the company's systems when cancelling.",
+            "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+            "triggers": [
+              {
+                "trigger": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+                "kept_as": "If the customer asks"
+              }
+            ],
+            "duty": {
+              "from_then": "processing shall not apply to the extent that processing is necessary for exercising the right of freedom of expression and information",
+              "kept_as": "the customer's name, address, and card details are removed from the company's systems"
+            },
+            "problems": [
+              "the trigger \"When cancelling, many customers ask the company to remove their name, home address and card details from its systems\" is not copied word for word from the legal passage"
+            ],
+            "canonical_quotes": {
+              "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+              "triggers": [
+                {
+                  "trigger": null,
+                  "kept_as": "If the customer asks"
+                }
+              ],
+              "duty": {
+                "from_then": "processing shall not apply to the extent that processing is necessary for exercising the right of freedom of expression and information",
+                "kept_as": "the customer's name, address, and card details are removed from the company's systems"
+              }
+            },
+            "measures": {
+              "n_words": 19,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 15,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "If the customer asks, the customer is told their data will not be removed if it is needed for legal reasons or to comply with laws.",
+            "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+            "triggers": [
+              {
+                "trigger": "for the establishment, exercise or defence of legal claims",
+                "kept_as": "if it is needed for legal reasons"
+              }
+            ],
+            "duty": {
+              "from_then": "processing shall not apply to the extent that processing is necessary for exercising the right of freedom of expression and information; for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller; for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3); for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing; or for the establishment, exercise or defence of legal claims",
+              "kept_as": "the customer is told their data will not be removed if it is needed for legal reasons or to comply with laws"
+            },
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+              "triggers": [
+                {
+                  "trigger": "for the establishment, exercise or defence of legal claims",
+                  "kept_as": "if it is needed for legal reasons"
+                }
+              ],
+              "duty": {
+                "from_then": "processing shall not apply to the extent that processing is necessary for exercising the right of freedom of expression and information; for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject or for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller; for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3); for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing; or for the establishment, exercise or defence of legal claims",
+                "kept_as": "the customer is told their data will not be removed if it is needed for legal reasons or to comply with laws"
+              }
+            },
+            "measures": {
+              "n_words": 26,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 22,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art17-3] If the customer asks, the customer is told their data will not be removed if it is needed for legal reasons or to comply with laws."
+}

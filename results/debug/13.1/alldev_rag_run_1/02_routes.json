@@ -1,0 +1,710 @@
+{
+  "stage": "S2 article routing (two views, union of routes)",
+  "n_articles_offered": 71,
+  "views": [
+    "title",
+    "law_title_sentence"
+  ],
+  "per_step": {
+    "S1": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is relevant when a customer files a complaint.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art15",
+          "reason": "The article addresses the right of access by the data subject, which may be involved when a complaint is filed.",
+          "title": "Right of access by the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art19",
+          "reason": "The article covers notification obligations regarding rectification or erasure, which could be relevant in handling a complaint.",
+          "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art16",
+          "reason": "The article is about the right to rectification, which may be relevant if the complaint involves incorrect personal data.",
+          "title": "Right to rectification",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is relevant when a customer files a complaint."
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article addresses the right of access by the data subject, which may be involved when a complaint is filed."
+            },
+            {
+              "article_id": "GDPR-Art19",
+              "reason": "The article covers notification obligations regarding rectification or erasure, which could be relevant in handling a complaint."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is relevant when a customer files a complaint.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article addresses the right of access by the data subject, which may be involved when a complaint is filed.",
+              "title": "Right of access by the data subject"
+            },
+            {
+              "article_id": "GDPR-Art19",
+              "reason": "The article covers notification obligations regarding rectification or erasure, which could be relevant in handling a complaint.",
+              "title": "Notification obligation regarding rectification or erasure of personal data or restriction of processing"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves the customer filing a complaint, which may require clear communication."
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article is about the right of access by the data subject, which relates to the customer's ability to access their personal data when filing a complaint."
+            },
+            {
+              "article_id": "GDPR-Art16",
+              "reason": "The article is about the right to rectification, which may be relevant if the complaint involves incorrect personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves the customer filing a complaint, which may require clear communication.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art15",
+              "reason": "The article is about the right of access by the data subject, which relates to the customer's ability to access their personal data when filing a complaint.",
+              "title": "Right of access by the data subject"
+            },
+            {
+              "article_id": "GDPR-Art16",
+              "reason": "The article is about the right to rectification, which may be relevant if the complaint involves incorrect personal data.",
+              "title": "Right to rectification"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S2": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which applies to logging and handling complaints.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected, which applies to logging complaints.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to complaints.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing personal data lawfully and transparently, which applies to logging a complaint containing personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art30",
+          "reason": "The article requires records of processing activities, which applies to logging complaints as part of data processing.",
+          "title": "Records of processing activities",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which applies to logging and handling complaints."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected, which applies to logging complaints."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to complaints."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which applies to logging and handling complaints.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected, which applies to logging complaints.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to complaints.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which applies to logging a complaint containing personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article requires transparent information for data subjects, which is relevant when handling complaints that may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires records of processing activities, which applies to logging complaints as part of data processing."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which applies to logging a complaint containing personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article requires transparent information for data subjects, which is relevant when handling complaints that may involve personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires records of processing activities, which applies to logging complaints as part of data processing.",
+              "title": "Records of processing activities"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S3": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to determining the validity of a complaint involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article outlines the responsibility of the controller, which includes assessing the validity of complaints involving personal data processing.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art35",
+          "reason": "The article requires data protection impact assessments, which may be relevant when evaluating the validity of complaints involving personal data.",
+          "title": "Data protection impact assessment",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves determining the validity of a complaint, which may include personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article deals with transparent information and communication, which is relevant to the step of determining the validity of a complaint involving personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to determining the validity of a complaint involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which includes assessing the validity of complaints involving personal data processing."
+            },
+            {
+              "article_id": "GDPR-Art35",
+              "reason": "The article requires data protection impact assessments, which may be relevant when evaluating the validity of complaints involving personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to determining the validity of a complaint involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which includes assessing the validity of complaints involving personal data processing.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art35",
+              "reason": "The article requires data protection impact assessments, which may be relevant when evaluating the validity of complaints involving personal data.",
+              "title": "Data protection impact assessment"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves determining the validity of a complaint, which may include personal data."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step involves assessing the validity of a complaint, which may relate to data processing legality."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article deals with transparent information and communication, which is relevant to the step of determining the validity of a complaint involving personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves determining the validity of a complaint, which may include personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step involves assessing the validity of a complaint, which may relate to data processing legality.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article deals with transparent information and communication, which is relevant to the step of determining the validity of a complaint involving personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S4": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing personal data, which is relevant when the financial team processes a refund involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information and communication regarding data subject rights, which may be involved when handling a refund that includes personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article outlines the responsibility of the controller, which applies to the financial team when processing a refund that involves personal data.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing personal data lawfully and transparently, which is relevant to the financial team processing a refund.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected, which is relevant to the refund process involving personal data.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which is relevant when the financial team processes a refund involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication regarding data subject rights, which may be involved when handling a refund that includes personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which applies to the financial team when processing a refund that involves personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which is relevant when the financial team processes a refund involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication regarding data subject rights, which may be involved when handling a refund that includes personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which applies to the financial team when processing a refund that involves personal data.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which is relevant to the financial team processing a refund."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article addresses transparent information for data subjects, which is relevant to the refund process handled by the financial team."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected, which is relevant to the refund process involving personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which is relevant to the financial team processing a refund.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article addresses transparent information for data subjects, which is relevant to the refund process handled by the financial team.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected, which is relevant to the refund process involving personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S5": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and communication, which is needed when notifying the customer about a refund.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article addresses information to be provided when personal data have not been obtained from the data subject, which may apply if the refund involves personal data.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the refund is related to a contract withdrawal.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art13",
+          "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to the refund process.",
+          "title": "Obligations of the trader in the event of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article specifies the remedies for lack of conformity, which can include a refund, aligning with the refund process.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed when notifying the customer about a refund."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided when personal data have not been obtained from the data subject, which may apply if the refund involves personal data."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the refund is related to a contract withdrawal."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and communication, which is needed when notifying the customer about a refund.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information to be provided when personal data have not been obtained from the data subject, which may apply if the refund involves personal data.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the refund is related to a contract withdrawal.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to the refund process."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article specifies the remedies for lack of conformity, which can include a refund, aligning with the refund process."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article deals with transparent information for data subjects, which is relevant when handling personal data related to refunds."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines the obligations of the trader in the event of withdrawal, which relates to the refund process.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article specifies the remedies for lack of conformity, which can include a refund, aligning with the refund process.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article deals with transparent information for data subjects, which is relevant when handling personal data related to refunds.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S6": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and the step involves providing feedback which may require transparency.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when data is collected, which aligns with the feedback provision step.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article addresses information requirements when data is not obtained directly from the data subject, which may apply to feedback provided by the customer.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves providing feedback which may contain personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves providing feedback which may require transparency."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when data is collected, which aligns with the feedback provision step."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information requirements when data is not obtained directly from the data subject, which may apply to feedback provided by the customer."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves providing feedback which may require transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when data is collected, which aligns with the feedback provision step.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article addresses information requirements when data is not obtained directly from the data subject, which may apply to feedback provided by the customer.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves providing feedback which may contain personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves providing feedback which may require transparency."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected and the step involves providing feedback which may involve personal data."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves providing feedback which may contain personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves providing feedback which may require transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected and the step involves providing feedback which may involve personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    }
+  }
+}

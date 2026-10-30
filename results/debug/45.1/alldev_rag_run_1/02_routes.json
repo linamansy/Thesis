@@ -1,0 +1,1669 @@
+{
+  "stage": "S2 article routing (two views, union of routes)",
+  "n_articles_offered": 71,
+  "views": [
+    "title",
+    "law_title_sentence"
+  ],
+  "per_step": {
+    "S1": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which relates to the customer's login activity involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, relevant to the login process where personal data is handled.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article deals with the responsibility of the controller, which applies to the customer's login activity in an E-Shop system.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing personal data lawfully and transparently, which is relevant when a customer logs into an E-Shop system.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article mandates clear and unambiguous information for service providers, which is relevant when a customer logs into an E-Shop system.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to the customer's login activity involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant to the login process where personal data is handled."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the customer's login activity in an E-Shop system."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to the customer's login activity involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant to the login process where personal data is handled.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article deals with the responsibility of the controller, which applies to the customer's login activity in an E-Shop system.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which is relevant when a customer logs into an E-Shop system."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article requires transparent information for data subjects, which applies to the customer's login activity."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article mandates clear and unambiguous information for service providers, which is relevant when a customer logs into an E-Shop system."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing personal data lawfully and transparently, which is relevant when a customer logs into an E-Shop system.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article requires transparent information for data subjects, which applies to the customer's login activity.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article mandates clear and unambiguous information for service providers, which is relevant when a customer logs into an E-Shop system.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S2": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to checking credentials as part of data processing.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article outlines the responsibility of the controller, which includes verifying credentials as part of data handling.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information and communication, which is relevant to checking credentials in a systematic way.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article is about conditions for consent, and the step checks credentials which may involve verifying consent for data processing.",
+          "title": "Conditions for consent",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to checking credentials as part of data processing."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which includes verifying credentials as part of data handling."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication, which is relevant to checking credentials in a systematic way."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to checking credentials as part of data processing.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article outlines the responsibility of the controller, which includes verifying credentials as part of data handling.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information and communication, which is relevant to checking credentials in a systematic way.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step checks credentials which involves personal data processing."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent, and the step checks credentials which may involve verifying consent for data processing."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article is about the responsibility of the controller, and the step checks credentials which is part of ensuring data processing compliance."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step checks credentials which involves personal data processing.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent, and the step checks credentials which may involve verifying consent for data processing.",
+              "title": "Conditions for consent"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article is about the responsibility of the controller, and the step checks credentials which is part of ensuring data processing compliance.",
+              "title": "Responsibility of the controller"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S3": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article relates to information requirements for distance and off-premises contracts, which the step handles as the customer selects products.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which is relevant as the customer's actions may involve personal data processing.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which is relevant when the customer is provided with information during product selection.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods, and the step involves the customer selecting products that must meet certain requirements.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article is about information to be provided in e-commerce, and the step involves the customer selecting products in an online environment.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article relates to information requirements for distance and off-premises contracts, which the step handles as the customer selects products."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant as the customer's actions may involve personal data processing."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when the customer is provided with information during product selection."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article relates to information requirements for distance and off-premises contracts, which the step handles as the customer selects products.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant as the customer's actions may involve personal data processing.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when the customer is provided with information during product selection.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves the customer selecting products."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves the customer selecting products that must meet certain requirements."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided in e-commerce, and the step involves the customer selecting products in an online environment."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves the customer selecting products.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves the customer selecting products that must meet certain requirements.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided in e-commerce, and the step involves the customer selecting products in an online environment.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S4": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which relates to adding a product to a shopping cart involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, relevant when handling personal data in the shopping cart.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article specifies information requirements for distance contracts, which may apply when a customer adds a product to a cart online.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about the conformity of goods, and the step involves adding a product to a shopping cart, which relates to the goods being sold.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to adding a product to a shopping cart involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant when handling personal data in the shopping cart."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article specifies information requirements for distance contracts, which may apply when a customer adds a product to a cart online."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to adding a product to a shopping cart involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, relevant when handling personal data in the shopping cart.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article specifies information requirements for distance contracts, which may apply when a customer adds a product to a cart online.",
+              "title": "Information requirements for distance and off-premises contracts"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves adding a product to a shopping cart, which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information for data subjects, and the step involves handling personal data related to the product."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about the conformity of goods, and the step involves adding a product to a shopping cart, which relates to the goods being sold."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves adding a product to a shopping cart, which may involve personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information for data subjects, and the step involves handling personal data related to the product.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about the conformity of goods, and the step involves adding a product to a shopping cart, which relates to the goods being sold.",
+              "title": "Conformity of goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S5": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves the customer saving a product which may include personal data.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article is about transparent information and communication for data subjects, which relates to the customer's action of saving a product that may involve personal data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article is about the right of withdrawal, which could be relevant if the customer is saving a product in a context that allows for withdrawal, such as a distance contract.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves saving a product, which may contain personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing personal data, which is relevant to the step of saving a product that may involve personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article deals with conditions for consent, which may be relevant if the product saving involves personal data and requires user consent.",
+          "title": "Conditions for consent",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves the customer saving a product which may include personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, which relates to the customer's action of saving a product that may involve personal data."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal, which could be relevant if the customer is saving a product in a context that allows for withdrawal, such as a distance contract."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article is about information to be provided when personal data are collected from the data subject, and the step involves the customer saving a product which may include personal data.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, which relates to the customer's action of saving a product that may involve personal data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal, which could be relevant if the customer is saving a product in a context that allows for withdrawal, such as a distance contract.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves saving a product, which may contain personal data."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which is relevant to the step of saving a product that may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article deals with conditions for consent, which may be relevant if the product saving involves personal data and requires user consent."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves saving a product, which may contain personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which is relevant to the step of saving a product that may involve personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article deals with conditions for consent, which may be relevant if the product saving involves personal data and requires user consent.",
+              "title": "Conditions for consent"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S6": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which relates to checking if products were already selected in compliance with data protection rules.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which may relate to informing customers about product selections.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article outlines the exercise of the right of withdrawal, which could involve checking if products were already selected in a contract.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves checking if products are selected.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods, and the step involves verifying if products are selected as part of a sales contract.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art6",
+          "reason": "The article is about subjective requirements for conformity, and the step involves checking if products are selected as part of a sales contract.",
+          "title": "Subjective requirements for conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to checking if products were already selected in compliance with data protection rules."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which may relate to informing customers about product selections."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could involve checking if products were already selected in a contract."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to checking if products were already selected in compliance with data protection rules.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which may relate to informing customers about product selections.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which could involve checking if products were already selected in a contract.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves checking if products are selected."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves verifying if products are selected as part of a sales contract."
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity, and the step involves checking if products are selected as part of a sales contract."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves checking if products are selected.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves verifying if products are selected as part of a sales contract.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity, and the step involves checking if products are selected as part of a sales contract.",
+              "title": "Subjective requirements for conformity"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S7": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses lawfulness of processing, which relates to the customer's selection of products involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the customer's selection of products.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article covers information requirements for distance and off-premises contracts, which may apply to the customer's selection of products.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods, and the step involves selecting products which may relate to product conformity.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article is about information to be provided in e-commerce, and the step involves a customer selecting products which may be part of an online transaction.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to the customer's selection of products involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the customer's selection of products."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may apply to the customer's selection of products."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses lawfulness of processing, which relates to the customer's selection of products involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the customer's selection of products.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may apply to the customer's selection of products.",
+              "title": "Information requirements for distance and off-premises contracts"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves a customer selecting products."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves selecting products which may relate to product conformity."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided in e-commerce, and the step involves a customer selecting products which may be part of an online transaction."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves a customer selecting products.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods, and the step involves selecting products which may relate to product conformity.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided in e-commerce, and the step involves a customer selecting products which may be part of an online transaction.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S8": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article relates to the responsibility of the controller, which applies when the shopping system finishes an order.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when finishing an order.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art16",
+          "reason": "The article covers termination of the sales contract, which could be related to finishing an order.",
+          "title": "Termination of the sales contract",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step finishes an order which may involve personal data handling.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art10",
+          "reason": "The article deals with liability of the seller and the step finishes an order which may involve ensuring the goods meet the required standards.",
+          "title": "Liability of the seller",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller, which applies when the shopping system finishes an order."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when finishing an order."
+            },
+            {
+              "article_id": "SGD-Art16",
+              "reason": "The article covers termination of the sales contract, which could be related to finishing an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller, which applies when the shopping system finishes an order.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when finishing an order.",
+              "title": "Exercise of the right of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art16",
+              "reason": "The article covers termination of the sales contract, which could be related to finishing an order.",
+              "title": "Termination of the sales contract"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step finishes an order which may involve personal data handling."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves finishing an order which may require ensuring data protection compliance."
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article deals with liability of the seller and the step finishes an order which may involve ensuring the goods meet the required standards."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step finishes an order which may involve personal data handling.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves finishing an order which may require ensuring data protection compliance.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article deals with liability of the seller and the step finishes an order which may involve ensuring the goods meet the required standards.",
+              "title": "Liability of the seller"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S9": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing personal data, which relates to the customer entering payment data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which is relevant when handling payment data.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article specifies information requirements for distance and off-premises contracts, which may apply when a customer enters payment data remotely.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article is about conditions for consent and the step involves the customer providing payment data, which may require consent.",
+          "title": "Conditions for consent",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which relates to the customer entering payment data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when handling payment data."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article specifies information requirements for distance and off-premises contracts, which may apply when a customer enters payment data remotely."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing personal data, which relates to the customer entering payment data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which is relevant when handling payment data.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article specifies information requirements for distance and off-premises contracts, which may apply when a customer enters payment data remotely.",
+              "title": "Information requirements for distance and off-premises contracts"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing and the step involves entering payment data, which is personal data."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent and the step involves the customer providing payment data, which may require consent."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves handling payment data, which requires transparency."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing and the step involves entering payment data, which is personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article is about conditions for consent and the step involves the customer providing payment data, which may require consent.",
+              "title": "Conditions for consent"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and the step involves handling payment data, which requires transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S10": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article relates to transparent information and the step involves waiting for payment confirmation, which may require clear communication.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when a customer waits for payment confirmation.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may relate to the customer's waiting process.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article is about the right of withdrawal and the step involves waiting for payment confirmation, which is related to contract termination.",
+          "title": "Right of withdrawal",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art10",
+          "reason": "The article is about liability of the seller for lack of conformity and the step involves waiting for payment confirmation, which is related to contract obligations.",
+          "title": "Liability of the seller",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article is about information to be provided and the step involves waiting for payment confirmation, which is related to consumer information requirements.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves waiting for payment confirmation, which may require clear communication."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when a customer waits for payment confirmation."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may relate to the customer's waiting process."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article relates to transparent information and the step involves waiting for payment confirmation, which may require clear communication.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article addresses the exercise of the right of withdrawal, which may be relevant when a customer waits for payment confirmation.",
+              "title": "Exercise of the right of withdrawal"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article covers information to be provided where personal data have not been obtained from the data subject, which may relate to the customer's waiting process.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves waiting for payment confirmation, which is related to contract termination."
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller for lack of conformity and the step involves waiting for payment confirmation, which is related to contract obligations."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided and the step involves waiting for payment confirmation, which is related to consumer information requirements."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves waiting for payment confirmation, which is related to contract termination.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller for lack of conformity and the step involves waiting for payment confirmation, which is related to contract obligations.",
+              "title": "Liability of the seller"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article is about information to be provided and the step involves waiting for payment confirmation, which is related to consumer information requirements.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S11": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering their shipping address.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article covers information requirements for distance and off-premises contracts, which may include the shipping address provided by the customer.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article deals with delivery obligations, which may involve the shipping address entered by the customer.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art8",
+          "reason": "The article specifies formal requirements for distance contracts, which may involve the customer providing a shipping address.",
+          "title": "Formal requirements for distance contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article requires information to be provided clearly when a service is ordered, which could include a shipping address.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering their shipping address."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may include the shipping address provided by the customer."
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article deals with delivery obligations, which may involve the shipping address entered by the customer."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering their shipping address.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may include the shipping address provided by the customer.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article deals with delivery obligations, which may involve the shipping address entered by the customer.",
+              "title": "Delivery"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires providing information to the data subject when personal data are collected, which relates to the customer entering a shipping address."
+            },
+            {
+              "article_id": "CRD-Art8",
+              "reason": "The article specifies formal requirements for distance contracts, which may involve the customer providing a shipping address."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article requires information to be provided clearly when a service is ordered, which could include a shipping address."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires providing information to the data subject when personal data are collected, which relates to the customer entering a shipping address.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "CRD-Art8",
+              "reason": "The article specifies formal requirements for distance contracts, which may involve the customer providing a shipping address.",
+              "title": "Formal requirements for distance contracts"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article requires information to be provided clearly when a service is ordered, which could include a shipping address.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S12": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering a billing address.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art14",
+          "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to the billing address entered by the customer.",
+          "title": "Information to be provided where personal data have not been obtained from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article covers information requirements for distance and off-premises contracts, which may include the billing address provided by the customer.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article is about the lawfulness of processing personal data, and the step involves the customer providing a billing address, which is personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article is about transparent information and communication for data subjects, which relates to the customer providing a billing address.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering a billing address."
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to the billing address entered by the customer."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may include the billing address provided by the customer."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which relates to the customer entering a billing address.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art14",
+              "reason": "The article requires information to be provided when personal data have not been obtained from the data subject, which may apply to the billing address entered by the customer.",
+              "title": "Information to be provided where personal data have not been obtained from the data subject"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may include the billing address provided by the customer.",
+              "title": "Information requirements for distance and off-premises contracts"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the customer providing a billing address, which is personal data."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the customer entering a billing address."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, which relates to the customer providing a billing address."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the customer providing a billing address, which is personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the customer entering a billing address.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, which relates to the customer providing a billing address.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S13": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to the customer's payment and address data handling.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information for data subjects, which applies to the customer's address and payment steps.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant to the customer's payment process.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art8",
+          "reason": "The article specifies formal requirements for distance contracts, which aligns with the customer's activity of executing payment steps in a digital context.",
+          "title": "Formal requirements for distance contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to the customer's payment and address data handling."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which applies to the customer's address and payment steps."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant to the customer's payment process."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to the customer's payment and address data handling.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information for data subjects, which applies to the customer's address and payment steps.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant to the customer's payment process.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article relates to the lawfulness of processing personal data, which is relevant to the customer executing payment steps involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article addresses transparent information for data subjects, which is relevant to the customer's address and payment steps where personal data is handled."
+            },
+            {
+              "article_id": "CRD-Art8",
+              "reason": "The article specifies formal requirements for distance contracts, which aligns with the customer's activity of executing payment steps in a digital context."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article relates to the lawfulness of processing personal data, which is relevant to the customer executing payment steps involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article addresses transparent information for data subjects, which is relevant to the customer's address and payment steps where personal data is handled.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art8",
+              "reason": "The article specifies formal requirements for distance contracts, which aligns with the customer's activity of executing payment steps in a digital context.",
+              "title": "Formal requirements for distance contracts"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S14": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art24",
+          "reason": "The article relates to the responsibility of the controller, which applies when the system finishes the order and handles personal data.",
+          "title": "Responsibility of the controller",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art32",
+          "reason": "The article addresses the security of processing, which is relevant when the system finishes an order involving personal data.",
+          "title": "Security of processing",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the order completion involves consumer rights.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step finishes the order, which may involve handling personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art30",
+          "reason": "The article requires maintaining records of processing activities, which could be relevant to the system finishing an order involving data processing.",
+          "title": "Records of processing activities",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller, which applies when the system finishes the order and handles personal data."
+            },
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses the security of processing, which is relevant when the system finishes an order involving personal data."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the order completion involves consumer rights."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article relates to the responsibility of the controller, which applies when the system finishes the order and handles personal data.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art32",
+              "reason": "The article addresses the security of processing, which is relevant when the system finishes an order involving personal data.",
+              "title": "Security of processing"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article outlines the exercise of the right of withdrawal, which may be relevant if the order completion involves consumer rights.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step finishes the order, which may involve handling personal data."
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves the system finishing an order, which may require ensuring compliance with data protection requirements."
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires maintaining records of processing activities, which could be relevant to the system finishing an order involving data processing."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step finishes the order, which may involve handling personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art24",
+              "reason": "The article addresses the responsibility of the controller and the step involves the system finishing an order, which may require ensuring compliance with data protection requirements.",
+              "title": "Responsibility of the controller"
+            },
+            {
+              "article_id": "GDPR-Art30",
+              "reason": "The article requires maintaining records of processing activities, which could be relevant to the system finishing an order involving data processing.",
+              "title": "Records of processing activities"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    }
+  }
+}

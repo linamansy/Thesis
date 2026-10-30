@@ -1,0 +1,31 @@
+RAG STEP ROUTING (SR) DEBUG, case 01.2
+Answer key: target LPD-Art3-1. Rules: (a) LPD-Art3 routed for >= 1 step; (b) LPD-Art3-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 10 kept, 0 dropped
+  S1: [potential customer] inquires about a product or service | -
+  S2: [Sales staff or customer support] collects relevant information and addresses any concerns or questions | -
+  S3: [customer] is guided through selecting the appropriate product or service | -
+  S4: [sales representative] provides a quote | -
+  S5: [customer] approves the quote | -
+  S6: [customer] places an order | -
+  S7: [system] records the order | -
+  S8: [customer] receives confirmation of their order | -
+  S9: [company] sends a bill | -
+  S10: [customer] pays later than the agreed date | -
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art13, CRD-Art6, GDPR-Art5
+  S2: GDPR-Art12, GDPR-Art13, CRD-Art9, GDPR-Art5
+  S3: CRD-Art6, GDPR-Art12, GDPR-Art13, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6
+  S5: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S6: GDPR-Art6, CRD-Art11, ECD-Art11, CRD-Art6, SGD-Art5
+  S7: GDPR-Art6, GDPR-Art30, CRD-Art11, GDPR-Art5, GDPR-Art12
+  S8: GDPR-Art12, CRD-Art11, CRD-Art8, SGD-Art5, ECD-Art10
+  S9: GDPR-Art6, CRD-Art18, GDPR-Art12
+  S10: GDPR-Art6, GDPR-Art24, CRD-Art9, LPD-Art3, LPD-Art6
+S3 rank of LPD-Art3-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=10
+S4 rank of LPD-Art3-1 (full merge): 73; top 5: ECD-Art11-1, ECD-Art11-2, ECD-Art11-3, LPD-Art3-1, LPD-Art3-2, LPD-Art3-3, LPD-Art3-4, LPD-Art3-5, GDPR-Art13-1, GDPR-Art13-2-a, GDPR-Art13-2-f, GDPR-Art13-3, GDPR-Art13-4, CRD-Art8-1, CRD-Art8-2, CRD-Art8-3, CRD-Art8-4, CRD-Art8-5, CRD-Art8-6, CRD-Art8-7
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+Runs: alldev_rag_run_1 PASS  (1/1 pass)

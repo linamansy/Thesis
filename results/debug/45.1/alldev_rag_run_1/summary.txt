@@ -1,0 +1,39 @@
+RAG STEP ROUTING (SR) DEBUG, case 45.1
+Answer key: target ECD-Art10-1. Rules: (a) ECD-Art10 routed for >= 1 step; (b) ECD-Art10-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 14 kept, 0 dropped
+  S1: [customer] logs into an E-Shop system | -
+  S2: [system] checks credentials | -
+  S3: [customer] can continue to select products | -
+  S4: [customer] adds a product to a shopping cart | product
+  S5: [customer] saves the product | product
+  S6: [customer] checks if every product was already selected | -
+  S7: [customer] selects products | -
+  S8: [shopping system] finishes the order | -
+  S9: [customer] enters payment data | payment data
+  S10: [customer] waits for payment confirmation | -
+  S11: [customer] enters shipping address | shipping address
+  S12: [customer] enters independent billing address | billing address
+  S13: [customer] executes address and payment steps | -
+  S14: [system] finishes the order | -
+S2 routes per step:
+  S1: GDPR-Art6, GDPR-Art12, GDPR-Art24, GDPR-Art5, ECD-Art10
+  S2: GDPR-Art6, GDPR-Art24, GDPR-Art12, GDPR-Art7
+  S3: CRD-Art6, GDPR-Art6, GDPR-Art12, SGD-Art5, ECD-Art10
+  S4: GDPR-Art6, GDPR-Art12, CRD-Art6, SGD-Art5
+  S5: GDPR-Art13, GDPR-Art12, CRD-Art9, GDPR-Art5, GDPR-Art6, GDPR-Art7
+  S6: GDPR-Art6, GDPR-Art12, CRD-Art9, CRD-Art6, SGD-Art5, SGD-Art6
+  S7: GDPR-Art6, GDPR-Art13, CRD-Art6, SGD-Art5, ECD-Art10
+  S8: GDPR-Art24, CRD-Art11, SGD-Art16, GDPR-Art5, SGD-Art10
+  S9: GDPR-Art6, GDPR-Art12, CRD-Art6, GDPR-Art7
+  S10: GDPR-Art12, CRD-Art11, GDPR-Art14, CRD-Art9, SGD-Art10, ECD-Art10
+  S11: GDPR-Art13, CRD-Art6, CRD-Art18, CRD-Art8, ECD-Art10
+  S12: GDPR-Art13, GDPR-Art14, CRD-Art6, GDPR-Art6, GDPR-Art12
+  S13: GDPR-Art6, GDPR-Art12, CRD-Art9, CRD-Art8
+  S14: GDPR-Art24, GDPR-Art32, CRD-Art11, GDPR-Art5, GDPR-Art30
+S3 rank of ECD-Art10-1 per step list: S1=4, S2=-, S3=7, S4=-, S5=-, S6=-, S7=9, S8=-, S9=-, S10=13, S11=10, S12=-, S13=-, S14=-
+S4 rank of ECD-Art10-1 (full merge): 18; top 5: ECD-Art10-1, ECD-Art10-2, ECD-Art10-3, ECD-Art10-4, CRD-Art9-1, CRD-Art9-1a, CRD-Art9-2-a, CRD-Art9-2-c, CRD-Art9-3, GDPR-Art6-1, GDPR-Art6-2, GDPR-Art6-3, GDPR-Art6-4, GDPR-Art24-1, GDPR-Art24-2, GDPR-Art24-3, CRD-Art6-1-a, CRD-Art6-1-e, CRD-Art6-1-g, CRD-Art6-1-l
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+Runs: alldev_rag_run_1 PASS  (1/1 pass)

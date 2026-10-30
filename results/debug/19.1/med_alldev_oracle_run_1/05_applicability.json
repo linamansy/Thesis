@@ -1,0 +1,172 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art11-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body"
+        ],
+        "if": [
+          "the recipient of the service places his order through technological means"
+        ],
+        "then": "the Member State shall ensure that the service provider acknowledges the receipt of the recipient's order without undue delay and by electronic means, and that the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them",
+        "exceptions": [
+          "otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The user starts an order by logging in to their account.",
+            "status": "confirmed",
+            "quotes": [
+              "The user starts an order by logging in to their account."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "The user has the right to return items for exchange.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "contradicted",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service places his order through technological means",
+          "text_sent": "the recipient of the service places his order through technological means",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The user starts an order by logging in to their account."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The user starts an order by logging in to their account"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The first sentence indicates the user (recipient) starts an order via logging in (technological means), supporting the statement."
+          }
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "otherwise agreed by parties who are not consumers",
+          "text_sent": "otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Not applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {}
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art11-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+        ],
+        "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": false,
+      "rejected_if": [
+        "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+      ],
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Split invalid",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art11-3",
+    "applicability": null,
+    "failed_step": null
+  }
+]

@@ -1,0 +1,643 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "CRD-Art14-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer",
+          "trader"
+        ],
+        "if": [
+          "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+          "the trader has not offered to collect the goods himself",
+          "the goods have been delivered to the consumer’s home at the time of the conclusion of the contract and by their nature cannot normally be returned by post"
+        ],
+        "then": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired. The consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them. The trader shall at his own expense collect the goods",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "customers are private persons in several EU countries",
+            "status": "confirmed",
+            "quotes": [
+              "customers are private persons in several EU countries"
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "When a customer places an order, the system records the order details.",
+            "status": "confirmed",
+            "quotes": [
+              "When a customer places an order, the system records the order details.",
+              "Payment processing begins."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer or trader",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            },
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "When a customer places an order, the system records the order details",
+            "Payment processing begins"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "customers are private persons in several EU countries"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences mention 'private persons' but do not explicitly state that they are acting outside their trade, business, craft, or profession as required by the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+          "text_sent": "its customer has communicated his decision to withdraw from the contract to the organisation running the described process in accordance with Article 11",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader has not offered to collect the goods himself",
+          "text_sent": "the organisation running the described process has not offered to collect the goods himself",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "the goods have been delivered to the consumer’s home at the time of the conclusion of the contract and by their nature cannot normally be returned by post",
+          "text_sent": "the goods have been delivered to its customer’s home at the time of the conclusion of the contract and by their nature cannot normally be returned by post",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "When a customer places an order, the system records the order details.",
+            "Payment processing begins."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "When a customer places an order, the system records the order details",
+            "Payment processing begins"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences imply the organization is engaged in selling goods/services through order processing and payment handling, which aligns with the statement."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "CRD-Art14-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          "the consumer withdraws from the contract",
+          "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)"
+        ],
+        "then": "the consumer shall not be liable for diminished value of the goods",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The customers are private persons in several EU countries.",
+            "status": "confirmed",
+            "quotes": [
+              "The customers are private persons in several EU countries."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "The customers are private persons in several EU countries."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences mention customers are private persons in EU countries but do not explicitly state they are acting outside their trade, business, craft, or profession as required by the statement's definition."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+          "text_sent": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art14-2a",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art14-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer",
+          "trader"
+        ],
+        "if": [
+          "a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)"
+        ],
+        "then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The customers are private persons in several EU countries.",
+            "status": "confirmed",
+            "quotes": [
+              "The customers are private persons in several EU countries."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "An e-commerce company has a comprehensive order fulfillment process",
+            "status": "confirmed",
+            "quotes": [
+              "An e-commerce company has a comprehensive order fulfillment process"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer or trader",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            },
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "An e-commerce company has a comprehensive order fulfillment process"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "The customers are private persons in several EU countries."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences mention customers are private persons in EU countries but do not explicitly state they are acting outside their trade, business, craft, or profession as required by the statement's definition."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)",
+          "text_sent": "its customer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "An e-commerce company has a comprehensive order fulfillment process"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "An e-commerce company has a comprehensive order fulfillment process"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "An e-commerce company's order fulfillment process inherently implies selling goods or services as part of its business operations."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "CRD-Art14-4",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "CRD-Art14-5",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          "the consumer exercises the right of withdrawal"
+        ],
+        "then": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+        "exceptions": [
+          "where provided for in Article 13(2) and in this Article"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "customers are private persons in several EU countries",
+            "status": "confirmed",
+            "quotes": [
+              "customers are private persons in several EU countries"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "customers are private persons in several EU countries"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences mention customers as private persons in EU countries but do not explicitly state that the buyer is a consumer acting outside their trade, business, craft, or profession as per the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer exercises the right of withdrawal",
+          "text_sent": "its customer exercises the right of withdrawal",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "where provided for in Article 13(2) and in this Article",
+          "text_sent": "where provided for in Article 13(2) and in this Article",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  }
+]

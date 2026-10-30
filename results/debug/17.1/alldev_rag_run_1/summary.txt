@@ -1,0 +1,57 @@
+RAG STEP ROUTING (SR) DEBUG, case 17.1
+Answer key: target CRD-Art14-1. Rules: (a) CRD-Art14 routed for >= 1 step; (b) CRD-Art14-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 23 kept, 0 dropped
+  S1: [customer] places an order | order details
+  S2: [system] records the order details | order details
+  S3: [system] begins payment processing | payment
+  S4: [system] notifies the customer | notification
+  S5: [system] checks stock availability | stock availability
+  S6: [system] initiates a back-order | back-order
+  S7: [system] informs the customer | notification
+  S8: [system] continues the process | process
+  S9: [system] picks in-stock items | items
+  S10: [system] performs quality control checks | items
+  S11: [system] does packaging | packaging
+  S12: [shipping department] prepares shipping documents and labels | shipping documents and labels
+  S13: [shipping department] prepares customs documentation | customs documentation
+  S14: [system] dispatches the order | order
+  S15: [system] sends a shipping confirmation | shipping confirmation
+  S16: [system] updates inventory levels | inventory levels
+  S17: [system] sends a follow-up email for feedback | follow-up email
+  S18: [system] initiates a returns process | returns process
+  S19: [system] sends a return shipping label | return shipping label
+  S20: [system] receives returned items | returned items
+  S21: [system] inspects returned items | returned items
+  S22: [system] processes a refund or replacement | refund or replacement
+  S23: [customer] contacts the company | contact
+S2 routes per step:
+  S1: GDPR-Art6, CRD-Art11, ECD-Art11, CRD-Art6, SGD-Art5
+  S2: GDPR-Art30, GDPR-Art12, GDPR-Art13, GDPR-Art5
+  S3: GDPR-Art6, GDPR-Art24, GDPR-Art32
+  S4: GDPR-Art12, GDPR-Art14, ECD-Art5, ECD-Art10
+  S5: GDPR-Art32, GDPR-Art24, SGD-Art12, SGD-Art5, SGD-Art6, SGD-Art7
+  S6: GDPR-Art6, GDPR-Art24, CRD-Art18, SGD-Art5, SGD-Art13, SGD-Art10
+  S7: GDPR-Art12, GDPR-Art14, CRD-Art6, GDPR-Art13, ECD-Art10
+  S8: GDPR-Art24, GDPR-Art32, GDPR-Art30, GDPR-Art5
+  S9: GDPR-Art6, GDPR-Art32, GDPR-Art24, SGD-Art5, SGD-Art6, SGD-Art7
+  S10: GDPR-Art25, SGD-Art12, GDPR-Art35, GDPR-Art5, GDPR-Art24, SGD-Art5
+  S11: GDPR-Art32, GDPR-Art25, SGD-Art12, SGD-Art5, SGD-Art6, SGD-Art7
+  S12: GDPR-Art24, CRD-Art18, SGD-Art12, GDPR-Art5, GDPR-Art30
+  S13: GDPR-Art24, GDPR-Art32, CRD-Art6, GDPR-Art5, GDPR-Art25
+  S14: GDPR-Art6, GDPR-Art32, CRD-Art18, SGD-Art5, SGD-Art13, SGD-Art14
+  S15: GDPR-Art12, GDPR-Art14, CRD-Art18, GDPR-Art13
+  S16: GDPR-Art12, GDPR-Art32, GDPR-Art24, GDPR-Art25, GDPR-Art30
+  S17: GDPR-Art12, GDPR-Art14, GDPR-Art34, GDPR-Art13
+  S18: GDPR-Art6, GDPR-Art12, CRD-Art9, GDPR-Art5, SGD-Art5
+  S19: GDPR-Art12, GDPR-Art14, CRD-Art11, GDPR-Art5, GDPR-Art34
+  S20: GDPR-Art34, SGD-Art13, SGD-Art14, GDPR-Art5, GDPR-Art12, GDPR-Art33
+  S21: GDPR-Art12, GDPR-Art34, SGD-Art12, GDPR-Art5, GDPR-Art33
+  S22: SGD-Art14, CRD-Art11, GDPR-Art12, CRD-Art9, CRD-Art13
+  S23: GDPR-Art12, GDPR-Art13, CRD-Art9, GDPR-Art14
+S3 rank of CRD-Art14-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-, S9=-, S10=-, S11=-, S12=-, S13=-, S14=-, S15=-, S16=-, S17=-, S18=-, S19=-, S20=-, S21=-, S22=-, S23=-
+S4 rank of CRD-Art14-1 (full merge): not in any list; top 5: ECD-Art11-1, ECD-Art11-2, ECD-Art11-3, SGD-Art14-1, SGD-Art14-2, SGD-Art14-3, SGD-Art14-4, SGD-Art7-1, SGD-Art7-2, SGD-Art7-3, SGD-Art7-4, SGD-Art7-5, GDPR-Art32-1, GDPR-Art32-2, GDPR-Art32-3, GDPR-Art32-4, GDPR-Art12-1, GDPR-Art12-2, GDPR-Art12-3, GDPR-Art12-4
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+Runs: alldev_rag_run_1 FAIL  (0/1 pass)

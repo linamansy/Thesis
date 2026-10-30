@@ -1,0 +1,627 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "LPD-Art3-1",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "transactions between undertakings",
+      "law_quote": "Transactions between undertakings",
+      "relevant": true,
+      "process_step": "the company sends them a bill",
+      "description_quote": "the company sends them a bill",
+      "reason": "The rule is about transactions between undertakings, and the process includes a step where a company sends a bill to another company, which is a transaction between undertakings.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Transactions between undertakings",
+      "description_quote_canonical": "the company sends them a bill",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "creditor"
+        ],
+        "if": [
+          "the creditor has fulfilled its contractual and legal obligations",
+          "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay"
+        ],
+        "then": "the creditor is entitled to interest for late payment without the necessity of a reminder",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+            "status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ]
+          },
+          {
+            "id": "D2",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+            "status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "some customers pay later than the agreed date",
+            "status": "confirmed",
+            "quotes": [
+              "some customers pay later than the agreed date"
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: creditor",
+          "roles": [
+            {
+              "role": "creditor",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "D2 not stated"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe a transaction between companies (undertakings) involving payment for goods/services, matching the statement's definition of a commercial transaction."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the creditor has fulfilled its contractual and legal obligations",
+          "text_sent": "the organisation running the described process has fulfilled its contractual and legal obligations",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the creditor has not received the amount due on time",
+          "original_text": "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "text_sent": "the organisation running the described process has not received the amount due on time",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "some customers pay later than the agreed date"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "some customers pay later than the agreed date"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "If customers pay later than the agreed date, the organisation has not received the amount due on time."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "D2",
+          "kind": "role_fact",
+          "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences mention sending a bill but do not confirm receipt of payment, while the statement asserts payment has occurred."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "unless the debtor is not responsible for the delay",
+          "original_text": "the creditor has not received the amount due on time, unless the debtor is not responsible for the delay",
+          "split_from": "C2",
+          "text_sent": "unless the debtor is not responsible for the delay",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "creditor": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": null,
+        "S1": "first look",
+        "C1": null,
+        "C2": "first look"
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "LPD-Art3-2",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n2. Member States shall ensure that the applicable reference rate:\n(a) for the first semester of the year concerned shall be the rate in force on 1 January of that year;\n(b) for the second semester of the year concerned shall be the rate in force on 1 July of that year.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "reference rate for transactions between undertakings",
+      "law_quote": "the applicable reference rate",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The rule is about setting a reference rate for transactions between undertakings, but the process does not involve any such activity.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "the applicable reference rate",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "LPD-Art3-3",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n3. Where the conditions set out in paragraph 1 are satisfied, Member States shall ensure the following:\n(a) that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract;\n(b) where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "late payment by debtors",
+      "law_quote": "the creditor is entitled to interest for late payment",
+      "relevant": true,
+      "process_step": "the company sends them a bill, and some customers pay later than the agreed date",
+      "description_quote": "the company sends them a bill, and some customers pay later than the agreed date",
+      "reason": "The rule is about late payment by debtors, and the process includes a step where customers pay later than the agreed date.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the creditor is entitled to interest for late payment",
+      "description_quote_canonical": "the company sends them a bill, and some customers pay later than the agreed date",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "creditor"
+        ],
+        "if": [
+          "the conditions set out in paragraph 1 are satisfied"
+        ],
+        "then": "the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+            ]
+          },
+          {
+            "id": "D2",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: creditor",
+          "roles": [
+            {
+              "role": "creditor",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "D2 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe transactions between companies (undertakings) involving payment for goods/services, matching the statement's definition of a commercial transaction."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the conditions set out in paragraph 1 are satisfied",
+          "text_sent": "the conditions set out in paragraph 1 are satisfied",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "D2",
+          "kind": "role_fact",
+          "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences indicate that other companies (undertakings) are billed for goods/services, aligning with the statement about payment from another undertaking."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "creditor": "the organisation running the described process"
+      }
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "LPD-Art3-4",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "procedure of acceptance or verification of conformity of goods or services with the contract",
+      "law_quote": "procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The rule is about verifying the conformity of goods or services, but the process does not mention any such verification step.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "LPD-Art3-5",
+    "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n5. Member States shall ensure that the period for payment fixed in the contract does not exceed 60 calendar days, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+    "label": "Not applicable",
+    "label_cause": "an IF item is contradicted",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "Transactions between undertakings",
+      "law_quote": "Transactions between undertakings",
+      "relevant": true,
+      "process_step": "the company sends them a bill",
+      "description_quote": "the company sends them a bill",
+      "reason": "The rule is about transactions between undertakings, and the process includes a step where a company sends a bill to another company, which is a transaction between undertakings.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Transactions between undertakings",
+      "description_quote_canonical": "the company sends them a bill",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body"
+        ],
+        "if": [
+          "the period for payment fixed in the contract does not exceed 60 calendar days"
+        ],
+        "then": "the Member State must ensure that the period for payment fixed in the contract does not exceed 60 calendar days, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+            "status": "confirmed",
+            "quotes": [
+              "Most customers are other companies.",
+              "After the order is confirmed, the company sends them a bill"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "some customers pay later than the agreed date",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "contradicted",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most customers are other companies.",
+            "After the order is confirmed, the company sends them a bill"
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "Most customers are other companies",
+            "After the order is confirmed, the company sends them a bill"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences imply a commercial transaction between companies (customers) involving billing, which aligns with the statement's definition of payment for goods/services between undertakings."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the period for payment fixed in the contract does not exceed 60 calendar days",
+          "text_sent": "the period for payment fixed in the contract does not exceed 60 calendar days",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Not applicable",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {}
+    },
+    "resolution": {
+      "label": "Not applicable",
+      "if_label": "Not applicable",
+      "exceptions_applying": [],
+      "reason": "an IF item is contradicted",
+      "decided_by": {
+        "R1": "code rule",
+        "S1": "first look",
+        "C1": null
+      }
+    },
+    "requirement": null
+  }
+]

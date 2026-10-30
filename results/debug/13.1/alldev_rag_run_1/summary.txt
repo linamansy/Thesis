@@ -1,0 +1,23 @@
+RAG STEP ROUTING (SR) DEBUG, case 13.1
+Answer key: target SGD-Art14-1. Rules: (a) SGD-Art14 routed for >= 1 step; (b) SGD-Art14-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 6 kept, 0 dropped
+  S1: [customer] files a complaint | complaint
+  S2: [customer service] logs the complaint and assigns it | complaint
+  S3: [team] determines whether the complaint is valid | complaint
+  S4: [financial team] processes the reimbursement | refund
+  S5: [customer] receives the refund or is notified | refund
+  S6: [customer] provides feedback | feedback
+S2 routes per step:
+  S1: GDPR-Art12, GDPR-Art15, GDPR-Art19, GDPR-Art16
+  S2: GDPR-Art12, GDPR-Art13, GDPR-Art14, GDPR-Art5, GDPR-Art30
+  S3: GDPR-Art6, GDPR-Art24, GDPR-Art35, GDPR-Art5, GDPR-Art12
+  S4: GDPR-Art6, GDPR-Art12, GDPR-Art24, GDPR-Art5, GDPR-Art13
+  S5: GDPR-Art12, GDPR-Art14, CRD-Art11, CRD-Art13, SGD-Art13
+  S6: GDPR-Art12, GDPR-Art13, GDPR-Art14, GDPR-Art5
+S3 rank of SGD-Art14-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-
+S4 rank of SGD-Art14-1 (full merge): not in any list; top 5: CRD-Art13-1, CRD-Art13-2, CRD-Art13-3, CRD-Art13-4, CRD-Art13-5, CRD-Art13-6, CRD-Art13-7, CRD-Art13-8, GDPR-Art12-1, GDPR-Art12-2, GDPR-Art12-3, GDPR-Art12-4, GDPR-Art12-5, GDPR-Art12-6, GDPR-Art12-7, GDPR-Art12-8, GDPR-Art15-1, GDPR-Art15-2, GDPR-Art15-3, GDPR-Art15-4
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+Runs: alldev_rag_run_1 FAIL  (0/1 pass)

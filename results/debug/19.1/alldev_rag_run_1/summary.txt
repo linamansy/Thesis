@@ -1,0 +1,27 @@
+RAG STEP ROUTING (SR) DEBUG, case 19.1
+Answer key: target ECD-Art11-1. Rules: (a) ECD-Art11 routed for >= 1 step; (b) ECD-Art11-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 8 kept, 0 dropped
+  S1: [user] starts an order | -
+  S2: [user] selects the items to purchase and sets a payment method | items, payment method
+  S3: [user] pays or completes an installment agreement | -
+  S4: [user] chooses between multiple options for a free reward | free reward
+  S5: [user] chooses between multiple options for a free reward | free reward
+  S6: [user] delivers the items | items
+  S7: [user] returns items for exchange | items
+  S8: [shop] makes a new delivery | items
+S2 routes per step:
+  S1: GDPR-Art6, CRD-Art6, ECD-Art11, GDPR-Art5, GDPR-Art7
+  S2: CRD-Art6, GDPR-Art6, GDPR-Art13, ECD-Art10
+  S3: GDPR-Art6, GDPR-Art12, CRD-Art9
+  S4: CRD-Art9, CRD-Art13, CRD-Art11, CRD-Art6, GDPR-Art6, SGD-Art5
+  S5: CRD-Art9, CRD-Art13, CRD-Art11, CRD-Art6, GDPR-Art6, GDPR-Art12
+  S6: CRD-Art18, SGD-Art14, SGD-Art10, SGD-Art5, SGD-Art6, SGD-Art7
+  S7: CRD-Art9, SGD-Art13, SGD-Art14
+  S8: CRD-Art18, SGD-Art14, SGD-Art10, SGD-Art5, SGD-Art6, SGD-Art7
+S3 rank of ECD-Art11-1 per step list: S1=1, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-
+S4 rank of ECD-Art11-1 (full merge): 53; top 5: CRD-Art18-1, CRD-Art18-2, CRD-Art18-3, CRD-Art18-4, SGD-Art5-1, SGD-Art10-1, SGD-Art10-2, SGD-Art10-3, SGD-Art10-4, SGD-Art10-5, SGD-Art10-6, SGD-Art6-1, SGD-Art7-1, SGD-Art7-2, SGD-Art7-3, SGD-Art7-4, SGD-Art7-5, ECD-Art11-1, ECD-Art11-2, ECD-Art11-3
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+Runs: alldev_rag_run_1 PASS  (1/1 pass)

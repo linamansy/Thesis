@@ -1,0 +1,49 @@
+{
+  "case_id": "11.1",
+  "mode": "mediation on given passages (no retrieval)",
+  "label": "alldev",
+  "passages_from": "alldev_rag_run_1",
+  "given_passage_ids": [
+    "GDPR-Art17-1",
+    "GDPR-Art17-2",
+    "GDPR-Art17-3",
+    "GDPR-Art15-1",
+    "GDPR-Art15-2",
+    "GDPR-Art15-3",
+    "GDPR-Art15-4",
+    "SGD-Art16-1",
+    "SGD-Art16-2",
+    "SGD-Art16-3",
+    "CRD-Art11-1",
+    "CRD-Art11-2",
+    "CRD-Art11-3",
+    "CRD-Art11-4",
+    "GDPR-Art12-1",
+    "GDPR-Art12-2",
+    "GDPR-Art12-3",
+    "GDPR-Art12-4",
+    "GDPR-Art12-5",
+    "GDPR-Art12-6"
+  ],
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "c3_version": "v2",
+  "fresh": true,
+  "think_calls": [
+    "CheckIfCallV2",
+    "SecondLookCallV2",
+    "VerifierCallV2"
+  ],
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.40.11",
+  "run": "med_alldev_run_1",
+  "started_at": "2026-10-30T20:30:13+00:00",
+  "answer_key": {
+    "target_passage_id": "GDPR-Art17-1",
+    "accepted_target_ids": [
+      "GDPR-Art17-1"
+    ],
+    "expected_step": "Delete customer's account details"
+  }
+}

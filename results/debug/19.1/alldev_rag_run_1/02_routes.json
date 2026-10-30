@@ -1,0 +1,955 @@
+{
+  "stage": "S2 article routing (two views, union of routes)",
+  "n_articles_offered": 71,
+  "views": [
+    "title",
+    "law_title_sentence"
+  ],
+  "per_step": {
+    "S1": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "ECD-Art11",
+          "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order.",
+          "title": "Placing of the order",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art5",
+          "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data.",
+          "title": "Principles relating to processing of personal data",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art7",
+          "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing.",
+          "title": "Conditions for consent",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely."
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "ECD-Art11",
+              "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order.",
+              "title": "Placing of the order"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step involves starting an order which may require lawful processing of personal data."
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art5",
+              "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data.",
+              "title": "Principles relating to processing of personal data"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing and the step involves starting an order which may require lawful processing of personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art7",
+              "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing.",
+              "title": "Conditions for consent"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S2": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art13",
+          "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method.",
+          "title": "Information to be provided where personal data are collected from the data subject",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "ECD-Art10",
+          "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method.",
+          "title": "Information to be provided",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method."
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art13",
+              "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method.",
+              "title": "Information to be provided where personal data are collected from the data subject"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article relates to the lawfulness of processing personal data, which includes the user's payment method selection."
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which includes selecting items and payment methods."
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article relates to the lawfulness of processing personal data, which includes the user's payment method selection.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article covers information requirements for distance and off-premises contracts, which includes selecting items and payment methods.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "ECD-Art10",
+              "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method.",
+              "title": "Information to be provided"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S3": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the user paying or completing an installment agreement, which may involve personal data processing."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, and the step involves the user providing personal data through payment, which requires transparency."
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal for consumers, and the step involves completing an installment agreement, which may be subject to consumer rights."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves the user paying or completing an installment agreement, which may involve personal data processing.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information and communication for data subjects, and the step involves the user providing personal data through payment, which requires transparency.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            },
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal for consumers, and the step involves completing an installment agreement, which may be subject to consumer rights.",
+              "title": "Right of withdrawal"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S4": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art13",
+          "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+          "title": "Obligations of the trader in the event of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward."
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection."
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service.",
+              "title": "Conformity of goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S5": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art13",
+          "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+          "title": "Obligations of the trader in the event of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art11",
+          "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward.",
+          "title": "Exercise of the right of withdrawal",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "CRD-Art6",
+          "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+          "title": "Information requirements for distance and off-premises contracts",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art6",
+          "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward.",
+          "title": "Lawfulness of processing",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "GDPR-Art12",
+          "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward.",
+          "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward."
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward."
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art13",
+              "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+              "title": "Obligations of the trader in the event of withdrawal"
+            },
+            {
+              "article_id": "CRD-Art11",
+              "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward.",
+              "title": "Exercise of the right of withdrawal"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract."
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward."
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art6",
+              "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+              "title": "Information requirements for distance and off-premises contracts"
+            },
+            {
+              "article_id": "GDPR-Art6",
+              "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward.",
+              "title": "Lawfulness of processing"
+            },
+            {
+              "article_id": "GDPR-Art12",
+              "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward.",
+              "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S6": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article is about delivery of goods and the step involves delivering items.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article is about repair or replacement of goods and the step involves delivering items.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art10",
+          "reason": "The article is about liability of the seller and the step involves delivering items.",
+          "title": "Liability of the seller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step involves delivering items.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art6",
+          "reason": "The article is about subjective requirements for conformity and the step involves delivering items.",
+          "title": "Subjective requirements for conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art7",
+          "reason": "The article is about objective requirements for conformity and the step involves delivering items.",
+          "title": "Objective requirements for conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step involves delivering items."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering items."
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller and the step involves delivering items."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery of goods and the step involves delivering items.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves delivering items.",
+              "title": "Repair or replacement of the goods"
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article is about liability of the seller and the step involves delivering items.",
+              "title": "Liability of the seller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves delivering items."
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity and the step involves delivering items."
+            },
+            {
+              "article_id": "SGD-Art7",
+              "reason": "The article is about objective requirements for conformity and the step involves delivering items."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves delivering items.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity and the step involves delivering items.",
+              "title": "Subjective requirements for conformity"
+            },
+            {
+              "article_id": "SGD-Art7",
+              "reason": "The article is about objective requirements for conformity and the step involves delivering items.",
+              "title": "Objective requirements for conformity"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S7": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art9",
+          "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange.",
+          "title": "Right of withdrawal",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art13",
+          "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange.",
+          "title": "Remedies for lack of conformity",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title",
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves returning items for exchange."
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves returning items for exchange."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves returning items for exchange."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art9",
+              "reason": "The article is about the right of withdrawal and the step involves returning items for exchange.",
+              "title": "Right of withdrawal"
+            },
+            {
+              "article_id": "SGD-Art13",
+              "reason": "The article is about remedies for lack of conformity and the step involves returning items for exchange.",
+              "title": "Remedies for lack of conformity"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article is about repair or replacement of goods and the step involves returning items for exchange.",
+              "title": "Repair or replacement of the goods"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    },
+    "S8": {
+      "failed": false,
+      "routes": [
+        {
+          "article_id": "CRD-Art18",
+          "reason": "The article is about delivery obligations and the step involves making a new delivery.",
+          "title": "Delivery",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art14",
+          "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items.",
+          "title": "Repair or replacement of the goods",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art10",
+          "reason": "The article covers the liability of the seller, which applies to the delivery of items.",
+          "title": "Liability of the seller",
+          "views": [
+            "title"
+          ]
+        },
+        {
+          "article_id": "SGD-Art5",
+          "reason": "The article is about conformity of goods and the step involves making a new delivery of items.",
+          "title": "Conformity of goods",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art6",
+          "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards.",
+          "title": "Subjective requirements for conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        },
+        {
+          "article_id": "SGD-Art7",
+          "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose.",
+          "title": "Objective requirements for conformity",
+          "views": [
+            "law_title_sentence"
+          ]
+        }
+      ],
+      "dropped": [],
+      "views": {
+        "title": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery obligations and the step involves making a new delivery."
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items."
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article covers the liability of the seller, which applies to the delivery of items."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "CRD-Art18",
+              "reason": "The article is about delivery obligations and the step involves making a new delivery.",
+              "title": "Delivery"
+            },
+            {
+              "article_id": "SGD-Art14",
+              "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items.",
+              "title": "Repair or replacement of the goods"
+            },
+            {
+              "article_id": "SGD-Art10",
+              "reason": "The article covers the liability of the seller, which applies to the delivery of items.",
+              "title": "Liability of the seller"
+            }
+          ],
+          "dropped": []
+        },
+        "law_title_sentence": {
+          "failed": false,
+          "raw_routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves making a new delivery of items."
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards."
+            },
+            {
+              "article_id": "SGD-Art7",
+              "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose."
+            }
+          ],
+          "routes": [
+            {
+              "article_id": "SGD-Art5",
+              "reason": "The article is about conformity of goods and the step involves making a new delivery of items.",
+              "title": "Conformity of goods"
+            },
+            {
+              "article_id": "SGD-Art6",
+              "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards.",
+              "title": "Subjective requirements for conformity"
+            },
+            {
+              "article_id": "SGD-Art7",
+              "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose.",
+              "title": "Objective requirements for conformity"
+            }
+          ],
+          "dropped": []
+        }
+      }
+    }
+  }
+}

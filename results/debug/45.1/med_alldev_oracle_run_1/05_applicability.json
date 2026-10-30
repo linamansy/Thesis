@@ -1,0 +1,189 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art10-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "a service provider provides a service to a recipient"
+        ],
+        "then": "the service provider must provide the following information clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service: (a) the different technical steps to follow to conclude the contract; (b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible; (c) the technical means for identifying and correcting input errors prior to the placing of the order; (d) the languages offered for the conclusion of the contract",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a service provider provides a service to a recipient",
+          "text_sent": "the organisation running the described process provides a service to a recipient",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The E-Shop's activity of selling to private persons constitutes providing a service to recipients."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The E-Shop's operation of selling to private persons directly aligns with the statement's claim of selling goods/services for trade/business purposes."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "when otherwise agreed by parties who are not consumers",
+          "text_sent": "when otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art10-2",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art10-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "ECD-Art10-4",
+    "applicability": null,
+    "failed_step": null
+  }
+]

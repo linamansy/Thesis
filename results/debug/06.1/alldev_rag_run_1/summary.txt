@@ -1,0 +1,27 @@
+RAG STEP ROUTING (SR) DEBUG, case 06.1
+Answer key: target CRD-Art13-1. Rules: (a) CRD-Art13 routed for >= 1 step; (b) CRD-Art13-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 8 kept, 0 dropped
+  S1: [customer] places an order | -
+  S2: [system] generates an order confirmation and sends it | order confirmation
+  S3: [warehouse team] picks and packs the items and generates a shipping label | shipping label
+  S4: [logistics provider] delivers the order | -
+  S5: [system] sends tracking information | tracking information
+  S6: [system] monitors the shipment until it reaches the customer's address | -
+  S7: [customer] receives the parcel | -
+  S8: [customer] sends the parcel back | -
+S2 routes per step:
+  S1: GDPR-Art6, CRD-Art11, ECD-Art11, CRD-Art6, SGD-Art5
+  S2: GDPR-Art12, GDPR-Art14, CRD-Art18, GDPR-Art13
+  S3: GDPR-Art12, GDPR-Art32, SGD-Art12, GDPR-Art5, GDPR-Art24, GDPR-Art30
+  S4: CRD-Art18, SGD-Art14, SGD-Art10, SGD-Art5, SGD-Art13
+  S5: GDPR-Art12, GDPR-Art14, GDPR-Art34, GDPR-Art13
+  S6: GDPR-Art32, GDPR-Art34, SGD-Art12, CRD-Art18, SGD-Art5, SGD-Art14
+  S7: CRD-Art18, SGD-Art14, SGD-Art13, SGD-Art5
+  S8: GDPR-Art12, GDPR-Art34, CRD-Art11, CRD-Art14, SGD-Art13, SGD-Art14
+S3 rank of CRD-Art13-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=-
+S4 rank of CRD-Art13-1 (full merge): not in any list; top 5: ECD-Art11-1, ECD-Art11-2, ECD-Art11-3, CRD-Art18-1, CRD-Art18-2, CRD-Art18-3, CRD-Art18-4, CRD-Art14-1, CRD-Art14-2, CRD-Art14-2a, CRD-Art14-3, CRD-Art14-4, CRD-Art14-5, SGD-Art5-1, SGD-Art10-1, SGD-Art10-2, SGD-Art10-3, SGD-Art10-4, SGD-Art10-5, SGD-Art10-6
+Rule (a) FAIL   Rule (b) FAIL   -> run FAIL
+
+Runs: alldev_rag_run_1 FAIL  (0/1 pass)

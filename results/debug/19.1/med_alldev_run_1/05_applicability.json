@@ -1,0 +1,1432 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "CRD-Art18-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          "the parties have not agreed otherwise on the time of delivery"
+        ],
+        "then": "the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Finally, the items are delivered",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The first sentence describes users as private persons buying from home, which aligns with the consumer definition but does not explicitly state the purpose is outside their trade, business, etc."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the parties have not agreed otherwise on the time of delivery",
+          "text_sent": "the parties have not agreed otherwise on the time of delivery",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop being run by a company implies business activity, and selling to private persons via website constitutes trade/business purpose."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "CRD-Art18-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          "the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1"
+        ],
+        "then": "the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract",
+        "exceptions": [
+          "sales contracts where the trader has refused to deliver the goods",
+          "sales contracts where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract",
+          "sales contracts where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "The users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe users as private persons buying from home, implying they are natural persons acting for personal purposes, aligning with the statement's definition of a consumer."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1",
+          "text_sent": "the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with its customer or within the time limit set out in paragraph 1",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "sales contracts where the trader has refused to deliver the goods",
+          "text_sent": "sales contracts where the trader has refused to deliver the goods",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E2",
+          "text": "sales contracts where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract",
+          "text_sent": "sales contracts where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "E3",
+          "text": "sales contracts where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential",
+          "text_sent": "sales contracts where its customer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art18-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art18-4",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "SGD-Art5-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller"
+        ],
+        "if": [
+          "the seller delivers goods to the consumer"
+        ],
+        "then": "the seller shall deliver goods to the consumer that meet the requirements set out in Articles 6, 7 and 8, where applicable",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The user has the right to return items for exchange.",
+            "status": "confirmed",
+            "quotes": [
+              "The user has the right to return items for exchange."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Finally, the items are delivered.",
+            "status": "confirmed",
+            "quotes": [
+              "Finally, the items are delivered."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The user has the right to return items for exchange."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The user has the right to return items for exchange"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The second sentence explicitly states that goods are sold to a consumer acting outside their trade, business, etc., which matches the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the seller delivers goods to the consumer",
+          "text_sent": "the organisation running the described process delivers goods to its customer",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Finally, the items are delivered."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Finally, the items are delivered"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence 'Finally, the items are delivered' implies that the organisation's process includes delivering goods to customers, thus confirming the statement."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop being run by a company implies business activity, and selling to private persons via website constitutes trade/business purpose."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "SGD-Art10-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller",
+          "consumer"
+        ],
+        "if": [
+          "a lack of conformity exists at the time when the goods were delivered and becomes apparent within two years of that time"
+        ],
+        "then": "the seller shall be liable to the consumer",
+        "exceptions": [
+          "without prejudice to Article 7(3), this paragraph shall also apply to goods with digital elements"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "the shop is run by a company based in France",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "the user has the right to return items for exchange",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "the user has the right to return items for exchange",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller or consumer",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "T1 not stated"
+            },
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences together indicate users are private persons (natural persons) buying for personal use (from home), aligning with the statement's definition of a consumer acting outside their trade/business."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a lack of conformity exists at the time when the goods were delivered and becomes apparent within two years of that time",
+          "text_sent": "a lack of conformity exists at the time when the goods were delivered and becomes apparent within two years of that time",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "without prejudice to Article 7(3), this paragraph shall also apply to goods with digital elements",
+          "text_sent": "without prejudice to Article 7(3), this paragraph shall also apply to goods with digital elements",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 7,
+    "passage_id": "SGD-Art10-2",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 8,
+    "passage_id": "SGD-Art10-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 9,
+    "passage_id": "SGD-Art10-4",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer",
+          "public body"
+        ],
+        "if": [
+          "under national law, the remedies provided for in Article 13 are also subject to a limitation period"
+        ],
+        "then": "Member States shall ensure that such limitation period allows the consumer to exercise the remedies laid down in Article 13 for any lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent within the period of time referred to in those paragraphs",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer or public body",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            },
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe users as private persons buying from home on the shop's website, which aligns with the statement's definition of a consumer acting outside their trade, business, craft, or profession."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "under national law, the remedies provided for in Article 13 are also subject to a limitation period",
+          "text_sent": "under national law, the remedies provided for in Article 13 are also subject to a limitation period",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 10,
+    "passage_id": "SGD-Art10-5",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body",
+          "consumer"
+        ],
+        "if": [
+          "a lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent during the period of time referred to in those paragraphs"
+        ],
+        "then": "Member States shall ensure that such limitation period allows the consumer to exercise the remedies laid down in Article 13",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body or consumer",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            },
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe private persons buying for personal use, aligning with the statement's definition of a consumer acting outside their trade/business."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent during the period of time referred to in those paragraphs",
+          "text_sent": "a lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent during the period of time referred to in those paragraphs",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 11,
+    "passage_id": "SGD-Art10-6",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 12,
+    "passage_id": "SGD-Art6-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller"
+        ],
+        "if": [
+          "the goods are to conform with the sales contract"
+        ],
+        "then": "the goods shall be of the description, type, quantity and quality, and possess the functionality, compatibility, interoperability and other features, as required by the sales contract; be fit for any particular purpose for which the consumer requires them and which the consumer made known to the seller at the latest at the time of the conclusion of the sales contract, and in respect of which the seller has given acceptance; be delivered with all accessories and instructions, including on installation, as stipulated by the sales contract; and be supplied with updates as stipulated by the sales contract",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe private persons (consumers) buying for personal use, which aligns with the statement's definition of a consumer acting outside their trade/business."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the goods are to conform with the sales contract",
+          "text_sent": "the goods are to conform with the sales contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop being run by a company implies business activity, and selling to private persons via website constitutes trade/business purpose."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 13,
+    "passage_id": "SGD-Art7-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller",
+          "consumer"
+        ],
+        "if": [
+          "the goods are sold"
+        ],
+        "then": "the goods shall be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct; where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract; where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "users are private persons who buy from home on the shop's website",
+            "status": "confirmed",
+            "quotes": [
+              "users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France",
+              "users are private persons who buy from home on the shop's website"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Finally, the items are delivered",
+            "status": "confirmed",
+            "quotes": [
+              "Finally, the items are delivered"
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller or consumer",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            },
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France",
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The first sentence describes users as private persons buying from home, but the statement refers to a consumer acting outside their trade, which is not explicitly confirmed by the first sentence alone."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the goods are sold",
+          "text_sent": "the goods are sold",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "Finally, the items are delivered"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Finally, the items are delivered"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The delivery of items implies that the goods have been sold as part of the business process."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France",
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France",
+            "users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop being run by a company implies commercial activity, and users purchasing from the website confirm sales to customers, aligning with the statement's claim."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 14,
+    "passage_id": "SGD-Art7-2",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 15,
+    "passage_id": "SGD-Art7-3",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 16,
+    "passage_id": "SGD-Art7-4",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 17,
+    "passage_id": "SGD-Art7-5",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 18,
+    "passage_id": "ECD-Art11-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "public body"
+        ],
+        "if": [
+          "the recipient of the service places his order through technological means"
+        ],
+        "then": "the Member State shall ensure that the service provider acknowledges the receipt of the recipient's order without undue delay and by electronic means, and that the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them",
+        "exceptions": [
+          "otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The user starts an order by logging in to their account.",
+            "status": "confirmed",
+            "quotes": [
+              "The user starts an order by logging in to their account."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: public body",
+          "roles": [
+            {
+              "role": "public body",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "a public body is not a business"
+            }
+          ],
+          "status": "contradicted",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service places his order through technological means",
+          "text_sent": "the recipient of the service places his order through technological means",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The user starts an order by logging in to their account."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The user starts an order by logging in to their account"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The first sentence indicates the user (recipient) starts an order via logging in (technological means), supporting the statement."
+          }
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "otherwise agreed by parties who are not consumers",
+          "text_sent": "otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "first_look_label": "Not applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {}
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 19,
+    "passage_id": "ECD-Art11-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+        ],
+        "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ]
+      },
+      "split_valid": false,
+      "rejected_if": [
+        "the service provider is required to make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order"
+      ],
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "first_look_label": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Split invalid",
+      "failed_step": null,
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 20,
+    "passage_id": "ECD-Art11-3",
+    "applicability": null,
+    "failed_step": null
+  }
+]

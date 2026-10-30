@@ -1,0 +1,354 @@
+{
+  "stage": "S1 steps",
+  "failed": false,
+  "raw_steps": [
+    {
+      "step_id": "S1",
+      "actor": "customer",
+      "activity": "places an order",
+      "data_or_object": "order details",
+      "quote": "When a customer places an order"
+    },
+    {
+      "step_id": "S2",
+      "actor": "system",
+      "activity": "records the order details",
+      "data_or_object": "order details",
+      "quote": "the system records the order details"
+    },
+    {
+      "step_id": "S3",
+      "actor": "system",
+      "activity": "begins payment processing",
+      "data_or_object": "payment",
+      "quote": "Payment processing begins"
+    },
+    {
+      "step_id": "S4",
+      "actor": "system",
+      "activity": "notifies the customer",
+      "data_or_object": "notification",
+      "quote": "If the payment fails, the customer is notified, and the process ends"
+    },
+    {
+      "step_id": "S5",
+      "actor": "system",
+      "activity": "checks stock availability",
+      "data_or_object": "stock availability",
+      "quote": "Upon successful payment, the inventory system checks stock availability"
+    },
+    {
+      "step_id": "S6",
+      "actor": "system",
+      "activity": "initiates a back-order",
+      "data_or_object": "back-order",
+      "quote": "If items are out of stock, a back-order is initiated, and the customer is informed about the delay"
+    },
+    {
+      "step_id": "S7",
+      "actor": "system",
+      "activity": "informs the customer",
+      "data_or_object": "notification",
+      "quote": "If items are out of stock, a back-order is initiated, and the customer is informed about the delay"
+    },
+    {
+      "step_id": "S8",
+      "actor": "system",
+      "activity": "continues the process",
+      "data_or_object": "process",
+      "quote": "The process continues once the back-order is received and all required items are available in stock"
+    },
+    {
+      "step_id": "S9",
+      "actor": "system",
+      "activity": "picks in-stock items",
+      "data_or_object": "items",
+      "quote": "In-stock items are picked from the warehouse"
+    },
+    {
+      "step_id": "S10",
+      "actor": "system",
+      "activity": "performs quality control checks",
+      "data_or_object": "items",
+      "quote": "Quality control checks are performed on the picked items"
+    },
+    {
+      "step_id": "S11",
+      "actor": "system",
+      "activity": "does packaging",
+      "data_or_object": "packaging",
+      "quote": "Packaging is done, including gift wrapping if the customer requested it"
+    },
+    {
+      "step_id": "S12",
+      "actor": "shipping department",
+      "activity": "prepares shipping documents and labels",
+      "data_or_object": "shipping documents and labels",
+      "quote": "Meanwhile, the shipping department prepares shipping documents and labels"
+    },
+    {
+      "step_id": "S13",
+      "actor": "shipping department",
+      "activity": "prepares customs documentation",
+      "data_or_object": "customs documentation",
+      "quote": "If the order is international, customs documentation is prepared"
+    },
+    {
+      "step_id": "S14",
+      "actor": "system",
+      "activity": "dispatches the order",
+      "data_or_object": "order",
+      "quote": "Once packaging and shipping documents are ready, the order is dispatched"
+    },
+    {
+      "step_id": "S15",
+      "actor": "system",
+      "activity": "sends a shipping confirmation",
+      "data_or_object": "shipping confirmation",
+      "quote": "The system sends a shipping confirmation to the customer"
+    },
+    {
+      "step_id": "S16",
+      "actor": "system",
+      "activity": "updates inventory levels",
+      "data_or_object": "inventory levels",
+      "quote": "After dispatch, the system updates the inventory levels"
+    },
+    {
+      "step_id": "S17",
+      "actor": "system",
+      "activity": "sends a follow-up email for feedback",
+      "data_or_object": "follow-up email",
+      "quote": "A follow-up email for feedback is sent directly after confirming the successful delivery"
+    },
+    {
+      "step_id": "S18",
+      "actor": "system",
+      "activity": "initiates a returns process",
+      "data_or_object": "returns process",
+      "quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes"
+    },
+    {
+      "step_id": "S19",
+      "actor": "system",
+      "activity": "sends a return shipping label",
+      "data_or_object": "return shipping label",
+      "quote": "Sending a return shipping label."
+    },
+    {
+      "step_id": "S20",
+      "actor": "system",
+      "activity": "receives returned items",
+      "data_or_object": "returned items",
+      "quote": "Receiving returned items."
+    },
+    {
+      "step_id": "S21",
+      "actor": "system",
+      "activity": "inspects returned items",
+      "data_or_object": "returned items",
+      "quote": "Inspecting returned items."
+    },
+    {
+      "step_id": "S22",
+      "actor": "system",
+      "activity": "processes a refund or replacement",
+      "data_or_object": "refund or replacement",
+      "quote": "Processing a refund or replacement."
+    },
+    {
+      "step_id": "S23",
+      "actor": "customer",
+      "activity": "contacts the company",
+      "data_or_object": "contact",
+      "quote": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue"
+    }
+  ],
+  "steps": [
+    {
+      "step_id": "S1",
+      "actor": "customer",
+      "activity": "places an order",
+      "data_or_object": "order details",
+      "quote": "When a customer places an order",
+      "quote_found": true
+    },
+    {
+      "step_id": "S2",
+      "actor": "system",
+      "activity": "records the order details",
+      "data_or_object": "order details",
+      "quote": "the system records the order details",
+      "quote_found": true
+    },
+    {
+      "step_id": "S3",
+      "actor": "system",
+      "activity": "begins payment processing",
+      "data_or_object": "payment",
+      "quote": "Payment processing begins",
+      "quote_found": true
+    },
+    {
+      "step_id": "S4",
+      "actor": "system",
+      "activity": "notifies the customer",
+      "data_or_object": "notification",
+      "quote": "If the payment fails, the customer is notified, and the process ends",
+      "quote_found": true
+    },
+    {
+      "step_id": "S5",
+      "actor": "system",
+      "activity": "checks stock availability",
+      "data_or_object": "stock availability",
+      "quote": "Upon successful payment, the inventory system checks stock availability",
+      "quote_found": true
+    },
+    {
+      "step_id": "S6",
+      "actor": "system",
+      "activity": "initiates a back-order",
+      "data_or_object": "back-order",
+      "quote": "If items are out of stock, a back-order is initiated, and the customer is informed about the delay",
+      "quote_found": true
+    },
+    {
+      "step_id": "S7",
+      "actor": "system",
+      "activity": "informs the customer",
+      "data_or_object": "notification",
+      "quote": "If items are out of stock, a back-order is initiated, and the customer is informed about the delay",
+      "quote_found": true
+    },
+    {
+      "step_id": "S8",
+      "actor": "system",
+      "activity": "continues the process",
+      "data_or_object": "process",
+      "quote": "The process continues once the back-order is received and all required items are available in stock",
+      "quote_found": true
+    },
+    {
+      "step_id": "S9",
+      "actor": "system",
+      "activity": "picks in-stock items",
+      "data_or_object": "items",
+      "quote": "In-stock items are picked from the warehouse",
+      "quote_found": true
+    },
+    {
+      "step_id": "S10",
+      "actor": "system",
+      "activity": "performs quality control checks",
+      "data_or_object": "items",
+      "quote": "Quality control checks are performed on the picked items",
+      "quote_found": true
+    },
+    {
+      "step_id": "S11",
+      "actor": "system",
+      "activity": "does packaging",
+      "data_or_object": "packaging",
+      "quote": "Packaging is done, including gift wrapping if the customer requested it",
+      "quote_found": true
+    },
+    {
+      "step_id": "S12",
+      "actor": "shipping department",
+      "activity": "prepares shipping documents and labels",
+      "data_or_object": "shipping documents and labels",
+      "quote": "Meanwhile, the shipping department prepares shipping documents and labels",
+      "quote_found": true
+    },
+    {
+      "step_id": "S13",
+      "actor": "shipping department",
+      "activity": "prepares customs documentation",
+      "data_or_object": "customs documentation",
+      "quote": "If the order is international, customs documentation is prepared",
+      "quote_found": true
+    },
+    {
+      "step_id": "S14",
+      "actor": "system",
+      "activity": "dispatches the order",
+      "data_or_object": "order",
+      "quote": "Once packaging and shipping documents are ready, the order is dispatched",
+      "quote_found": true
+    },
+    {
+      "step_id": "S15",
+      "actor": "system",
+      "activity": "sends a shipping confirmation",
+      "data_or_object": "shipping confirmation",
+      "quote": "The system sends a shipping confirmation to the customer",
+      "quote_found": true
+    },
+    {
+      "step_id": "S16",
+      "actor": "system",
+      "activity": "updates inventory levels",
+      "data_or_object": "inventory levels",
+      "quote": "After dispatch, the system updates the inventory levels",
+      "quote_found": true
+    },
+    {
+      "step_id": "S17",
+      "actor": "system",
+      "activity": "sends a follow-up email for feedback",
+      "data_or_object": "follow-up email",
+      "quote": "A follow-up email for feedback is sent directly after confirming the successful delivery",
+      "quote_found": true
+    },
+    {
+      "step_id": "S18",
+      "actor": "system",
+      "activity": "initiates a returns process",
+      "data_or_object": "returns process",
+      "quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes",
+      "quote_found": true
+    },
+    {
+      "step_id": "S19",
+      "actor": "system",
+      "activity": "sends a return shipping label",
+      "data_or_object": "return shipping label",
+      "quote": "Sending a return shipping label.",
+      "quote_found": true
+    },
+    {
+      "step_id": "S20",
+      "actor": "system",
+      "activity": "receives returned items",
+      "data_or_object": "returned items",
+      "quote": "Receiving returned items.",
+      "quote_found": true
+    },
+    {
+      "step_id": "S21",
+      "actor": "system",
+      "activity": "inspects returned items",
+      "data_or_object": "returned items",
+      "quote": "Inspecting returned items.",
+      "quote_found": true
+    },
+    {
+      "step_id": "S22",
+      "actor": "system",
+      "activity": "processes a refund or replacement",
+      "data_or_object": "refund or replacement",
+      "quote": "Processing a refund or replacement.",
+      "quote_found": true
+    },
+    {
+      "step_id": "S23",
+      "actor": "customer",
+      "activity": "contacts the company",
+      "data_or_object": "contact",
+      "quote": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue",
+      "quote_found": true
+    }
+  ],
+  "dropped": []
+}

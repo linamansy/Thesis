@@ -1,0 +1,39 @@
+RAG STEP ROUTING (SR) DEBUG, case 11.1
+Answer key: target GDPR-Art17-1. Rules: (a) GDPR-Art17 routed for >= 1 step; (b) GDPR-Art17-1 in the S4 top 5.
+
+=== alldev_rag_run_1 ===
+S1 steps: 14 kept, 0 dropped
+  S1: [customer] signs up for a subscription service | -
+  S2: [system] generates an account | -
+  S3: [system] assigns access | -
+  S4: [system] triggers automated billing cycles | -
+  S5: [customer] receives regular updates | -
+  S6: [customer] receives product enhancements | -
+  S7: [customer] receives renewal notifications | -
+  S8: [customer] decides to cancel | -
+  S9: [customer] submits a cancellation request | -
+  S10: [support team] processes a cancellation request | -
+  S11: [system] applies refunds or charges | -
+  S12: [support team] deactivates the subscription | -
+  S13: [support team] settles the final account balance | -
+  S14: [customer] asks to remove personal information | -
+S2 routes per step:
+  S1: GDPR-Art7, GDPR-Art6, CRD-Art9
+  S2: GDPR-Art6, GDPR-Art24, GDPR-Art25, GDPR-Art5
+  S3: GDPR-Art6, GDPR-Art12, GDPR-Art24, GDPR-Art5, GDPR-Art7
+  S4: GDPR-Art6, GDPR-Art24, GDPR-Art25, GDPR-Art5
+  S5: GDPR-Art12, GDPR-Art14, CRD-Art11, GDPR-Art13
+  S6: GDPR-Art12, CRD-Art18, SGD-Art14, SGD-Art5, SGD-Art13
+  S7: GDPR-Art12, GDPR-Art14, GDPR-Art24, GDPR-Art13
+  S8: CRD-Art9, GDPR-Art17, SGD-Art16, ECD-Art11
+  S9: CRD-Art9, CRD-Art13, CRD-Art11
+  S10: GDPR-Art12, GDPR-Art15, CRD-Art9, CRD-Art13, CRD-Art14
+  S11: GDPR-Art6, GDPR-Art12, GDPR-Art24, GDPR-Art19
+  S12: GDPR-Art17, GDPR-Art24, GDPR-Art12, GDPR-Art30
+  S13: GDPR-Art6, GDPR-Art24, GDPR-Art12, GDPR-Art5, GDPR-Art30
+  S14: GDPR-Art17, GDPR-Art12, GDPR-Art15
+S3 rank of GDPR-Art17-1 per step list: S1=-, S2=-, S3=-, S4=-, S5=-, S6=-, S7=-, S8=4, S9=-, S10=-, S11=-, S12=1, S13=-, S14=1
+S4 rank of GDPR-Art17-1 (full merge): 21; top 5: GDPR-Art17-1, GDPR-Art17-2, GDPR-Art17-3, GDPR-Art15-1, GDPR-Art15-2, GDPR-Art15-3, GDPR-Art15-4, SGD-Art16-1, SGD-Art16-2, SGD-Art16-3, CRD-Art11-1, CRD-Art11-2, CRD-Art11-3, CRD-Art11-4, GDPR-Art12-1, GDPR-Art12-2, GDPR-Art12-3, GDPR-Art12-4, GDPR-Art12-5, GDPR-Art12-6
+Rule (a) PASS   Rule (b) PASS   -> run PASS
+
+Runs: alldev_rag_run_1 PASS  (1/1 pass)
