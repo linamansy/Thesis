@@ -28,6 +28,8 @@ from src.mediation.applicability_resolver import INDETERMINATE, NOT_APPLICABLE
 from src.orchestrator_v2 import OrchestratorV2
 from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
 
+pytestmark = pytest.mark.usefixtures("verifier_yes")   # written before the verifier (fix verifier); see conftest.py
+
 CONFIG = load_config()
 SCOPE = CONFIG["c3_v2"]["scope_conditions"]
 PASSAGES = {json.loads(line)["id"]: json.loads(line)["text"] for line in

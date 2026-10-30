@@ -11,6 +11,8 @@ from src.config import load_config
 from src.llm.mock_llm import MockLLM
 from tests.test_debug_single_case import CONFIRMED, DESCRIPTION, PASSAGE, RELEVANT, REQUIREMENT, SPLIT
 
+pytestmark = pytest.mark.usefixtures("verifier_yes")   # written before the verifier (fix verifier); see conftest.py
+
 CONFIG = load_config()
 
 

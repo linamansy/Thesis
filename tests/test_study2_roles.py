@@ -29,6 +29,8 @@ from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
 from src.retrieval.passage import load_passages
 from src.retrieval.sparse_retriever import BM25Retriever
 
+pytestmark = pytest.mark.usefixtures("verifier_yes")   # written before the verifier (fix verifier); see conftest.py
+
 CONFIG = load_config()
 SETTINGS = CONFIG["c3_v2"]
 CORPUS = project_path(CONFIG["study2_corpus"]["passages"])

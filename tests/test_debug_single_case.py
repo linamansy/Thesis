@@ -6,6 +6,9 @@ from scripts.debug_single_case import (CASE_ID, debug_run, load_answer_key, load
                                         retrieval_stages, summary_text, target_ranks)
 from src.config import load_config
 from src.llm.mock_llm import MockLLM
+import pytest
+
+pytestmark = pytest.mark.usefixtures("verifier_yes")   # written before the verifier (fix verifier); see conftest.py
 
 CONFIG = load_config()
 DESCRIPTION = "The customer chooses a product. The customer pays by card. The shop sends the product."

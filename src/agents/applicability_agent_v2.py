@@ -38,6 +38,11 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      situational conditions still not_stated (R5): the description + ONLY the other retrieved paragraphs of the SAME
      article as the passage being checked (none if there are none; fix sameart, 29 Oct 2026: with all retrieved
      passages the call was distracted by unrelated rules). Same quote check. Roles and scope are never looked at again.
+  h. verifier (VerifierCallV2, fix verifier, 30 Oct 2026), after the quote check of the first and of the second look:
+     every item that is still confirmed or contradicted gets one more call with ONLY its statement as sent (text_sent)
+     and its canonical quote: "Does this sentence, on its own, state that the statement is true / false?". "no" ->
+     not_stated (downgrade_cause "verifier rejected"). It runs before the roles and the look label are decided, so a
+     rejected item can still be looked at again by the second look.
 Every IF item records "decided_by": "code rule", "first look" or "second look" (None while not_stated).
 The final label (with exceptions) is decided by ResolverV2 (src/mediation/resolver_v2.py), not here.
 A1, the role meanings, the role facts and the scope texts are fixed in config.yaml, the same for every case, and never reach the
@@ -167,7 +172,12 @@ class CheckOutputV2(BaseModel):
     results: list[ItemCheck] = Field(description="One result for every item of the list")
 
 
-# ---------- the three calls ----------
+class VerifierOutputV2(BaseModel):
+    answer: Literal["yes", "no"] = Field(description="yes if the sentence on its own states it, otherwise no")
+    reason: str = Field(description="One line of reason")
+
+
+# ---------- the calls ----------
 
 class SplitCallV2(BaseAgent):
     prompt_key = "applicability_split_prompt_v2"
@@ -226,6 +236,17 @@ class SecondLookCallV2(ItemCheckCall):
                                     passages=passage_lines, passage_id=passage_id, items=self.item_lines(items, key="text_sent"))
 
 
+class VerifierCallV2(BaseAgent):
+    prompt_key = "applicability_verifier_prompt_v2"
+    output_schema = VerifierOutputV2
+    json_format = True
+
+    def build_prompt(self, statement: str, quote: str, truth: str) -> str:
+        """truth: "true" for a confirmed item, "false" for a contradicted one."""
+        return self.template.format(schema=self.schema_text(), quote=quote.strip(), statement=statement.strip(),
+                                    truth=truth)
+
+
 # ---------- the agent ----------
 
 class ApplicabilityAgentV2:
@@ -236,6 +257,7 @@ class ApplicabilityAgentV2:
         self.split_call = SplitCallV2(llm, logger, max_retries)
         self.check_call = CheckIfCallV2(llm, logger, max_retries)
         self.second_look_call = SecondLookCallV2(llm, logger, max_retries)
+        self.verifier_call = VerifierCallV2(llm, logger, max_retries)
         settings = config["c3_v2"]
         words = "|".join(re.escape(w) for w in settings["obligation_words"])
         self.obligation_pattern = re.compile(rf"\b({words})\b", re.IGNORECASE)
@@ -289,7 +311,9 @@ class ApplicabilityAgentV2:
                 record["failed_step"] = "check"
                 return record
             record["check"] = check.model_dump()
-            self.verify(items, check, description, "first look")
+            if not self.verify(case_id, items, check, description, "first look"):
+                record["failed_step"] = "verifier"
+                return record
 
         # e. roles by code (R3), f. first look
         self.decide_roles(role_item, record["role_facts"], scope, rules)
@@ -363,17 +387,20 @@ class ApplicabilityAgentV2:
         record["second_look"] = answer.model_dump()
         for c in open_items:
             c["first_look_status"] = c["status"]
-        self.verify(open_items, answer, description, "second look")
+        if not self.verify(case_id, open_items, answer, description, "second look"):
+            record["failed_step"] = "verifier"
+            return record
 
         label = look_label([c["status"] for c in record["conditions"]])
         record["second_look_decided"] = label != INDETERMINATE
         record["label"] = label
         return record
 
-    def verify(self, items: list[dict], answer: CheckOutputV2, description: str, look: str) -> None:
+    def verify(self, case_id: str, items: list[dict], answer: CheckOutputV2, description: str, look: str) -> bool:
         """Step d: copy each item's answer into it; a confirmed or contradicted status needs a quote that is really in
         the description, otherwise it becomes not_stated. look ("first look" / "second look") is recorded as
-        decided_by of a status that stays confirmed or contradicted."""
+        decided_by of a status that stays confirmed or contradicted. Then step h (the verifier). Returns False if a
+        verifier call has no valid answer after its retry."""
         by_id = {r.id: r for r in answer.results}
         for item in items:
             result = by_id[item["id"]]
@@ -381,4 +408,23 @@ class ApplicabilityAgentV2:
             downgraded = result.status != "not_stated" and not found
             status = "not_stated" if downgraded else result.status
             item.update(status=status, original_status=result.status, quote=result.quote, quote_found=found,
-                        quote_canonical=canonical, downgraded=downgraded, decided_by=look if status != "not_stated" else None)
+                        quote_canonical=canonical, downgraded=downgraded, decided_by=look if status != "not_stated" else None,
+                        downgrade_cause="quote not found" if downgraded else None, verifier=None)
+        return self.run_verifier(case_id, items)
+
+    def run_verifier(self, case_id: str, items: list[dict]) -> bool:
+        """Step h: one verifier call for every item that is still confirmed or contradicted. Input: the statement as
+        sent (text_sent, else text) and the canonical quote only. "no" -> not_stated, downgrade_cause "verifier
+        rejected"."""
+        for item in items:
+            if item["status"] not in ("confirmed", "contradicted"):
+                continue
+            truth = "true" if item["status"] == "confirmed" else "false"
+            answer = self.verifier_call.run(case_id, statement=item.get("text_sent", item["text"]),
+                                            quote=item["quote_canonical"], truth=truth)
+            if answer is None:
+                return False
+            item["verifier"] = {"asked": truth, "answer": answer.answer, "reason": answer.reason}
+            if answer.answer == "no":
+                item.update(status="not_stated", downgraded=True, downgrade_cause="verifier rejected", decided_by=None)
+        return True

@@ -18,6 +18,9 @@ from src.mediation.resolver_v2 import ResolverV2
 from src.orchestrator import IRRELEVANT, MEDIATION_FAILED
 from src.orchestrator_v2 import OrchestratorV2
 from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
+import pytest
+
+pytestmark = pytest.mark.usefixtures("verifier_yes")   # written before the verifier (fix verifier); see conftest.py
 
 CONFIG = load_config()
 DESCRIPTION = "The customer chooses a product. The customer pays by card. The shop sends the product."
@@ -370,7 +373,8 @@ def test_round1_eval_counts(tmp_path):
     record = {"set": "s", "case_id": "c"} | orch.mediate_passage("c", DESCRIPTION, {"rank": 1, "passage_id": "P-1",
                                                                                   "text": PASSAGE}, [])
     log = log_calls(tmp_path)
-    assert log == {"calls": 5, "calls_with_retry": 1, "calls_failed_after_retry": 0, "max_retries_seen": 1,
+    # one call more than before the verifier: C1 is confirmed, so the verifier is asked once
+    assert log == {"calls": 6, "calls_with_retry": 1, "calls_failed_after_retry": 0, "max_retries_seen": 1,
                    "valid_share": 1.0}
     m = metrics([record], orch.applicability_agent.obligation_pattern, log, CONFIG["c3_v2"]["requirement_checks"])
     assert (m["c1_usable_split"], m["c2_if_items_with_obligation_word"], m["requirements_passed_on"],
