@@ -31,7 +31,7 @@ a from_then without an ellipsis is checked exactly as before. duty.kept_as is un
 
 Fix tolquote (30 Oct 2026): every quote check here (step_quote, triggers, kept_as, duty.kept_as, and duty.from_then
 through law_quote_found) uses the ONE tolerant function match_quote of src/mediation/quote_checker.py (plural -s, at
-most 1 extra word per 6 quote words, at least 3 words). canonical_quotes() returns the matched exact spans, which
+most 1 extra word per 6 quote words from 3 words on; shorter quotes exactly, fix shortquote). canonical_quotes() returns the matched exact spans, which
 RequirementAgentV2 saves with each attempt.
 """
 

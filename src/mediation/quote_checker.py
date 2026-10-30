@@ -17,10 +17,12 @@ quotes, duty from_then, triggers, kept_as; the ellipsis-fragment check of Releva
 qwen3 sometimes drops or adds one word when it copies a quote ("phone and email" for "phone number and email"), and
 the strict check then turned a confirmed condition into not_stated (GDPR-Art13-1, case 01.1). The rule, in match_quote:
   1. both texts are split into words: lowercase, punctuation removed, a simple plural -s removed (word_key)
-  2. the quote must have at least MIN_QUOTE_WORDS words
-  3. it matches a contiguous span of the source if ALL quote words appear in that span in the same order, the span
-     starts with the first quote word and ends with the last, and the span has at most 1 extra word per 6 quote
-     words (rounded up: 1 extra word for 3-6 quote words, 2 for 7-12, ...)
+  2. a quote of fewer than MIN_QUOTE_WORDS words (fix shortquote, 30 Oct 2026; before, it was rejected) must match
+     exactly after step 1: its words, one after the other, with no gap ("on request", "distance contracts" for
+     "distance contract")
+  3. a quote of MIN_QUOTE_WORDS or more words matches a contiguous span of the source if ALL quote words appear in
+     that span in the same order, the span starts with the first quote word and ends with the last, and the span has
+     at most 1 extra word per 6 quote words (rounded up: 1 extra word for 3-6 quote words, 2 for 7-12, ...)
   4. the matched span, copied exactly from the source, is returned as the canonical quote and saved next to the
      model's quote
 Reordered words, a changed word or words from elsewhere in the source do not match.
@@ -36,7 +38,7 @@ QUOTE_CHARACTERS = str.maketrans({
 })
 NOT_LETTER_OR_DIGIT = re.compile(r"[\W_]+")
 LETTERS_OR_DIGITS = re.compile(r"[^\W_]+")
-MIN_QUOTE_WORDS = 3      # fixed by the task of 30 Oct 2026, not a study parameter
+MIN_QUOTE_WORDS = 3      # shorter quotes must match exactly (no extra word); fixed by the task, not a study parameter
 QUOTE_WORDS_PER_EXTRA = 6  # at most 1 extra source word per 6 quote words (rounded up)
 
 
@@ -78,9 +80,10 @@ def find_span(quote: str, words: list[tuple[str, int, int]], start_word: int = 0
     If several spans match, the one with the fewest extra words is taken (the earliest of those), so a quote of
     "The controller shall ..." does not start at an earlier "the" in the article title."""
     keys = [word_key(w) for w in LETTERS_OR_DIGITS.findall(quote or "")]
-    if len(keys) < MIN_QUOTE_WORDS:
+    if not keys:
         return None
-    max_span = len(keys) + math.ceil(len(keys) / QUOTE_WORDS_PER_EXTRA)
+    extra = math.ceil(len(keys) / QUOTE_WORDS_PER_EXTRA) if len(keys) >= MIN_QUOTE_WORDS else 0   # step 2 / 3
+    max_span = len(keys) + extra
     best = None
     for first in range(start_word, len(words)):
         if words[first][0] != keys[0]:

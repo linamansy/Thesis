@@ -71,7 +71,7 @@ def test_empty_step_gives_irrelevant(tmp_path):
 def test_quote_matching_is_quotechecker_matching(tmp_path):
     loose = dict(REAL, description_quote="the CUSTOMER pays, by card")   # case and punctuation are ignored
     assert run_and_check(tmp_path, loose)["description_quote_found"] is True
-    partial_word = dict(REAL, description_quote="customer pay")          # whole words only
+    partial_word = dict(REAL, description_quote="customer pa")           # whole words only
     assert run_and_check(tmp_path, partial_word)["description_quote_found"] is False
 
 

@@ -25,7 +25,7 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      the described process; a role decided by the scope item -> its customer; other roles unchanged). The saved
      item keeps its original "text" and records the sent "text_sent". The second look gets the same text_sent (fix 2).
   d. code quote check (match_quote, tolerant since fix tolquote, 30 Oct 2026: plural -s, at most 1 extra word per 6
-     quote words, at least 3 words): a confirmed or contradicted item whose quote is missing or not found in the
+     quote words from 3 words on, shorter quotes exactly (fix shortquote)): a confirmed or contradicted item whose quote is missing or not found in the
      description becomes not_stated (recorded as downgraded). The matched exact span is saved as quote_canonical.
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
      processor -> confirmed only if P1 is confirmed with a checked quote, otherwise contradicted (A1: the organisation

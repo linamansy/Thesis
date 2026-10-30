@@ -77,7 +77,6 @@ def test_one_missing_word_in_a_short_quote_is_accepted_and_the_exact_span_is_sav
 
 def test_plural_s_is_accepted():
     assert match_quote("sends the offers", DESCRIPTION) == (True, "sends the offer")
-    assert match_quote("distance contracts", "rules for a distance contract")[0] is False   # 2 words: too short
     assert match_quote("for distance contracts", "rules for distance contract")[0] is True
 
 
@@ -89,8 +88,25 @@ def test_a_quote_from_another_sentence_is_rejected():
     assert match_quote("the customer pays the invoice", DESCRIPTION) == (False, None)
 
 
-def test_a_two_word_quote_is_rejected():
-    assert match_quote("phone number", DESCRIPTION) == (False, None)
+# ---------- fix shortquote (30 Oct 2026): quotes under 3 words must match exactly, no gap ----------
+
+def test_a_short_exact_quote_is_accepted():
+    assert match_quote("on request", "The shop sends the brochure on request.") == (True, "on request")
+    assert match_quote("phone number", DESCRIPTION) == (True, "phone number")
+
+
+def test_a_short_quote_with_a_plural_s_is_accepted():
+    assert match_quote("distance contracts", "rules for a distance contract") == (True, "distance contract")
+
+
+def test_a_short_quote_with_a_gap_is_rejected():
+    assert match_quote("phone email", DESCRIPTION) == (False, None)          # "number and" in between
+    assert match_quote("name number", DESCRIPTION) == (False, None)          # "phone" in between
+
+
+def test_a_short_quote_with_a_changed_word_is_rejected():
+    assert match_quote("phone numbers please", DESCRIPTION)[0] is False
+    assert match_quote("mobile number", DESCRIPTION) == (False, None)
 
 
 def test_more_extra_words_than_allowed_are_rejected():
