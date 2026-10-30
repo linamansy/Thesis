@@ -1,0 +1,132 @@
+"""Tests for scripts/run_all_dev.py (step order, resume, log-and-continue, oracle set) and scripts/summarise_all_dev.py
+(table and details). No LLM: the retrieval and mediation steps are replaced by fakes that write the files the real steps
+write; the summary reads synthetic run folders.
+"""
+
+import json
+
+from scripts import run_all_dev, summarise_all_dev
+from scripts.run_all_dev import AllDevRunner, oracle_ids
+from src.config import load_config, project_path
+
+
+def write_json(path, data):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data), encoding="utf-8")
+
+
+def item(id_, kind, status, quotes=(), cause=None, verifier=None, **extra):
+    return {"id": id_, "kind": kind, "text": f"text {id_}", "status": status, "quotes_canonical": list(quotes),
+            "downgrade_cause": cause, "verifier": verifier, **extra}
+
+
+def record(pid, label, requirement=None, conditions=(), cause="cause"):
+    return {"passage_id": pid, "label": label, "label_cause": cause, "failed_step": None, "error": None,
+            "requirement": requirement, "applicability": {"conditions": list(conditions), "role_facts": [],
+                                                          "exceptions": []}}
+
+
+def fake_rag(run_dir, ids):
+    write_json(run_dir / "04_merged_top5.json", {"passages": [{"passage_id": i} for i in ids]})
+    (run_dir / "summary.txt").write_text("done", encoding="utf-8")
+
+
+def fake_med(run_dir, records):
+    write_json(run_dir / "09_audit_trail_full.json", records)
+    (run_dir / "summary.txt").write_text("done", encoding="utf-8")
+
+
+class FakeRunner(AllDevRunner):
+    """AllDevRunner without Ollama: retrieval and mediation write fake folders and record what they were given."""
+
+    def __init__(self, config, fail_retrieval=False):
+        self.config, self.fresh, self.think_calls = config, False, []
+        self.messages, self.calls = [], []
+        self.log = self.messages.append
+        self.corpus_ids = ["GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art5-1-a", "GDPR-Art13-3"]
+        self.fail_retrieval = fail_retrieval
+
+    def retrieval(self, variant, run_dir):
+        self.calls.append(("retrieval", variant, run_dir.name))
+        if self.fail_retrieval:
+            run_dir.mkdir(parents=True)
+            raise RuntimeError("Ollama stopped")
+        fake_rag(run_dir, ["GDPR-Art5-1-a", "GDPR-Art13-1"])
+
+    def mediation(self, variant, run_dir, label, ids, source):
+        self.calls.append(("mediation", label, run_dir.name, tuple(ids)))
+        fake_med(run_dir, [record(ids[0], "Indeterminate")])
+
+
+def case_dir(config, variant="01.1"):
+    return project_path(config["paths"]["runs"]).parent / "debug" / variant
+
+
+def test_oracle_is_the_target_then_the_rest_of_its_article_in_corpus_order():
+    corpus = ["GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art5-1-a", "GDPR-Art13-3", "GDPR-Art130-1"]
+    assert oracle_ids("GDPR-Art13-2-a", corpus) == ["GDPR-Art13-2-a", "GDPR-Art13-1", "GDPR-Art13-3"]
+
+
+def test_one_run_is_retrieval_then_mediation_on_its_own_set_then_oracle():
+    config = load_config()
+    runner = FakeRunner(config)
+    runner.run_variant("01.1", 1)
+    assert runner.calls == [("retrieval", "01.1", "alldev_rag_run_1"),
+                            ("mediation", "alldev", "med_alldev_run_1", ("GDPR-Art5-1-a", "GDPR-Art13-1")),
+                            ("mediation", "alldev_oracle", "med_alldev_oracle_run_1",
+                             ("GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art13-3"))]
+
+
+def test_a_finished_step_is_skipped_on_resume():
+    config = load_config()
+    FakeRunner(config).run_variant("01.1", 2)
+    again = FakeRunner(config)
+    again.run_variant("01.1", 2)
+    assert again.calls == [] and sum("skip" in m for m in again.messages) == 3
+
+
+def test_a_failure_is_logged_the_run_goes_on_and_the_folder_is_kept_on_resume():
+    config = load_config()
+    failing = FakeRunner(config, fail_retrieval=True)
+    failing.run_variant("01.1", 3)
+    assert any(m.startswith("FAILED 01.1 run 3 retrieval") and "Ollama stopped" in m for m in failing.messages)
+    assert "skip 01.1 run 3 mediation: retrieval not done" in failing.messages
+    assert [c[0:2] for c in failing.calls] == [("retrieval", "01.1"), ("mediation", "alldev_oracle")]
+    resumed = FakeRunner(config)
+    resumed.run_variant("01.1", 3)                       # the stopped folder is moved, not deleted
+    moved = list((case_dir(config) / "_incomplete").glob("alldev_rag_run_3_*"))
+    assert len(moved) == 1 and [c[1] for c in resumed.calls] == ["01.1", "alldev"]
+
+
+def test_summary_table_and_details():
+    config = load_config()
+    variant, target = "06.1", "CRD-Art13-1"
+    d = case_dir(config, variant)
+    good = record(target, "Applicable", {"requirement": "The shop refunds within 14 days.", "requirement_invalid": False})
+    stuck = record(target, "Indeterminate", conditions=[
+        item("R1", "role", "confirmed"),
+        item("C1", "situation", "not_stated", ["The customer sends a bill"], "verifier rejected",
+             {"reason": "a bill is not a payment"}, first_look_status="not_stated"),
+        item("C2", "situation", "not_stated")])
+    for n, (oracle, full, retrieved) in enumerate([(good, good, True), (good, stuck, True), (stuck, None, False)], 1):
+        fake_rag(d / f"alldev_rag_run_{n}", [target] if retrieved else ["CRD-Art8-1"])
+        fake_med(d / f"med_alldev_oracle_run_{n}", [oracle])
+        fake_med(d / f"med_alldev_run_{n}", [full] if full else [record("CRD-Art8-1", "Irrelevant")])
+    text = summarise_all_dev.summarise(config, [variant], 3)
+    row = next(line for line in text.splitlines() if line.startswith(variant))
+    assert "2/3" in row and "2/3 (A A I)" in row and "1/3 (A I -)" in row and "The shop refunds within 14 days." in row
+    assert "06.1 CRD-Art13-1 oracle 3: Indeterminate (I)" in text and "full run 2: Indeterminate" in text
+    assert 'quotes: ["The customer sends a bill"]' in text and "verifier: a bill is not a payment" in text
+    assert "failing stage: verifier (second look)" in text and "failing stage: first look: not_stated" in text
+    assert "full run 3" not in text                       # not retrieved: nothing to detail
+
+
+def test_summary_marks_missing_runs():
+    config = load_config()
+    text = summarise_all_dev.summarise(config, ["45.1"], 3)
+    row = next(line for line in text.splitlines() if line.startswith("45.1"))
+    assert "0/3 (? ? ?)" in row and row.split()[2] == "0/3"
+
+
+def test_variant_list():
+    assert run_all_dev.VARIANTS == ("01.1", "01.2", "06.1", "11.1", "13.1", "17.1", "19.1", "45.1")
