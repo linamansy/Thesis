@@ -21,6 +21,9 @@ reference annotator (src/build_silver_reference.py) and, ONLY in the stronger-mo
     twice. If Groq rejects an answer as invalid JSON (HTTP 400 json_validate_failed), the model's text is returned as
     the answer, so BaseAgent treats it like any invalid JSON answer (one retry), as with Ollama.
     The silver requests are unchanged: seed, response_format and the cache are only used when set.
+  - JSON schema mode (json_schema=True; run option only, e.g. scripts/run_all_dev.py --groq-model): an agent's
+    output schema is sent as response_format {"type": "json_schema"} (the same schema Ollama gets as "format"), so the
+    answer must follow it; a call without a schema falls back to json_object (json_mode). Off by default.
   - Server errors (5xx), timeouts and network errors are retried with increasing waits (2, 4, 8, ... s,
     silver.groq_api_max_retries times). Other errors (e.g. 401 wrong key, 404 unknown model) stop at once.
 """
@@ -88,7 +91,7 @@ class GroqLLM(LLMClient):
                  initial_wait_seconds: float, max_rate_limit_wait_seconds: float, base_url: str,
                  timeout_seconds: float, max_rate_limit_waits: int, api_key: str | None = None, client: httpx.Client | None = None,
                  sleep: Callable[[float], None] = time.sleep, seed: int | None = None, json_mode: bool = False,
-                 cache_dir: Path | None = None):
+                 cache_dir: Path | None = None, json_schema: bool = False):
         """client and sleep can be replaced in tests: no real API call and no real waiting.
         max_rate_limit_waits: safety stop, one call that keeps getting 429 is given up after this many waits
         (config.yaml silver.groq_max_rate_limit_waits).
@@ -105,6 +108,8 @@ class GroqLLM(LLMClient):
         self.last_system_fingerprint: str | None = None
         self.seed = seed
         self.json_mode = json_mode
+        self.json_schema = json_schema
+        self.accepts_format_schema = json_schema   # BaseAgent then passes its output schema to complete()
         self.cache_dir = Path(cache_dir) if cache_dir else None
         self.connection_retries: list[dict] = []  # agent mode: every 429 wait (saved by the diagnostic script)
         self.cache_hits = 0
@@ -130,44 +135,48 @@ class GroqLLM(LLMClient):
     def from_agent_config(cls, config: dict, client: httpx.Client | None = None,
                           sleep: Callable[[float], None] = time.sleep) -> "GroqLLM":
         """The C3 agents' client when c3_agents_llm.provider is groq: model and Groq settings from c3_agents_llm.groq;
-        temperature, seed and max_tokens from llm (the same values the agents send to Ollama)."""
+        temperature, seed and max_tokens from llm (the same values the agents send to Ollama). json_schema only if
+        c3_agents_llm.groq.json_schema is set (in memory by a run option; config.yaml has no such key)."""
         load_dotenv(project_path(config["paths"]["env_file"]))  # puts GROQ_API_KEY into the environment
         groq, llm = config["c3_agents_llm"]["groq"], config["llm"]
         return cls(groq["model"], llm["temperature"], llm["max_tokens"], groq["api_max_retries"],
                    llm["api_initial_wait_seconds"], groq["max_rate_limit_wait_seconds"], groq["base_url"],
                    groq["timeout_seconds"], groq["max_rate_limit_waits"], client=client, sleep=sleep,
-                   seed=llm["seed"], json_mode=groq["json_mode"], cache_dir=project_path(groq["cache_dir"]))
+                   seed=llm["seed"], json_mode=groq["json_mode"], cache_dir=project_path(groq["cache_dir"]),
+                   json_schema=groq.get("json_schema", False))
 
-    def request_body(self, prompt: str) -> dict:
-        """The exact request sent for every call."""
+    def request_body(self, prompt: str, format_schema: dict | None = None) -> dict:
+        """The exact request sent for every call. format_schema: json_schema mode only (see the module text)."""
         body = {"model": self.model, "messages": [{"role": "user", "content": prompt}],
                 "temperature": self.temperature, "max_tokens": self.max_tokens}
         if self.seed is not None:
             body["seed"] = self.seed
-        if self.json_mode:
+        if self.json_schema and format_schema is not None:
+            body["response_format"] = {"type": "json_schema", "json_schema": {"name": "output", "schema": format_schema}}
+        elif self.json_mode:
             body["response_format"] = {"type": "json_object"}
         return body
 
-    def complete(self, prompt: str) -> str:
+    def complete(self, prompt: str, format_schema: dict | None = None) -> str:
         if self.cache_dir is None:
-            return self._read(self._post(prompt))
-        body = self.request_body(prompt)
+            return self._read(self._post(prompt, format_schema))
+        body = self.request_body(prompt, format_schema)
         key = hashlib.sha256(json.dumps(body, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
         path = self.cache_dir / f"{key}.json"
         if path.exists():   # the same request was answered before: no new call
             self.cache_hits += 1
             return self._read(json.loads(path.read_text(encoding="utf-8"))["response"])
-        data = self._post(prompt)
+        data = self._post(prompt, format_schema)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps({"request": body, "response": data}, indent=2, ensure_ascii=False), encoding="utf-8")
         return self._read(data)
 
-    def _post(self, prompt: str) -> dict:
+    def _post(self, prompt: str, format_schema: dict | None = None) -> dict:
         """Send one request (with the waits and retries described above); return Groq's JSON answer."""
         failures = waits = 0   # for this call: counted failures, and rate-limit waits (not counted as failures)
         for _ in range(self.max_rate_limit_waits + self.api_max_retries + 1):
             try:
-                response = self.client.post("/chat/completions", json=self.request_body(prompt))
+                response = self.client.post("/chat/completions", json=self.request_body(prompt, format_schema))
             except httpx.TransportError as e:  # timeout or network error: a counted retry
                 failures = self._count_failure(failures, f"{type(e).__name__}: {e}", e)
                 continue
@@ -188,7 +197,8 @@ class GroqLLM(LLMClient):
             if response.status_code >= 500:  # server error: a counted retry
                 failures = self._count_failure(failures, f"HTTP {response.status_code}: {response.text[:300]}")
                 continue
-            if response.status_code == 400 and self.json_mode and failed_generation(response) is not None:
+            if (response.status_code == 400 and (self.json_mode or self.json_schema)
+                    and failed_generation(response) is not None):
                 return {"model": self.model, "choices": [{"finish_reason": "json_validate_failed",
                                                           "message": {"content": failed_generation(response)}}]}
             if response.status_code != 200:   # e.g. 401 wrong key, 404 unknown model, 413 request too large

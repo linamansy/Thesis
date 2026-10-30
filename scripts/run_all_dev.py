@@ -9,6 +9,11 @@ For every variant (VARIANTS) and run n = 1..--runs, three steps, each in its own
      target's article in the corpus, target first, the others in corpus order, no cap).
 --fresh unloads the model before every step; --think-calls names the ApplicabilityAgentV2 calls sent with think: true
 (mediation steps only; retrieval has no such calls).
+--groq-model MODEL (ceiling test, run option only; config.yaml is not changed): ONLY the oracle step, label
+ceiling_<model> (folder med_ceiling_<model>_run_<n>), with every C3 agent call on that Groq model (GroqLLM agent mode:
+same prompts and code, temperature/seed/max_tokens from llm, the agents' output schema sent as Groq json_schema,
+429 waits as Groq asks, answers cached in results/debug/_groq_cache/<model>/). No retrieval, no Ollama, no thinking
+(Groq returns no reasoning in its JSON modes), so --fresh and --think-calls are refused. The silver model is refused.
 
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
@@ -17,9 +22,12 @@ step; mediation of a run whose retrieval is not done is skipped (logged). Log: r
 
 Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
+Ceiling test (GROQ_API_KEY in .env):
+    .venv\\Scripts\\python.exe -m scripts.run_all_dev --groq-model qwen/qwen3.8-27b --runs 1
 """
 
 import argparse
+import copy
 import hashlib
 import json
 import shutil
@@ -68,6 +76,33 @@ def oracle_ids(target: str, corpus_ids: list[str]) -> list[str]:
     return [target] + [pid for pid in corpus_ids if article_id_of(pid) == article and pid != target]
 
 
+def ceiling_label(model: str) -> str:
+    return f"ceiling_{model.split('/')[-1]}"
+
+
+def ceiling_config(config: dict, model: str) -> dict:
+    """A copy of the config with the C3 agents on the Groq model (json_schema on, own cache). In memory only."""
+    if model == config["silver"]["model"]:
+        raise ValueError(f"{model} is the silver annotator's model; it must never be used for C3")
+    config = copy.deepcopy(config)
+    config["c3_agents_llm"]["provider"] = "groq"
+    groq = config["c3_agents_llm"]["groq"]
+    groq.update(model=model, json_schema=True,
+                cache_dir=str(project_path(config["paths"]["runs"]).parent / "debug" / "_groq_cache"
+                              / model.replace("/", "__")))
+    return config
+
+
+def groq_llm(config: dict, model: str) -> tuple:
+    """The Groq client for every C3 agent call (ceiling test); returns (client, run-info part)."""
+    from run_experiment import create_llm
+    from src.study2_config import study2_view
+    config = ceiling_config(config, model)
+    info = {"model": model, "provider": "groq", "groq_response_format": "json_schema (agents' output schema)",
+            "thinking": "none (Groq returns no reasoning in JSON modes)", "agent_settings": config["llm"]}
+    return create_llm(study2_view(config), "relevance", {}), info
+
+
 def retrieved_ids(run_dir: Path) -> list[str]:
     """The final set of an alldev retrieval run (after parent expansion)."""
     s4 = json.loads((run_dir / "04_merged_top5.json").read_text(encoding="utf-8"))
@@ -75,9 +110,10 @@ def retrieved_ids(run_dir: Path) -> list[str]:
 
 
 class AllDevRunner:
-    def __init__(self, config: dict, fresh: bool, think_calls: list[str], log):
+    def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None):
         self.config, self.fresh, self.think_calls, self.log = config, fresh, think_calls, log
-        self.llm, self.llm_info = make_llm(config)
+        self.groq_model = groq_model
+        self.llm, self.llm_info = groq_llm(config, groq_model) if groq_model else make_llm(config)
         self.think_llm = None
         if think_calls:
             from scripts.oracle_o2 import thinking_llm
@@ -119,9 +155,13 @@ class AllDevRunner:
                     "passages_from": source, "given_passage_ids": ids,
                     "corpus_file": self.config["study2_corpus"]["passages"], "corpus_sha256": corpus_sha,
                     "c3_version": "v2", "fresh": self.fresh, "think_calls": self.think_calls, **self.llm_info}
+        waits_before = len(getattr(self.llm, "connection_retries", []))
         run = debug_run(self.config, given_case(passages, description), description,
                         load_answer_key(self.config, variant), self.llm, run_dir, run_info, variant,
                         self.think_calls, self.think_llm)
+        if self.groq_model:   # Groq rate-limit waits of this step (not failures)
+            (run_dir / "groq_rate_limit_waits.json").write_text(json.dumps(
+                self.llm.connection_retries[waits_before:], indent=2), encoding="utf-8")
         (run_dir / "summary.txt").write_text(mediation_summary(label, [run], variant), encoding="utf-8")
 
     def step(self, name: str, run_dir: Path, action) -> bool:
@@ -145,6 +185,13 @@ class AllDevRunner:
     def run_variant(self, variant: str, n: int) -> None:
         case_dir = project_path(self.config["paths"]["runs"]).parent / "debug" / variant
         target = load_answer_key(self.config, variant)["target_passage_id"]
+        if self.groq_model:   # ceiling test: the oracle step only
+            label = ceiling_label(self.groq_model)
+            ceiling = med_dir(case_dir, label, n)
+            self.step(f"{variant} run {n} {label}", ceiling,
+                      lambda: self.mediation(variant, ceiling, label, oracle_ids(target, self.corpus_ids),
+                                             "oracle: target + the rest of its article"))
+            return
         rag = rag_dir(case_dir, n)
         if self.step(f"{variant} run {n} retrieval", rag, lambda: self.retrieval(variant, rag)):
             ids = retrieved_ids(rag)
@@ -176,14 +223,19 @@ def main(argv: list[str] | None = None) -> None:
     add_fresh_option(parser)
     parser.add_argument("--think-calls", default="",
                         help="comma-separated ApplicabilityAgentV2 call classes sent with think: true (default none)")
+    parser.add_argument("--groq-model", default=None,
+                        help="ceiling test: oracle step only, every C3 agent call on this Groq model")
     args = parser.parse_args(argv)
+    if args.groq_model and (args.fresh or args.think_calls):
+        parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
-    runner = AllDevRunner(config, args.fresh, think_calls, log)
+    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model)
     numbers = [args.only_run] if args.only_run else range(1, args.runs + 1)
     variants = [v.strip() for v in args.variants.split(",") if v.strip()]
-    log(f"run_all_dev: variants {variants}, runs {list(numbers)}, fresh {args.fresh}, think_calls {think_calls}")
+    log(f"run_all_dev: variants {variants}, runs {list(numbers)}, fresh {args.fresh}, think_calls {think_calls}, "
+        f"groq_model {args.groq_model}")
     for variant in variants:
         for n in numbers:
             runner.run_variant(variant, n)

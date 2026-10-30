@@ -5,7 +5,9 @@ write; the summary reads synthetic run folders.
 
 import json
 
-from scripts import run_all_dev, summarise_all_dev
+import pytest
+
+from scripts import compare_ceiling, run_all_dev, summarise_all_dev
 from scripts.run_all_dev import AllDevRunner, oracle_ids
 from src.config import load_config, project_path
 
@@ -40,7 +42,7 @@ class FakeRunner(AllDevRunner):
     """AllDevRunner without Ollama: retrieval and mediation write fake folders and record what they were given."""
 
     def __init__(self, config, fail_retrieval=False):
-        self.config, self.fresh, self.think_calls = config, False, []
+        self.config, self.fresh, self.think_calls, self.groq_model = config, False, [], None
         self.messages, self.calls = [], []
         self.log = self.messages.append
         self.corpus_ids = ["GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art5-1-a", "GDPR-Art13-3"]
@@ -130,3 +132,50 @@ def test_summary_marks_missing_runs():
 
 def test_variant_list():
     assert run_all_dev.VARIANTS == ("01.1", "01.2", "06.1", "11.1", "13.1", "17.1", "19.1", "45.1")
+
+
+def test_ceiling_runs_only_the_oracle_under_its_own_label():
+    config = load_config()
+    runner = FakeRunner(config)
+    runner.groq_model = "qwen/qwen3.8-27b"
+    runner.run_variant("01.1", 4)
+    assert runner.calls == [("mediation", "ceiling_qwen3.8-27b", "med_ceiling_qwen3.8-27b_run_4",
+                             ("GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art13-3"))]
+
+
+def test_ceiling_refuses_the_silver_model_and_ollama_options():
+    config = load_config()
+    with pytest.raises(ValueError, match="silver"):
+        run_all_dev.groq_llm(config, config["silver"]["model"])
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--groq-model", "qwen/qwen3.8-27b", "--fresh"])
+
+
+def test_ceiling_client_is_groq_with_json_schema_and_config_unchanged(monkeypatch):
+    from src.llm.groq_llm import GroqLLM
+    from src.study2_config import study2_view
+    monkeypatch.setenv("GROQ_API_KEY", "test-key")   # never sent: no request is made
+    config = load_config()
+    view = study2_view(run_all_dev.ceiling_config(config, "qwen/qwen3.8-27b"))
+    assert view["c3_agents_llm"]["provider"] == "groq"
+    llm = GroqLLM.from_agent_config(view)
+    assert llm.model == "qwen/qwen3.8-27b" and llm.json_schema and llm.accepts_format_schema
+    assert (llm.temperature, llm.seed, llm.max_tokens) == (0, config["llm"]["seed"], config["llm"]["max_tokens"])
+    assert config["c3_agents_llm"]["provider"] == "ollama" and "json_schema" not in config["c3_agents_llm"]["groq"]
+    assert llm.cache_dir.parts[-2:] == ("_groq_cache", "qwen__qwen3.8-27b")
+
+
+def test_ceiling_comparison_report():
+    config = load_config()
+    variant, target = "19.1", "ECD-Art11-1"
+    d = case_dir(config, variant)
+    fake_med(d / "med_alldev_oracle_run_5", [record(target, "Not applicable", conditions=[
+        item("C1", "situation", "contradicted", ["We ship"], verifier={"reason": "shipping is not ordering"})])])
+    fake_med(d / "med_ceiling_qwen3.8-27b_run_5", [record(target, "Applicable", {"requirement": "Acknowledge.",
+                                                                               "requirement_invalid": False},
+                                                          conditions=[item("C1", "situation", "confirmed", ["Orders"])])])
+    text = compare_ceiling.compare(config, "qwen/qwen3.8-27b", [variant, "45.1"], 5)
+    assert next(l for l in text.splitlines() if l.startswith("19.1")).split()[2:4] == ["N", "A"]
+    assert "C1  situation  contradicted -> confirmed" in text and "requirement strong: Acknowledge." in text
+    assert 'quotes qwen:     ["We ship"]' in text and "verifier qwen:   shipping is not ordering" in text
+    assert "45.1 " in text and "run missing" in text

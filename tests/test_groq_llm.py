@@ -134,3 +134,31 @@ def test_model_name_finish_reason_and_reasoning_are_logged(tmp_path):
     assert [(r["model"], r["finish_reason"], r["valid_json"]) for r in records] == [
         (MODEL, "MAX_TOKENS", False), (MODEL, "STOP", True)]
     assert records[1]["reasoning"] == "Let me think."   # the reasoning is saved too
+
+
+def test_json_schema_mode_sends_the_agents_schema_and_falls_back_to_json_object(tmp_path):
+    class Out(BaseModel):
+        answer: str
+
+    class Agent(BaseAgent):
+        output_schema = Out
+        json_format = True
+
+        def build_prompt(self, question):
+            return question
+
+    client, requests = fake_groq(answer(), answer())
+    llm = GroqLLM("qwen/qwen3.8-27b", 0, 8192, 2, 2, 900, "https://api.groq.com/openai/v1", 120, 100, client=client,
+                  sleep=lambda s: None, json_mode=True, json_schema=True)
+    assert llm.accepts_format_schema
+    agent = Agent(llm, RunLogger(tmp_path, "DEBUG", "t"))
+    agent.run(case_id="01", question="?")
+    llm.complete("no schema")
+    assert requests[0]["response_format"] == {"type": "json_schema",
+                                              "json_schema": {"name": "output", "schema": agent.model_schema()}}
+    assert requests[1]["response_format"] == {"type": "json_object"}
+
+
+def test_json_schema_mode_is_off_by_default():
+    llm, _ = make_llm(fake_groq()[0])
+    assert not llm.accepts_format_schema and not CONFIG["c3_agents_llm"]["groq"].get("json_schema", False)
