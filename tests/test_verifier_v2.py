@@ -19,8 +19,10 @@ SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "th
 
 
 def check(c1_status="confirmed", c1_quote="the customer PAYS by card", e1_status="not_stated", e1_quote=None):
-    return {"results": [{"id": "C1", "closest_sentence": None, "status": c1_status, "quote": c1_quote},
-                        {"id": "E1", "closest_sentence": None, "status": e1_status, "quote": e1_quote}]}
+    return {"results": [{"id": "C1", "closest_sentence": None, "status": c1_status,
+                         "quotes": [c1_quote] if c1_quote else []},
+                        {"id": "E1", "closest_sentence": None, "status": e1_status,
+                         "quotes": [e1_quote] if e1_quote else []}]}
 
 
 YES = {"answer": "yes", "reason": "The sentence says the customer pays by card."}
@@ -52,7 +54,7 @@ def test_the_prompt_has_only_the_statement_as_sent_and_the_canonical_quote(tmp_p
     _, record, llm = first_look(tmp_path, [SPLIT, check(), YES])
     prompt = llm.prompts_received[2]
     c1 = item(record, "C1")
-    assert c1["text_sent"] in prompt and c1["quote_canonical"] == "The customer pays by card"
+    assert c1["text_sent"] in prompt and c1["quotes_canonical"] == ["The customer pays by card"]
     assert "The customer pays by card" in prompt and "the customer PAYS by card" not in prompt   # canonical, not the model's
     assert "chooses a product" not in prompt and PASSAGE not in prompt                       # no description, no law
     assert "state that the statement is true?" in prompt
@@ -90,7 +92,7 @@ def test_every_confirmed_or_contradicted_item_gets_its_own_call(tmp_path):
 
 def test_the_second_look_is_verified_too(tmp_path):
     second = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed",
-                           "quote": "The customer pays by card"}]}
+                           "quotes": ["The customer pays by card"]}]}
     agent, record, llm = first_look(tmp_path, [SPLIT, check(c1_status="not_stated", c1_quote=None), second, NO])
     assert record["label"] == INDETERMINATE
     agent.second_look("x", DESCRIPTION, record, "P-1", [])

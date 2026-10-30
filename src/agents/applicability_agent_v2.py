@@ -19,14 +19,16 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
   c. check-IF call (CheckIfCallV2: the description + the items that need a quote, not the law text): S1, the role
      facts of the named roles (c3_v2.role_facts: P1 for a processor, T1 for a trader / seller / service provider, D1
      for a debtor, D2 for a creditor), C1..., the exceptions E1... -> each item confirmed / not_stated / contradicted,
-     with a quote from the description.
+     with 1-3 quotes from the description (fix multiquote, 30 Oct 2026: before, one quote; a fact spread over two
+     sentences could not be shown).
      Role binding (fix F2, 29 Oct 2026): in the C and E items sent to this call, a role name is replaced by the actor
      it refers to in the process (role_binding: a duty role decided by a role fact or A1 -> the organisation running
      the described process; a role decided by the scope item -> its customer; other roles unchanged). The saved
      item keeps its original "text" and records the sent "text_sent". The second look gets the same text_sent (fix 2).
   d. code quote check (match_quote, tolerant since fix tolquote, 30 Oct 2026: plural -s, at most 1 extra word per 6
-     quote words from 3 words on, shorter quotes exactly (fix shortquote)): a confirmed or contradicted item whose quote is missing or not found in the
-     description becomes not_stated (recorded as downgraded). The matched exact span is saved as quote_canonical.
+     quote words from 3 words on, shorter quotes exactly (fix shortquote)), for EACH quote of the item (fix
+     multiquote): a confirmed or contradicted item with no quote found in the description becomes not_stated (recorded
+     as downgraded). The matched exact spans of the quotes that were found are saved as quotes_canonical (a list).
   e. roles by code (R3, config.yaml c3_v2.roles): controller -> confirmed by assumption A1 (c3_v2.controller_assumption);
      processor -> confirmed only if P1 is confirmed with a checked quote, otherwise contradicted (A1: the organisation
      is the controller); trader / seller / service provider (A2) -> confirmed only if T1 is confirmed, debtor only if
@@ -40,7 +42,8 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      passages the call was distracted by unrelated rules). Same quote check. Roles and scope are never looked at again.
   h. verifier (VerifierCallV2, fix verifier, 30 Oct 2026), after the quote check of the first and of the second look:
      every item that is still confirmed or contradicted gets one more call with ONLY its statement as sent (text_sent)
-     and its canonical quote: "Does this sentence, on its own, state that the statement is true / false?". "no" ->
+     and ALL its canonical quotes together (fix multiquote): "Do these sentences, on their own and together, state
+     that the statement is true / false?". "no" ->
      not_stated (downgrade_cause "verifier rejected"). It runs before the roles and the look label are decided, so a
      rejected item can still be looked at again by the second look.
 Every IF item records "decided_by": "code rule", "first look" or "second look" (None while not_stated).
@@ -66,6 +69,7 @@ from src.mediation.resolver_v2 import look_label
 
 SPLIT_INVALID = "Split invalid"
 Status = Literal["confirmed", "not_stated", "contradicted"]
+MAX_QUOTES = 3   # quotes per item (fix multiquote); fixed by the task, not a study parameter
 
 
 # ---------- schemas ----------
@@ -160,12 +164,16 @@ def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
 
 class ItemCheck(BaseModel):
     """Field order (fix C, 29 Oct 2026, oracle O2 in scripts/oracle_o2.py): the model first copies the closest
-    sentence of the description, then decides the status and the quote (search first, then judge)."""
+    sentence of the description, then decides the status and the quotes (search first, then judge).
+    quotes (fix multiquote, 30 Oct 2026): 1-3 sentences instead of one quote, so a fact stated over two sentences can
+    be shown; each is checked by code on its own (ApplicabilityAgentV2.verify)."""
     id: str = Field(description="The id of the item, as given in the list")
     closest_sentence: str | None = Field(description="The sentence of the process description that comes closest "
                                                      "to the statement, copied word for word, or null if none")
     status: Status = Field(description="confirmed, contradicted or not_stated, judged from the description only")
-    quote: str | None = Field(description="Exact words copied from the process description, or null for not_stated")
+    quotes: list[str] = Field(max_length=MAX_QUOTES,
+                              description="1 to 3 sentences copied word for word from the process description that "
+                                          "together show the status; empty list for not_stated")
 
 
 class CheckOutputV2(BaseModel):
@@ -241,9 +249,11 @@ class VerifierCallV2(BaseAgent):
     output_schema = VerifierOutputV2
     json_format = True
 
-    def build_prompt(self, statement: str, quote: str, truth: str) -> str:
-        """truth: "true" for a confirmed item, "false" for a contradicted one."""
-        return self.template.format(schema=self.schema_text(), quote=quote.strip(), statement=statement.strip(),
+    def build_prompt(self, statement: str, quotes: list[str], truth: str) -> str:
+        """quotes: the item's canonical quotes, all sent together (fix multiquote), one per line.
+        truth: "true" for a confirmed item, "false" for a contradicted one."""
+        sentences = "\n".join(f"- {q.strip()}" for q in quotes)
+        return self.template.format(schema=self.schema_text(), sentences=sentences, statement=statement.strip(),
                                     truth=truth)
 
 
@@ -364,9 +374,10 @@ class ApplicabilityAgentV2:
         # a role confirmed through a role fact or S1 keeps that item's checked quote, so ResolverV2 counts it as
         # confirmed (bug fix 1)
         if first and first["role"] in source:
-            role_item.update(quote=source[first["role"]]["quote"], quote_found=True, downgraded=False)
+            role_item.update(quotes_canonical=source[first["role"]]["quotes_canonical"], quote_found=True,
+                             downgraded=False)
         else:
-            role_item.update(quote=None, quote_found=None, downgraded=False)
+            role_item.update(quotes_canonical=[], quote_found=None, downgraded=False)
 
     def open_conditions(self, record: dict) -> list[dict]:
         """The situational IF conditions that are still not_stated (input of the second look, R5)."""
@@ -397,31 +408,36 @@ class ApplicabilityAgentV2:
         return record
 
     def verify(self, case_id: str, items: list[dict], answer: CheckOutputV2, description: str, look: str) -> bool:
-        """Step d: copy each item's answer into it; a confirmed or contradicted status needs a quote that is really in
-        the description, otherwise it becomes not_stated. look ("first look" / "second look") is recorded as
-        decided_by of a status that stays confirmed or contradicted. Then step h (the verifier). Returns False if a
+        """Step d: copy each item's answer into it; every quote is checked on its own (fix multiquote): a confirmed or
+        contradicted status needs at least one quote that is really in the description, otherwise it becomes
+        not_stated. quote_found: True if at least one quote was found, False if none of the given quotes was, None if
+        no quote was given. look ("first look" / "second look") is recorded as decided_by of a status that stays
+        confirmed or contradicted. Then step h (the verifier). Returns False if a
         verifier call has no valid answer after its retry."""
         by_id = {r.id: r for r in answer.results}
         for item in items:
             result = by_id[item["id"]]
-            found, canonical = match_quote(result.quote, description)   # None = no quote given
+            matches = [match_quote(q, description) for q in result.quotes]   # (None, None) = a quote without words
+            canonical = list(dict.fromkeys(c for found, c in matches if found))
+            found = bool(canonical) if any(f is not None for f, _ in matches) else None
             downgraded = result.status != "not_stated" and not found
             status = "not_stated" if downgraded else result.status
-            item.update(status=status, original_status=result.status, quote=result.quote, quote_found=found,
-                        quote_canonical=canonical, downgraded=downgraded, decided_by=look if status != "not_stated" else None,
+            item.update(status=status, original_status=result.status, quotes=result.quotes,
+                        quotes_found=[f for f, _ in matches], quotes_canonical=canonical, quote_found=found,
+                        downgraded=downgraded, decided_by=look if status != "not_stated" else None,
                         downgrade_cause="quote not found" if downgraded else None, verifier=None)
         return self.run_verifier(case_id, items)
 
     def run_verifier(self, case_id: str, items: list[dict]) -> bool:
         """Step h: one verifier call for every item that is still confirmed or contradicted. Input: the statement as
-        sent (text_sent, else text) and the canonical quote only. "no" -> not_stated, downgrade_cause "verifier
-        rejected"."""
+        sent (text_sent, else text) and all its canonical quotes, judged together (fix multiquote). "no" -> not_stated,
+        downgrade_cause "verifier rejected"."""
         for item in items:
             if item["status"] not in ("confirmed", "contradicted"):
                 continue
             truth = "true" if item["status"] == "confirmed" else "false"
             answer = self.verifier_call.run(case_id, statement=item.get("text_sent", item["text"]),
-                                            quote=item["quote_canonical"], truth=truth)
+                                            quotes=item["quotes_canonical"], truth=truth)
             if answer is None:
                 return False
             item["verifier"] = {"asked": truth, "answer": answer.answer, "reason": answer.reason}

@@ -8,14 +8,14 @@ INSTRUCTIONS
   - "not_stated": use this only when no sentence of the description speaks to the statement.
 - "confirmed" needs a quote that itself states that fact; a sentence about a different event never confirms it.
 - Do not guess facts the description does not state.
-- quote: for "confirmed" or "contradicted", copy the words of the process description that show it, exactly and word for word. For "not_stated", use null. Quotes are checked automatically; a quote that does not appear in the description counts as "not_stated".
+- quotes: for "confirmed" or "contradicted", a list of 1 to 3 sentences of the process description that together show it, each copied exactly and word for word. Use more than one sentence only when the fact is stated across several sentences. For "not_stated", use an empty list []. Quotes are checked automatically; a quote that does not appear in the description is ignored, and an item with no such quote counts as "not_stated".
 - Give one result for every condition, with its id, and no other results.
 - Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 EXAMPLE OF EVERYDAY WORDS (made up, from another domain)
 Statement: "C1: the vessel has obtained clearance for departure from the port authority"
 Description sentence: "The harbour master tells the captain that the ship may leave."
-Result: "confirmed", quote "The harbour master tells the captain that the ship may leave" (the same fact in everyday words). The sentence "The crew loads the cargo." speaks about a different event and would not confirm it.
+Result: "confirmed", quotes ["The harbour master tells the captain that the ship may leave"] (the same fact in everyday words). The sentence "The crew loads the cargo." speaks about a different event and would not confirm it.
 
 JSON SCHEMA
 {schema}

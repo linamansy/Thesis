@@ -18,7 +18,7 @@ RELEVANT = {"law_focus": "card payments", "law_quote": "a customer pays by card"
             "reason": "The process has a card payment step."}
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": []}
-CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quote": "The customer pays by card"}]}
+CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["The customer pays by card"]}]}
 REQUIREMENT = {"requirement": "After the customer pays by card, a receipt is handed to the customer.",
                "step_quote": "The customer pays by card",
                "triggers": [{"trigger": "a customer pays by card", "kept_as": "After the customer pays by card"}],
@@ -73,7 +73,7 @@ def test_debug_run_writes_every_stage(tmp_path):
     assert resolver["final_label"] == "Applicable" and resolver["resolution"]["reason"]
     conditions = json.loads((tmp_path / "run_1" / "05_applicability.json").read_text(encoding="utf-8"))[0][
         "applicability"]["conditions"]
-    assert any(c["id"] == "C1" and c["quote"] == "The customer pays by card" for c in conditions)
+    assert any(c["id"] == "C1" and c["quotes_canonical"] == ["The customer pays by card"] for c in conditions)
     final = json.loads((tmp_path / "run_1" / "08_final_requirement.json").read_text(encoding="utf-8"))
     assert "receipt" in final["knowledge_block"]
     text = summary_text(key, target_ranks(case, key), [out], case)

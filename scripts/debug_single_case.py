@@ -12,7 +12,7 @@ Files in results/debug/01.1/run_<n>/ (a new run folder every time; nothing is ov
   03_top5_after_rerank.json           the 5 passages after the cross-encoder, with rerank scores and texts
   04_relevance.json                   RelevanceAgentV2 output + code quote check, per passage
   05_applicability.json               ApplicabilityAgentV2: split, every IF item / role fact / exception with status,
-                                      quote, quote_found, decided_by (second-look items also keep first_look_status)
+                                      quotes, quotes_canonical, quote_found, decided_by (second-look items also keep first_look_status)
   06_resolver.json                    ResolverV2 decision per passage (label, reason, exceptions applying)
   07_second_look.json                 the second-look answer and what it changed (null where it did not run)
   08_final_requirement.json           RequirementAgentV2 output + code check, and the final knowledge block
@@ -96,7 +96,8 @@ def mediation_stages(records: list[dict], knowledge_block: str) -> dict:
         if not a.get("second_look"):
             return {"second_look": None}
         changed = [{"id": c["id"], "text": c["text"], "first_look_status": c.get("first_look_status"),
-                    "second_look_status": c["status"], "quote": c.get("quote"), "quote_found": c.get("quote_found")}
+                    "second_look_status": c["status"], "quotes": c.get("quotes_canonical"),
+                    "quote_found": c.get("quote_found")}
                    for c in a["conditions"] if "first_look_status" in c]
         return {"second_look": {"answer": a["second_look"], "items": changed, "first_look_label": a["first_look_label"],
                                 "label_after": a["label"], "decided": a["second_look_decided"]}}

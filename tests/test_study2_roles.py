@@ -67,7 +67,7 @@ def relevant(law_quote: str, step: str, description_quote: str) -> dict:
 
 
 def result(item_id: str, status: str, quote: str | None = None) -> dict:
-    return {"id": item_id, "closest_sentence": None, "status": status, "quote": quote}
+    return {"id": item_id, "closest_sentence": None, "status": status, "quotes": [quote] if quote else []}
 
 
 def run_case(tmp_path, desc: str, passage_id: str, answers: list[dict]):
@@ -169,7 +169,7 @@ def test_crd_art13_trader_selling_to_private_customers_applicable(tmp_path):
     assert items(record) == {"R1": ("confirmed", "first look"), "S1": ("confirmed", "first look"),
                              "C1": ("confirmed", "first look")}
     assert role(record)["roles"][0]["reason"] == "T1 confirmed with a checked quote"
-    assert role(record)["quote"] == SHOP_QUOTE and role(record)["quote_found"] is True
+    assert role(record)["quotes_canonical"] == [SHOP_QUOTE] and role(record)["quote_found"] is True
     assert [f["id"] for f in record["applicability"]["role_facts"]] == ["T1"]
     assert record["requirement"]["attempts"][0]["problems"] == []
     assert len(llm.prompts_received) == 4                                    # no second look
@@ -212,7 +212,7 @@ def test_crd_art14_consumer_withdrawal_applicable(tmp_path):
     assert items(record) == {"R1": ("confirmed", "first look"), "S1": ("confirmed", "first look"),
                              "C1": ("confirmed", "first look")}
     assert role(record)["roles"][0]["reason"] == "the scope item S1 is confirmed"   # consumer = S1
-    assert role(record)["quote"] == PRIVATE_QUOTE and record["applicability"]["role_facts"] == []
+    assert role(record)["quotes_canonical"] == [PRIVATE_QUOTE] and record["applicability"]["role_facts"] == []
     assert len(llm.prompts_received) == 4
     assert knowledge == block("CRD-Art14-1", requirement["requirement"])
 
