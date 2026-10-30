@@ -101,3 +101,9 @@ def test_more_extra_words_than_allowed_are_rejected():
 def test_no_quote_still_gives_none():
     assert match_quote(None, DESCRIPTION) == (None, None)
     assert match_quote(" — ", DESCRIPTION) == (None, None)
+
+
+def test_the_tightest_span_is_saved_not_an_earlier_looser_one():
+    passage = "Article 5: Principles relating to personal data\n1. Personal data shall be:\n(a) processed lawfully"
+    assert match_quote("Personal data shall be processed lawfully", passage) == \
+        (True, "Personal data shall be:\n(a) processed lawfully")

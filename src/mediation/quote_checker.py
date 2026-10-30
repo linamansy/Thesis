@@ -74,11 +74,14 @@ def source_words(text: str) -> list[tuple[str, int, int]]:
 
 
 def find_span(quote: str, words: list[tuple[str, int, int]], start_word: int = 0) -> tuple[int, int] | None:
-    """(first word, last word + 1) of the first span from start_word on that the quote matches (step 3), else None."""
+    """(first word, last word + 1) of the span from start_word on that the quote matches (step 3), else None.
+    If several spans match, the one with the fewest extra words is taken (the earliest of those), so a quote of
+    "The controller shall ..." does not start at an earlier "the" in the article title."""
     keys = [word_key(w) for w in LETTERS_OR_DIGITS.findall(quote or "")]
     if len(keys) < MIN_QUOTE_WORDS:
         return None
     max_span = len(keys) + math.ceil(len(keys) / QUOTE_WORDS_PER_EXTRA)
+    best = None
     for first in range(start_word, len(words)):
         if words[first][0] != keys[0]:
             continue
@@ -87,9 +90,11 @@ def find_span(quote: str, words: list[tuple[str, int, int]], start_word: int = 0
             if words[position][0] == keys[matched]:
                 matched += 1
             position += 1
-        if matched == len(keys):
-            return first, position
-    return None
+        if matched == len(keys) and (best is None or position - first < best[1] - best[0]):
+            best = (first, position)
+            if position - first == len(keys):   # no extra word: nothing can be better
+                break
+    return best
 
 
 def match_quote(quote: str | None, text: str) -> tuple[bool | None, str | None]:
