@@ -5,6 +5,7 @@ For every passage of the case, in rank order:
      not final_relevant        -> label "Irrelevant", stop
   2. ApplicabilityAgentV2, first look: split (law only) -> check-IF -> quote check -> first-look label
      split with an obligation word in an IF item -> label "Split invalid", stop
+     split with duty_type "none" (F1, design round 2: no duty or right of its own) -> label "No duty", stop
      Indeterminate with open IF conditions -> second look, with the description + only the other retrieved
      paragraphs of the same article (fix sameart)
   3. ResolverV2 (code): Applicable only if all IF conditions are confirmed AND no stated exception applies
@@ -21,7 +22,7 @@ A call with no valid answer after its retry gives "Mediation failed" (failed_ste
 passage is processed. LLMUnavailableError is passed on (the run stops and can be resumed), as in v1.
 
 Knowledge block: confirmed requirements that passed the code check only (prompts/c3_block_template_v2.json).
-Indeterminate, Not applicable, Split invalid, Irrelevant, requirement_invalid and failed passages are kept in the audit
+Indeterminate, Not applicable, Split invalid, No duty, Irrelevant, requirement_invalid and failed passages are kept in the audit
 trail and never passed on. With no requirement, the block is C1's text ("No domain knowledge provided.", prompts/c1_no_knowledge.txt), so the generator gets the same
 layout as C1. The neutral label in front of the block is added by the generator, as for C1 and C2.
 
@@ -36,7 +37,7 @@ reused and no agent is called again (resumed run).
 import json
 from pathlib import Path
 
-from src.agents.applicability_agent_v2 import SPLIT_INVALID, ApplicabilityAgentV2
+from src.agents.applicability_agent_v2 import NO_DUTY, SPLIT_INVALID, ApplicabilityAgentV2
 from src.agents.relevance_agent_v2 import RelevanceAgentV2
 from src.agents.requirement_agent_v2 import RequirementAgentV2
 from src.llm.base_llm import LLMUnavailableError
@@ -111,6 +112,11 @@ class OrchestratorV2:
                 case_id, description, applicability, passage_id, case_passages))
         if applicability["failed_step"]:
             return self._failed(record, applicability["failed_step"], "no valid output after retry (see the log file)")
+        if applicability["label"] == NO_DUTY:
+            record["label"] = NO_DUTY
+            record["label_cause"] = ("duty_type none: the passage places no duty and gives no right of its own; it only "
+                                     "limits, excludes or refers to other rules")
+            return record
         if applicability["label"] == SPLIT_INVALID:
             record["label"] = SPLIT_INVALID
             record["label_cause"] = "obligation word in the IF item(s): " + "; ".join(applicability["rejected_if"])

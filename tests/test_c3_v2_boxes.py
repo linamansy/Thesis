@@ -32,7 +32,7 @@ SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "th
 # the split as saved: since D4a (design round 1) every IF text is read as a group of one item that must hold; since
 # D4b the split has special cases (none here); since D5 a plain text item is a process fact
 SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": [{"text": "a customer pays by card", "kind": "process_fact"}]}],
-               "special_cases": []}
+               "special_cases": [], "duty_type": "duty"}   # duty_type: F1 (design round 2), absent = a duty
 CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["The customer pays by card"]},
                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
 NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quotes": []},
@@ -296,7 +296,7 @@ def test_split_prompt_has_role_field_and_examples():
     # round 3 (R1): roles in their own field, every situational condition in "if"
     text = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
     assert "Never put a role into \"if\"; roles go into \"roles\"" in text
-    assert "EXAMPLE WITH NO SITUATIONAL CONDITION" in text and '{{"roles": ["processor"], "if": []' in text
+    assert "EXAMPLE WITH NO SITUATIONAL CONDITION" in text and '{{"duty_type": "duty", "roles": ["processor"], "if": []' in text
     assert 'must not contain the words "must", "shall" or "is required to"' in text   # obligation check unchanged
 
 
@@ -398,7 +398,7 @@ def test_split_prompt_has_public_body_role_and_example(tmp_path):
                                                                                      passage_text=PASSAGE)
     assert '"public body": the Commission, a supervisory authority, a Member State' in text
     template = project_path(CONFIG["paths"]["applicability_split_prompt_v2"]).read_text(encoding="utf-8")
-    assert '{{"roles": ["public body"]' in template
+    assert '{{"duty_type": "duty", "roles": ["public body"]' in template
 
 
 def test_public_body_role_contradicted_by_code_gives_not_applicable(tmp_path):

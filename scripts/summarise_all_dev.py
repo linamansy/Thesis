@@ -8,7 +8,7 @@ Table columns:
   full run    the same in med_alldev_run_<n> ("-" = target not retrieved in that run, so not mediated)
   requirement the requirement text(s) of the target where it is Applicable (full runs first, else oracle)
 Label letters: A Applicable (requirement valid), A* Applicable with an invalid requirement, I Indeterminate,
-N Not applicable, X Irrelevant, S Split invalid, F failed step, - not retrieved, ? run missing.
+N Not applicable, X Irrelevant, S Split invalid, D No duty, F failed step, - not retrieved, ? run missing.
 
 Details, for every non-Applicable target (oracle and full runs): the cause of the label, then each IF item (role,
 scope, role facts, situations, exceptions): id, kind, status, quotes (canonical), verifier reason, failing stage.
@@ -25,7 +25,8 @@ from scripts.debug_single_case import load_answer_key
 from scripts.run_all_dev import LABEL, ORACLE_LABEL, VARIANTS, is_done, med_dir, rag_dir, retrieved_ids
 from src.config import load_config, project_path
 
-LETTERS = {"Applicable": "A", "Indeterminate": "I", "Not applicable": "N", "Irrelevant": "X", "Split invalid": "S"}
+LETTERS = {"Applicable": "A", "Indeterminate": "I", "Not applicable": "N", "Irrelevant": "X", "Split invalid": "S",
+           "No duty": "D"}
 
 
 def target_record(run_dir: Path, target: str) -> dict | None:
@@ -79,7 +80,7 @@ def record_cause(record: dict) -> str:
         return f"failed at {record['failed_step']}: {record.get('error') or ''}".strip()
     if record["label"] == "Irrelevant":
         return f"relevance: {record.get('label_cause')}"
-    if record["label"] == "Split invalid":
+    if record["label"] in ("Split invalid", "No duty"):
         return f"split: {record.get('label_cause')}"
     if record["label"] == "Applicable":
         return f"requirement: {record.get('label_cause')}"
@@ -133,7 +134,7 @@ def summarise(config: dict, variants, runs: int) -> str:
                         f"    cause: {record_cause(record)}"] + item_lines(record)
     return "\n".join(["ALL DEVELOPMENT VARIANTS (scripts/run_all_dev.py)", "", *table, "",
                       "Letters: A Applicable, A* Applicable with invalid requirement, I Indeterminate, N Not "
-                      "applicable, X Irrelevant, S Split invalid, F failed step, - not retrieved, ? run missing", "",
+                      "applicable, X Irrelevant, S Split invalid, D No duty, F failed step, - not retrieved, ? run missing", "",
                       "NON-APPLICABLE TARGETS", *(details or ["(none)"])]) + "\n"
 
 

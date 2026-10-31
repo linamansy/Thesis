@@ -164,7 +164,7 @@ def compare(config: dict, label: str, variants, n: int = 1) -> str:
                       f"Regression rule: {PASS_VARIANT} {PASS_TARGET} Applicable (conditional or not) with requirement: "
                       f"{'PASS' if passed else 'FAIL'} ({cell(regression)})", "", *table, "",
                       "Letters: A Applicable, AC Applicable (conditional), * invalid requirement, I Indeterminate, N Not "
-                      "applicable, X Irrelevant, S Split invalid, F failed step, ? run missing; [K1:..] sub-rules", "",
+                      "applicable, X Irrelevant, S Split invalid, D No duty, F failed step, ? run missing; [K1:..] sub-rules", "",
                       "TARGETS STILL NOT APPLICABLE", *(details or ["(none)"]), "",
                       f"EVERY APPLICABLE / APPLICABLE (CONDITIONAL) RULE IN THE {label} ORACLE RUNS (any passage)",
                       *(applicable or ["(none)"])]) + "\n"

@@ -149,6 +149,8 @@ def failing_boxes(record: dict | None) -> list[str]:
     a = record["applicability"]
     if record["label"] == "Split invalid":
         return ["split (obligation word in an IF item)"]
+    if record["label"] == "No duty":   # F1 (design round 2)
+        return ["split (duty_type none: no duty or right of its own)"]
     boxes = []
     for e in (record.get("resolution") or {}).get("exceptions_applying", []):
         boxes.append(f"check-IF (exception confirmed: {e})")

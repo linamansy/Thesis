@@ -9,6 +9,10 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      "roles" = who the duty is on, using only the role names of the passage's law (config.yaml c3_v2.roles, by passage
      id prefix; GDPR and any other prefix: controller / processor / public body / other; e.g. CRD: trader / consumer /
      public body / other), "if" = the situational conditions.
+     No duty (F1, design round 2, 31 Oct 2026): the split also gives "duty_type": "duty", "right" or "none". "none" =
+     the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules
+     ("paragraphs 1 to 3 shall not apply where ...", "without prejudice to ..."). Code then gives the label "No duty"
+     and nothing else runs (no check-IF call, no requirement). "duty" and "right" go on as before.
      Code rejects the split if an IF item contains an obligation word (config.yaml c3_v2.obligation_words:
      must / shall / is required to) -> label "Split invalid", nothing else runs.
      Substantive duty holder (D1, design round 1, 31 Oct 2026), by code: if the passage says "Member State(s) shall
@@ -76,7 +80,7 @@ import functools
 import re
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from src.agents.base_agent import BaseAgent
 from src.config import load_config
@@ -85,6 +89,7 @@ from src.mediation.quote_checker import match_quote
 from src.mediation.resolver_v2 import look_label
 
 SPLIT_INVALID = "Split invalid"
+NO_DUTY = "No duty"   # F1 (design round 2): the split's duty_type is "none"
 Status = Literal["confirmed", "not_stated", "contradicted"]
 MAX_QUOTES = 3   # quotes per item (fix multiquote); fixed by the task, not a study parameter
 
@@ -254,6 +259,20 @@ def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
 
     class SplitOutputV2(BaseModel):
         model_config = ConfigDict(populate_by_name=True)
+        # F1 (design round 2): what the passage does; "none" -> label "No duty"
+        duty_type: Literal["duty", "right", "none"] = Field(
+            description='"duty": the rule places a duty on someone; "right": it gives someone a right or an '
+                        'entitlement; "none": it places no duty and gives no right of its own, it only limits, '
+                        'excludes or refers to other rules')
+
+        @model_validator(mode="before")
+        @classmethod
+        def _duty_type(cls, value):
+            """An answer without duty_type (the format before F1) is read as a duty."""
+            if isinstance(value, dict) and "duty_type" not in value:
+                return {"duty_type": "duty", **value}
+            return value
+
         roles: list[Literal[role_names]] = Field(min_length=1, description="Who the rule places its duty on")
         conditions: list[IfGroup] = Field(alias="if", description="Every situational condition under which the rule "
                                                                   "applies (when it applies, never a role and never "
@@ -405,12 +424,13 @@ class ApplicabilityAgentV2:
         self.scope_conditions = settings["scope_conditions"]   # passage id prefix -> scope statement (R2)
 
     def first_look(self, case_id: str, description: str, passage_id: str, passage_text: str) -> dict:
-        """Steps a-f. Returns the applicability record for the audit trail. If a call has no valid answer after its
+        """Steps a-f. Returns the applicability record for the audit trail. A split with duty_type "none" (F1) gives
+        the label "No duty" and stops. If a call has no valid answer after its
         retry, "failed_step" names it ("split" or "check") and "label" is None.
         Sub-rules (D4b): every special case of the split is evaluated like the main rule (steps b-f, its own check-IF
         call) into record["sub_rules"] (ids K1, K2, ...); a failed call of a sub-rule marks only that sub-rule."""
-        record = {"split": None, "split_valid": None, "rejected_if": [], "duty_holder": None, **rule_record(),
-                  "sub_rules": [], "note": None}
+        record = {"split": None, "duty_type": None, "split_valid": None, "rejected_if": [], "duty_holder": None,
+                  **rule_record(), "sub_rules": [], "note": None}
 
         # a. split (law text only) + code check for obligation words (main rule and special cases)
         split = self.split_call.run(case_id, passage_id=passage_id, passage_text=passage_text)
@@ -418,6 +438,10 @@ class ApplicabilityAgentV2:
             record["failed_step"] = "split"
             return record
         record["split"] = split.model_dump(by_alias=True)
+        record["duty_type"] = split.duty_type
+        if split.duty_type == "none":   # F1: no duty or right of its own -> "No duty", nothing else runs
+            record["label"] = NO_DUTY
+            return record
         if_items = self.items_of(split.conditions)
         specials = split.special_cases if self.sub_rules else []
         texts = [c["text"] for c in if_items] + [c["text"] for sc in specials for c in flat_items(sc.conditions)]
