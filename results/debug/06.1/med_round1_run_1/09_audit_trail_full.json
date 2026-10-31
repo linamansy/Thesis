@@ -1,0 +1,2781 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "CRD-Art13-1",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement.",
+    "label": "Applicable (conditional)",
+    "label_cause": "requirement invalid: the kept_as words \"If the organisation is told the customer wants to cancel the order\" of case event C2 are not copied word for word from the requirement",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "reimbursement of payments upon withdrawal",
+      "law_quote": "The trader shall reimburse all payments received from the consumer",
+      "relevant": true,
+      "process_step": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+      "description_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+      "reason": "The rule is about reimbursement of payments upon withdrawal, and the process includes a step where returns may trigger further actions.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "The trader shall reimburse all payments received from the consumer",
+      "description_quote_canonical": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              },
+              {
+                "text": "the trader is informed of the consumer’s decision to withdraw",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial capacity."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "Returning a parcel is a different event than withdrawing from a contract; the sentences do not explicitly state the customer withdrew from the contract."
+          }
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader is informed of the consumer’s decision to withdraw",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "the organisation running the described process is informed of its customer’s decision to withdraw",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence states the shop sells kitchen items (goods) to private persons (customers) across the EU, which aligns with the statement's claim of selling goods/services for trade/business purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null,
+        "C2": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "C2",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer withdraws from the contract"
+        },
+        {
+          "id": "C2",
+          "text": "the organisation running the described process is informed of its customer’s decision to withdraw"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": null,
+      "requirement_invalid": true,
+      "attempts": [
+        {
+          "requirement": "If the customer returns the item, the customer is refunded within 14 days of the organisation being told they want to cancel the order, using the same payment method unless they agree otherwise.",
+          "step_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+          "triggers": [
+            {
+              "trigger": "not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+              "kept_as": "within 14 days of the organisation being told they want to cancel the order"
+            },
+            {
+              "trigger": "using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise",
+              "kept_as": "using the same payment method unless they agree otherwise"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+            "kept_as": "the customer is refunded within 14 days of the organisation being told they want to cancel the order, using the same payment method unless they agree otherwise"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer returns the item"
+            },
+            {
+              "id": "C2",
+              "kept_as": "If the organisation is told the customer wants to cancel the order"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            },
+            {
+              "id": "C2",
+              "text": "the organisation running the described process is informed of its customer’s decision to withdraw"
+            }
+          ],
+          "problems": [
+            "the kept_as words \"If the organisation is told the customer wants to cancel the order\" of case event C2 are not copied word for word from the requirement"
+          ],
+          "canonical_quotes": {
+            "step_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+            "triggers": [
+              {
+                "trigger": "not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+                "kept_as": "within 14 days of the organisation being told they want to cancel the order"
+              },
+              {
+                "trigger": "using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise",
+                "kept_as": "using the same payment method unless they agree otherwise"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+              "kept_as": "the customer is refunded within 14 days of the organisation being told they want to cancel the order, using the same payment method unless they agree otherwise"
+            }
+          },
+          "measures": {
+            "n_words": 33,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 29,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        },
+        {
+          "requirement": "If the customer sends back the item, the customer is refunded, including delivery costs, within 14 days of the organisation being told the customer wants to cancel the order.",
+          "step_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+          "triggers": [
+            {
+              "trigger": "not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+              "kept_as": "within 14 days of the organisation being told the customer wants to cancel the order"
+            },
+            {
+              "trigger": "using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+              "kept_as": "the customer is refunded, including delivery costs"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+            "kept_as": "the customer is refunded, including delivery costs, within 14 days of the organisation being told the customer wants to cancel the order"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer sends back the item"
+            },
+            {
+              "id": "C2",
+              "kept_as": "If the organisation is told the customer wants to cancel the order"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            },
+            {
+              "id": "C2",
+              "text": "the organisation running the described process is informed of its customer’s decision to withdraw"
+            }
+          ],
+          "problems": [
+            "the kept_as words \"If the organisation is told the customer wants to cancel the order\" of case event C2 are not copied word for word from the requirement"
+          ],
+          "canonical_quotes": {
+            "step_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+            "triggers": [
+              {
+                "trigger": "not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+                "kept_as": "within 14 days of the organisation being told the customer wants to cancel the order"
+              },
+              {
+                "trigger": "using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+                "kept_as": "the customer is refunded, including delivery costs"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+              "kept_as": "the customer is refunded, including delivery costs, within 14 days of the organisation being told the customer wants to cancel the order"
+            }
+          },
+          "measures": {
+            "n_words": 29,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 25,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 2,
+    "passage_id": "CRD-Art13-2",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n2. Notwithstanding paragraph 1, the trader shall not be required to reimburse the supplementary costs, if the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader.",
+    "label": "Applicable (conditional)",
+    "label_cause": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the trader shall not be required to reimburse the supplementary costs",
+      "law_quote": "the trader shall not be required to reimburse the supplementary costs",
+      "relevant": true,
+      "process_step": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "description_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "reason": "The rule is about reimbursement of supplementary costs for delivery, and the process has a step where customers return parcels, which may involve such costs.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the trader shall not be required to reimburse the supplementary costs",
+      "description_quote_canonical": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader shall not be required to reimburse the supplementary costs",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the organisation running the described process",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the organisation running the described process"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": "If a customer returns an item without explanation, the shop is not required to pay for extra delivery costs, if the customer chose a more expensive delivery method.",
+      "requirement_invalid": false,
+      "attempts": [
+        {
+          "requirement": "If a customer returns an item without explanation, the shop is not required to pay for extra delivery costs, if the customer chose a more expensive delivery method.",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "if the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+              "kept_as": "if the customer chose a more expensive delivery method"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader shall not be required to reimburse the supplementary costs",
+            "kept_as": "the shop is not required to pay for extra delivery costs"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If a customer returns an item without explanation"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the organisation running the described process"
+            }
+          ],
+          "problems": [],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": "if the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+                "kept_as": "if the customer chose a more expensive delivery method"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader shall not be required to reimburse the supplementary costs",
+              "kept_as": "the shop is not required to pay for extra delivery costs"
+            }
+          },
+          "measures": {
+            "n_words": 28,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 24,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art13-3",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest.",
+    "label": "Applicable",
+    "label_cause": "requirement invalid: the trigger \"within two weeks\" is not copied word for word from the legal passage",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods",
+      "law_quote": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods",
+      "relevant": true,
+      "process_step": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "description_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "reason": "The rule is about the return of goods and the withholding of reimbursement, which the process includes through the step where customers send back parcels.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods",
+      "description_quote_canonical": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the trader has not offered to collect the goods himself",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The order is then handed over to a logistics provider for delivery.",
+            "status": "confirmed",
+            "quotes": [
+              "The order is then handed over to a logistics provider for delivery."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the trader has not offered to collect the goods himself",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "the organisation running the described process has not offered to collect the goods himself",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The order is then handed over to a logistics provider for delivery."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The order is then handed over to a logistics provider for delivery"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence implies the organisation is outsourcing delivery to a third party, confirming they haven't offered to collect the goods themselves."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable",
+      "if_label": "Applicable",
+      "exceptions_applying": [],
+      "reason": "every IF item confirmed and no stated exception applies",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": "first look"
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": {
+      "requirement": null,
+      "requirement_invalid": true,
+      "attempts": [
+        {
+          "requirement": "If the customer returns the item within two weeks, the trader waits to give a refund until the goods are returned or the customer shows proof they sent them back.",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "within two weeks",
+              "kept_as": "within two weeks"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+            "kept_as": "the trader waits to give a refund until the goods are returned or the customer shows proof they sent them back"
+          },
+          "case_events": [],
+          "case_events_given": [],
+          "problems": [
+            "the trigger \"within two weeks\" is not copied word for word from the legal passage"
+          ],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": null,
+                "kept_as": "within two weeks"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+              "kept_as": "the trader waits to give a refund until the goods are returned or the customer shows proof they sent them back"
+            }
+          },
+          "measures": {
+            "n_words": 30,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 26,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        },
+        {
+          "requirement": "If the customer returns the item within two weeks, the trader can delay payment until the goods are returned or the customer proves they sent them back, whichever comes first.",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "within two weeks",
+              "kept_as": "within two weeks"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+            "kept_as": "the trader can delay payment until the goods are returned or the customer proves they sent them back, whichever comes first"
+          },
+          "case_events": [],
+          "case_events_given": [],
+          "problems": [
+            "the trigger \"within two weeks\" is not copied word for word from the legal passage"
+          ],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": null,
+                "kept_as": "within two weeks"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+              "kept_as": "the trader can delay payment until the goods are returned or the customer proves they sent them back, whichever comes first"
+            }
+          },
+          "measures": {
+            "n_words": 30,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 26,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art13-4",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n4. In respect of personal data of the consumer, the trader shall comply with the obligations applicable under Regulation (EU) 2016/679.",
+    "label": "Applicable (conditional)",
+    "label_cause": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "personal data of the consumer",
+      "law_quote": "personal data of the consumer",
+      "relevant": true,
+      "process_step": "The shop sells kitchen items to private persons across the EU.",
+      "description_quote": "The shop sells kitchen items to private persons across the EU.",
+      "reason": "The rule is about the personal data of the consumer, and the process involves selling to private persons across the EU, which includes handling personal data.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "personal data of the consumer",
+      "description_quote_canonical": "The shop sells kitchen items to private persons across the EU",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must comply with the obligations applicable under Regulation (EU) 2016/679 in respect of personal data of the consumer",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer withdraws",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer withdraws"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": "If the customer withdraws, the shop handles the customer's personal data in line with Regulation (EU) 2016/679.",
+      "requirement_invalid": false,
+      "attempts": [
+        {
+          "requirement": "If the customer withdraws, the shop handles the customer's personal data in line with Regulation (EU) 2016/679.",
+          "step_quote": "The shop sells kitchen items to private persons across the EU.",
+          "triggers": [
+            {
+              "trigger": "in respect of personal data of the consumer",
+              "kept_as": "in line with Regulation (EU) 2016/679"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader must comply with the obligations applicable under Regulation (EU) 2016/679 in respect of personal data of the consumer",
+            "kept_as": "the shop handles the customer's personal data in line with Regulation (EU) 2016/679"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer withdraws"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws"
+            }
+          ],
+          "problems": [],
+          "canonical_quotes": {
+            "step_quote": "The shop sells kitchen items to private persons across the EU",
+            "triggers": [
+              {
+                "trigger": "In respect of personal data of the consumer",
+                "kept_as": "in line with Regulation (EU) 2016/679"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader must comply with the obligations applicable under Regulation (EU) 2016/679 in respect of personal data of the consumer",
+              "kept_as": "the shop handles the customer's personal data in line with Regulation (EU) 2016/679"
+            }
+          },
+          "measures": {
+            "n_words": 18,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 14,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 5,
+    "passage_id": "CRD-Art13-5",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n5. The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content:\n(a) has no utility outside the context of the digital content or digital service supplied by the trader;\n(b) only relates to the consumer’s activity when using the digital content or digital service supplied by the trader;\n(c) has been aggregated with other data by the trader and cannot be disaggregated or only with disproportionate efforts; or\n(d) has been generated jointly by the consumer and others, and other consumers are able to continue to make use of the content.",
+    "label": "Applicable (conditional)",
+    "label_cause": "requirement invalid: the trigger \"except where such content meets one of the conditions listed in (a) to (d)\" is not copied word for word from the legal passage",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the trader shall refrain from using any content, other than personal data, which was provided or created by the consumer",
+      "law_quote": "The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer",
+      "relevant": true,
+      "process_step": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "description_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "reason": "The rule is about the trader refraining from using consumer-provided content, and the process includes customers returning parcels, which may involve such content.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer",
+      "description_quote_canonical": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content meets one of the conditions listed in (a) to (d)",
+        "exceptions": [],
+        "special_cases": [
+          {
+            "clause": "except where such content",
+            "roles": [
+              "trader"
+            ],
+            "if": [
+              {
+                "logic": "any",
+                "items": [
+                  {
+                    "text": "has no utility outside the context of the digital content or digital service supplied by the trader",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "only relates to the consumer’s activity when using the digital content or digital service supplied by the trader",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "has been aggregated with other data by the trader and cannot be disaggregated or only with disproportionate efforts",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "has been generated jointly by the consumer and others, and other consumers are able to continue to make use of the content",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the trader may use the content"
+          }
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "Returning the parcel is a different event from the customer withdrawing from the contract."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [
+        {
+          "id": "K1",
+          "clause": "except where such content",
+          "then": "the trader may use the content",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+                "status": "confirmed",
+                "quotes": [
+                  "The shop sells kitchen items to private persons across the EU."
+                ]
+              },
+              {
+                "id": "T1",
+                "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+                "status": "confirmed",
+                "quotes": [
+                  "The shop sells kitchen items to private persons across the EU."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C3",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C4",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: trader",
+              "roles": [
+                {
+                  "role": "trader",
+                  "status": "confirmed",
+                  "decided_by": "first look",
+                  "reason": "T1 confirmed with a checked quote"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "first look",
+              "quotes_canonical": [
+                "The shop sells kitchen items to private persons across the EU"
+              ],
+              "quote_found": true,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "The shop sells kitchen items to private persons across the EU"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "has no utility outside the context of the digital content or digital service supplied by the trader",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "any",
+              "text_sent": "has no utility outside the context of the digital content or digital service supplied by the organisation running the described process",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            },
+            {
+              "id": "C2",
+              "kind": "situation",
+              "text": "only relates to the consumer’s activity when using the digital content or digital service supplied by the trader",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "any",
+              "text_sent": "only relates to its customer’s activity when using the digital content or digital service supplied by the organisation running the described process",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            },
+            {
+              "id": "C3",
+              "kind": "situation",
+              "text": "has been aggregated with other data by the trader and cannot be disaggregated or only with disproportionate efforts",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "any",
+              "text_sent": "has been aggregated with other data by the organisation running the described process and cannot be disaggregated or only with disproportionate efforts",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            },
+            {
+              "id": "C4",
+              "kind": "situation",
+              "text": "has been generated jointly by the consumer and others, and other consumers are able to continue to make use of the content",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "any",
+              "text_sent": "has been generated jointly by its customer and others, and other consumers are able to continue to make use of the content",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [
+            {
+              "id": "T1",
+              "kind": "role_fact",
+              "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "The shop sells kitchen items to private persons across the EU"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+              }
+            }
+          ],
+          "exceptions": [],
+          "role_binding": {
+            "trader": "the organisation running the described process",
+            "consumer": "its customer"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C3",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C4",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "first look",
+              "S1": "first look",
+              "C1": null,
+              "C2": null,
+              "C3": null,
+              "C4": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "G1",
+                "logic": "any",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1",
+                  "C2",
+                  "C3",
+                  "C4"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        }
+      ],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer withdraws from the contract"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": null,
+      "requirement_invalid": true,
+      "attempts": [
+        {
+          "requirement": "If the customer returns the item without explanation, the shop must not use any content created by the customer, except as allowed by the conditions in (a) to (d).",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "except where such content meets one of the conditions listed in (a) to (d)",
+              "kept_as": "except as allowed by the conditions in (a) to (d)"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+            "kept_as": "the shop must not use any content created by the customer"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer returns the item without explanation"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            }
+          ],
+          "problems": [
+            "the trigger \"except where such content meets one of the conditions listed in (a) to (d)\" is not copied word for word from the legal passage"
+          ],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": null,
+                "kept_as": "except as allowed by the conditions in (a) to (d"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+              "kept_as": "the shop must not use any content created by the customer"
+            }
+          },
+          "measures": {
+            "n_words": 29,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 25,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        },
+        {
+          "requirement": "If the customer returns the item within two weeks without explanation, the shop must not use any content provided by the customer, except as allowed by the conditions in (a) to (d).",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "except where such content meets one of the conditions listed in (a) to (d)",
+              "kept_as": "except as allowed by the conditions in (a) to (d)"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content meets one of the conditions listed in (a) to (d)",
+            "kept_as": "the shop must not use any content provided by the customer, except as allowed by the conditions in (a) to (d)"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer returns the item within two weeks without explanation"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            }
+          ],
+          "problems": [
+            "the trigger \"except where such content meets one of the conditions listed in (a) to (d)\" is not copied word for word from the legal passage"
+          ],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": null,
+                "kept_as": "except as allowed by the conditions in (a) to (d"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content meets one of the conditions listed in (a) to (d",
+              "kept_as": "the shop must not use any content provided by the customer, except as allowed by the conditions in (a) to (d"
+            }
+          },
+          "measures": {
+            "n_words": 32,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 28,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 6,
+    "passage_id": "CRD-Art13-6",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n6. Except in the situations referred to in point (a), (b) or (c) of paragraph 5, the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader.",
+    "label": "Applicable (conditional)",
+    "label_cause": "requirement invalid: the trigger \"has not yet used the digital content or digital service\" is not copied word for word from the legal passage; the kept_as words \"its customer has not yet used the digital content or digital service\" are not copied word for word from the requirement; the trigger \"has used the digital content or digital service but has not exceeded the scope of the service\" is not copied word for word from the legal passage; the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" are not copied word for word from the requirement; case_events names G2 more than once; the kept_as words \"its customer has not yet used the digital content or digital service\" of case event G2 are not copied word for word from the requirement; the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" of case event G2 are not copied word for word from the requirement",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+      "law_quote": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+      "relevant": true,
+      "process_step": "The shop sells kitchen items to private persons across the EU.",
+      "description_quote": "The shop sells kitchen items to private persons across the EU.",
+      "reason": "The rule is about the trader making available content provided or created by the consumer, and the process involves the shop selling items to consumers across the EU.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+      "description_quote_canonical": "The shop sells kitchen items to private persons across the EU",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          },
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "the consumer has not yet used the digital content or digital service",
+                "kind": "case_event"
+              },
+              {
+                "text": "the consumer has used the digital content or digital service but has not exceeded the scope of the service",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "exceptions": [
+          "the situations referred to in point (a), (b) or (c) of paragraph 5"
+        ],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the consumer has not yet used the digital content or digital service",
+          "item_kind": "case_event",
+          "group": "G2",
+          "logic": "any",
+          "text_sent": "its customer has not yet used the digital content or digital service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "the consumer has used the digital content or digital service but has not exceeded the scope of the service",
+          "item_kind": "case_event",
+          "group": "G2",
+          "logic": "any",
+          "text_sent": "its customer has used the digital content or digital service but has not exceeded the scope of the service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "the situations referred to in point (a), (b) or (c) of paragraph 5",
+          "text_sent": "the situations referred to in point (a), (b) or (c) of paragraph 5",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null,
+        "C2": null,
+        "C3": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "G2",
+          "logic": "any",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C2",
+            "C3"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer withdraws from the contract"
+        },
+        {
+          "id": "G2",
+          "text": "one of: its customer has not yet used the digital content or digital service; its customer has used the digital content or digital service but has not exceeded the scope of the service"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": null,
+      "requirement_invalid": true,
+      "attempts": [
+        {
+          "requirement": "If the customer withdraws, the customer is given any content, other than personal data, created by them when using the shop's digital service.",
+          "step_quote": "The shop sells kitchen items to private persons across the EU.",
+          "triggers": [
+            {
+              "trigger": "at the request of the consumer",
+              "kept_as": "If the customer withdraws"
+            },
+            {
+              "trigger": "has not yet used the digital content or digital service",
+              "kept_as": "its customer has not yet used the digital content or digital service"
+            },
+            {
+              "trigger": "has used the digital content or digital service but has not exceeded the scope of the service",
+              "kept_as": "its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "duty": {
+            "from_then": "make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+            "kept_as": "the customer is given any content, other than personal data, created by them when using the shop's digital service"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer withdraws"
+            },
+            {
+              "id": "G2",
+              "kept_as": "its customer has not yet used the digital content or digital service"
+            },
+            {
+              "id": "G2",
+              "kept_as": "its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            },
+            {
+              "id": "G2",
+              "text": "one of: its customer has not yet used the digital content or digital service; its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "problems": [
+            "the trigger \"has not yet used the digital content or digital service\" is not copied word for word from the legal passage",
+            "the kept_as words \"its customer has not yet used the digital content or digital service\" are not copied word for word from the requirement",
+            "the trigger \"has used the digital content or digital service but has not exceeded the scope of the service\" is not copied word for word from the legal passage",
+            "the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" are not copied word for word from the requirement",
+            "case_events names G2 more than once",
+            "the kept_as words \"its customer has not yet used the digital content or digital service\" of case event G2 are not copied word for word from the requirement",
+            "the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" of case event G2 are not copied word for word from the requirement"
+          ],
+          "canonical_quotes": {
+            "step_quote": "The shop sells kitchen items to private persons across the EU",
+            "triggers": [
+              {
+                "trigger": "at the request of the consumer",
+                "kept_as": "If the customer withdraws"
+              },
+              {
+                "trigger": null,
+                "kept_as": null
+              },
+              {
+                "trigger": null,
+                "kept_as": null
+              }
+            ],
+            "duty": {
+              "from_then": "make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+              "kept_as": "the customer is given any content, other than personal data, created by them when using the shop's digital service"
+            }
+          },
+          "measures": {
+            "n_words": 23,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 19,
+            "n_copied_ngrams": 2,
+            "copied_share": 0.1053
+          }
+        },
+        {
+          "requirement": "If the customer withdraws, the shop gives back any content, other than personal data, the customer created when using the digital service.",
+          "step_quote": "The shop sells kitchen items to private persons across the EU.",
+          "triggers": [
+            {
+              "trigger": "at the request of the consumer",
+              "kept_as": "If the customer withdraws"
+            },
+            {
+              "trigger": "has not yet used the digital content or digital service",
+              "kept_as": "its customer has not yet used the digital content or digital service"
+            },
+            {
+              "trigger": "has used the digital content or digital service but has not exceeded the scope of the service",
+              "kept_as": "its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "duty": {
+            "from_then": "make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+            "kept_as": "the shop gives back any content, other than personal data, the customer created when using the digital service"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer withdraws"
+            },
+            {
+              "id": "G2",
+              "kept_as": "its customer has not yet used the digital content or digital service"
+            },
+            {
+              "id": "G2",
+              "kept_as": "its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            },
+            {
+              "id": "G2",
+              "text": "one of: its customer has not yet used the digital content or digital service; its customer has used the digital content or digital service but has not exceeded the scope of the service"
+            }
+          ],
+          "problems": [
+            "the trigger \"has not yet used the digital content or digital service\" is not copied word for word from the legal passage",
+            "the kept_as words \"its customer has not yet used the digital content or digital service\" are not copied word for word from the requirement",
+            "the trigger \"has used the digital content or digital service but has not exceeded the scope of the service\" is not copied word for word from the legal passage",
+            "the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" are not copied word for word from the requirement",
+            "case_events names G2 more than once",
+            "the kept_as words \"its customer has not yet used the digital content or digital service\" of case event G2 are not copied word for word from the requirement",
+            "the kept_as words \"its customer has used the digital content or digital service but has not exceeded the scope of the service\" of case event G2 are not copied word for word from the requirement"
+          ],
+          "canonical_quotes": {
+            "step_quote": "The shop sells kitchen items to private persons across the EU",
+            "triggers": [
+              {
+                "trigger": "at the request of the consumer",
+                "kept_as": "If the customer withdraws"
+              },
+              {
+                "trigger": null,
+                "kept_as": null
+              },
+              {
+                "trigger": null,
+                "kept_as": null
+              }
+            ],
+            "duty": {
+              "from_then": "make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+              "kept_as": "the shop gives back any content, other than personal data, the customer created when using the digital service"
+            }
+          },
+          "measures": {
+            "n_words": 22,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 18,
+            "n_copied_ngrams": 2,
+            "copied_share": 0.1111
+          }
+        }
+      ]
+    }
+  },
+  {
+    "rank": 7,
+    "passage_id": "CRD-Art13-7",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "retrieve that digital content free of charge, without hindrance from the trader",
+      "law_quote": "retrieve that digital content free of charge, without hindrance from the trader",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The rule is about retrieving digital content, but the process describes physical goods and returns, not digital content.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "retrieve that digital content free of charge, without hindrance from the trader",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 8,
+    "passage_id": "CRD-Art13-8",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n8. In the event of withdrawal from the contract, the trader may prevent any further use of the digital content or digital service by the consumer, in particular by making the digital content or digital service inaccessible to the consumer or disabling the user account of the consumer, without prejudice to paragraph 6.",
+    "label": "Applicable (conditional)",
+    "label_cause": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "withdrawal from the contract",
+      "law_quote": "In the event of withdrawal from the contract",
+      "relevant": true,
+      "process_step": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "description_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "reason": "The rule is about withdrawal from the contract, and the process has a step where customers return items, which could be considered withdrawal.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "In the event of withdrawal from the contract",
+      "description_quote_canonical": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader may prevent any further use of the digital content or digital service by the consumer, in particular by making the digital content or digital service inaccessible to the consumer or disabling the user account of the consumer, without prejudice to paragraph 6",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "case_event",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "Returning the parcel is a different event from the customer withdrawing from the contract."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable (conditional)",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable (conditional)",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Applicable (conditional)",
+      "if_label": "Applicable (conditional)",
+      "exceptions_applying": [],
+      "reason": "role, scope and every process fact confirmed, no case event contradicted and no stated exception applies; the case events stay the requirement's triggers",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": true,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": [
+        {
+          "id": "C1",
+          "text": "its customer withdraws from the contract"
+        }
+      ]
+    },
+    "requirement": {
+      "requirement": "If the customer returns the item, the trader stops the customer from using the digital content or service, like making it unavailable or disabling the account.",
+      "requirement_invalid": false,
+      "attempts": [
+        {
+          "requirement": "If the customer returns the item, the trader stops the customer from using the digital content or service, like making it unavailable or disabling the account.",
+          "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+          "triggers": [
+            {
+              "trigger": "in the event of withdrawal from the contract",
+              "kept_as": "If the customer returns the item"
+            }
+          ],
+          "duty": {
+            "from_then": "the trader may prevent any further use of the digital content or digital service by the consumer",
+            "kept_as": "the trader stops the customer from using the digital content or service"
+          },
+          "case_events": [
+            {
+              "id": "C1",
+              "kept_as": "If the customer returns the item"
+            }
+          ],
+          "case_events_given": [
+            {
+              "id": "C1",
+              "text": "its customer withdraws from the contract"
+            }
+          ],
+          "problems": [],
+          "canonical_quotes": {
+            "step_quote": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why",
+            "triggers": [
+              {
+                "trigger": "In the event of withdrawal from the contract",
+                "kept_as": "If the customer returns the item"
+              }
+            ],
+            "duty": {
+              "from_then": "the trader may prevent any further use of the digital content or digital service by the consumer",
+              "kept_as": "the trader stops the customer from using the digital content or service"
+            }
+          },
+          "measures": {
+            "n_words": 26,
+            "n_sentences": 1,
+            "banned_found": [],
+            "n_ngrams": 22,
+            "n_copied_ngrams": 0,
+            "copied_share": 0.0
+          }
+        }
+      ]
+    }
+  }
+]

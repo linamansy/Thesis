@@ -1,0 +1,228 @@
+DESIGN ROUND REPORT: round1 oracle run 1 vs alldev oracle run 1 (qwen3:8b)
+
+Regression rule: 01.1 GDPR-Art13-1 Applicable (conditional or not) with requirement: PASS (A)
+
+variant target          alldev oracle   round1 oracle         fixes involved
+----------------------------------------------------------------------------
+01.1    GDPR-Art13-1    A               A                     -  (label unchanged)
+01.2    LPD-Art3-1      I               I                     D5  (label unchanged)
+06.1    CRD-Art13-1     I               AC*                   D5
+11.1    GDPR-Art17-1    I               I [K1:I K2:I K3:I K4:I K5:I K6:A]D4b
+13.1    SGD-Art14-1     I               I                     D5  (label unchanged)
+17.1    CRD-Art14-1     I               I [K1:N]              D3, D4a, D4b, D5
+19.1    ECD-Art11-1     N               N                     -  (label unchanged)
+45.1    ECD-Art10-1     I               I                     D5  (label unchanged)
+
+Letters: A Applicable, AC Applicable (conditional), * invalid requirement, I Indeterminate, N Not applicable, X Irrelevant, S Split invalid, F failed step, ? run missing; [K1:..] sub-rules
+
+TARGETS STILL NOT APPLICABLE
+01.2 LPD-Art3-1: I
+    cause: not every IF item is confirmed
+      R1  role                             not_stated: the duty is on: creditor
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): creditor: D2 not stated
+      S1  scope                            confirmed: the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences describe billing to other companies (commercial entities) after order confirmation, which aligns with the statement's definition of a commercial transaction involving payment for goods/services.
+          failing stage: -
+      C1  situation/process_fact           not_stated: the organisation running the described process has fulfilled its contractual and legal obligations
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation/case_event             confirmed: the organisation running the described process has not received the amount due on time
+          quotes: ["some customers pay later than the agreed date"]
+          verifier: The sentence indicates that some customers' payments are delayed, which directly implies the organization hasn't received the amount on time for those cases.
+          failing stage: -
+      C3  situation/case_event (G2 any)    not_stated: the debtor is not responsible for the delay
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      D2  role_fact                        not_stated: another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences describe sending a bill, not the actual payment being made by the customer, which is the core of the statement.
+          failing stage: verifier (first look)
+06.1 CRD-Art13-1: AC*
+    cause: requirement invalid: the kept_as words "If the organisation is told the customer wants to cancel the order" of case event C2 are not copied word for word from the requirement
+      R1  role                             confirmed: the duty is on: trader
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: -
+          failing stage: -
+      S1  scope                            confirmed: the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: The sentence explicitly mentions 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial capacity.
+          failing stage: -
+      C1  situation/case_event             not_stated: its customer withdraws from the contract
+          quotes: ["Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why"]
+          verifier: Returning a parcel is a different event than withdrawing from a contract; the sentences do not explicitly state the customer withdrew from the contract.
+          failing stage: verifier (first look)
+      C2  situation/case_event             not_stated: the organisation running the described process is informed of its customer’s decision to withdraw
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      T1  role_fact                        confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: The sentence states the shop sells kitchen items (goods) to private persons (customers) across the EU, which aligns with the statement's claim of selling goods/services for trade/business purposes.
+          failing stage: -
+13.1 SGD-Art14-1: I
+    cause: not every IF item is confirmed
+      R1  role                             not_stated: the duty is on: seller
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): seller: T1 not stated
+      S1  scope                            confirmed: goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: ["Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier: Private persons are considered consumers under the statement's definition, as they are natural persons not acting in trade, business, etc.
+          failing stage: -
+      C1  situation/case_event             confirmed: the organisation running the described process has been informed by its customer about the lack of conformity
+          quotes: ["The process begins when a customer files a complaint about a product or service"]
+          verifier: Filing a complaint about a product or service directly implies informing the organization about a lack of conformity.
+          failing stage: -
+      C2  situation/process_fact           confirmed: the goods are not conforming
+          quotes: ["Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier: The appliance stopping working implies it did not meet the required standards, confirming the goods are non-conforming.
+          failing stage: -
+      T1  role_fact                        not_stated: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The process begins when a customer files a complaint about a product or service"]
+          verifier: A complaint about a product or service implies the organisation is engaged in selling goods/services, supporting the statement rather than contradicting it.
+          failing stage: verifier (first look)
+17.1 CRD-Art14-1: I [K1:N]
+    cause: not every IF item is confirmed
+      R1  role                             confirmed: the duty is on: consumer or trader
+          quotes: ["customers are private persons in several EU countries"]
+          verifier: -
+          failing stage: -
+      S1  scope                            confirmed: the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: ["customers are private persons in several EU countries"]
+          verifier: The sentences describe customers as private persons in EU countries, which aligns with the statement's definition of a consumer as a natural person not acting in a commercial context.
+          failing stage: -
+      C1  situation/case_event             not_stated: its customer has communicated his decision to withdraw from the contract to the organisation running the described process in accordance with Article 11
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation/process_fact (G2 any)  not_stated: the organisation running the described process has not offered to collect the goods himself
+          quotes: ["If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label"]
+          verifier: The sentences describe sending a return label but do not mention whether the organisation offers to collect goods, so they neither confirm nor deny the statement.
+          failing stage: verifier (second look)
+      C3  situation/process_fact (G2 any)  not_stated: the goods have been delivered to its customer’s home at the time of the conclusion of the contract
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      T1  role_fact                        confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["An e-commerce company has a comprehensive order fulfillment process"]
+          verifier: An e-commerce company's order fulfillment process inherently relates to selling goods/services as part of its business operations.
+          failing stage: -
+    sub-rule K1 ('In the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract'): Not applicable; cause: an IF item is contradicted
+        R1  role                             confirmed: the duty is on: trader
+            quotes: ["When a customer places an order, the system records the order details"]
+            verifier: -
+            failing stage: -
+        S1  scope                            confirmed: the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+            quotes: ["The customers are private persons in several EU countries"]
+            verifier: The sentences describe customers as private persons (non-commercial) in EU countries, which aligns with the statement's definition of a consumer as a natural person not acting in trade/business.
+            failing stage: -
+        C1  situation/process_fact           not_stated: the goods have been delivered to its customer’s home at the time of the conclusion of the contract
+            quotes: ["The system sends a shipping confirmation to the customer", "Once packaging and shipping documents are ready, the order is dispatched"]
+            verifier: The sentences describe shipping confirmation and dispatching, which are different events from delivery at contract conclusion.
+            failing stage: verifier (first look)
+        C2  situation/case_event             contradicted: by their nature, those goods cannot normally be returned by post
+            quotes: ["If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label", "Receiving returned items", "Processing a refund or replacement"]
+            verifier: The sentences describe a returns process that includes returning items, implying they can be returned by post, contradicting the statement.
+            failing stage: first look: contradicted
+        T1  role_fact                        confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+            quotes: ["When a customer places an order, the system records the order details"]
+            verifier: The act of recording order details implies the organisation is engaged in selling goods/services as part of its business operations.
+            failing stage: -
+19.1 ECD-Art11-1: N
+    cause: an IF item is contradicted
+      R1  role                             confirmed: the duty is on: service provider
+          quotes: ["The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"]
+          verifier: -
+          failing stage: -
+      S1  scope                            not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation/process_fact           confirmed: the recipient of the service places his order through technological means
+          quotes: ["The user starts an order by logging in to their account"]
+          verifier: The user starting an order by logging in (a technological means) aligns with the recipient placing the order through technological means, as both involve initiating the order via technology.
+          failing stage: -
+      C2  situation/case_event             contradicted: the recipient is not a consumer
+          quotes: ["The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"]
+          verifier: The sentences describe users as private persons buying for personal use (consumers), directly contradicting the statement that the recipient is not a consumer.
+          failing stage: first look: contradicted
+      T1  role_fact                        confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"]
+          verifier: The shop being run by a company for private customers via website confirms the organization sells goods/services as part of its business.
+          failing stage: -
+45.1 ECD-Art10-1: I
+    cause: not every IF item is confirmed
+      R1  role                             confirmed: the duty is on: service provider
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: -
+          failing stage: -
+      S1  scope                            not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation/process_fact           not_stated: the organisation running the described process provides an information society service
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation/case_event             confirmed: the recipient of the service places an order
+          quotes: ["After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected", "Finally if the address and the payment steps are executed then the order will be finished by the system"]
+          verifier: The sentences describe the customer's actions (selecting products, adding to cart, completing address/payment) which collectively constitute placing an order, matching the statement's fact.
+          failing stage: -
+      T1  role_fact                        confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: The E-Shop selling to private persons implies commercial activity as part of its business operations.
+          failing stage: -
+      E1  exception                        not_stated: when otherwise agreed by parties who are not consumers
+          quotes: -
+          verifier: -
+          failing stage: -
+
+EVERY APPLICABLE / APPLICABLE (CONDITIONAL) RULE IN THE round1 ORACLE RUNS (any passage)
+01.1 GDPR-Art13-1 (target) main: Applicable (A)
+    requirement: When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.
+01.1 GDPR-Art13-2-a main: Applicable (A)
+    requirement: During the inquiry, the customer is told how long their data is kept, or the criteria used, and their rights to access, correct, erase, object, or port data.
+01.1 GDPR-Art13-4 main: Applicable (A)
+    requirement: The customer is told about their data being stored during the inquiry.
+06.1 CRD-Art13-1 (target) main: Applicable (conditional) (AC*)
+    requirement: (invalid) If the customer sends back the item, the customer is refunded, including delivery costs, within 14 days of the organisation being told the customer wants to cancel the order.  -- problems: the kept_as words "If the organisation is told the customer wants to cancel the order" of case event C2 are not copied word for word from the requirement
+    case events: C1: its customer withdraws from the contract; C2: the organisation running the described process is informed of its customer’s decision to withdraw
+06.1 CRD-Art13-2 main: Applicable (conditional) (AC)
+    requirement: If a customer returns an item without explanation, the shop is not required to pay for extra delivery costs, if the customer chose a more expensive delivery method.
+    case events: C1: its customer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the organisation running the described process
+06.1 CRD-Art13-3 main: Applicable (A*)
+    requirement: (invalid) If the customer returns the item within two weeks, the trader can delay payment until the goods are returned or the customer proves they sent them back, whichever comes first.  -- problems: the trigger "within two weeks" is not copied word for word from the legal passage
+06.1 CRD-Art13-4 main: Applicable (conditional) (AC)
+    requirement: If the customer withdraws, the shop handles the customer's personal data in line with Regulation (EU) 2016/679.
+    case events: C1: its customer withdraws
+06.1 CRD-Art13-5 main: Applicable (conditional) (AC*)
+    requirement: (invalid) If the customer returns the item within two weeks without explanation, the shop must not use any content provided by the customer, except as allowed by the conditions in (a) to (d).  -- problems: the trigger "except where such content meets one of the conditions listed in (a) to (d)" is not copied word for word from the legal passage
+    case events: C1: its customer withdraws from the contract
+06.1 CRD-Art13-6 main: Applicable (conditional) (AC*)
+    requirement: (invalid) If the customer withdraws, the shop gives back any content, other than personal data, the customer created when using the digital service.  -- problems: the trigger "has not yet used the digital content or digital service" is not copied word for word from the legal passage; the kept_as words "its customer has not yet used the digital content or digital service" are not copied word for word from the requirement; the trigger "has used the digital content or digital service but has not exceeded the scope of the service" is not copied word for word from the legal passage; the kept_as words "its customer has used the digital content or digital service but has not exceeded the scope of the service" are not copied word for word from the requirement; case_events names G2 more than once; the kept_as words "its customer has not yet used the digital content or digital service" of case event G2 are not copied word for word from the requirement; the kept_as words "its customer has used the digital content or digital service but has not exceeded the scope of the service" of case event G2 are not copied word for word from the requirement
+    case events: C1: its customer withdraws from the contract; G2: one of: its customer has not yet used the digital content or digital service; its customer has used the digital content or digital service but has not exceeded the scope of the service
+06.1 CRD-Art13-8 main: Applicable (conditional) (AC)
+    requirement: If the customer returns the item, the trader stops the customer from using the digital content or service, like making it unavailable or disabling the account.
+    case events: C1: its customer withdraws from the contract
+11.1 GDPR-Art17-1 (target) sub-rule K6 ('(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)'): Applicable (A)
+    requirement: When cancelling, customers ask the company to delete their name, home address, and card details from its systems before the subscription is deactivated.
+17.1 CRD-Art14-2 main: Applicable (conditional) (AC)
+    requirement: If the customer reports issues, the customer is told they are not liable for damage unless they handled the goods beyond checking their condition.
+    case events: C1: its customer withdraws from the contract
+17.1 CRD-Art14-2a main: Applicable (conditional) (AC)
+    requirement: If the customer withdraws from the contract, they must not use the digital content or digital service and must not share it with others.
+    case events: C1: its customer withdraws from the contract
+17.1 CRD-Art14-3 main: Applicable (conditional) (AC)
+    requirement: If the customer reports issues, they must pay a proportionate amount based on what was delivered before they informed of withdrawal.
+    case events: C1: its customer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)
+17.1 CRD-Art14-4 main: Applicable (conditional) (AC)
+    requirement: If the customer reports issues, the customer is not charged for returning items if the trader failed to inform them or if they didn't agree to start the service during the withdrawal period.
+    case events: C1: its customer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); G2: one of: the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); its customer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9; its customer has not acknowledged that he loses his right of withdrawal when giving his consent; the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)
+17.1 CRD-Art14-5 main: Applicable (conditional) (AC*)
+    requirement: (invalid) If the customer reports issues, they can return the item without being held responsible for any costs.  -- problems: the case event C1 ("its customer exercises the right of withdrawal") is not kept: the requirement must say "If ..." or "When ..." it happens, and case_events must give C1 with those words
+    case events: C1: its customer exercises the right of withdrawal

@@ -1,0 +1,446 @@
+{
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "CRD-Art14-1",
+      "final_label": "Indeterminate",
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "CRD-Art14-2",
+      "final_label": "Applicable (conditional)",
+      "requirement": {
+        "requirement": "If the customer reports issues, the customer is told they are not liable for damage unless they handled the goods beyond checking their condition.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer reports issues, they are not held responsible for any reduced value of the goods unless it was caused by unnecessary handling.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+            "triggers": [
+              {
+                "trigger": "other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                "kept_as": "unless it was caused by unnecessary handling"
+              },
+              {
+                "trigger": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods",
+                "kept_as": "they are not held responsible for any reduced value of the goods"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+              "kept_as": "they are not held responsible for any reduced value of the goods unless it was caused by unnecessary handling"
+            },
+            "case_events": [],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer withdraws from the contract"
+              }
+            ],
+            "problems": [
+              "the case event C1 (\"its customer withdraws from the contract\") is not kept: the requirement must say \"If ...\" or \"When ...\" it happens, and case_events must give C1 with those words"
+            ],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+              "triggers": [
+                {
+                  "trigger": "other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                  "kept_as": "unless it was caused by unnecessary handling"
+                },
+                {
+                  "trigger": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods",
+                  "kept_as": "they are not held responsible for any reduced value of the goods"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                "kept_as": "they are not held responsible for any reduced value of the goods unless it was caused by unnecessary handling"
+              }
+            },
+            "measures": {
+              "n_words": 24,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 20,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "If the customer reports issues, the customer is told they are not liable for damage unless they handled the goods beyond checking their condition.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+            "triggers": [
+              {
+                "trigger": "other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                "kept_as": "unless they handled the goods beyond checking their condition"
+              },
+              {
+                "trigger": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods",
+                "kept_as": "the customer is told they are not liable for damage unless they handled the goods beyond checking their condition"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+              "kept_as": "the customer is told they are not liable for damage unless they handled the goods beyond checking their condition"
+            },
+            "case_events": [
+              {
+                "id": "C1",
+                "kept_as": "If the customer reports issues"
+              }
+            ],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer withdraws from the contract"
+              }
+            ],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+              "triggers": [
+                {
+                  "trigger": "other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                  "kept_as": "unless they handled the goods beyond checking their condition"
+                },
+                {
+                  "trigger": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods",
+                  "kept_as": "the customer is told they are not liable for damage unless they handled the goods beyond checking their condition"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                "kept_as": "the customer is told they are not liable for damage unless they handled the goods beyond checking their condition"
+              }
+            },
+            "measures": {
+              "n_words": 24,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 20,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 3,
+      "passage_id": "CRD-Art14-2a",
+      "final_label": "Applicable (conditional)",
+      "requirement": {
+        "requirement": "If the customer withdraws from the contract, they must not use the digital content or digital service and must not share it with others.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer withdraws from the contract, they must not use the digital content or digital service and must not share it with others.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+            "triggers": [
+              {
+                "trigger": "in the event of withdrawal from the contract",
+                "kept_as": "If the customer withdraws from the contract"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+              "kept_as": "they must not use the digital content or digital service and must not share it with others"
+            },
+            "case_events": [
+              {
+                "id": "C1",
+                "kept_as": "If the customer withdraws from the contract"
+              }
+            ],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer withdraws from the contract"
+              }
+            ],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+              "triggers": [
+                {
+                  "trigger": "In the event of withdrawal from the contract",
+                  "kept_as": "If the customer withdraws from the contract"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+                "kept_as": "they must not use the digital content or digital service and must not share it with others"
+              }
+            },
+            "measures": {
+              "n_words": 24,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 20,
+              "n_copied_ngrams": 3,
+              "copied_share": 0.15
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 4,
+      "passage_id": "CRD-Art14-3",
+      "final_label": "Applicable (conditional)",
+      "requirement": {
+        "requirement": "If the customer reports issues, they must pay a proportionate amount based on what was delivered before they informed of withdrawal.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer reports issues, they must pay a proportionate amount based on what was delivered before they informed of withdrawal.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+            "triggers": [
+              {
+                "trigger": "where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)",
+                "kept_as": "If the customer reports issues"
+              },
+              {
+                "trigger": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal",
+                "kept_as": "they must pay a proportionate amount based on what was delivered before they informed of withdrawal"
+              },
+              {
+                "trigger": "the proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract",
+                "kept_as": "based on what was delivered before they informed of withdrawal"
+              },
+              {
+                "trigger": "If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided",
+                "kept_as": "based on what was delivered before they informed of withdrawal"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract",
+              "kept_as": "they must pay a proportionate amount based on what was delivered before they informed of withdrawal"
+            },
+            "case_events": [
+              {
+                "id": "C1",
+                "kept_as": "If the customer reports issues"
+              }
+            ],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8)"
+              }
+            ],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+              "triggers": [
+                {
+                  "trigger": "Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8",
+                  "kept_as": "If the customer reports issues"
+                },
+                {
+                  "trigger": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal",
+                  "kept_as": "they must pay a proportionate amount based on what was delivered before they informed of withdrawal"
+                },
+                {
+                  "trigger": "The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract",
+                  "kept_as": "based on what was delivered before they informed of withdrawal"
+                },
+                {
+                  "trigger": "If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided",
+                  "kept_as": "based on what was delivered before they informed of withdrawal"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract",
+                "kept_as": "they must pay a proportionate amount based on what was delivered before they informed of withdrawal"
+              }
+            },
+            "measures": {
+              "n_words": 21,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 17,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 5,
+      "passage_id": "CRD-Art14-4",
+      "final_label": "Applicable (conditional)",
+      "requirement": {
+        "requirement": "If the customer reports issues, the customer is not charged for returning items if the trader failed to inform them or if they didn't agree to start the service during the withdrawal period.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer reports issues, the customer is not charged for returning items if the trader failed to inform them or if they didn't agree to start the service during the withdrawal period.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+            "triggers": [
+              {
+                "trigger": "during the withdrawal period",
+                "kept_as": "if the customer reports issues"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall bear no cost for the performance of services",
+              "kept_as": "the customer is not charged for returning items"
+            },
+            "case_events": [
+              {
+                "id": "C1",
+                "kept_as": "If the customer reports issues"
+              },
+              {
+                "id": "G2",
+                "kept_as": "if the trader failed to inform them or if they didn't agree to start the service during the withdrawal period"
+              }
+            ],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8)"
+              },
+              {
+                "id": "G2",
+                "text": "one of: the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); its customer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9; its customer has not acknowledged that he loses his right of withdrawal when giving his consent; the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)"
+              }
+            ],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+              "triggers": [
+                {
+                  "trigger": "during the withdrawal period",
+                  "kept_as": "If the customer reports issues"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall bear no cost for the performance of services",
+                "kept_as": "the customer is not charged for returning items"
+              }
+            },
+            "measures": {
+              "n_words": 33,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 29,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 6,
+      "passage_id": "CRD-Art14-5",
+      "final_label": "Applicable (conditional)",
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "If the customer reports issues, they can return items without being held responsible for any costs.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+            "triggers": [
+              {
+                "trigger": "as a consequence",
+                "kept_as": "without being held responsible"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall not incur any liability as a consequence",
+              "kept_as": "they can return items without being held responsible"
+            },
+            "case_events": [
+              {
+                "id": "C1",
+                "kept_as": "If the customer exercises the right of withdrawal"
+              }
+            ],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer exercises the right of withdrawal"
+              }
+            ],
+            "problems": [
+              "the kept_as words \"If the customer exercises the right of withdrawal\" of case event C1 are not copied word for word from the requirement"
+            ],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+              "triggers": [
+                {
+                  "trigger": "as a consequence",
+                  "kept_as": "without being held responsible"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall not incur any liability as a consequence",
+                "kept_as": "they can return items without being held responsible"
+              }
+            },
+            "measures": {
+              "n_words": 16,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 12,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "If the customer reports issues, they can return the item without being held responsible for any costs.",
+            "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+            "triggers": [
+              {
+                "trigger": "as a consequence",
+                "kept_as": "without being held responsible for any costs"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall not incur any liability as a consequence",
+              "kept_as": "the customer can return the item without being held responsible for any costs"
+            },
+            "case_events": [],
+            "case_events_given": [
+              {
+                "id": "C1",
+                "text": "its customer exercises the right of withdrawal"
+              }
+            ],
+            "problems": [
+              "the case event C1 (\"its customer exercises the right of withdrawal\") is not kept: the requirement must say \"If ...\" or \"When ...\" it happens, and case_events must give C1 with those words"
+            ],
+            "canonical_quotes": {
+              "step_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+              "triggers": [
+                {
+                  "trigger": "as a consequence",
+                  "kept_as": "without being held responsible for any costs"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall not incur any liability as a consequence",
+                "kept_as": "the customer reports issues, they can return the item without being held responsible for any costs"
+              }
+            },
+            "measures": {
+              "n_words": 17,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 13,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [CRD-Art14-2] If the customer reports issues, the customer is told they are not liable for damage unless they handled the goods beyond checking their condition.\n- [CRD-Art14-2a] If the customer withdraws from the contract, they must not use the digital content or digital service and must not share it with others.\n- [CRD-Art14-3] If the customer reports issues, they must pay a proportionate amount based on what was delivered before they informed of withdrawal.\n- [CRD-Art14-4] If the customer reports issues, the customer is not charged for returning items if the trader failed to inform them or if they didn't agree to start the service during the withdrawal period."
+}

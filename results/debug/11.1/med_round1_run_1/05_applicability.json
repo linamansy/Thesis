@@ -1,0 +1,1766 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "GDPR-Art17-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "one of the following grounds applies",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the controller must erase personal data without undue delay",
+        "exceptions": [],
+        "special_cases": [
+          {
+            "clause": "(a) the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          },
+          {
+            "clause": "(b) the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2)",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "there is no other legal ground for the processing",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          },
+          {
+            "clause": "(c) the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2)",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing",
+                    "kind": "process_fact"
+                  }
+                ]
+              },
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the data subject objects to the processing pursuant to Article 21(2)",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          },
+          {
+            "clause": "(d) the personal data have been unlawfully processed",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the personal data have been unlawfully processed",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          },
+          {
+            "clause": "(e) the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          },
+          {
+            "clause": "(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)",
+            "roles": [
+              "controller"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the controller must erase personal data without undue delay"
+          }
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The customer enters personal and payment information.",
+            "status": "confirmed",
+            "quotes": [
+              "The customer enters personal and payment information.",
+              "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The customer enters personal and payment information.",
+            "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+          ],
+          "quotes_found": [
+            false,
+            true
+          ],
+          "quotes_canonical": [
+            "When cancelling, many customers ask the company to remove their name, home address and card details from its systems"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence confirms the process handles personal data (name, address, card details) of identifiable individuals."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "one of the following grounds applies",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "one of the following grounds applies",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [
+        {
+          "id": "K1",
+          "clause": "(a) the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                  "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+              ],
+              "quotes_found": [
+                true,
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentences mention handling personal data (name, address, card details) which are information about identifiable people."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        },
+        {
+          "id": "K2",
+          "clause": "(b) the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                  "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+              ],
+              "quotes_found": [
+                true,
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentences mention handling personal information like names, addresses, and card details, which are identifiable people's data."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2)",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2)",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            },
+            {
+              "id": "C2",
+              "kind": "situation",
+              "text": "there is no other legal ground for the processing",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "there is no other legal ground for the processing",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": "The process concludes when the subscription is deactivated by the support team and the final account balance is settled.",
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": null,
+              "C2": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              },
+              {
+                "id": "C2",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C2"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        },
+        {
+          "id": "K3",
+          "clause": "(c) the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2)",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentence mentions personal and payment information, which inherently relates to identifiable individuals."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            },
+            {
+              "id": "C2",
+              "kind": "situation",
+              "text": "the data subject objects to the processing pursuant to Article 21(2)",
+              "item_kind": "process_fact",
+              "group": "G2",
+              "logic": "all",
+              "text_sent": "the data subject objects to the processing pursuant to Article 21(2)",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              },
+              {
+                "id": "C2",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": null,
+              "C2": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              },
+              {
+                "id": "C2",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C2"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        },
+        {
+          "id": "K4",
+          "clause": "(d) the personal data have been unlawfully processed",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                  "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": null,
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems."
+              ],
+              "quotes_found": [
+                true,
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+                "When cancelling, many customers ask the company to remove their name, home address and card details from its systems"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentences mention handling personal information like names, addresses, and card details, which are identifiable people's data."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the personal data have been unlawfully processed",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the personal data have been unlawfully processed",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        },
+        {
+          "id": "K5",
+          "clause": "(e) the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentence mentions personal and payment information, which inherently relates to identifiable individuals."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the controller is subject",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the organisation running the described process is subject",
+              "status": "not_stated",
+              "original_status": "not_stated",
+              "quotes": [],
+              "quotes_found": [],
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false,
+              "decided_by": null,
+              "downgrade_cause": null,
+              "verifier": null,
+              "first_look_status": "not_stated"
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Indeterminate",
+          "second_look": {
+            "results": [
+              {
+                "id": "C1",
+                "closest_sentence": "The company is based in the Netherlands. When cancelling, many customers ask the company to remove their name, home address and card details from its systems.",
+                "status": "not_stated",
+                "quotes": []
+              }
+            ]
+          },
+          "look": "second",
+          "second_look_decided": false,
+          "label": "Indeterminate",
+          "failed_step": null,
+          "resolution": {
+            "label": "Indeterminate",
+            "if_label": "Indeterminate",
+            "exceptions_applying": [],
+            "reason": "not every IF item is confirmed",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": null
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "not_stated",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": null,
+          "label_cause": "not every IF item is confirmed",
+          "error": null
+        },
+        {
+          "id": "K6",
+          "clause": "(f) the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)",
+          "then": "the controller must erase personal data without undue delay",
+          "check": {
+            "results": [
+              {
+                "id": "S1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+                ]
+              },
+              {
+                "id": "C1",
+                "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "status": "confirmed",
+                "quotes": [
+                  "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+                ]
+              }
+            ]
+          },
+          "conditions": [
+            {
+              "id": "R1",
+              "kind": "role",
+              "text": "the duty is on: controller",
+              "roles": [
+                {
+                  "role": "controller",
+                  "status": "confirmed",
+                  "decided_by": "code rule",
+                  "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+                }
+              ],
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "quotes_canonical": [],
+              "quote_found": null,
+              "downgraded": false
+            },
+            {
+              "id": "S1",
+              "kind": "scope",
+              "text": "the process handles information about identifiable people",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentence mentions personal and payment information, which inherently relates to identifiable individuals."
+              }
+            },
+            {
+              "id": "C1",
+              "kind": "situation",
+              "text": "the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)",
+              "item_kind": "process_fact",
+              "group": "G1",
+              "logic": "all",
+              "text_sent": "the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)",
+              "status": "confirmed",
+              "original_status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ],
+              "quotes_found": [
+                true
+              ],
+              "quotes_canonical": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+              ],
+              "quote_found": true,
+              "downgraded": false,
+              "decided_by": "first look",
+              "downgrade_cause": null,
+              "verifier": {
+                "asked": "true",
+                "answer": "yes",
+                "reason": "The sentences describe collecting personal data for a subscription service, which aligns with the statement about collecting personal data for information society services under Article 8(1)."
+              }
+            }
+          ],
+          "role_facts": [],
+          "exceptions": [],
+          "role_binding": {
+            "controller": "the organisation running the described process"
+          },
+          "first_look_label": "Applicable",
+          "second_look": null,
+          "look": "first",
+          "second_look_decided": null,
+          "label": "Applicable",
+          "failed_step": null,
+          "resolution": {
+            "label": "Applicable",
+            "if_label": "Applicable",
+            "exceptions_applying": [],
+            "reason": "every IF item confirmed and no stated exception applies",
+            "decided_by": {
+              "R1": "code rule",
+              "S1": "first look",
+              "C1": "first look"
+            },
+            "units": [
+              {
+                "id": "R1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "R1"
+                ]
+              },
+              {
+                "id": "S1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "S1"
+                ]
+              },
+              {
+                "id": "C1",
+                "logic": "one",
+                "status": "confirmed",
+                "case_event": false,
+                "items": [
+                  "C1"
+                ]
+              }
+            ],
+            "case_events": []
+          },
+          "requirement": {
+            "requirement": "When cancelling, customers ask the company to delete their name, home address, and card details from its systems before the subscription is deactivated.",
+            "requirement_invalid": false,
+            "attempts": [
+              {
+                "requirement": "When cancelling, customers ask the company to delete their name, home address, and card details from its systems before the subscription is deactivated.",
+                "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+                "triggers": [
+                  {
+                    "trigger": "without undue delay",
+                    "kept_as": "before the subscription is deactivated"
+                  }
+                ],
+                "duty": {
+                  "from_then": "erase personal data without undue delay",
+                  "kept_as": "customers ask the company to delete their name, home address, and card details from its systems"
+                },
+                "case_events": [],
+                "case_events_given": [],
+                "problems": [],
+                "canonical_quotes": {
+                  "step_quote": "When cancelling, many customers ask the company to remove their name, home address and card details from its systems",
+                  "triggers": [
+                    {
+                      "trigger": "without undue delay",
+                      "kept_as": "before the subscription is deactivated"
+                    }
+                  ],
+                  "duty": {
+                    "from_then": "erase personal data without undue delay",
+                    "kept_as": "customers ask the company to delete their name, home address, and card details from its systems"
+                  }
+                },
+                "measures": {
+                  "n_words": 23,
+                  "n_sentences": 1,
+                  "banned_found": [],
+                  "n_ngrams": 19,
+                  "n_copied_ngrams": 0,
+                  "copied_share": 0.0
+                }
+              }
+            ]
+          },
+          "label_cause": "every IF item confirmed and no stated exception applies",
+          "error": null
+        }
+      ],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "GDPR-Art17-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the controller has made the personal data public",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the controller is obliged pursuant to paragraph 1 to erase the personal data",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the controller, taking account of available technology and the cost of implementation, must take reasonable steps, including technical measures, to inform controllers which are processing the personal data that the data subject has requested the erasure by such controllers of any links to, or copy or replication of, those personal data",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+            "status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence mentions personal and payment information, which inherently relates to identifiable individuals."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the controller has made the personal data public",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "the organisation running the described process has made the personal data public",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the controller is obliged pursuant to paragraph 1 to erase the personal data",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "text_sent": "the organisation running the described process is obliged pursuant to paragraph 1 to erase the personal data",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {
+        "controller": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "GDPR-Art17-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "controller",
+          "processor"
+        ],
+        "if": [
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "processing is necessary for exercising the right of freedom of expression and information",
+                "kind": "process_fact"
+              },
+              {
+                "text": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject",
+                "kind": "process_fact"
+              },
+              {
+                "text": "processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+                "kind": "process_fact"
+              },
+              {
+                "text": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+                "kind": "process_fact"
+              },
+              {
+                "text": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+                "kind": "process_fact"
+              },
+              {
+                "text": "processing is necessary for the establishment, exercise or defence of legal claims",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "processing shall not be subject to the right to erasure referred to in paragraphs 1 and 2",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The customer signs up for a subscription service, entering personal and payment information.",
+            "status": "confirmed",
+            "quotes": [
+              "The customer signs up for a subscription service, entering personal and payment information.",
+              "The system generates an account, assigns access, and triggers automated billing cycles."
+            ]
+          },
+          {
+            "id": "P1",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C4",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C5",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C6",
+            "closest_sentence": "The company is based in the Netherlands.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: controller or processor",
+          "roles": [
+            {
+              "role": "controller",
+              "status": "confirmed",
+              "decided_by": "code rule",
+              "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            },
+            {
+              "role": "processor",
+              "status": "contradicted",
+              "decided_by": "code rule",
+              "reason": "P1 not confirmed with a checked quote; A1: the organisation running the described process is the controller of the personal data it collects in that process"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "code rule",
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the process handles information about identifiable people",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "The customer signs up for a subscription service, entering personal and payment information.",
+            "The system generates an account, assigns access, and triggers automated billing cycles."
+          ],
+          "quotes_found": [
+            false,
+            true
+          ],
+          "quotes_canonical": [
+            "The system generates an account, assigns access, and triggers automated billing cycles"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentences describe system actions but do not explicitly mention handling information about identifiable people."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "processing is necessary for exercising the right of freedom of expression and information",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for exercising the right of freedom of expression and information",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the controller is subject",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for compliance with a legal obligation which requires processing by Union or Member State law to which the organisation running the described process is subject",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the organisation running the described process",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C4",
+          "kind": "situation",
+          "text": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for reasons of public interest in the area of public health in accordance with points (h) and (i) of Article 9(2) as well as Article 9(3)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C5",
+          "kind": "situation",
+          "text": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) in so far as the right referred to in paragraph 1 is likely to render impossible or seriously impair the achievement of the objectives of that processing",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C6",
+          "kind": "situation",
+          "text": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "any",
+          "text_sent": "processing is necessary for the establishment, exercise or defence of legal claims",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "P1",
+          "kind": "role_fact",
+          "text": "the organisation handles personal data on behalf of another organisation",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "controller": "the organisation running the described process",
+        "processor": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  }
+]
