@@ -1,6 +1,7 @@
 """Tests for C3 v2 design round 1 (31 Oct 2026), one section per fix (MockLLM answers only, no Ollama):
   D1 substantive duty holder of a "Member States shall ensure" rule (code)
   D2 relevance prompt: a rule that could govern a step (e.g. the step that triggers its duty) is relevant
+  D3 verifier prompt: ordinary reading, an everyday equivalent of a legal concept counts
 Passages and descriptions below are made up unless a real passage id is named.
 """
 
@@ -106,3 +107,20 @@ def test_d2_a_rule_whose_duty_step_is_missing_stays_relevant_after_the_code_chec
     a = RelevanceAgentV2(MockLLM([json.dumps(answer)]), RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"))
     out = a.run("x", description=description, passage_id="P-1", passage_text=passage)
     assert RelevanceV2Checker().check(out, passage, description)["final_relevant"] is True
+
+
+# ---------- D3: verifier judges under an ordinary reading ----------
+
+def test_d3_verifier_prompt_ordinary_reading_everyday_equivalent_and_different_event(tmp_path):
+    from src.agents.applicability_agent_v2 import VerifierCallV2
+    call = VerifierCallV2(MockLLM(["{}"]), RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"))
+    prompt = call.build_prompt(statement="the buyer is a consumer", quotes=["The shop sells to private persons"],
+                               truth="true")
+    assert "Under an ordinary reading" in prompt and "state that the statement is true?" in prompt
+    assert "an everyday equivalent of a legal concept counts as stating it" in prompt
+    assert "A sentence about a different event never confirms the statement." in prompt         # kept
+    assert "EXAMPLE (made up, from another domain)" in prompt
+    example = prompt.split("EXAMPLE (made up, from another domain)")[1].split("JSON SCHEMA")[0].lower()
+    for word in ("consumer", "trader", "personal data", "controller", "payment", "order", "service"):
+        assert word not in example, word                                   # the example is outside the corpus
+    assert "- The shop sells to private persons" in prompt and prompt.count("{") > 0

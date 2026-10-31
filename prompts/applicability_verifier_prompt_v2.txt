@@ -6,7 +6,15 @@ SENTENCES
 STATEMENT
 {statement}
 
-Do these sentences, on their own and taken together, state that the statement is {truth}? Answer yes or no with one line of reason.
+Under an ordinary reading, do these sentences, on their own and taken together, state that the statement is {truth}? Answer yes or no with one line of reason.
+- Judge the fact, not the wording: an everyday equivalent of a legal concept counts as stating it.
+- A sentence about a different event never confirms the statement.
+
+EXAMPLE (made up, from another domain)
+Statement: "the borrower has returned the item before the end of the loan period"
+Sentence: "Readers bring the books back before the due date." -> yes (the same fact in everyday words)
+Sentence: "Readers pay a fee at the desk." -> no (a different event)
+
 Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
 
 JSON SCHEMA
