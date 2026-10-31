@@ -20,6 +20,9 @@ brace in 27 of 150 calls (Groq json_validate_failed); json_object had 0 unparsea
 
 --oracle-label LABEL (design rounds, added 31 Oct 2026): ONLY the oracle step (qwen3:8b, same options), saved under
 that label (folder med_<LABEL>_run_<n>), e.g. --oracle-label round1 after design round 1; no retrieval, no full run.
+--no-d5 / --no-d4b (ablation, added 31 Oct 2026, only with --oracle-label): switch off D5 (case events: every IF item
+is read as a process fact, no "Applicable (conditional)") or D4b (special-case sub-rules are not evaluated) in
+ApplicabilityAgentV2; prompts unchanged; saved in run_info.json as "ablation". Default: both on.
 
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
@@ -32,6 +35,8 @@ Ceiling test (GROQ_API_KEY in .env):
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --groq-model qwen/qwen3.8-27b --runs 1
 Oracles only, after a design round:
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label round1 --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
+Ablation of a design round, e.g. without D5:
+    .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label abl_noD5 --no-d5 --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
 """
 
 import argparse
@@ -120,8 +125,9 @@ def retrieved_ids(run_dir: Path) -> list[str]:
 
 class AllDevRunner:
     def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None,
-                 groq_json: str = "schema", oracle_label: str | None = None):
+                 groq_json: str = "schema", oracle_label: str | None = None, ablation: dict | None = None):
         self.config, self.fresh, self.think_calls, self.log = config, fresh, think_calls, log
+        self.ablation = ablation or {}   # ApplicabilityAgentV2 switches (--no-d5, --no-d4b); empty = all on
         self.groq_model, self.groq_json, self.oracle_label = groq_model, groq_json, oracle_label
         self.llm, self.llm_info = groq_llm(config, groq_model, groq_json) if groq_model else make_llm(config)
         self.think_llm = None
@@ -165,10 +171,12 @@ class AllDevRunner:
                     "passages_from": source, "given_passage_ids": ids,
                     "corpus_file": self.config["study2_corpus"]["passages"], "corpus_sha256": corpus_sha,
                     "c3_version": "v2", "fresh": self.fresh, "think_calls": self.think_calls, **self.llm_info}
+        if self.ablation:
+            run_info["ablation"] = self.ablation
         waits_before = len(getattr(self.llm, "connection_retries", []))
         run = debug_run(self.config, given_case(passages, description), description,
                         load_answer_key(self.config, variant), self.llm, run_dir, run_info, variant,
-                        self.think_calls, self.think_llm)
+                        self.think_calls, self.think_llm, self.ablation)
         if self.groq_model:   # Groq rate-limit waits of this step (not failures)
             (run_dir / "groq_rate_limit_waits.json").write_text(json.dumps(
                 self.llm.connection_retries[waits_before:], indent=2), encoding="utf-8")
@@ -239,19 +247,27 @@ def main(argv: list[str] | None = None) -> None:
                         help="Groq JSON output: json_schema (default) or json_object")
     parser.add_argument("--oracle-label", default=None,
                         help="design round: only the oracle step, saved as med_<label>_run_<n> (e.g. round1)")
+    parser.add_argument("--no-d5", action="store_true",
+                        help="ablation (with --oracle-label): switch off D5, every IF item read as a process fact")
+    parser.add_argument("--no-d4b", action="store_true",
+                        help="ablation (with --oracle-label): switch off D4b, special-case sub-rules not evaluated")
     args = parser.parse_args(argv)
     if args.groq_model and (args.fresh or args.think_calls):
         parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
     if args.oracle_label and (args.groq_model or args.oracle_label in (LABEL, ORACLE_LABEL)):
         parser.error("--oracle-label needs its own name and cannot be combined with --groq-model")
+    if (args.no_d5 or args.no_d4b) and not args.oracle_label:
+        parser.error("--no-d5 / --no-d4b need --oracle-label (their own folder name)")
+    ablation = {k: False for k, off in (("case_events", args.no_d5), ("sub_rules", args.no_d4b)) if off}
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
-    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model, args.groq_json, args.oracle_label)
+    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model, args.groq_json, args.oracle_label,
+                          ablation)
     numbers = [args.only_run] if args.only_run else range(1, args.runs + 1)
     variants = [v.strip() for v in args.variants.split(",") if v.strip()]
     log(f"run_all_dev: variants {variants}, runs {list(numbers)}, fresh {args.fresh}, think_calls {think_calls}, "
-        f"groq_model {args.groq_model}, groq_json {args.groq_json}, oracle_label {args.oracle_label}")
+        f"groq_model {args.groq_model}, groq_json {args.groq_json}, oracle_label {args.oracle_label}, ablation {ablation}")
     for variant in variants:
         for n in numbers:
             runner.run_variant(variant, n)

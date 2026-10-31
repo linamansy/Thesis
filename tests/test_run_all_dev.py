@@ -157,6 +157,26 @@ def test_oracle_label_runs_only_the_oracle_under_that_label():
         run_all_dev.main(["--oracle-label", "round1", "--groq-model", "qwen/qwen3.8-27b"])
 
 
+def test_ablation_options_need_an_oracle_label_and_reach_the_runner(monkeypatch):
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--no-d5"])                                   # never into the alldev folders
+    seen = []
+
+    class Recorder:
+        def __init__(self, *args):
+            seen.append(args[-1])
+
+        def run_variant(self, variant, n):
+            pass
+
+    monkeypatch.setattr(run_all_dev, "AllDevRunner", Recorder)
+    monkeypatch.setattr(run_all_dev, "make_log", lambda path: lambda message: None)
+    run_all_dev.main(["--oracle-label", "abl_noD5", "--no-d5", "--runs", "1"])
+    run_all_dev.main(["--oracle-label", "abl_noD5_noD4b", "--no-d5", "--no-d4b", "--runs", "1"])
+    run_all_dev.main(["--oracle-label", "round9", "--runs", "1"])
+    assert seen == [{"case_events": False}, {"case_events": False, "sub_rules": False}, {}]
+
+
 def test_ceiling_refuses_the_silver_model_and_ollama_options():
     config = load_config()
     with pytest.raises(ValueError, match="silver"):

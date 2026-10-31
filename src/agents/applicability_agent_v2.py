@@ -383,8 +383,13 @@ def rule_record() -> dict:
 class ApplicabilityAgentV2:
     """Runs split -> check-IF -> quote check -> first look, and the second look when the orchestrator asks."""
 
-    def __init__(self, llm, logger, max_retries: int | None = None, config: dict | None = None):
+    def __init__(self, llm, logger, max_retries: int | None = None, config: dict | None = None,
+                 case_events: bool = True, sub_rules: bool = True):
+        """case_events / sub_rules (ablation, debug run options only; default on): case_events False switches off D5
+        (every IF item is read as a process fact, so no "Applicable (conditional)"); sub_rules False switches off D4b
+        (the split's special_cases are kept in record["split"] but never evaluated). The prompts are unchanged."""
         config = config or load_config()
+        self.case_events, self.sub_rules = case_events, sub_rules
         self.split_call = SplitCallV2(llm, logger, max_retries)
         self.check_call = CheckIfCallV2(llm, logger, max_retries)
         self.second_look_call = SecondLookCallV2(llm, logger, max_retries)
@@ -411,9 +416,9 @@ class ApplicabilityAgentV2:
             record["failed_step"] = "split"
             return record
         record["split"] = split.model_dump(by_alias=True)
-        if_items = flat_items(split.conditions)
-        texts = [c["text"] for c in if_items] + [c["text"] for sc in split.special_cases
-                                                 for c in flat_items(sc.conditions)]
+        if_items = self.items_of(split.conditions)
+        specials = split.special_cases if self.sub_rules else []
+        texts = [c["text"] for c in if_items] + [c["text"] for sc in specials for c in flat_items(sc.conditions)]
         record["rejected_if"] = [t for t in texts if self.obligation_pattern.search(t)]
         record["split_valid"] = not record["rejected_if"]
         if not record["split_valid"]:
@@ -428,13 +433,22 @@ class ApplicabilityAgentV2:
             return record
 
         # D4b: each special case as its own sub-rule
-        for k, special in enumerate(split.special_cases, 1):
+        for k, special in enumerate(specials, 1):
             sub = {"id": f"K{k}", "clause": special.clause, "then": special.then, **rule_record(),
                    "resolution": None, "requirement": None, "label_cause": None, "error": None}
             self.evaluate_rule(case_id, description, passage_id, sub, list(dict.fromkeys(special.roles)),
-                               flat_items(special.conditions), [], rules)
+                               self.items_of(special.conditions), [], rules)
             record["sub_rules"].append(sub)
         return record
+
+    def items_of(self, groups: list[IfGroup]) -> list[dict]:
+        """flat_items; with D5 switched off (ablation) every item is read as a process fact, its kind from the split
+        kept as split_kind."""
+        items = flat_items(groups)
+        if not self.case_events:
+            for item in items:
+                item["split_kind"], item["item_kind"] = item["item_kind"], "process_fact"
+        return items
 
     def evaluate_rule(self, case_id: str, description: str, passage_id: str, rule: dict, roles: list[str],
                       if_items: list[dict], exceptions: list[str], rules: dict) -> None:

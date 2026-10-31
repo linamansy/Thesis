@@ -428,3 +428,39 @@ def test_d5_prompts_mark_kinds_and_list_case_events(tmp_path):
     assert req.build_prompt(**inputs).rstrip().endswith("CASE EVENTS\nnone")
     assert req.build_prompt(**inputs, case_events=[{"id": "C2", "text": "the customer returns it"}]).rstrip().endswith(
         "CASE EVENTS\nC2: the customer returns it")
+
+
+# ---------- ablation switches (run options --no-d5 / --no-d4b) ----------
+
+def test_ablation_without_d5_reads_every_item_as_a_process_fact(tmp_path):
+    llm = MockLLM([json.dumps(a) for a in [RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN]])
+    a = ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), case_events=False)
+    record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
+    assert [(c["id"], c.get("item_kind"), c.get("split_kind")) for c in record["conditions"]] == [
+        ("R1", None, None), ("C1", "process_fact", "process_fact"),
+        ("C2", "process_fact", "case_event")]
+    assert record["first_look_label"] == "Indeterminate"                 # with D5: Applicable (conditional)
+    assert record["split"]["if"][0]["items"][1]["kind"] == "case_event"  # the split's answer is kept as given
+
+
+def test_ablation_without_d4b_never_evaluates_special_cases(tmp_path):
+    llm = MockLLM([json.dumps(a) for a in [SPECIAL_SPLIT, MAIN_OPEN]])
+    a = ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), sub_rules=False)
+    record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
+    assert record["sub_rules"] == [] and len(llm.prompts_received) == 2   # split + the main rule's check only
+    assert record["split"]["special_cases"][0]["clause"] == "In the case of fragile products"
+    bad = {**SPECIAL_SPLIT, "special_cases": [{**SPECIAL_SPLIT["special_cases"][0],
+                                               "if": ["the shop must use a padded box"]}]}
+    a = ApplicabilityAgentV2(MockLLM([json.dumps(bad), json.dumps(MAIN_OPEN)]),
+                             RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), sub_rules=False)
+    assert a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)["split_valid"] is True
+
+
+def test_ablation_switches_leave_the_prompts_unchanged(tmp_path):
+    prompts = []
+    for switches in ({}, {"case_events": False, "sub_rules": False}):
+        llm = MockLLM([json.dumps(a) for a in [SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED]])
+        a = ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), **switches)
+        a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
+        prompts.append(llm.prompts_received[:2])
+    assert prompts[0] == prompts[1]
