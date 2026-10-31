@@ -1,0 +1,718 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art10-1",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n1. In addition to other information requirements established by Community law, Member States shall ensure, except when otherwise agreed by parties who are not consumers, that at least the following information is given by the service provider clearly, comprehensibly and unambiguously and prior to the order being placed by the recipient of the service:\n(a) the different technical steps to follow to conclude the contract;\n(b) whether or not the concluded contract will be filed by the service provider and whether it will be accessible;\n(c) the technical means for identifying and correcting input errors prior to the placing of the order;\n(d) the languages offered for the conclusion of the contract.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the different technical steps to follow to conclude the contract",
+      "law_quote": "the different technical steps to follow to conclude the contract",
+      "relevant": true,
+      "process_step": "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+      "description_quote": "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected. These steps repeat until all products were selected. Then the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+      "reason": "The rule is about the technical steps to conclude a contract, and the process describes the steps a customer takes to select products and finalize an order.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the different technical steps to follow to conclude the contract",
+      "description_quote_canonical": "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.\nThese steps repeat until all products were selected.\nThen the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the service provider provides an information society service",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the recipient of the service places an order",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the service provider must provide the information referred to in (a), (b), (c) and (d) clearly, comprehensibly and unambiguously prior to the order being placed",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": {
+        "rule": "D1 Member States shall ensure",
+        "split_roles": [
+          "service provider"
+        ],
+        "role_found": "service provider",
+        "roles": [
+          "service provider"
+        ]
+      },
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+            "status": "confirmed",
+            "quotes": [
+              "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+              "Finally if the address and the payment steps are executed then the order will be finished by the system."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the service provider provides an information society service",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "the organisation running the described process provides an information society service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the recipient of the service places an order",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "the recipient of the service places an order",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected.",
+            "Finally if the address and the payment steps are executed then the order will be finished by the system."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "After selecting a product the customer has to add it to a shopping cart, save the product and check if every product was already selected",
+            "Finally if the address and the payment steps are executed then the order will be finished by the system"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe the customer's actions (selecting products, adding to cart, completing address/payment) which collectively constitute placing an order, matching the statement's fact."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The E-Shop selling to private persons implies commercial activity as part of its business operations."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "when otherwise agreed by parties who are not consumers",
+          "text_sent": "when otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null,
+        "C2": "first look"
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "C2",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art10-2",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider indicates any relevant codes of conduct to which he subscribes and information on how those codes can be consulted electronically.",
+    "label": "Irrelevant",
+    "label_cause": "the model said not relevant, description_quote empty",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "indicating relevant codes of conduct to which the service provider subscribes",
+      "law_quote": "the service provider indicates any relevant codes of conduct to which he subscribes",
+      "relevant": false,
+      "process_step": "",
+      "description_quote": "",
+      "reason": "The rule is about indicating codes of conduct, which is not mentioned or performed in the process description.",
+      "law_quote_found": true,
+      "description_quote_found": null,
+      "law_quote_canonical": "the service provider indicates any relevant codes of conduct to which he subscribes",
+      "description_quote_canonical": null,
+      "final_relevant": false,
+      "cause": "the model said not relevant, description_quote empty"
+    },
+    "applicability": null,
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art10-3",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n3. Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "contract terms and general conditions provided to the recipient",
+      "law_quote": "Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them.",
+      "relevant": true,
+      "process_step": "The order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+      "description_quote": "The order is finished by the shopping system and simultaneously payment and shipment for the order is prepared.",
+      "reason": "The rule is about providing contract terms and general conditions, which the process involves when preparing the order.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Contract terms and general conditions provided to the recipient must be made available in a way that allows him to store and reproduce them",
+      "description_quote_canonical": "the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "contract terms and general conditions are provided to the recipient",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the service provider must make available the contract terms and general conditions in a way that allows him to store and reproduce them",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "contract terms and general conditions are provided to the recipient",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "contract terms and general conditions are provided to the recipient",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The E-Shop's business of selling to private persons constitutes part of its trade, fulfilling the statement's requirement."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "ECD-Art10-4",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 10: Information to be provided\n4. Paragraphs 1 and 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "law_quote": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "relevant": true,
+      "process_step": "the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared",
+      "description_quote": "the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared",
+      "reason": "The rule is about contracts concluded exclusively by electronic mail or equivalent communications, and the process involves an order being completed through an electronic system, which aligns with the rule's focus.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "description_quote_canonical": "the order is finished by the shopping system and simultaneously payment and shipment for the order is prepared",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [],
+        "then": "the service provider must not apply paragraphs 1 and 2",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English.",
+            "status": "confirmed",
+            "quotes": [
+              "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The E-Shop's business of selling to private persons constitutes part of its trade, fulfilling the statement's requirement."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  }
+]

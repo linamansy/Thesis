@@ -1,0 +1,1312 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "CRD-Art13-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              },
+              {
+                "text": "the trader is informed of the consumer’s decision to withdraw",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract, using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence explicitly mentions 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial capacity."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader is informed of the consumer’s decision to withdraw",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "the organisation running the described process is informed of its customer’s decision to withdraw",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence states the shop sells kitchen items (goods) to private persons (customers) across the EU, which aligns with the statement's claim of selling goods/services for trade/business purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "CRD-Art13-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader shall not be required to reimburse the supplementary costs",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the organisation running the described process",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art13-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the trader has not offered to collect the goods himself",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The order is then handed over to a logistics provider for delivery.",
+            "status": "confirmed",
+            "quotes": [
+              "The order is then handed over to a logistics provider for delivery."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the trader has not offered to collect the goods himself",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "the organisation running the described process has not offered to collect the goods himself",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The order is then handed over to a logistics provider for delivery."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The order is then handed over to a logistics provider for delivery"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence implies the organisation is outsourcing delivery to a third party, confirming they haven't offered to collect the goods themselves."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Applicable",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Applicable",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art13-4",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must comply with the obligations applicable under Regulation (EU) 2016/679 in respect of personal data of the consumer",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "CRD-Art13-5",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content meets one of the conditions listed in (a) to (d)",
+        "exceptions": [],
+        "special_cases": [
+          {
+            "clause": "except where such content",
+            "roles": [
+              "trader"
+            ],
+            "if": [
+              {
+                "logic": "any",
+                "items": [
+                  {
+                    "text": "has no utility outside the context of the digital content or digital service supplied by the trader",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "only relates to the consumer’s activity when using the digital content or digital service supplied by the trader",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "has been aggregated with other data by the trader and cannot be disaggregated or only with disproportionate efforts",
+                    "kind": "process_fact"
+                  },
+                  {
+                    "text": "has been generated jointly by the consumer and others, and other consumers are able to continue to make use of the content",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the trader may use the content"
+          }
+        ]
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "CRD-Art13-6",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          },
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "the consumer has not yet used the digital content or digital service",
+                "kind": "case_event"
+              },
+              {
+                "text": "the consumer has used the digital content or digital service but has not exceeded the scope of the service",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader must make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "exceptions": [
+          "the situations referred to in point (a), (b) or (c) of paragraph 5"
+        ],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "E1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the consumer has not yet used the digital content or digital service",
+          "item_kind": "process_fact",
+          "group": "G2",
+          "logic": "any",
+          "split_kind": "case_event",
+          "text_sent": "its customer has not yet used the digital content or digital service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "the consumer has used the digital content or digital service but has not exceeded the scope of the service",
+          "item_kind": "process_fact",
+          "group": "G2",
+          "logic": "any",
+          "split_kind": "case_event",
+          "text_sent": "its customer has used the digital content or digital service but has not exceeded the scope of the service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "the situations referred to in point (a), (b) or (c) of paragraph 5",
+          "text_sent": "the situations referred to in point (a), (b) or (c) of paragraph 5",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 7,
+    "passage_id": "CRD-Art13-7",
+    "applicability": null,
+    "failed_step": null
+  },
+  {
+    "rank": 8,
+    "passage_id": "CRD-Art13-8",
+    "applicability": {
+      "split": {
+        "roles": [
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the trader may prevent any further use of the digital content or digital service by the consumer, in particular by making the digital content or digital service inaccessible to the consumer or disabling the user account of the consumer, without prejudice to paragraph 6",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why.",
+            "status": "confirmed",
+            "quotes": [
+              "Some customers change their mind shortly after the parcel arrives and send it back within two weeks without saying why."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: trader",
+          "roles": [
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop sells kitchen items to private persons across the EU."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop sells kitchen items to private persons across the EU"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "failed_step": null
+  }
+]

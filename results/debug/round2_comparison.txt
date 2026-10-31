@@ -1,0 +1,51 @@
+variant target          alldev    B         R2        R2b       
+--------------------------------------------------------
+01.1    GDPR-Art13-1    A         A         A         A         
+01.2    LPD-Art3-1      I         I         I         I         
+06.1    CRD-Art13-1     I         I         AC*       I         
+11.1    GDPR-Art17-1    I         I         I         I         
+13.1    SGD-Art14-1     I         I         I         I         
+17.1    CRD-Art14-1     I         I         I         I         
+19.1    ECD-Art11-1     N         N         N         N         
+45.1    ECD-Art10-1     I         I         N         N         
+
+=== B (abl_noD5_noD4b) ===
+targets Applicable / Applicable (conditional) with a valid requirement:
+  01.1 GDPR-Art13-1 Applicable: When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.
+non-target Applicable / Applicable (conditional):
+  01.1 GDPR-Art13-2-a Applicable (A)
+      requirement: During the inquiry, the customer is told how long their data is kept, or the criteria used, and their rights to access, correct, erase, object, or port data.
+  01.1 GDPR-Art13-4 Applicable (A)
+      requirement: The customer is told about their data being stored during the inquiry.
+  06.1 CRD-Art13-3 Applicable (A*)
+      requirement: (invalid) If the customer returns the item within two weeks, the trader can delay payment until the goods are returned or the customer proves they sent them back, whichever comes first.  -- problems: the trigger "within two weeks" is not copied word for word from the legal passage
+
+=== R2 (round2) ===
+targets Applicable / Applicable (conditional) with a valid requirement:
+  01.1 GDPR-Art13-1 Applicable: When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.
+non-target Applicable / Applicable (conditional):
+  01.1 GDPR-Art13-2-a Applicable (A)  (also in B)
+      requirement: When the customer is contacted during the inquiry, they are told how long their data will be kept, and the reasons if it's not possible to say.
+  06.1 CRD-Art13-6 Applicable (conditional) (AC*)  NEW vs B
+      requirement: (invalid) If the customer asks, the customer is given any content, other than personal data, they created when using the shop's digital services.  -- problems: the If/When part "If the customer asks" does not describe the same event as case event C1 ("its customer withdraws from the contract"): The If/When part is the customer asking (a different action) than the case event of withdrawing.
+      case event C1: its customer withdraws from the contract
+      case event C2: its customer requests the organisation running the described process to make available any content, other than personal data, which was provided or created by its customer when using the digital content or digital service supplied by the organisation running the described process
+      event check C1: no ('If the customer asks'): The If/When part is the customer asking (a different action) than the case event of withdrawing.
+      event check C2: yes ('If the customer asks'): Both describe the customer's request for non-personal data content created during their use of the service.
+  06.1 CRD-Art13-8 Applicable (conditional) (AC*)  NEW vs B
+      requirement: (invalid) If the customer returns the item, the trader stops the customer from using the digital content or service.  -- problems: the If/When part "If the customer returns the item" does not describe the same event as case event C1 ("its customer withdraws from the contract"): Returning the item is a step in the withdrawal process, not the same event as withdrawing from the contract.
+      case event C1: its customer withdraws from the contract
+      event check C1: no ('If the customer returns the item'): Returning the item is a step in the withdrawal process, not the same event as withdrawing from the contract.
+B's non-target A/AC no longer A/AC: 01.1 GDPR-Art13-4, 06.1 CRD-Art13-3
+
+=== R2b (round2_noD5) ===
+targets Applicable / Applicable (conditional) with a valid requirement:
+  01.1 GDPR-Art13-1 Applicable: When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.
+non-target Applicable / Applicable (conditional):
+  01.1 GDPR-Art13-2-a Applicable (A)  (also in B)
+      requirement: When the customer is contacted during the inquiry, they are told how long their data will be kept, and the reasons if it's not possible to say.
+B's non-target A/AC no longer A/AC: 01.1 GDPR-Art13-4, 06.1 CRD-Art13-3
+
+No duty in R2: 01.1 GDPR-Art13-4, 01.2 LPD-Art3-2, 06.1 CRD-Art13-2, 11.1 GDPR-Art17-3, 17.1 CRD-Art14-4, 17.1 CRD-Art14-5, 19.1 ECD-Art11-3, 45.1 ECD-Art10-4
+
+No duty in R2b: 01.1 GDPR-Art13-4, 01.2 LPD-Art3-2, 06.1 CRD-Art13-2, 11.1 GDPR-Art17-3, 17.1 CRD-Art14-4, 17.1 CRD-Art14-5, 19.1 ECD-Art11-3, 45.1 ECD-Art10-4

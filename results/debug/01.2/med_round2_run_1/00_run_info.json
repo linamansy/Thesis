@@ -1,0 +1,34 @@
+{
+  "case_id": "01.2",
+  "mode": "mediation on given passages (no retrieval)",
+  "label": "round2",
+  "passages_from": "oracle: target + the rest of its article",
+  "given_passage_ids": [
+    "LPD-Art3-1",
+    "LPD-Art3-2",
+    "LPD-Art3-3",
+    "LPD-Art3-4",
+    "LPD-Art3-5"
+  ],
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "c3_version": "v2",
+  "fresh": true,
+  "think_calls": [
+    "CheckIfCallV2",
+    "SecondLookCallV2",
+    "VerifierCallV2"
+  ],
+  "model": "qwen3:8b",
+  "model_digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+  "ollama_version": "0.40.11",
+  "run": "med_round2_run_1",
+  "started_at": "2026-10-31T19:34:01+00:00",
+  "answer_key": {
+    "target_passage_id": "LPD-Art3-1",
+    "accepted_target_ids": [
+      "LPD-Art3-1"
+    ],
+    "expected_step": "Charge interest on the late payment"
+  }
+}

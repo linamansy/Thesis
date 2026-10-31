@@ -1,0 +1,1187 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "CRD-Art14-1",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the consumer's obligation to return goods within 14 days",
+      "law_quote": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label.",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label.",
+      "reason": "The rule is about the consumer's obligation to return goods within 14 days, and the process has a returns process step where this activity occurs.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "duty",
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+                "kind": "process_fact"
+              }
+            ]
+          },
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "the trader has not offered to collect the goods himself",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired",
+        "exceptions": [],
+        "special_cases": [
+          {
+            "clause": "In the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract",
+            "roles": [
+              "consumer"
+            ],
+            "if": [
+              {
+                "logic": "all",
+                "items": [
+                  {
+                    "text": "the goods have been delivered to the consumer’s home at the time of the conclusion of the contract",
+                    "kind": "process_fact"
+                  }
+                ]
+              }
+            ],
+            "then": "the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post"
+          }
+        ]
+      },
+      "duty_type": "duty",
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "customers are private persons in several EU countries",
+            "status": "confirmed",
+            "quotes": [
+              "customers are private persons in several EU countries"
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "customers are private persons in several EU countries"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe customers as private persons in EU countries, which aligns with the statement's definition of a consumer as a natural person not acting in a commercial context."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "its customer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the trader has not offered to collect the goods himself",
+          "item_kind": "process_fact",
+          "group": "G2",
+          "logic": "any",
+          "split_kind": "case_event",
+          "text_sent": "the trader has not offered to collect the goods himself",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null,
+        "C2": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "G2",
+          "logic": "any",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "CRD-Art14-2",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2. The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods. The consumer shall in any event not be liable for diminished value of the goods where the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1).",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the consumer's liability for diminished value of goods",
+      "law_quote": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods.",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+      "reason": "The rule is about the consumer's liability for diminished value of goods, and the process has a step where the customer reports issues upon delivery, which could trigger the rule's obligations.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "duty",
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer withdraws from the contract",
+                "kind": "case_event"
+              }
+            ]
+          },
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the consumer shall only be liable for any diminished value of the goods",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "duty_type": "duty",
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "customers are private persons in several EU countries",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": "",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            }
+          ],
+          "status": "not_stated",
+          "decided_by": null,
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the consumer withdraws from the contract",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer withdraws from the contract",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+          "item_kind": "process_fact",
+          "group": "G2",
+          "logic": "any",
+          "split_kind": "process_fact",
+          "text_sent": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C3",
+          "kind": "situation",
+          "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+          "item_kind": "process_fact",
+          "group": "G2",
+          "logic": "any",
+          "split_kind": "process_fact",
+          "text_sent": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "The process description does not mention whether handling of goods was necessary to establish their nature, characteristics, or functioning.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C3",
+            "closest_sentence": "The process description does not mention whether the trader provided notice of the right of withdrawal in accordance with point (h) of Article 6(1).",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": null,
+        "S1": null,
+        "C1": null,
+        "C2": null,
+        "C3": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "G2",
+          "logic": "any",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C2",
+            "C3"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "CRD-Art14-2a",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2a. In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "refrain from using the digital content or digital service and from making it available to third parties",
+      "law_quote": "the consumer shall refrain from using the digital content or digital service and from making it available to third parties",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+      "reason": "The rule is about consumers refraining from using digital content or services after withdrawal, and the process includes a returns process where such actions may occur.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the consumer shall refrain from using the digital content or digital service and from making it available to third parties",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "duty",
+        "roles": [
+          "consumer"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "a withdrawal from the contract occurs",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "duty_type": "duty",
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The customers are private persons in several EU countries.",
+            "status": "confirmed",
+            "quotes": [
+              "The customers are private persons in several EU countries."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The customers are private persons in several EU countries."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe customers as private persons (non-commercial) in EU countries, which aligns with the statement's definition of a consumer as a natural person not acting in trade/business."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a withdrawal from the contract occurs",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "a withdrawal from the contract occurs",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "CRD-Art14-3",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n3. Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the consumer's obligations in the event of withdrawal",
+      "law_quote": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated, which includes: Sending a return shipping label. Receiving returned items. Inspecting returned items. Processing a refund or replacement.",
+      "reason": "The rule is about the consumer's obligations in the event of withdrawal, and the process has a returns process step that involves the customer reporting issues and initiating a refund or replacement.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:\nSending a return shipping label.\nReceiving returned items.\nInspecting returned items.\nProcessing a refund or replacement",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "duty",
+        "roles": [
+          "consumer",
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "a consumer exercises the right of withdrawal",
+                "kind": "case_event"
+              },
+              {
+                "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "duty_type": "duty",
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "customers are private persons in several EU countries",
+            "status": "confirmed",
+            "quotes": [
+              "customers are private persons in several EU countries"
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "When a customer places an order, the system records the order details.",
+            "status": "confirmed",
+            "quotes": [
+              "When a customer places an order, the system records the order details.",
+              "Payment processing begins.",
+              "In-stock items are picked from the warehouse."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": null,
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer or trader",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "the scope item S1 is confirmed"
+            },
+            {
+              "role": "trader",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "customers are private persons in several EU countries"
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "customers are private persons in several EU countries"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe customers as private persons in EU countries, which under everyday legal understanding aligns with the statement's definition of a consumer acting outside their trade or profession."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a consumer exercises the right of withdrawal",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "its customer exercises the right of withdrawal",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "its customer has made a request in accordance with Article 7(3) or Article 8(8)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "When a customer places an order, the system records the order details.",
+            "Payment processing begins.",
+            "In-stock items are picked from the warehouse."
+          ],
+          "quotes_found": [
+            true,
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "When a customer places an order, the system records the order details",
+            "Payment processing begins",
+            "In-stock items are picked from the warehouse"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe order processing, payment, and fulfillment, which are core activities of selling goods/services in a business context."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "trader": "the organisation running the described process",
+        "consumer": "its customer"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": {
+        "results": [
+          {
+            "id": "C1",
+            "closest_sentence": "Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "If the customer reports any issues upon delivery, a returns process is initiated, which includes:",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": "first look",
+        "C1": null,
+        "C2": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "C2",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 5,
+    "passage_id": "CRD-Art14-4",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7).",
+    "label": "No duty",
+    "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the supply of digital content which is not supplied on a tangible medium",
+      "law_quote": "the supply, in full or in part, of digital content which is not supplied on a tangible medium",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "reason": "The rule is about the supply of digital content, and the process has a returns process step that could involve such content; whether the specific conditions of the rule are met is checked later.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the supply, in full or in part, of digital content which is not supplied on a tangible medium",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "none",
+        "roles": [
+          "consumer",
+          "trader"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the consumer has withdrawn from the contract",
+                "kind": "case_event"
+              }
+            ]
+          },
+          {
+            "logic": "any",
+            "items": [
+              {
+                "text": "the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1)",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8)",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the consumer has not acknowledged that he loses his right of withdrawal when giving his consent",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)",
+                "kind": "process_fact"
+              }
+            ]
+          }
+        ],
+        "then": "",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "duty_type": "none",
+      "split_valid": null,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {},
+      "first_look_label": null,
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "No duty",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": null,
+    "requirement": null
+  },
+  {
+    "rank": 6,
+    "passage_id": "CRD-Art14-5",
+    "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n5. Except as provided for in Article 13(2) and in this Article, the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal.",
+    "label": "No duty",
+    "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "the consumer's right of withdrawal",
+      "law_quote": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+      "relevant": true,
+      "process_step": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "description_quote": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "reason": "The rule is about the consumer's right of withdrawal, and the process has a returns process step that aligns with this.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+      "description_quote_canonical": "If the customer reports any issues upon delivery, a returns process is initiated",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "duty_type": "none",
+        "roles": [
+          "other"
+        ],
+        "if": [],
+        "then": "",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "duty_type": "none",
+      "split_valid": null,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": null,
+      "conditions": [],
+      "role_facts": [],
+      "exceptions": [],
+      "role_binding": {},
+      "first_look_label": null,
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "No duty",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": null,
+    "requirement": null
+  }
+]

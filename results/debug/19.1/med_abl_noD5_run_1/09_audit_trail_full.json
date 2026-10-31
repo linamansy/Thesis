@@ -1,0 +1,746 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "ECD-Art11-1",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them.",
+    "label": "Not applicable",
+    "label_cause": "an IF item is contradicted",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "placing of the order",
+      "law_quote": "Placing of the order",
+      "relevant": true,
+      "process_step": "the user starts an order by logging in to their account",
+      "description_quote": "The user starts an order by logging in to their account",
+      "reason": "The rule is about placing an order, and the process has a step where the user starts an order.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "Placing of the order",
+      "description_quote_canonical": "The user starts an order by logging in to their account",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the recipient of the service places his order through technological means",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the recipient is not a consumer",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the service provider must acknowledge the receipt of the recipient's order without undue delay and by electronic means",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": {
+        "rule": "D1 Member States shall ensure",
+        "split_roles": [
+          "service provider"
+        ],
+        "role_found": "service provider",
+        "roles": [
+          "service provider"
+        ]
+      },
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The user starts an order by logging in to their account.",
+            "status": "confirmed",
+            "quotes": [
+              "The user starts an order by logging in to their account."
+            ]
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "contradicted",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the recipient of the service places his order through technological means",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "the recipient of the service places his order through technological means",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The user starts an order by logging in to their account."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The user starts an order by logging in to their account"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The user starting an order by logging in (a technological means) aligns with the recipient placing the order through technological means, as both involve initiating the order via technology."
+          }
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the recipient is not a consumer",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "the recipient is not a consumer",
+          "status": "contradicted",
+          "original_status": "contradicted",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "false",
+            "answer": "yes",
+            "reason": "The sentences describe users as private persons buying for personal use (consumers), directly contradicting the statement that the recipient is not a consumer."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop being run by a company for private customers via website confirms the organization sells goods/services as part of its business."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Not applicable",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Not applicable",
+      "if_label": "Not applicable",
+      "exceptions_applying": [],
+      "reason": "an IF item is contradicted",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": "first look",
+        "C2": "first look"
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "C2",
+          "logic": "one",
+          "status": "contradicted",
+          "case_event": false,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "ECD-Art11-2",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order.",
+    "label": "Not applicable",
+    "label_cause": "an IF item is contradicted",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "identifying and correcting input errors prior to the placing of the order",
+      "law_quote": "the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+      "relevant": true,
+      "process_step": "the user starts an order by logging in to their account",
+      "description_quote": "The user starts an order by logging in to their account",
+      "reason": "The rule is about identifying and correcting input errors before placing an order, and the process has a step where the user starts an order, which is the beginning of the order placement process.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+      "description_quote_canonical": "The user starts an order by logging in to their account",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [
+          {
+            "logic": "all",
+            "items": [
+              {
+                "text": "the service provider is providing an information society service",
+                "kind": "process_fact"
+              },
+              {
+                "text": "the recipient of the service is not a consumer",
+                "kind": "case_event"
+              }
+            ]
+          }
+        ],
+        "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "exceptions": [
+          "when otherwise agreed by parties who are not consumers"
+        ],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": {
+        "rule": "D1 Member States shall ensure",
+        "split_roles": [
+          "service provider"
+        ],
+        "role_found": "service provider",
+        "roles": [
+          "service provider"
+        ]
+      },
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "confirmed",
+            "quotes": [
+              "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "The users are private persons who buy from home on the shop's website.",
+            "status": "contradicted",
+            "quotes": [
+              "The users are private persons who buy from home on the shop's website."
+            ]
+          },
+          {
+            "id": "E1",
+            "closest_sentence": "The user has the right to return items for exchange.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the service provider is providing an information society service",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "process_fact",
+          "text_sent": "the organisation running the described process is providing an information society service",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "the recipient of the service is not a consumer",
+          "item_kind": "process_fact",
+          "group": "G1",
+          "logic": "all",
+          "split_kind": "case_event",
+          "text_sent": "the recipient of the service is not a consumer",
+          "status": "contradicted",
+          "original_status": "contradicted",
+          "quotes": [
+            "The users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "false",
+            "answer": "yes",
+            "reason": "The sentences describe users as private persons buying for personal use (consumers), directly contradicting the statement that the recipient is not a consumer."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The shop's operation by a company selling to private customers via website confirms the organisation engages in trade/business activities."
+          }
+        }
+      ],
+      "exceptions": [
+        {
+          "id": "E1",
+          "text": "when otherwise agreed by parties who are not consumers",
+          "text_sent": "when otherwise agreed by parties who are not consumers",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Not applicable",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Not applicable",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Not applicable",
+      "if_label": "Not applicable",
+      "exceptions_applying": [],
+      "reason": "an IF item is contradicted",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null,
+        "C1": null,
+        "C2": "first look"
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        },
+        {
+          "id": "C1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "C1"
+          ]
+        },
+        {
+          "id": "C2",
+          "logic": "one",
+          "status": "contradicted",
+          "case_event": false,
+          "items": [
+            "C2"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "ECD-Art11-3",
+    "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+    "label": "Indeterminate",
+    "label_cause": "not every IF item is confirmed",
+    "failed_step": null,
+    "error": null,
+    "relevance": {
+      "law_focus": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "law_quote": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "relevant": true,
+      "process_step": "the user starts an order by logging in to their account",
+      "description_quote": "The user starts an order by logging in to their account",
+      "reason": "The rule is about contracts concluded exclusively by electronic communication, and the process has a step where the user starts an order, which involves electronic communication.",
+      "law_quote_found": true,
+      "description_quote_found": true,
+      "law_quote_canonical": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+      "description_quote_canonical": "The user starts an order by logging in to their account",
+      "final_relevant": true,
+      "cause": "relevant"
+    },
+    "applicability": {
+      "split": {
+        "roles": [
+          "service provider"
+        ],
+        "if": [],
+        "then": "the service provider must not apply paragraph 1, first indent, and paragraph 2",
+        "exceptions": [],
+        "special_cases": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "duty_holder": null,
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "The shop is run by a company based in France, and the users are private persons who buy from home on the shop's website.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The user starts an order by logging in to their account. Then, the user simultaneously selects the items to purchase and sets a payment method.",
+            "status": "confirmed",
+            "quotes": [
+              "The user starts an order by logging in to their account.",
+              "Then, the user simultaneously selects the items to purchase and sets a payment method."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: service provider",
+          "roles": [
+            {
+              "role": "service provider",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The user starts an order by logging in to their account",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The user starts an order by logging in to their account.",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The user starts an order by logging in to their account",
+            "Then, the user simultaneously selects the items to purchase and sets a payment method"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The sentences describe a purchasing process where users select items and set payment methods, implying the organization sells goods/services as part of its business."
+          }
+        }
+      ],
+      "exceptions": [],
+      "role_binding": {
+        "service provider": "the organisation running the described process"
+      },
+      "first_look_label": "Indeterminate",
+      "second_look": null,
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "sub_rules": [],
+      "note": null
+    },
+    "resolution": {
+      "label": "Indeterminate",
+      "if_label": "Indeterminate",
+      "exceptions_applying": [],
+      "reason": "not every IF item is confirmed",
+      "decided_by": {
+        "R1": "first look",
+        "S1": null
+      },
+      "units": [
+        {
+          "id": "R1",
+          "logic": "one",
+          "status": "confirmed",
+          "case_event": false,
+          "items": [
+            "R1"
+          ]
+        },
+        {
+          "id": "S1",
+          "logic": "one",
+          "status": "not_stated",
+          "case_event": false,
+          "items": [
+            "S1"
+          ]
+        }
+      ],
+      "case_events": []
+    },
+    "requirement": null
+  }
+]
