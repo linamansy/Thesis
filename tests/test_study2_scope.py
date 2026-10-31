@@ -89,8 +89,17 @@ def split(law: dict) -> dict:
     return {"roles": ["other"], "if": [law["if"]], "then": law["then"], "exceptions": []}
 
 
-def check(s1_status: str, s1_quote: str | None, c1_status: str, c1_quote: str | None) -> dict:
+# D1 (design round 1): ECD-Art11-1 and LPD-Art3-1 say "Member States shall ensure ... service provider / creditor", so
+# code makes that role the duty holder instead of the split's "other"; its role fact is then checked too (not_stated
+# here, so R1 stays open as before).
+D1_ROLE_FACT = {"ECD": "T1", "LPD": "D2"}
+
+
+def check(s1_status: str, s1_quote: str | None, c1_status: str, c1_quote: str | None, law: str | None = None) -> dict:
+    facts = [{"id": D1_ROLE_FACT[law], "closest_sentence": None, "status": "not_stated", "quotes": []}
+             ] if law in D1_ROLE_FACT else []
     return {"results": [{"id": "S1", "closest_sentence": None, "status": s1_status, "quotes": [s1_quote] if s1_quote else []},
+                        *facts,
                         {"id": "C1", "closest_sentence": None, "status": c1_status, "quotes": [c1_quote] if c1_quote else []}]}
 
 
@@ -140,7 +149,7 @@ def test_description_stating_out_of_scope_gives_not_applicable(tmp_path, law):
     # e.g. CRD passage + "A business customer orders desks for its offices" -> the buyer is not a consumer
     rule = LAWS[law]
     answers = [relevant(rule, rule["against_quote"]), split(rule),
-               check("contradicted", rule["against_quote"], "not_stated", None)]
+               check("contradicted", rule["against_quote"], "not_stated", None, law)]
     record, knowledge, llm = run_case(tmp_path, rule["out_of_scope"], rule["passage"], answers)
     assert items(record)["S1"] == ("contradicted", "first look")
     assert record["applicability"]["conditions"][1]["quote_found"] is True
@@ -157,9 +166,9 @@ def test_description_stating_scope_confirms_it(tmp_path, law):
     # e.g. CRD passage + "A private customer, buying for personal use at home" -> scope confirmed
     rule = LAWS[law]
     answers = [relevant(rule, rule["c1_quote"]), split(rule),
-               check("confirmed", rule["s1_quote"], "confirmed", rule["c1_quote"])]
+               check("confirmed", rule["s1_quote"], "confirmed", rule["c1_quote"], law)]
     record, knowledge, llm = run_case(tmp_path, rule["in_scope"], rule["passage"], answers)
-    assert items(record) == {"R1": ("not_stated", None),                    # duty holder "other": not decided by code
+    assert items(record) == {"R1": ("not_stated", None),                    # "other" (or D1's role, fact not stated)
                              "S1": ("confirmed", "first look"), "C1": ("confirmed", "first look")}
     assert record["applicability"]["conditions"][1]["text"] == SCOPE[law + "-"]
     # known limitation (module comment): R1 stays open, so the rule is Indeterminate, never passed on
@@ -184,7 +193,7 @@ def test_scope_not_stated_gives_indeterminate(tmp_path):
     # the bakery description says nothing about payments between businesses
     rule = LAWS["LPD"]
     answers = [relevant(rule, "the customer pays when collecting the cake"), split(rule),
-               check("not_stated", None, "not_stated", None), {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated",
+               check("not_stated", None, "not_stated", None, "LPD"), {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated",
                                                                              "quotes": []}]}]
     record, knowledge, llm = run_case(tmp_path, COUNTER, rule["passage"], answers)
     assert items(record)["S1"] == ("not_stated", None)

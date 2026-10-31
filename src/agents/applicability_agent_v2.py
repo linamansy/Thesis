@@ -11,6 +11,10 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      public body / other), "if" = the situational conditions.
      Code rejects the split if an IF item contains an obligation word (config.yaml c3_v2.obligation_words:
      must / shall / is required to) -> label "Split invalid", nothing else runs.
+     Substantive duty holder (D1, design round 1, 31 Oct 2026), by code: if the passage says "Member State(s) shall
+     ensure ...", the duty is on the first role of the law's role list (config.yaml c3_v2.roles, never "public body"
+     or "other") named after "shall ensure"; with no such role the split's roles are kept without "public body" (or
+     "other" if none is left). The Member State only passes the duty on; it is never the duty holder.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -119,6 +123,34 @@ def bind_roles(text: str, binding: dict[str, str]) -> str:
     for role in sorted(binding, key=len, reverse=True):
         text = re.sub(rf"\b(?:(?:the|a|an)\s+)?{re.escape(role)}\b", binding[role], text, flags=re.IGNORECASE)
     return text
+
+
+# D1 (design round 1): "Member States shall ensure (that) ..." passes a duty on to someone named after it.
+SHALL_ENSURE = re.compile(r"\bMember States?\s+shall\s+ensure\b", re.IGNORECASE)
+NOT_A_DUTY_HOLDER = ("public body", "other")
+
+
+def substantive_duty_holder(passage_text: str, role_names) -> tuple[bool, str | None]:
+    """(True, role) if the passage says "Member State(s) shall ensure": role = the first of role_names (without
+    NOT_A_DUTY_HOLDER) named after it (whole words, plural -s, any case), or None if none is named.
+    (False, None) if the passage has no "shall ensure"."""
+    match = SHALL_ENSURE.search(passage_text)
+    if not match:
+        return False, None
+    rest = passage_text[match.end():]
+    found = [(m.start(), name) for name in role_names if name not in NOT_A_DUTY_HOLDER
+             for m in [re.search(rf"\b{re.escape(name)}s?\b", rest, re.IGNORECASE)] if m]
+    return True, (min(found)[1] if found else None)
+
+
+def duty_roles(split_roles: list[str], passage_text: str, role_names) -> tuple[list[str], dict | None]:
+    """The roles the rule places its duty on, after D1, and the D1 record (None if D1 does not apply)."""
+    roles = list(dict.fromkeys(split_roles))
+    applies, holder = substantive_duty_holder(passage_text, role_names)
+    if not applies:
+        return roles, None
+    new = [holder] if holder else ([r for r in roles if r != "public body"] or ["other"])
+    return new, {"rule": "D1 Member States shall ensure", "split_roles": roles, "role_found": holder, "roles": new}
 
 
 # Exception splitting (fix exc, 30 Oct 2026): words that start an exception inside an IF item.
@@ -280,7 +312,7 @@ class ApplicabilityAgentV2:
         """Steps a-f. Returns the applicability record for the audit trail. If a call has no valid answer after its
         retry, "failed_step" names it ("split" or "check") and "label" is None."""
         record = {"split": None, "split_valid": None, "rejected_if": [], "check": None, "conditions": [],
-                  "role_facts": [], "exceptions": [], "first_look_label": None, "second_look": None, "look": "first",
+                  "role_facts": [], "exceptions": [], "duty_holder": None, "first_look_label": None, "second_look": None, "look": "first",
                   "second_look_decided": None, "label": None, "failed_step": None, "note": None}
 
         # a. split (law text only) + code check for obligation words
@@ -295,21 +327,24 @@ class ApplicabilityAgentV2:
             record["label"] = SPLIT_INVALID
             return record
 
+        # D1: the substantive duty holder of a "Member States shall ensure" rule
+        rules = law_roles(self.roles_config, passage_id)["names"]
+        roles, record["duty_holder"] = duty_roles(split.roles, passage_text, rules)
+
         # b. the IF list by code: role item + scope item + situational conditions (R1, R2)
-        role_item = {"id": "R1", "kind": "role", "text": "the duty is on: " + " or ".join(dict.fromkeys(split.roles)),
-                     "roles": [{"role": r} for r in dict.fromkeys(split.roles)]}
+        role_item = {"id": "R1", "kind": "role", "text": "the duty is on: " + " or ".join(roles),
+                     "roles": [{"role": r} for r in roles]}
         scope = [{"id": "S1", "kind": "scope", "text": text} for prefix, text in self.scope_conditions.items()
                  if passage_id.startswith(prefix)]
         situational, split_off = split_exceptions(split.conditions)
         record["conditions"] = [role_item] + scope + situational
-        rules = law_roles(self.roles_config, passage_id)["names"]
         fact_ids = dict.fromkeys(rules[r["role"]]["fact"] for r in role_item["roles"]
                                  if rules[r["role"]]["decide"] == "fact")
         record["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
         record["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(split.exceptions, 1)]
         for i, e in enumerate(split_off, len(record["exceptions"]) + 1):
             record["exceptions"].append({"id": f"E{i}", **e})
-        record["role_binding"] = binding = role_binding(split.roles, rules)
+        record["role_binding"] = binding = role_binding(roles, rules)
         for item in situational + record["exceptions"]:
             item["text_sent"] = bind_roles(item["text"], binding)
 

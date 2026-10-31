@@ -218,47 +218,52 @@ def test_crd_art14_consumer_withdrawal_applicable(tmp_path):
 
 
 # ---------- LPD-Art3-1: who pays whom ----------
+# "Member States shall ensure that ... the creditor is entitled to interest": by D1 (design round 1) the duty holder is
+# the creditor, whatever role the split names, so the role is decided by D2 (the organisation is paid).
 
 LPD_SPLIT = {"roles": ["debtor"],
              "if": ["the creditor has fulfilled its contractual and legal obligations",
                     "the creditor has not received the amount due on time"],
              "then": "the creditor is entitled to interest for late payment without the necessity of a reminder",
              "exceptions": ["the debtor is not responsible for the delay"]}
+SUPPLIER = ("A steel supplier sells steel to manufacturing companies. The supplier delivers the steel as ordered and "
+            "sends an invoice. Some companies pay the invoice after the agreed payment date.")
 
 
-def test_lpd_art3_company_pays_supplier_applicable(tmp_path):
-    check = {"results": [result("S1", "confirmed", "buys steel from its supplier, another company"),
-                         result("D1", "confirmed", "The company pays its supplier's invoice"),
+def test_lpd_art3_supplier_paid_late_applicable(tmp_path):
+    check = {"results": [result("S1", "confirmed", "A steel supplier sells steel to manufacturing companies"),
+                         result("D2", "confirmed", "Some companies pay the invoice after the agreed payment date"),
                          result("C1", "confirmed", "The supplier delivers the steel as ordered"),
-                         result("C2", "confirmed", "sometimes after the agreed payment date"),
+                         result("C2", "confirmed", "Some companies pay the invoice after the agreed payment date"),
                          result("E1", "not_stated")]}
-    requirement = {"requirement": "When the company pays the supplier's invoice after the agreed date, it also pays "
-                                  "the supplier interest for the late payment, even without a reminder.",
-                   "step_quote": "The company pays its supplier's invoice",
+    requirement = {"requirement": "When a company pays the invoice after the agreed date, the supplier charges it "
+                                  "interest for the late payment, even without a reminder.",
+                   "step_quote": "The supplier delivers the steel as ordered and sends an invoice",
                    "triggers": [{"trigger": "without the necessity of a reminder",
                                  "kept_as": "even without a reminder"}],
                    "duty": {"from_then": "entitled to interest for late payment",
-                            "kept_as": "it also pays the supplier interest for the late payment"}}
-    answers = [relevant("the creditor is entitled to interest for late payment", "the company pays the invoice",
-                        "The company pays its supplier's invoice"), LPD_SPLIT, check, requirement]
-    record, knowledge, llm = run_case(tmp_path, SUPPLY, "LPD-Art3-1", answers)
+                            "kept_as": "the supplier charges it interest for the late payment"}}
+    answers = [relevant("the creditor is entitled to interest for late payment", "the supplier sends an invoice",
+                        "sends an invoice"), LPD_SPLIT, check, requirement]
+    record, knowledge, llm = run_case(tmp_path, SUPPLIER, "LPD-Art3-1", answers)
     assert record["label"] == APPLICABLE
-    assert role(record)["roles"][0]["reason"] == "D1 confirmed with a checked quote"   # the organisation is the debtor
-    assert [f["id"] for f in record["applicability"]["role_facts"]] == ["D1"]
+    assert role(record)["text"] == "the duty is on: creditor"                     # D1, not the split's "debtor"
+    assert role(record)["roles"][0]["reason"] == "D2 confirmed with a checked quote"   # the organisation is paid
+    assert [f["id"] for f in record["applicability"]["role_facts"]] == ["D2"]
     check_prompt = llm.prompts_received[2]
-    assert "D1: " + SETTINGS["role_facts"]["D1"] in check_prompt and "D2: " not in check_prompt
+    assert "D2: " + SETTINGS["role_facts"]["D2"] in check_prompt and "D1: " not in check_prompt
     assert knowledge == block("LPD-Art3-1", requirement["requirement"])
 
 
 def test_lpd_art3_no_payment_between_businesses_indeterminate(tmp_path):
-    check = {"results": [result(i, "not_stated") for i in ("S1", "D1", "C1", "C2", "E1")]}
+    check = {"results": [result(i, "not_stated") for i in ("S1", "D2", "C1", "C2", "E1")]}
     second = {"results": [result("C1", "not_stated"), result("C2", "not_stated")]}
     answers = [relevant("the creditor is entitled to interest for late payment", "the customer pays",
                         "The customer pays at the counter"), LPD_SPLIT, check, second]
     record, knowledge, llm = run_case(tmp_path, BAKERY, "LPD-Art3-1", answers)
     assert items(record) == {"R1": ("not_stated", None), "S1": ("not_stated", None), "C1": ("not_stated", None),
                              "C2": ("not_stated", None)}
-    assert role(record)["roles"][0]["reason"] == "D1 not stated"               # no assumption decides a debtor
+    assert role(record)["roles"][0]["reason"] == "D2 not stated"               # no assumption decides a creditor
     assert record["label"] == INDETERMINATE and record["requirement"] is None
     assert len(llm.prompts_received) == 4                                     # second look for C1, C2 only
     assert knowledge == NO_KNOWLEDGE
