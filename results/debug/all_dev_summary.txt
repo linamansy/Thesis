@@ -1,0 +1,282 @@
+ALL DEVELOPMENT VARIANTS (scripts/run_all_dev.py)
+
+variant target          R     oracle            full run          requirement
+-----------------------------------------------------------------------------
+01.1    GDPR-Art13-1    1/1   1/1 (A)           1/1 (A)           When the customer's details are collected, the customer is told about the company's identity, contact info, and why their data is being collected.
+01.2    LPD-Art3-1      1/1   0/1 (I)           0/1 (I)           -
+06.1    CRD-Art13-1     0/1   0/1 (I)           0/1 (-)           -
+11.1    GDPR-Art17-1    1/1   0/1 (I)           0/1 (I)           -
+13.1    SGD-Art14-1     0/1   0/1 (I)           0/1 (-)           -
+17.1    CRD-Art14-1     0/1   0/1 (I)           0/1 (-)           -
+19.1    ECD-Art11-1     1/1   0/1 (N)           0/1 (N)           -
+45.1    ECD-Art10-1     1/1   0/1 (I)           0/1 (I)           -
+
+Letters: A Applicable, A* Applicable with invalid requirement, I Indeterminate, N Not applicable, X Irrelevant, S Split invalid, F failed step, - not retrieved, ? run missing
+
+NON-APPLICABLE TARGETS
+01.2 LPD-Art3-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       not_stated: the duty is on: creditor
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): creditor: D2 not stated
+      S1  scope      confirmed: the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences describe a transaction between companies (undertakings) involving payment for goods/services, matching the statement's definition of a commercial transaction.
+          failing stage: -
+      C1  situation  not_stated: the organisation running the described process has fulfilled its contractual and legal obligations
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  confirmed: the organisation running the described process has not received the amount due on time
+          quotes: ["some customers pay later than the agreed date"]
+          verifier: If customers pay later than the agreed date, the organisation has not received the amount due on time.
+          failing stage: -
+      D2  role_fact  not_stated: another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences mention sending a bill but do not confirm receipt of payment, while the statement asserts payment has occurred.
+          failing stage: verifier (first look)
+      E1  exception  not_stated: unless the debtor is not responsible for the delay
+          quotes: -
+          verifier: -
+          failing stage: -
+01.2 LPD-Art3-1 full run 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       not_stated: the duty is on: creditor
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): creditor: D2 not stated
+      S1  scope      confirmed: the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences describe a transaction between companies (undertakings) involving payment for goods/services, matching the statement's definition of a commercial transaction.
+          failing stage: -
+      C1  situation  not_stated: the organisation running the described process has fulfilled its contractual and legal obligations
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  confirmed: the organisation running the described process has not received the amount due on time
+          quotes: ["Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"]
+          verifier: The sentences indicate that some customers pay later than the agreed date, implying the organisation has not received the amount due on time for those cases.
+          failing stage: -
+      D2  role_fact  not_stated: another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided
+          quotes: ["After the order is confirmed, the company sends them a bill"]
+          verifier: The sentences mention sending a bill but do not confirm that payment was received from another party or public authority.
+          failing stage: verifier (first look)
+      E1  exception  not_stated: unless the debtor is not responsible for the delay
+          quotes: -
+          verifier: -
+          failing stage: -
+06.1 CRD-Art13-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: trader
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: -
+          failing stage: -
+      S1  scope      confirmed: the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: The sentence mentions 'private persons' which aligns with the definition of a consumer as a natural person not acting in their trade/business.
+          failing stage: -
+      C1  situation  not_stated: its customer withdraws from the contract
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  not_stated: the organisation running the described process is informed of its customer’s decision to withdraw from the contract
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      T1  role_fact  confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The shop sells kitchen items to private persons across the EU"]
+          verifier: The sentence indicates the shop sells kitchen items to customers, which aligns with business activities as stated.
+          failing stage: -
+11.1 GDPR-Art17-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: controller
+          quotes: -
+          verifier: -
+          failing stage: -
+      S1  scope      confirmed: the process handles information about identifiable people
+          quotes: ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier: The sentences mention personal information, which directly relates to identifiable people.
+          failing stage: -
+      C1  situation  not_stated: the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  not_stated: the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C3  situation  not_stated: the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2)
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C4  situation  not_stated: the personal data have been unlawfully processed
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C5  situation  not_stated: the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the organisation running the described process is subject
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C6  situation  confirmed: the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)
+          quotes: ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier: The sentences imply personal data collection for a subscription service, which qualifies as an information society service under Article 8(1) of GDPR.
+          failing stage: -
+11.1 GDPR-Art17-1 full run 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: controller
+          quotes: -
+          verifier: -
+          failing stage: -
+      S1  scope      confirmed: the process handles information about identifiable people
+          quotes: ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier: The sentences mention personal information, which directly relates to identifiable people.
+          failing stage: -
+      C1  situation  not_stated: the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  not_stated: the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C3  situation  not_stated: the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2)
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C4  situation  not_stated: the personal data have been unlawfully processed
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C5  situation  not_stated: the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the organisation running the described process is subject
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C6  situation  confirmed: the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)
+          quotes: ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier: The sentences imply personal data collection for a subscription service, which qualifies as an information society service under Article 8(1) of GDPR.
+          failing stage: -
+13.1 SGD-Art14-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       not_stated: the duty is on: seller
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): seller: T1 not stated
+      S1  scope      not_stated: goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation  confirmed: its customer informs the organisation running the described process about the lack of conformity
+          quotes: ["The process begins when a customer files a complaint about a product or service"]
+          verifier: The sentence indicates the customer initiates the process by filing a complaint, which aligns with informing the organisation about the lack of conformity.
+          failing stage: -
+      T1  role_fact  not_stated: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+17.1 CRD-Art14-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: consumer or trader
+          quotes: ["When a customer places an order, the system records the order details", "Payment processing begins"]
+          verifier: -
+          failing stage: -
+      S1  scope      not_stated: the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes: ["customers are private persons in several EU countries"]
+          verifier: The sentences mention 'private persons' but do not explicitly state that they are acting outside their trade, business, craft, or profession as required by the statement.
+          failing stage: verifier (first look)
+      C1  situation  not_stated: its customer has communicated his decision to withdraw from the contract to the organisation running the described process in accordance with Article 11
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C2  situation  not_stated: the organisation running the described process has not offered to collect the goods himself
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      C3  situation  not_stated: the goods have been delivered to its customer’s home at the time of the conclusion of the contract and by their nature cannot normally be returned by post
+          quotes: -
+          verifier: -
+          failing stage: second look: not_stated
+      T1  role_fact  confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["When a customer places an order, the system records the order details", "Payment processing begins"]
+          verifier: The sentences imply the organization is engaged in selling goods/services through order processing and payment handling, which aligns with the statement.
+          failing stage: -
+19.1 ECD-Art11-1 oracle 1: Not applicable (N)
+    cause: an IF item is contradicted
+      R1  role       contradicted: the duty is on: public body
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): public body: a public body is not a business
+      S1  scope      not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation  confirmed: the recipient of the service places his order through technological means
+          quotes: ["The user starts an order by logging in to their account"]
+          verifier: The first sentence indicates the user (recipient) starts an order via logging in (technological means), supporting the statement.
+          failing stage: -
+      E1  exception  not_stated: otherwise agreed by parties who are not consumers
+          quotes: -
+          verifier: -
+          failing stage: -
+19.1 ECD-Art11-1 full run 1: Not applicable (N)
+    cause: an IF item is contradicted
+      R1  role       contradicted: the duty is on: public body
+          quotes: -
+          verifier: -
+          failing stage: code rule (roles): public body: a public body is not a business
+      S1  scope      not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation  confirmed: the recipient of the service places his order through technological means
+          quotes: ["The user starts an order by logging in to their account"]
+          verifier: The first sentence indicates the user (recipient) starts an order via logging in (technological means), supporting the statement.
+          failing stage: -
+      E1  exception  not_stated: otherwise agreed by parties who are not consumers
+          quotes: -
+          verifier: -
+          failing stage: -
+45.1 ECD-Art10-1 oracle 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: service provider
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: -
+          failing stage: -
+      S1  scope      not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation  confirmed: the organisation running the described process provides a service to a recipient
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: The E-Shop's activity of selling to private persons constitutes providing a service to recipients.
+          failing stage: -
+      T1  role_fact  confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: The E-Shop's operation of selling to private persons directly aligns with the statement's claim of selling goods/services for trade/business purposes.
+          failing stage: -
+      E1  exception  not_stated: when otherwise agreed by parties who are not consumers
+          quotes: -
+          verifier: -
+          failing stage: -
+45.1 ECD-Art10-1 full run 1: Indeterminate (I)
+    cause: not every IF item is confirmed
+      R1  role       confirmed: the duty is on: service provider
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: -
+          failing stage: -
+      S1  scope      not_stated: the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          quotes: -
+          verifier: -
+          failing stage: first look: not_stated
+      C1  situation  confirmed: the organisation running the described process provides a service to a recipient
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: The E-Shop's activity of selling to private persons constitutes providing a service to recipients.
+          failing stage: -
+      T1  role_fact  confirmed: the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes: ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          verifier: The E-Shop's operation of selling to private persons directly aligns with the statement's claim of selling goods/services for trade/business purposes.
+          failing stage: -
+      E1  exception  not_stated: when otherwise agreed by parties who are not consumers
+          quotes: -
+          verifier: -
+          failing stage: -
