@@ -175,7 +175,13 @@ def test_ablation_options_need_an_oracle_label_and_reach_the_runner(monkeypatch)
     run_all_dev.main(["--oracle-label", "abl_noD5_noD4b", "--no-d5", "--no-d4b", "--runs", "1"])
     run_all_dev.main(["--oracle-label", "round9", "--runs", "1"])
     run_all_dev.main(["--oracle-label", "round9b", "--d4b", "--runs", "1"])
-    assert seen == [{"case_events": False}, {"case_events": False}, {}, {"sub_rules": True}]   # D4b off by default
+    run_all_dev.main(["--oracle-label", "round9c", "--d5", "--event-check", "--runs", "1"])
+    assert seen == [{"case_events": False}, {"case_events": False}, {}, {"sub_rules": True},   # defaults: all off
+                    {"case_events": True, "event_check": True}]
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--oracle-label", "x", "--event-check"])     # the event check needs --d5
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--oracle-label", "x", "--d5", "--no-d5"])
     with pytest.raises(SystemExit):
         run_all_dev.main(["--d4b"])
     with pytest.raises(SystemExit):

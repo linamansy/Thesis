@@ -318,14 +318,14 @@ RETURN_REQUIREMENT = {"requirement": "If the customer returns the product, the s
 CONDITIONAL = "Applicable (conditional)"
 
 
-def return_orchestrator(tmp_path, answers, passage=RETURN_PASSAGE):
+def return_orchestrator(tmp_path, answers, passage=RETURN_PASSAGE, **switches):
     from src.agents.relevance_agent_v2 import RelevanceAgentV2
     from src.agents.requirement_agent_v2 import RequirementAgentV2
     from src.orchestrator_v2 import OrchestratorV2
     from src.prompt_texts import load_c3_block_template
     llm = MockLLM([json.dumps(a) for a in answers])
     log = RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}")
-    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log), RequirementAgentV2(llm, log),
+    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log, **switches), RequirementAgentV2(llm, log),
                           {"c": {"passages": [{"rank": 1, "passage_id": "P-1", "text": passage}]}},
                           tmp_path / "mediation", load_c3_block_template(CONFIG, "c3_block_template_v2"),
                           NO_KNOWLEDGE)
@@ -334,7 +334,7 @@ def return_orchestrator(tmp_path, answers, passage=RETURN_PASSAGE):
 
 def test_d5_case_event_not_stated_gives_applicable_conditional_with_its_requirement(tmp_path):
     orch, llm = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
-                                               RETURN_REQUIREMENT])
+                                               RETURN_REQUIREMENT], case_events=True)
     out = orch.mediate_case("c", SHOP)
     record = out["passages"][0]
     assert [(c["id"], c.get("item_kind")) for c in record["applicability"]["conditions"]] == [
@@ -349,7 +349,8 @@ def test_d5_case_event_not_stated_gives_applicable_conditional_with_its_requirem
 
 def test_d5_every_case_event_confirmed_is_still_conditional(tmp_path):
     a, _ = agent(tmp_path, [RETURN_SPLIT, {"results": [result("C1", "confirmed", "The customer chooses a product"),
-                                                       result("C2", "confirmed", "The shop sends the product")]}])
+                                                       result("C2", "confirmed", "The shop sends the product")]}],
+                 case_events=True)
     record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
     assert record["first_look_label"] == CONDITIONAL
 
@@ -376,7 +377,8 @@ def test_d5_or_group_of_case_events_is_one_case_event(tmp_path):
         {"logic": "any", "items": [{"text": "the customer returns the product", "kind": "case_event"},
                                    {"text": "the customer complains", "kind": "case_event"}]}]}
     a, _ = agent(tmp_path, [split, {"results": [result("C1", "confirmed", "The customer chooses a product"),
-                                                result("C2", "not_stated"), result("C3", "not_stated")]}])
+                                                result("C2", "not_stated"), result("C3", "not_stated")]}],
+                 case_events=True)
     record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
     resolution = ResolverV2().resolve(record)
     assert resolution["label"] == CONDITIONAL
@@ -387,7 +389,7 @@ def test_d5_or_group_of_case_events_is_one_case_event(tmp_path):
 def test_d5_requirement_without_its_case_event_is_retried_then_invalid(tmp_path):
     dropped = {**RETURN_REQUIREMENT, "case_events": []}
     orch, llm = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
-                                               dropped, dropped])
+                                               dropped, dropped], case_events=True)
     out = orch.mediate_case("c", SHOP)
     record = out["passages"][0]
     problem = record["requirement"]["attempts"][0]["problems"][0]
@@ -461,7 +463,7 @@ def test_d4b_is_off_by_default_since_design_round_2(tmp_path):
     a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN])
     record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
     assert record["sub_rules"] == [] and len(llm.prompts_received) == 2   # split + the main rule's check only
-    assert a.case_events is True and a.sub_rules is False
+    assert a.sub_rules is False
 
 
 def test_ablation_switches_leave_the_prompts_unchanged(tmp_path):

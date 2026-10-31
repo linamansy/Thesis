@@ -131,8 +131,8 @@ def debug_run(config: dict, case: dict, description: str, key: dict, llm, run_di
     """Write all stage files of one run into run_dir (new folder) and return the summary data.
     think_calls / think_llm (debug only, scripts/oracle_o2.py --think-calls): the named ApplicabilityAgentV2 calls
     send their requests through think_llm; default none, so the requests are unchanged.
-    ablation (debug only): ApplicabilityAgentV2 switches, e.g. {"case_events": False, "sub_rules": False}; default
-    none (everything on)."""
+    ablation (debug only): ApplicabilityAgentV2 switches, e.g. {"case_events": True, "event_check": True}; default
+    none (the agent's defaults: D5, the event check and D4b off)."""
     from src.agents.applicability_agent_v2 import ApplicabilityAgentV2
     from src.agents.relevance_agent_v2 import RelevanceAgentV2
     from src.agents.requirement_agent_v2 import RequirementAgentV2

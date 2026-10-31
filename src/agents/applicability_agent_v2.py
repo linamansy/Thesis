@@ -38,6 +38,8 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      Applicable (conditional) rule with a valid requirement, the verifier also checks, one call per case event
      (EventVerifierCallV2, check_case_events), that the requirement's If/When part for it describes the same event;
      "no" -> the requirement is invalid. With D5 switched off there are no case events, so no such call.
+     Dry-run defaults (31 Oct 2026): D5 (with its F2a narrowing) and the F2b event check are OFF by default, switched on
+     by case_events=True and event_check=True; F1 stays on, D4b stays off.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -428,14 +430,17 @@ class ApplicabilityAgentV2:
     """Runs split -> check-IF -> quote check -> first look, and the second look when the orchestrator asks."""
 
     def __init__(self, llm, logger, max_retries: int | None = None, config: dict | None = None,
-                 case_events: bool = True, sub_rules: bool = False):
-        """case_events / sub_rules (ablation, debug run options only): case_events False switches off D5 (every IF
-        item is read as a process fact, so no "Applicable (conditional)"); sub_rules False switches off D4b (the
-        split's special_cases are kept in record["split"] but never evaluated). The prompts are unchanged.
-        Defaults: D5 on; D4b OFF since design round 2 (31 Oct 2026; round 1 and its ablations: 0 targets gained by
-        D4b), so sub_rules=True switches it on."""
+                 case_events: bool = False, sub_rules: bool = False, event_check: bool = False):
+        """case_events / sub_rules / event_check (ablation, debug run options only): case_events False switches off
+        D5 (every IF item is read as a process fact, so no "Applicable (conditional)"); sub_rules False switches off
+        D4b (the split's special_cases are kept in record["split"] but never evaluated); event_check False switches
+        off the F2b case-event check (no EventVerifierCallV2). The prompts are unchanged.
+        Defaults: D5 and the event check OFF since the dry-run preparation (31 Oct 2026), switched on by
+        case_events=True / event_check=True (the check needs case events, so it only acts with D5 on); D4b OFF since
+        design round 2 (31 Oct 2026; round 1 and its ablations: 0 targets gained by D4b), so sub_rules=True switches
+        it on."""
         config = config or load_config()
-        self.case_events, self.sub_rules = case_events, sub_rules
+        self.case_events, self.sub_rules, self.event_check = case_events, sub_rules, event_check
         self.split_call = SplitCallV2(llm, logger, max_retries)
         self.check_call = CheckIfCallV2(llm, logger, max_retries)
         self.second_look_call = SecondLookCallV2(llm, logger, max_retries)
@@ -663,9 +668,9 @@ class ApplicabilityAgentV2:
         code checks, one verifier call per case event with the case event as sent ({"id", "text"}, ResolverV2) and
         the requirement's If/When part for it (the kept_as of the last attempt's case_events). The answers are saved
         in requirement["event_checks"]; a "no" adds a problem to the last attempt and makes the requirement invalid.
-        Nothing is called for a missing or invalid requirement or without case events. Returns False if a call has no
-        valid answer after its retry."""
-        if not case_events or requirement is None or requirement["requirement_invalid"]:
+        Nothing is called with the check switched off (event_check False, the default), for a missing or invalid
+        requirement or without case events. Returns False if a call has no valid answer after its retry."""
+        if not self.event_check or not case_events or requirement is None or requirement["requirement_invalid"]:
             return True
         last = requirement["attempts"][-1]
         kept = {c["id"]: c["kept_as"] for c in last["case_events"]}

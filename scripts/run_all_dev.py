@@ -23,7 +23,9 @@ that label (folder med_<LABEL>_run_<n>), e.g. --oracle-label round1 after design
 --no-d5 / --no-d4b (ablation, added 31 Oct 2026, only with --oracle-label): switch off D5 (case events: every IF item
 is read as a process fact, no "Applicable (conditional)") or D4b (special-case sub-rules are not evaluated) in
 ApplicabilityAgentV2; prompts unchanged; saved in run_info.json as "ablation". Since design round 2 D4b is OFF by
-default (--no-d4b kept so earlier commands still work); --d4b switches it on. Default: D5 on, D4b off.
+default (--no-d4b kept so earlier commands still work); --d4b switches it on. Since the dry-run preparation
+(31 Oct 2026) D5 and the F2b event check are OFF by default too (--no-d5 kept so earlier commands still work); --d5
+switches D5 on, --event-check (only with --d5) the event check. Default: D5, event check and D4b off.
 
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
@@ -36,8 +38,8 @@ Ceiling test (GROQ_API_KEY in .env):
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --groq-model qwen/qwen3.8-27b --runs 1
 Oracles only, after a design round:
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label round1 --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
-Ablation of a design round, e.g. without D5:
-    .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label abl_noD5 --no-d5 --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
+Ablation of a design round, e.g. with D5 and the event check:
+    .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label round2 --d5 --event-check --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
 """
 
 import argparse
@@ -128,7 +130,7 @@ class AllDevRunner:
     def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None,
                  groq_json: str = "schema", oracle_label: str | None = None, ablation: dict | None = None):
         self.config, self.fresh, self.think_calls, self.log = config, fresh, think_calls, log
-        self.ablation = ablation or {}   # ApplicabilityAgentV2 switches (--no-d5, --no-d4b); empty = all on
+        self.ablation = ablation or {}   # ApplicabilityAgentV2 switches (--d5, --event-check, --d4b); empty = defaults
         self.groq_model, self.groq_json, self.oracle_label = groq_model, groq_json, oracle_label
         self.llm, self.llm_info = groq_llm(config, groq_model, groq_json) if groq_model else make_llm(config)
         self.think_llm = None
@@ -249,7 +251,11 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--oracle-label", default=None,
                         help="design round: only the oracle step, saved as med_<label>_run_<n> (e.g. round1)")
     parser.add_argument("--no-d5", action="store_true",
-                        help="ablation (with --oracle-label): switch off D5, every IF item read as a process fact")
+                        help="D5 off (the default since the dry-run preparation; kept so earlier commands still work)")
+    parser.add_argument("--d5", action="store_true",
+                        help="ablation (with --oracle-label): switch on D5 (narrowed case events, F2a)")
+    parser.add_argument("--event-check", action="store_true",
+                        help="ablation (with --oracle-label and --d5): switch on the F2b case-event check")
     parser.add_argument("--no-d4b", action="store_true",
                         help="D4b off (the default since design round 2; kept so earlier commands still work)")
     parser.add_argument("--d4b", action="store_true",
@@ -259,11 +265,17 @@ def main(argv: list[str] | None = None) -> None:
         parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
     if args.oracle_label and (args.groq_model or args.oracle_label in (LABEL, ORACLE_LABEL)):
         parser.error("--oracle-label needs its own name and cannot be combined with --groq-model")
-    if (args.no_d5 or args.no_d4b or args.d4b) and not args.oracle_label:
-        parser.error("--no-d5 / --no-d4b / --d4b need --oracle-label (their own folder name)")
+    if (args.no_d5 or args.d5 or args.event_check or args.no_d4b or args.d4b) and not args.oracle_label:
+        parser.error("--no-d5 / --d5 / --event-check / --no-d4b / --d4b need --oracle-label (their own folder name)")
     if args.d4b and args.no_d4b:
         parser.error("--d4b and --no-d4b exclude each other")
-    ablation = {k: v for k, v, given in (("case_events", False, args.no_d5), ("sub_rules", True, args.d4b)) if given}
+    if args.d5 and args.no_d5:
+        parser.error("--d5 and --no-d5 exclude each other")
+    if args.event_check and not args.d5:
+        parser.error("--event-check needs --d5 (without case events there is nothing to check)")
+    ablation = {k: v for k, v, given in (("case_events", False, args.no_d5), ("case_events", True, args.d5),
+                                         ("event_check", True, args.event_check), ("sub_rules", True, args.d4b))
+                if given}
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]

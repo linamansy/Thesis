@@ -54,7 +54,7 @@ def test_f1_orchestrator_keeps_no_duty_out_of_the_block(tmp_path):
 
 @pytest.mark.parametrize("duty_type", ["duty", "right"])
 def test_f1_duty_and_right_go_on_as_before(tmp_path, duty_type):
-    a, _ = agent(tmp_path, [{**RETURN_SPLIT, "duty_type": duty_type}, BUY_CONFIRMED_RETURN_OPEN])
+    a, _ = agent(tmp_path, [{**RETURN_SPLIT, "duty_type": duty_type}, BUY_CONFIRMED_RETURN_OPEN], case_events=True)
     record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
     assert record["duty_type"] == duty_type and record["label"] == "Applicable (conditional)"
 
@@ -102,7 +102,7 @@ def test_f2a_split_prompt_and_schema_narrow_case_events(tmp_path):
 
 def conditional_orchestrator(tmp_path, event_answers):
     orch, llm = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
-                                               RETURN_REQUIREMENT])
+                                               RETURN_REQUIREMENT], case_events=True, event_check=True)
     check = MockLLM([json.dumps(e) if isinstance(e, dict) else e for e in event_answers])
     orch.applicability_agent.event_verifier_call.llm = check
     return orch, check
@@ -170,3 +170,36 @@ def test_f2b_event_check_is_a_verifier_call_and_gets_thinking(tmp_path):
     assert a.event_verifier_call.llm is think and a.verifier_call.llm is think and a.split_call.llm is base
     schema = a.event_verifier_call.model_schema()
     assert schema["properties"]["answer"]["enum"] == ["yes", "no"] and set(schema["required"]) == {"answer", "reason"}
+
+
+# ---------- dry-run defaults (31 Oct 2026): D5 off, event check off, F1 on, D4b off ----------
+
+def test_default_d5_is_off_every_if_item_is_a_process_fact(tmp_path):
+    a, _ = agent(tmp_path, [RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN])
+    record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
+    assert a.case_events is False
+    assert [(c["id"], c.get("item_kind"), c.get("split_kind")) for c in record["conditions"]] == [
+        ("R1", None, None), ("C1", "process_fact", "process_fact"), ("C2", "process_fact", "case_event")]
+    assert record["label"] == "Indeterminate"                               # not "Applicable (conditional)"
+
+
+def test_default_event_check_is_off_even_with_d5_on(tmp_path):
+    orch, _ = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
+                                             RETURN_REQUIREMENT], case_events=True)
+    orch.applicability_agent.event_verifier_call.llm = check = MockLLM([json.dumps(NO)])
+    record = orch.mediate_case("c", SHOP)["passages"][0]
+    assert orch.applicability_agent.event_check is False and check.prompts_received == []
+    assert record["label"] == "Applicable (conditional)" and record["requirement"]["requirement_invalid"] is False
+    assert "event_checks" not in record["requirement"]
+
+
+def test_default_f1_is_on_duty_type_none_gives_no_duty(tmp_path):
+    a, llm = agent(tmp_path, [NONE_SPLIT])
+    assert a.first_look("x", SHOP, "P-1", LIMIT_PASSAGE)["label"] == NO_DUTY and len(llm.prompts_received) == 1
+
+
+def test_default_d4b_is_off_special_cases_are_not_evaluated(tmp_path):
+    from tests.test_design_round1 import MAIN_OPEN, SPECIAL_PASSAGE, SPECIAL_SPLIT, VASES
+    a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN])
+    assert a.sub_rules is False
+    assert a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)["sub_rules"] == [] and len(llm.prompts_received) == 2
