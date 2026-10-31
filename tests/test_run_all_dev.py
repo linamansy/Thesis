@@ -43,7 +43,7 @@ class FakeRunner(AllDevRunner):
 
     def __init__(self, config, fail_retrieval=False):
         self.config, self.fresh, self.think_calls, self.groq_model = config, False, [], None
-        self.groq_json = "schema"
+        self.groq_json, self.oracle_label = "schema", None
         self.messages, self.calls = [], []
         self.log = self.messages.append
         self.corpus_ids = ["GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art5-1-a", "GDPR-Art13-3"]
@@ -144,6 +144,19 @@ def test_ceiling_runs_only_the_oracle_under_its_own_label():
                              ("GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art13-3"))]
 
 
+def test_oracle_label_runs_only_the_oracle_under_that_label():
+    config = load_config()
+    runner = FakeRunner(config)
+    runner.oracle_label = "round1"
+    runner.run_variant("01.1", 4)
+    assert runner.calls == [("mediation", "round1", "med_round1_run_4",
+                             ("GDPR-Art13-1", "GDPR-Art13-2-a", "GDPR-Art13-3"))]
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--oracle-label", "alldev_oracle"])          # never the old folders' name
+    with pytest.raises(SystemExit):
+        run_all_dev.main(["--oracle-label", "round1", "--groq-model", "qwen/qwen3.8-27b"])
+
+
 def test_ceiling_refuses_the_silver_model_and_ollama_options():
     config = load_config()
     with pytest.raises(ValueError, match="silver"):
@@ -190,3 +203,39 @@ def test_ceiling_json_object_option(monkeypatch):
     llm = GroqLLM.from_agent_config(study2_view(run_all_dev.ceiling_config(load_config(), "qwen/qwen3.8-27b", "object")))
     assert llm.json_mode and not llm.json_schema and not llm.accepts_format_schema
     assert llm.request_body("x")["response_format"] == {"type": "json_object"}
+
+
+def test_design_round_report():
+    from scripts import compare_round
+    config = load_config()
+    # 01.1: target Applicable (conditional) with requirement -> regression rule PASS; another passage Applicable too
+    d = case_dir(config, "01.1")
+    fake_med(d / "med_alldev_oracle_run_6", [record("GDPR-Art13-1", "Applicable",
+                                                    {"requirement": "Tell.", "requirement_invalid": False})])
+    target = record("GDPR-Art13-1", "Applicable (conditional)", {"requirement": "When asked, tell.",
+                                                                 "requirement_invalid": False},
+                    conditions=[item("C1", "situation", "not_stated", item_kind="case_event", logic="all", group="G1")])
+    target["resolution"] = {"units": [{"id": "C1", "logic": "one", "status": "not_stated", "case_event": True,
+                                       "items": ["C1"]}], "case_events": [{"id": "C1", "text": "the customer asks"}]}
+    other = record("GDPR-Art13-3", "Applicable", {"requirement": "Inform again.", "requirement_invalid": False})
+    fake_med(d / "med_round9_run_6", [target, other])
+    # 17.1: main rule Indeterminate, a sub-rule (special case) Not applicable -> listed as still failing, with items
+    d = case_dir(config, "17.1")
+    fake_med(d / "med_alldev_oracle_run_6", [record("CRD-Art14-1", "Indeterminate")])
+    stuck = record("CRD-Art14-1", "Indeterminate", conditions=[
+        item("S1", "scope", "not_stated", cause="verifier rejected", verifier={"reason": "not explicit"})])
+    stuck["applicability"]["sub_rules"] = [{"id": "K1", "clause": "In the case of", "label": "Not applicable",
+                                            "label_cause": "an IF item is contradicted", "failed_step": None,
+                                            "conditions": [item("C1", "situation", "contradicted", ["No visits"])],
+                                            "role_facts": [], "exceptions": []}]
+    fake_med(d / "med_round9_run_6", [stuck])
+    text = compare_round.compare(config, "round9", ["01.1", "17.1", "45.1"], 6)
+    assert "PASS (AC)" in text
+    rows = {v: next(l for l in text.splitlines() if l.startswith(v)) for v in ("01.1", "17.1", "45.1")}   # table
+    assert rows["01.1"].split()[2:5] == ["A", "AC", "D5"]
+    assert rows["17.1"].split()[2:5] == ["I", "I", "[K1:N]"] and "D4b" in rows["17.1"]
+    assert "17.1 CRD-Art14-1: I [K1:N]" in text and "verifier: not explicit" in text
+    assert "sub-rule K1 ('In the case of'): Not applicable" in text and 'quotes: ["No visits"]' in text
+    assert "01.1 GDPR-Art13-1 (target) main: Applicable (conditional) (AC)" in text
+    assert "    case events: C1: the customer asks" in text
+    assert "01.1 GDPR-Art13-3 main: Applicable (A)" in text and "requirement: Inform again." in text

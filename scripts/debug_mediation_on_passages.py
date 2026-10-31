@@ -21,6 +21,7 @@ from pathlib import Path
 
 from scripts.debug_single_case import add_fresh_option, debug_run, load_answer_key, make_llm, unload_model
 from src.config import load_config, project_path
+from src.mediation.resolver_v2 import APPLICABLE_LABELS
 
 
 def load_corpus_passages(config: dict, ids: list[str]) -> tuple[list[dict], str]:
@@ -60,7 +61,7 @@ def reason(record: dict) -> str:
     Never the model's own reason, so the printed cause can no longer contradict the label the code decided.
     """
     cause = str(record.get("label_cause") or "")
-    if record["label"] == "Applicable" and not cause.startswith("requirement invalid"):
+    if record["label"] in APPLICABLE_LABELS and not cause.startswith("requirement invalid"):
         return ""
     return cause
 
@@ -73,8 +74,13 @@ def summary_text(label: str, runs: list[dict], case_id: str = "01.1") -> str:
             why = reason(r)
             lines.append(f"  {r['passage_id']:<16} {r['label']}" + (f"  ({why})" if why else ""))
             # only a requirement that passed the code checks is printed; a failed one is named in the cause above
-            if r["label"] == "Applicable" and (r["requirement"] or {}).get("requirement"):
+            if r["label"] in APPLICABLE_LABELS and (r["requirement"] or {}).get("requirement"):
                 lines.append(f"      requirement: {r['requirement']['requirement']}")
+            for sub in (r.get("applicability") or {}).get("sub_rules") or []:   # D4b sub-rules (special cases)
+                why = reason(sub)
+                lines.append(f"    {sub['id']} {sub['clause']!r}: {sub['label']}" + (f"  ({why})" if why else ""))
+                if sub["label"] in APPLICABLE_LABELS and (sub.get("requirement") or {}).get("requirement"):
+                    lines.append(f"      requirement: {sub['requirement']['requirement']}")
     return "\n".join(lines) + "\n"
 
 

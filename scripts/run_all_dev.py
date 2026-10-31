@@ -18,6 +18,9 @@ same prompts and code, temperature/seed/max_tokens from llm, the agents' output 
 ceiling_<model>_jsonobject. Added 31 Oct 2026: with json_schema, qwen/qwen3.8-27b put a junk token after the opening
 brace in 27 of 150 calls (Groq json_validate_failed); json_object had 0 unparseable answers in 146 earlier calls.
 
+--oracle-label LABEL (design rounds, added 31 Oct 2026): ONLY the oracle step (qwen3:8b, same options), saved under
+that label (folder med_<LABEL>_run_<n>), e.g. --oracle-label round1 after design round 1; no retrieval, no full run.
+
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
 step is run again. A step that fails (any exception) is logged with its traceback and the script goes on with the next
@@ -27,6 +30,8 @@ Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
 Ceiling test (GROQ_API_KEY in .env):
     .venv\\Scripts\\python.exe -m scripts.run_all_dev --groq-model qwen/qwen3.8-27b --runs 1
+Oracles only, after a design round:
+    .venv\\Scripts\\python.exe -m scripts.run_all_dev --oracle-label round1 --runs 1 --fresh --think-calls CheckIfCallV2,SecondLookCallV2,VerifierCallV2
 """
 
 import argparse
@@ -115,9 +120,9 @@ def retrieved_ids(run_dir: Path) -> list[str]:
 
 class AllDevRunner:
     def __init__(self, config: dict, fresh: bool, think_calls: list[str], log, groq_model: str | None = None,
-                 groq_json: str = "schema"):
+                 groq_json: str = "schema", oracle_label: str | None = None):
         self.config, self.fresh, self.think_calls, self.log = config, fresh, think_calls, log
-        self.groq_model, self.groq_json = groq_model, groq_json
+        self.groq_model, self.groq_json, self.oracle_label = groq_model, groq_json, oracle_label
         self.llm, self.llm_info = groq_llm(config, groq_model, groq_json) if groq_model else make_llm(config)
         self.think_llm = None
         if think_calls:
@@ -190,8 +195,8 @@ class AllDevRunner:
     def run_variant(self, variant: str, n: int) -> None:
         case_dir = project_path(self.config["paths"]["runs"]).parent / "debug" / variant
         target = load_answer_key(self.config, variant)["target_passage_id"]
-        if self.groq_model:   # ceiling test: the oracle step only
-            label = ceiling_label(self.groq_model, self.groq_json)
+        if self.groq_model or self.oracle_label:   # ceiling test or design round: the oracle step only
+            label = self.oracle_label or ceiling_label(self.groq_model, self.groq_json)
             ceiling = med_dir(case_dir, label, n)
             self.step(f"{variant} run {n} {label}", ceiling,
                       lambda: self.mediation(variant, ceiling, label, oracle_ids(target, self.corpus_ids),
@@ -232,17 +237,21 @@ def main(argv: list[str] | None = None) -> None:
                         help="ceiling test: oracle step only, every C3 agent call on this Groq model")
     parser.add_argument("--groq-json", choices=("schema", "object"), default="schema",
                         help="Groq JSON output: json_schema (default) or json_object")
+    parser.add_argument("--oracle-label", default=None,
+                        help="design round: only the oracle step, saved as med_<label>_run_<n> (e.g. round1)")
     args = parser.parse_args(argv)
     if args.groq_model and (args.fresh or args.think_calls):
         parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
+    if args.oracle_label and (args.groq_model or args.oracle_label in (LABEL, ORACLE_LABEL)):
+        parser.error("--oracle-label needs its own name and cannot be combined with --groq-model")
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
-    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model, args.groq_json)
+    runner = AllDevRunner(config, args.fresh, think_calls, log, args.groq_model, args.groq_json, args.oracle_label)
     numbers = [args.only_run] if args.only_run else range(1, args.runs + 1)
     variants = [v.strip() for v in args.variants.split(",") if v.strip()]
     log(f"run_all_dev: variants {variants}, runs {list(numbers)}, fresh {args.fresh}, think_calls {think_calls}, "
-        f"groq_model {args.groq_model}, groq_json {args.groq_json}")
+        f"groq_model {args.groq_model}, groq_json {args.groq_json}, oracle_label {args.oracle_label}")
     for variant in variants:
         for n in numbers:
             runner.run_variant(variant, n)
