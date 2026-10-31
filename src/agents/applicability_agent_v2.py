@@ -19,6 +19,11 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      or "any" (alternatives: "any of", "one of the following", "or"). The items are numbered C1, C2, ... across the
      groups and keep their group id (G1, ...) and logic; an "any" group counts as one unit for the label
      (src/mediation/resolver_v2.if_units). A plain text in "if" is read as an "all" group of one item.
+     Sub-rules (D4b, design round 1): a special-case clause ("In the case of ...", "Where ..." introducing a
+     different duty) is not part of the main rule; the split gives it in "special_cases" with its own roles, IF
+     groups and THEN. Each becomes a sub-rule (K1, K2, ...) that goes through steps b-h on its own (own check-IF
+     call; no exceptions of its own besides split-off "unless" clauses) and gets its own label and requirement from
+     the OrchestratorV2. D1 applies to the main rule only.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -211,6 +216,22 @@ def flat_items(groups: list[IfGroup]) -> list[dict]:
 def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
     """The schema of the split's answer, with "roles" limited to the role names of one law."""
 
+    class SpecialCaseV2(BaseModel):
+        # D4b (design round 1): a special-case clause ("In the case of ...", "Where ..." with a different duty) as its
+        # own sub-rule. (No docstring: JSON agents send their schema without class descriptions, fix nodoc.)
+        model_config = ConfigDict(populate_by_name=True)
+        clause: str = Field(description='The words of the rule that start the special case, copied (for example "In '
+                                        'the case of ..." or "Where ...")')
+        roles: list[Literal[role_names]] = Field(min_length=1, description="Who the special case places its duty on")
+        conditions: list[IfGroup] = Field(alias="if", description="The conditions of the special case, in groups that "
+                                                                  "must all hold")
+        then: str = Field(description="What the special case requires to be done")
+
+        @field_validator("conditions", mode="before")
+        @classmethod
+        def _groups(cls, value):
+            return as_groups(value)
+
     class SplitOutputV2(BaseModel):
         model_config = ConfigDict(populate_by_name=True)
         roles: list[Literal[role_names]] = Field(min_length=1, description="Who the rule places its duty on")
@@ -227,6 +248,10 @@ def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
         then: str = Field(description="What the rule requires to be done when it applies")
         exceptions: list[str] = Field(description="Situations the rule itself names in which it does not apply; "
                                                   "empty list if none")
+        special_cases: list[SpecialCaseV2] = Field(default_factory=list,
+                                                   description="Clauses of the rule that start a special case with a "
+                                                               "different duty, each as its own rule; empty list if "
+                                                               "none")
 
     return SplitOutputV2
 
@@ -328,6 +353,13 @@ class VerifierCallV2(BaseAgent):
 
 # ---------- the agent ----------
 
+def rule_record() -> dict:
+    """The fields of one rule's applicability record (the main rule of a passage, or a sub-rule, D4b)."""
+    return {"check": None, "conditions": [], "role_facts": [], "exceptions": [], "role_binding": {},
+            "first_look_label": None, "second_look": None, "look": "first", "second_look_decided": None,
+            "label": None, "failed_step": None}
+
+
 class ApplicabilityAgentV2:
     """Runs split -> check-IF -> quote check -> first look, and the second look when the orchestrator asks."""
 
@@ -347,19 +379,22 @@ class ApplicabilityAgentV2:
 
     def first_look(self, case_id: str, description: str, passage_id: str, passage_text: str) -> dict:
         """Steps a-f. Returns the applicability record for the audit trail. If a call has no valid answer after its
-        retry, "failed_step" names it ("split" or "check") and "label" is None."""
-        record = {"split": None, "split_valid": None, "rejected_if": [], "check": None, "conditions": [],
-                  "role_facts": [], "exceptions": [], "duty_holder": None, "first_look_label": None, "second_look": None, "look": "first",
-                  "second_look_decided": None, "label": None, "failed_step": None, "note": None}
+        retry, "failed_step" names it ("split" or "check") and "label" is None.
+        Sub-rules (D4b): every special case of the split is evaluated like the main rule (steps b-f, its own check-IF
+        call) into record["sub_rules"] (ids K1, K2, ...); a failed call of a sub-rule marks only that sub-rule."""
+        record = {"split": None, "split_valid": None, "rejected_if": [], "duty_holder": None, **rule_record(),
+                  "sub_rules": [], "note": None}
 
-        # a. split (law text only) + code check for obligation words
+        # a. split (law text only) + code check for obligation words (main rule and special cases)
         split = self.split_call.run(case_id, passage_id=passage_id, passage_text=passage_text)
         if split is None:
             record["failed_step"] = "split"
             return record
         record["split"] = split.model_dump(by_alias=True)
         if_items = flat_items(split.conditions)
-        record["rejected_if"] = [c["text"] for c in if_items if self.obligation_pattern.search(c["text"])]
+        texts = [c["text"] for c in if_items] + [c["text"] for sc in split.special_cases
+                                                 for c in flat_items(sc.conditions)]
+        record["rejected_if"] = [t for t in texts if self.obligation_pattern.search(t)]
         record["split_valid"] = not record["rejected_if"]
         if not record["split_valid"]:
             record["label"] = SPLIT_INVALID
@@ -368,40 +403,56 @@ class ApplicabilityAgentV2:
         # D1: the substantive duty holder of a "Member States shall ensure" rule
         rules = law_roles(self.roles_config, passage_id)["names"]
         roles, record["duty_holder"] = duty_roles(split.roles, passage_text, rules)
+        self.evaluate_rule(case_id, description, passage_id, record, roles, if_items, split.exceptions, rules)
+        if record["failed_step"]:
+            return record
 
+        # D4b: each special case as its own sub-rule
+        for k, special in enumerate(split.special_cases, 1):
+            sub = {"id": f"K{k}", "clause": special.clause, "then": special.then, **rule_record(),
+                   "resolution": None, "requirement": None, "label_cause": None, "error": None}
+            self.evaluate_rule(case_id, description, passage_id, sub, list(dict.fromkeys(special.roles)),
+                               flat_items(special.conditions), [], rules)
+            record["sub_rules"].append(sub)
+        return record
+
+    def evaluate_rule(self, case_id: str, description: str, passage_id: str, rule: dict, roles: list[str],
+                      if_items: list[dict], exceptions: list[str], rules: dict) -> None:
+        """Steps b-f for one rule: the passage's main rule, or one sub-rule (D4b). Fills rule's conditions,
+        role_facts, exceptions, role_binding, check, first_look_label and label; on a call with no valid answer,
+        failed_step ("check" or "verifier"). if_items: flat_items of its IF groups; rules: the law's role list."""
         # b. the IF list by code: role item + scope item + situational conditions (R1, R2)
         role_item = {"id": "R1", "kind": "role", "text": "the duty is on: " + " or ".join(roles),
                      "roles": [{"role": r} for r in roles]}
         scope = [{"id": "S1", "kind": "scope", "text": text} for prefix, text in self.scope_conditions.items()
                  if passage_id.startswith(prefix)]
         situational, split_off = split_exceptions(if_items)
-        record["conditions"] = [role_item] + scope + situational
+        rule["conditions"] = [role_item] + scope + situational
         fact_ids = dict.fromkeys(rules[r["role"]]["fact"] for r in role_item["roles"]
                                  if rules[r["role"]]["decide"] == "fact")
-        record["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
-        record["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(split.exceptions, 1)]
-        for i, e in enumerate(split_off, len(record["exceptions"]) + 1):
-            record["exceptions"].append({"id": f"E{i}", **e})
-        record["role_binding"] = binding = role_binding(roles, rules)
-        for item in situational + record["exceptions"]:
+        rule["role_facts"] = [{"id": f, "kind": "role_fact", "text": self.role_facts[f]} for f in fact_ids]
+        rule["exceptions"] = [{"id": f"E{i}", "text": t} for i, t in enumerate(exceptions, 1)]
+        for i, e in enumerate(split_off, len(rule["exceptions"]) + 1):
+            rule["exceptions"].append({"id": f"E{i}", **e})
+        rule["role_binding"] = binding = role_binding(roles, rules)
+        for item in situational + rule["exceptions"]:
             item["text_sent"] = bind_roles(item["text"], binding)
 
         # c. check-IF call, d. quote check (only the items that need a quote from the description)
-        items = scope + record["role_facts"] + situational + record["exceptions"]
+        items = scope + rule["role_facts"] + situational + rule["exceptions"]
         if items:
             check = self.check_call.run(case_id, description=description, items=items)
             if check is None:
-                record["failed_step"] = "check"
-                return record
-            record["check"] = check.model_dump()
+                rule["failed_step"] = "check"
+                return
+            rule["check"] = check.model_dump()
             if not self.verify(case_id, items, check, description, "first look"):
-                record["failed_step"] = "verifier"
-                return record
+                rule["failed_step"] = "verifier"
+                return
 
         # e. roles by code (R3), f. first look
-        self.decide_roles(role_item, record["role_facts"], scope, rules)
-        record["first_look_label"] = record["label"] = look_label(record["conditions"])
-        return record
+        self.decide_roles(role_item, rule["role_facts"], scope, rules)
+        rule["first_look_label"] = rule["label"] = look_label(rule["conditions"])
 
     def decide_roles(self, role_item: dict, role_facts: list[dict], scope: list[dict], rules: dict) -> None:
         """Step e (R3): the status of every role and of the role item R1, by code only. rules: the role list of the

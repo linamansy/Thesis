@@ -74,7 +74,8 @@ def test_split_schema_uses_the_parsers_names_and_the_laws_roles(tmp_path):
     agent = SplitCallV2(llm, RunLogger(tmp_path, "C3", "test"), max_retries=0)
     agent.run(case_id="01", passage_id="GDPR-Art13-1", passage_text="text")
     schema = llm.schemas_received[0]
-    assert set(schema["properties"]) == {"roles", "if", "then", "exceptions"}   # "if" as the parser reads it
+    assert set(schema["properties"]) == {"roles", "if", "then", "exceptions",       # "if" as the parser reads it
+                                         "special_cases"}                             # D4b (design round 1)
     assert schema == agent.output_schema.model_json_schema()
 
 

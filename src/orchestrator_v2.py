@@ -10,6 +10,10 @@ For every passage of the case, in rank order:
   3. ResolverV2 (code): Applicable only if all IF conditions are confirmed AND no stated exception applies
   4. RequirementAgentV2, ONLY for Applicable: the THEN part -> 1-2 plain sentences tied to RelevanceAgentV2's process
      step, checked by code (RequirementCheckerV2); failing twice -> requirement_invalid, never passed on
+  Sub-rules (D4b, design round 1): every special case the split gave (applicability "sub_rules", K1, ...) gets
+     steps 2 (second look) to 4 on its own, after the main rule; its label, resolution and requirement are saved in
+     the sub-rule. The passage label is the main rule's. A requirement of an Applicable sub-rule goes into the block
+     like a main rule's (same line, same passage id). A failed call marks only that sub-rule "Mediation failed".
 A call with no valid answer after its retry gives "Mediation failed" (failed_step names the call) and the next
 passage is processed. LLMUnavailableError is passed on (the run stops and can be resumed), as in v1.
 
@@ -113,19 +117,56 @@ class OrchestratorV2:
         record["resolution"] = self.resolver.resolve(applicability)
         record["label"] = record["resolution"]["label"]
         record["label_cause"] = record["resolution"]["reason"]
-        if record["label"] != APPLICABLE:
-            return record
 
         # Box 4: requirement, only for Applicable rules
-        record["requirement"] = self._step(record, "requirement", lambda: self.requirement_agent.write(
-            case_id, description=description, passage_id=passage_id, passage_text=text,
-            then=applicability["split"]["then"], process_step=record["relevance"]["process_step"],
-            description_quote=record["relevance"]["description_quote"],
-            if_items=applicability["conditions"]))
-        if record["requirement"] and record["requirement"]["requirement_invalid"]:
-            record["label_cause"] = ("requirement invalid: "
-                                     + "; ".join(record["requirement"]["attempts"][-1]["problems"]))
+        if record["label"] == APPLICABLE:
+            record["requirement"] = self._step(record, "requirement", lambda: self.write_requirement(
+                case_id, description, record, text, applicability["split"]["then"], applicability["conditions"]))
+            if record["requirement"] and record["requirement"]["requirement_invalid"]:
+                record["label_cause"] = ("requirement invalid: "
+                                         + "; ".join(record["requirement"]["attempts"][-1]["problems"]))
+
+        # D4b: the sub-rules (special cases) of the passage, each resolved on its own
+        for sub in applicability.get("sub_rules") or []:
+            self.mediate_sub_rule(case_id, description, record, sub, case_passages)
         return record
+
+    def write_requirement(self, case_id: str, description: str, record: dict, text: str, then: str,
+                          conditions: list[dict]) -> dict | None:
+        """Box 4 for one Applicable rule (the main rule or a sub-rule), tied to RelevanceAgentV2's process step."""
+        return self.requirement_agent.write(
+            case_id, description=description, passage_id=record["passage_id"], passage_text=text, then=then,
+            process_step=record["relevance"]["process_step"],
+            description_quote=record["relevance"]["description_quote"], if_items=conditions)
+
+    def mediate_sub_rule(self, case_id: str, description: str, record: dict, sub: dict,
+                         case_passages: list[dict]) -> None:
+        """D4b: second look (only for Indeterminate), resolver and requirement (only for Applicable) of one sub-rule,
+        exactly as for the main rule. A call with no valid answer marks only this sub-rule "Mediation failed"."""
+        agent = self.applicability_agent
+        try:
+            if not sub["failed_step"] and sub["label"] == INDETERMINATE and agent.open_conditions(sub):
+                agent.second_look(case_id, description, sub, record["passage_id"], case_passages)
+            if sub["failed_step"]:
+                sub.update(label=MEDIATION_FAILED, label_cause=f"failed at {sub['failed_step']}: no valid output "
+                                                               f"after retry (see the log file)")
+                return
+            sub["resolution"] = self.resolver.resolve(sub)
+            sub["label"], sub["label_cause"] = sub["resolution"]["label"], sub["resolution"]["reason"]
+            if sub["label"] != APPLICABLE:
+                return
+            sub["requirement"] = self.write_requirement(case_id, description, record, record["passage_text"],
+                                                        sub["then"], sub["conditions"])
+            if sub["requirement"] is None:
+                sub.update(label=MEDIATION_FAILED, failed_step="requirement",
+                           label_cause="failed at requirement: no valid output after retry (see the log file)")
+            elif sub["requirement"]["requirement_invalid"]:
+                sub["label_cause"] = "requirement invalid: " + "; ".join(sub["requirement"]["attempts"][-1]["problems"])
+        except LLMUnavailableError:
+            raise
+        except Exception as e:
+            sub.update(label=MEDIATION_FAILED, failed_step=sub["failed_step"] or "sub-rule",
+                       error=f"{type(e).__name__}: {e}", label_cause=f"failed: {type(e).__name__}: {e}")
 
     def _step(self, record: dict, step: str, call):
         """Run one step. On no valid output or an error, mark the passage "Mediation failed" and return None."""
@@ -148,11 +189,13 @@ class OrchestratorV2:
     # ---------- knowledge block ----------
 
     def knowledge_block(self, records: list[dict]) -> str:
-        """Confirmed requirements that passed the code check only; C1's text when there are none."""
+        """Confirmed requirements that passed the code check only (of the main rule and of every sub-rule, D4b, in
+        passage order); C1's text when there are none."""
         lines = [self.template["requirement_line"].format(passage_id=r["passage_id"],
-                                                          requirement=r["requirement"]["requirement"].strip())
-                 for r in records if r["label"] == APPLICABLE and r["requirement"]
-                 and not r["requirement"]["requirement_invalid"]]
+                                                          requirement=rule["requirement"]["requirement"].strip())
+                 for r in records for rule in [r] + ((r.get("applicability") or {}).get("sub_rules") or [])
+                 if rule["label"] == APPLICABLE and rule.get("requirement")
+                 and not rule["requirement"]["requirement_invalid"]]
         if not lines:
             return self.no_knowledge_text
         return self.template["block"].format(requirements="\n".join(lines))

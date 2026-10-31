@@ -3,6 +3,7 @@
   D2 relevance prompt: a rule that could govern a step (e.g. the step that triggers its duty) is relevant
   D3 verifier prompt: ordinary reading, an everyday equivalent of a legal concept counts
   D4a the split marks IF item groups "all" (AND) or "any" (OR); an OR group is one unit for the label
+  D4b a special-case clause becomes a sub-rule with its own IF/THEN, label and requirement
 Passages and descriptions below are made up unless a real passage id is named.
 """
 
@@ -204,3 +205,88 @@ def test_d4a_split_prompt_and_schema_mark_all_and_any_groups(tmp_path):
     assert "EXAMPLE WITH ALTERNATIVES (made up, for the format only)" in prompt
     group = a.split_call.output_schema.model_json_schema()["$defs"]["IfGroup"]
     assert group["properties"]["logic"]["enum"] == ["all", "any"]
+
+
+# ---------- D4b: a special-case clause becomes its own sub-rule ----------
+
+VASES = ("The customer chooses a product. The customer pays by card. The shop sends the product. Most products are "
+         "glass vases, which break easily.")
+SPECIAL_PASSAGE = ("Where the customer asks for express shipping, the shop shall send the product within one day. In "
+                   "the case of fragile products, the shop shall pack the product in a padded box.")
+SPECIAL_SPLIT = {"roles": ["controller"],
+                 "if": [{"logic": "all", "items": ["the customer asks for express shipping"]}],
+                 "then": "the shop must send the product within one day", "exceptions": [],
+                 "special_cases": [{"clause": "In the case of fragile products", "roles": ["controller"],
+                                    "if": [{"logic": "all", "items": ["the products are fragile"]}],
+                                    "then": "the shop must pack the product in a padded box"}]}
+SPECIAL_RELEVANT = {"law_focus": "sending products", "law_quote": "the shop shall send the product", "relevant": True,
+                    "process_step": "the shop sends the product", "description_quote": "The shop sends the product",
+                    "reason": "The process sends products."}
+MAIN_OPEN = {"results": [result("C1", "not_stated")]}
+SUB_CONFIRMED = {"results": [result("C1", "confirmed", "Most products are glass vases, which break easily")]}
+SUB_REQUIREMENT = {"requirement": "When a glass vase is sent, the shop first packs it in a padded box.",
+                   "step_quote": "The shop sends the product",
+                   "triggers": [{"trigger": "In the case of fragile products", "kept_as": "When a glass vase is sent"}],
+                   "duty": {"from_then": "pack the product in a padded box", "kept_as": "packs it in a padded box"}}
+
+
+def special_orchestrator(tmp_path, answers):
+    from src.agents.relevance_agent_v2 import RelevanceAgentV2
+    from src.agents.requirement_agent_v2 import RequirementAgentV2
+    from src.orchestrator_v2 import OrchestratorV2
+    from src.prompt_texts import load_c3_block_template, load_no_knowledge_text
+    llm = MockLLM([json.dumps(a) for a in answers])
+    log = RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}")
+    passages = [{"rank": 1, "passage_id": "P-1", "text": SPECIAL_PASSAGE}]
+    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log), RequirementAgentV2(llm, log),
+                          {"c": {"passages": passages}}, tmp_path / "mediation",
+                          load_c3_block_template(CONFIG, "c3_block_template_v2"), load_no_knowledge_text(CONFIG))
+    return orch, llm
+
+
+def test_d4b_special_case_is_a_sub_rule_with_its_own_if_then_and_check(tmp_path):
+    a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED])
+    record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
+    assert [c["text"] for c in record["conditions"]] == ["the duty is on: controller",
+                                                         "the customer asks for express shipping"]
+    sub = record["sub_rules"][0]
+    assert (sub["id"], sub["clause"], sub["then"]) == ("K1", "In the case of fragile products",
+                                                      "the shop must pack the product in a padded box")
+    assert [(c["id"], c["text"], c["status"]) for c in sub["conditions"]] == [
+        ("R1", "the duty is on: controller", "confirmed"), ("C1", "the products are fragile", "confirmed")]
+    assert record["first_look_label"] == "Indeterminate" and sub["first_look_label"] == "Applicable"
+    main_check, sub_check = llm.prompts_received[1], llm.prompts_received[2]
+    assert "C1: the customer asks for express shipping" in main_check and "fragile" not in main_check
+    assert "C1: the products are fragile" in sub_check and "express" not in sub_check
+
+
+def test_d4b_orchestrator_resolves_the_sub_rule_and_passes_its_requirement_on(tmp_path):
+    orch, llm = special_orchestrator(tmp_path, [SPECIAL_RELEVANT, SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED,
+                                                {"results": [result("C1", "not_stated")]}, SUB_REQUIREMENT])
+    result_ = orch.mediate_case("c", VASES)
+    record = result_["passages"][0]
+    assert record["label"] == "Indeterminate" and record["requirement"] is None      # the main rule
+    sub = record["applicability"]["sub_rules"][0]
+    assert sub["label"] == "Applicable" and sub["requirement"]["requirement"] == SUB_REQUIREMENT["requirement"]
+    assert sub["resolution"]["reason"] == "every IF item confirmed and no stated exception applies"
+    assert result_["knowledge_block"] == ("REQUIREMENTS\nThese rules were checked and apply to this process.\n"
+                                          "- [P-1] " + SUB_REQUIREMENT["requirement"])
+    assert "OBLIGATION\nthe shop must pack the product in a padded box" in llm.prompts_received[5]
+    assert len(llm.prompts_received) == 6
+
+
+def test_d4b_obligation_word_in_a_special_case_makes_the_split_invalid(tmp_path):
+    bad = {**SPECIAL_SPLIT, "special_cases": [{**SPECIAL_SPLIT["special_cases"][0],
+                                               "if": ["the shop must use a padded box"]}]}
+    a, _ = agent(tmp_path, [bad])
+    record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
+    assert record["label"] == "Split invalid" and record["rejected_if"] == ["the shop must use a padded box"]
+
+
+def test_d4b_a_failed_sub_rule_call_fails_only_the_sub_rule(tmp_path):
+    orch, _ = special_orchestrator(tmp_path, [SPECIAL_RELEVANT, SPECIAL_SPLIT, MAIN_OPEN, "not json", "not json",
+                                              {"results": [result("C1", "not_stated")]}])
+    record = orch.mediate_case("c", VASES)["passages"][0]
+    assert record["label"] == "Indeterminate"
+    sub = record["applicability"]["sub_rules"][0]
+    assert sub["label"] == "Mediation failed" and sub["failed_step"] == "check"

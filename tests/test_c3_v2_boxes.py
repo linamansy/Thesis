@@ -29,8 +29,9 @@ OTHER_PASSAGE = "A card means a payment card issued by a bank."
 
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": ["the customer declines the receipt"]}
-# the split as saved: since D4a (design round 1) every IF text is read as a group of one item that must hold
-SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": ["a customer pays by card"]}]}
+# the split as saved: since D4a (design round 1) every IF text is read as a group of one item that must hold; since
+# D4b the split has special cases (none here)
+SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": ["a customer pays by card"]}], "special_cases": []}
 CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["The customer pays by card"]},
                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
 NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quotes": []},
