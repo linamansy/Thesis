@@ -39,7 +39,7 @@ Rule: "A sender may ask the carrier for a receipt for each parcel collected."
 Answer: {{"duty_type": "right", "roles": ["other"], "if": [{{"logic": "all", "items": [{{"text": "a parcel is collected from a sender", "kind": "process_fact"}}, {{"text": "the sender asks for a receipt", "kind": "case_event"}}]}}], "then": "the carrier must give the sender a receipt for the parcel", "exceptions": [], "special_cases": []}}
 
 EXAMPLE WITH NO DUTY OF ITS OWN (made up, for the format only)
-Rule: "Paragraphs 1 and 2 shall not apply to parcels below 1 kg, without prejudice to the rules on dangerous goods."
+Rule: "Parcels under 1 kg are exempt from paragraphs 1 and 2; this leaves the separate rules on dangerous goods untouched."
 Answer: {{"duty_type": "none", "roles": ["other"], "if": [], "then": "", "exceptions": [], "special_cases": []}}
 
 EXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)

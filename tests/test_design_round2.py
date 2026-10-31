@@ -76,8 +76,8 @@ def test_f1_schema_requires_duty_type_and_prompt_explains_it_with_made_up_exampl
     assert prompt.count('"duty_type": "duty"') == 5
     assert ('EXAMPLE WITH A RIGHT (made up, for the format only)\nRule: "A sender may ask the carrier for a receipt'
             in prompt)
-    assert ('EXAMPLE WITH NO DUTY OF ITS OWN (made up, for the format only)\nRule: "Paragraphs 1 and 2 shall not '
-            'apply to parcels below 1 kg, without prejudice to the rules on dangerous goods."\nAnswer: {"duty_type": '
+    assert ('EXAMPLE WITH NO DUTY OF ITS OWN (made up, for the format only)\nRule: "Parcels under 1 kg are exempt '
+            'from paragraphs 1 and 2; this leaves the separate rules on dangerous goods untouched."\nAnswer: {"duty_type": '
             '"none", "roles": ["other"], "if": [], "then": "", "exceptions": [], "special_cases": []}') in prompt
 
 
