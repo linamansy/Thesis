@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling.\n\nSENTENCES\n- The shop sells kitchen items to private persons across the EU\n\nSTATEMENT\nthe contract is a sales contract\n\nDo these sentences, on their own and taken together, state that the statement is true? Answer yes or no with one line of reason.\nAnswer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"answer\": {\n      \"description\": \"yes if the sentence on its own states it, otherwise no\",\n      \"enum\": [\n        \"yes\",\n        \"no\"\n      ],\n      \"title\": \"Answer\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One line of reason\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"answer\",\n    \"reason\"\n  ],\n  \"title\": \"VerifierOutputV2\",\n  \"type\": \"object\"\n}\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-7a9900dc-f6df-49d1-b408-14942ff5b30c",
+    "object": "chat.completion",
+    "created": 1793432291,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"answer\": \"yes\",\n  \"reason\": \"The act of selling items inherently constitutes a sales contract.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.017228882,
+      "prompt_tokens": 252,
+      "prompt_time": 0.01892516,
+      "completion_tokens": 29,
+      "completion_time": 0.056122602,
+      "total_tokens": 281,
+      "total_time": 0.075047762
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m68ea1zjecw976nwymjznqxq",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

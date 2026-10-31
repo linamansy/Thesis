@@ -1,0 +1,377 @@
+CEILING TEST: oracle run 1, qwen3:8b (alldev, think on CheckIf/SecondLook/Verifier) vs qwen/qwen3.8-27b on Groq (all C3 calls, json_object, no thinking)
+
+variant target          qwen3:8b oracle   qwen/qwen3.8-27b oracle     
+----------------------------------------------------------------------
+01.1    GDPR-Art13-1    A                 A                           
+01.2    LPD-Art3-1      I                 N                           
+06.1    CRD-Art13-1     I                 I                           
+11.1    GDPR-Art17-1    I                 I                           
+13.1    SGD-Art14-1     I                 I                           
+17.1    CRD-Art14-1     I                 I                           
+19.1    ECD-Art11-1     N                 X                           
+45.1    ECD-Art10-1     I                 X                           
+
+Letters: A Applicable, A* Applicable with invalid requirement, I Indeterminate, N Not applicable, X Irrelevant, S Split invalid, F failed step, ? run missing
+
+VARIANTS WHERE THE LABELS DIFFER OR NEITHER IS A
+01.2 LPD-Art3-1: qwen3:8b I -> qwen/qwen3.8-27b N
+    cause qwen: not every IF item is confirmed
+    cause strong: an IF item is contradicted
+      R1  role       not_stated -> contradicted
+          text qwen:       the duty is on: creditor
+          text strong:     the duty is on: public body
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: code rule (roles): creditor: D2 not stated / code rule (roles): public body: a public body is not a business
+      S1  scope      confirmed -> not_stated
+          text:            the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)
+          quotes qwen:     ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          quotes strong:   -
+          verifier qwen:   The sentences describe a transaction between companies (undertakings) involving payment for goods/services, matching the statement's definition of a commercial transaction.
+          verifier strong: -
+          stage qwen / strong: - / first look: not_stated
+      C1  situation  not_stated -> not_stated
+          text qwen:       the organisation running the described process has fulfilled its contractual and legal obligations
+          text strong:     in commercial transactions between undertakings
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / first look: not_stated
+      C2  situation  confirmed -> not_stated
+          text qwen:       the organisation running the described process has not received the amount due on time
+          text strong:     the creditor has fulfilled its contractual and legal obligations
+          quotes qwen:     ["some customers pay later than the agreed date"]
+          quotes strong:   -
+          verifier qwen:   If customers pay later than the agreed date, the organisation has not received the amount due on time.
+          verifier strong: -
+          stage qwen / strong: - / first look: not_stated
+      D2  role_fact  not_stated -> (no item)
+          text qwen:       another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided
+          text strong:     -
+          quotes qwen:     ["Most customers are other companies. After the order is confirmed, the company sends them a bill"]
+          quotes strong:   -
+          verifier qwen:   The sentences mention sending a bill but do not confirm receipt of payment, while the statement asserts payment has occurred.
+          verifier strong: -
+          stage qwen / strong: verifier (first look) / -
+      E1  exception  not_stated -> not_stated
+          text qwen:       unless the debtor is not responsible for the delay
+          text strong:     the debtor is not responsible for the delay
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      C3  situation  (no item) -> not_stated
+          text qwen:       -
+          text strong:     the creditor has not received the amount due on time
+          quotes qwen:     -
+          quotes strong:   ["some customers pay later than the agreed date"]
+          verifier qwen:   -
+          verifier strong: The sentence states that some customers pay late, which implies the creditor has not received the amount on time for those specific cases, but the statement is a general assertion that is not explicitly stated as a universal fact by the single sentence provided.
+          stage qwen / strong: - / verifier (first look)
+06.1 CRD-Art13-1: qwen3:8b I -> qwen/qwen3.8-27b I
+    cause qwen: not every IF item is confirmed
+    cause strong: not every IF item is confirmed
+      R1  role       confirmed -> confirmed
+          text:            the duty is on: trader
+          quotes qwen:     ["The shop sells kitchen items to private persons across the EU"]
+          quotes strong:   ["The shop sells kitchen items to private persons across the EU"]
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      S1  scope      confirmed -> not_stated
+          text:            the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes qwen:     ["The shop sells kitchen items to private persons across the EU"]
+          quotes strong:   ["The shop sells kitchen items to private persons across the EU"]
+          verifier qwen:   The sentence mentions 'private persons' which aligns with the definition of a consumer as a natural person not acting in their trade/business.
+          verifier strong: The sentence states the shop sells to private persons, but does not explicitly define them as consumers acting outside their trade, business, craft, or profession as required by the statement.
+          stage qwen / strong: - / verifier (first look)
+      C1  situation  not_stated -> not_stated
+          text qwen:       its customer withdraws from the contract
+          text strong:     the organisation running the described process is informed of its customer’s decision to withdraw from the contract in accordance with Article 11
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C2  situation  not_stated -> (no item)
+          text qwen:       the organisation running the described process is informed of its customer’s decision to withdraw from the contract
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / -
+      T1  role_fact  confirmed -> confirmed
+          text:            the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes qwen:     ["The shop sells kitchen items to private persons across the EU"]
+          quotes strong:   ["The shop sells kitchen items to private persons across the EU"]
+          verifier qwen:   The sentence indicates the shop sells kitchen items to customers, which aligns with business activities as stated.
+          verifier strong: Selling kitchen items to private persons constitutes selling goods to customers for trade purposes.
+          stage qwen / strong: - / -
+      E1  exception  (no item) -> not_stated
+          text qwen:       -
+          text strong:     its customer has expressly agreed otherwise and provided that its customer does not incur any fees as a result of such reimbursement
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+11.1 GDPR-Art17-1: qwen3:8b I -> qwen/qwen3.8-27b I
+    cause qwen: not every IF item is confirmed
+    cause strong: not every IF item is confirmed
+      R1  role       confirmed -> confirmed
+          text:            the duty is on: controller
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      S1  scope      confirmed -> confirmed
+          text:            the process handles information about identifiable people
+          quotes qwen:     ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          quotes strong:   ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier qwen:   The sentences mention personal information, which directly relates to identifiable people.
+          verifier strong: The sentence explicitly states that the process involves entering personal information, which constitutes information about identifiable people.
+          stage qwen / strong: - / -
+      C1  situation  not_stated -> not_stated
+          text:            the personal data are no longer necessary in relation to the purposes for which they were collected or otherwise processed
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C2  situation  not_stated -> not_stated
+          text:            the data subject withdraws consent on which the processing is based according to point (a) of Article 6(1), or point (a) of Article 9(2), and where there is no other legal ground for the processing
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C3  situation  not_stated -> not_stated
+          text:            the data subject objects to the processing pursuant to Article 21(1) and there are no overriding legitimate grounds for the processing, or the data subject objects to the processing pursuant to Article 21(2)
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C4  situation  not_stated -> not_stated
+          text:            the personal data have been unlawfully processed
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C5  situation  not_stated -> not_stated
+          text:            the personal data have to be erased for compliance with a legal obligation in Union or Member State law to which the organisation running the described process is subject
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C6  situation  confirmed -> not_stated
+          text:            the personal data have been collected in relation to the offer of information society services referred to in Article 8(1)
+          quotes qwen:     ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          quotes strong:   ["This process begins when a customer signs up for a subscription service, entering personal and payment information"]
+          verifier qwen:   The sentences imply personal data collection for a subscription service, which qualifies as an information society service under Article 8(1) of GDPR.
+          verifier strong: The sentence describes a general subscription signup but does not specify that the service is an 'information society service' as defined in Article 8(1) of the ePrivacy Directive.
+          stage qwen / strong: - / verifier (second look)
+13.1 SGD-Art14-1: qwen3:8b I -> qwen/qwen3.8-27b I
+    cause qwen: not every IF item is confirmed
+    cause strong: not every IF item is confirmed
+      R1  role       not_stated -> confirmed
+          text:            the duty is on: seller
+          quotes qwen:     -
+          quotes strong:   ["The process begins when a customer files a complaint about a product or service", "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: code rule (roles): seller: T1 not stated / -
+      S1  scope      not_stated -> not_stated
+          text:            goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes qwen:     -
+          quotes strong:   ["Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier qwen:   -
+          verifier strong: The sentence describes the source of complaints (private persons) but does not explicitly state that goods are sold to consumers as defined in the statement.
+          stage qwen / strong: first look: not_stated / verifier (first look)
+      C1  situation  confirmed -> confirmed
+          text qwen:       its customer informs the organisation running the described process about the lack of conformity
+          text strong:     the organisation running the described process has been informed by its customer about the lack of conformity
+          quotes qwen:     ["The process begins when a customer files a complaint about a product or service"]
+          quotes strong:   ["The process begins when a customer files a complaint about a product or service", "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier qwen:   The sentence indicates the customer initiates the process by filing a complaint, which aligns with informing the organisation about the lack of conformity.
+          verifier strong: Filing a complaint about a product or service inherently means the customer has informed the organisation about a lack of conformity.
+          stage qwen / strong: - / -
+      T1  role_fact  not_stated -> confirmed
+          text:            the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes qwen:     -
+          quotes strong:   ["The process begins when a customer files a complaint about a product or service", "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"]
+          verifier qwen:   -
+          verifier strong: The mention of customers filing complaints about products or services implies the organization sells goods or services to customers as part of its business.
+          stage qwen / strong: first look: not_stated / -
+17.1 CRD-Art14-1: qwen3:8b I -> qwen/qwen3.8-27b I
+    cause qwen: not every IF item is confirmed
+    cause strong: not every IF item is confirmed
+      R1  role       confirmed -> confirmed
+          text:            the duty is on: consumer or trader
+          quotes qwen:     ["When a customer places an order, the system records the order details", "Payment processing begins"]
+          quotes strong:   ["An e-commerce company has a comprehensive order fulfillment process", "When a customer places an order, the system records the order details"]
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      S1  scope      not_stated -> not_stated
+          text:            the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)
+          quotes qwen:     ["customers are private persons in several EU countries"]
+          quotes strong:   ["The customers are private persons in several EU countries"]
+          verifier qwen:   The sentences mention 'private persons' but do not explicitly state that they are acting outside their trade, business, craft, or profession as required by the statement.
+          verifier strong: The sentence states the customers are private persons but does not specify that they are acting for purposes outside their trade, business, craft, or profession, which is required to define them as consumers.
+          stage qwen / strong: verifier (first look) / verifier (first look)
+      C1  situation  not_stated -> not_stated
+          text:            its customer has communicated his decision to withdraw from the contract to the organisation running the described process in accordance with Article 11
+          quotes qwen:     -
+          quotes strong:   ["Some customers contact the company a few days after delivery only because they no longer want the items, without reporting any issue"]
+          verifier qwen:   -
+          verifier strong: The sentence describes a customer returning items without reporting an issue, which does not explicitly confirm a formal communication of withdrawal in accordance with Article 11.
+          stage qwen / strong: second look: not_stated / verifier (second look)
+      C2  situation  not_stated -> not_stated
+          text:            the organisation running the described process has not offered to collect the goods himself
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: second look: not_stated / second look: not_stated
+      C3  situation  not_stated -> not_stated
+          text qwen:       the goods have been delivered to its customer’s home at the time of the conclusion of the contract and by their nature cannot normally be returned by post
+          text strong:     the contract is an off-premises contract
+          quotes qwen:     -
+          quotes strong:   ["An e-commerce company has a comprehensive order fulfillment process"]
+          verifier qwen:   -
+          verifier strong: The sentence describes an order fulfillment process but contains no information about contracts or their location.
+          stage qwen / strong: second look: not_stated / verifier (second look)
+      T1  role_fact  confirmed -> confirmed
+          text:            the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          quotes qwen:     ["When a customer places an order, the system records the order details", "Payment processing begins"]
+          quotes strong:   ["An e-commerce company has a comprehensive order fulfillment process", "When a customer places an order, the system records the order details"]
+          verifier qwen:   The sentences imply the organization is engaged in selling goods/services through order processing and payment handling, which aligns with the statement.
+          verifier strong: The description of an e-commerce company with an order fulfillment process explicitly indicates that the organization sells goods or services to customers as part of its business.
+          stage qwen / strong: - / -
+      C4  situation  (no item) -> not_stated
+          text qwen:       -
+          text strong:     the goods have been delivered to its customer’s home at the time of the conclusion of the contract
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / second look: not_stated
+      C5  situation  (no item) -> not_stated
+          text qwen:       -
+          text strong:     by their nature, those goods cannot normally be returned by post
+          quotes qwen:     -
+          quotes strong:   ["Sending a return shipping label"]
+          verifier qwen:   -
+          verifier strong: The sentence describes an action (sending a label) which does not logically imply that the goods cannot be returned by post; in fact, sending a label often facilitates postal returns.
+          stage qwen / strong: - / verifier (second look)
+      E1  exception  (no item) -> not_stated
+          text qwen:       -
+          text strong:     the organisation running the described process has offered to collect the goods himself
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      E2  exception  (no item) -> not_stated
+          text qwen:       -
+          text strong:     the organisation running the described process has agreed to bear the direct cost of returning the goods
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      E3  exception  (no item) -> not_stated
+          text qwen:       -
+          text strong:     the organisation running the described process failed to inform its customer that its customer has to bear the direct cost of returning the goods
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+19.1 ECD-Art11-1: qwen3:8b N -> qwen/qwen3.8-27b X
+    cause qwen: an IF item is contradicted
+    cause strong: relevance: the model said not relevant, description_quote empty
+      R1  role       contradicted -> (no item)
+          text qwen:       the duty is on: public body
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: code rule (roles): public body: a public body is not a business / -
+      S1  scope      not_stated -> (no item)
+          text qwen:       the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: first look: not_stated / -
+      C1  situation  confirmed -> (no item)
+          text qwen:       the recipient of the service places his order through technological means
+          text strong:     -
+          quotes qwen:     ["The user starts an order by logging in to their account"]
+          quotes strong:   -
+          verifier qwen:   The first sentence indicates the user (recipient) starts an order via logging in (technological means), supporting the statement.
+          verifier strong: -
+          stage qwen / strong: - / -
+      E1  exception  not_stated -> (no item)
+          text qwen:       otherwise agreed by parties who are not consumers
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+45.1 ECD-Art10-1: qwen3:8b I -> qwen/qwen3.8-27b X
+    cause qwen: not every IF item is confirmed
+    cause strong: relevance: the model said not relevant, description_quote empty
+      R1  role       confirmed -> (no item)
+          text qwen:       the duty is on: service provider
+          text strong:     -
+          quotes qwen:     ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -
+      S1  scope      not_stated -> (no item)
+          text qwen:       the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: first look: not_stated / -
+      C1  situation  confirmed -> (no item)
+          text qwen:       the organisation running the described process provides a service to a recipient
+          text strong:     -
+          quotes qwen:     ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          quotes strong:   -
+          verifier qwen:   The E-Shop's activity of selling to private persons constitutes providing a service to recipients.
+          verifier strong: -
+          stage qwen / strong: - / -
+      T1  role_fact  confirmed -> (no item)
+          text qwen:       the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession
+          text strong:     -
+          quotes qwen:     ["The E-Shop belongs to a company in Austria and sells to private persons; its website is available in German and English"]
+          quotes strong:   -
+          verifier qwen:   The E-Shop's operation of selling to private persons directly aligns with the statement's claim of selling goods/services for trade/business purposes.
+          verifier strong: -
+          stage qwen / strong: - / -
+      E1  exception  not_stated -> (no item)
+          text qwen:       when otherwise agreed by parties who are not consumers
+          text strong:     -
+          quotes qwen:     -
+          quotes strong:   -
+          verifier qwen:   -
+          verifier strong: -
+          stage qwen / strong: - / -

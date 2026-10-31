@@ -1,0 +1,520 @@
+[
+  {
+    "rank": 1,
+    "passage_id": "SGD-Art14-1",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller"
+        ],
+        "if": [
+          "the seller has been informed by the consumer about the lack of conformity"
+        ],
+        "then": "repairs or replacements shall be carried out free of charge, within a reasonable period of time from the moment the seller has been informed by the consumer about the lack of conformity, and without any significant inconvenience to the consumer, taking into account the nature of the goods and the purpose for which the consumer required the goods",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase.",
+            "status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+            "status": "confirmed",
+            "quotes": [
+              "The process begins when a customer files a complaint about a product or service.",
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+            "status": "confirmed",
+            "quotes": [
+              "The process begins when a customer files a complaint about a product or service.",
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes the source of complaints (private persons) but does not explicitly state that goods are sold to consumers as defined in the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the seller has been informed by the consumer about the lack of conformity",
+          "text_sent": "the organisation running the described process has been informed by its customer about the lack of conformity",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "Filing a complaint about a product or service inherently means the customer has informed the organisation about a lack of conformity."
+          }
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The mention of customers filing complaints about products or services implies the organization sells goods or services to customers as part of its business."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "first",
+      "second_look_decided": null,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 2,
+    "passage_id": "SGD-Art14-2",
+    "applicability": {
+      "split": {
+        "roles": [
+          "consumer",
+          "seller"
+        ],
+        "if": [
+          "the lack of conformity is to be remedied by repair or replacement of the goods"
+        ],
+        "then": "the consumer shall make the goods available to the seller and the seller shall take back the replaced goods at the seller's expense",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase.",
+            "status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+            "status": "confirmed",
+            "quotes": [
+              "The process begins when a customer files a complaint about a product or service.",
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "These customers usually ask for the appliance to be fixed or swapped for a new one.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: consumer or seller",
+          "roles": [
+            {
+              "role": "consumer",
+              "status": "not_stated",
+              "decided_by": null,
+              "reason": "the scope item S1 is not_stated"
+            },
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes the source of complaints (private persons) but does not explicitly state that goods are sold to consumers as defined in the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "the lack of conformity is to be remedied by repair or replacement of the goods",
+          "text_sent": "the lack of conformity is to be remedied by repair or replacement of the goods",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "These customers usually ask for the appliance to be fixed or swapped for a new one."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "These customers usually ask for the appliance to be fixed or swapped for a new one"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes customer requests for repair or swap, not a mandatory remedy for lack of conformity."
+          },
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The mention of customers filing complaints about products or services implies the organization sells goods or services to customers as part of its business."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 3,
+    "passage_id": "SGD-Art14-3",
+    "applicability": {
+      "split": {
+        "roles": [
+          "seller"
+        ],
+        "if": [
+          "a repair requires the removal of goods that had been installed in a manner consistent with their nature and purpose before the lack of conformity became apparent",
+          "such goods are to be replaced"
+        ],
+        "then": "the obligation to repair or replace the goods shall include the removal of the non-conforming goods, and the installation of replacement goods or repaired goods, or bearing the costs of that removal and installation",
+        "exceptions": []
+      },
+      "split_valid": true,
+      "rejected_if": [],
+      "check": {
+        "results": [
+          {
+            "id": "S1",
+            "closest_sentence": "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase.",
+            "status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "T1",
+            "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+            "status": "confirmed",
+            "quotes": [
+              "The process begins when a customer files a complaint about a product or service.",
+              "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+            ]
+          },
+          {
+            "id": "C1",
+            "closest_sentence": "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase.",
+            "status": "not_stated",
+            "quotes": []
+          },
+          {
+            "id": "C2",
+            "closest_sentence": "These customers usually ask for the appliance to be fixed or swapped for a new one.",
+            "status": "not_stated",
+            "quotes": []
+          }
+        ]
+      },
+      "conditions": [
+        {
+          "id": "R1",
+          "kind": "role",
+          "text": "the duty is on: seller",
+          "roles": [
+            {
+              "role": "seller",
+              "status": "confirmed",
+              "decided_by": "first look",
+              "reason": "T1 confirmed with a checked quote"
+            }
+          ],
+          "status": "confirmed",
+          "decided_by": "first look",
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false
+        },
+        {
+          "id": "S1",
+          "kind": "scope",
+          "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+          "status": "not_stated",
+          "original_status": "confirmed",
+          "quotes": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true
+          ],
+          "quotes_canonical": [
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": true,
+          "decided_by": null,
+          "downgrade_cause": "verifier rejected",
+          "verifier": {
+            "asked": "true",
+            "answer": "no",
+            "reason": "The sentence describes the source of complaints (private persons) but does not explicitly state that goods are sold to consumers as defined in the statement."
+          }
+        },
+        {
+          "id": "C1",
+          "kind": "situation",
+          "text": "a repair requires the removal of goods that had been installed in a manner consistent with their nature and purpose before the lack of conformity became apparent",
+          "text_sent": "a repair requires the removal of goods that had been installed in a manner consistent with their nature and purpose before the lack of conformity became apparent",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        },
+        {
+          "id": "C2",
+          "kind": "situation",
+          "text": "such goods are to be replaced",
+          "text_sent": "such goods are to be replaced",
+          "status": "not_stated",
+          "original_status": "not_stated",
+          "quotes": [],
+          "quotes_found": [],
+          "quotes_canonical": [],
+          "quote_found": null,
+          "downgraded": false,
+          "decided_by": null,
+          "downgrade_cause": null,
+          "verifier": null,
+          "first_look_status": "not_stated"
+        }
+      ],
+      "role_facts": [
+        {
+          "id": "T1",
+          "kind": "role_fact",
+          "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+          "status": "confirmed",
+          "original_status": "confirmed",
+          "quotes": [
+            "The process begins when a customer files a complaint about a product or service.",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase."
+          ],
+          "quotes_found": [
+            true,
+            true
+          ],
+          "quotes_canonical": [
+            "The process begins when a customer files a complaint about a product or service",
+            "Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase"
+          ],
+          "quote_found": true,
+          "downgraded": false,
+          "decided_by": "first look",
+          "downgrade_cause": null,
+          "verifier": {
+            "asked": "true",
+            "answer": "yes",
+            "reason": "The mention of customers filing complaints about products or services implies the organization sells goods or services to customers as part of its business."
+          }
+        }
+      ],
+      "exceptions": [],
+      "first_look_label": "Indeterminate",
+      "look": "second",
+      "second_look_decided": false,
+      "label": "Indeterminate",
+      "failed_step": null,
+      "note": null,
+      "role_binding": {
+        "seller": "the organisation running the described process",
+        "consumer": "its customer"
+      }
+    },
+    "failed_step": null
+  },
+  {
+    "rank": 4,
+    "passage_id": "SGD-Art14-4",
+    "applicability": null,
+    "failed_step": null
+  }
+]

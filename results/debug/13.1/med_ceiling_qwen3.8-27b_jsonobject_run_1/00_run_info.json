@@ -1,0 +1,42 @@
+{
+  "case_id": "13.1",
+  "mode": "mediation on given passages (no retrieval)",
+  "label": "ceiling_qwen3.8-27b_jsonobject",
+  "passages_from": "oracle: target + the rest of its article",
+  "given_passage_ids": [
+    "SGD-Art14-1",
+    "SGD-Art14-2",
+    "SGD-Art14-3",
+    "SGD-Art14-4"
+  ],
+  "corpus_file": "data/knowledge_study2_corpus/passages.jsonl",
+  "corpus_sha256": "d30eea57b4773c24772a88d0f68cb61c0f3d6e29466a7ccf5dbbce0e574fd43b",
+  "c3_version": "v2",
+  "fresh": false,
+  "think_calls": [],
+  "model": "qwen/qwen3.8-27b",
+  "provider": "groq",
+  "groq_response_format": "json_object",
+  "thinking": "none (Groq returns no reasoning in JSON modes)",
+  "agent_settings": {
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "ollama_timeout_seconds": 900,
+    "ollama_api_max_retries": 5,
+    "max_retries": 1,
+    "api_initial_wait_seconds": 2,
+    "api_max_retries": 5,
+    "gemini_api_max_retries": 5,
+    "gemini_pause_between_calls_seconds": 10
+  },
+  "run": "med_ceiling_qwen3.8-27b_jsonobject_run_1",
+  "started_at": "2026-10-31T02:06:44+00:00",
+  "answer_key": {
+    "target_passage_id": "SGD-Art14-1",
+    "accepted_target_ids": [
+      "SGD-Art14-1"
+    ],
+    "expected_step": "Repair or replace the product free of charge"
+  }
+}

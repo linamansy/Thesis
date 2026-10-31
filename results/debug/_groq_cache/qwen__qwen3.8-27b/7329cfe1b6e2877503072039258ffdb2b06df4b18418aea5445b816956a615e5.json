@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling.\n\nSENTENCES\n- Sending a return shipping label\n\nSTATEMENT\nby their nature, those goods cannot normally be returned by post\n\nDo these sentences, on their own and taken together, state that the statement is false? Answer yes or no with one line of reason.\nAnswer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"answer\": {\n      \"description\": \"yes if the sentence on its own states it, otherwise no\",\n      \"enum\": [\n        \"yes\",\n        \"no\"\n      ],\n      \"title\": \"Answer\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One line of reason\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"answer\",\n    \"reason\"\n  ],\n  \"title\": \"VerifierOutputV2\",\n  \"type\": \"object\"\n}\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-0a5354d7-a457-4759-bd44-be98ddd37f23",
+    "object": "chat.completion",
+    "created": 1793423856,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"answer\": \"no\",\n  \"reason\": \"The sentence describes an action (sending a label) which does not logically imply that the goods cannot be returned by post; in fact, sending a label often facilitates postal returns.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.016498544,
+      "prompt_tokens": 252,
+      "prompt_time": 0.018431678,
+      "completion_tokens": 53,
+      "completion_time": 0.103220039,
+      "total_tokens": 305,
+      "total_time": 0.121651717
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_8999620a6e",
+    "x_groq": {
+      "id": "req_01m6868mavesw87pyyjd2axsek",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "request": {
+    "model": "qwen/qwen3.8-27b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "You are assisting with business process modelling.\n\nSENTENCES\n- The process begins when a customer files a complaint about a product or service\n- Most complaints come from private persons whose kitchen appliance stopped working a few months after purchase\n\nSTATEMENT\nthe organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession\n\nDo these sentences, on their own and taken together, state that the statement is true? Answer yes or no with one line of reason.\nAnswer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.\n\nJSON SCHEMA\n{\n  \"properties\": {\n    \"answer\": {\n      \"description\": \"yes if the sentence on its own states it, otherwise no\",\n      \"enum\": [\n        \"yes\",\n        \"no\"\n      ],\n      \"title\": \"Answer\",\n      \"type\": \"string\"\n    },\n    \"reason\": {\n      \"description\": \"One line of reason\",\n      \"title\": \"Reason\",\n      \"type\": \"string\"\n    }\n  },\n  \"required\": [\n    \"answer\",\n    \"reason\"\n  ],\n  \"title\": \"VerifierOutputV2\",\n  \"type\": \"object\"\n}\n"
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 8192,
+    "seed": 42,
+    "response_format": {
+      "type": "json_object"
+    }
+  },
+  "response": {
+    "id": "chatcmpl-eb1e4a97-7944-420e-8e45-8025b43d76b0",
+    "object": "chat.completion",
+    "created": 1793414439,
+    "model": "qwen/qwen3.8-27b",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\n  \"answer\": \"yes\",\n  \"reason\": \"The mention of customers filing complaints about products or services implies the organization sells goods or services to customers as part of its business.\"\n}"
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "queue_time": 0.016784497,
+      "prompt_tokens": 292,
+      "prompt_time": 0.025021906,
+      "completion_tokens": 43,
+      "completion_time": 0.09391739,
+      "total_tokens": 335,
+      "total_time": 0.118939296
+    },
+    "usage_breakdown": null,
+    "system_fingerprint": "fp_43dd1ea4ee",
+    "x_groq": {
+      "id": "req_01m67x987cer885jnyz1k4rtdw",
+      "seed": 42
+    },
+    "service_tier": "on_demand"
+  }
+}
