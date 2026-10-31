@@ -1,5 +1,6 @@
 """Tests for C3 v2 design round 1 (31 Oct 2026), one section per fix (MockLLM answers only, no Ollama):
   D1 substantive duty holder of a "Member States shall ensure" rule (code)
+  D2 relevance prompt: a rule that could govern a step (e.g. the step that triggers its duty) is relevant
 Passages and descriptions below are made up unless a real passage id is named.
 """
 
@@ -79,3 +80,29 @@ def test_d1_leaves_other_rules_unchanged(tmp_path):
     a, _ = agent(tmp_path, [split])
     record = a.first_look("x", "The shop keeps a list.", "P-1", "The controller shall keep a list.")
     assert record["duty_holder"] is None and record["conditions"][0]["text"] == "the duty is on: controller"
+
+
+# ---------- D2: relevance covers the step that triggers a duty ----------
+
+def test_d2_relevance_prompt_counts_the_triggering_step_and_keeps_the_json_fields(tmp_path):
+    from src.agents.relevance_agent_v2 import RelevanceAgentV2, RelevanceOutputV2
+    a = RelevanceAgentV2(MockLLM(["{}"]), RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"))
+    prompt = a.build_prompt(description="The tenant hands back the keys.", passage_id="P-1", passage_text="A rule.")
+    assert "could govern an activity, an actor or an object of this process" in prompt
+    assert "even when the duty itself is not performed" in prompt and "A missing duty step is not a reason for false" in prompt
+    assert "EXAMPLE WITH A MISSING DUTY STEP (made up, from another domain)" in prompt
+    assert list(RelevanceOutputV2.model_fields) == ["law_focus", "law_quote", "relevant", "process_step",
+                                                    "description_quote", "reason"]          # same JSON fields
+
+
+def test_d2_a_rule_whose_duty_step_is_missing_stays_relevant_after_the_code_check(tmp_path):
+    from src.agents.relevance_agent_v2 import RelevanceAgentV2
+    from src.mediation.relevance_v2_checker import RelevanceV2Checker
+    description = "The tenant hands back the keys. The agent checks the flat for damage. The agent closes the file."
+    passage = "When a tenant moves out, the landlord must return the deposit within 30 days."
+    answer = {"law_focus": "a tenant moving out", "law_quote": "When a tenant moves out", "relevant": True,
+              "process_step": "the tenant hands back the keys", "description_quote": "The tenant hands back the keys",
+              "reason": "The process has the moving out; the deposit return is missing."}
+    a = RelevanceAgentV2(MockLLM([json.dumps(answer)]), RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"))
+    out = a.run("x", description=description, passage_id="P-1", passage_text=passage)
+    assert RelevanceV2Checker().check(out, passage, description)["final_relevant"] is True

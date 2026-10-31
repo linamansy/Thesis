@@ -2,8 +2,8 @@ You are assisting with business process modelling. Decide whether a rule from a 
 
 INSTRUCTIONS
 - First find what the rule is about: the kind of activity it deals with. Write it in law_focus, and copy the words of the passage that state it, word for word, into law_quote.
-- Then look for a step in the process description where that kind of activity happens. Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.
-- relevant is true if the rule is about something this process does. relevant is false if no step of the process does that kind of activity.
+- Then look for a step in the process description that the rule could govern: a step where that kind of activity happens, or a step that involves an actor or an object the rule is about (for example the step that triggers the rule's duty). Write that step in process_step, and copy the words of the description that state it, word for word, into description_quote.
+- relevant is true if the rule could govern an activity, an actor or an object of this process, even when the duty itself is not performed anywhere in the process. A missing duty step is not a reason for false: adding the missing step is the job of a later step. relevant is false only if the rule could govern no activity, actor or object of the process.
 - This is a broad judgement. Do NOT check the rule's conditions ("if ..."), trigger events, deadlines or exceptions; they are checked in a later step. Do not mark a passage irrelevant only because a specific event or condition from the rule is not described in the process.
 - Judge by what the process does, not by whether the two texts use similar words or sound like the same subject.
 - Use only the two texts below. Do not assume steps that the description does not state.
@@ -15,6 +15,11 @@ EXAMPLE (made up, for the format only)
 Rule: "If a customer complains about a card payment, the shop must refund within 14 days."
 Process: "The customer chooses a product. The customer pays by card. The shop sends the product."
 Answer: {{"law_focus": "card payments by customers", "law_quote": "a card payment", "relevant": true, "process_step": "the customer pays by card", "description_quote": "The customer pays by card", "reason": "The rule is about card payments, and the process has a card payment step; whether a complaint happens is checked later."}}
+
+EXAMPLE WITH A MISSING DUTY STEP (made up, from another domain)
+Rule: "When a tenant moves out, the landlord must return the deposit within 30 days."
+Process: "The tenant hands back the keys. The agent checks the flat for damage. The agent closes the file."
+Answer: {{"law_focus": "a tenant moving out", "law_quote": "When a tenant moves out", "relevant": true, "process_step": "the tenant hands back the keys", "description_quote": "The tenant hands back the keys", "reason": "The rule governs the tenant moving out, which the process has; returning the deposit is missing, which a later step adds."}}
 
 JSON SCHEMA
 {schema}
