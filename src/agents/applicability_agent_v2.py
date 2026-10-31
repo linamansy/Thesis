@@ -19,8 +19,8 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      or "any" (alternatives: "any of", "one of the following", "or"). The items are numbered C1, C2, ... across the
      groups and keep their group id (G1, ...) and logic; an "any" group counts as one unit for the label
      (src/mediation/resolver_v2.if_units). A plain text in "if" is read as an "all" group of one item.
-     Sub-rules (D4b, design round 1): a special-case clause ("In the case of ...", "Where ..." introducing a
-     different duty) is not part of the main rule; the split gives it in "special_cases" with its own roles, IF
+     Sub-rules (D4b, design round 1; OFF by default since design round 2, switched on by sub_rules=True): a
+     special-case clause ("In the case of ...", "Where ..." introducing a different duty) is not part of the main rule; the split gives it in "special_cases" with its own roles, IF
      groups and THEN. Each becomes a sub-rule (K1, K2, ...) that goes through steps b-h on its own (own check-IF
      call; no exceptions of its own besides split-off "unless" clauses) and gets its own label and requirement from
      the OrchestratorV2. D1 applies to the main rule only.
@@ -384,10 +384,12 @@ class ApplicabilityAgentV2:
     """Runs split -> check-IF -> quote check -> first look, and the second look when the orchestrator asks."""
 
     def __init__(self, llm, logger, max_retries: int | None = None, config: dict | None = None,
-                 case_events: bool = True, sub_rules: bool = True):
-        """case_events / sub_rules (ablation, debug run options only; default on): case_events False switches off D5
-        (every IF item is read as a process fact, so no "Applicable (conditional)"); sub_rules False switches off D4b
-        (the split's special_cases are kept in record["split"] but never evaluated). The prompts are unchanged."""
+                 case_events: bool = True, sub_rules: bool = False):
+        """case_events / sub_rules (ablation, debug run options only): case_events False switches off D5 (every IF
+        item is read as a process fact, so no "Applicable (conditional)"); sub_rules False switches off D4b (the
+        split's special_cases are kept in record["split"] but never evaluated). The prompts are unchanged.
+        Defaults: D5 on; D4b OFF since design round 2 (31 Oct 2026; round 1 and its ablations: 0 targets gained by
+        D4b), so sub_rules=True switches it on."""
         config = config or load_config()
         self.case_events, self.sub_rules = case_events, sub_rules
         self.split_call = SplitCallV2(llm, logger, max_retries)

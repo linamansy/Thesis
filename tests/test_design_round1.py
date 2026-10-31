@@ -29,9 +29,9 @@ LPD_ROLES = CONFIG["c3_v2"]["roles"]["LPD-"]["names"]
 NO_KNOWLEDGE = load_no_knowledge_text(CONFIG)
 
 
-def agent(tmp_path, answers):
+def agent(tmp_path, answers, **switches):
     llm = MockLLM([json.dumps(a) for a in answers])
-    return ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}")), llm
+    return ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), **switches), llm
 
 
 # ---------- D1: substantive duty holder ----------
@@ -243,14 +243,15 @@ def special_orchestrator(tmp_path, answers):
     llm = MockLLM([json.dumps(a) for a in answers])
     log = RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}")
     passages = [{"rank": 1, "passage_id": "P-1", "text": SPECIAL_PASSAGE}]
-    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log), RequirementAgentV2(llm, log),
+    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log, sub_rules=True),
+                          RequirementAgentV2(llm, log),
                           {"c": {"passages": passages}}, tmp_path / "mediation",
                           load_c3_block_template(CONFIG, "c3_block_template_v2"), load_no_knowledge_text(CONFIG))
     return orch, llm
 
 
 def test_d4b_special_case_is_a_sub_rule_with_its_own_if_then_and_check(tmp_path):
-    a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED])
+    a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED], sub_rules=True)
     record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
     assert [c["text"] for c in record["conditions"]] == ["the duty is on: controller",
                                                          "the customer asks for express shipping"]
@@ -283,7 +284,7 @@ def test_d4b_orchestrator_resolves_the_sub_rule_and_passes_its_requirement_on(tm
 def test_d4b_obligation_word_in_a_special_case_makes_the_split_invalid(tmp_path):
     bad = {**SPECIAL_SPLIT, "special_cases": [{**SPECIAL_SPLIT["special_cases"][0],
                                                "if": ["the shop must use a padded box"]}]}
-    a, _ = agent(tmp_path, [bad])
+    a, _ = agent(tmp_path, [bad], sub_rules=True)
     record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
     assert record["label"] == "Split invalid" and record["rejected_if"] == ["the shop must use a padded box"]
 
@@ -456,9 +457,16 @@ def test_ablation_without_d4b_never_evaluates_special_cases(tmp_path):
     assert a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)["split_valid"] is True
 
 
+def test_d4b_is_off_by_default_since_design_round_2(tmp_path):
+    a, llm = agent(tmp_path, [SPECIAL_SPLIT, MAIN_OPEN])
+    record = a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)
+    assert record["sub_rules"] == [] and len(llm.prompts_received) == 2   # split + the main rule's check only
+    assert a.case_events is True and a.sub_rules is False
+
+
 def test_ablation_switches_leave_the_prompts_unchanged(tmp_path):
     prompts = []
-    for switches in ({}, {"case_events": False, "sub_rules": False}):
+    for switches in ({"sub_rules": True}, {"case_events": False, "sub_rules": False}):
         llm = MockLLM([json.dumps(a) for a in [SPECIAL_SPLIT, MAIN_OPEN, SUB_CONFIRMED]])
         a = ApplicabilityAgentV2(llm, RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"), **switches)
         a.first_look("x", VASES, "P-1", SPECIAL_PASSAGE)

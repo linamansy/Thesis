@@ -22,7 +22,8 @@ brace in 27 of 150 calls (Groq json_validate_failed); json_object had 0 unparsea
 that label (folder med_<LABEL>_run_<n>), e.g. --oracle-label round1 after design round 1; no retrieval, no full run.
 --no-d5 / --no-d4b (ablation, added 31 Oct 2026, only with --oracle-label): switch off D5 (case events: every IF item
 is read as a process fact, no "Applicable (conditional)") or D4b (special-case sub-rules are not evaluated) in
-ApplicabilityAgentV2; prompts unchanged; saved in run_info.json as "ablation". Default: both on.
+ApplicabilityAgentV2; prompts unchanged; saved in run_info.json as "ablation". Since design round 2 D4b is OFF by
+default (--no-d4b kept so earlier commands still work); --d4b switches it on. Default: D5 on, D4b off.
 
 Resumable: a step whose folder has summary.txt (written last) is done and skipped. A folder without summary.txt is
 left by a step that stopped; it is moved to results/debug/<variant>/_incomplete/<name>_<time> (never deleted) and the
@@ -250,15 +251,19 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--no-d5", action="store_true",
                         help="ablation (with --oracle-label): switch off D5, every IF item read as a process fact")
     parser.add_argument("--no-d4b", action="store_true",
-                        help="ablation (with --oracle-label): switch off D4b, special-case sub-rules not evaluated")
+                        help="D4b off (the default since design round 2; kept so earlier commands still work)")
+    parser.add_argument("--d4b", action="store_true",
+                        help="ablation (with --oracle-label): switch on D4b, special-case sub-rules evaluated")
     args = parser.parse_args(argv)
     if args.groq_model and (args.fresh or args.think_calls):
         parser.error("--groq-model does not use Ollama: --fresh and --think-calls are not allowed")
     if args.oracle_label and (args.groq_model or args.oracle_label in (LABEL, ORACLE_LABEL)):
         parser.error("--oracle-label needs its own name and cannot be combined with --groq-model")
-    if (args.no_d5 or args.no_d4b) and not args.oracle_label:
-        parser.error("--no-d5 / --no-d4b need --oracle-label (their own folder name)")
-    ablation = {k: False for k, off in (("case_events", args.no_d5), ("sub_rules", args.no_d4b)) if off}
+    if (args.no_d5 or args.no_d4b or args.d4b) and not args.oracle_label:
+        parser.error("--no-d5 / --no-d4b / --d4b need --oracle-label (their own folder name)")
+    if args.d4b and args.no_d4b:
+        parser.error("--d4b and --no-d4b exclude each other")
+    ablation = {k: v for k, v, given in (("case_events", False, args.no_d5), ("sub_rules", True, args.d4b)) if given}
     config = load_config()
     log = make_log(project_path(config["paths"]["runs"]).parent / "debug" / "run_all_dev.log")
     think_calls = [c.strip() for c in args.think_calls.split(",") if c.strip()]
