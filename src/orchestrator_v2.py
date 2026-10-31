@@ -13,7 +13,9 @@ For every passage of the case, in rank order:
      step, checked by code (RequirementCheckerV2); failing twice -> requirement_invalid, never passed on
   D5 (design round 1): "Applicable (conditional)" (role, scope and process facts confirmed, case events not
      contradicted) is treated like Applicable: requirement (which must keep each case event as "If/When ...") and
-     block line.
+     block line. F2b (design round 2): its requirement is then checked by the verifier, one call per case event
+     (ApplicabilityAgentV2.check_case_events): an If/When part that does not describe the same event makes the
+     requirement invalid; a check call with no valid answer after its retry gives "Mediation failed".
   Sub-rules (D4b, design round 1): every special case the split gave (applicability "sub_rules", K1, ...) gets
      steps 2 (second look) to 4 on its own, after the main rule; its label, resolution and requirement are saved in
      the sub-rule. The passage label is the main rule's. A requirement of an Applicable sub-rule goes into the block
@@ -144,12 +146,16 @@ class OrchestratorV2:
     def write_requirement(self, case_id: str, description: str, record: dict, text: str, then: str,
                           conditions: list[dict], case_events: list[dict]) -> dict | None:
         """Box 4 for one Applicable rule (the main rule or a sub-rule), tied to RelevanceAgentV2's process step.
-        case_events (D5): the resolver's case events, which the requirement must keep as its "If/When ..." trigger."""
-        return self.requirement_agent.write(
+        case_events (D5): the resolver's case events, which the requirement must keep as its "If/When ..." trigger;
+        F2b: the verifier then checks that each If/When part describes the same event (a "no" -> requirement_invalid)."""
+        requirement = self.requirement_agent.write(
             case_id, description=description, passage_id=record["passage_id"], passage_text=text, then=then,
             process_step=record["relevance"]["process_step"],
             description_quote=record["relevance"]["description_quote"], if_items=conditions,
             case_events=case_events)
+        if not self.applicability_agent.check_case_events(case_id, requirement, case_events):
+            raise RuntimeError("event check (EventVerifierCallV2): no valid output after retry (see the log file)")
+        return requirement
 
     def mediate_sub_rule(self, case_id: str, description: str, record: dict, sub: dict,
                          case_passages: list[dict]) -> None:

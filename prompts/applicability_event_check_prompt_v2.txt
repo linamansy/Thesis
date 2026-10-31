@@ -1,0 +1,21 @@
+You are assisting with business process modelling.
+
+CASE EVENT
+{event}
+
+IF/WHEN PART OF A REQUIREMENT
+{kept_as}
+
+Under an ordinary reading, does the If/When part describe the same event as the case event? Answer yes or no with one line of reason.
+- Judge the event, not the wording: the same event in everyday words counts.
+- A different event, an event of a different actor, or a step that happens in every case of the process is not the same event.
+
+EXAMPLE (made up, from another domain)
+Case event: "the borrower asks to extend the loan period"
+If/When part: "If a reader asks for more time to keep the book" -> yes (the same request in everyday words)
+If/When part: "When a reader borrows a book" -> no (a step of every loan, not the request)
+
+Answer with one JSON object that follows the JSON schema below. Output only the JSON, with no other text.
+
+JSON SCHEMA
+{schema}

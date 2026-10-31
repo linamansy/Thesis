@@ -64,13 +64,20 @@ def thinking_llm(config: dict) -> ThinkingOllamaLLM:
 
 
 def give_thinking(agent, call_names: list[str], llm) -> None:
-    """The named calls of the agent (class names) send their requests through llm instead."""
-    calls = {type(c).__name__: c for c in vars(agent).values() if isinstance(c, BaseAgent)}
-    unknown = sorted(set(call_names) - set(calls))
+    """The named calls of the agent (class names) send their requests through llm instead. A call whose class is a
+    subclass of a named call is included (F2b, design round 2: VerifierCallV2 also names EventVerifierCallV2)."""
+    calls = [c for c in vars(agent).values() if isinstance(c, BaseAgent)]
+
+    def names(call) -> set[str]:   # its class and its base classes below BaseAgent
+        return {k.__name__ for k in type(call).__mro__ if issubclass(k, BaseAgent) and k is not BaseAgent}
+
+    known = set().union(*(names(c) for c in calls))
+    unknown = sorted(set(call_names) - known)
     if unknown:
-        raise ValueError(f"no such call in {type(agent).__name__}: {unknown} (has: {sorted(calls)})")
-    for name in call_names:
-        calls[name].llm = llm
+        raise ValueError(f"no such call in {type(agent).__name__}: {unknown} (has: {sorted(known)})")
+    for call in calls:
+        if names(call) & set(call_names):
+            call.llm = llm
 
 
 def oracle_run(config, case, description, key, llm, run_dir, run_info, think_calls=(), think_llm=None) -> dict:

@@ -419,7 +419,7 @@ def test_d5_prompts_mark_kinds_and_list_case_events(tmp_path):
     from src.agents.requirement_agent_v2 import RequirementAgentV2
     a, _ = agent(tmp_path, ["{}"])
     split_prompt = a.split_call.build_prompt(passage_id="P-1", passage_text=RETURN_PASSAGE)
-    assert '"case_event": an event that happens only in some cases of the process' in split_prompt
+    assert '"case_event": ONLY something an actor does during a single case of the process'   # narrowed by F2a in split_prompt
     assert '"process_fact": a fact that holds or does not hold for the process as a whole' in split_prompt
     item = a.split_call.output_schema.model_json_schema()["$defs"]["IfItem"]
     assert item["properties"]["kind"]["enum"] == ["process_fact", "case_event"]

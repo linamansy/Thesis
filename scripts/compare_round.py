@@ -158,6 +158,8 @@ def compare(config: dict, label: str, variants, n: int = 1) -> str:
                                    f"    requirement: {requirement_text(rule)}"]
                     if events:
                         applicable.append("    case events: " + "; ".join(f"{e['id']}: {e['text']}" for e in events))
+                    for c in (rule.get("requirement") or {}).get("event_checks") or []:   # F2b (design round 2)
+                        applicable.append(f"    event check {c['id']}: {c['answer']} ({c['kept_as']!r}): {c['reason']}")
     regression = target_record(med_dir(debug / PASS_VARIANT, label, n), PASS_TARGET)
     passed = regression is not None and rule_letter(regression) in ("A", "AC")
     return "\n".join([f"DESIGN ROUND REPORT: {label} oracle run {n} vs alldev oracle run {n} (qwen3:8b)", "",

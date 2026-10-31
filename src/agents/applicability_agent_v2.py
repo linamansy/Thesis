@@ -32,6 +32,12 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      a whole) or "case_event" (happens only in some cases: a request, a withdrawal, a complaint, ...); saved as
      "item_kind". The label needs only the role, the scope and the process facts confirmed; with case events not
      contradicted it is "Applicable (conditional)" (src/mediation/resolver_v2.py). A plain text item is a process fact.
+     Narrowed D5 (F2, design round 2, 31 Oct 2026): "case_event" only for something an actor does during a single case
+     (requests, withdraws, pays, delivers, returns, complains, cancels); what is sold, the type of contract, content
+     or service, and who the parties are are always process facts (split prompt and schema). F2b: for every
+     Applicable (conditional) rule with a valid requirement, the verifier also checks, one call per case event
+     (EventVerifierCallV2, check_case_events), that the requirement's If/When part for it describes the same event;
+     "no" -> the requirement is invalid. With D5 switched off there are no case events, so no such call.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -199,12 +205,14 @@ def split_exceptions(conditions: list) -> tuple[list[dict], list[dict]]:
 
 
 class IfItem(BaseModel):
-    # D5 (design round 1): one IF item and its kind. (Comments, not docstrings: JSON agents send their schema without
+    # D5 (design round 1; narrowed by F2a, design round 2): one IF item and its kind. (Comments, not docstrings: JSON agents send their schema without
     # class descriptions, fix nodoc.)
     text: str = Field(description="The condition, a short statement in the words of the rule")
     kind: Literal["process_fact", "case_event"] = Field(
-        description='"process_fact": holds or does not hold for the process as a whole; "case_event": happens only in '
-                    'some cases (for example a request, a withdrawal, a complaint, a late payment, a delivery)')
+        description='"process_fact": holds or does not hold for the process as a whole; what is sold, the type of '
+                    'contract, content or service, and who the parties are are always process facts; "case_event": '
+                    'only something an actor does during a single case of the process (requests, withdraws, pays, '
+                    'delivers, returns, complains or cancels)')
 
 
 class IfGroup(BaseModel):
@@ -318,6 +326,12 @@ class VerifierOutputV2(BaseModel):
     reason: str = Field(description="One line of reason")
 
 
+class EventCheckOutputV2(BaseModel):
+    answer: Literal["yes", "no"] = Field(description="yes if the If/When part describes the same event as the case "
+                                                     "event, otherwise no")
+    reason: str = Field(description="One line of reason")
+
+
 # ---------- the calls ----------
 
 class SplitCallV2(BaseAgent):
@@ -390,6 +404,17 @@ class VerifierCallV2(BaseAgent):
                                     truth=truth)
 
 
+class EventVerifierCallV2(VerifierCallV2):
+    """F2b (design round 2): the verifier's check of one case event of an Applicable (conditional) rule: does the
+    requirement's If/When part (its kept_as for that case event) describe the same event? A verifier call (subclass),
+    so --think-calls VerifierCallV2 gives it thinking too (scripts/oracle_o2.give_thinking)."""
+    prompt_key = "applicability_event_check_prompt_v2"
+    output_schema = EventCheckOutputV2
+
+    def build_prompt(self, event: str, kept_as: str) -> str:
+        return self.template.format(schema=self.schema_text(), event=event.strip(), kept_as=kept_as.strip())
+
+
 # ---------- the agent ----------
 
 def rule_record() -> dict:
@@ -415,6 +440,7 @@ class ApplicabilityAgentV2:
         self.check_call = CheckIfCallV2(llm, logger, max_retries)
         self.second_look_call = SecondLookCallV2(llm, logger, max_retries)
         self.verifier_call = VerifierCallV2(llm, logger, max_retries)
+        self.event_verifier_call = EventVerifierCallV2(llm, logger, max_retries)   # F2b
         settings = config["c3_v2"]
         words = "|".join(re.escape(w) for w in settings["obligation_words"])
         self.obligation_pattern = re.compile(rf"\b({words})\b", re.IGNORECASE)
@@ -630,4 +656,30 @@ class ApplicabilityAgentV2:
             item["verifier"] = {"asked": truth, "answer": answer.answer, "reason": answer.reason}
             if answer.answer == "no":
                 item.update(status="not_stated", downgraded=True, downgrade_cause="verifier rejected", decided_by=None)
+        return True
+
+    def check_case_events(self, case_id: str, requirement: dict | None, case_events: list[dict]) -> bool:
+        """F2b (design round 2): for a rule with case events (Applicable (conditional)) whose requirement passed the
+        code checks, one verifier call per case event with the case event as sent ({"id", "text"}, ResolverV2) and
+        the requirement's If/When part for it (the kept_as of the last attempt's case_events). The answers are saved
+        in requirement["event_checks"]; a "no" adds a problem to the last attempt and makes the requirement invalid.
+        Nothing is called for a missing or invalid requirement or without case events. Returns False if a call has no
+        valid answer after its retry."""
+        if not case_events or requirement is None or requirement["requirement_invalid"]:
+            return True
+        last = requirement["attempts"][-1]
+        kept = {c["id"]: c["kept_as"] for c in last["case_events"]}
+        checks = []
+        for event in case_events:
+            answer = self.event_verifier_call.run(case_id, event=event["text"], kept_as=kept[event["id"]])
+            if answer is None:
+                return False
+            checks.append({"id": event["id"], "event": event["text"], "kept_as": kept[event["id"]],
+                           "answer": answer.answer, "reason": answer.reason})
+        requirement["event_checks"] = checks
+        wrong = [c for c in checks if c["answer"] == "no"]
+        if wrong:
+            last["problems"] += [f'the If/When part "{c["kept_as"]}" does not describe the same event as case event '
+                                 f'{c["id"]} ("{c["event"]}"): {c["reason"]}' for c in wrong]
+            requirement.update(requirement=None, requirement_invalid=True)
         return True
