@@ -22,6 +22,11 @@ Duty check (28 Oct 2026): the answer also has a duty ("from_then": the words of 
 done, "kept_as": the words of the requirement that keep them). Without it a requirement could pass every check while
 only restating the process step and stating no duty at all (GDPR-Art13-2-a, case 01.1). The checker also rejects an
 empty triggers list when the IF part has situational conditions; a role-only rule may leave it empty.
+
+D5 (design round 1, 31 Oct 2026): runs also for "Applicable (conditional)". The prompt lists the rule's case events
+(CASE EVENTS, from ResolverV2); the answer's case_events gives, for each, the words of the requirement that keep it
+as its "If/When ..." trigger, checked like triggers by code (every listed id once, no other id, kept_as copied from the
+requirement and starting with "If" or "When").
 """
 
 from pydantic import BaseModel, Field
@@ -42,12 +47,21 @@ class DutyKept(BaseModel):
     kept_as: str = Field(description="The words of the requirement, copied exactly, that say the same thing")
 
 
+class CaseEventKept(BaseModel):
+    id: str = Field(description="The id of the case event, as given in CASE EVENTS")
+    kept_as: str = Field(description='The words of the requirement, copied exactly, that keep this case event; they '
+                                     'start with "If" or "When"')
+
+
 class RequirementOutputV2(BaseModel):
     requirement: str = Field(description="One or two sentences: what the rule requires, tied to the process step")
     step_quote: str = Field(description="Exact words copied from the process description that name the step")
     triggers: list[TriggerKept] = Field(description="Every trigger or condition the obligation states; empty list "
                                                     "if none")
     duty: DutyKept = Field(description="The duty of the obligation, and the words of the requirement that keep it")
+    case_events: list[CaseEventKept] = Field(default_factory=list,
+                                             description="One entry for every case event listed in CASE EVENTS; "
+                                                         "empty list if none is listed")
 
 
 class RequirementAgentV2(BaseAgent):
@@ -61,40 +75,50 @@ class RequirementAgentV2(BaseAgent):
         self.check_note = ""   # failure reasons of the code check, added to the prompt of the check retry
 
     def build_prompt(self, description: str, passage_id: str, passage_text: str, then: str, process_step: str,
-                     description_quote: str) -> str:
+                     description_quote: str, case_events: list[dict] | None = None) -> str:
+        """case_events (D5): {"id", "text"} of each case event of the rule (ResolverV2), listed in CASE EVENTS."""
         if not then.strip():
             raise ValueError("RequirementAgentV2 needs the THEN part of an Applicable rule")
         banned = self.checker.banned_words
         banned_text = ", ".join(f'"{w}"' for w in banned[:-1]) + f' or "{banned[-1]}"'
+        events = "\n".join(f'{e["id"]}: {e["text"]}' for e in case_events or []) or "none"
         prompt = self.template.format(schema=self.schema_text(), description=description.strip(),
                                       passage=f"[{passage_id}] {passage_text.strip()}", then=then.strip(),
                                       step=f'{process_step} ("{description_quote}")',
-                                      max_words=self.checker.max_words, banned_words=banned_text)
+                                      max_words=self.checker.max_words, banned_words=banned_text,
+                                      case_events=events)
         return prompt + self.check_note
 
-    def write(self, case_id: str, if_items: list[dict] | None = None, **inputs) -> dict | None:
+    def write(self, case_id: str, if_items: list[dict] | None = None, case_events: list[dict] | None = None,
+              **inputs) -> dict | None:
         """The requirement after the code checks, or None if no answer was valid JSON (after the JSON retry).
 
         if_items: the IF items of the split (the applicability record's "conditions", each with its "kind").
         They are not part of the prompt; the checker only uses them to see whether the rule has situational
         conditions, because only a role-only rule may leave the triggers list empty.
+        case_events (D5): the rule's case events ({"id", "text"}, ResolverV2); each must be kept as an "If/When ..."
+        part of the requirement (RequirementCheckerV2.case_event_problems).
 
         Returns {"requirement": text or None, "requirement_invalid": bool, "attempts": [...]}; each attempt keeps the
         answer, its measurements and the problems found."""
         attempts = []
         self.check_note = ""
+        case_events = case_events or []
         for _ in range(2):   # the answer, and one retry if the code check fails
-            output = self.run(case_id, **inputs)
+            output = self.run(case_id, case_events=case_events, **inputs)
             if output is None:
                 self.check_note = ""
                 return None
             problems = (self.checker.problems(output.requirement, inputs["passage_text"])
                         + self.checker.quote_problems(output, inputs["description"], inputs["passage_text"],
-                                                      inputs["then"], if_items))
+                                                      inputs["then"], if_items)
+                        + self.checker.case_event_problems(output, case_events))
             duty = getattr(output, "duty", None)
             attempts.append({"requirement": output.requirement, "step_quote": output.step_quote,
                              "triggers": [t.model_dump() for t in output.triggers],
-                             "duty": duty.model_dump() if duty else None, "problems": problems,
+                             "duty": duty.model_dump() if duty else None,
+                             "case_events": [c.model_dump() for c in getattr(output, "case_events", [])],
+                             "case_events_given": case_events, "problems": problems,
                              "canonical_quotes": self.checker.canonical_quotes(output, inputs["description"],
                                                                                inputs["passage_text"], inputs["then"]),
                              "measures": self.checker.measure(output.requirement, inputs["passage_text"])})

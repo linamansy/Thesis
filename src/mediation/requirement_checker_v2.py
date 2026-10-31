@@ -29,6 +29,9 @@ function fix B wrote for the law quote (RelevanceV2Checker.law_quote_found: spli
 least 4 words, verbatim and in order). It is imported and reused, never copied, so both checks can never drift apart;
 a from_then without an ellipsis is checked exactly as before. duty.kept_as is unchanged (plain QuoteChecker).
 
+D5 (design round 1, 31 Oct 2026), case_event_problems(): every case event of the rule must be kept as an "If/When ..."
+trigger of the requirement (see the method).
+
 Fix tolquote (30 Oct 2026): every quote check here (step_quote, triggers, kept_as, duty.kept_as, and duty.from_then
 through law_quote_found) uses the ONE tolerant function match_quote of src/mediation/quote_checker.py (plural -s, at
 most 1 extra word per 6 quote words from 3 words on; shorter quotes exactly, fix shortquote). canonical_quotes() returns the matched exact spans, which
@@ -43,6 +46,7 @@ from src.mediation.relevance_v2_checker import RelevanceV2Checker
 
 WORD = re.compile(r"[a-z0-9]+(?:'[a-z]+)?")
 MIN_DUTY_WORDS = 3   # shortest duty quote accepted (fixed by the task of 28 Oct 2026, not a config parameter)
+CASE_EVENT_STARTS = ("if", "when", "whenever")   # D5: the first word of a case event's kept_as
 
 
 def words(text: str) -> list[str]:
@@ -125,6 +129,28 @@ class RequirementCheckerV2:
                 "duty": None if duty is None else
                 {"from_then": self.fragment_checker.law_quote_match(duty.from_then, then)[1],
                  "kept_as": match_quote(duty.kept_as, output.requirement)[1]}}
+
+    def case_event_problems(self, output, case_events: list[dict]) -> list[str]:
+        """D5 (design round 1): every case event of the rule ({"id", "text"}) must be kept as an "If/When ..." part of
+        the requirement, checked like the triggers: each listed id once in the answer's case_events and no other id,
+        kept_as copied from the requirement (match_quote) and starting with "If", "When" or "Whenever"."""
+        kept = getattr(output, "case_events", None) or []
+        given = {e["id"]: e["text"] for e in case_events}
+        answered = [c.id for c in kept]
+        found = [f'the case event {i} ("{t}") is not kept: the requirement must say "If ..." or "When ..." it '
+                 f'happens, and case_events must give {i} with those words' for i, t in given.items() if i not in answered]
+        found += [f"case_events names {i}, which is not a listed case event" for i in dict.fromkeys(answered)
+                  if i not in given]
+        found += [f"case_events names {i} more than once" for i in dict.fromkeys(answered) if answered.count(i) > 1]
+        for c in kept:
+            if c.id not in given:
+                continue
+            if not match_quote(c.kept_as, output.requirement)[0]:
+                found.append(f'the kept_as words "{c.kept_as}" of case event {c.id} are not copied word for word from '
+                             f'the requirement')
+            elif (words(c.kept_as) or [""])[0] not in CASE_EVENT_STARTS:
+                found.append(f'the kept_as words "{c.kept_as}" of case event {c.id} must start with "If" or "When"')
+        return found
 
     def duty_problems(self, output, then: str) -> list[str]:
         """The duty check (28 Oct 2026): the requirement must keep the duty of the obligation.

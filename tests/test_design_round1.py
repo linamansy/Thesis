@@ -4,6 +4,8 @@
   D3 verifier prompt: ordinary reading, an everyday equivalent of a legal concept counts
   D4a the split marks IF item groups "all" (AND) or "any" (OR); an OR group is one unit for the label
   D4b a special-case clause becomes a sub-rule with its own IF/THEN, label and requirement
+  D5 IF items are process facts or case events; case events need not be confirmed (Applicable (conditional))
+     but the requirement must keep each as its If/When trigger
 Passages and descriptions below are made up unless a real passage id is named.
 """
 
@@ -16,6 +18,7 @@ from src.agents.applicability_agent_v2 import ApplicabilityAgentV2, duty_roles, 
 from src.config import load_config
 from src.llm.mock_llm import MockLLM
 from src.logger import RunLogger
+from src.prompt_texts import load_no_knowledge_text
 
 pytestmark = pytest.mark.usefixtures("verifier_yes")   # the verifier says "yes"; it is tested in test_verifier_v2.py
 
@@ -23,6 +26,7 @@ CONFIG = load_config()
 RUN_IDS = itertools.count()
 ECD_ROLES = CONFIG["c3_v2"]["roles"]["ECD-"]["names"]
 LPD_ROLES = CONFIG["c3_v2"]["roles"]["LPD-"]["names"]
+NO_KNOWLEDGE = load_no_knowledge_text(CONFIG)
 
 
 def agent(tmp_path, answers):
@@ -155,7 +159,8 @@ def test_d4a_or_group_confirmed_by_one_item_with_a_checked_quote(tmp_path):
     assert record["first_look_label"] == "Applicable"
     resolution = ResolverV2().resolve(record)
     assert resolution["label"] == "Applicable"
-    assert resolution["units"][1] == {"id": "G1", "logic": "any", "status": "confirmed", "items": ["C1", "C2"]}
+    assert resolution["units"][1] == {"id": "G1", "logic": "any", "status": "confirmed", "case_event": False,
+                                      "items": ["C1", "C2"]}
 
 
 def test_d4a_or_item_with_a_fake_quote_does_not_confirm_the_group(tmp_path):
@@ -185,8 +190,8 @@ def test_d4a_plain_texts_are_read_as_and_items(tmp_path):
     split = {**OR_SPLIT, "if": ["a customer pays by card", "a customer pays by cash"]}
     _, record, _ = first_look(tmp_path, [split, {"results": [
         result("C1", "confirmed", "The customer pays by card"), result("C2", "not_stated")]}])
-    assert record["split"]["if"] == [{"logic": "all", "items": ["a customer pays by card"]},
-                                     {"logic": "all", "items": ["a customer pays by cash"]}]
+    assert record["split"]["if"] == [{"logic": "all", "items": [{"text": "a customer pays by card", "kind": "process_fact"}]},
+                                     {"logic": "all", "items": [{"text": "a customer pays by cash", "kind": "process_fact"}]}]
     assert record["first_look_label"] == "Indeterminate"
 
 
@@ -290,3 +295,136 @@ def test_d4b_a_failed_sub_rule_call_fails_only_the_sub_rule(tmp_path):
     assert record["label"] == "Indeterminate"
     sub = record["applicability"]["sub_rules"][0]
     assert sub["label"] == "Mediation failed" and sub["failed_step"] == "check"
+
+
+# ---------- D5: process facts and case events ----------
+
+RETURN_PASSAGE = "If a customer returns a product, the shop must refund the price within 14 days."
+RETURN_SPLIT = {"roles": ["controller"],
+                "if": [{"logic": "all", "items": [{"text": "a customer buys a product", "kind": "process_fact"},
+                                                  {"text": "the customer returns the product", "kind": "case_event"}]}],
+                "then": "the shop must refund the price within 14 days", "exceptions": []}
+RETURN_RELEVANT = {"law_focus": "returns of products", "law_quote": "a customer returns a product", "relevant": True,
+                   "process_step": "the customer chooses a product", "description_quote": "The customer chooses a product",
+                   "reason": "The process sells products."}
+BUY_CONFIRMED_RETURN_OPEN = {"results": [result("C1", "confirmed", "The customer chooses a product"),
+                                         result("C2", "not_stated")]}
+RETURN_REQUIREMENT = {"requirement": "If the customer returns the product, the shop refunds the price within 14 days.",
+                      "step_quote": "The customer chooses a product",
+                      "triggers": [{"trigger": "within 14 days", "kept_as": "within 14 days"}],
+                      "duty": {"from_then": "refund the price within 14 days", "kept_as": "the shop refunds the price"},
+                      "case_events": [{"id": "C2", "kept_as": "If the customer returns the product"}]}
+CONDITIONAL = "Applicable (conditional)"
+
+
+def return_orchestrator(tmp_path, answers, passage=RETURN_PASSAGE):
+    from src.agents.relevance_agent_v2 import RelevanceAgentV2
+    from src.agents.requirement_agent_v2 import RequirementAgentV2
+    from src.orchestrator_v2 import OrchestratorV2
+    from src.prompt_texts import load_c3_block_template
+    llm = MockLLM([json.dumps(a) for a in answers])
+    log = RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}")
+    orch = OrchestratorV2(RelevanceAgentV2(llm, log), ApplicabilityAgentV2(llm, log), RequirementAgentV2(llm, log),
+                          {"c": {"passages": [{"rank": 1, "passage_id": "P-1", "text": passage}]}},
+                          tmp_path / "mediation", load_c3_block_template(CONFIG, "c3_block_template_v2"),
+                          NO_KNOWLEDGE)
+    return orch, llm
+
+
+def test_d5_case_event_not_stated_gives_applicable_conditional_with_its_requirement(tmp_path):
+    orch, llm = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
+                                               RETURN_REQUIREMENT])
+    out = orch.mediate_case("c", SHOP)
+    record = out["passages"][0]
+    assert [(c["id"], c.get("item_kind")) for c in record["applicability"]["conditions"]] == [
+        ("R1", None), ("C1", "process_fact"), ("C2", "case_event")]
+    assert record["label"] == CONDITIONAL and record["applicability"]["look"] == "first"   # no second look
+    assert record["resolution"]["case_events"] == [{"id": "C2", "text": "the customer returns the product"}]
+    assert record["requirement"]["requirement"] == RETURN_REQUIREMENT["requirement"]
+    assert record["requirement"]["requirement_invalid"] is False
+    assert "CASE EVENTS\nC2: the customer returns the product" in llm.prompts_received[3]
+    assert out["knowledge_block"].endswith("- [P-1] " + RETURN_REQUIREMENT["requirement"])
+
+
+def test_d5_every_case_event_confirmed_is_still_conditional(tmp_path):
+    a, _ = agent(tmp_path, [RETURN_SPLIT, {"results": [result("C1", "confirmed", "The customer chooses a product"),
+                                                       result("C2", "confirmed", "The shop sends the product")]}])
+    record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
+    assert record["first_look_label"] == CONDITIONAL
+
+
+def test_d5_a_contradicted_case_event_gives_not_applicable(tmp_path):
+    description = SHOP + " Products can never be returned."
+    a, _ = agent(tmp_path, [RETURN_SPLIT, {"results": [
+        result("C1", "confirmed", "The customer chooses a product"),
+        result("C2", "contradicted", "Products can never be returned")]}])
+    record = a.first_look("x", description, "P-1", RETURN_PASSAGE)
+    assert record["first_look_label"] == "Not applicable"
+
+
+def test_d5_a_process_fact_not_stated_keeps_the_rule_indeterminate(tmp_path):
+    a, _ = agent(tmp_path, [RETURN_SPLIT, {"results": [result("C1", "not_stated"), result("C2", "not_stated")]}])
+    record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
+    assert record["first_look_label"] == "Indeterminate"
+
+
+def test_d5_or_group_of_case_events_is_one_case_event(tmp_path):
+    from src.mediation.resolver_v2 import ResolverV2
+    split = {**RETURN_SPLIT, "if": [
+        {"logic": "all", "items": [{"text": "a customer buys a product", "kind": "process_fact"}]},
+        {"logic": "any", "items": [{"text": "the customer returns the product", "kind": "case_event"},
+                                   {"text": "the customer complains", "kind": "case_event"}]}]}
+    a, _ = agent(tmp_path, [split, {"results": [result("C1", "confirmed", "The customer chooses a product"),
+                                                result("C2", "not_stated"), result("C3", "not_stated")]}])
+    record = a.first_look("x", SHOP, "P-1", RETURN_PASSAGE)
+    resolution = ResolverV2().resolve(record)
+    assert resolution["label"] == CONDITIONAL
+    assert resolution["case_events"] == [{"id": "G2", "text": "one of: the customer returns the product; "
+                                                              "the customer complains"}]
+
+
+def test_d5_requirement_without_its_case_event_is_retried_then_invalid(tmp_path):
+    dropped = {**RETURN_REQUIREMENT, "case_events": []}
+    orch, llm = return_orchestrator(tmp_path, [RETURN_RELEVANT, RETURN_SPLIT, BUY_CONFIRMED_RETURN_OPEN,
+                                               dropped, dropped])
+    out = orch.mediate_case("c", SHOP)
+    record = out["passages"][0]
+    problem = record["requirement"]["attempts"][0]["problems"][0]
+    assert problem.startswith('the case event C2 ("the customer returns the product") is not kept')
+    assert problem in llm.prompts_received[4]                                   # the retry gets the reason
+    assert record["requirement"]["requirement_invalid"] is True and out["knowledge_block"] == NO_KNOWLEDGE
+
+
+def test_d5_case_event_kept_as_must_start_with_if_or_when_and_be_in_the_requirement():
+    from src.agents.requirement_agent_v2 import RequirementOutputV2
+    from src.mediation.requirement_checker_v2 import RequirementCheckerV2
+    checker, events = RequirementCheckerV2(CONFIG), [{"id": "C2", "text": "the customer returns the product"}]
+    ok = RequirementOutputV2.model_validate(RETURN_REQUIREMENT)
+    assert checker.case_event_problems(ok, events) == []
+    not_if = RequirementOutputV2.model_validate({**RETURN_REQUIREMENT, "case_events": [
+        {"id": "C2", "kept_as": "the customer returns the product"}]})
+    assert checker.case_event_problems(not_if, events) == [
+        'the kept_as words "the customer returns the product" of case event C2 must start with "If" or "When"']
+    invented = RequirementOutputV2.model_validate({**RETURN_REQUIREMENT, "case_events": [
+        {"id": "C2", "kept_as": "When the customer complains"}, {"id": "C9", "kept_as": "If the customer returns"}]})
+    assert checker.case_event_problems(invented, events) == [
+        "case_events names C9, which is not a listed case event",
+        'the kept_as words "When the customer complains" of case event C2 are not copied word for word from the '
+        'requirement']
+    assert checker.case_event_problems(ok, []) == ["case_events names C2, which is not a listed case event"]
+
+
+def test_d5_prompts_mark_kinds_and_list_case_events(tmp_path):
+    from src.agents.requirement_agent_v2 import RequirementAgentV2
+    a, _ = agent(tmp_path, ["{}"])
+    split_prompt = a.split_call.build_prompt(passage_id="P-1", passage_text=RETURN_PASSAGE)
+    assert '"case_event": an event that happens only in some cases of the process' in split_prompt
+    assert '"process_fact": a fact that holds or does not hold for the process as a whole' in split_prompt
+    item = a.split_call.output_schema.model_json_schema()["$defs"]["IfItem"]
+    assert item["properties"]["kind"]["enum"] == ["process_fact", "case_event"]
+    req = RequirementAgentV2(MockLLM(["{}"]), RunLogger(tmp_path, "ROUND1", f"r{next(RUN_IDS)}"))
+    inputs = dict(description=SHOP, passage_id="P-1", passage_text=RETURN_PASSAGE, then="refund the price",
+                  process_step="sale", description_quote="The customer chooses a product")
+    assert req.build_prompt(**inputs).rstrip().endswith("CASE EVENTS\nnone")
+    assert req.build_prompt(**inputs, case_events=[{"id": "C2", "text": "the customer returns it"}]).rstrip().endswith(
+        "CASE EVENTS\nC2: the customer returns it")

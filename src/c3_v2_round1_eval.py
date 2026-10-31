@@ -65,8 +65,10 @@ def split_of(record: dict) -> dict | None:
 
 
 def if_texts(split: dict) -> list[str]:
-    """The IF item texts of a split answer: plain texts (before D4a) or the items of its groups (D4a)."""
-    return [t for c in split["if"] for t in ([c] if isinstance(c, str) else c["items"])]
+    """The IF item texts of a split answer: plain texts (before D4a) or the items of its groups (D4a; since D5 each item
+    is {"text", "kind"})."""
+    items = [i for c in split["if"] for i in ([c] if isinstance(c, str) else c["items"])]
+    return [i if isinstance(i, str) else i["text"] for i in items]
 
 
 def log_calls(log_dir: Path) -> dict:

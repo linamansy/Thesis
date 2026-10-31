@@ -10,6 +10,9 @@ For every passage of the case, in rank order:
   3. ResolverV2 (code): Applicable only if all IF conditions are confirmed AND no stated exception applies
   4. RequirementAgentV2, ONLY for Applicable: the THEN part -> 1-2 plain sentences tied to RelevanceAgentV2's process
      step, checked by code (RequirementCheckerV2); failing twice -> requirement_invalid, never passed on
+  D5 (design round 1): "Applicable (conditional)" (role, scope and process facts confirmed, case events not
+     contradicted) is treated like Applicable: requirement (which must keep each case event as "If/When ...") and
+     block line.
   Sub-rules (D4b, design round 1): every special case the split gave (applicability "sub_rules", K1, ...) gets
      steps 2 (second look) to 4 on its own, after the main rule; its label, resolution and requirement are saved in
      the sub-rule. The passage label is the main rule's. A requirement of an Applicable sub-rule goes into the block
@@ -39,7 +42,7 @@ from src.agents.requirement_agent_v2 import RequirementAgentV2
 from src.llm.base_llm import LLMUnavailableError
 from src.mediation.applicability_resolver import APPLICABLE, INDETERMINATE
 from src.mediation.relevance_v2_checker import RelevanceV2Checker
-from src.mediation.resolver_v2 import ResolverV2
+from src.mediation.resolver_v2 import APPLICABLE_LABELS, ResolverV2
 from src.orchestrator import IRRELEVANT, MEDIATION_FAILED
 
 
@@ -118,10 +121,11 @@ class OrchestratorV2:
         record["label"] = record["resolution"]["label"]
         record["label_cause"] = record["resolution"]["reason"]
 
-        # Box 4: requirement, only for Applicable rules
-        if record["label"] == APPLICABLE:
+        # Box 4: requirement, only for Applicable rules (D5: also Applicable (conditional), keeping its case events)
+        if record["label"] in APPLICABLE_LABELS:
             record["requirement"] = self._step(record, "requirement", lambda: self.write_requirement(
-                case_id, description, record, text, applicability["split"]["then"], applicability["conditions"]))
+                case_id, description, record, text, applicability["split"]["then"], applicability["conditions"],
+                record["resolution"]["case_events"]))
             if record["requirement"] and record["requirement"]["requirement_invalid"]:
                 record["label_cause"] = ("requirement invalid: "
                                          + "; ".join(record["requirement"]["attempts"][-1]["problems"]))
@@ -132,12 +136,14 @@ class OrchestratorV2:
         return record
 
     def write_requirement(self, case_id: str, description: str, record: dict, text: str, then: str,
-                          conditions: list[dict]) -> dict | None:
-        """Box 4 for one Applicable rule (the main rule or a sub-rule), tied to RelevanceAgentV2's process step."""
+                          conditions: list[dict], case_events: list[dict]) -> dict | None:
+        """Box 4 for one Applicable rule (the main rule or a sub-rule), tied to RelevanceAgentV2's process step.
+        case_events (D5): the resolver's case events, which the requirement must keep as its "If/When ..." trigger."""
         return self.requirement_agent.write(
             case_id, description=description, passage_id=record["passage_id"], passage_text=text, then=then,
             process_step=record["relevance"]["process_step"],
-            description_quote=record["relevance"]["description_quote"], if_items=conditions)
+            description_quote=record["relevance"]["description_quote"], if_items=conditions,
+            case_events=case_events)
 
     def mediate_sub_rule(self, case_id: str, description: str, record: dict, sub: dict,
                          case_passages: list[dict]) -> None:
@@ -153,10 +159,10 @@ class OrchestratorV2:
                 return
             sub["resolution"] = self.resolver.resolve(sub)
             sub["label"], sub["label_cause"] = sub["resolution"]["label"], sub["resolution"]["reason"]
-            if sub["label"] != APPLICABLE:
+            if sub["label"] not in APPLICABLE_LABELS:
                 return
             sub["requirement"] = self.write_requirement(case_id, description, record, record["passage_text"],
-                                                        sub["then"], sub["conditions"])
+                                                        sub["then"], sub["conditions"], sub["resolution"]["case_events"])
             if sub["requirement"] is None:
                 sub.update(label=MEDIATION_FAILED, failed_step="requirement",
                            label_cause="failed at requirement: no valid output after retry (see the log file)")
@@ -194,7 +200,7 @@ class OrchestratorV2:
         lines = [self.template["requirement_line"].format(passage_id=r["passage_id"],
                                                           requirement=rule["requirement"]["requirement"].strip())
                  for r in records for rule in [r] + ((r.get("applicability") or {}).get("sub_rules") or [])
-                 if rule["label"] == APPLICABLE and rule.get("requirement")
+                 if rule["label"] in APPLICABLE_LABELS and rule.get("requirement")
                  and not rule["requirement"]["requirement_invalid"]]
         if not lines:
             return self.no_knowledge_text

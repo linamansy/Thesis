@@ -117,9 +117,9 @@ def test_role_lists_per_law_and_role_facts():
 
 
 GDPR_SPLIT_PROMPT_SHA256 = {   # measured before the per-law role list was added (round 3 split prompt); re-measured
-    # after the split prompt changed on purpose in design round 1 (D4a: AND/OR groups; D4b: special cases)
-    "GDPR-Art13-1": "224cc36a0206be7341c2057af5df32b1cb63c4db8a167cd539ada031a7a2f0dd",
-    "GDPR-Art30-2": "8989c3bb186d66bd4394a6abf76bc5e872d7f7076c25d4102e417351985448ec"}
+    # after the split prompt changed on purpose in design round 1 (D4a: AND/OR groups; D4b: special cases; D5: item kinds)
+    "GDPR-Art13-1": "fe08d993ccc6219cf937317f9c612bc17559930966022740fa0031b986bdc43d",
+    "GDPR-Art30-2": "476a501aaf01fbea54e7159a4bbb98fb35d9ffa571f2eab1a03b00ec82e15f02"}
 
 
 @pytest.mark.parametrize("passage_id", GDPR_SPLIT_PROMPT_SHA256)

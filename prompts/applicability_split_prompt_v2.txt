@@ -8,6 +8,9 @@ INSTRUCTIONS
 - "if" is a list of groups, and every group must hold. Each group has "logic" and "items":
   - "all": every item of the group must hold (conditions joined by "and", or a single condition).
   - "any": the items are alternatives and at least one of them must hold (for example "any of", "one of the following", or conditions joined by "or"). Put all alternatives of the same choice into one "any" group.
+- Each item has "text" (the condition) and "kind":
+  - "process_fact": a fact that holds or does not hold for the process as a whole (for example the kind of activity, of customer or of goods).
+  - "case_event": an event that happens only in some cases of the process (for example a request, a withdrawal, a complaint, a late payment or a delivery).
 - A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into "if": an "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
 - "then": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example "at the time when", "on request", "where applicable").
 - "exceptions": the situations the rule itself names in which it does not apply (for example "unless ..." or "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
@@ -17,15 +20,15 @@ INSTRUCTIONS
 
 EXAMPLE (made up, for the format only)
 Rule: "Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it."
-Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": ["a parcel is collected from a sender"]}}], "then": "the carrier must give a receipt at the time of collection", "exceptions": ["the sender declines the receipt"], "special_cases": []}}
+Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": [{{"text": "a parcel is collected from a sender", "kind": "process_fact"}}]}}], "then": "the carrier must give a receipt at the time of collection", "exceptions": ["the sender declines the receipt"], "special_cases": []}}
 
 EXAMPLE WITH ALTERNATIVES (made up, for the format only)
 Rule: "A carrier shall store a parcel for 30 days where the parcel is collected from a sender and one of the following applies: (a) the address is unreadable; (b) the recipient is absent; or (c) the recipient refuses the parcel."
-Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": ["a parcel is collected from a sender"]}}, {{"logic": "any", "items": ["the address is unreadable", "the recipient is absent", "the recipient refuses the parcel"]}}], "then": "the carrier must store the parcel for 30 days", "exceptions": [], "special_cases": []}}
+Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": [{{"text": "a parcel is collected from a sender", "kind": "process_fact"}}]}}, {{"logic": "any", "items": [{{"text": "the address is unreadable", "kind": "case_event"}}, {{"text": "the recipient is absent", "kind": "case_event"}}, {{"text": "the recipient refuses the parcel", "kind": "case_event"}}]}}], "then": "the carrier must store the parcel for 30 days", "exceptions": [], "special_cases": []}}
 
 EXAMPLE WITH A SPECIAL CASE (made up, for the format only)
 Rule: "A carrier shall deliver a parcel within 3 days of collection. In the case of fragile parcels, the carrier shall pack the parcel in a padded box before transport."
-Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": ["a parcel is collected"]}}], "then": "the carrier must deliver the parcel within 3 days of collection", "exceptions": [], "special_cases": [{{"clause": "In the case of fragile parcels", "roles": ["other"], "if": [{{"logic": "all", "items": ["the parcel is fragile"]}}], "then": "the carrier must pack the parcel in a padded box before transport"}}]}}
+Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": [{{"text": "a parcel is collected", "kind": "process_fact"}}]}}], "then": "the carrier must deliver the parcel within 3 days of collection", "exceptions": [], "special_cases": [{{"clause": "In the case of fragile parcels", "roles": ["other"], "if": [{{"logic": "all", "items": [{{"text": "the parcel is fragile", "kind": "case_event"}}]}}], "then": "the carrier must pack the parcel in a padded box before transport"}}]}}
 
 EXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)
 Rule: "Each processor shall keep a list of the parcels it handles on behalf of a controller."
@@ -33,7 +36,7 @@ Answer: {{"roles": ["processor"], "if": [], "then": "the processor must keep a l
 
 EXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)
 Rule: "Where a list of approved carriers changes, each Member State shall publish it."
-Answer: {{"roles": ["public body"], "if": [{{"logic": "all", "items": ["a list of approved carriers changes"]}}], "then": "the Member State must publish the list", "exceptions": [], "special_cases": []}}
+Answer: {{"roles": ["public body"], "if": [{{"logic": "all", "items": [{{"text": "a list of approved carriers changes", "kind": "case_event"}}]}}], "then": "the Member State must publish the list", "exceptions": [], "special_cases": []}}
 
 JSON SCHEMA
 {schema}

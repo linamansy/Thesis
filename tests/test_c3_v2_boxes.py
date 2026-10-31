@@ -30,8 +30,9 @@ OTHER_PASSAGE = "A card means a payment card issued by a bank."
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": ["the customer declines the receipt"]}
 # the split as saved: since D4a (design round 1) every IF text is read as a group of one item that must hold; since
-# D4b the split has special cases (none here)
-SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": ["a customer pays by card"]}], "special_cases": []}
+# D4b the split has special cases (none here); since D5 a plain text item is a process fact
+SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": [{"text": "a customer pays by card", "kind": "process_fact"}]}],
+               "special_cases": []}
 CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["The customer pays by card"]},
                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
 NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quotes": []},
@@ -650,7 +651,8 @@ def test_first_look_turns_unless_clause_into_exception(tmp_path):
     assert [(e["id"], e["text"]) for e in record["exceptions"]] == \
         [("E1", "the customer declines the receipt"), ("E2", "unless the customer declines it")]
     assert record["exceptions"][1]["split_from"] == "C1"
-    assert record["split"]["if"] == [{"logic": "all", "items": UNLESS_SPLIT["if"]}]   # the model's item, as a group (D4a)
+    assert record["split"]["if"] == [{"logic": "all", "items": [{"text": UNLESS_SPLIT["if"][0],   # the model's item,
+                                                                 "kind": "process_fact"}]}]    # as a group (D4a, D5)
     check_prompt = llm.prompts_received[1]
     assert "C1: a customer pays by card\n" in check_prompt and "E2: unless the customer declines it" in check_prompt
     # read-only check of the task: a not_stated exception does not block the rule

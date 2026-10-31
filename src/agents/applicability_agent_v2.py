@@ -24,6 +24,10 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      groups and THEN. Each becomes a sub-rule (K1, K2, ...) that goes through steps b-h on its own (own check-IF
      call; no exceptions of its own besides split-off "unless" clauses) and gets its own label and requirement from
      the OrchestratorV2. D1 applies to the main rule only.
+     Case events (D5, design round 1): the split marks each IF item "process_fact" (holds or not for the process as
+     a whole) or "case_event" (happens only in some cases: a request, a withdrawal, a complaint, ...); saved as
+     "item_kind". The label needs only the role, the scope and the process facts confirmed; with case events not
+     contradicted it is "Applicable (conditional)" (src/mediation/resolver_v2.py). A plain text item is a process fact.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -189,14 +193,29 @@ def split_exceptions(conditions: list) -> tuple[list[dict], list[dict]]:
     return ([{"id": f"C{i}", "kind": "situation", **c} for i, c in enumerate(situational, 1)], split_off)
 
 
+class IfItem(BaseModel):
+    # D5 (design round 1): one IF item and its kind. (Comments, not docstrings: JSON agents send their schema without
+    # class descriptions, fix nodoc.)
+    text: str = Field(description="The condition, a short statement in the words of the rule")
+    kind: Literal["process_fact", "case_event"] = Field(
+        description='"process_fact": holds or does not hold for the process as a whole; "case_event": happens only in '
+                    'some cases (for example a request, a withdrawal, a complaint, a late payment, a delivery)')
+
+
 class IfGroup(BaseModel):
-    # D4a (design round 1): a group of IF items with its logic. The groups of a rule must all hold. (A comment, not a
-    # docstring: JSON agents send their schema without class descriptions, fix nodoc.)
+    # D4a (design round 1): a group of IF items with its logic. The groups of a rule must all hold.
     logic: Literal["all", "any"] = Field(description='"all": every item of the group must hold; "any": the items are '
                                                      'alternatives and at least one must hold ("any of", "one of the '
                                                      'following", "or")')
-    items: list[str] = Field(min_length=1, description="The conditions of the group, each a short statement in the "
-                                                       "words of the rule")
+    items: list[IfItem] = Field(min_length=1, description="The conditions of the group")
+
+    @field_validator("items", mode="before")
+    @classmethod
+    def _items(cls, value):
+        """A plain text item (the format before D5) is read as a process fact."""
+        if isinstance(value, list):
+            return [{"text": v, "kind": "process_fact"} if isinstance(v, str) else v for v in value]
+        return value
 
 
 def as_groups(value):
@@ -207,9 +226,10 @@ def as_groups(value):
 
 
 def flat_items(groups: list[IfGroup]) -> list[dict]:
-    """The IF items of the split in order, each with its group id (G1, G2, ...) and the group's logic."""
-    return [{"text": text, "group": f"G{g}", "logic": group.logic}
-            for g, group in enumerate(groups, 1) for text in group.items]
+    """The IF items of the split in order, each with its kind (D5: item_kind process_fact / case_event), its group id
+    (G1, G2, ...) and the group's logic."""
+    return [{"text": item.text, "item_kind": item.kind, "group": f"G{g}", "logic": group.logic}
+            for g, group in enumerate(groups, 1) for item in group.items]
 
 
 @functools.cache

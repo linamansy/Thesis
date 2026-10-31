@@ -66,7 +66,9 @@ def test_schema_has_the_fields_the_parser_expects(tmp_path, agent_class):
     agent = agent_class(MockLLM(["{}"]), RunLogger(tmp_path, "C3", "test"), max_retries=0)
     schema = agent.format_schema()
     assert set(schema["properties"]) == {f.alias or name for name, f in agent.output_schema.model_fields.items()}
-    assert set(schema["required"]) == set(schema["properties"])
+    # every field is required, except one with a default (D5: RequirementAgentV2.case_events, checked by code)
+    assert set(schema["required"]) == {f.alias or name for name, f in agent.output_schema.model_fields.items()
+                                       if f.is_required()}
 
 
 def test_split_schema_uses_the_parsers_names_and_the_laws_roles(tmp_path):
