@@ -64,6 +64,11 @@ def split_of(record: dict) -> dict | None:
     return record.get("split_only")
 
 
+def if_texts(split: dict) -> list[str]:
+    """The IF item texts of a split answer: plain texts (before D4a) or the items of its groups (D4a)."""
+    return [t for c in split["if"] for t in ([c] if isinstance(c, str) else c["items"])]
+
+
 def log_calls(log_dir: Path) -> dict:
     """Criterion 8 from the log: one agent call = one record with retries 0; a failed call = an invalid last attempt."""
     records = [json.loads(line) for path in sorted(log_dir.glob("*.jsonl"))
@@ -80,8 +85,8 @@ def metrics(records: list[dict], obligation_pattern, log: dict, limits: dict) ->
     """limits: config.yaml c3_v2.requirement_checks."""
     splits = [(r, split_of(r)) for r in records]
     usable = [r for r, s in splits if s and s["if"] and s["then"].strip()
-              and not any(obligation_pattern.search(c) for c in s["if"])]
-    if_items = [c for _, s in splits if s for c in s["if"]]
+              and not any(obligation_pattern.search(c) for c in if_texts(s))]
+    if_items = [c for _, s in splits if s for c in if_texts(s)]
     obligation_items = [c for c in if_items if obligation_pattern.search(c)]
     requirements = [r for r in records if r["label"] == APPLICABLE]
     written = [r for r in requirements if r["requirement"]]

@@ -15,6 +15,10 @@ Steps for one passage kept by RelevanceAgentV2 (round 3 decision logic, docs/C3_
      ensure ...", the duty is on the first role of the law's role list (config.yaml c3_v2.roles, never "public body"
      or "other") named after "shall ensure"; with no such role the split's roles are kept without "public body" (or
      "other" if none is left). The Member State only passes the duty on; it is never the duty holder.
+     AND / OR (D4a, design round 1): "if" is a list of groups that must all hold, each with logic "all" (every item)
+     or "any" (alternatives: "any of", "one of the following", "or"). The items are numbered C1, C2, ... across the
+     groups and keep their group id (G1, ...) and logic; an "any" group counts as one unit for the label
+     (src/mediation/resolver_v2.if_units). A plain text in "if" is read as an "all" group of one item.
   b. the IF list is built by code (R1, R2): one role item R1 + the scope item S1 (config.yaml c3_v2.scope_conditions,
      for every passage of that law, e.g. GDPR) + every situational condition C1, C2, ...
      Exception splitting (fix exc, 30 Oct 2026): an IF item containing "unless", "except where" or "except when" is
@@ -63,7 +67,7 @@ import functools
 import re
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 from src.agents.base_agent import BaseAgent
 from src.config import load_config
@@ -158,23 +162,49 @@ EXCEPTION_MARKERS = ("unless", "except where", "except when")
 EXCEPTION_PATTERN = re.compile(r"\b(?:" + "|".join(re.escape(m) for m in EXCEPTION_MARKERS) + r")\b", re.IGNORECASE)
 
 
-def split_exceptions(conditions: list[str]) -> tuple[list[dict], list[dict]]:
+def split_exceptions(conditions: list) -> tuple[list[dict], list[dict]]:
     """The situational IF items C1, C2, ... and the exceptions split off them by code. An IF item with an exception
     marker (EXCEPTION_MARKERS) is cut at the first marker: the part before stays the IF item, the clause from the
     marker on becomes an exception (numbered by the caller after the split's own exceptions). Both keep the
-    model's item as "original_text". An item that starts with a marker becomes an exception only."""
+    model's item as "original_text". An item that starts with a marker becomes an exception only.
+    conditions: texts, or dicts with "text" and other keys (group, logic: D4a), which the IF item keeps."""
     situational, split_off = [], []
-    for text in conditions:
+    for condition in conditions:
+        text = condition if isinstance(condition, str) else condition["text"]
+        extra = {} if isinstance(condition, str) else {k: v for k, v in condition.items() if k != "text"}
         match = EXCEPTION_PATTERN.search(text)
         if not match:
-            situational.append({"text": text})
+            situational.append({"text": text, **extra})
             continue
         before = text[:match.start()].strip().rstrip(",;:").strip()
         if before:
-            situational.append({"text": before, "original_text": text})
+            situational.append({"text": before, "original_text": text, **extra})
         split_off.append({"text": text[match.start():].strip(), "original_text": text,
                           "split_from": f"C{len(situational)}" if before else None})
     return ([{"id": f"C{i}", "kind": "situation", **c} for i, c in enumerate(situational, 1)], split_off)
+
+
+class IfGroup(BaseModel):
+    # D4a (design round 1): a group of IF items with its logic. The groups of a rule must all hold. (A comment, not a
+    # docstring: JSON agents send their schema without class descriptions, fix nodoc.)
+    logic: Literal["all", "any"] = Field(description='"all": every item of the group must hold; "any": the items are '
+                                                     'alternatives and at least one must hold ("any of", "one of the '
+                                                     'following", "or")')
+    items: list[str] = Field(min_length=1, description="The conditions of the group, each a short statement in the "
+                                                       "words of the rule")
+
+
+def as_groups(value):
+    """A plain text in "if" (the format before D4a) is read as a group of one item that must hold."""
+    if isinstance(value, list):
+        return [{"logic": "all", "items": [v]} if isinstance(v, str) else v for v in value]
+    return value
+
+
+def flat_items(groups: list[IfGroup]) -> list[dict]:
+    """The IF items of the split in order, each with its group id (G1, G2, ...) and the group's logic."""
+    return [{"text": text, "group": f"G{g}", "logic": group.logic}
+            for g, group in enumerate(groups, 1) for text in group.items]
 
 
 @functools.cache
@@ -184,9 +214,16 @@ def split_schema(role_names: tuple[str, ...]) -> type[BaseModel]:
     class SplitOutputV2(BaseModel):
         model_config = ConfigDict(populate_by_name=True)
         roles: list[Literal[role_names]] = Field(min_length=1, description="Who the rule places its duty on")
-        conditions: list[str] = Field(alias="if", description="Every situational condition under which the rule "
-                                                              "applies (when it applies, never a role and never what "
-                                                              "must be done); empty list if none")
+        conditions: list[IfGroup] = Field(alias="if", description="Every situational condition under which the rule "
+                                                                  "applies (when it applies, never a role and never "
+                                                                  "what must be done), in groups that must all hold; "
+                                                                  "empty list if none")
+
+        @field_validator("conditions", mode="before")
+        @classmethod
+        def _groups(cls, value):
+            return as_groups(value)
+
         then: str = Field(description="What the rule requires to be done when it applies")
         exceptions: list[str] = Field(description="Situations the rule itself names in which it does not apply; "
                                                   "empty list if none")
@@ -321,7 +358,8 @@ class ApplicabilityAgentV2:
             record["failed_step"] = "split"
             return record
         record["split"] = split.model_dump(by_alias=True)
-        record["rejected_if"] = [c for c in split.conditions if self.obligation_pattern.search(c)]
+        if_items = flat_items(split.conditions)
+        record["rejected_if"] = [c["text"] for c in if_items if self.obligation_pattern.search(c["text"])]
         record["split_valid"] = not record["rejected_if"]
         if not record["split_valid"]:
             record["label"] = SPLIT_INVALID
@@ -336,7 +374,7 @@ class ApplicabilityAgentV2:
                      "roles": [{"role": r} for r in roles]}
         scope = [{"id": "S1", "kind": "scope", "text": text} for prefix, text in self.scope_conditions.items()
                  if passage_id.startswith(prefix)]
-        situational, split_off = split_exceptions(split.conditions)
+        situational, split_off = split_exceptions(if_items)
         record["conditions"] = [role_item] + scope + situational
         fact_ids = dict.fromkeys(rules[r["role"]]["fact"] for r in role_item["roles"]
                                  if rules[r["role"]]["decide"] == "fact")
@@ -362,7 +400,7 @@ class ApplicabilityAgentV2:
 
         # e. roles by code (R3), f. first look
         self.decide_roles(role_item, record["role_facts"], scope, rules)
-        record["first_look_label"] = record["label"] = look_label([c["status"] for c in record["conditions"]])
+        record["first_look_label"] = record["label"] = look_label(record["conditions"])
         return record
 
     def decide_roles(self, role_item: dict, role_facts: list[dict], scope: list[dict], rules: dict) -> None:
@@ -415,8 +453,11 @@ class ApplicabilityAgentV2:
             role_item.update(quotes_canonical=[], quote_found=None, downgraded=False)
 
     def open_conditions(self, record: dict) -> list[dict]:
-        """The situational IF conditions that are still not_stated (input of the second look, R5)."""
-        return [c for c in record["conditions"] if c["kind"] == "situation" and c["status"] == "not_stated"]
+        """The situational IF conditions that are still not_stated (input of the second look, R5), without the
+        alternatives of an "any" group that already has a confirmed item (D4a: the group holds)."""
+        held = {c["group"] for c in record["conditions"] if c.get("logic") == "any" and c["status"] == "confirmed"}
+        return [c for c in record["conditions"] if c["kind"] == "situation" and c["status"] == "not_stated"
+                and not (c.get("logic") == "any" and c["group"] in held)]
 
     def second_look(self, case_id: str, description: str, record: dict, passage_id: str,
                     case_passages: list[dict]) -> dict:
@@ -437,7 +478,7 @@ class ApplicabilityAgentV2:
             record["failed_step"] = "verifier"
             return record
 
-        label = look_label([c["status"] for c in record["conditions"]])
+        label = look_label(record["conditions"])
         record["second_look_decided"] = label != INDETERMINATE
         record["label"] = label
         return record

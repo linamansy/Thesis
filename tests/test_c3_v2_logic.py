@@ -5,7 +5,7 @@ answer below is HAND-WRITTEN FOR LOGIC TESTING, PROVISIONAL: it is what an ideal
 (MockLLM), so the test shows that the code (roles A1/R3, scope R2, quote check, second look R5, ResolverV2 R4, the
 requirement checks R6) gives the expected label when the agents answer well. It says nothing about qwen3:8b (that is
 evaluation (b), results/diagnostics/c3_v2_round3/).
-The OR test (GDPR-Art2-1) is marked expected-failure: it documents a known limitation, the IF list is a conjunction.
+The OR test (GDPR-Art2-1) was an expected failure until design round 1 (D4a: the split marks OR groups).
 """
 
 import itertools
@@ -395,25 +395,35 @@ def test_requirement_with_fake_step_quote_rejected(tmp_path):
     assert knowledge == NO_KNOWLEDGE
 
 
-@pytest.mark.xfail(strict=True, reason="IF list is a conjunction; OR not represented")
-def test_or_conditions_art2_1_known_limitation(tmp_path):
+def test_or_conditions_art2_1(tmp_path):
     # GDPR-Art2-1: processing "wholly or partly by automated means" OR (not by automated means) "part of a filing
-    # system". One alternative holds in 01.1 (stored in the system), so the rule applies; the code needs ALL IF items
-    # confirmed and gives Indeterminate. Expected to fail until OR conditions are represented.
+    # system". One alternative holds in 01.1 (stored in the system), so the rule applies. Until design round 1 this was
+    # an expected failure (the IF list was a conjunction); since D4a the split marks the alternatives as an "any" group,
+    # which is confirmed when one item is confirmed with a checked quote.
     split = {"roles": ["controller"],
-             "if": ["personal data are processed wholly or partly by automated means",
-                    "personal data processed other than by automated means form part of a filing system"],
+             "if": [{"logic": "any", "items": [
+                 "personal data are processed wholly or partly by automated means",
+                 "personal data processed other than by automated means form part of a filing system"]}],
              "then": "the processing falls under the Regulation", "exceptions": []}
     check = {"results": [
         {"id": "S1", "closest_sentence": None, "status": "confirmed", "quotes": ["the customer's name, phone number and email address"]},
         {"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["store them in the system"]},
         {"id": "C2", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
-    second = {"results": [{"id": "C2", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
+    requirement = {"requirement": "When the sales staff store the contact details in the system, the processing falls "
+                                  "under the data rules.",
+                   "step_quote": "store them in the system",
+                   "triggers": [{"trigger": "wholly or partly by automated means",
+                                 "kept_as": "store the contact details in the system"}],
+                   "duty": {"from_then": "the processing falls under", "kept_as": "the processing falls under"}}
     answers = [relevant("the processing of personal data wholly or partly by automated means",
                         "the contact details are stored in the system", "store them in the system"),
-               split, check, second]
-    record, _, _ = run_case(tmp_path, DESC_01_1, "GDPR-Art2-1", answers)
+               split, check, requirement]
+    record, _, llm = run_case(tmp_path, DESC_01_1, "GDPR-Art2-1", answers)
     assert record["label"] == APPLICABLE
+    assert record["applicability"]["look"] == "first"                       # decided: no second look for C2
+    assert {u["id"]: u["status"] for u in record["resolution"]["units"]} == {"R1": "confirmed", "S1": "confirmed",
+                                                                            "G1": "confirmed"}
+    assert len(llm.prompts_received) == 4
 
 
 # ---------- full pipeline: oracle 01.1, all 5 passages ----------

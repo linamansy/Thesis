@@ -2,6 +2,7 @@
   D1 substantive duty holder of a "Member States shall ensure" rule (code)
   D2 relevance prompt: a rule that could govern a step (e.g. the step that triggers its duty) is relevant
   D3 verifier prompt: ordinary reading, an everyday equivalent of a legal concept counts
+  D4a the split marks IF item groups "all" (AND) or "any" (OR); an OR group is one unit for the label
 Passages and descriptions below are made up unless a real passage id is named.
 """
 
@@ -124,3 +125,82 @@ def test_d3_verifier_prompt_ordinary_reading_everyday_equivalent_and_different_e
     for word in ("consumer", "trader", "personal data", "controller", "payment", "order", "service"):
         assert word not in example, word                                   # the example is outside the corpus
     assert "- The shop sells to private persons" in prompt and prompt.count("{") > 0
+
+
+# ---------- D4a: AND / OR groups of IF items ----------
+
+SHOP = "The customer chooses a product. The customer pays by card. The shop sends the product."
+OR_PASSAGE = "Where a customer pays by card or by cash, the shop must give a receipt."
+OR_SPLIT = {"roles": ["controller"],
+            "if": [{"logic": "any", "items": ["a customer pays by card", "a customer pays by cash"]}],
+            "then": "the shop must give a receipt", "exceptions": []}
+
+
+def result(item_id, status, quote=None):
+    return {"id": item_id, "closest_sentence": None, "status": status, "quotes": [quote] if quote else []}
+
+
+def first_look(tmp_path, answers, passage=OR_PASSAGE):
+    a, llm = agent(tmp_path, answers)
+    return a, a.first_look("x", SHOP, "P-1", passage), llm
+
+
+def test_d4a_or_group_confirmed_by_one_item_with_a_checked_quote(tmp_path):
+    from src.mediation.resolver_v2 import ResolverV2
+    _, record, _ = first_look(tmp_path, [OR_SPLIT, {"results": [
+        result("C1", "confirmed", "The customer pays by card"), result("C2", "not_stated")]}])
+    assert [(c["id"], c["group"], c["logic"]) for c in record["conditions"][1:]] == [("C1", "G1", "any"),
+                                                                                    ("C2", "G1", "any")]
+    assert record["first_look_label"] == "Applicable"
+    resolution = ResolverV2().resolve(record)
+    assert resolution["label"] == "Applicable"
+    assert resolution["units"][1] == {"id": "G1", "logic": "any", "status": "confirmed", "items": ["C1", "C2"]}
+
+
+def test_d4a_or_item_with_a_fake_quote_does_not_confirm_the_group(tmp_path):
+    _, record, _ = first_look(tmp_path, [OR_SPLIT, {"results": [
+        result("C1", "confirmed", "The customer pays with a voucher"), result("C2", "not_stated")]}])
+    assert record["conditions"][1]["status"] == "not_stated" and record["first_look_label"] == "Indeterminate"
+
+
+def test_d4a_or_group_contradicted_only_when_all_items_are(tmp_path):
+    _, record, _ = first_look(tmp_path, [OR_SPLIT, {"results": [
+        result("C1", "contradicted", "The customer pays by card"), result("C2", "not_stated")]}])
+    assert record["first_look_label"] == "Indeterminate"                    # one alternative still open
+    _, record, _ = first_look(tmp_path, [OR_SPLIT, {"results": [
+        result("C1", "contradicted", "The customer pays by card"),
+        result("C2", "contradicted", "The customer pays by card")]}])
+    assert record["first_look_label"] == "Not applicable"
+
+
+def test_d4a_and_group_needs_every_item(tmp_path):
+    split = {**OR_SPLIT, "if": [{"logic": "all", "items": ["a customer pays by card", "a customer pays by cash"]}]}
+    _, record, _ = first_look(tmp_path, [split, {"results": [
+        result("C1", "confirmed", "The customer pays by card"), result("C2", "not_stated")]}])
+    assert record["first_look_label"] == "Indeterminate"
+
+
+def test_d4a_plain_texts_are_read_as_and_items(tmp_path):
+    split = {**OR_SPLIT, "if": ["a customer pays by card", "a customer pays by cash"]}
+    _, record, _ = first_look(tmp_path, [split, {"results": [
+        result("C1", "confirmed", "The customer pays by card"), result("C2", "not_stated")]}])
+    assert record["split"]["if"] == [{"logic": "all", "items": ["a customer pays by card"]},
+                                     {"logic": "all", "items": ["a customer pays by cash"]}]
+    assert record["first_look_label"] == "Indeterminate"
+
+
+def test_d4a_second_look_skips_alternatives_of_a_group_that_holds(tmp_path):
+    split = {**OR_SPLIT, "if": OR_SPLIT["if"] + [{"logic": "all", "items": ["the shop is open"]}]}
+    a, record, _ = first_look(tmp_path, [split, {"results": [
+        result("C1", "confirmed", "The customer pays by card"), result("C2", "not_stated"),
+        result("C3", "not_stated")]}])
+    assert [c["id"] for c in a.open_conditions(record)] == ["C3"]
+
+
+def test_d4a_split_prompt_and_schema_mark_all_and_any_groups(tmp_path):
+    a, _ = agent(tmp_path, ["{}"])
+    prompt = a.split_call.build_prompt(passage_id="P-1", passage_text=OR_PASSAGE)
+    assert '"any": the items are alternatives and at least one of them must hold' in prompt
+    assert "EXAMPLE WITH ALTERNATIVES (made up, for the format only)" in prompt
+    group = a.split_call.output_schema.model_json_schema()["$defs"]["IfGroup"]
+    assert group["properties"]["logic"]["enum"] == ["all", "any"]

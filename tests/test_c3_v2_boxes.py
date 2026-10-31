@@ -29,6 +29,8 @@ OTHER_PASSAGE = "A card means a payment card issued by a bank."
 
 SPLIT = {"roles": ["controller"], "if": ["a customer pays by card"], "then": "the shop must give a receipt",
          "exceptions": ["the customer declines the receipt"]}
+# the split as saved: since D4a (design round 1) every IF text is read as a group of one item that must hold
+SPLIT_SAVED = {**SPLIT, "if": [{"logic": "all", "items": ["a customer pays by card"]}]}
 CONFIRMED = {"results": [{"id": "C1", "closest_sentence": None, "status": "confirmed", "quotes": ["The customer pays by card"]},
                          {"id": "E1", "closest_sentence": None, "status": "not_stated", "quotes": []}]}
 NOT_STATED = {"results": [{"id": "C1", "closest_sentence": None, "status": "not_stated", "quotes": []},
@@ -76,7 +78,7 @@ def orchestrator(tmp_path, answers, passages=None):
 
 def test_valid_split(tmp_path):
     record, llm = first_look(tmp_path, [SPLIT, CONFIRMED])
-    assert record["split_valid"] is True and record["split"] == SPLIT
+    assert record["split_valid"] is True and record["split"] == SPLIT_SAVED
     assert [(c["id"], c["kind"], c["text"]) for c in record["conditions"]] == \
         [("R1", "role", "the duty is on: controller"), ("C1", "situation", "a customer pays by card")]
     assert [(e["id"], e["text"]) for e in record["exceptions"]] == [("E1", "the customer declines the receipt")]
@@ -264,7 +266,7 @@ def test_audit_trail_saves_every_step_and_is_reused(tmp_path):
     saved = json.loads((tmp_path / "mediation" / "c.json").read_text(encoding="utf-8"))
     assert saved == result and saved["c3_version"] == "v2"
     p = saved["passages"][0]
-    assert p["relevance"]["final_relevant"] is True and p["applicability"]["split"] == SPLIT
+    assert p["relevance"]["final_relevant"] is True and p["applicability"]["split"] == SPLIT_SAVED
     assert p["applicability"]["check"] == CONFIRMED and p["resolution"]["label"] == APPLICABLE
     assert p["requirement"]["requirement"] == REQUIREMENT["requirement"] and not p["requirement"]["requirement_invalid"]
     calls = len(llm.prompts_received)
@@ -647,7 +649,7 @@ def test_first_look_turns_unless_clause_into_exception(tmp_path):
     assert [(e["id"], e["text"]) for e in record["exceptions"]] == \
         [("E1", "the customer declines the receipt"), ("E2", "unless the customer declines it")]
     assert record["exceptions"][1]["split_from"] == "C1"
-    assert record["split"]["if"] == UNLESS_SPLIT["if"]                          # the model's answer is kept as it was
+    assert record["split"]["if"] == [{"logic": "all", "items": UNLESS_SPLIT["if"]}]   # the model's item, as a group (D4a)
     check_prompt = llm.prompts_received[1]
     assert "C1: a customer pays by card\n" in check_prompt and "E2: unless the customer declines it" in check_prompt
     # read-only check of the task: a not_stated exception does not block the rule

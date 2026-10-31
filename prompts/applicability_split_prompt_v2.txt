@@ -5,6 +5,9 @@ INSTRUCTIONS
 {role_lines}
   If the duty is on more than one of them (for example "{pair_example}"), list each.
 - "if": EVERY situational condition of the rule: the kind of situation or activity it is about, the event that triggers it, and conditions on the data or the people (for example a clause starting with "where", "when" or "if"). Write each as a short statement in the words of the rule. Never put a role into "if"; roles go into "roles". Use an empty list only if the rule names no situation at all and simply places a duty on someone.
+- "if" is a list of groups, and every group must hold. Each group has "logic" and "items":
+  - "all": every item of the group must hold (conditions joined by "and", or a single condition).
+  - "any": the items are alternatives and at least one of them must hold (for example "any of", "one of the following", or conditions joined by "or"). Put all alternatives of the same choice into one "any" group.
 - A condition says WHEN the rule applies, never what someone has to do. Never put an obligation into "if": an "if" item must not contain the words "must", "shall" or "is required to"; such an answer is rejected automatically.
 - "then": what the rule requires to be done when it applies, in the words of the rule, with its timing and every trigger it states (for example "at the time when", "on request", "where applicable").
 - "exceptions": the situations the rule itself names in which it does not apply (for example "unless ..." or "this does not apply where ..."), each as a short statement of that situation. Use an empty list if the rule names none.
@@ -13,7 +16,11 @@ INSTRUCTIONS
 
 EXAMPLE (made up, for the format only)
 Rule: "Where a carrier collects a parcel from a sender, the carrier shall give a receipt at the time of collection, unless the sender declines it."
-Answer: {{"roles": ["other"], "if": ["a parcel is collected from a sender"], "then": "the carrier must give a receipt at the time of collection", "exceptions": ["the sender declines the receipt"]}}
+Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": ["a parcel is collected from a sender"]}}], "then": "the carrier must give a receipt at the time of collection", "exceptions": ["the sender declines the receipt"]}}
+
+EXAMPLE WITH ALTERNATIVES (made up, for the format only)
+Rule: "A carrier shall store a parcel for 30 days where the parcel is collected from a sender and one of the following applies: (a) the address is unreadable; (b) the recipient is absent; or (c) the recipient refuses the parcel."
+Answer: {{"roles": ["other"], "if": [{{"logic": "all", "items": ["a parcel is collected from a sender"]}}, {{"logic": "any", "items": ["the address is unreadable", "the recipient is absent", "the recipient refuses the parcel"]}}], "then": "the carrier must store the parcel for 30 days", "exceptions": []}}
 
 EXAMPLE WITH NO SITUATIONAL CONDITION (made up, for the format only)
 Rule: "Each processor shall keep a list of the parcels it handles on behalf of a controller."
@@ -21,7 +28,7 @@ Answer: {{"roles": ["processor"], "if": [], "then": "the processor must keep a l
 
 EXAMPLE WITH A DUTY ON A PUBLIC BODY (made up, for the format only)
 Rule: "Where a list of approved carriers changes, each Member State shall publish it."
-Answer: {{"roles": ["public body"], "if": ["a list of approved carriers changes"], "then": "the Member State must publish the list", "exceptions": []}}
+Answer: {{"roles": ["public body"], "if": [{{"logic": "all", "items": ["a list of approved carriers changes"]}}], "then": "the Member State must publish the list", "exceptions": []}}
 
 JSON SCHEMA
 {schema}
