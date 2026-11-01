@@ -66,7 +66,7 @@ def test_configs_equal_section_7_2_and_baseline():
 def test_agent_settings_are_the_ones_section_7_2_fixes():
     assert CONFIG["llm"]["temperature"] == 0 and CONFIG["llm"]["seed"] == 42
     assert CONFIG["model"]["think"] is False and CONFIG["model"]["num_ctx"] == 16384
-    assert str(CONFIG["study2_gdpr"]["ollama_version"]) == "0.40.11"
+    assert str(CONFIG["study2_gdpr"]["ollama_version"]) == "0.40.13"   # updated 1 Nov 2026, deviation in claude/decisions.md
 
 
 def test_make_rewriter_refuses_the_mock_provider():

@@ -12,7 +12,7 @@ generator call per case, no retries; invalid XML is a result. Only the config vi
 the Study 2 corpus and the frozen SR file).
 
 Refused before anything runs: a held-out variant id (mediation_test.held_out_variants), a Study 1 run id
-(statistics.runs), a generator other than bpmngen, a frozen file whose SHA-256 differs from its manifest or that does
+(statistics.runs), a generator other than bpmngen, an Ollama version other than study2_gdpr.ollama_version, a frozen file whose SHA-256 differs from its manifest or that does
 not hold the case or holds 0 passages for it, and any condition whose case folder (or, for C3, mediation file) already exists in the run: an
 existing run is never overwritten or resumed (use a new --run-id). Once study2_run.reference_run_id is set, every other
 run id must have the reference run's settings (SAME_AS_REFERENCE, from its run_info.json) or it does not start.
@@ -194,7 +194,11 @@ def main(argv: list[str] | None = None) -> None:
     conditions = [c.strip() for c in args.conditions.split(",") if c.strip()]
     try:
         view, frozen_sha = prepare(config, args.case, args.run_id, conditions, args.frozen)
-        settings = (ollama_settings(view) | bpmngen_file_settings(view, args.run_id) | bpmngen_library_settings(view)
+        ollama = ollama_settings(view)    # model digest and server settings, checked
+        expected = str(config["study2_gdpr"]["ollama_version"])
+        if ollama.get("ollama_version") != expected:
+            raise ValueError(f"Ollama is {ollama.get('ollama_version')!r}, study2_gdpr.ollama_version is {expected!r}")
+        settings = (ollama | bpmngen_file_settings(view, args.run_id) | bpmngen_library_settings(view)
                     | {"c3_version": config["study2_run"]["c3_version"],
                        "frozen_retrieval": view["paths"]["frozen_retrieval"], "frozen_sha256": frozen_sha,
                        "think_calls": list(config["study2_run"]["think_calls"]), "fresh": args.fresh})

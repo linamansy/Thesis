@@ -65,8 +65,9 @@ def test_settings_must_equal_the_development_run(tmp_path):
     config["paths"]["runs"] = str(tmp_path)
     dev = json.loads(real.read_text(encoding="utf-8"))
     assert dev["ollama_version"] == "0.40.8" and dev["generator"] == "bpmngen/qwen3:8b"
-    settings = {k: dev.get(k) for k in SAME_AS_DEV} | {"ollama_version": "0.40.11"}
-    assert str(GDPR["ollama_version"]) == "0.40.11"
+    # updated 1 Nov 2026, deviation in claude/decisions.md
+    settings = {k: dev.get(k) for k in SAME_AS_DEV} | {"ollama_version": "0.40.13"}
+    assert str(GDPR["ollama_version"]) == "0.40.13"
     check_same_as_dev(config, settings)
     for key, value in (("ollama_version", "0.40.8"), ("ollama_version", None), ("generator_digest", "x"),
                        ("temperature", 0.3)):
