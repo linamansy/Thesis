@@ -666,3 +666,15 @@ mediation_test:
   top5_file: data/retrieval_study2_corpus/mediation_test_top5.json   # R and O lists, written once (step 1)
   output_dir: results/diagnostics/mediation_test   # <group>/answers.json, logs/, metrics.json, report.md
   log_condition: MEDIATION_TEST
+
+study2_run:
+  # STUDY 2 runs (added 1 Nov 2026, BUILD ONLY; nothing frozen or run yet). Step-routing retrieval (src/rag_v3_steps.py)
+  # is run ONCE beforehand by src/freeze_sr.py; C1/C2/C3 (src/run_study2.py) only read the frozen file.
+  # The held-out variants (mediation_test.held_out_variants) are refused by both scripts.
+  sr_options: {two_view: true, fusion: combmax, parent_expansion: true}   # = scripts/run_all_dev.py SR_OPTIONS
+  frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_sr.json            # cases -> passages
+  frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_sr_manifest.json    # SHA-256, corpus hash, settings
+  freeze_output_dir: results/sr_freeze      # <UTC time>/<case>.json (S1-S4 stages) + logs/ of the freeze run
+  freeze_log_condition: SR_FREEZE           # RunLogger file name of the freeze run's LLM calls
+  c3_version: v2
+  think_calls: [CheckIfCallV2, SecondLookCallV2, VerifierCallV2]   # ApplicabilityAgentV2 calls sent with think: true
