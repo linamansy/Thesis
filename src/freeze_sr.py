@@ -9,7 +9,8 @@ of scripts/run_all_dev.py), the Study 2 corpus (study2_corpus.passages, its SHA-
 the RAG v2 retrievers and reranker, and the C3 agents' model and settings (model + llm).
 
 Refused before anything is loaded: an id of a held-out variant (mediation_test.held_out_variants), an id without a
-case folder, a repeated id, and an existing frozen file or manifest (never overwritten).
+case folder, a repeated id, and an existing frozen file or manifest (never overwritten). The frozen file is not
+written if any case ends with 0 passages (the cases and their S1/S2 failure are listed; the stages stay saved).
 
 Written:
   study2_run.frozen_retrieval   {"created_at", "method", "case_ids", "cases": {id: {"passages": [{rank, passage_id,
@@ -66,14 +67,24 @@ def frozen_passages(s4: dict) -> list[dict]:
     return [{"rank": p["rank"], "passage_id": p["passage_id"], "text": p["text"]} for p in s4["passages"]]
 
 
+def empty_reason(stages: dict) -> str:
+    """Why a case has no passages: what went wrong in S1 (steps) and S2 (routing)."""
+    s1, s2 = stages["S1"], stages["S2"]
+    per_step = s2.get("per_step", {})
+    return (f"S1 failed={s1['failed']}, steps kept={len(s1['steps'])}, dropped={len(s1['dropped'])}; "
+            f"S2 steps failed={sum(bool(v['failed']) for v in per_step.values())}, "
+            f"steps with a route={sum(bool(v['routes']) for v in per_step.values())}/{len(per_step)}")
+
+
 def freeze(config: dict, ids: list[str], router_factory, stages_dir: Path, before_case=None) -> dict:
     """Run SR once per id and return the frozen file's content. router_factory(logger) -> StepRouter.
     Every case's S1-S4 stages are written to stages_dir/<id>.json, the LLM calls to stages_dir/logs/.
-    before_case(): called before every case (--fresh: unload the model)."""
+    before_case(): called before every case (--fresh: unload the model).
+    Raises ValueError (after all cases) if any case has 0 passages: nothing may be frozen then."""
     stages_dir.mkdir(parents=True)   # raises if it exists: nothing is overwritten
     router = router_factory(RunLogger(stages_dir / "logs", config["study2_run"]["freeze_log_condition"],
                                       stages_dir.name))
-    cases = {}
+    cases, empty = {}, {}
     for case_id in ids:
         if before_case:
             before_case()
@@ -81,7 +92,11 @@ def freeze(config: dict, ids: list[str], router_factory, stages_dir: Path, befor
         (stages_dir / f"{case_id}.json").write_text(json.dumps(stages, indent=2, ensure_ascii=False) + "\n",
                                                     encoding="utf-8")
         cases[case_id] = {"passages": frozen_passages(stages["S4"])}
+        if not cases[case_id]["passages"]:
+            empty[case_id] = empty_reason(stages)
         print(f"{case_id:<6}{' '.join(p['passage_id'] for p in cases[case_id]['passages'])}", flush=True)
+    if empty:
+        raise ValueError(f"cases with 0 passages, frozen file not written: {empty}")
     return {"created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "method": "RAG step routing (SR), src/rag_v3_steps.py, study2_run.sr_options; frozen by src/freeze_sr.py",
             "case_ids": ids, "cases": cases}
@@ -136,8 +151,11 @@ def main(argv: list[str] | None = None) -> None:
                           reranker, **run["sr_options"])
 
     stages_dir = project_path(run["freeze_output_dir"]) / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    frozen = freeze(config, ids, router_factory, stages_dir,
-                    (lambda: unload_model(config)) if args.fresh else None)
+    try:
+        frozen = freeze(config, ids, router_factory, stages_dir,
+                        (lambda: unload_model(config)) if args.fresh else None)
+    except ValueError as e:
+        sys.exit(f"Not saved: {e}")
     save(frozen, out_path, force=False)
     save(manifest(config, frozen, out_path, stages_dir, llm_info, reranker, args.fresh), manifest_path, force=False)
     print(f"Saved {out_path}\nsha256 {hashlib.sha256(out_path.read_bytes()).hexdigest()}")

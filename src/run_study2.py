@@ -13,7 +13,7 @@ the Study 2 corpus and the frozen SR file).
 
 Refused before anything runs: a held-out variant id (mediation_test.held_out_variants), a Study 1 run id
 (statistics.runs), a generator other than bpmngen, a frozen file whose SHA-256 differs from its manifest or that does
-not hold the case, and any condition whose case folder (or, for C3, mediation file) already exists in the run: an
+not hold the case or holds 0 passages for it, and any condition whose case folder (or, for C3, mediation file) already exists in the run: an
 existing run is never overwritten or resumed (use a new --run-id). Once study2_run.reference_run_id is set, every other
 run id must have the reference run's settings (SAME_AS_REFERENCE, from its run_info.json) or it does not start.
 
@@ -70,8 +70,11 @@ def load_frozen(config: dict, case_id: str) -> str:
     expected = json.loads(manifest_path.read_text(encoding="utf-8"))["sha256"]
     if sha != expected:
         raise RuntimeError(f"{path} differs from its manifest (frozen file changed): {sha} != {expected}")
-    if case_id not in json.loads(path.read_text(encoding="utf-8"))["cases"]:
+    cases = json.loads(path.read_text(encoding="utf-8"))["cases"]
+    if case_id not in cases:
         raise ValueError(f"case {case_id} is not in the frozen file {path}")
+    if not cases[case_id]["passages"]:
+        raise ValueError(f"case {case_id} has 0 passages in the frozen file {path}; it is never run")
     return sha
 
 
