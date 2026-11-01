@@ -22,7 +22,9 @@ results/runs/<run_id>/C3/mediation/<id>.json, results/logs/<condition>_<run_id>.
 
 Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m src.run_study2 --case 01.1 --run-id study2_01.1_rep1
-    (optional: --conditions C2,C3; --repetition 2; --fresh: unload the model from Ollama before each condition)
+    (optional: --conditions C2,C3; --repetition 2; --fresh: unload the model from Ollama before each condition;
+     --frozen PATH: another frozen file, manifest = PATH with _manifest.json; a file in the folder of
+     study2_run.smoke_frozen_retrieval only for run ids starting with evaluation.smoke_run_prefix)
 """
 
 import argparse
@@ -36,7 +38,7 @@ from run_experiment import (MEDIATION_ROLES, RunInterrupted, bpmngen_file_settin
                             create_llm, ollama_settings, print_summary)
 from src.bpmngen_generator import GeneratorSetupError
 from src.config import load_config, project_path
-from src.freeze_sr import held_out_ids
+from src.freeze_sr import frozen_paths, held_out_ids
 from src.logger import RunLogger
 from src.run_folder import RunFolder
 from src.run_variant_01_1 import VariantRunner
@@ -62,10 +64,18 @@ def check_run_id(config: dict, run_id: str) -> None:
         raise ValueError(f"run id {run_id!r} is empty or a Study 1 run")
 
 
-def load_frozen(config: dict, case_id: str) -> str:
+def check_smoke_frozen(config: dict, frozen: str | None, run_id: str) -> None:
+    """A frozen file in the smoke folder (study2_run.smoke_frozen_retrieval) is only for smoke run ids."""
+    smoke_dir = project_path(config["study2_run"]["smoke_frozen_retrieval"]).resolve().parent
+    path = frozen_paths(config, frozen)[0].resolve()
+    if smoke_dir in path.parents and not run_id.startswith(config["evaluation"]["smoke_run_prefix"]):
+        raise ValueError(f"{path} is a smoke frozen file; run id {run_id!r} must start with "
+                         f"{config['evaluation']['smoke_run_prefix']!r}")
+
+
+def load_frozen(config: dict, case_id: str, frozen: str | None = None) -> str:
     """Check the frozen SR file against its manifest and that it holds the case; returns its SHA-256."""
-    run = config["study2_run"]
-    path, manifest_path = project_path(run["frozen_retrieval"]), project_path(run["frozen_manifest"])
+    path, manifest_path = frozen_paths(config, frozen)
     sha = hashlib.sha256(path.read_bytes()).hexdigest()
     expected = json.loads(manifest_path.read_text(encoding="utf-8"))["sha256"]
     if sha != expected:
@@ -93,11 +103,11 @@ def check_same_as_reference(config: dict, settings: dict, run_id: str) -> None:
         raise ValueError(f"settings differ from the reference run {reference} (theirs vs now): {different}")
 
 
-def run_view(config: dict, case_id: str) -> dict:
-    """Study 2 config view for one case: the Study 2 corpus and the frozen SR file."""
+def run_view(config: dict, case_id: str, frozen: str | None = None) -> dict:
+    """Study 2 config view for one case: the Study 2 corpus and the frozen SR file (frozen, or the default)."""
     view = copy.deepcopy(study2_view(config))
     view["paths"]["passages"] = config["study2_corpus"]["passages"]
-    view["paths"]["frozen_retrieval"] = config["study2_run"]["frozen_retrieval"]
+    view["paths"]["frozen_retrieval"] = frozen or config["study2_run"]["frozen_retrieval"]
     view["cases"]["ids"] = [case_id]
     return view
 
@@ -154,7 +164,8 @@ def run_condition(view: dict, folder: RunFolder, condition: str, agent_llm=None,
     return records
 
 
-def prepare(config: dict, case_id: str, run_id: str, conditions: list[str]) -> tuple[dict, str]:
+def prepare(config: dict, case_id: str, run_id: str, conditions: list[str],
+            frozen: str | None = None) -> tuple[dict, str]:
     """Every check that needs no Ollama; returns (view, frozen SHA-256)."""
     check_case(config, case_id)
     if config["generator"]["type"] != "bpmngen":
@@ -163,8 +174,9 @@ def prepare(config: dict, case_id: str, run_id: str, conditions: list[str]) -> t
     if unknown or not conditions:
         raise ValueError(f"conditions must be from {CONDITIONS}, not {conditions}")
     check_run_id(config, run_id)
-    sha = load_frozen(config, case_id)
-    return run_view(config, case_id), sha
+    check_smoke_frozen(config, frozen, run_id)
+    sha = load_frozen(config, case_id, frozen)
+    return run_view(config, case_id, frozen), sha
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -173,13 +185,15 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--run-id", required=True, help="new run id (an existing run is never overwritten)")
     parser.add_argument("--conditions", default=",".join(CONDITIONS), help="comma-separated (default C1,C2,C3)")
     parser.add_argument("--repetition", type=int, default=1, help="repetition number (default 1)")
+    parser.add_argument("--frozen", help="frozen SR file (default study2_run.frozen_retrieval; manifest = same name "
+                                         "with _manifest.json)")
     parser.add_argument("--fresh", action="store_true",
                         help="unload the model from Ollama before each condition (empty prompt cache); default off")
     args = parser.parse_args(argv)
     config = load_config()
     conditions = [c.strip() for c in args.conditions.split(",") if c.strip()]
     try:
-        view, frozen_sha = prepare(config, args.case, args.run_id, conditions)
+        view, frozen_sha = prepare(config, args.case, args.run_id, conditions, args.frozen)
         settings = (ollama_settings(view) | bpmngen_file_settings(view, args.run_id) | bpmngen_library_settings(view)
                     | {"c3_version": config["study2_run"]["c3_version"],
                        "frozen_retrieval": view["paths"]["frozen_retrieval"], "frozen_sha256": frozen_sha,

@@ -674,6 +674,8 @@ study2_run:
   sr_options: {two_view: true, fusion: combmax, parent_expansion: true}   # = scripts/run_all_dev.py SR_OPTIONS
   frozen_retrieval: data/retrieval_study2_corpus/frozen_retrieval_sr.json            # cases -> passages
   frozen_manifest: data/retrieval_study2_corpus/frozen_retrieval_sr_manifest.json    # SHA-256, corpus hash, settings
+  smoke_frozen_retrieval: data/retrieval_study2_corpus/smoke/frozen_retrieval_sr_smoke.json   # --frozen of a smoke
+                              # freeze; src/run_study2.py uses its folder only for run ids starting with evaluation.smoke_run_prefix
   freeze_output_dir: results/sr_freeze      # <UTC time>/<case>.json (S1-S4 stages) + logs/ of the freeze run
   freeze_log_condition: SR_FREEZE           # RunLogger file name of the freeze run's LLM calls
   c3_version: v2

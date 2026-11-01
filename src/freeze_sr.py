@@ -12,7 +12,8 @@ Refused before anything is loaded: an id of a held-out variant (mediation_test.h
 case folder, a repeated id, and an existing frozen file or manifest (never overwritten). The frozen file is not
 written if any case ends with 0 passages (the cases and their S1/S2 failure are listed; the stages stay saved).
 
-Written:
+Written (--frozen PATH replaces study2_run.frozen_retrieval, the manifest is then PATH with _manifest.json; a smoke
+freeze uses study2_run.smoke_frozen_retrieval, so it never touches the real frozen file):
   study2_run.frozen_retrieval   {"created_at", "method", "case_ids", "cases": {id: {"passages": [{rank, passage_id,
                                 text}]}}}, the layout of the existing frozen files (ExperimentRunner reads "cases")
   study2_run.frozen_manifest    SHA-256 of the frozen file, corpus file + SHA-256, model, digest, Ollama version, agent
@@ -21,7 +22,7 @@ Written:
   study2_run.freeze_output_dir/<UTC time>/logs/          every LLM call (RunLogger)
 
 Run from the project root (Ollama running):
-    .venv\\Scripts\\python.exe -m src.freeze_sr --ids 01.1,01.2,06.1,11.1,13.1,17.1,19.1,45.1 [--fresh]
+    .venv\\Scripts\\python.exe -m src.freeze_sr --ids 01.1,01.2,06.1,11.1,13.1,17.1,19.1,45.1 [--fresh] [--frozen PATH]
 """
 
 import argparse
@@ -40,6 +41,14 @@ from src.rag_v3_steps import ROUTING_PROMPT, STEPS_PROMPT
 def held_out_ids(config: dict) -> set[str]:
     """Every held-out variant id (all groups of mediation_test.held_out_variants)."""
     return {i for group in config["mediation_test"]["held_out_variants"].values() for i in group}
+
+
+def frozen_paths(config: dict, frozen: str | None = None) -> tuple[Path, Path]:
+    """(frozen file, manifest): study2_run.frozen_retrieval / frozen_manifest, or frozen and frozen with _manifest.json."""
+    if not frozen:
+        return project_path(config["study2_run"]["frozen_retrieval"]), project_path(config["study2_run"]["frozen_manifest"])
+    path = project_path(frozen)
+    return path, path.with_name(f"{path.stem}_manifest.json")
 
 
 def check_ids(config: dict, ids: list[str]) -> None:
@@ -131,11 +140,13 @@ def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description="Run step-routing retrieval once and freeze it.")
     parser.add_argument("--ids", required=True, help="comma-separated case / variant ids")
     add_fresh_option(parser)
+    parser.add_argument("--frozen", help="frozen file to write (default study2_run.frozen_retrieval; manifest = same "
+                                         "name with _manifest.json)")
     args = parser.parse_args(argv)
     config = load_config()
     run = config["study2_run"]
     ids = [i.strip() for i in args.ids.split(",") if i.strip()]
-    out_path, manifest_path = project_path(run["frozen_retrieval"]), project_path(run["frozen_manifest"])
+    out_path, manifest_path = frozen_paths(config, args.frozen)
     try:
         check_ids(config, ids)
         if out_path.exists() or manifest_path.exists():   # checked before the slow work
