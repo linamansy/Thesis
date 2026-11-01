@@ -678,3 +678,5 @@ study2_run:
   freeze_log_condition: SR_FREEZE           # RunLogger file name of the freeze run's LLM calls
   c3_version: v2
   think_calls: [CheckIfCallV2, SecondLookCallV2, VerifierCallV2]   # ApplicabilityAgentV2 calls sent with think: true
+  reference_run_id: ""        # first Study 2 run (empty until set); every later run id must have its settings
+                              # (src/run_study2.SAME_AS_REFERENCE) or it does not start

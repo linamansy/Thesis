@@ -14,7 +14,8 @@ the Study 2 corpus and the frozen SR file).
 Refused before anything runs: a held-out variant id (mediation_test.held_out_variants), a Study 1 run id
 (statistics.runs), a generator other than bpmngen, a frozen file whose SHA-256 differs from its manifest or that does
 not hold the case, and any condition whose case folder (or, for C3, mediation file) already exists in the run: an
-existing run is never overwritten or resumed (use a new --run-id).
+existing run is never overwritten or resumed (use a new --run-id). Once study2_run.reference_run_id is set, every other
+run id must have the reference run's settings (SAME_AS_REFERENCE, from its run_info.json) or it does not start.
 
 Outputs, as Study 1: results/runs/<run_id>/run_info.json, results/runs/<run_id>/<condition>/<id>/...,
 results/runs/<run_id>/C3/mediation/<id>.json, results/logs/<condition>_<run_id>.jsonl.
@@ -42,6 +43,9 @@ from src.run_variant_01_1 import VariantRunner
 from src.study2_config import study2_view
 
 CONDITIONS = ["C1", "C2", "C3"]
+# settings every Study 2 run must share with the reference run (study2_run.reference_run_id)
+SAME_AS_REFERENCE = ["ollama_version", "model_digest", "generator_digest", "ollama_server_env", "bpmngen_file_hashes",
+                     "bpmngen_library_versions", "think_calls", "frozen_sha256", "c3_version", "fresh"]
 
 
 # ---------- checks and config view ----------
@@ -69,6 +73,21 @@ def load_frozen(config: dict, case_id: str) -> str:
     if case_id not in json.loads(path.read_text(encoding="utf-8"))["cases"]:
         raise ValueError(f"case {case_id} is not in the frozen file {path}")
     return sha
+
+
+def check_same_as_reference(config: dict, settings: dict, run_id: str) -> None:
+    """Stop unless every setting in SAME_AS_REFERENCE equals the reference run's run_info.json. No check while
+    study2_run.reference_run_id is empty, or for the reference run itself (its own folder keeps its settings)."""
+    reference = config["study2_run"].get("reference_run_id") or ""
+    if not reference or run_id == reference:
+        return
+    path = project_path(config["paths"]["runs"]) / reference / config["paths"]["run_info_file"]
+    if not path.exists():
+        raise ValueError(f"reference run {reference!r} has no {path}")
+    ref = json.loads(path.read_text(encoding="utf-8"))
+    different = {k: (ref.get(k), settings.get(k)) for k in SAME_AS_REFERENCE if ref.get(k) != settings.get(k)}
+    if different:
+        raise ValueError(f"settings differ from the reference run {reference} (theirs vs now): {different}")
 
 
 def run_view(config: dict, case_id: str) -> dict:
@@ -163,6 +182,7 @@ def main(argv: list[str] | None = None) -> None:
                        "frozen_retrieval": view["paths"]["frozen_retrieval"], "frozen_sha256": frozen_sha,
                        "think_calls": list(config["study2_run"]["think_calls"]), "fresh": args.fresh})
         folder = RunFolder(view, args.run_id, args.repetition, settings)
+        check_same_as_reference(config, folder.settings, args.run_id)
         check_not_existing(view, folder, conditions, args.case)
         agent_llm = create_llm(view, "relevance", {}) if "C3" in conditions else None
         think_llm = None
