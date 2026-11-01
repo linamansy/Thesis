@@ -21,7 +21,7 @@ results/runs/<run_id>/C3/mediation/<id>.json, results/logs/<condition>_<run_id>.
 
 Run from the project root (Ollama running):
     .venv\\Scripts\\python.exe -m src.run_study2 --case 01.1 --run-id study2_01.1_rep1
-    (optional: --conditions C2,C3; --repetition 2)
+    (optional: --conditions C2,C3; --repetition 2; --fresh: unload the model from Ollama before each condition)
 """
 
 import argparse
@@ -107,9 +107,13 @@ class Study2Runner(VariantRunner):
 
 
 def run_condition(view: dict, folder: RunFolder, condition: str, agent_llm=None, think_llm=None,
-                  bpmngen_factory=None) -> list[dict]:
-    """One condition for the view's one case. bpmngen_factory(view, logger) replaces the real generator (tests)."""
+                  bpmngen_factory=None, fresh: bool = False, ollama_client=None) -> list[dict]:
+    """One condition for the view's one case. bpmngen_factory(view, logger) replaces the real generator (tests).
+    fresh: unload the model from Ollama first (empty prompt cache); ollama_client replaces the real client (tests)."""
     folder.check_can_start(condition)
+    if fresh:
+        from scripts.debug_single_case import unload_model
+        unload_model(view, client=ollama_client)
     part = folder.next_part(condition)
     logger = RunLogger(project_path(view["paths"]["logs"]), condition, folder.run_id, part)
     llms = {role: agent_llm for role in MEDIATION_ROLES} if condition == "C3" else None
@@ -147,6 +151,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--run-id", required=True, help="new run id (an existing run is never overwritten)")
     parser.add_argument("--conditions", default=",".join(CONDITIONS), help="comma-separated (default C1,C2,C3)")
     parser.add_argument("--repetition", type=int, default=1, help="repetition number (default 1)")
+    parser.add_argument("--fresh", action="store_true",
+                        help="unload the model from Ollama before each condition (empty prompt cache); default off")
     args = parser.parse_args(argv)
     config = load_config()
     conditions = [c.strip() for c in args.conditions.split(",") if c.strip()]
@@ -155,7 +161,7 @@ def main(argv: list[str] | None = None) -> None:
         settings = (ollama_settings(view) | bpmngen_file_settings(view, args.run_id) | bpmngen_library_settings(view)
                     | {"c3_version": config["study2_run"]["c3_version"],
                        "frozen_retrieval": view["paths"]["frozen_retrieval"], "frozen_sha256": frozen_sha,
-                       "think_calls": list(config["study2_run"]["think_calls"])})
+                       "think_calls": list(config["study2_run"]["think_calls"]), "fresh": args.fresh})
         folder = RunFolder(view, args.run_id, args.repetition, settings)
         check_not_existing(view, folder, conditions, args.case)
         agent_llm = create_llm(view, "relevance", {}) if "C3" in conditions else None
@@ -168,7 +174,7 @@ def main(argv: list[str] | None = None) -> None:
     for condition in conditions:
         print(f"Run {args.run_id} | condition {condition} | case {args.case} | frozen {view['paths']['frozen_retrieval']}")
         try:
-            records = run_condition(view, folder, condition, agent_llm, think_llm)
+            records = run_condition(view, folder, condition, agent_llm, think_llm, fresh=args.fresh)
         except (FileNotFoundError, GeneratorSetupError) as e:
             sys.exit(f"Not started: {e}")
         except RunInterrupted as e:
