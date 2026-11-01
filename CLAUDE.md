@@ -90,7 +90,7 @@ Legacy generator (generator.type: json_builder, used by the mock tests): own pro
 - Chunking (DirectiveChunker): keep only articles (drop recitals and annexes, keep definitions). One passage = one numbered paragraph; keep lettered points (a), (b), (c) together. Prefix each passage with directive name and article title. Passage IDs like CRD-Art9-1 and LPD-Art3-1. Output: data/knowledge/passages.jsonl with fields id, directive, article, paragraph, title, text, n_chars.
 - Dense retrieval (DenseRetriever): small English embedding model with its required query/passage prefixes, normalised vectors, FAISS IndexFlatIP.
 - Sparse retrieval (BM25Retriever): BM25 with k1=1.5 and b=0.75; text lowercased, punctuation removed, English stopwords removed, Porter stemming.
-- Queries per case (QueryBuilder): the full description + each sentence of it separately. No LLM anywhere in retrieval.
+- Queries per case (QueryBuilder): the full description + each sentence of it separately. No LLM calls inside the experiment run; retrieval is run once beforehand and frozen as a file.
 - Fusion (HybridRetriever): Reciprocal Rank Fusion with k=60 over the top-20 from each retriever, summed across all queries of a case, deduplicated, fixed top-5 per case, no relevance threshold.
 - Retrieval runs ONCE (src/freeze_retrieval.py) and is saved to data/retrieval/frozen_retrieval.json together with the config used. C2 and C3 only read this file; they never run retrieval themselves.
 - All retrieval classes live in src/retrieval/, one class per file.
