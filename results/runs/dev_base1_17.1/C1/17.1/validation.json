@@ -1,0 +1,60 @@
+{
+  "case_id": "17.1",
+  "condition": "C1",
+  "run_id": "dev_base1_17.1",
+  "generation_succeeded": true,
+  "parses": true,
+  "valid": false,
+  "errors": [
+    "sequence flow f12 has targetRef='ice1', which is not an element",
+    "sequence flow f13 has targetRef='ice2', which is not an element",
+    "sequence flow f14 has targetRef='ice3', which is not an element",
+    "sequence flow f15 has targetRef='ice4', which is not an element",
+    "sequence flow f16 has targetRef='ice5', which is not an element",
+    "sequence flow f17 has targetRef='ice6', which is not an element",
+    "sequence flow f18 has sourceRef='ice1', which is not an element",
+    "sequence flow f19 has sourceRef='ice2', which is not an element",
+    "sequence flow f20 has sourceRef='ice3', which is not an element",
+    "sequence flow f21 has sourceRef='ice4', which is not an element",
+    "sequence flow f22 has sourceRef='ice5', which is not an element",
+    "sequence flow f23 has sourceRef='ice6', which is not an element",
+    "sequence flow f25 has targetRef='ice2', which is not an element",
+    "sequence flow f26 has targetRef='ice3', which is not an element",
+    "sequence flow f27 has sourceRef='ice2', which is not an element",
+    "sequence flow f28 has sourceRef='ice3', which is not an element",
+    "sequence flow f38 has targetRef='ice4', which is not an element",
+    "sequence flow f39 has sourceRef='ice4', which is not an element",
+    "sequence flow f41 has targetRef='ice5', which is not an element",
+    "sequence flow f42 has sourceRef='ice5', which is not an element"
+  ],
+  "counts": {
+    "start_events": 9,
+    "end_events": 8,
+    "tasks": 14,
+    "gateways": 0,
+    "sequence_flows": 50
+  },
+  "context_limit_hit": false,
+  "timed_out": false,
+  "bpmngen": {
+    "ollama_model_reported": "qwen3:8b",
+    "temperature": 0.3,
+    "num_ctx": 16384,
+    "think_param": false,
+    "prompt_tokens": 1973,
+    "output_tokens": 9826,
+    "done_reason": "stop",
+    "fits_context": true,
+    "cut_off_by_harness": false,
+    "raw_has_think_block": false,
+    "think_tags_in_answer": 0,
+    "thinking_chars": 0,
+    "auto_repairs": {
+      "auto_flows_added": 0,
+      "auto_links_added": 3,
+      "first_task_inserted": false
+    },
+    "seconds": 244.557,
+    "bpmnlint_valid": true
+  }
+}

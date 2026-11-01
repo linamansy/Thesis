@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="E-Shop System" processRef="EShopSystemProcess"/>
+    <bpmn:messageFlow id="mf1" name="Login Confirmation" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf2" name="Product Selected" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf3" name="Add to Cart" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf4" name="Save Product" sourceRef="t4" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf5" name="Order Finished" sourceRef="t5" targetRef="ice5"/>
+    <bpmn:messageFlow id="mf6" name="Payment Confirmation" sourceRef="t6" targetRef="ice6"/>
+    <bpmn:messageFlow id="mf7" name="Shipping Address" sourceRef="t7" targetRef="ice7"/>
+    <bpmn:messageFlow id="mf8" name="Billing Address" sourceRef="t8" targetRef="ice8"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Log In"/>
+    <bpmn:task id="t1" name="Login"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Login Confirmed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="g1" name="Login Successful?"/>
+    <bpmn:task id="t2" name="Select Product"/>
+    <bpmn:intermediateCatchEvent id="ice2" name="Product Selected">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t3" name="Add to Cart"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Added to Cart">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatch
+    <bpmn:intermediateCatchEvent id="ice4" name="Product Saved">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="g2" name="All Products Selected?"/>
+    <bpmn:task id="t5" name="Order Finished"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Order Finished">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t6" name="Enter Payment Data"/>
+    <bpmn:intermediateCatchEvent id="ice6" name="Payment Confirmed">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t7" name="Enter Shipping Address"/>
+    <bpmn:intermediateCatchEvent id="ice7" name="Shipping Address Entered">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t8" name="Enter Billing Address"/>
+    <bpmn:intermediateCatchEvent id="ice8" name="Billing Address Entered">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="g1"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="g1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="ice2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t3" targetRef="ice3"/>
+    
+    
+    <bpmn:sequenceFlow id="f10" sourceRef="ice4" targetRef="g2"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="g2" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t5" targetRef="ice5"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice5" targetRef="t6"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="t6" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="f15" sourceRef="ice6" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f16" sourceRef="t7" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f17" sourceRef="ice7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f18" sourceRef="t8" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f19" sourceRef="ice8" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="EShopSystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Login Request"/>
+    <bpmn:task id="t9" name="Check Credentials"/>
+    <bpmn:intermediateCatchEvent id="ice9" name="Login Confirmed">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="g3" name="Login Successful?"/>
+    <bpmn:task id="t10" name="Prepare Order"/>
+    <bpmn:intermediateCatchEvent id="ice10" name="Order Prepared">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t11" name="Prepare Payment"/>
+    <bpmn:intermediateCatchEvent id="ice11" name="Payment Confirmed">
+      <bpmn:messageEventDefinition id="med11"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t12" name="Prepare Shipment"/>
+    <bpmn:intermediateCatchEvent id="ice12" name="Shipment Prepared">
+      <bpmn:messageEventDefinition id="med12"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f20" sourceRef="se2" targetRef="t9"/>
+    <bpmn:sequenceFlow id="f21" sourceRef="t9" targetRef="ice9"/>
+    <bpmn:sequenceFlow id="f22" sourceRef="ice9" targetRef="g3"/>
+    <bpmn:sequenceFlow id="f23" sourceRef="g3" targetRef="t10"/>
+    <bpmn:sequenceFlow id="f24" sourceRef="t10" targetRef="ice10"/>
+    <bpmn:sequenceFlow id="f25" sourceRef="ice10" targetRef="t11"/>
+    <bpmn:sequenceFlow id="f26" sourceRef="t11" targetRef="ice11"/>
+    <bpmn:sequenceFlow id="f27" sourceRef="ice11" targetRef="t12"/>
+    <bpmn:sequenceFlow id="f28" sourceRef="t12" targetRef="ice12"/>
+    <bpmn:sequenceFlow id="f29" sourceRef="ice12" targetRef="ee2"/>
+  </bpmn:process>
+</bpmn:definitions>

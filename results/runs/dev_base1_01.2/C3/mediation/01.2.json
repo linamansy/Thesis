@@ -1,0 +1,4260 @@
+{
+  "case_id": "01.2",
+  "c3_version": "v2",
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "ECD-Art11-1",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "placing of the order through technological means",
+        "law_quote": "the recipient of the service places his order through technological means",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "reason": "The rule is about placing an order through technological means, and the process has a step where the order is recorded and confirmation is sent.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the recipient of the service places his order through technological means",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "service provider"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the recipient of the service places his order through technological means",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the recipient is not a consumer",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the service provider must acknowledge the receipt of the recipient's order without undue delay and by electronic means",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "service provider"
+          ],
+          "role_found": "service provider",
+          "roles": [
+            "service provider"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a potential customer inquires about a product or service.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order.",
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a potential customer inquires about a product or service.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order.",
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "contradicted",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: service provider",
+            "roles": [
+              {
+                "role": "service provider",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "The order is then recorded in the system, and the customer receives confirmation of their order",
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a potential customer inquires about a product or service.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+            ],
+            "quotes_found": [
+              true,
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "The order is then recorded in the system, and the customer receives confirmation of their order",
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences mention ordering and billing but do not explicitly state the service is provided electronically, at a distance, or for remuneration as required by the statement."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the recipient of the service places his order through technological means",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient of the service places his order through technological means",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the recipient is not a consumer",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient is not a consumer",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a potential customer inquires about a product or service.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+            ],
+            "quotes_found": [
+              true,
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "The order is then recorded in the system, and the customer receives confirmation of their order",
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The process involves taking orders, confirming them, and billing customers, which are standard activities of a business selling goods or services."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "service provider": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "ECD-Art11-2",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "placing of the order",
+        "law_quote": "placing of the order",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "reason": "The rule is about placing of the order, and the process has a step where the order is recorded and confirmed.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Placing of the order",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "service provider"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the service provider is providing an information society service",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the recipient of the service is not a consumer",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+          "exceptions": [
+            "when otherwise agreed by parties who are not consumers"
+          ],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "service provider"
+          ],
+          "role_found": "service provider",
+          "roles": [
+            "service provider"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a potential customer inquires about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+              "status": "confirmed",
+              "quotes": [
+                "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "confirmed",
+              "quotes": [
+                "Most customers are other companies."
+              ]
+            },
+            {
+              "id": "E1",
+              "closest_sentence": "Some customers pay later than the agreed date.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: service provider",
+            "roles": [
+              {
+                "role": "service provider",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the service provider is providing an information society service",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process is providing an information society service",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the recipient of the service is not a consumer",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient of the service is not a consumer",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most customers are other companies."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence indicates that customers (recipients) are companies, not consumers, directly supporting the statement."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sales process described (quote, approval, order placement) directly relates to selling goods/services as part of the organisation's trade/business."
+            }
+          }
+        ],
+        "exceptions": [
+          {
+            "id": "E1",
+            "text": "when otherwise agreed by parties who are not consumers",
+            "text_sent": "when otherwise agreed by parties who are not consumers",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_binding": {
+          "service provider": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "ECD-Art11-3",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "law_quote": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "reason": "The rule is about contracts concluded through electronic communication, and the process involves recording an order and sending confirmation, which may involve such communication.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "LPD-Art3-1",
+      "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n1. Member States shall ensure that, in commercial transactions between undertakings, the creditor is entitled to interest for late payment without the necessity of a reminder, where the following conditions are satisfied:\n(a) the creditor has fulfilled its contractual and legal obligations; and\n(b) the creditor has not received the amount due on time, unless the debtor is not responsible for the delay.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transactions between undertakings",
+        "law_quote": "Transactions between undertakings",
+        "relevant": true,
+        "process_step": "the customer receives confirmation of their order",
+        "description_quote": "The customer receives confirmation of their order",
+        "reason": "The rule is about transactions between undertakings, and the process has a step involving order confirmation, which is part of such transactions.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transactions between undertakings",
+        "description_quote_canonical": "the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "creditor"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the creditor has fulfilled its contractual and legal obligations",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the creditor has not received the amount due on time",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the debtor is not responsible for the delay",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the creditor is entitled to interest for late payment without the necessity of a reminder",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "creditor"
+          ],
+          "role_found": "creditor",
+          "roles": [
+            "creditor"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+              ]
+            },
+            {
+              "id": "D2",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "some customers pay later than the agreed date",
+              "status": "confirmed",
+              "quotes": [
+                "some customers pay later than the agreed date"
+              ]
+            },
+            {
+              "id": "C3",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: creditor",
+            "roles": [
+              {
+                "role": "creditor",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "D2 not stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe billing to other companies (commercial entities) after order confirmation, which aligns with the statement's definition of a commercial transaction involving payment for goods/services."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the creditor has fulfilled its contractual and legal obligations",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process has fulfilled its contractual and legal obligations",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the creditor has not received the amount due on time",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process has not received the amount due on time",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "some customers pay later than the agreed date"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence indicates that some customers' payments are delayed, which directly implies the organization hasn't received the amount on time for those cases."
+            }
+          },
+          {
+            "id": "C3",
+            "kind": "situation",
+            "text": "the debtor is not responsible for the delay",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the debtor is not responsible for the delay",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "D2",
+            "kind": "role_fact",
+            "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe sending a bill, not the actual payment being made by the customer, which is the core of the statement."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "creditor": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": "first look",
+          "C1": null,
+          "C2": "first look",
+          "C3": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          },
+          {
+            "id": "C3",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C3"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "LPD-Art3-2",
+      "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n2. Member States shall ensure that the applicable reference rate:\n(a) for the first semester of the year concerned shall be the rate in force on 1 January of that year;\n(b) for the second semester of the year concerned shall be the rate in force on 1 July of that year.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "Transactions between undertakings",
+        "law_quote": "Transactions between undertakings",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "reason": "The rule is about transactions between undertakings, and the process involves an order being placed and confirmed, which is a transaction between companies.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transactions between undertakings",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "public body"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "LPD-Art3-3",
+      "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n3. Where the conditions set out in paragraph 1 are satisfied, Member States shall ensure the following:\n(a) that the creditor is entitled to interest for late payment from the day following the date or the end of the period for payment fixed in the contract;\n(b) where the date or period for payment is not fixed in the contract, that the creditor is entitled to interest for late payment upon the expiry of any of the following time limits:\n(i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment;\n(ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services;\n(iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services;\n(iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transactions between undertakings",
+        "law_quote": "Transactions between undertakings",
+        "relevant": true,
+        "process_step": "the customer receives confirmation of their order",
+        "description_quote": "The customer receives confirmation of their order",
+        "reason": "The rule is about transactions between undertakings, and the process has a step where the customer receives confirmation of their order, which is part of such a transaction.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transactions between undertakings",
+        "description_quote_canonical": "the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "creditor"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the conditions set out in paragraph 1 are satisfied",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the date or period for payment is not fixed in the contract",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the creditor is entitled to interest for late payment upon the expiry of any of the following time limits: (i) 30 calendar days following the date of receipt by the debtor of the invoice or an equivalent request for payment; (ii) where the date of the receipt of the invoice or the equivalent request for payment is uncertain, 30 calendar days after the date of receipt of the goods or services; (iii) where the debtor receives the invoice or the equivalent request for payment earlier than the goods or the services, 30 calendar days after the date of the receipt of the goods or services; (iv) where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for by statute or in the contract and if the debtor receives the invoice or the equivalent request for payment earlier or on the date on which such acceptance or verification takes place, 30 calendar days after that date",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "creditor"
+          ],
+          "role_found": "creditor",
+          "roles": [
+            "creditor"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+              ]
+            },
+            {
+              "id": "D2",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill",
+              "status": "contradicted",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: creditor",
+            "roles": [
+              {
+                "role": "creditor",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "D2 not stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences imply a commercial transaction between companies involving payment (sending a bill) for goods/services, matching the statement's definition."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the conditions set out in paragraph 1 are satisfied",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the conditions set out in paragraph 1 are satisfied",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the date or period for payment is not fixed in the contract",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the date or period for payment is not fixed in the contract",
+            "status": "not_stated",
+            "original_status": "contradicted",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "false",
+              "answer": "no",
+              "reason": "The sentences mention an 'agreed date' which implies the payment date is fixed in the contract, contradicting the statement."
+            },
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "D2",
+            "kind": "role_fact",
+            "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies. After the order is confirmed, the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe sending a bill, not the actual payment being made, which is a different event."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "creditor": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+              "status": "contradicted",
+              "quotes": [
+                "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date."
+              ]
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 7,
+      "passage_id": "LPD-Art3-4",
+      "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n4. Where a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for, Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "a procedure of acceptance or verification to ascertain the conformity of the goods or services with the contract",
+        "law_quote": "a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "reason": "The rule is about verifying the conformity of goods or services with the contract, and the process has a step where the order is confirmed, which could be part of such a verification procedure.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "public body"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "otherwise expressly agreed in the contract",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "it is not grossly unfair to the creditor within the meaning of Article 7",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "Member States shall ensure that the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "public body"
+          ],
+          "role_found": "creditor",
+          "roles": [
+            "creditor"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "D2",
+              "closest_sentence": "the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "the company sends them a bill",
+                "some customers pay later than the agreed date"
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "the process ends when the order is successfully placed and confirmed",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "the process ends when the order is successfully placed and confirmed",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "the process ends when the order is successfully placed and confirmed",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C4",
+              "closest_sentence": "the process ends when the order is successfully placed and confirmed",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: creditor",
+            "roles": [
+              {
+                "role": "creditor",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "D2 not stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a procedure of acceptance or verification, by which the conformity of the goods or services with the contract is to be ascertained, is provided for",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the maximum duration of that procedure does not exceed 30 calendar days from the date of receipt of the goods or services",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C3",
+            "kind": "situation",
+            "text": "otherwise expressly agreed in the contract",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "otherwise expressly agreed in the contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C4",
+            "kind": "situation",
+            "text": "it is not grossly unfair to the creditor within the meaning of Article 7",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "it is not grossly unfair to the organisation running the described process within the meaning of Article 7",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "D2",
+            "kind": "role_fact",
+            "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "the company sends them a bill",
+              "some customers pay later than the agreed date"
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "the company sends them a bill",
+              "some customers pay later than the agreed date"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences mention sending a bill and delayed payments but do not confirm the payment was made, which is required by the statement."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "creditor": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C4",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": null,
+          "C2": null,
+          "C3": null,
+          "C4": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C3",
+              "C4"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 8,
+      "passage_id": "LPD-Art3-5",
+      "passage_text": "Late Payment Directive (2011/7/EU) - Article 3: Transactions between undertakings\n5. Member States shall ensure that the period for payment fixed in the contract does not exceed 60 calendar days, unless otherwise expressly agreed in the contract and provided it is not grossly unfair to the creditor within the meaning of Article 7.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "Transactions between undertakings",
+        "law_quote": "Transactions between undertakings",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "reason": "The rule is about transactions between undertakings, and the process has an order placement step that involves such a transaction.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transactions between undertakings",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "public body"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the period for payment fixed in the contract does not exceed 60 calendar days",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "it is not grossly unfair to the creditor within the meaning of Article 7",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "Member States must ensure that the period for payment fixed in the contract does not exceed 60 calendar days",
+          "exceptions": [
+            "otherwise expressly agreed in the contract"
+          ],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "public body"
+          ],
+          "role_found": "creditor",
+          "roles": [
+            "creditor"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "the company sends them a bill"
+              ]
+            },
+            {
+              "id": "D2",
+              "closest_sentence": "the company sends them a bill",
+              "status": "confirmed",
+              "quotes": [
+                "the company sends them a bill"
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "some customers pay later than the agreed date",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "E1",
+              "closest_sentence": "some customers pay later than the agreed date",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: creditor",
+            "roles": [
+              {
+                "role": "creditor",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "D2 not stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the payment is for a commercial transaction (a transaction between undertakings or between undertakings and public authorities which leads to the delivery of goods or the provision of services for remuneration)",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentence does not specify the recipient of the bill, so it cannot confirm the transaction is between undertakings or public authorities as required by the statement."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the period for payment fixed in the contract does not exceed 60 calendar days",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the period for payment fixed in the contract does not exceed 60 calendar days",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "it is not grossly unfair to the creditor within the meaning of Article 7",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "it is not grossly unfair to the organisation running the described process within the meaning of Article 7",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "D2",
+            "kind": "role_fact",
+            "text": "another undertaking or a public authority pays the organisation running the described process the amount due for goods it delivered or services it provided",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "the company sends them a bill"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "the company sends them a bill"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentence describes sending a bill (requesting payment) while the statement refers to receiving payment, which is a different event."
+            }
+          }
+        ],
+        "exceptions": [
+          {
+            "id": "E1",
+            "text": "otherwise expressly agreed in the contract",
+            "text_sent": "otherwise expressly agreed in the contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_binding": {
+          "creditor": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most customers are other companies. After the order is confirmed, the company sends them a bill, and some customers pay later than the agreed date.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art13-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information to be provided where personal data are collected from the data subject",
+        "law_quote": "Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about providing information when personal data are collected, and the process has a step where information is collected from the data subject.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data relating to a data subject are collected from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "The process begins when a potential customer inquires about a product or service."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "The process begins when a potential customer inquires about a product or service."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "The process begins when a potential customer inquires about a product or service."
+            ],
+            "quotes_found": [
+              true,
+              false
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences mention collecting information but do not explicitly state that the information relates to identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data relating to a data subject are collected from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data relating to a data subject are collected from the data subject",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "GDPR-Art13-2-a",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "law_quote": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "relevant": true,
+        "process_step": "the customer receives confirmation of their order",
+        "description_quote": "The customer receives confirmation of their order",
+        "reason": "The rule is about the storage period of personal data, and the process has a step where personal data are collected and processed (customer inquiry and order confirmation); whether the data is stored or the criteria for storage is checked later.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "description_quote_canonical": "the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data are obtained from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject with the following further information necessary to ensure fair and transparent processing: (a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period; (b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability; (c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal; (d) the right to lodge a complaint with a supervisory authority; (e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences mention collecting information but do not specify that the information relates to identifiable people, so they do not confirm the statement."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data are obtained from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data are obtained from the data subject",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe collecting information from the data subject, which aligns with the statement that personal data are obtained from them."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 11,
+      "passage_id": "GDPR-Art13-2-f",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(f) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the existence of automated decision-making, including profiling",
+        "law_quote": "the existence of automated decision-making, including profiling",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about automated decision-making and profiling, which are not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the existence of automated decision-making, including profiling",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 12,
+      "passage_id": "GDPR-Art13-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n3. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "further processing of personal data for a purpose other than that for which the personal data were collected",
+        "law_quote": "Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about further processing of personal data for a different purpose, and the process involves collecting relevant information, which could be personal data.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process intends to further process the personal data for a purpose other than that for which the personal data were collected",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 13,
+      "passage_id": "GDPR-Art13-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n4. Paragraphs 1, 2 and 3 shall not apply where and insofar as the data subject already has the information.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information to be provided where personal data are collected from the data subject",
+        "law_quote": "Information to be provided where personal data are collected from the data subject",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about providing information when personal data are collected, and the process has a step where information is collected from the customer.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Information to be provided where personal data are collected from the data subject",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 14,
+      "passage_id": "CRD-Art8-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n1. With respect to distance contracts, the trader shall give the information provided for in Article 6(1) or make that information available to the consumer in a way appropriate to the means of distance communication used in plain and intelligible language. In so far as that information is provided on a durable medium, it shall be legible.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "distance contracts",
+        "law_quote": "distance contracts",
+        "relevant": true,
+        "process_step": "the customer receives confirmation of their order",
+        "description_quote": "The customer receives confirmation of their order",
+        "reason": "The rule is about distance contracts, and the process involves a customer receiving confirmation of an order, which could be part of a distance contract.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "distance contracts",
+        "description_quote_canonical": "the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader",
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the contract is a distance contract",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must give the information provided for in Article 6(1) or make that information available to the consumer in a way appropriate to the means of distance communication used in plain and intelligible language. In so far as that information is provided on a durable medium, it shall be legible",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "the customer receives confirmation of their order",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader or consumer",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              },
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the contract is a distance contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the contract is a distance contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order."
+            ],
+            "quotes_found": [
+              true,
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a sales process involving quotes, order placement, and confirmation, which directly relates to selling goods/services as part of the organization's trade/business."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 15,
+      "passage_id": "CRD-Art8-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n2. If a distance contract to be concluded by electronic means places the consumer under an obligation to pay, the trader shall make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1).\nThe trader shall ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay. If placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader. If the trader has not complied with this subparagraph, the consumer shall not be bound by the contract or order.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "distance contracts to be concluded by electronic means",
+        "law_quote": "distance contracts to be concluded by electronic means",
+        "relevant": true,
+        "process_step": "the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "reason": "The rule is about distance contracts concluded by electronic means, and the process has a step involving order confirmation, which is part of the electronic contract process.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "distance contract to be concluded by electronic means",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a distance contract to be concluded by electronic means places the consumer under an obligation to pay",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer places his order",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must make the consumer aware in a clear and prominent manner, and directly before the consumer places his order, of the information provided for in points (a), (e), (o) and (p) of Article 6(1); the trader must ensure that the consumer, when placing his order, explicitly acknowledges that the order implies an obligation to pay; if placing an order entails activating a button or a similar function, the button or similar function shall be labelled in an easily legible manner only with the words ‘order with obligation to pay’ or a corresponding unambiguous formulation indicating that placing the order entails an obligation to pay the trader",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "This process begins when a potential customer inquires about a product or service.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a potential customer inquires about a product or service.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "After approval from the customer, the process moves to order placement.",
+              "status": "confirmed",
+              "quotes": [
+                "After approval from the customer, the process moves to order placement.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a distance contract to be concluded by electronic means places the consumer under an obligation to pay",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a distance contract to be concluded by electronic means places its customer under an obligation to pay",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the consumer places his order",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer places his order",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "After approval from the customer, the process moves to order placement.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "after approval from the customer, the process moves to order placement",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe the order being recorded and confirmed, which is the same fact as the customer placing the order in everyday terms."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a potential customer inquires about a product or service.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a process involving selling products/services (order recording and confirmation), which directly aligns with the statement about the organisation's trade/business purpose."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 16,
+      "passage_id": "CRD-Art8-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n3. Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "delivery restrictions and accepted means of payment for distance contracts",
+        "law_quote": "Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "reason": "The rule is about delivery restrictions and accepted means of payment during the ordering process, which the process has as it involves order recording and confirmation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Trading websites shall indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a trading website is used",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must indicate clearly and legibly at the latest at the beginning of the ordering process whether any delivery restrictions apply and which means of payment are accepted",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "This process begins when a potential customer inquires about a product or service.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a trading website is used",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a trading website is used",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe the sales process, which is part of the organization's trade or business as stated."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 17,
+      "passage_id": "CRD-Art8-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n4. If the contract is concluded through a means of distance communication which allows limited space or time to display the information, the trader shall provide, on or through that particular means prior to the conclusion of such a contract, at least the pre-contractual information regarding the main characteristics of the goods or services, the identity of the trader, the total price, the right of withdrawal, the duration of the contract and, if the contract is of indeterminate duration, the conditions for terminating the contract, as referred to, respectively, in points (a), (b), (e), (h) and (o) of Article 6(1) except the model withdrawal form set out in Annex I(B) referred to in point (h). The other information referred to in Article 6(1), including the model withdrawal form, shall be provided by the trader to the consumer in an appropriate way in accordance with paragraph 1 of this Article.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "distance contracts",
+        "law_quote": "If the contract is concluded through a means of distance communication which allows limited space or time to display the information",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "reason": "The rule is about distance contracts, and the process has a step where the customer receives confirmation of their order, which could be part of a distance communication process.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "If the contract is concluded through a means of distance communication which allows limited space or time to display the information",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the contract is concluded through a means of distance communication which allows limited space or time to display the information",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader shall provide, on or through that particular means prior to the conclusion of such a contract, at least the pre-contractual information regarding the main characteristics of the goods or services, the identity of the trader, the total price, the right of withdrawal, the duration of the contract and, if the contract is of indeterminate duration, the conditions for terminating the contract",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "This process begins when a potential customer inquires about a product or service.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a potential customer inquires about a product or service.",
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the contract is concluded through a means of distance communication which allows limited space or time to display the information",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the contract is concluded through a means of distance communication which allows limited space or time to display the information",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a potential customer inquires about a product or service.",
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+            ],
+            "quotes_found": [
+              true,
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a potential customer inquires about a product or service",
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "Next, the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a sales process involving product inquiries, quotes, and order placement, which directly relates to selling goods/services as part of the organization's business."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 18,
+      "passage_id": "CRD-Art8-5",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n5. Without prejudice to paragraph 4, if the trader makes a telephone call to the consumer with a view to concluding a distance contract, he shall, at the beginning of the conversation with the consumer, disclose his identity and, where applicable, the identity of the person on whose behalf he makes that call, and the commercial purpose of the call.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "telephone calls to consumers with a view to concluding a distance contract",
+        "law_quote": "if the trader makes a telephone call to the consumer with a view to concluding a distance contract",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about telephone calls to consumers with a view to concluding a distance contract, and the process has a step where sales staff interact with customers, which could involve such calls.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "if the trader makes a telephone call to the consumer with a view to concluding a distance contract",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the trader makes a telephone call to the consumer with a view to concluding a distance contract",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader shall, at the beginning of the conversation with the consumer, disclose his identity and, where applicable, the identity of the person on whose behalf he makes that call, and the commercial purpose of the call",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the trader makes a telephone call to the consumer with a view to concluding a distance contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process makes a telephone call to its customer with a view to concluding a distance contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "the sales representative provides a quote, and after approval from the customer, the process moves to order placement."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "the sales representative provides a quote, and after approval from the customer, the process moves to order placement"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a sales process involving quotes and order placement, which directly relates to the organization selling goods/services as part of its business."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process ends when the order is successfully placed and confirmed.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 19,
+      "passage_id": "CRD-Art8-6",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n6. Where a distance contract is to be concluded by telephone, Member States may provide that the trader has to confirm the offer to the consumer who is bound only once he has signed the offer or has sent his written consent. Member States may also provide that such confirmations have to be made on a durable medium.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "distance contracts concluded by telephone",
+        "law_quote": "Where a distance contract is to be concluded by telephone",
+        "relevant": true,
+        "process_step": "The customer is guided through selecting the appropriate product or service",
+        "description_quote": "If the customer is interested, they are guided through selecting the appropriate product or service",
+        "reason": "The rule is about distance contracts concluded by telephone, and the process has a step where the customer selects a product or service, which could be part of a telephone-based contract.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where a distance contract is to be concluded by telephone",
+        "description_quote_canonical": "If the customer is interested, they are guided through selecting the appropriate product or service",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 20,
+      "passage_id": "CRD-Art8-7",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 8: Formal requirements for distance contracts\n7. The trader shall provide the consumer with the confirmation of the contract concluded, on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins. That confirmation shall include:\n(a) all the information referred to in Article 6(1) unless the trader has already provided that information to the consumer on a durable medium prior to the conclusion of the distance contract; and\n(b) where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "confirmation of the contract concluded",
+        "law_quote": "The trader shall provide the consumer with the confirmation of the contract concluded",
+        "relevant": true,
+        "process_step": "The customer receives confirmation of their order",
+        "description_quote": "The customer receives confirmation of their order",
+        "reason": "The rule is about confirming the contract, and the process has a step where the customer receives confirmation of their order.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The trader shall provide the consumer with the confirmation of the contract concluded",
+        "description_quote_canonical": "the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader",
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a distance contract is concluded",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must provide the consumer with the confirmation of the contract concluded on a durable medium within a reasonable time after the conclusion of the distance contract, and at the latest at the time of the delivery of the goods or before the performance of the service begins",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "where applicable, the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16",
+              "roles": [
+                "trader",
+                "consumer"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "a distance contract is concluded",
+                      "kind": "process_fact"
+                    },
+                    {
+                      "text": "the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16 is required",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the trader must provide the confirmation of the consumer’s prior express consent and acknowledgment in accordance with point (m) of Article 16"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most customers are other companies.",
+              "status": "contradicted",
+              "quotes": [
+                "Most customers are other companies."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+              "status": "confirmed",
+              "quotes": [
+                "The sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+                "The order is then recorded in the system, and the customer receives confirmation of their order."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader or consumer",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              },
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "the sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "contradicted",
+            "quotes": [
+              "Most customers are other companies."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most customers are other companies"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "false",
+              "answer": "no",
+              "reason": "The sentence indicates most customers are companies, but does not definitively state that the buyer is not a consumer, as 'most' allows for exceptions."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a distance contract is concluded",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a distance contract is concluded",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The sales representative provides a quote, and after approval from the customer, the process moves to order placement.",
+              "The order is then recorded in the system, and the customer receives confirmation of their order."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "the sales representative provides a quote, and after approval from the customer, the process moves to order placement",
+              "The order is then recorded in the system, and the customer receives confirmation of their order"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The process described (quote, order placement, system recording, confirmation) is inherently part of selling goods/services as part of the organisation's trade/business."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "No domain knowledge provided."
+}

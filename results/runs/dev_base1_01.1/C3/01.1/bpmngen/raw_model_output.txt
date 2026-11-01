@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Sales Staff" processRef="SalesProcess"/>
+    <bpmn:messageFlow id="mf1" name="Inquiry" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Data Collection" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Quote" sourceRef="t3" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf4" name="Order Confirmation" sourceRef="t5" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Inquiry"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Data Collected">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Quote Approved">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="ice3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SalesProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Inquiry Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Collect Customer Data"/>
+    <bpmn:task id="t2" name="Provide Quote"/>
+    <bpmn:task id="t3" name="Place Order"/>
+    <bpmn:endEvent id="ee1" name="Order Confirmed"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="CustomerProcess_1" bpmnElement="CustomerProcess">
+        <dc:Bounds x="200" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SalesProcess_1" bpmnElement="SalesProcess">
+        <dc:Bounds x="400" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1" bpmnElement="se1">
+        <dc:Bounds x="100" y="100" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1" bpmnElement="t1">
+        <dc:Bounds x="180" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1" bpmnElement="ice1">
+        <dc:Bounds x="260" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2" bpmnElement="t2">
+        <dc:Bounds x="340" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmnd
+</think>
+
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Sales Staff" processRef="SalesProcess"/>
+    <bpmn:messageFlow id="mf1" name="Inquiry" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Data Collection" sourceRef="t2" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Quote" sourceRef="t3" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf4" name="Order Confirmation" sourceRef="t5" targetRef="ee1"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Inquiry"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Data Collected">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Quote Approved">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="ice3" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SalesProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Inquiry Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t1" name="Collect Customer Data"/>
+    <bpmn:task id="t2" name="Provide Quote"/>
+    <bpmn:task id="t3" name="Place Order"/>
+    <bpmn:endEvent id="ee1" name="Order Confirmed"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se2" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequence

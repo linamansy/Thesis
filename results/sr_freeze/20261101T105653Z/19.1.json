@@ -1,0 +1,2474 @@
+{
+  "S1": {
+    "stage": "S1 steps",
+    "failed": false,
+    "raw_steps": [
+      {
+        "step_id": "S1",
+        "actor": "user",
+        "activity": "starts an order",
+        "data_or_object": "",
+        "quote": "The user starts an order by logging in to their account."
+      },
+      {
+        "step_id": "S2",
+        "actor": "user",
+        "activity": "selects the items to purchase and sets a payment method",
+        "data_or_object": "items, payment method",
+        "quote": "Then, the user simultaneously selects the items to purchase and sets a payment method."
+      },
+      {
+        "step_id": "S3",
+        "actor": "user",
+        "activity": "pays or completes an installment agreement",
+        "data_or_object": "",
+        "quote": "Afterward, the user either pays or completes an installment agreement."
+      },
+      {
+        "step_id": "S4",
+        "actor": "user",
+        "activity": "chooses between multiple options for a free reward",
+        "data_or_object": "free reward",
+        "quote": "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities."
+      },
+      {
+        "step_id": "S5",
+        "actor": "user",
+        "activity": "chooses between multiple options for a free reward",
+        "data_or_object": "free reward",
+        "quote": "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities."
+      },
+      {
+        "step_id": "S6",
+        "actor": "user",
+        "activity": "delivers the items",
+        "data_or_object": "items",
+        "quote": "Finally, the items are delivered."
+      },
+      {
+        "step_id": "S7",
+        "actor": "user",
+        "activity": "returns items for exchange",
+        "data_or_object": "items",
+        "quote": "The user has the right to return items for exchange."
+      },
+      {
+        "step_id": "S8",
+        "actor": "shop",
+        "activity": "makes a new delivery",
+        "data_or_object": "items",
+        "quote": "Every time items are returned, a new delivery is made."
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "actor": "user",
+        "activity": "starts an order",
+        "data_or_object": "",
+        "quote": "The user starts an order by logging in to their account.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S2",
+        "actor": "user",
+        "activity": "selects the items to purchase and sets a payment method",
+        "data_or_object": "items, payment method",
+        "quote": "Then, the user simultaneously selects the items to purchase and sets a payment method.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S3",
+        "actor": "user",
+        "activity": "pays or completes an installment agreement",
+        "data_or_object": "",
+        "quote": "Afterward, the user either pays or completes an installment agreement.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S4",
+        "actor": "user",
+        "activity": "chooses between multiple options for a free reward",
+        "data_or_object": "free reward",
+        "quote": "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S5",
+        "actor": "user",
+        "activity": "chooses between multiple options for a free reward",
+        "data_or_object": "free reward",
+        "quote": "Since the reward value depends on the purchase value, this step is done after selecting the items, but it is independent of the payment activities.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S6",
+        "actor": "user",
+        "activity": "delivers the items",
+        "data_or_object": "items",
+        "quote": "Finally, the items are delivered.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S7",
+        "actor": "user",
+        "activity": "returns items for exchange",
+        "data_or_object": "items",
+        "quote": "The user has the right to return items for exchange.",
+        "quote_found": true
+      },
+      {
+        "step_id": "S8",
+        "actor": "shop",
+        "activity": "makes a new delivery",
+        "data_or_object": "items",
+        "quote": "Every time items are returned, a new delivery is made.",
+        "quote_found": true
+      }
+    ],
+    "dropped": []
+  },
+  "S2": {
+    "stage": "S2 article routing (two views, union of routes)",
+    "n_articles_offered": 71,
+    "views": [
+      "title",
+      "law_title_sentence"
+    ],
+    "per_step": {
+      "S1": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "GDPR-Art6",
+            "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data.",
+            "title": "Lawfulness of processing",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "CRD-Art6",
+            "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely.",
+            "title": "Information requirements for distance and off-premises contracts",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "ECD-Art11",
+            "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order.",
+            "title": "Placing of the order",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art5",
+            "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data.",
+            "title": "Principles relating to processing of personal data",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art7",
+            "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing.",
+            "title": "Conditions for consent",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data."
+              },
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely."
+              },
+              {
+                "article_id": "ECD-Art11",
+                "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing, which is relevant when a user starts an order involving personal data.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article covers information requirements for distance and off-premises contracts, which may apply when a user starts an order remotely.",
+                "title": "Information requirements for distance and off-premises contracts"
+              },
+              {
+                "article_id": "ECD-Art11",
+                "reason": "The article relates to the placing of the order, which is directly connected to the step of starting an order.",
+                "title": "Placing of the order"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "GDPR-Art5",
+                "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data."
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing and the step involves starting an order which may require lawful processing of personal data."
+              },
+              {
+                "article_id": "GDPR-Art7",
+                "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "GDPR-Art5",
+                "reason": "The article relates to processing of personal data and the step involves starting an order which may involve personal data.",
+                "title": "Principles relating to processing of personal data"
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing and the step involves starting an order which may require lawful processing of personal data.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "GDPR-Art7",
+                "reason": "The article deals with conditions for consent and the step involves starting an order which may require obtaining consent for data processing.",
+                "title": "Conditions for consent"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S2": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art6",
+            "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method.",
+            "title": "Information requirements for distance and off-premises contracts",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art6",
+            "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method.",
+            "title": "Lawfulness of processing",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art13",
+            "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method.",
+            "title": "Information to be provided where personal data are collected from the data subject",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "ECD-Art10",
+            "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method.",
+            "title": "Information to be provided",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method."
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method."
+              },
+              {
+                "article_id": "GDPR-Art13",
+                "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article addresses information requirements for distance and off-premises contracts, which relates to selecting items and setting a payment method.",
+                "title": "Information requirements for distance and off-premises contracts"
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article deals with the lawfulness of processing personal data, which is relevant when a user sets a payment method.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "GDPR-Art13",
+                "reason": "The article requires information to be provided when personal data are collected from the data subject, which applies to the user selecting items and setting a payment method.",
+                "title": "Information to be provided where personal data are collected from the data subject"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article relates to the lawfulness of processing personal data, which includes the user's payment method selection."
+              },
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article covers information requirements for distance and off-premises contracts, which includes selecting items and payment methods."
+              },
+              {
+                "article_id": "ECD-Art10",
+                "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article relates to the lawfulness of processing personal data, which includes the user's payment method selection.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article covers information requirements for distance and off-premises contracts, which includes selecting items and payment methods.",
+                "title": "Information requirements for distance and off-premises contracts"
+              },
+              {
+                "article_id": "ECD-Art10",
+                "reason": "The article requires information to be provided clearly, which applies to the user's selection of items and payment method.",
+                "title": "Information to be provided"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S3": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "GDPR-Art6",
+            "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data.",
+            "title": "Lawfulness of processing",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art12",
+            "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment.",
+            "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "CRD-Art9",
+            "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period.",
+            "title": "Right of withdrawal",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data."
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment."
+              },
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article addresses the lawfulness of processing, which relates to the user's payment activity involving personal data.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article covers transparent information requirements, which are relevant to informing the user about their data processing during payment.",
+                "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+              },
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article deals with the exercise of the right of withdrawal, which may be relevant if the user is completing an installment agreement with a cooling-off period.",
+                "title": "Right of withdrawal"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves the user paying or completing an installment agreement, which may involve personal data processing."
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article is about transparent information and communication for data subjects, and the step involves the user providing personal data through payment, which requires transparency."
+              },
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article is about the right of withdrawal for consumers, and the step involves completing an installment agreement, which may be subject to consumer rights."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves the user paying or completing an installment agreement, which may involve personal data processing.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article is about transparent information and communication for data subjects, and the step involves the user providing personal data through payment, which requires transparency.",
+                "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+              },
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article is about the right of withdrawal for consumers, and the step involves completing an installment agreement, which may be subject to consumer rights.",
+                "title": "Right of withdrawal"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S4": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art9",
+            "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+            "title": "Right of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art13",
+            "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+            "title": "Obligations of the trader in the event of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art11",
+            "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward.",
+            "title": "Exercise of the right of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art6",
+            "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+            "title": "Information requirements for distance and off-premises contracts",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art6",
+            "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection.",
+            "title": "Lawfulness of processing",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art5",
+            "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service.",
+            "title": "Conformity of goods",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward."
+              },
+              {
+                "article_id": "CRD-Art13",
+                "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward."
+              },
+              {
+                "article_id": "CRD-Art11",
+                "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+                "title": "Right of withdrawal"
+              },
+              {
+                "article_id": "CRD-Art13",
+                "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+                "title": "Obligations of the trader in the event of withdrawal"
+              },
+              {
+                "article_id": "CRD-Art11",
+                "reason": "The article specifies how the right of withdrawal is exercised, which aligns with the user choosing between multiple options for a free reward.",
+                "title": "Exercise of the right of withdrawal"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract."
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection."
+              },
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+                "title": "Information requirements for distance and off-premises contracts"
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data through the free reward selection.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about the conformity of goods, and the step involves selecting a free reward which may be considered as a good or service.",
+                "title": "Conformity of goods"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S5": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art9",
+            "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+            "title": "Right of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art13",
+            "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+            "title": "Obligations of the trader in the event of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art11",
+            "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward.",
+            "title": "Exercise of the right of withdrawal",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "CRD-Art6",
+            "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+            "title": "Information requirements for distance and off-premises contracts",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art6",
+            "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward.",
+            "title": "Lawfulness of processing",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "GDPR-Art12",
+            "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward.",
+            "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward."
+              },
+              {
+                "article_id": "CRD-Art13",
+                "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward."
+              },
+              {
+                "article_id": "CRD-Art11",
+                "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to choosing between options for a free reward.",
+                "title": "Right of withdrawal"
+              },
+              {
+                "article_id": "CRD-Art13",
+                "reason": "The article outlines obligations of the trader in the event of withdrawal, which connects to the user's choice of a free reward.",
+                "title": "Obligations of the trader in the event of withdrawal"
+              },
+              {
+                "article_id": "CRD-Art11",
+                "reason": "The article specifies how the right of withdrawal is exercised, which is relevant to the user's decision-making process for a free reward.",
+                "title": "Exercise of the right of withdrawal"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract."
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward."
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art6",
+                "reason": "The article is about information requirements for distance and off-premises contracts, and the step involves choosing a free reward which may be part of a contract.",
+                "title": "Information requirements for distance and off-premises contracts"
+              },
+              {
+                "article_id": "GDPR-Art6",
+                "reason": "The article is about the lawfulness of processing personal data, and the step involves handling personal data related to the free reward.",
+                "title": "Lawfulness of processing"
+              },
+              {
+                "article_id": "GDPR-Art12",
+                "reason": "The article is about transparent information for data subjects, and the step involves providing information about the free reward.",
+                "title": "Transparent information, communication and modalities for the exercise of the rights of the data subject"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S6": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art18",
+            "reason": "The article is about delivery of goods and the step involves delivering items.",
+            "title": "Delivery",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art14",
+            "reason": "The article is about repair or replacement of goods and the step involves delivering items.",
+            "title": "Repair or replacement of the goods",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art10",
+            "reason": "The article is about liability of the seller and the step involves delivering items.",
+            "title": "Liability of the seller",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art5",
+            "reason": "The article is about conformity of goods and the step involves delivering items.",
+            "title": "Conformity of goods",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art6",
+            "reason": "The article is about subjective requirements for conformity and the step involves delivering items.",
+            "title": "Subjective requirements for conformity",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art7",
+            "reason": "The article is about objective requirements for conformity and the step involves delivering items.",
+            "title": "Objective requirements for conformity",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art18",
+                "reason": "The article is about delivery of goods and the step involves delivering items."
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article is about repair or replacement of goods and the step involves delivering items."
+              },
+              {
+                "article_id": "SGD-Art10",
+                "reason": "The article is about liability of the seller and the step involves delivering items."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art18",
+                "reason": "The article is about delivery of goods and the step involves delivering items.",
+                "title": "Delivery"
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article is about repair or replacement of goods and the step involves delivering items.",
+                "title": "Repair or replacement of the goods"
+              },
+              {
+                "article_id": "SGD-Art10",
+                "reason": "The article is about liability of the seller and the step involves delivering items.",
+                "title": "Liability of the seller"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about conformity of goods and the step involves delivering items."
+              },
+              {
+                "article_id": "SGD-Art6",
+                "reason": "The article is about subjective requirements for conformity and the step involves delivering items."
+              },
+              {
+                "article_id": "SGD-Art7",
+                "reason": "The article is about objective requirements for conformity and the step involves delivering items."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about conformity of goods and the step involves delivering items.",
+                "title": "Conformity of goods"
+              },
+              {
+                "article_id": "SGD-Art6",
+                "reason": "The article is about subjective requirements for conformity and the step involves delivering items.",
+                "title": "Subjective requirements for conformity"
+              },
+              {
+                "article_id": "SGD-Art7",
+                "reason": "The article is about objective requirements for conformity and the step involves delivering items.",
+                "title": "Objective requirements for conformity"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S7": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art9",
+            "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange.",
+            "title": "Right of withdrawal",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art13",
+            "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange.",
+            "title": "Remedies for lack of conformity",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art14",
+            "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange.",
+            "title": "Repair or replacement of the goods",
+            "views": [
+              "title",
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange."
+              },
+              {
+                "article_id": "SGD-Art13",
+                "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange."
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article addresses the exercise of the right of withdrawal, which relates to returning items for exchange.",
+                "title": "Right of withdrawal"
+              },
+              {
+                "article_id": "SGD-Art13",
+                "reason": "The article outlines remedies for lack of conformity, which can include returning items for exchange.",
+                "title": "Remedies for lack of conformity"
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article specifies repair or replacement of goods, which is related to returning items for exchange.",
+                "title": "Repair or replacement of the goods"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article is about the right of withdrawal and the step involves returning items for exchange."
+              },
+              {
+                "article_id": "SGD-Art13",
+                "reason": "The article is about remedies for lack of conformity and the step involves returning items for exchange."
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article is about repair or replacement of goods and the step involves returning items for exchange."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art9",
+                "reason": "The article is about the right of withdrawal and the step involves returning items for exchange.",
+                "title": "Right of withdrawal"
+              },
+              {
+                "article_id": "SGD-Art13",
+                "reason": "The article is about remedies for lack of conformity and the step involves returning items for exchange.",
+                "title": "Remedies for lack of conformity"
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article is about repair or replacement of goods and the step involves returning items for exchange.",
+                "title": "Repair or replacement of the goods"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      },
+      "S8": {
+        "failed": false,
+        "routes": [
+          {
+            "article_id": "CRD-Art18",
+            "reason": "The article is about delivery obligations and the step involves making a new delivery.",
+            "title": "Delivery",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art14",
+            "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items.",
+            "title": "Repair or replacement of the goods",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art10",
+            "reason": "The article covers the liability of the seller, which applies to the delivery of items.",
+            "title": "Liability of the seller",
+            "views": [
+              "title"
+            ]
+          },
+          {
+            "article_id": "SGD-Art5",
+            "reason": "The article is about conformity of goods and the step involves making a new delivery of items.",
+            "title": "Conformity of goods",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art6",
+            "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards.",
+            "title": "Subjective requirements for conformity",
+            "views": [
+              "law_title_sentence"
+            ]
+          },
+          {
+            "article_id": "SGD-Art7",
+            "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose.",
+            "title": "Objective requirements for conformity",
+            "views": [
+              "law_title_sentence"
+            ]
+          }
+        ],
+        "dropped": [],
+        "views": {
+          "title": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "CRD-Art18",
+                "reason": "The article is about delivery obligations and the step involves making a new delivery."
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items."
+              },
+              {
+                "article_id": "SGD-Art10",
+                "reason": "The article covers the liability of the seller, which applies to the delivery of items."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "CRD-Art18",
+                "reason": "The article is about delivery obligations and the step involves making a new delivery.",
+                "title": "Delivery"
+              },
+              {
+                "article_id": "SGD-Art14",
+                "reason": "The article addresses repair or replacement of goods, which relates to the delivery of items.",
+                "title": "Repair or replacement of the goods"
+              },
+              {
+                "article_id": "SGD-Art10",
+                "reason": "The article covers the liability of the seller, which applies to the delivery of items.",
+                "title": "Liability of the seller"
+              }
+            ],
+            "dropped": []
+          },
+          "law_title_sentence": {
+            "failed": false,
+            "raw_routes": [
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about conformity of goods and the step involves making a new delivery of items."
+              },
+              {
+                "article_id": "SGD-Art6",
+                "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards."
+              },
+              {
+                "article_id": "SGD-Art7",
+                "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose."
+              }
+            ],
+            "routes": [
+              {
+                "article_id": "SGD-Art5",
+                "reason": "The article is about conformity of goods and the step involves making a new delivery of items.",
+                "title": "Conformity of goods"
+              },
+              {
+                "article_id": "SGD-Art6",
+                "reason": "The article is about subjective requirements for conformity and the step involves delivering items that must meet certain standards.",
+                "title": "Subjective requirements for conformity"
+              },
+              {
+                "article_id": "SGD-Art7",
+                "reason": "The article is about objective requirements for conformity and the step involves delivering items that must be fit for their intended purpose.",
+                "title": "Objective requirements for conformity"
+              }
+            ],
+            "dropped": []
+          }
+        }
+      }
+    }
+  },
+  "S3": {
+    "stage": "S3 paragraph ranking",
+    "per_step": {
+      "S1": {
+        "step_id": "S1",
+        "query": "starts an order",
+        "routed_articles": [
+          "GDPR-Art6",
+          "CRD-Art6",
+          "ECD-Art11",
+          "GDPR-Art5",
+          "GDPR-Art7"
+        ],
+        "n_paragraphs_in_routed_articles": 27,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "ECD-Art11-1",
+            "rerank_score": -5.4652252197265625,
+            "hybrid_rank": 1,
+            "fused_score": 0.03252247488101534
+          },
+          {
+            "rank": 2,
+            "passage_id": "ECD-Art11-2",
+            "rerank_score": -5.866605758666992,
+            "hybrid_rank": 2,
+            "fused_score": 0.03252247488101534
+          },
+          {
+            "rank": 3,
+            "passage_id": "ECD-Art11-3",
+            "rerank_score": -8.085344314575195,
+            "hybrid_rank": 3,
+            "fused_score": 0.031746031746031744
+          },
+          {
+            "rank": 4,
+            "passage_id": "GDPR-Art6-1",
+            "rerank_score": -10.595624923706055,
+            "hybrid_rank": 4,
+            "fused_score": 0.027820121951219513
+          },
+          {
+            "rank": 5,
+            "passage_id": "CRD-Art6-1-g",
+            "rerank_score": -10.716582298278809,
+            "hybrid_rank": 15,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 6,
+            "passage_id": "CRD-Art6-1-a",
+            "rerank_score": -10.822722434997559,
+            "hybrid_rank": 16,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 7,
+            "passage_id": "GDPR-Art6-3",
+            "rerank_score": -10.967202186584473,
+            "hybrid_rank": 20,
+            "fused_score": 0.012987012987012988
+          },
+          {
+            "rank": 8,
+            "passage_id": "CRD-Art6-1-e",
+            "rerank_score": -10.984392166137695,
+            "hybrid_rank": 19,
+            "fused_score": 0.013157894736842105
+          },
+          {
+            "rank": 9,
+            "passage_id": "GDPR-Art6-4",
+            "rerank_score": -11.04212474822998,
+            "hybrid_rank": 5,
+            "fused_score": 0.02719970792259949
+          },
+          {
+            "rank": 10,
+            "passage_id": "GDPR-Art5-1-e",
+            "rerank_score": -11.05655574798584,
+            "hybrid_rank": 6,
+            "fused_score": 0.026878868258178604
+          },
+          {
+            "rank": 11,
+            "passage_id": "GDPR-Art7-3",
+            "rerank_score": -11.073375701904297,
+            "hybrid_rank": 18,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 12,
+            "passage_id": "CRD-Art6-1-s",
+            "rerank_score": -11.120450019836426,
+            "hybrid_rank": 13,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 13,
+            "passage_id": "CRD-Art6-4",
+            "rerank_score": -11.237706184387207,
+            "hybrid_rank": 8,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 14,
+            "passage_id": "CRD-Art6-6",
+            "rerank_score": -11.366646766662598,
+            "hybrid_rank": 10,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 15,
+            "passage_id": "GDPR-Art7-1",
+            "rerank_score": -11.382972717285156,
+            "hybrid_rank": 17,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 16,
+            "passage_id": "CRD-Art6-2",
+            "rerank_score": -11.389244079589844,
+            "hybrid_rank": 7,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 17,
+            "passage_id": "CRD-Art6-5",
+            "rerank_score": -11.391862869262695,
+            "hybrid_rank": 9,
+            "fused_score": 0.015151515151515152
+          },
+          {
+            "rank": 18,
+            "passage_id": "CRD-Art6-7",
+            "rerank_score": -11.40517520904541,
+            "hybrid_rank": 11,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 19,
+            "passage_id": "CRD-Art6-3",
+            "rerank_score": -11.417359352111816,
+            "hybrid_rank": 12,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 20,
+            "passage_id": "CRD-Art6-9",
+            "rerank_score": -11.427083969116211,
+            "hybrid_rank": 14,
+            "fused_score": 0.014084507042253521
+          }
+        ]
+      },
+      "S2": {
+        "step_id": "S2",
+        "query": "selects the items to purchase and sets a payment method items, payment method",
+        "routed_articles": [
+          "CRD-Art6",
+          "GDPR-Art6",
+          "GDPR-Art13",
+          "ECD-Art10"
+        ],
+        "n_paragraphs_in_routed_articles": 26,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art6-1-g",
+            "rerank_score": -10.516519546508789,
+            "hybrid_rank": 1,
+            "fused_score": 0.03200204813108039
+          },
+          {
+            "rank": 2,
+            "passage_id": "ECD-Art10-3",
+            "rerank_score": -10.937591552734375,
+            "hybrid_rank": 7,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 3,
+            "passage_id": "CRD-Art6-1-e",
+            "rerank_score": -11.082966804504395,
+            "hybrid_rank": 6,
+            "fused_score": 0.016129032258064516
+          },
+          {
+            "rank": 4,
+            "passage_id": "CRD-Art6-1-s",
+            "rerank_score": -11.099491119384766,
+            "hybrid_rank": 2,
+            "fused_score": 0.03177805800756621
+          },
+          {
+            "rank": 5,
+            "passage_id": "ECD-Art10-4",
+            "rerank_score": -11.147050857543945,
+            "hybrid_rank": 13,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 6,
+            "passage_id": "CRD-Art6-1-a",
+            "rerank_score": -11.184185028076172,
+            "hybrid_rank": 9,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 7,
+            "passage_id": "CRD-Art6-1-l",
+            "rerank_score": -11.193309783935547,
+            "hybrid_rank": 10,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 8,
+            "passage_id": "ECD-Art10-2",
+            "rerank_score": -11.206687927246094,
+            "hybrid_rank": 11,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 9,
+            "passage_id": "CRD-Art6-6",
+            "rerank_score": -11.23259449005127,
+            "hybrid_rank": 8,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 10,
+            "passage_id": "CRD-Art6-4",
+            "rerank_score": -11.249913215637207,
+            "hybrid_rank": 3,
+            "fused_score": 0.031024531024531024
+          },
+          {
+            "rank": 11,
+            "passage_id": "GDPR-Art13-2-a",
+            "rerank_score": -11.257753372192383,
+            "hybrid_rank": 17,
+            "fused_score": 0.012987012987012988
+          },
+          {
+            "rank": 12,
+            "passage_id": "ECD-Art10-1",
+            "rerank_score": -11.262296676635742,
+            "hybrid_rank": 5,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 13,
+            "passage_id": "CRD-Art6-3",
+            "rerank_score": -11.263472557067871,
+            "hybrid_rank": 12,
+            "fused_score": 0.014084507042253521
+          },
+          {
+            "rank": 14,
+            "passage_id": "GDPR-Art6-4",
+            "rerank_score": -11.268333435058594,
+            "hybrid_rank": 20,
+            "fused_score": 0.0125
+          },
+          {
+            "rank": 15,
+            "passage_id": "GDPR-Art13-1",
+            "rerank_score": -11.27827262878418,
+            "hybrid_rank": 15,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 16,
+            "passage_id": "CRD-Art6-2",
+            "rerank_score": -11.284566879272461,
+            "hybrid_rank": 4,
+            "fused_score": 0.028958333333333336
+          },
+          {
+            "rank": 17,
+            "passage_id": "CRD-Art6-9",
+            "rerank_score": -11.285059928894043,
+            "hybrid_rank": 18,
+            "fused_score": 0.01282051282051282
+          },
+          {
+            "rank": 18,
+            "passage_id": "GDPR-Art13-3",
+            "rerank_score": -11.303993225097656,
+            "hybrid_rank": 19,
+            "fused_score": 0.012658227848101266
+          },
+          {
+            "rank": 19,
+            "passage_id": "GDPR-Art13-2-f",
+            "rerank_score": -11.31164264678955,
+            "hybrid_rank": 14,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 20,
+            "passage_id": "CRD-Art6-5",
+            "rerank_score": -11.32812213897705,
+            "hybrid_rank": 16,
+            "fused_score": 0.013157894736842105
+          }
+        ]
+      },
+      "S3": {
+        "step_id": "S3",
+        "query": "pays or completes an installment agreement",
+        "routed_articles": [
+          "GDPR-Art6",
+          "GDPR-Art12",
+          "CRD-Art9"
+        ],
+        "n_paragraphs_in_routed_articles": 17,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art9-3",
+            "rerank_score": -10.539981842041016,
+            "hybrid_rank": 1,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 2,
+            "passage_id": "CRD-Art9-2-a",
+            "rerank_score": -11.081180572509766,
+            "hybrid_rank": 3,
+            "fused_score": 0.015873015873015872
+          },
+          {
+            "rank": 3,
+            "passage_id": "CRD-Art9-1",
+            "rerank_score": -11.146846771240234,
+            "hybrid_rank": 2,
+            "fused_score": 0.016129032258064516
+          },
+          {
+            "rank": 4,
+            "passage_id": "CRD-Art9-1a",
+            "rerank_score": -11.212898254394531,
+            "hybrid_rank": 5,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 5,
+            "passage_id": "GDPR-Art6-1",
+            "rerank_score": -11.250364303588867,
+            "hybrid_rank": 10,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 6,
+            "passage_id": "GDPR-Art12-1",
+            "rerank_score": -11.26218032836914,
+            "hybrid_rank": 16,
+            "fused_score": 0.013157894736842105
+          },
+          {
+            "rank": 7,
+            "passage_id": "GDPR-Art6-3",
+            "rerank_score": -11.265058517456055,
+            "hybrid_rank": 9,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 8,
+            "passage_id": "GDPR-Art12-3",
+            "rerank_score": -11.274801254272461,
+            "hybrid_rank": 7,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 9,
+            "passage_id": "GDPR-Art6-4",
+            "rerank_score": -11.27929973602295,
+            "hybrid_rank": 12,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 10,
+            "passage_id": "GDPR-Art12-2",
+            "rerank_score": -11.282780647277832,
+            "hybrid_rank": 14,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 11,
+            "passage_id": "CRD-Art9-2-c",
+            "rerank_score": -11.298505783081055,
+            "hybrid_rank": 6,
+            "fused_score": 0.015151515151515152
+          },
+          {
+            "rank": 12,
+            "passage_id": "GDPR-Art12-5",
+            "rerank_score": -11.31265640258789,
+            "hybrid_rank": 4,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 13,
+            "passage_id": "GDPR-Art12-7",
+            "rerank_score": -11.321974754333496,
+            "hybrid_rank": 15,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 14,
+            "passage_id": "GDPR-Art12-4",
+            "rerank_score": -11.326041221618652,
+            "hybrid_rank": 13,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 15,
+            "passage_id": "GDPR-Art12-6",
+            "rerank_score": -11.32992172241211,
+            "hybrid_rank": 8,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 16,
+            "passage_id": "GDPR-Art6-2",
+            "rerank_score": -11.333026885986328,
+            "hybrid_rank": 11,
+            "fused_score": 0.014084507042253521
+          },
+          {
+            "rank": 17,
+            "passage_id": "GDPR-Art12-8",
+            "rerank_score": -11.34770393371582,
+            "hybrid_rank": 17,
+            "fused_score": 0.012987012987012988
+          }
+        ]
+      },
+      "S4": {
+        "step_id": "S4",
+        "query": "chooses between multiple options for a free reward free reward",
+        "routed_articles": [
+          "CRD-Art9",
+          "CRD-Art13",
+          "CRD-Art11",
+          "CRD-Art6",
+          "GDPR-Art6",
+          "SGD-Art5"
+        ],
+        "n_paragraphs_in_routed_articles": 35,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art13-7",
+            "rerank_score": -11.221883773803711,
+            "hybrid_rank": 1,
+            "fused_score": 0.032266458495966696
+          },
+          {
+            "rank": 2,
+            "passage_id": "CRD-Art9-2-a",
+            "rerank_score": -11.229397773742676,
+            "hybrid_rank": 3,
+            "fused_score": 0.028177225029148854
+          },
+          {
+            "rank": 3,
+            "passage_id": "CRD-Art11-3",
+            "rerank_score": -11.279075622558594,
+            "hybrid_rank": 2,
+            "fused_score": 0.03200204813108039
+          },
+          {
+            "rank": 4,
+            "passage_id": "GDPR-Art6-4",
+            "rerank_score": -11.314016342163086,
+            "hybrid_rank": 16,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 5,
+            "passage_id": "CRD-Art13-5",
+            "rerank_score": -11.344232559204102,
+            "hybrid_rank": 6,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 6,
+            "passage_id": "CRD-Art11-1",
+            "rerank_score": -11.352958679199219,
+            "hybrid_rank": 9,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 7,
+            "passage_id": "CRD-Art13-1",
+            "rerank_score": -11.359987258911133,
+            "hybrid_rank": 13,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 8,
+            "passage_id": "CRD-Art6-1-g",
+            "rerank_score": -11.369609832763672,
+            "hybrid_rank": 20,
+            "fused_score": 0.012658227848101266
+          },
+          {
+            "rank": 9,
+            "passage_id": "CRD-Art11-2",
+            "rerank_score": -11.375680923461914,
+            "hybrid_rank": 15,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 10,
+            "passage_id": "CRD-Art9-1a",
+            "rerank_score": -11.38083553314209,
+            "hybrid_rank": 19,
+            "fused_score": 0.01282051282051282
+          },
+          {
+            "rank": 11,
+            "passage_id": "CRD-Art6-1-l",
+            "rerank_score": -11.38361930847168,
+            "hybrid_rank": 17,
+            "fused_score": 0.013157894736842105
+          },
+          {
+            "rank": 12,
+            "passage_id": "CRD-Art13-8",
+            "rerank_score": -11.39089584350586,
+            "hybrid_rank": 10,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 13,
+            "passage_id": "CRD-Art6-1-e",
+            "rerank_score": -11.392105102539062,
+            "hybrid_rank": 7,
+            "fused_score": 0.015151515151515152
+          },
+          {
+            "rank": 14,
+            "passage_id": "CRD-Art13-2",
+            "rerank_score": -11.392325401306152,
+            "hybrid_rank": 4,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 15,
+            "passage_id": "CRD-Art6-1-s",
+            "rerank_score": -11.392990112304688,
+            "hybrid_rank": 18,
+            "fused_score": 0.012987012987012988
+          },
+          {
+            "rank": 16,
+            "passage_id": "CRD-Art13-6",
+            "rerank_score": -11.396764755249023,
+            "hybrid_rank": 11,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 17,
+            "passage_id": "CRD-Art11-4",
+            "rerank_score": -11.397478103637695,
+            "hybrid_rank": 8,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 18,
+            "passage_id": "CRD-Art9-1",
+            "rerank_score": -11.403304100036621,
+            "hybrid_rank": 14,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 19,
+            "passage_id": "CRD-Art13-3",
+            "rerank_score": -11.406747817993164,
+            "hybrid_rank": 5,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 20,
+            "passage_id": "CRD-Art6-6",
+            "rerank_score": -11.44612979888916,
+            "hybrid_rank": 12,
+            "fused_score": 0.014084507042253521
+          }
+        ]
+      },
+      "S5": {
+        "step_id": "S5",
+        "query": "chooses between multiple options for a free reward free reward",
+        "routed_articles": [
+          "CRD-Art9",
+          "CRD-Art13",
+          "CRD-Art11",
+          "CRD-Art6",
+          "GDPR-Art6",
+          "GDPR-Art12"
+        ],
+        "n_paragraphs_in_routed_articles": 42,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art13-7",
+            "rerank_score": -11.221883773803711,
+            "hybrid_rank": 2,
+            "fused_score": 0.032018442622950824
+          },
+          {
+            "rank": 2,
+            "passage_id": "CRD-Art9-2-a",
+            "rerank_score": -11.229397773742676,
+            "hybrid_rank": 4,
+            "fused_score": 0.02736726874657909
+          },
+          {
+            "rank": 3,
+            "passage_id": "GDPR-Art12-5",
+            "rerank_score": -11.263721466064453,
+            "hybrid_rank": 1,
+            "fused_score": 0.03225806451612903
+          },
+          {
+            "rank": 4,
+            "passage_id": "CRD-Art11-3",
+            "rerank_score": -11.279075622558594,
+            "hybrid_rank": 3,
+            "fused_score": 0.03149801587301587
+          },
+          {
+            "rank": 5,
+            "passage_id": "GDPR-Art6-4",
+            "rerank_score": -11.314016342163086,
+            "hybrid_rank": 18,
+            "fused_score": 0.012987012987012988
+          },
+          {
+            "rank": 6,
+            "passage_id": "CRD-Art13-5",
+            "rerank_score": -11.344232559204102,
+            "hybrid_rank": 7,
+            "fused_score": 0.015151515151515152
+          },
+          {
+            "rank": 7,
+            "passage_id": "GDPR-Art12-7",
+            "rerank_score": -11.351081848144531,
+            "hybrid_rank": 17,
+            "fused_score": 0.013157894736842105
+          },
+          {
+            "rank": 8,
+            "passage_id": "CRD-Art11-1",
+            "rerank_score": -11.352958679199219,
+            "hybrid_rank": 10,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 9,
+            "passage_id": "GDPR-Art12-6",
+            "rerank_score": -11.35861873626709,
+            "hybrid_rank": 19,
+            "fused_score": 0.01282051282051282
+          },
+          {
+            "rank": 10,
+            "passage_id": "CRD-Art13-1",
+            "rerank_score": -11.359987258911133,
+            "hybrid_rank": 14,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 11,
+            "passage_id": "CRD-Art11-2",
+            "rerank_score": -11.375680923461914,
+            "hybrid_rank": 16,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 12,
+            "passage_id": "CRD-Art6-1-l",
+            "rerank_score": -11.38361930847168,
+            "hybrid_rank": 20,
+            "fused_score": 0.012658227848101266
+          },
+          {
+            "rank": 13,
+            "passage_id": "CRD-Art13-8",
+            "rerank_score": -11.39089584350586,
+            "hybrid_rank": 11,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 14,
+            "passage_id": "CRD-Art6-1-e",
+            "rerank_score": -11.392105102539062,
+            "hybrid_rank": 8,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 15,
+            "passage_id": "CRD-Art13-2",
+            "rerank_score": -11.392325401306152,
+            "hybrid_rank": 5,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 16,
+            "passage_id": "CRD-Art13-6",
+            "rerank_score": -11.396764755249023,
+            "hybrid_rank": 12,
+            "fused_score": 0.014084507042253521
+          },
+          {
+            "rank": 17,
+            "passage_id": "CRD-Art11-4",
+            "rerank_score": -11.397478103637695,
+            "hybrid_rank": 9,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 18,
+            "passage_id": "CRD-Art9-1",
+            "rerank_score": -11.403304100036621,
+            "hybrid_rank": 15,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 19,
+            "passage_id": "CRD-Art13-3",
+            "rerank_score": -11.406747817993164,
+            "hybrid_rank": 6,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 20,
+            "passage_id": "CRD-Art6-6",
+            "rerank_score": -11.44612979888916,
+            "hybrid_rank": 13,
+            "fused_score": 0.013888888888888888
+          }
+        ]
+      },
+      "S6": {
+        "step_id": "S6",
+        "query": "delivers the items items",
+        "routed_articles": [
+          "CRD-Art18",
+          "SGD-Art14",
+          "SGD-Art10",
+          "SGD-Art5",
+          "SGD-Art6",
+          "SGD-Art7"
+        ],
+        "n_paragraphs_in_routed_articles": 21,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art18-1",
+            "rerank_score": -0.25490832328796387,
+            "hybrid_rank": 2,
+            "fused_score": 0.03200204813108039
+          },
+          {
+            "rank": 2,
+            "passage_id": "SGD-Art5-1",
+            "rerank_score": -0.6502798795700073,
+            "hybrid_rank": 1,
+            "fused_score": 0.03252247488101534
+          },
+          {
+            "rank": 3,
+            "passage_id": "CRD-Art18-2",
+            "rerank_score": -2.751896381378174,
+            "hybrid_rank": 3,
+            "fused_score": 0.031099324975891997
+          },
+          {
+            "rank": 4,
+            "passage_id": "SGD-Art10-1",
+            "rerank_score": -3.994664430618286,
+            "hybrid_rank": 6,
+            "fused_score": 0.029910714285714284
+          },
+          {
+            "rank": 5,
+            "passage_id": "SGD-Art6-1",
+            "rerank_score": -5.30427360534668,
+            "hybrid_rank": 4,
+            "fused_score": 0.03076923076923077
+          },
+          {
+            "rank": 6,
+            "passage_id": "SGD-Art7-1",
+            "rerank_score": -5.398499488830566,
+            "hybrid_rank": 5,
+            "fused_score": 0.03007688828584351
+          },
+          {
+            "rank": 7,
+            "passage_id": "SGD-Art10-2",
+            "rerank_score": -5.993072509765625,
+            "hybrid_rank": 7,
+            "fused_score": 0.029236022193768675
+          },
+          {
+            "rank": 8,
+            "passage_id": "SGD-Art14-2",
+            "rerank_score": -8.514242172241211,
+            "hybrid_rank": 9,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 9,
+            "passage_id": "CRD-Art18-4",
+            "rerank_score": -8.726180076599121,
+            "hybrid_rank": 10,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 10,
+            "passage_id": "SGD-Art7-3",
+            "rerank_score": -9.104086875915527,
+            "hybrid_rank": 11,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 11,
+            "passage_id": "CRD-Art18-3",
+            "rerank_score": -9.200371742248535,
+            "hybrid_rank": 8,
+            "fused_score": 0.015873015873015872
+          },
+          {
+            "rank": 12,
+            "passage_id": "SGD-Art14-1",
+            "rerank_score": -9.265970230102539,
+            "hybrid_rank": 12,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 13,
+            "passage_id": "SGD-Art14-3",
+            "rerank_score": -9.27958869934082,
+            "hybrid_rank": 15,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 14,
+            "passage_id": "SGD-Art10-6",
+            "rerank_score": -9.984001159667969,
+            "hybrid_rank": 18,
+            "fused_score": 0.01282051282051282
+          },
+          {
+            "rank": 15,
+            "passage_id": "SGD-Art14-4",
+            "rerank_score": -10.100522994995117,
+            "hybrid_rank": 14,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 16,
+            "passage_id": "SGD-Art10-3",
+            "rerank_score": -10.408706665039062,
+            "hybrid_rank": 16,
+            "fused_score": 0.013157894736842105
+          },
+          {
+            "rank": 17,
+            "passage_id": "SGD-Art7-4",
+            "rerank_score": -10.676307678222656,
+            "hybrid_rank": 13,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 18,
+            "passage_id": "SGD-Art10-5",
+            "rerank_score": -10.852843284606934,
+            "hybrid_rank": 20,
+            "fused_score": 0.0125
+          },
+          {
+            "rank": 19,
+            "passage_id": "SGD-Art10-4",
+            "rerank_score": -10.895681381225586,
+            "hybrid_rank": 19,
+            "fused_score": 0.012658227848101266
+          },
+          {
+            "rank": 20,
+            "passage_id": "SGD-Art7-5",
+            "rerank_score": -11.087406158447266,
+            "hybrid_rank": 17,
+            "fused_score": 0.012987012987012988
+          }
+        ]
+      },
+      "S7": {
+        "step_id": "S7",
+        "query": "returns items for exchange items",
+        "routed_articles": [
+          "CRD-Art9",
+          "SGD-Art13",
+          "SGD-Art14"
+        ],
+        "n_paragraphs_in_routed_articles": 16,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "SGD-Art14-2",
+            "rerank_score": -10.936103820800781,
+            "hybrid_rank": 1,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 2,
+            "passage_id": "SGD-Art13-4",
+            "rerank_score": -11.179443359375,
+            "hybrid_rank": 7,
+            "fused_score": 0.014925373134328358
+          },
+          {
+            "rank": 3,
+            "passage_id": "CRD-Art9-2-a",
+            "rerank_score": -11.189748764038086,
+            "hybrid_rank": 12,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 4,
+            "passage_id": "SGD-Art14-3",
+            "rerank_score": -11.191872596740723,
+            "hybrid_rank": 4,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 5,
+            "passage_id": "SGD-Art14-1",
+            "rerank_score": -11.208171844482422,
+            "hybrid_rank": 2,
+            "fused_score": 0.016129032258064516
+          },
+          {
+            "rank": 6,
+            "passage_id": "SGD-Art14-4",
+            "rerank_score": -11.224126815795898,
+            "hybrid_rank": 3,
+            "fused_score": 0.015873015873015872
+          },
+          {
+            "rank": 7,
+            "passage_id": "SGD-Art13-6",
+            "rerank_score": -11.247093200683594,
+            "hybrid_rank": 9,
+            "fused_score": 0.014492753623188406
+          },
+          {
+            "rank": 8,
+            "passage_id": "CRD-Art9-1a",
+            "rerank_score": -11.253355979919434,
+            "hybrid_rank": 13,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 9,
+            "passage_id": "SGD-Art13-2",
+            "rerank_score": -11.253528594970703,
+            "hybrid_rank": 5,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 10,
+            "passage_id": "SGD-Art13-3",
+            "rerank_score": -11.270950317382812,
+            "hybrid_rank": 6,
+            "fused_score": 0.015151515151515152
+          },
+          {
+            "rank": 11,
+            "passage_id": "SGD-Art13-1",
+            "rerank_score": -11.284897804260254,
+            "hybrid_rank": 8,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 12,
+            "passage_id": "CRD-Art9-3",
+            "rerank_score": -11.29330062866211,
+            "hybrid_rank": 15,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 13,
+            "passage_id": "SGD-Art13-5",
+            "rerank_score": -11.32420539855957,
+            "hybrid_rank": 11,
+            "fused_score": 0.014084507042253521
+          },
+          {
+            "rank": 14,
+            "passage_id": "SGD-Art13-7",
+            "rerank_score": -11.34844970703125,
+            "hybrid_rank": 10,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 15,
+            "passage_id": "CRD-Art9-1",
+            "rerank_score": -11.357772827148438,
+            "hybrid_rank": 14,
+            "fused_score": 0.013513513513513514
+          },
+          {
+            "rank": 16,
+            "passage_id": "CRD-Art9-2-c",
+            "rerank_score": -11.384275436401367,
+            "hybrid_rank": 16,
+            "fused_score": 0.013157894736842105
+          }
+        ]
+      },
+      "S8": {
+        "step_id": "S8",
+        "query": "makes a new delivery items",
+        "routed_articles": [
+          "CRD-Art18",
+          "SGD-Art14",
+          "SGD-Art10",
+          "SGD-Art5",
+          "SGD-Art6",
+          "SGD-Art7"
+        ],
+        "n_paragraphs_in_routed_articles": 21,
+        "ranking": [
+          {
+            "rank": 1,
+            "passage_id": "CRD-Art18-2",
+            "rerank_score": -6.435667037963867,
+            "hybrid_rank": 2,
+            "fused_score": 0.031544957774465976
+          },
+          {
+            "rank": 2,
+            "passage_id": "CRD-Art18-1",
+            "rerank_score": -8.483720779418945,
+            "hybrid_rank": 1,
+            "fused_score": 0.03225806451612903
+          },
+          {
+            "rank": 3,
+            "passage_id": "SGD-Art5-1",
+            "rerank_score": -8.908548355102539,
+            "hybrid_rank": 6,
+            "fused_score": 0.01639344262295082
+          },
+          {
+            "rank": 4,
+            "passage_id": "SGD-Art7-1",
+            "rerank_score": -9.647592544555664,
+            "hybrid_rank": 7,
+            "fused_score": 0.015873015873015872
+          },
+          {
+            "rank": 5,
+            "passage_id": "SGD-Art10-1",
+            "rerank_score": -9.752601623535156,
+            "hybrid_rank": 14,
+            "fused_score": 0.0136986301369863
+          },
+          {
+            "rank": 6,
+            "passage_id": "SGD-Art10-2",
+            "rerank_score": -9.956071853637695,
+            "hybrid_rank": 13,
+            "fused_score": 0.013888888888888888
+          },
+          {
+            "rank": 7,
+            "passage_id": "SGD-Art14-2",
+            "rerank_score": -10.01590347290039,
+            "hybrid_rank": 3,
+            "fused_score": 0.030309988518943745
+          },
+          {
+            "rank": 8,
+            "passage_id": "SGD-Art6-1",
+            "rerank_score": -10.175527572631836,
+            "hybrid_rank": 9,
+            "fused_score": 0.015384615384615385
+          },
+          {
+            "rank": 9,
+            "passage_id": "CRD-Art18-4",
+            "rerank_score": -10.220027923583984,
+            "hybrid_rank": 4,
+            "fused_score": 0.030117753623188408
+          },
+          {
+            "rank": 10,
+            "passage_id": "CRD-Art18-3",
+            "rerank_score": -10.612337112426758,
+            "hybrid_rank": 5,
+            "fused_score": 0.029386529386529386
+          },
+          {
+            "rank": 11,
+            "passage_id": "SGD-Art14-4",
+            "rerank_score": -10.71783447265625,
+            "hybrid_rank": 11,
+            "fused_score": 0.014285714285714285
+          },
+          {
+            "rank": 12,
+            "passage_id": "SGD-Art14-3",
+            "rerank_score": -10.730443954467773,
+            "hybrid_rank": 15,
+            "fused_score": 0.013333333333333334
+          },
+          {
+            "rank": 13,
+            "passage_id": "SGD-Art14-1",
+            "rerank_score": -10.96877384185791,
+            "hybrid_rank": 12,
+            "fused_score": 0.014084507042253521
+          },
+          {
+            "rank": 14,
+            "passage_id": "SGD-Art7-3",
+            "rerank_score": -11.008153915405273,
+            "hybrid_rank": 8,
+            "fused_score": 0.015625
+          },
+          {
+            "rank": 15,
+            "passage_id": "SGD-Art7-4",
+            "rerank_score": -11.12862491607666,
+            "hybrid_rank": 10,
+            "fused_score": 0.014705882352941176
+          },
+          {
+            "rank": 16,
+            "passage_id": "SGD-Art10-6",
+            "rerank_score": -11.232146263122559,
+            "hybrid_rank": 19,
+            "fused_score": 0.012658227848101266
+          },
+          {
+            "rank": 17,
+            "passage_id": "SGD-Art7-2",
+            "rerank_score": -11.274133682250977,
+            "hybrid_rank": 20,
+            "fused_score": 0.0125
+          },
+          {
+            "rank": 18,
+            "passage_id": "SGD-Art10-4",
+            "rerank_score": -11.302312850952148,
+            "hybrid_rank": 18,
+            "fused_score": 0.01282051282051282
+          },
+          {
+            "rank": 19,
+            "passage_id": "SGD-Art7-5",
+            "rerank_score": -11.306455612182617,
+            "hybrid_rank": 17,
+            "fused_score": 0.012987012987012988
+          },
+          {
+            "rank": 20,
+            "passage_id": "SGD-Art10-3",
+            "rerank_score": -11.312079429626465,
+            "hybrid_rank": 16,
+            "fused_score": 0.013157894736842105
+          }
+        ]
+      }
+    },
+    "steps_without_route": []
+  },
+  "S4": {
+    "stage": "S4 merge (combmax over the steps, parent expansion)",
+    "fusion": "combmax",
+    "rrf_k": 60,
+    "top_k": 10,
+    "fused": [
+      {
+        "passage_id": "CRD-Art18-1",
+        "max_rerank_score": -0.25490832328796387,
+        "rrf_score": 0.03252247488101534,
+        "rank": 1
+      },
+      {
+        "passage_id": "SGD-Art5-1",
+        "max_rerank_score": -0.6502798795700073,
+        "rrf_score": 0.03200204813108039,
+        "rank": 2
+      },
+      {
+        "passage_id": "CRD-Art18-2",
+        "max_rerank_score": -2.751896381378174,
+        "rrf_score": 0.032266458495966696,
+        "rank": 3
+      },
+      {
+        "passage_id": "SGD-Art10-1",
+        "max_rerank_score": -3.994664430618286,
+        "rrf_score": 0.031009615384615385,
+        "rank": 4
+      },
+      {
+        "passage_id": "SGD-Art6-1",
+        "max_rerank_score": -5.30427360534668,
+        "rrf_score": 0.030090497737556562,
+        "rank": 5
+      },
+      {
+        "passage_id": "SGD-Art7-1",
+        "max_rerank_score": -5.398499488830566,
+        "rrf_score": 0.030776515151515152,
+        "rank": 6
+      },
+      {
+        "passage_id": "ECD-Art11-1",
+        "max_rerank_score": -5.4652252197265625,
+        "rrf_score": 0.01639344262295082,
+        "rank": 7
+      },
+      {
+        "passage_id": "ECD-Art11-2",
+        "max_rerank_score": -5.866605758666992,
+        "rrf_score": 0.016129032258064516,
+        "rank": 8
+      },
+      {
+        "passage_id": "SGD-Art10-2",
+        "max_rerank_score": -5.993072509765625,
+        "rrf_score": 0.03007688828584351,
+        "rank": 9
+      },
+      {
+        "passage_id": "ECD-Art11-3",
+        "max_rerank_score": -8.085344314575195,
+        "rrf_score": 0.015873015873015872,
+        "rank": 10
+      }
+    ],
+    "expansion_cap": 20,
+    "articles": [
+      "CRD-Art18",
+      "SGD-Art5",
+      "SGD-Art10",
+      "SGD-Art6",
+      "SGD-Art7",
+      "ECD-Art11"
+    ],
+    "cut": [],
+    "passages": [
+      {
+        "rank": 1,
+        "passage_id": "CRD-Art18-1",
+        "fused_rank": 1,
+        "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n1. Unless the parties have agreed otherwise on the time of delivery, the trader shall deliver the goods by transferring the physical possession or control of the goods to the consumer without undue delay, but not later than 30 days from the conclusion of the contract."
+      },
+      {
+        "rank": 2,
+        "passage_id": "CRD-Art18-2",
+        "fused_rank": 3,
+        "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n2. Where the trader has failed to fulfil his obligation to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall call upon him to make the delivery within an additional period of time appropriate to the circumstances. If the trader fails to deliver the goods within that additional period of time, the consumer shall be entitled to terminate the contract.\nThe first subparagraph shall not be applicable to sales contracts where the trader has refused to deliver the goods or where delivery within the agreed delivery period is essential taking into account all the circumstances attending the conclusion of the contract or where the consumer informs the trader, prior to the conclusion of the contract, that delivery by or on a specified date is essential. In those cases, if the trader fails to deliver the goods at the time agreed upon with the consumer or within the time limit set out in paragraph 1, the consumer shall be entitled to terminate the contract immediately."
+      },
+      {
+        "rank": 3,
+        "passage_id": "CRD-Art18-3",
+        "fused_rank": null,
+        "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n3. Upon termination of the contract, the trader shall, without undue delay, reimburse all sums paid under the contract."
+      },
+      {
+        "rank": 4,
+        "passage_id": "CRD-Art18-4",
+        "fused_rank": null,
+        "text": "Consumer Rights Directive (2011/83/EU) - Article 18: Delivery\n4. In addition to the termination of the contract in accordance with paragraph 2, the consumer may have recourse to other remedies provided for by national law."
+      },
+      {
+        "rank": 5,
+        "passage_id": "SGD-Art5-1",
+        "fused_rank": 2,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 5: Conformity of goods\nThe seller shall deliver goods to the consumer that meet the requirements set out in Articles 6, 7 and 8, where applicable, without prejudice to Article 9."
+      },
+      {
+        "rank": 6,
+        "passage_id": "SGD-Art10-1",
+        "fused_rank": 4,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n1. The seller shall be liable to the consumer for any lack of conformity which exists at the time when the goods were delivered and which becomes apparent within two years of that time. Without prejudice to Article 7(3), this paragraph shall also apply to goods with digital elements."
+      },
+      {
+        "rank": 7,
+        "passage_id": "SGD-Art10-2",
+        "fused_rank": 9,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n2. In the case of goods with digital elements, where the sales contract provides for a continuous supply of the digital content or digital service over a period of time, the seller shall also be liable for any lack of conformity of the digital content or digital service that occurs or becomes apparent within two years of the time when the goods with digital elements were delivered. Where the contract provides for a continuous supply for more than two years, the seller shall be liable for any lack of conformity of the digital content or digital service that occurs or becomes apparent within the period of time during which the digital content or digital service is to be supplied under the sales contract."
+      },
+      {
+        "rank": 8,
+        "passage_id": "SGD-Art10-3",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n3. Member States may maintain or introduce longer time limits than those referred to in paragraphs 1 and 2."
+      },
+      {
+        "rank": 9,
+        "passage_id": "SGD-Art10-4",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n4. If, under national law, the remedies provided for in Article 13 are also subject to a limitation period, Member States shall ensure that such limitation period allows the consumer to exercise the remedies laid down in Article 13 for any lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent within the period of time referred to in those paragraphs."
+      },
+      {
+        "rank": 10,
+        "passage_id": "SGD-Art10-5",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n5. Notwithstanding paragraphs 1 and 2 of this Article, Member States may maintain or introduce only a limitation period for the remedies provided for in Article 13. Member States shall ensure that such limitation period allows the consumer to exercise the remedies laid down in Article 13 for any lack of conformity for which the seller is liable pursuant to paragraphs 1 and 2 of this Article, and which becomes apparent during the period of time referred to in those paragraphs."
+      },
+      {
+        "rank": 11,
+        "passage_id": "SGD-Art10-6",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 10: Liability of the seller\n6. Member States may provide that, in the case of second-hand goods, the seller and the consumer can agree to contractual terms or agreements with a shorter liability or limitation period than those referred to in paragraphs 1, 2 and 5, provided that such shorter periods shall not be less than one year."
+      },
+      {
+        "rank": 12,
+        "passage_id": "SGD-Art6-1",
+        "fused_rank": 5,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 6: Subjective requirements for conformity\nIn order to conform with the sales contract, the goods shall, in particular, where applicable:\n(a) be of the description, type, quantity and quality, and possess the functionality, compatibility, interoperability and other features, as required by the sales contract;\n(b) be fit for any particular purpose for which the consumer requires them and which the consumer made known to the seller at the latest at the time of the conclusion of the sales contract, and in respect of which the seller has given acceptance;\n(c) be delivered with all accessories and instructions, including on installation, as stipulated by the sales contract; and\n(d) be supplied with updates as stipulated by the sales contract."
+      },
+      {
+        "rank": 13,
+        "passage_id": "SGD-Art7-1",
+        "fused_rank": 6,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n1. In addition to complying with any subjective requirement for conformity, the goods shall:\n(a) be fit for the purposes for which goods of the same type would normally be used, taking into account, where applicable, any existing Union and national law, technical standards or, in the absence of such technical standards, applicable sector-specific industry codes of conduct;\n(b) where applicable, be of the quality and correspond to the description of a sample or model that the seller made available to the consumer before the conclusion of the contract;\n(c) where applicable, be delivered along with such accessories, including packaging, installation instructions or other instructions, as the consumer may reasonably expect to receive; and\n(d) be of the quantity and possess the qualities and other features, including in relation to durability, functionality, compatibility and security normal for goods of the same type and which the consumer may reasonably expect given the nature of the goods and taking into account any public statement made by or on behalf of the seller, or other persons in previous links of the chain of transactions, including the producer, particularly in advertising or on labelling."
+      },
+      {
+        "rank": 14,
+        "passage_id": "SGD-Art7-2",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n2. The seller shall not be bound by public statements, as referred to in point (d) of paragraph 1 if the seller shows that:\n(a) the seller was not, and could not reasonably have been, aware of the public statement in question;\n(b) by the time of conclusion of the contract, the public statement had been corrected in the same way as, or in a way comparable to how, it had been made; or\n(c) the decision to buy the goods could not have been influenced by the public statement."
+      },
+      {
+        "rank": 15,
+        "passage_id": "SGD-Art7-3",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n3. In the case of goods with digital elements, the seller shall ensure that the consumer is informed of and supplied with updates, including security updates, that are necessary to keep those goods in conformity, for the period of time:\n(a) that the consumer may reasonably expect given the type and purpose of the goods and the digital elements, and taking into account the circumstances and nature of the contract, where the sales contract provides for a single act of supply of the digital content or digital service; or\n(b) indicated in Article 10(2) or (5), as applicable, where the sales contract provides for a continuous supply of the digital content or digital service over a period of time."
+      },
+      {
+        "rank": 16,
+        "passage_id": "SGD-Art7-4",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n4. Where the consumer fails to install within a reasonable time updates supplied in accordance with paragraph 3, the seller shall not be liable for any lack of conformity resulting solely from the lack of the relevant update, provided that:\n(a) the seller informed the consumer about the availability of the update and the consequences of the failure of the consumer to install it; and\n(b) the failure of the consumer to install or the incorrect installation by the consumer of the update was not due to shortcomings in the installation instructions provided to the consumer."
+      },
+      {
+        "rank": 17,
+        "passage_id": "SGD-Art7-5",
+        "fused_rank": null,
+        "text": "Sale of Goods Directive ((EU) 2019/771) - Article 7: Objective requirements for conformity\n5. There shall be no lack of conformity within the meaning of paragraph 1 or 3 if, at the time of the conclusion of the sales contract, the consumer was specifically informed that a particular characteristic of the goods was deviating from the objective requirements for conformity laid down in paragraph 1 or 3 and the consumer expressly and separately accepted that deviation when concluding the sales contract."
+      },
+      {
+        "rank": 18,
+        "passage_id": "ECD-Art11-1",
+        "fused_rank": 7,
+        "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them."
+      },
+      {
+        "rank": 19,
+        "passage_id": "ECD-Art11-2",
+        "fused_rank": 8,
+        "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order."
+      },
+      {
+        "rank": 20,
+        "passage_id": "ECD-Art11-3",
+        "fused_rank": 10,
+        "text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications."
+      }
+    ]
+  }
+}

@@ -1,0 +1,3901 @@
+{
+  "case_id": "06.1",
+  "c3_version": "v2",
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "ECD-Art11-1",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n1. Member States shall ensure, except when otherwise agreed by parties who are not consumers, that in cases where the recipient of the service places his order through technological means, the following principles apply:\n- the service provider has to acknowledge the receipt of the recipient's order without undue delay and by electronic means,\n- the order and the acknowledgement of receipt are deemed to be received when the parties to whom they are addressed are able to access them.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "placing of the order through technological means",
+        "law_quote": "the recipient of the service places his order through technological means",
+        "relevant": true,
+        "process_step": "This process begins when a customer places an order through an online platform or over the phone",
+        "description_quote": "This process begins when a customer places an order through an online platform or over the phone",
+        "reason": "The rule is about placing an order through technological means, and the process has a step where a customer places an order through an online platform or over the phone.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the recipient of the service places his order through technological means",
+        "description_quote_canonical": "This process begins when a customer places an order through an online platform or over the phone",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "service provider"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the recipient of the service places his order through technological means",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the recipient is not a consumer",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the service provider must acknowledge the receipt of the recipient's order without undue delay and by electronic means",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "service provider"
+          ],
+          "role_found": "service provider",
+          "roles": [
+            "service provider"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a customer places an order through an online platform or over the phone.",
+              "status": "confirmed",
+              "quotes": [
+                "The process begins when a customer places an order through an online platform or over the phone."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The process begins when a customer places an order through an online platform or over the phone.",
+              "status": "confirmed",
+              "quotes": [
+                "The process begins when a customer places an order through an online platform or over the phone."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "contradicted",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU.",
+                "Some customers change their mind."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: service provider",
+            "roles": [
+              {
+                "role": "service provider",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "The process begins when a customer places an order through an online platform or over the phone."
+            ],
+            "quotes_found": [
+              false
+            ],
+            "quotes_canonical": [],
+            "quote_found": false,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "quote not found",
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the recipient of the service places his order through technological means",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient of the service places his order through technological means",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "The process begins when a customer places an order through an online platform or over the phone."
+            ],
+            "quotes_found": [
+              false
+            ],
+            "quotes_canonical": [],
+            "quote_found": false,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "quote not found",
+            "verifier": null
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the recipient is not a consumer",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient is not a consumer",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU.",
+              "Some customers change their mind."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU",
+              "Some customers change their mind"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences mention private persons and customers, which are consumers, directly contradicting the statement that the recipient is not a consumer."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods (kitchen items) to customers (private persons) for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "service provider": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "ECD-Art11-2",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n2. Member States shall ensure that, except when otherwise agreed by parties who are not consumers, the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "identifying and correcting input errors prior to the placing of the order",
+        "law_quote": "the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "relevant": true,
+        "process_step": "The system automatically generates an order confirmation and sends it to the customer",
+        "description_quote": "The system automatically generates an order confirmation and sends it to the customer",
+        "reason": "The rule is about identifying and correcting input errors before placing an order, and the process has a step where the system generates an order confirmation, which is part of the order placement process.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the service provider makes available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+        "description_quote_canonical": "The system automatically generates an order confirmation and sends it to the customer",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "service provider"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the service provider is providing an information society service",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the recipient of the service is not a consumer",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the service provider must make available to the recipient of the service appropriate, effective and accessible technical means allowing him to identify and correct input errors, prior to the placing of the order",
+          "exceptions": [
+            "when otherwise agreed by parties who are not consumers"
+          ],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": {
+          "rule": "D1 Member States shall ensure",
+          "split_roles": [
+            "service provider"
+          ],
+          "role_found": "service provider",
+          "roles": [
+            "service provider"
+          ]
+        },
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "contradicted",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "E1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: service provider",
+            "roles": [
+              {
+                "role": "service provider",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the service is an information society service (a service normally provided for remuneration, at a distance, by electronic means and at the individual request of a recipient of the service)",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe selling physical kitchen items, not a service provided electronically at a distance for remuneration."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the service provider is providing an information society service",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process is providing an information society service",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentence describes selling physical kitchen items, not an information society service which requires digital services like data processing or electronic communication."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the recipient of the service is not a consumer",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the recipient of the service is not a consumer",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The shop selling to 'private persons' (individual consumers) across the EU directly contradicts the statement that the recipient is not a consumer."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [
+          {
+            "id": "E1",
+            "text": "when otherwise agreed by parties who are not consumers",
+            "text_sent": "when otherwise agreed by parties who are not consumers",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_binding": {
+          "service provider": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "ECD-Art11-3",
+      "passage_text": "e-Commerce Directive (2000/31/EC) - Article 11: Placing of the order\n3. Paragraph 1, first indent, and paragraph 2 shall not apply to contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "law_quote": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "relevant": true,
+        "process_step": "The customer places an order through an online platform or over the phone",
+        "description_quote": "This process begins when a customer places an order through an online platform or over the phone",
+        "reason": "The rule is about contracts concluded through electronic mail or equivalent individual communications, and the process has a step where a customer places an order through an online platform or over the phone.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "contracts concluded exclusively by exchange of electronic mail or by equivalent individual communications",
+        "description_quote_canonical": "This process begins when a customer places an order through an online platform or over the phone",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "CRD-Art9-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n1. Save where the exceptions provided for in Article 16 apply, the consumer shall have a period of 14 days to withdraw from a distance or off-premises contract, without giving any reason, and without incurring any costs other than those provided for in Article 13(2) and Article 14.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right of withdrawal from a distance or off-premises contract",
+        "law_quote": "the consumer shall have a period of 14 days to withdraw from a distance or off-premises contract",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the right of withdrawal from a distance or off-premises contract, and the process includes a step where customers withdraw from the purchase after receiving the parcel.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the consumer shall have a period of 14 days to withdraw from a distance or off-premises contract",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a distance or off-premises contract is concluded",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer has a period of 14 days to withdraw from the contract, without giving any reason, and without incurring any costs other than those provided for in Article 13(2) and Article 14",
+          "exceptions": [
+            "the exceptions provided for in Article 16 apply"
+          ],
+          "special_cases": []
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "This process begins when a customer places an order through an online platform or over the phone.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer places an order through an online platform or over the phone."
+              ]
+            },
+            {
+              "id": "E1",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence explicitly mentions 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial capacity."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a distance or off-premises contract is concluded",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a distance or off-premises contract is concluded",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer places an order through an online platform or over the phone."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer places an order through an online platform or over the phone"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe the order placement method but do not mention or imply the conclusion of a distance/off-premises contract."
+            },
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [
+          {
+            "id": "E1",
+            "text": "the exceptions provided for in Article 16 apply",
+            "text_sent": "the exceptions provided for in Article 16 apply",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "This process begins when a customer places an order through an online platform or over the phone.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer places an order through an online platform or over the phone."
+              ]
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "CRD-Art9-1a",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n1a. Member States may adopt rules in accordance with which the withdrawal period of 14 days referred to in paragraph 1 is extended to 30 days for contracts concluded in the context of unsolicited visits by a trader to a consumer’s home or excursions organised by a trader with the aim or effect of promoting or selling products to consumers for the purpose of protecting legitimate interests of consumers with regard to aggressive or misleading marketing or selling practices. Such rules shall be proportionate, non-discriminatory and justified on grounds of consumer protection.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "contracts concluded in the context of unsolicited visits by a trader to a consumer’s home or excursions organised by a trader with the aim or effect of promoting or selling products to consumers for the purpose of protecting legitimate interests of consumers with regard to aggressive or misleading marketing or selling practices",
+        "law_quote": "contracts concluded in the context of unsolicited visits by a trader to a consumer’s home or excursions organised by a trader with the aim or effect of promoting or selling products to consumers for the purpose of protecting legitimate interests of consumers with regard to aggressive or misleading marketing or selling practices",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about contracts involving unsolicited visits or excursions for promoting products, and the process includes customers withdrawing from a purchase after receiving a parcel.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "contracts concluded in the context of unsolicited visits by a trader to a consumer’s home or excursions organised by a trader with the aim or effect of promoting or selling products to consumers for the purpose of protecting legitimate interests of consumers with regard to aggressive or misleading marketing or selling practices",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "CRD-Art9-2-a",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n2. Without prejudice to Article 10, the withdrawal period referred to in paragraph 1 of this Article shall expire after 14 days or, in cases where Member States have adopted rules in accordance with paragraph 1a of this Article, 30 days from:\n(a) in the case of service contracts, the day of the conclusion of the contract;\n(b) in the case of sales contracts, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the goods or:\n(i) in the case of multiple goods ordered by the consumer in one order and delivered separately, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last good;\n(ii) in the case of delivery of a good consisting of multiple lots or pieces, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the last lot or piece;\n(iii) in the case of contracts for regular delivery of goods during defined period of time, the day on which the consumer or a third party other than the carrier and indicated by the consumer acquires physical possession of the first good;",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "right of withdrawal for consumers in sales contracts",
+        "law_quote": "Right of withdrawal",
+        "relevant": true,
+        "process_step": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the right of withdrawal for consumers in sales contracts, and the process includes a step where customers withdraw from a purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Right of withdrawal",
+        "description_quote_canonical": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 7,
+      "passage_id": "CRD-Art9-2-c",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n2. Without prejudice to Article 10, the withdrawal period referred to in paragraph 1 of this Article shall expire after 14 days or, in cases where Member States have adopted rules in accordance with paragraph 1a of this Article, 30 days from:\n(c) in the case of contracts for the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, of district heating or of digital content which is not supplied on a tangible medium, the day of the conclusion of the contract.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "right of withdrawal",
+        "law_quote": "Right of withdrawal",
+        "relevant": true,
+        "process_step": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "description_quote": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions.",
+        "reason": "The rule is about the right of withdrawal, and the process includes a step where customer feedback or returns may trigger further actions.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Right of withdrawal",
+        "description_quote_canonical": "After successful delivery, the process ends, but customer feedback or returns may trigger further actions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 8,
+      "passage_id": "CRD-Art9-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 9: Right of withdrawal\n3. The Member States shall not prohibit the contracting parties from performing their contractual obligations during the withdrawal period. Nevertheless, in the case of off-premises contracts, Member States may maintain existing national legislation prohibiting the trader from collecting the payment from the consumer during the given period after the conclusion of the contract.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right of withdrawal for off-premises contracts",
+        "law_quote": "in the case of off-premises contracts, Member States may maintain existing national legislation prohibiting the trader from collecting the payment from the consumer during the given period after the conclusion of the contract",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the right of withdrawal for off-premises contracts, and the process includes a step where customers withdraw from a purchase after receiving the parcel.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "in the case of off-premises contracts, Member States may maintain existing national legislation prohibiting the trader from collecting the payment from the consumer during the given period after the conclusion of the contract",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "in the case of off-premises contracts",
+              "roles": [
+                "trader",
+                "consumer"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the contract is an off-premises contract",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the Member State may maintain existing national legislation prohibiting the trader from collecting the payment from the consumer during the given period after the conclusion of the contract"
+            }
+          ]
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 9,
+      "passage_id": "CRD-Art14-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligation to return goods within 14 days",
+        "law_quote": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the consumer's obligation to return goods within 14 days, and the process has a step where customers return items after withdrawing from the purchase.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the trader has not offered to collect the goods himself",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "In the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract",
+              "roles": [
+                "consumer"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the goods have been delivered to the consumer’s home at the time of the conclusion of the contract",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer has communicated his decision to withdraw from the contract to the trader in accordance with Article 11",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the trader has not offered to collect the goods himself",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "case_event",
+            "text_sent": "the trader has not offered to collect the goods himself",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "CRD-Art14-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2. The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods. The consumer shall in any event not be liable for diminished value of the goods where the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1).",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligations in the event of withdrawal",
+        "law_quote": "Obligations of the consumer in the event of withdrawal",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the consumer's obligations during withdrawal, and the process includes a step where customers withdraw from the purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Obligations of the consumer in the event of withdrawal",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer withdraws from the contract",
+                  "kind": "case_event"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the consumer has handled the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+                  "kind": "case_event"
+                },
+                {
+                  "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall not be liable for diminished value of the goods",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer withdraws from the contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer withdraws from the contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence states the customer withdraws from the purchase, which is an everyday equivalent of withdrawing from the contract."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the consumer has handled the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "case_event",
+            "text_sent": "its customer has handled the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C3",
+            "kind": "situation",
+            "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C2",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU. Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU. Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "first look",
+          "C2": null,
+          "C3": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2",
+              "C3"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 11,
+      "passage_id": "CRD-Art14-2a",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2a. In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties.",
+      "label": "Applicable",
+      "label_cause": "requirement invalid: the trigger \"within two weeks after the parcel arrives\" is not copied word for word from the legal passage; the kept_as words \"Within two weeks after the parcel arrives\" are not copied word for word from the requirement; the trigger \"they tell the shop by email that they withdraw from the purchase\" is not copied word for word from the legal passage; the kept_as words \"they tell the shop by email that they withdraw from the purchase\" are not copied word for word from the requirement",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer refraining from using digital content or digital service and from making it available to third parties",
+        "law_quote": "In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties.",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the consumer's obligations upon withdrawal, which the process includes through the step where customers withdraw from the purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a withdrawal from the contract occurs",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU.",
+                "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU",
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU.",
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU",
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop sells to private persons (consumers) and the return process aligns with consumer rights, confirming the buyer is a consumer."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a withdrawal from the contract occurs",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a withdrawal from the contract occurs",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a customer returning items within the allowed period after delivery, which constitutes a withdrawal from the contract in everyday terms."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "If a customer withdraws, they must not use the items or share them with others.",
+            "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+            "triggers": [],
+            "duty": {
+              "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+              "kept_as": "they must not use the items or share them with others"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "triggers missing: the rule applies only under situational conditions, so the triggers list must not be empty"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [],
+              "duty": {
+                "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+                "kept_as": "they must not use the items or share them with others"
+              }
+            },
+            "measures": {
+              "n_words": 15,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 11,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "If the customer withdraws, they must not use the items or share them with others.",
+            "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+            "triggers": [
+              {
+                "trigger": "within two weeks after the parcel arrives",
+                "kept_as": "Within two weeks after the parcel arrives"
+              },
+              {
+                "trigger": "they tell the shop by email that they withdraw from the purchase",
+                "kept_as": "they tell the shop by email that they withdraw from the purchase"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+              "kept_as": "they must not use the items or share them with others"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "the trigger \"within two weeks after the parcel arrives\" is not copied word for word from the legal passage",
+              "the kept_as words \"Within two weeks after the parcel arrives\" are not copied word for word from the requirement",
+              "the trigger \"they tell the shop by email that they withdraw from the purchase\" is not copied word for word from the legal passage",
+              "the kept_as words \"they tell the shop by email that they withdraw from the purchase\" are not copied word for word from the requirement"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [
+                {
+                  "trigger": null,
+                  "kept_as": null
+                },
+                {
+                  "trigger": null,
+                  "kept_as": null
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+                "kept_as": "they must not use the items or share them with others"
+              }
+            },
+            "measures": {
+              "n_words": 15,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 11,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 12,
+      "passage_id": "CRD-Art14-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n3. Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligations in the event of withdrawal",
+        "law_quote": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the consumer's obligations in the event of withdrawal, and the process has a step where customers withdraw from the purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer",
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a consumer exercises the right of withdrawal",
+                  "kind": "case_event"
+                },
+                {
+                  "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "If the total price is excessive",
+              "roles": [
+                "consumer",
+                "trader"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the total price is excessive",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the market value of what has been provided"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer or trader",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              },
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a consumer exercises the right of withdrawal",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer exercises the right of withdrawal",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a customer withdrawing from a purchase within the allowed timeframe and returning items, which directly matches the statement about exercising the right of withdrawal."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer has made a request in accordance with Article 7(3) or Article 8(8)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C2",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "first look",
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 13,
+      "passage_id": "CRD-Art14-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7).",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's right of withdrawal and the obligation of the trader to bear no cost",
+        "law_quote": "the consumer shall bear no cost for",
+        "relevant": true,
+        "process_step": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the consumer's right of withdrawal and the trader's obligation to bear no cost, which the process includes through the customer's withdrawal and return of items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall bear no cost for",
+        "description_quote_canonical": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 14,
+      "passage_id": "CRD-Art14-5",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n5. Except as provided for in Article 13(2) and in this Article, the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligations in the event of withdrawal",
+        "law_quote": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the consumer's obligations during withdrawal, and the process includes a step where customers withdraw from the purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 15,
+      "passage_id": "CRD-Art11-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n1. Before the expiry of the withdrawal period, the consumer shall inform the trader of his decision to withdraw from the contract. For this purpose, the consumer may either:\n(a) use the model withdrawal form as set out in Annex I(B); or\n(b) make any other unequivocal statement setting out his decision to withdraw from the contract.\nMember States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B).",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "Exercise of the right of withdrawal",
+        "law_quote": "Consumer shall inform the trader of his decision to withdraw from the contract",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the consumer's right to withdraw from a purchase, and the process includes steps where customers inform the shop of their withdrawal and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "consumer shall inform the trader of his decision to withdraw from the contract",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer",
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer has entered into a contract",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the withdrawal period has not expired",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall inform the trader of his decision to withdraw from the contract",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "Member States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B)",
+              "roles": [
+                "other"
+              ],
+              "if": [],
+              "then": "Member States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B)"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The system automatically generates an order confirmation and sends it to the customer.",
+              "status": "confirmed",
+              "quotes": [
+                "The system automatically generates an order confirmation and sends it to the customer."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer or trader",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              },
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer has entered into a contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer has entered into a contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the withdrawal period has not expired",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the withdrawal period has not expired",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process begins when a customer places an order through an online platform or over the phone.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 16,
+      "passage_id": "CRD-Art11-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n2. The consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10 if the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired.",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "exercise of the right of withdrawal",
+        "law_quote": "The consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10 if the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired.",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the exercise of the right of withdrawal, and the process has a step where customers withdraw from the purchase and send items back.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10 if the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the communication concerning the exercise of the right of withdrawal is sent by its customer before that period has expired",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "second look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences state customers communicate withdrawal within two weeks, which is the period referred to in the statement, thus confirming the communication is sent before the period expires."
+            },
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": true,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "second look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "If the customer withdraws by email within two weeks, they must have exercised their right of withdrawal before the withdrawal period ends.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer withdraws by email within two weeks, they must have exercised their right of withdrawal before the withdrawal period ends.",
+            "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+            "triggers": [
+              {
+                "trigger": "within the withdrawal period referred to in Article 9(2) and Article 10",
+                "kept_as": "before the withdrawal period ends"
+              }
+            ],
+            "duty": {
+              "from_then": "the consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10",
+              "kept_as": "they must have exercised their right of withdrawal before the withdrawal period ends"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [
+                {
+                  "trigger": "within the withdrawal period referred to in Article 9(2) and Article 10",
+                  "kept_as": "before the withdrawal period ends"
+                }
+              ],
+              "duty": {
+                "from_then": "the consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10",
+                "kept_as": "they must have exercised their right of withdrawal before the withdrawal period ends"
+              }
+            },
+            "measures": {
+              "n_words": 22,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 18,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 17,
+      "passage_id": "CRD-Art11-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n3. The trader may, in addition to the possibilities referred to in paragraph 1, give the option to the consumer to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website. In those cases the trader shall communicate to the consumer an acknowledgement of receipt of such a withdrawal on a durable medium without delay.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right of withdrawal",
+        "law_quote": "the right of withdrawal",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the right of withdrawal, and the process includes customers withdrawing from a purchase and sending items back.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the right of withdrawal",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the trader gives the consumer the option to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader shall communicate to the consumer an acknowledgement of receipt of such a withdrawal on a durable medium without delay",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the trader gives the consumer the option to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process gives its customer the option to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the organisation running the described process’s website",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 18,
+      "passage_id": "CRD-Art11-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n4. The burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer.",
+      "label": "Applicable",
+      "label_cause": "requirement invalid: the duty from_then \"the burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer\" is not copied word for word from the OBLIGATION; the trigger \"within two weeks after the parcel arrives\" is not copied word for word from the legal passage",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "exercise of the right of withdrawal",
+        "law_quote": "Exercise of the right of withdrawal",
+        "relevant": true,
+        "process_step": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "description_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+        "reason": "The rule is about the exercise of the right of withdrawal, and the process has a step where customers withdraw from the purchase after receiving the parcel.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Exercise of the right of withdrawal",
+        "description_quote_canonical": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer exercises the right of withdrawal in accordance with this Article",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer must bear the burden of proof",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+              "status": "confirmed",
+              "quotes": [
+                "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer exercises the right of withdrawal in accordance with this Article",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer exercises the right of withdrawal in accordance with this Article",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe the customer withdrawing and returning items, which matches the statement's fact about exercising the right of withdrawal."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "If the customer wants to cancel, they must prove they withdrew from the purchase within two weeks of the parcel arriving.",
+            "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+            "triggers": [
+              {
+                "trigger": "within two weeks after the parcel arrives",
+                "kept_as": "within two weeks of the parcel arriving"
+              }
+            ],
+            "duty": {
+              "from_then": "the burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer",
+              "kept_as": "they must prove they withdrew from the purchase"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "the duty from_then \"the burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer\" is not copied word for word from the OBLIGATION",
+              "the trigger \"within two weeks after the parcel arrives\" is not copied word for word from the legal passage"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [
+                {
+                  "trigger": null,
+                  "kept_as": "within two weeks of the parcel arriving"
+                }
+              ],
+              "duty": {
+                "from_then": null,
+                "kept_as": "they must prove they withdrew from the purchase"
+              }
+            },
+            "measures": {
+              "n_words": 21,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 17,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "The customer must prove they withdrew from the purchase. They must do this within two weeks after the parcel arrives.",
+            "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back.",
+            "triggers": [
+              {
+                "trigger": "within two weeks after the parcel arrives",
+                "kept_as": "within two weeks after the parcel arrives"
+              }
+            ],
+            "duty": {
+              "from_then": "the burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer",
+              "kept_as": "The customer must prove they withdrew from the purchase"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "the duty from_then \"the burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer\" is not copied word for word from the OBLIGATION",
+              "the trigger \"within two weeks after the parcel arrives\" is not copied word for word from the legal passage"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Some customers change their mind. Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [
+                {
+                  "trigger": null,
+                  "kept_as": "within two weeks after the parcel arrives"
+                }
+              ],
+              "duty": {
+                "from_then": null,
+                "kept_as": "The customer must prove they withdrew from the purchase"
+              }
+            },
+            "measures": {
+              "n_words": 20,
+              "n_sentences": 2,
+              "banned_found": [],
+              "n_ngrams": 16,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 19,
+      "passage_id": "CRD-Art13-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement.",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "reimbursement of payments upon withdrawal from a contract",
+        "law_quote": "The trader shall reimburse all payments received from the consumer",
+        "relevant": true,
+        "process_step": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about reimbursement upon withdrawal, and the process includes a step where customers withdraw and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The trader shall reimburse all payments received from the consumer",
+        "description_quote_canonical": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer withdraws from the contract",
+                  "kind": "case_event"
+                },
+                {
+                  "text": "the trader is informed of the consumer’s decision to withdraw",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "The trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction",
+              "roles": [
+                "trader"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the consumer has expressly agreed otherwise",
+                      "kind": "case_event"
+                    }
+                  ]
+                }
+              ],
+              "then": "the trader must carry out the reimbursement using the same means of payment as the consumer used for the initial transaction, provided that the consumer does not incur any fees as a result of such reimbursement"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The shop sells kitchen items to private persons across the EU.",
+              "status": "confirmed",
+              "quotes": [
+                "The shop sells kitchen items to private persons across the EU."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase",
+              "status": "confirmed",
+              "quotes": [
+                "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase"
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "they tell the shop by email that they withdraw from the purchase",
+              "status": "confirmed",
+              "quotes": [
+                "they tell the shop by email that they withdraw from the purchase"
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence refers to 'private persons' which aligns with the legal definition of a consumer as a natural person not acting in a commercial context."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer withdraws from the contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer withdraws from the contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence describes the customer withdrawing from the purchase, which is an everyday equivalent of withdrawing from the contract."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the trader is informed of the consumer’s decision to withdraw",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "the organisation running the described process is informed of its customer’s decision to withdraw",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "they tell the shop by email that they withdraw from the purchase"
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "they tell the shop by email that they withdraw from the purchase"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The customer's email communication to the shop directly conveys their withdrawal decision, informing the organization running the process."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The shop sells kitchen items to private persons across the EU."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The shop sells kitchen items to private persons across the EU"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The shop selling kitchen items to private persons across the EU directly confirms the organisation sells goods for trade purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "first look",
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "If the customer withdraws, the shop gets the money back within 14 days of being told.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "If the customer withdraws, the shop gets the money back within 14 days of being told.",
+            "step_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+            "triggers": [
+              {
+                "trigger": "not later than 14 days from the day on which he is informed",
+                "kept_as": "within 14 days of being told"
+              }
+            ],
+            "duty": {
+              "from_then": "reimburse all payments received from the consumer",
+              "kept_as": "the shop gets the money back"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+              "triggers": [
+                {
+                  "trigger": "not later than 14 days from the day on which he is informed",
+                  "kept_as": "within 14 days of being told"
+                }
+              ],
+              "duty": {
+                "from_then": "reimburse all payments received from the consumer",
+                "kept_as": "the shop gets the money back"
+              }
+            },
+            "measures": {
+              "n_words": 16,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 12,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 20,
+      "passage_id": "CRD-Art13-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n2. Notwithstanding paragraph 1, the trader shall not be required to reimburse the supplementary costs, if the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the trader shall not be required to reimburse the supplementary costs",
+        "law_quote": "the trader shall not be required to reimburse the supplementary costs",
+        "relevant": true,
+        "process_step": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "description_quote": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "reason": "The rule is about the trader's obligation regarding reimbursement of supplementary costs in the event of withdrawal, and the process includes a step where customers withdraw from the purchase and return items.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the trader shall not be required to reimburse the supplementary costs",
+        "description_quote_canonical": "Within two weeks after the parcel arrives, they tell the shop by email that they withdraw from the purchase, and then send the items back",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [CRD-Art11-2] If the customer withdraws by email within two weeks, they must have exercised their right of withdrawal before the withdrawal period ends.\n- [CRD-Art13-1] If the customer withdraws, the shop gets the money back within 14 days of being told."
+}

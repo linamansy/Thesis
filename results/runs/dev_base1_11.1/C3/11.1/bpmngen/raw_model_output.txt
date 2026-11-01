@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="System" processRef="SystemProcess"/>
+    <bpmn:participant id="p3" name="Support Team" processRef="SupportProcess"/>
+    <bpmn:messageFlow id="mf1" name="Subscription Request" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Account Created" sourceRef="se2" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Billing Triggered" sourceRef="se2" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf4" name="Cancellation Request" sourceRef="t4" targetRef="se5"/>
+    <bpmn:messageFlow id="mf5" name="Refund Applied" sourceRef="se6" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf6" name="Data Removed" sourceRef="se6" targetRef="ice4"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Sign Up"/>
+    <bpmn:task id="t1" name="Enter Personal and Payment Info"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Account Created">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Billing Triggered">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Refund Applied">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Data Removed">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Subscription Active"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice3" targetRef="ee1"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice4" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="SystemProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Subscription Request Received">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Account"/>
+    <bpmn:task id="t3" name="Assign Access"/>
+    <bpmn:task id="t4" name="Trigger Billing Cycles"/>
+    <bpmn:endEvent id="ee2" name="Subscription Active"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t4" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="SupportProcess" isExecutable="false">
+    <bpmn:startEvent id="se5" name="Cancellation Request Received">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t5" name="Process Cancellation"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Refund Applied">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Data Removed">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="Subscription Deactivated"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se5" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t5" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t5" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice3" targetRef="ee3"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice4" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="p1" bpmnElement="CustomerProcess" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2" bpmnElement="SystemProcess" isHorizontal="true">
+        <dc:Bounds x="380" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p3" bpmnElement="SupportProcess" isHorizontal="true">
+        <dc:Bounds x="660" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1" bpmnElement="se1">
+        <dc:Bounds x="80" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1" bpmnElement="t1">
+        <dc:Bounds x="140" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1" bpmnElement="ice1">
+        <dc:Bounds x="260" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice2" bpmnElement="ice2">
+        <dc:Bounds x="380" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1" bpmnElement="ee1">
+        <dc:Bounds x="500" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2" bpmnElement="se2">
+        <dc:Bounds x="400" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t2" bpmnElement="t2">
+        <dc:Bounds x="460" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3" bpmnElement="t3">
+        <dc:Bounds x="580" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4" bpmnElement="t4">
+        <dc:Bounds x="700" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee2" bpmnElement="ee2">
+        <dc:Bounds x="820" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se5" bpmnElement="se5">
+        <dc:Bounds x="680" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t5" bpmnElement="t5">
+        <dc:Bounds x="740" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice3" bpmnElement="ice3">
+        <dc:Bounds x="860" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice4" bpmnElement="ice4">
+        <dc:Bounds x="980" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee3" bpmnElement="ee3">
+        <dc:Bounds x="1100" y="140" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1" sourceRef="se1" targetRef="t1">
+        <di:waypoint x="120" y="140"/>
+        <di:waypoint x="140" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2" sourceRef="t1" targetRef="ice1">
+        <di:waypoint x="240" y="140"/>
+        <di:waypoint x="260" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3" sourceRef="t1" targetRef="ice2">
+        <di:waypoint x="360" y="140"/>
+        <di:waypoint x="380" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4" sourceRef="ice3" targetRef="ee1">
+        <di:waypoint x="980" y="140"/>
+        <di:waypoint x="1000" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5" sourceRef="ice4" targetRef="ee1">
+        <di:waypoint x="1100" y="140"/>
+        <di:waypoint x="1120" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6" sourceRef="se2" targetRef="t2">
+        <di:waypoint x="440" y="140"/>
+        <di:waypoint x="460" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7" sourceRef="t2" targetRef="t3">
+        <di:waypoint x="580" y="140"/>
+        <di:waypoint x="600" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f8" sourceRef="t3" targetRef="t4">
+        <di:waypoint x="700" y="140"/>
+        <di:waypoint x="720" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f9" sourceRef="t4" targetRef="ee2">
+        <di:waypoint x="820" y="140"/>
+        <di:waypoint x="840" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10" sourceRef="se5" targetRef="t5">
+        <di:waypoint x="700" y="140"/>
+        <di:waypoint x="740" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11" sourceRef="t5" targetRef="ice3">
+        <di:waypoint x="860" y="140"/>
+        <di:waypoint x="880" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12" sourceRef="t5" targetRef="ice4">
+        <di:waypoint x="980" y="140"/>
+        <di:waypoint x="1000" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13" sourceRef="ice3" targetRef="ee3">
+        <di:waypoint x="1000" y="140"/>
+        <di:waypoint x="1020" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14" sourceRef="ice4" targetRef="ee3">
+        <di:waypoint x="1100" y="140"/>
+        <di:waypoint x="1120" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf1" sourceRef="t1" targetRef="se2">
+        <di:waypoint x="240" y="140"/>
+        <di:waypoint x="400" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf2" sourceRef="se2" targetRef="ice1">
+        <di:waypoint x="400" y="140"/>
+        <di:waypoint x="260" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf3" sourceRef="se2" targetRef="ice2">
+        <di:waypoint x="400" y="140"/>
+        <di:waypoint x="380" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf4" sourceRef="t4" targetRef="se5">
+        <di:waypoint x="720" y="140"/>
+        <di:waypoint x="680" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf5" sourceRef="se6" targetRef="ice3">
+        <di:waypoint x="840" y="140"/>
+        <di:waypoint x="860" y="140"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="mf6" sourceRef="se6" targetRef="ice4">
+        <di:waypoint x="840" y="140"/>
+        <di:waypoint x="980" y="140"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

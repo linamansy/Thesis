@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Shop" processRef="ShopProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Order Confirmation" sourceRef="ice1" targetRef="t2"/>
+    <bpmn:messageFlow id="mf3" name="Withdrawal Request" sourceRef="t6" targetRef="ice4"/>
+    <bpmn:messageFlow id="mf4" name="Refund" sourceRef="ice5" targetRef="t7"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Hungry"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmed">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Shipment Tracking">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Delivery Complete">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t4" name="Provide Feedback"/>
+    <bpmn:task id="t5" name="Initiate Withdrawal"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Withdrawal Request Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t2" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="t3" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="ice3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t5" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="ice4" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="ShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t2" name="Generate Order Confirmation"/>
+    <bpmn:task id="t3" name="Process Order"/>
+    <bpmn:task id="t4" name="Generate Shipping Label"/>
+    <bpmn:task id="t5" name="Hand Over to Logistics"/>
+    <bpmn:task id="t6" name="Send Tracking Info"/>
+    <bpmn:intermediateCatchEvent id="ice3" name="Delivery Complete">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t7" name="Refund Money"/>
+    <bpmn:intermediateCatchEvent id="ice4" name="Withdrawal Request Received">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="t8" name="Process Refund"/>
+    <bpmn:endEvent id="ee2" name="Order Complete"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="se2" targetRef="t2"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequence
+</think>
+
+</bpmn:process>
+</bpmn:definitions>

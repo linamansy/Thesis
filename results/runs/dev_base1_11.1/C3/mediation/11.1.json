@@ -1,0 +1,3058 @@
+{
+  "case_id": "11.1",
+  "c3_version": "v2",
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "SGD-Art16-1",
+      "passage_text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n1. The consumer shall exercise the right to terminate the sales contract by means of a statement to the seller expressing the decision to terminate the sales contract.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "termination of the sales contract",
+        "law_quote": "The consumer shall exercise the right to terminate the sales contract by means of a statement to the seller expressing the decision to terminate the sales contract.",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about termination of the sales contract, and the process has a cancellation request step that aligns with this activity.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall exercise the right to terminate the sales contract by means of a statement to the seller expressing the decision to terminate the sales contract",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer exercises the right to terminate the sales contract",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer must express the decision to terminate the sales contract to the seller",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "confirmed",
+              "quotes": [
+                "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer exercises the right to terminate the sales contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer exercises the right to terminate the sales contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence describes a cancellation request process, which is an everyday equivalent of the customer exercising the right to terminate the contract."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "SGD-Art16-2",
+      "passage_text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n2. Where the lack of conformity relates to only some of the goods delivered under the sales contract and there is a ground for termination of the sales contract pursuant to Article 13, the consumer may terminate the sales contract only in relation to those goods, and in relation to any other goods which the consumer acquired together with the non-conforming goods if the consumer cannot reasonably be expected to accept to keep only the conforming goods.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "termination of the sales contract in relation to non-conforming goods",
+        "law_quote": "the consumer may terminate the sales contract only in relation to those goods",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about termination of a sales contract due to non-conforming goods, which is not related to the subscription cancellation process described.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the consumer may terminate the sales contract only in relation to those goods",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "SGD-Art16-3",
+      "passage_text": "Sale of Goods Directive ((EU) 2019/771) - Article 16: Termination of the sales contract\n3. Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract:\n(a) the consumer shall return to the seller, at the seller's expense, the goods; and\n(b) the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods.\nFor the purposes of this paragraph, Member States may determine the modalities for return and reimbursement.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "termination of the sales contract",
+        "law_quote": "Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about termination of the sales contract, and the process has a cancellation step; whether the goods are returned or reimbursement is applied is checked later.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer",
+            "seller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall return to the seller, at the seller's expense, the goods; and the seller shall reimburse to the consumer the price paid for the goods upon receipt of the goods or of evidence provided by the consumer of having sent back the goods",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "contradicted",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "The system generates an account, assigns access, and triggers automated billing cycles."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "contradicted",
+              "quotes": [
+                "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer or seller",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              },
+              {
+                "role": "seller",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "goods are sold to a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "contradicted",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "false",
+              "answer": "no",
+              "reason": "The sentences describe a subscription sign-up, which is a different event from selling goods to a consumer."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer terminates a sales contract as a whole or, in accordance with paragraph 2, in relation to some of the goods delivered under the sales contract",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences describe a cancellation request leading to contract termination, which matches the statement's fact about terminating a sales contract."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "The system generates an account, assigns access, and triggers automated billing cycles."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The mention of payment information and billing cycles implies the organization is providing a service (subscription) for commercial purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "seller": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "CRD-Art11-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n1. Before the expiry of the withdrawal period, the consumer shall inform the trader of his decision to withdraw from the contract. For this purpose, the consumer may either:\n(a) use the model withdrawal form as set out in Annex I(B); or\n(b) make any other unequivocal statement setting out his decision to withdraw from the contract.\nMember States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B).",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "Exercise of the right of withdrawal",
+        "law_quote": "Consumer shall inform the trader of his decision to withdraw from the contract",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "reason": "The rule is about the customer's right to withdraw from a contract, and the process has a step where the customer submits a cancellation request.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "consumer shall inform the trader of his decision to withdraw from the contract",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer",
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer has entered into a contract",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the withdrawal period has not expired",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall inform the trader of his decision to withdraw from the contract",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "Member States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B)",
+              "roles": [
+                "other"
+              ],
+              "if": [],
+              "then": "Member States shall not provide for any formal requirements applicable to the model withdrawal form other than those set out in Annex I(B)"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "confirmed",
+              "quotes": [
+                "The system generates an account, assigns access, and triggers automated billing cycles."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "The system generates an account, assigns access, and triggers automated billing cycles."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer or trader",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "the scope item S1 is confirmed"
+              },
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence describes a customer signing up for a subscription service, which aligns with the legal concept of a consumer as a natural person acting outside their trade/business."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer has entered into a contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer has entered into a contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "second look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "Signing up for a subscription service typically involves entering into a contract, so the fact is implied by the customer's action."
+            },
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the withdrawal period has not expired",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the withdrawal period has not expired",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "The system generates an account, assigns access, and triggers automated billing cycles."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The system's automated billing cycles imply the organisation is engaged in trade/business activities as described in the statement."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": "second look",
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "CRD-Art11-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n2. The consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10 if the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the exercise of the right of withdrawal",
+        "law_quote": "the consumer shall have exercised his right of withdrawal within the withdrawal period",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the exercise of the right of withdrawal, and the process has a cancellation request step that aligns with this activity.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall have exercised his right of withdrawal within the withdrawal period",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall have exercised his right of withdrawal within the withdrawal period referred to in Article 9(2) and Article 10",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the communication concerning the exercise of the right of withdrawal is sent by the consumer before that period has expired",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the communication concerning the exercise of the right of withdrawal is sent by its customer before that period has expired",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "CRD-Art11-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n3. The trader may, in addition to the possibilities referred to in paragraph 1, give the option to the consumer to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website. In those cases the trader shall communicate to the consumer an acknowledgement of receipt of such a withdrawal on a durable medium without delay.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right of withdrawal",
+        "law_quote": "the right of withdrawal",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the right of withdrawal, and the process has a cancellation step where the customer submits a request, which aligns with the rule's focus.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the right of withdrawal",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the trader gives the option to the consumer to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader shall communicate to the consumer an acknowledgement of receipt of such a withdrawal on a durable medium without delay",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the trader gives the option to the consumer to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the trader’s website",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process gives the option to its customer to electronically fill in and submit either the model withdrawal form set out in Annex I(B) or any other unequivocal statement on the organisation running the described process’s website",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence mentions a subscription service and payment information, indicating the organization provides services for commercial purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 7,
+      "passage_id": "CRD-Art11-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 11: Exercise of the right of withdrawal\n4. The burden of proof of exercising the right of withdrawal in accordance with this Article shall be on the consumer.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "exercise of the right of withdrawal",
+        "law_quote": "Exercise of the right of withdrawal",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the exercise of the right of withdrawal, and the process has a cancellation request step that aligns with this activity.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Exercise of the right of withdrawal",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer exercises the right of withdrawal in accordance with this Article",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer must bear the burden of proof",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer exercises the right of withdrawal in accordance with this Article",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer exercises the right of withdrawal in accordance with this Article",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 8,
+      "passage_id": "GDPR-Art11-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 11: Processing which does not require identification\n1. If the purposes for which a controller processes personal data do not or do no longer require the identification of a data subject by the controller, the controller shall not be obliged to maintain, acquire or process additional information in order to identify the data subject for the sole purpose of complying with this Regulation.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "Processing which does not require identification",
+        "law_quote": "If the purposes for which a controller processes personal data do not or do no longer require the identification of a data subject by the controller, the controller shall not be obliged to maintain, acquire or process additional information in order to identify the data subject for the sole purpose of complying with this Regulation.",
+        "relevant": true,
+        "process_step": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+        "description_quote": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+        "reason": "The rule is about data processing that no longer requires identification, and the process has a step where the company removes personal data after cancellation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "If the purposes for which a controller processes personal data do not or do no longer require the identification of a data subject by the controller, the controller shall not be obliged to maintain, acquire or process additional information in order to identify the data subject for the sole purpose of complying with this Regulation",
+        "description_quote_canonical": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art11-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 11: Processing which does not require identification\n2. Where, in cases referred to in paragraph 1 of this Article, the controller is able to demonstrate that it is not in a position to identify the data subject, the controller shall inform the data subject accordingly, if possible. In such cases, Articles 15 to 20 shall not apply except where the data subject, for the purpose of exercising his or her rights under those articles, provides additional information enabling his or her identification.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "processing which does not require identification",
+        "law_quote": "Processing which does not require identification",
+        "relevant": true,
+        "process_step": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems",
+        "description_quote": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems",
+        "reason": "The rule is about data processing that does not require identification, and the process has a step where the company removes customer data after cancellation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Processing which does not require identification",
+        "description_quote_canonical": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller is able to demonstrate that it is not in a position to identify the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller shall inform the data subject accordingly, if possible",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "In such cases, Articles 15 to 20 shall not apply except where the data subject, for the purpose of exercising his or her rights under those articles, provides additional information enabling his or her identification",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the data subject provides additional information enabling his or her identification",
+                      "kind": "case_event"
+                    }
+                  ]
+                }
+              ],
+              "then": "Articles 15 to 20 shall apply"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The customer enters personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "The customer enters personal and payment information.",
+                "The system generates an account, assigns access, and triggers automated billing cycles."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "The customer enters personal and payment information.",
+              "The system generates an account, assigns access, and triggers automated billing cycles."
+            ],
+            "quotes_found": [
+              false,
+              true
+            ],
+            "quotes_canonical": [
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe system actions but do not explicitly mention handling information about identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller is able to demonstrate that it is not in a position to identify the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process is able to demonstrate that it is not in a position to identify the data subject",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "GDPR-Art33-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n1. In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55, unless the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons. Where the notification to the supervisory authority is not made within 72 hours, it shall be accompanied by reasons for the delay.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "notification of a personal data breach to the supervisory authority",
+        "law_quote": "In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about notifying a personal data breach, and the process has a cancellation request step that could trigger such a breach.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "In the case of a personal data breach, the controller shall without undue delay and, where feasible, not later than 72 hours after having become aware of it, notify the personal data breach to the supervisory authority competent in accordance with Article 55",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a personal data breach occurs",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must notify the personal data breach to the supervisory authority competent in accordance with Article 55 without undue delay and, where feasible, not later than 72 hours after having become aware of it",
+          "exceptions": [
+            "the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons"
+          ],
+          "special_cases": [
+            {
+              "clause": "Where the notification to the supervisory authority is not made within 72 hours",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the notification to the supervisory authority is not made within 72 hours",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "it shall be accompanied by reasons for the delay"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "The company ... and many customers ask the company to remove this data from its systems."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "E1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "The company ... and many customers ask the company to remove this data from its systems."
+            ],
+            "quotes_found": [
+              true,
+              false
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentence mentions personal and payment information, which inherently relates to identifiable individuals."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a personal data breach occurs",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a personal data breach occurs",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [
+          {
+            "id": "E1",
+            "text": "the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons",
+            "text_sent": "the personal data breach is unlikely to result in a risk to the rights and freedoms of natural persons",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 11,
+      "passage_id": "GDPR-Art33-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n2. The processor shall notify the controller without undue delay after becoming aware of a personal data breach.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "notification of a personal data breach to the supervisory authority",
+        "law_quote": "The processor shall notify the controller without undue delay after becoming aware of a personal data breach.",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about notifying a data breach, but the process does not mention any data breach or notification step.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "The processor shall notify the controller without undue delay after becoming aware of a personal data breach",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 12,
+      "passage_id": "GDPR-Art33-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n3. The notification referred to in paragraph 1 shall at least:\n(a) describe the nature of the personal data breach including where possible, the categories and approximate number of data subjects concerned and the categories and approximate number of personal data records concerned;\n(b) communicate the name and contact details of the data protection officer or other contact point where more information can be obtained;\n(c) describe the likely consequences of the personal data breach;\n(d) describe the measures taken or proposed to be taken by the controller to address the personal data breach, including, where appropriate, measures to mitigate its possible adverse effects.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "notification of a personal data breach to the supervisory authority",
+        "law_quote": "Notification referred to in paragraph 1 shall at least: (a) describe the nature of the personal data breach including where possible, the categories and approximate number of data subjects concerned and the categories and approximate number of personal data records concerned; (b) communicate the name and contact details of the data protection officer or other contact point where more information can be obtained; (c) describe the likely consequences of the personal data breach; (d) describe the measures taken or proposed to be taken by the controller to address the personal data breach, including, where appropriate, measures to mitigate its possible adverse effects.",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about notifying a data breach, which is not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "notification referred to in paragraph 1 shall at least:\n(a) describe the nature of the personal data breach including where possible, the categories and approximate number of data subjects concerned and the categories and approximate number of personal data records concerned;\n(b) communicate the name and contact details of the data protection officer or other contact point where more information can be obtained;\n(c) describe the likely consequences of the personal data breach;\n(d) describe the measures taken or proposed to be taken by the controller to address the personal data breach, including, where appropriate, measures to mitigate its possible adverse effects",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 13,
+      "passage_id": "GDPR-Art33-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n4. Where, and in so far as, it is not possible to provide the information at the same time, the information may be provided in phases without undue further delay.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "notification of a personal data breach to the supervisory authority",
+        "law_quote": "Notification of a personal data breach to the supervisory authority",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about notifying a data breach, but the process does not involve any such activity.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "Notification of a personal data breach to the supervisory authority",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 14,
+      "passage_id": "GDPR-Art33-5",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 33: Notification of a personal data breach to the supervisory authority\n5. The controller shall document any personal data breaches, comprising the facts relating to the personal data breach, its effects and the remedial action taken. That documentation shall enable the supervisory authority to verify compliance with this Article.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "documenting personal data breaches",
+        "law_quote": "The controller shall document any personal data breaches, comprising the facts relating to the personal data breach, its effects and the remedial action taken",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about documenting personal data breaches, and the process has a step where customer data is handled during cancellation, which could involve such documentation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The controller shall document any personal data breaches, comprising the facts relating to the personal data breach, its effects and the remedial action taken",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a personal data breach occurs",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must document any personal data breaches, comprising the facts relating to the personal data breach, its effects and the remedial action taken. That documentation must enable the supervisory authority to verify compliance with this Article",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "The system generates an account, assigns access, and triggers automated billing cycles.",
+                "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems."
+            ],
+            "quotes_found": [
+              true,
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+              "The system generates an account, assigns access, and triggers automated billing cycles",
+              "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences mention personal data like names, addresses, and card details, which are identifiable information handled by the process."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a personal data breach occurs",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a personal data breach occurs",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 15,
+      "passage_id": "CRD-Art14-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n1. Unless the trader has offered to collect the goods himself, the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods, without undue delay and in any event not later than 14 days from the day on which he has communicated his decision to withdraw from the contract to the trader in accordance with Article 11. The deadline shall be met if the consumer sends back the goods before the period of 14 days has expired.\nThe consumer shall only bear the direct cost of returning the goods unless the trader has agreed to bear them or the trader failed to inform the consumer that the consumer has to bear them.\nIn the case of off-premises contracts where the goods have been delivered to the consumer’s home at the time of the conclusion of the contract, the trader shall at his own expense collect the goods if, by their nature, those goods cannot normally be returned by post.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligation to return goods",
+        "law_quote": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about returning goods, but the process described involves a subscription service, not the return of physical goods.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the consumer shall send back the goods or hand them over to the trader or to a person authorised by the trader to receive the goods",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 16,
+      "passage_id": "CRD-Art14-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2. The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods. The consumer shall in any event not be liable for diminished value of the goods where the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1).",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's liability for diminished value of the goods",
+        "law_quote": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods.",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the consumer's liability for diminished value of goods, and the process has a cancellation step where this liability could be relevant.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall only be liable for any diminished value of the goods resulting from the handling of the goods other than what is necessary to establish the nature, characteristics and functioning of the goods",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer withdraws from the contract",
+                  "kind": "case_event"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall not be liable for diminished value of the goods",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The customer signs up for a subscription service, entering personal and payment information.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "confirmed",
+              "quotes": [
+                "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+                "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "The system generates an account, assigns access, and triggers automated billing cycles.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer withdraws from the contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer withdraws from the contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "The process concludes when the subscription is deactivated by the support team and the final account balance is settled."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+              "The process concludes when the subscription is deactivated by the support team and the final account balance is settled"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The cancellation request and deactivation process directly correspond to the customer withdrawing from the contract."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the handling of the goods was not necessary to establish the nature, characteristics and functioning of the goods",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C3",
+            "kind": "situation",
+            "text": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the trader has failed to provide notice of the right of withdrawal in accordance with point (h) of Article 6(1)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C2",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "The company is based in the Netherlands. When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": "first look",
+          "C2": null,
+          "C3": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2",
+              "C3"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 17,
+      "passage_id": "CRD-Art14-2a",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n2a. In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "refrain from using the digital content or digital service and from making it available to third parties",
+        "law_quote": "In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties.",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the consumer refraining from using the digital service after cancellation, and the process has a cancellation step where this activity could occur.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "In the event of withdrawal from the contract, the consumer shall refrain from using the digital content or digital service and from making it available to third parties",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a withdrawal from the contract occurs",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer must refrain from using the digital content or digital service and from making it available to third parties",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "confirmed",
+              "quotes": [
+                "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              }
+            ],
+            "status": "not_stated",
+            "decided_by": null,
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a withdrawal from the contract occurs",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "a withdrawal from the contract occurs",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "If the customer decides to cancel, they submit a cancellation request, which the support team processes"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The cancellation request processing directly corresponds to a withdrawal from the contract as the same fact is described in different wording."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": null,
+          "S1": null,
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 18,
+      "passage_id": "CRD-Art14-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n3. Where a consumer exercises the right of withdrawal after having made a request in accordance with Article 7(3) or Article 8(8), the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's obligations in the event of withdrawal",
+        "law_quote": "Obligations of the consumer in the event of withdrawal",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the consumer's obligations when withdrawing, and the process has a cancellation request step.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Obligations of the consumer in the event of withdrawal",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "consumer",
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "a consumer exercises the right of withdrawal",
+                  "kind": "case_event"
+                },
+                {
+                  "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the consumer shall pay to the trader an amount which is in proportion to what has been provided until the time the consumer has informed the trader of the exercise of the right of withdrawal, in comparison with the full coverage of the contract. The proportionate amount to be paid by the consumer to the trader shall be calculated on the basis of the total price agreed in the contract. If the total price is excessive, the proportionate amount shall be calculated on the basis of the market value of what has been provided",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "status": "confirmed",
+              "quotes": [
+                "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+                "The system generates an account, assigns access, and triggers automated billing cycles."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "When a customer cancels the subscription, the company no longer needs the customer's name, home address and card details for the service, and many customers ask the company to remove this data from its systems.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: consumer or trader",
+            "roles": [
+              {
+                "role": "consumer",
+                "status": "not_stated",
+                "decided_by": null,
+                "reason": "the scope item S1 is not_stated"
+              },
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "a consumer exercises the right of withdrawal",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer exercises the right of withdrawal",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the consumer has made a request in accordance with Article 7(3) or Article 8(8)",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "its customer has made a request in accordance with Article 7(3) or Article 8(8)",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information.",
+              "The system generates an account, assigns access, and triggers automated billing cycles."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "This process begins when a customer signs up for a subscription service, entering personal and payment information",
+              "The system generates an account, assigns access, and triggers automated billing cycles"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe a subscription service with payment processing, implying the organization provides services for commercial purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Depending on the terms, any refunds or charges are applied.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": null,
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 19,
+      "passage_id": "CRD-Art14-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n4. The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7).",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's right of withdrawal and the obligation of the trader to provide information",
+        "law_quote": "the consumer shall bear no cost for: (a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where: (i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or (ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or (b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where: (i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9; (ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or (iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7)",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the consumer's right of withdrawal and the trader's obligation to provide information, which is relevant to the process step where the customer cancels the subscription.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The consumer shall bear no cost for:\n(a) the performance of services or the supply of water, gas or electricity, where they are not put up for sale in a limited volume or set quantity, or of district heating, in full or in part, during the withdrawal period, where:\n(i) the trader has failed to provide information in accordance with points (h) or (j) of Article 6(1); or\n(ii) the consumer has not expressly requested performance to begin during the withdrawal period in accordance with Article 7(3) and Article 8(8); or\n(b) the supply, in full or in part, of digital content which is not supplied on a tangible medium where:\n(i) the consumer has not given prior express consent to the beginning of the performance before the end of the 14-day or 30-day period referred to in Article 9;\n(ii) the consumer has not acknowledged that he loses his right of withdrawal when giving his consent; or\n(iii) the trader has failed to provide confirmation in accordance with Article 7(2) or Article 8(7",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 20,
+      "passage_id": "CRD-Art14-5",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 14: Obligations of the consumer in the event of withdrawal\n5. Except as provided for in Article 13(2) and in this Article, the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the consumer's right of withdrawal",
+        "law_quote": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+        "relevant": true,
+        "process_step": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "description_quote": "If the customer decides to cancel, they submit a cancellation request, which the support team processes.",
+        "reason": "The rule is about the consumer's right of withdrawal, and the process has a cancellation step where this right is exercised.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the consumer shall not incur any liability as a consequence of the exercise of the right of withdrawal",
+        "description_quote_canonical": "If the customer decides to cancel, they submit a cancellation request, which the support team processes",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "No domain knowledge provided."
+}

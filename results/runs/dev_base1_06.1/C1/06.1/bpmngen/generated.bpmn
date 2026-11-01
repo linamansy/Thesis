@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="collab1">
+    <bpmn:participant id="p1" name="Customer" processRef="CustomerProcess"/>
+    <bpmn:participant id="p2" name="Shop" processRef="ShopProcess"/>
+    <bpmn:participant id="p3" name="Logistics Provider" processRef="LogisticsProcess"/>
+    <bpmn:messageFlow id="mf1" name="Place Order" sourceRef="t1" targetRef="se2"/>
+    <bpmn:messageFlow id="mf2" name="Order Confirmation" sourceRef="t3" targetRef="ice1"/>
+    <bpmn:messageFlow id="mf3" name="Order Handover" sourceRef="t5" targetRef="se4"/>
+    <bpmn:messageFlow id="mf4" name="Tracking Info" sourceRef="t7" targetRef="ice2"/>
+    <bpmn:messageFlow id="mf5" name="Delivery Complete" sourceRef="t9" targetRef="ice3"/>
+    <bpmn:messageFlow id="mf6" name="Return Request" sourceRef="t11" targetRef="se10"/>
+    <bpmn:messageFlow id="mf7" name="Return Items" sourceRef="t13" targetRef="ice4"/>
+  </bpmn:collaboration>
+  <bpmn:process id="CustomerProcess" isExecutable="false">
+    <bpmn:startEvent id="se1" name="Start"/>
+    <bpmn:task id="t1" name="Place Order"/>
+    <bpmn:intermediateCatchEvent id="ice1" name="Order Confirmation Received">
+      <bpmn:messageEventDefinition id="med1"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice2" name="Tracking Info Received">
+      <bpmn:messageEventDefinition id="med2"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice3" name="Delivery Complete">
+      <bpmn:messageEventDefinition id="med3"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice4" name="Return Request Received">
+      <bpmn:messageEventDefinition id="med4"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee1" name="End"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="se1" targetRef="t1"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t1" targetRef="ice1"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="ice1" targetRef="ice2"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="ice2" targetRef="ice3"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="ice3" targetRef="ice4"/>
+    <bpmn:sequenceFlow id="f6" sourceRef="ice4" targetRef="ee1"/>
+  </bpmn:process>
+  <bpmn:process id="ShopProcess" isExecutable="false">
+    <bpmn:startEvent id="se2" name="Order Received">
+      <bpmn:messageEventDefinition id="med5"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t3" name="Generate Order Confirmation"/>
+    <bpmn:task id="t4" name="Picking and Packing"/>
+    <bpmn:task id="t5" name="Generate Shipping Label"/>
+    <bpmn:task id="t6" name="Handover to Logistics"/>
+    <bpmn:intermediateCatchEvent id="ice5" name="Tracking Info Request">
+      <bpmn:messageEventDefinition id="med6"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice6" name="Return Request">
+      <bpmn:messageEventDefinition id="med7"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee2" name="End"/>
+    <bpmn:sequenceFlow id="f7" sourceRef="se2" targetRef="t3"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t3" targetRef="t4"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t4" targetRef="t5"/>
+    <bpmn:sequence
+</think>
+
+
+    <bpmn:sequenceFlow id="auto_link_in_t3_to_ice6" sourceRef="t3" targetRef="ice6"/>
+    <bpmn:sequenceFlow id="auto_link_out_ice6_to_ee2" sourceRef="ice6" targetRef="ee2"/>
+  </bpmn:process>
+  <bpmn:process id="LogisticsProcess" isExecutable="false">
+    <bpmn:startEvent id="se4" name="Order Handover">
+      <bpmn:messageEventDefinition id="med8"/>
+    </bpmn:startEvent>
+    <bpmn:task id="t7" name="Ship Order"/>
+    <bpmn:task id="t8" name="Monitor Shipment"/>
+    <bpmn:intermediateCatchEvent id="ice7" name="Tracking Info Request">
+      <bpmn:messageEventDefinition id="med9"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="ice8" name="Delivery Complete">
+      <bpmn:messageEventDefinition id="med10"/>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="ee3" name="End"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="se4" targetRef="t7"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t7" targetRef="t8"/>
+    <bpmn:sequenceFlow id="f12" sourceRef="t8" targetRef="ice7"/>
+    <bpmn:sequenceFlow id="f13" sourceRef="ice7" targetRef="ice8"/>
+    <bpmn:sequenceFlow id="f14" sourceRef="ice8" targetRef="ee3"/>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram1">
+    <bpmndi:BPMNPlane id="BPMNPlane1" bpmnElement="collab1">
+      <bpmndi:BPMNShape id="p1_dup2" bpmnElement="Customer" isHorizontal="true">
+        <dc:Bounds x="100" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p2_dup2" bpmnElement="Shop" isHorizontal="true">
+        <dc:Bounds x="300" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="p3_dup2" bpmnElement="Logistics Provider" isHorizontal="true">
+        <dc:Bounds x="500" y="100" width="160" height="160"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se1_dup2" bpmnElement="Start">
+        <dc:Bounds x="80" y="180" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t1_dup2" bpmnElement="Place Order">
+        <dc:Bounds x="160" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice1_dup2" bpmnElement="Order Confirmation Received">
+        <dc:Bounds x="260" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice2_dup2" bpmnElement="Tracking Info Received">
+        <dc:Bounds x="260" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice3_dup2" bpmnElement="Delivery Complete">
+        <dc:Bounds x="260" y="320" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice4_dup2" bpmnElement="Return Request Received">
+        <dc:Bounds x="260" y="380" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee1_dup2" bpmnElement="End">
+        <dc:Bounds x="360" y="380" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se2_dup2" bpmnElement="Order Received">
+        <dc:Bounds x="400" y="180" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t3_dup2" bpmnElement="Generate Order Confirmation">
+        <dc:Bounds x="480" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t4_dup2" bpmnElement="Picking and Packing">
+        <dc:Bounds x="580" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t5_dup2" bpmnElement="Generate Shipping Label">
+        <dc:Bounds x="680" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t6_dup2" bpmnElement="Handover to Logistics">
+        <dc:Bounds x="780" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice5_dup2" bpmnElement="Tracking Info Request">
+        <dc:Bounds x="880" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice6_dup2" bpmnElement="Return Request">
+        <dc:Bounds x="880" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee2_dup2" bpmnElement="End">
+        <dc:Bounds x="980" y="260" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="se4_dup2" bpmnElement="Order Handover">
+        <dc:Bounds x="1020" y="180" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t7_dup2" bpmnElement="Ship Order">
+        <dc:Bounds x="1100" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="t8_dup2" bpmnElement="Monitor Shipment">
+        <dc:Bounds x="1200" y="180" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice7_dup2" bpmnElement="Tracking Info Request">
+        <dc:Bounds x="1300" y="200" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ice8_dup2" bpmnElement="Delivery Complete">
+        <dc:Bounds x="1300" y="260" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ee3_dup2" bpmnElement="End">
+        <dc:Bounds x="1400" y="260" width="80" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="f1_dup2" sourceRef="se1" targetRef="t1">
+        <di:waypoint x="140" y="210"/>
+        <di:waypoint x="260" y="210"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f2_dup2" sourceRef="t1" targetRef="ice1">
+        <di:waypoint x="260" y="210"/>
+        <di:waypoint x="260" y="236"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f3_dup2" sourceRef="ice1" targetRef="ice2">
+        <di:waypoint x="260" y="236"/>
+        <di:waypoint x="260" y="262"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f4_dup2" sourceRef="ice2" targetRef="ice3">
+        <di:waypoint x="260" y="262"/>
+        <di:waypoint x="260" y="288"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f5_dup2" sourceRef="ice3" targetRef="ice4">
+        <di:waypoint x="260" y="288"/>
+        <di:waypoint x="260" y="314"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f6_dup2" sourceRef="ice4" targetRef="ee1">
+        <di:waypoint x="260" y="314"/>
+        <di:waypoint x="360" y="314"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f7_dup2" sourceRef="se2" targetRef="t3">
+        <di:waypoint x="480" y="180"/>
+        <di:waypoint x="480" y="206"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f8_dup2" sourceRef="t3" targetRef="t4">
+        <di:waypoint x="480" y="206"/>
+        <di:waypoint x="580" y="206"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f9_dup2" sourceRef="t4" targetRef="t5">
+        <di:waypoint x="580" y="206"/>
+        <di:waypoint x="680" y="206"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f10_dup2" sourceRef="t5" targetRef="t6">
+        <di:waypoint x="680" y="206"/>
+        <di:waypoint x="780" y="206"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f11_dup2" sourceRef="t6" targetRef="ice5">
+        <di:waypoint x="780" y="206"/>
+        <di:waypoint x="880" y="206"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f12_dup2" sourceRef="ice5" targetRef="ice6">
+        <di:waypoint x="880" y="206"/>
+        <di:waypoint x="880" y="232"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f13_dup2" sourceRef="ice6" targetRef="ee2">
+        <di:waypoint x="880" y="232"/>
+        <di:waypoint x="980" y="232"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f14_dup2" sourceRef="se4" targetRef="t7">
+        <di:waypoint x="1020" y="180"/>
+        <di:waypoint x="1100" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f15" sourceRef="t7" targetRef="t8">
+        <di:waypoint x="1100" y="180"/>
+        <di:waypoint x="1200" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f16" sourceRef="t8" targetRef="ice7">
+        <di:waypoint x="1200" y="180"/>
+        <di:waypoint x="1300" y="200"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f17" sourceRef="ice7" targetRef="ice8">
+        <di:waypoint x="1300" y="200"/>
+        <di:waypoint x="1300" y="260"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="f18" sourceRef="ice8" targetRef="ee3">
+        <di:waypoint x="1300" y="260"/>
+        <di:waypoint x="1400" y="260"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

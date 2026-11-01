@@ -1,0 +1,3734 @@
+{
+  "case_id": "01.1",
+  "c3_version": "v2",
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "GDPR-Art13-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n1. Where personal data relating to a data subject are collected from the data subject, the controller shall, at the time when personal data are obtained, provide the data subject with all of the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available.",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "personal data collected from the data subject",
+        "law_quote": "Where personal data relating to a data subject are collected from the data subject",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about personal data collected from the data subject, and the process has a step where customer data is collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where personal data relating to a data subject are collected from the data subject",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data relating to a data subject are collected from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject with all of the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, the fact that the controller intends to transfer personal data to a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means by which to obtain a copy of them or where they have been made available",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention collecting and storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data relating to a data subject are collected from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data relating to a data subject are collected from the data subject",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe collecting personal data (name, phone, email) from customers during an inquiry, which aligns with the statement that personal data is collected from the data subject."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "When the customer is contacted during the inquiry"
+              }
+            ],
+            "duty": {
+              "from_then": "provide the data subject with all of the following information",
+              "kept_as": "they are told about the company's identity, contact details, and the purpose of data processing"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+              "triggers": [
+                {
+                  "trigger": "at the time when personal data are obtained",
+                  "kept_as": "When the customer is contacted during the inquiry"
+                }
+              ],
+              "duty": {
+                "from_then": "provide the data subject with all of the following information",
+                "kept_as": "they are told about the company's identity, contact details, and the purpose of data processing"
+              }
+            },
+            "measures": {
+              "n_words": 23,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 19,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 2,
+      "passage_id": "GDPR-Art13-2-a",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability;\n(c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(d) the right to lodge a complaint with a supervisory authority;\n(e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data;",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "law_quote": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about storing personal data and the period for which it is stored, and the process has a step where personal data is collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data are obtained from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject with the following further information necessary to ensure fair and transparent processing: (a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period; (b) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject or to object to processing as well as the right to data portability; (c) where the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal; (d) the right to lodge a complaint with a supervisory authority; (e) whether the provision of personal data is a statutory or contractual requirement, or a requirement necessary to enter into a contract, as well as whether the data subject is obliged to provide the personal data and of the possible consequences of failure to provide such data",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences mention collecting and storing personal data (name, phone, email) which are identifiers, confirming the process handles info about identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data are obtained from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data are obtained from the data subject",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The customer provides their personal data (name, phone, email) directly, which matches the statement's fact that personal data are obtained from the data subject."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "When the customer is contacted during the inquiry, they are told how long their data will be kept, and the reasons if it's not possible to say.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "When the customer is contacted during the inquiry, they are told how long their data will be kept, and the reasons if it's not possible to say.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "at the time when personal data are obtained",
+                "kept_as": "When the customer is contacted during the inquiry"
+              }
+            ],
+            "duty": {
+              "from_then": "provide the data subject with the following further information necessary to ensure fair and transparent processing",
+              "kept_as": "they are told how long their data will be kept, and the reasons if it's not possible to say"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+              "triggers": [
+                {
+                  "trigger": "at the time when personal data are obtained",
+                  "kept_as": "When the customer is contacted during the inquiry"
+                }
+              ],
+              "duty": {
+                "from_then": "provide the data subject with the following further information necessary to ensure fair and transparent processing",
+                "kept_as": "they are told how long their data will be kept, and the reasons if it's not possible to say"
+              }
+            },
+            "measures": {
+              "n_words": 27,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 23,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 3,
+      "passage_id": "GDPR-Art13-2-f",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall, at the time when personal data are obtained, provide the data subject with the following further information necessary to ensure fair and transparent processing:\n(f) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the existence of automated decision-making, including profiling",
+        "law_quote": "the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about automated decision-making and profiling, which is not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "GDPR-Art13-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n3. Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "further processing of personal data for a purpose other than that for which the personal data were collected",
+        "law_quote": "Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about further processing of personal data for a different purpose, and the process involves collecting and storing personal data during the inquiry.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Where the controller intends to further process the personal data for a purpose other than that for which the personal data were collected, the controller shall provide the data subject prior to that further processing with information on that other purpose",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject prior to that further processing with information on that other purpose and with any relevant further information as referred to in paragraph 2",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention collecting and storing personal identifiers (name, phone, email) which are information about identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller intends to further process the personal data for a purpose other than that for which the personal data were collected",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process intends to further process the personal data for a purpose other than that for which the personal data were collected",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "GDPR-Art13-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 13: Information to be provided where personal data are collected from the data subject\n4. Paragraphs 1, 2 and 3 shall not apply where and insofar as the data subject already has the information.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information to be provided where personal data are collected from the data subject",
+        "law_quote": "Information to be provided where personal data are collected from the data subject",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about collecting personal data from the data subject, and the process has a step where sales staff collect and store personal data during the inquiry.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Information to be provided where personal data are collected from the data subject",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "other"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "GDPR-Art5-1-a",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 5: Principles relating to processing of personal data\n1. Personal data shall be:\n(a) processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency’);\n(b) collected for specified, explicit and legitimate purposes and not further processed in a manner that is incompatible with those purposes; further processing for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes shall, in accordance with Article 89(1), not be considered to be incompatible with the initial purposes (‘purpose limitation’);\n(c) adequate, relevant and limited to what is necessary in relation to the purposes for which they are processed (‘data minimisation’);\n(d) accurate and, where necessary, kept up to date; every reasonable step must be taken to ensure that personal data that are inaccurate, having regard to the purposes for which they are processed, are erased or rectified without delay (‘accuracy’);",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "processing of personal data",
+        "law_quote": "Personal data shall be: (a) processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency’)",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about processing personal data, and the process has a step where personal data is collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Personal data shall be:\n(a) processed lawfully, fairly and in a transparent manner in relation to the data subject (‘lawfulness, fairness and transparency",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller",
+            "processor"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data is processed",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "personal data shall be processed lawfully, fairly and in a transparent manner in relation to the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "P1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller or processor",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              },
+              {
+                "role": "processor",
+                "status": "contradicted",
+                "decided_by": "code rule",
+                "reason": "P1 not confirmed with a checked quote; A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data is processed",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data is processed",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe collecting and storing customer personal data, which constitutes processing personal data."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "P1",
+            "kind": "role_fact",
+            "text": "the organisation handles personal data on behalf of another organisation",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process",
+          "processor": "the organisation running the described process"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "Personal data must be handled in a fair, clear, and lawful way when the customer is being asked about a product or service.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "Personal data is handled in a fair, open and lawful way when the sales staff record the customer's details during the inquiry.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [],
+            "duty": {
+              "from_then": "processed lawfully, fairly and in a transparent manner in relation to the data subject",
+              "kept_as": "personal data is handled in a fair, open and lawful way"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "triggers missing: the rule applies only under situational conditions, so the triggers list must not be empty"
+            ],
+            "canonical_quotes": {
+              "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+              "triggers": [],
+              "duty": {
+                "from_then": "processed lawfully, fairly and in a transparent manner in relation to the data subject",
+                "kept_as": "Personal data is handled in a fair, open and lawful way"
+              }
+            },
+            "measures": {
+              "n_words": 22,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 18,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "Personal data must be handled in a fair, clear, and lawful way when the customer is being asked about a product or service.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "in relation to the data subject",
+                "kept_as": "when the customer is being asked about a product or service"
+              }
+            ],
+            "duty": {
+              "from_then": "processed lawfully, fairly and in a transparent manner in relation to the data subject",
+              "kept_as": "personal data must be handled in a fair, clear, and lawful way"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+              "triggers": [
+                {
+                  "trigger": "in relation to the data subject",
+                  "kept_as": "when the customer is being asked about a product or service"
+                }
+              ],
+              "duty": {
+                "from_then": "processed lawfully, fairly and in a transparent manner in relation to the data subject",
+                "kept_as": "Personal data must be handled in a fair, clear, and lawful way"
+              }
+            },
+            "measures": {
+              "n_words": 23,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 19,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 7,
+      "passage_id": "GDPR-Art5-1-e",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 5: Principles relating to processing of personal data\n1. Personal data shall be:\n(e) kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed; personal data may be stored for longer periods insofar as the personal data will be processed solely for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) subject to implementation of the appropriate technical and organisational measures required by this Regulation in order to safeguard the rights and freedoms of the data subject (‘storage limitation’);\n(f) processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures (‘integrity and confidentiality’).",
+      "label": "Applicable",
+      "label_cause": "every IF item confirmed and no stated exception applies",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "storage limitation of personal data",
+        "law_quote": "kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about storing personal data for no longer than necessary, and the process has a step where personal data is stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller",
+            "processor"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data are processed",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "personal data may be stored for longer periods",
+              "roles": [
+                "controller",
+                "processor"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data will be processed solely for archiving purposes in the public interest",
+                      "kind": "process_fact"
+                    },
+                    {
+                      "text": "or for scientific or historical research purposes",
+                      "kind": "process_fact"
+                    },
+                    {
+                      "text": "or for statistical purposes",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "insofar as the personal data will be processed solely for archiving purposes in the public interest, scientific or historical research purposes or statistical purposes in accordance with Article 89(1) subject to implementation of the appropriate technical and organisational measures required by this Regulation in order to safeguard the rights and freedoms of the data subject"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "P1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller or processor",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              },
+              {
+                "role": "processor",
+                "status": "contradicted",
+                "decided_by": "code rule",
+                "reason": "P1 not confirmed with a checked quote; A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data are processed",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data are processed",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "Storing customer personal data in a system constitutes processing personal data."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "P1",
+            "kind": "role_fact",
+            "text": "the organisation handles personal data on behalf of another organisation",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process",
+          "processor": "the organisation running the described process"
+        },
+        "first_look_label": "Applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": "The customer's details are kept only as long as needed for the purpose they were collected.",
+        "requirement_invalid": false,
+        "attempts": [
+          {
+            "requirement": "The customer's details are kept only as long as needed for the purpose they were collected.",
+            "step_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+            "triggers": [
+              {
+                "trigger": "no longer than is necessary for the purposes for which the personal data are processed",
+                "kept_as": "only as long as needed for the purpose they were collected"
+              }
+            ],
+            "duty": {
+              "from_then": "personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed",
+              "kept_as": "The customer's details are kept only as long as needed for the purpose they were collected"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [],
+            "canonical_quotes": {
+              "step_quote": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+              "triggers": [
+                {
+                  "trigger": "no longer than is necessary for the purposes for which the personal data are processed",
+                  "kept_as": "only as long as needed for the purpose they were collected"
+                }
+              ],
+              "duty": {
+                "from_then": "personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed",
+                "kept_as": "The customer's details are kept only as long as needed for the purpose they were collected"
+              }
+            },
+            "measures": {
+              "n_words": 16,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 12,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 8,
+      "passage_id": "GDPR-Art5-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 5: Principles relating to processing of personal data\n2. The controller shall be responsible for, and be able to demonstrate compliance with, paragraph 1 (‘accountability’).",
+      "label": "Irrelevant",
+      "label_cause": "law_quote not found",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the controller shall be responsible for, and be able to demonstrate compliance with, paragraph 1 (‘accountability’) ",
+        "law_quote": "The controller shall be responsible for, and be able to demonstrate compliance with, paragraph 1 (‘accountility’) ",
+        "relevant": true,
+        "process_step": "The sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "The sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about data processing accountability, and the process involves storing personal data of customers, which falls under the scope of the GDPR.",
+        "law_quote_found": false,
+        "description_quote_found": true,
+        "law_quote_canonical": null,
+        "description_quote_canonical": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": false,
+        "cause": "law_quote not found"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art12-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n1. The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means.",
+      "label": "Applicable",
+      "label_cause": "requirement invalid: the duty from_then \"provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means\" is not copied word for word from the OBLIGATION",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transparent information and communication for the exercise of the data subject's rights",
+        "law_quote": "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about providing transparent information to data subjects, and the process has a step where sales staff collect and address customer information.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "processing of personal data",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "processing of personal data",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "processing of personal data",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "second look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe storing customer personal data (name, phone, email) in a system, which constitutes processing of personal data."
+            },
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": true,
+        "label": "Applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Applicable",
+        "if_label": "Applicable",
+        "exceptions_applying": [],
+        "reason": "every IF item confirmed and no stated exception applies",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "second look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": {
+        "requirement": null,
+        "requirement_invalid": true,
+        "attempts": [
+          {
+            "requirement": "The customer is told in clear, plain language about data processing, in writing or by electronic means, and may be told orally if they ask and their identity is confirmed.",
+            "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+            "triggers": [
+              {
+                "trigger": "When requested by the data subject",
+                "kept_as": "if they ask"
+              }
+            ],
+            "duty": {
+              "from_then": "provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+              "kept_as": "the customer is told in clear, plain language about data processing"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "the duty from_then \"provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language\" is not copied word for word from the OBLIGATION"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "triggers": [
+                {
+                  "trigger": "When requested by the data subject",
+                  "kept_as": "if they ask"
+                }
+              ],
+              "duty": {
+                "from_then": null,
+                "kept_as": "The customer is told in clear, plain language about data processing"
+              }
+            },
+            "measures": {
+              "n_words": 30,
+              "n_sentences": 1,
+              "banned_found": [],
+              "n_ngrams": 26,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          },
+          {
+            "requirement": "The customer is told information about data processing in a clear, simple way, using writing or electronic means. If the customer asks, it may be spoken, provided their identity is confirmed by other means.",
+            "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+            "triggers": [
+              {
+                "trigger": "When requested by the data subject",
+                "kept_as": "If the customer asks"
+              },
+              {
+                "trigger": "provided that the identity of the data subject is proven by other means",
+                "kept_as": "provided their identity is confirmed by other means"
+              }
+            ],
+            "duty": {
+              "from_then": "provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means",
+              "kept_as": "The customer is told information about data processing in a clear, simple way, using writing or electronic means"
+            },
+            "case_events": [],
+            "case_events_given": [],
+            "problems": [
+              "the duty from_then \"provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means\" is not copied word for word from the OBLIGATION"
+            ],
+            "canonical_quotes": {
+              "step_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "triggers": [
+                {
+                  "trigger": "When requested by the data subject",
+                  "kept_as": "If the customer asks"
+                },
+                {
+                  "trigger": "provided that the identity of the data subject is proven by other means",
+                  "kept_as": "provided their identity is confirmed by other means"
+                }
+              ],
+              "duty": {
+                "from_then": null,
+                "kept_as": "The customer is told information about data processing in a clear, simple way, using writing or electronic means"
+              }
+            },
+            "measures": {
+              "n_words": 34,
+              "n_sentences": 2,
+              "banned_found": [],
+              "n_ngrams": 30,
+              "n_copied_ngrams": 0,
+              "copied_share": 0.0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "rank": 10,
+      "passage_id": "GDPR-Art12-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n2. The controller shall facilitate the exercise of data subject rights under Articles 15 to 22. In the cases referred to in Article 11(2), the controller shall not refuse to act on the request of the data subject for exercising his or her rights under Articles 15 to 22, unless the controller demonstrates that it is not in a position to identify the data subject.",
+      "label": "Split invalid",
+      "label_cause": "obligation word in the IF item(s): the controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "facilitate the exercise of data subject rights",
+        "law_quote": "The controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about facilitating data subject rights, and the process has a step where customer information is collected and stored, which relates to data subject rights.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the cases referred to in Article 11(2)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must not refuse to act on the request of the data subject for exercising his or her rights under Articles 15 to 22, unless the controller demonstrates that it is not in a position to identify the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": false,
+        "rejected_if": [
+          "the controller shall facilitate the exercise of data subject rights under Articles 15 to 22"
+        ],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Split invalid",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 11,
+      "passage_id": "GDPR-Art12-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n3. The controller shall provide information on action taken on a request under Articles 15 to 22 to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller shall inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "action taken on a request under Articles 15 to 22",
+        "law_quote": "action taken on a request under Articles 15 to 22",
+        "relevant": true,
+        "process_step": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "reason": "The rule is about handling data subject requests, and the process has a step where customer data is collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "action taken on a request under Articles 15 to 22",
+        "description_quote_canonical": "the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the data subject makes a request under Articles 15 to 22",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide information on the action taken on the request to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller must inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the data subject makes a request under Articles 15 to 22",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the data subject makes a request under Articles 15 to 22",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU. During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 12,
+      "passage_id": "GDPR-Art12-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action",
+        "law_quote": "the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action",
+        "relevant": true,
+        "process_step": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "description_quote": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+        "reason": "The rule is about informing the data subject when action is not taken, and the process has a step where the customer receives confirmation, which could be related to informing them of any delays or issues.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action",
+        "description_quote_canonical": "The order is then recorded in the system, and the customer receives confirmation of their order",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller does not take action on the request of the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller does not take action on the request of the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process does not take action on the request of the data subject",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 13,
+      "passage_id": "GDPR-Art12-5",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n5. Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge. Where requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character, the controller may either:\n(a) charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or\n(b) refuse to act on the request.\nThe controller shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34",
+        "law_quote": "Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge.",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system.",
+        "reason": "The rule is about providing information and communication related to data subject rights, and the process involves collecting and storing customer data, which falls under this scope.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller may either charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or refuse to act on the request",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 14,
+      "passage_id": "GDPR-Art12-6",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "confirming the identity of the data subject",
+        "law_quote": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about confirming the identity of the data subject, and the process has a step where customer information is collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller has reasonable doubts concerning the identity of the natural person making the request",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the request is referred to in Articles 15 to 21",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention collecting and storing personal identifiers (name, phone, email) which are information about identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller has reasonable doubts concerning the identity of the natural person making the request",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process has reasonable doubts concerning the identity of the natural person making the request",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the request is referred to in Articles 15 to 21",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the request is referred to in Articles 15 to 21",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 15,
+      "passage_id": "GDPR-Art12-7",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n7. The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "law_quote": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about transparent information and communication, which the process has through the step where sales staff collect information and address concerns.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller",
+            "processor"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the information may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "P1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The order is then recorded in the system, and the customer receives confirmation of their order.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller or processor",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              },
+              {
+                "role": "processor",
+                "status": "contradicted",
+                "decided_by": "code rule",
+                "reason": "P1 not confirmed with a checked quote; A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the information to be provided to data subjects pursuant to Articles 13 and 14 is provided",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "P1",
+            "kind": "role_fact",
+            "text": "the organisation handles personal data on behalf of another organisation",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process",
+          "processor": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 16,
+      "passage_id": "GDPR-Art12-8",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n8. The Commission shall be empowered to adopt delegated acts in accordance with Article 92 for the purpose of determining the information to be presented by the icons and the procedures for providing standardised icons.",
+      "label": "No duty",
+      "label_cause": "duty_type none: the passage places no duty and gives no right of its own; it only limits, excludes or refers to other rules",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "law_quote": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "relevant": true,
+        "process_step": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "description_quote": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "reason": "The rule is about collecting and communicating information to data subjects, and the process has a step where sales staff collect relevant information.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "description_quote_canonical": "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "none",
+          "roles": [
+            "public body"
+          ],
+          "if": [],
+          "then": "",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "none",
+        "split_valid": null,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "No duty",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 17,
+      "passage_id": "GDPR-Art14-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n1. Where personal data have not been obtained from the data subject, the controller shall provide the data subject with the following information:\n(a) the identity and the contact details of the controller and, where applicable, of the controller's representative;\n(b) the contact details of the data protection officer, where applicable;\n(c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing;\n(d) the categories of personal data concerned;\n(e) the recipients or categories of recipients of the personal data, if any;\n(f) where applicable, that the controller intends to transfer personal data to a recipient in a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means to obtain a copy of them or where they have been made available.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "personal data not obtained from the data subject",
+        "law_quote": "Where personal data have not been obtained from the data subject",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about personal data not obtained from the data subject, and the process has a step where personal data are collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "where personal data have not been obtained from the data subject",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data have not been obtained from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the data subject with the following information: (a) the identity and the contact details of the controller and, where applicable, of the controller's representative; (b) the contact details of the data protection officer, where applicable; (c) the purposes of the processing for which the personal data are intended as well as the legal basis for the processing; (d) the categories of personal data concerned; (e) the recipients or categories of recipients of the personal data, if any; (f) where applicable, that the controller intends to transfer personal data to a recipient in a third country or international organisation and the existence or absence of an adequacy decision by the Commission, or in the case of transfers referred to in Article 46 or 47, or the second subparagraph of Article 49(1), reference to the appropriate or suitable safeguards and the means to obtain a copy of them or where they have been made available",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "contradicted",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data have not been obtained from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data have not been obtained from the data subject",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences describe the collection and storage of personal data (name, phone, email), directly contradicting the statement that 'personal data have not been obtained'."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 18,
+      "passage_id": "GDPR-Art14-2-a",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject:\n(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period;\n(b) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party;\n(c) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability;\n(d) where processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal;\n(e) the right to lodge a complaint with a supervisory authority;\n(f) from which source the personal data originate, and if applicable, whether it came from publicly accessible sources;",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the source of personal data",
+        "law_quote": "from which source the personal data originate, and if applicable, whether it came from publicly accessible sources",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about the source of personal data, and the process has a step where personal data are collected and stored.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "from which source the personal data originate, and if applicable, whether it came from publicly accessible sources",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "right",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data have not been obtained from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "(a) the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the period for which the personal data will be stored, or if that is not possible, the criteria used to determine that period"
+            },
+            {
+              "clause": "(b) where the processing is based on point (f) of Article 6(1), the legitimate interests pursued by the controller or by a third party",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    },
+                    {
+                      "text": "the processing is based on point (f) of Article 6(1)",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the legitimate interests pursued by the controller or by a third party"
+            },
+            {
+              "clause": "(c) the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability"
+            },
+            {
+              "clause": "(d) where processing is based on point (a) of Article 6(1) or point (a) of Article 9(2), the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    },
+                    {
+                      "text": "the processing is based on point (a) of Article 6(1) or point (a) of Article 9(2)",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the existence of the right to withdraw consent at any time, without affecting the lawfulness of processing based on consent before its withdrawal"
+            },
+            {
+              "clause": "(e) the right to lodge a complaint with a supervisory authority",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the right to lodge a complaint with a supervisory authority"
+            },
+            {
+              "clause": "(f) from which source the personal data originate, and if applicable, whether it came from publicly accessible sources",
+              "roles": [
+                "controller"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "personal data have not been obtained from the data subject",
+                      "kind": "process_fact"
+                    }
+                  ]
+                }
+              ],
+              "then": "the controller shall provide the data subject with the source of the personal data, and if applicable, whether it came from publicly accessible sources"
+            }
+          ]
+        },
+        "duty_type": "right",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "confirmed",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "contradicted",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention storing customer's name, phone number, and email address, which are identifiable personal information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data have not been obtained from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data have not been obtained from the data subject",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences describe the collection and storage of personal data (name, phone, email), directly contradicting the statement that 'personal data have not been obtained'."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 19,
+      "passage_id": "GDPR-Art14-2-g",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n2. In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject:\n(g) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the existence of automated decision-making, including profiling",
+        "law_quote": "the existence of automated decision-making, including profiling",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about automated decision-making and profiling, which are not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the existence of automated decision-making, including profiling",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 20,
+      "passage_id": "GDPR-Art14-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 14: Information to be provided where personal data have not been obtained from the data subject\n3. The controller shall provide the information referred to in paragraphs 1 and 2:\n(a) within a reasonable period after obtaining the personal data, but at the latest within one month, having regard to the specific circumstances in which the personal data are processed;\n(b) if the personal data are to be used for communication with the data subject, at the latest at the time of the first communication to that data subject; or\n(c) if a disclosure to another recipient is envisaged, at the latest when the personal data are first disclosed.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information to be provided where personal data have not been obtained from the data subject",
+        "law_quote": "Information to be provided where personal data have not been obtained from the data subject",
+        "relevant": true,
+        "process_step": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "description_quote": "During the inquiry, the sales staff write down the customer's name, phone and email address and store them in the system",
+        "reason": "The rule is about providing information regarding personal data, and the process involves collecting and storing personal data during the inquiry phase.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Information to be provided where personal data have not been obtained from the data subject",
+        "description_quote_canonical": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "personal data have not been obtained from the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the personal data are to be used for communication with the data subject",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "a disclosure to another recipient is envisaged",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide the information referred to in paragraphs 1 and 2: (a) within a reasonable period after obtaining the personal data, but at the latest within one month, having regard to the specific circumstances in which the personal data are processed; (b) if the personal data are to be used for communication with the data subject, at the latest at the time of the first communication to that data subject; or (c) if a disclosure to another recipient is envisaged, at the latest when the personal data are first disclosed",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system.",
+              "status": "contradicted",
+              "quotes": [
+                "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "status": "confirmed",
+              "quotes": [
+                "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+              ]
+            },
+            {
+              "id": "C3",
+              "closest_sentence": "The company is based in Germany and sells to customers across the EU.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions.",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions",
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences explicitly mention collecting and storing personal identifiers (name, phone, email) which are information about identifiable people."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "personal data have not been obtained from the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "personal data have not been obtained from the data subject",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "During the inquiry, the sales staff write down the customer's name, phone number and email address and store them in the system"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences describe the collection and storage of personal data (name, phone, email), directly contradicting the statement that 'personal data have not been obtained'."
+            }
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the personal data are to be used for communication with the data subject",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the personal data are to be used for communication with the data subject",
+            "status": "not_stated",
+            "original_status": "confirmed",
+            "quotes": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Sales staff or customer support collects relevant information and addresses any concerns or questions"
+            ],
+            "quote_found": true,
+            "downgraded": true,
+            "decided_by": null,
+            "downgrade_cause": "verifier rejected",
+            "verifier": {
+              "asked": "true",
+              "answer": "no",
+              "reason": "The sentences describe collecting information and addressing concerns but do not explicitly state the purpose of using personal data for communication as in the statement."
+            }
+          },
+          {
+            "id": "C3",
+            "kind": "situation",
+            "text": "a disclosure to another recipient is envisaged",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "a disclosure to another recipient is envisaged",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": "first look",
+          "C2": null,
+          "C3": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2",
+              "C3"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "REQUIREMENTS\nThese rules were checked and apply to this process.\n- [GDPR-Art13-1] When the customer is contacted during the inquiry, they are told about the company's identity, contact details, and the purpose of data processing.\n- [GDPR-Art13-2-a] When the customer is contacted during the inquiry, they are told how long their data will be kept, and the reasons if it's not possible to say.\n- [GDPR-Art5-1-a] Personal data must be handled in a fair, clear, and lawful way when the customer is being asked about a product or service.\n- [GDPR-Art5-1-e] The customer's details are kept only as long as needed for the purpose they were collected."
+}

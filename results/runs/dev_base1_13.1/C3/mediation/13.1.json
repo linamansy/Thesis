@@ -1,0 +1,1874 @@
+{
+  "case_id": "13.1",
+  "c3_version": "v2",
+  "passages": [
+    {
+      "rank": 1,
+      "passage_id": "CRD-Art13-1",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n1. The trader shall reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract in accordance with Article 11.\nThe trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction, unless the consumer has expressly agreed otherwise and provided that the consumer does not incur any fees as a result of such reimbursement.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "reimbursement of payments by the trader",
+        "law_quote": "The trader shall reimburse all payments received from the consumer",
+        "relevant": true,
+        "process_step": "If a refund is approved, the financial team processes the reimbursement",
+        "description_quote": "If a refund is approved, the financial team processes the reimbursement",
+        "reason": "The rule is about reimbursement of payments by the trader, and the process has a step where a refund is processed.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The trader shall reimburse all payments received from the consumer",
+        "description_quote_canonical": "If a refund is approved, the financial team processes the reimbursement",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the consumer withdraws from the contract",
+                  "kind": "case_event"
+                },
+                {
+                  "text": "the trader is informed of the consumer’s decision to withdraw",
+                  "kind": "case_event"
+                }
+              ]
+            }
+          ],
+          "then": "the trader must reimburse all payments received from the consumer, including, if applicable, the costs of delivery without undue delay and in any event not later than 14 days from the day on which he is informed of the consumer’s decision to withdraw from the contract",
+          "exceptions": [],
+          "special_cases": [
+            {
+              "clause": "The trader shall carry out the reimbursement referred to in the first subparagraph using the same means of payment as the consumer used for the initial transaction",
+              "roles": [
+                "trader"
+              ],
+              "if": [
+                {
+                  "logic": "all",
+                  "items": [
+                    {
+                      "text": "the consumer has expressly agreed otherwise",
+                      "kind": "case_event"
+                    }
+                  ]
+                }
+              ],
+              "then": "the trader must carry out the reimbursement using the same means of payment as the consumer used for the initial transaction, provided that the consumer does not incur any fees as a result of such reimbursement"
+            }
+          ]
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "status": "confirmed",
+              "quotes": [
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "status": "confirmed",
+              "quotes": [
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+                "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally",
+              "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe private individuals (not part of trade/business) purchasing appliances for personal use, matching the consumer definition."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the consumer withdraws from the contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "its customer withdraws from the contract",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the trader is informed of the consumer’s decision to withdraw",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "case_event",
+            "text_sent": "the organisation running the described process is informed of its customer’s decision to withdraw",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally",
+              "The complaint is marked as resolved once the customer receives the refund or directly after notifying the customer in case the refund was rejected"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The first sentence explicitly states that the shop sells kitchen appliances (goods) to customers, which directly confirms the statement about selling goods/services for trade/business purposes."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 2,
+      "passage_id": "CRD-Art13-2",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n2. Notwithstanding paragraph 1, the trader shall not be required to reimburse the supplementary costs, if the consumer has expressly opted for a type of delivery other than the least expensive type of standard delivery offered by the trader.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the trader shall not be required to reimburse the supplementary costs",
+        "law_quote": "the trader shall not be required to reimburse the supplementary costs",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about reimbursement of supplementary costs for delivery, which is not mentioned or performed in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the trader shall not be required to reimburse the supplementary costs",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 3,
+      "passage_id": "CRD-Art13-3",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n3. Unless the trader has offered to collect the goods himself, with regard to sales contracts, the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+        "law_quote": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+        "relevant": true,
+        "process_step": "If a refund is approved, the financial team processes the reimbursement",
+        "description_quote": "If a refund is approved, the financial team processes the reimbursement",
+        "reason": "The rule is about the trader withholding reimbursement until the goods are returned or evidence of return is provided, and the process has a step where a refund is processed.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+        "description_quote_canonical": "If a refund is approved, the financial team processes the reimbursement",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "trader"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the trader has not offered to collect the goods himself",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "the contract is a sales contract",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the trader may withhold the reimbursement until he has received the goods back, or until the consumer has supplied evidence of having sent back the goods, whichever is the earliest",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "status": "confirmed",
+              "quotes": [
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+              ]
+            },
+            {
+              "id": "T1",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "status": "confirmed",
+              "quotes": [
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "the shop repairs the appliance or swaps it for a new one",
+              "status": "confirmed",
+              "quotes": [
+                "the shop repairs the appliance or swaps it for a new one"
+              ]
+            },
+            {
+              "id": "C2",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally.",
+              "status": "confirmed",
+              "quotes": [
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: trader",
+            "roles": [
+              {
+                "role": "trader",
+                "status": "confirmed",
+                "decided_by": "first look",
+                "reason": "T1 confirmed with a checked quote"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "first look",
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the buyer is a consumer (a natural person acting for purposes which are outside that person's trade, business, craft or profession)",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences describe private individuals (not part of trade/business) purchasing appliances for personal use, matching the consumer definition."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the trader has not offered to collect the goods himself",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process has not offered to collect the goods himself",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the contract is a sales contract",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the contract is a sales contract",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The fact that private persons bought a kitchen appliance from the shop implies a sales contract, which is the ordinary legal concept for such a transaction."
+            }
+          }
+        ],
+        "role_facts": [
+          {
+            "id": "T1",
+            "kind": "role_fact",
+            "text": "the organisation running the described process sells goods or services to customers, for purposes relating to its trade, business, craft or profession",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+            ],
+            "quotes_found": [
+              true
+            ],
+            "quotes_canonical": [
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences confirm the organisation sells kitchen appliances (goods) to customers as part of its trade, matching the statement."
+            }
+          }
+        ],
+        "exceptions": [],
+        "role_binding": {
+          "trader": "the organisation running the described process",
+          "consumer": "its customer"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally. In these cases the shop repairs the appliance or swaps it for a new one.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "first look",
+          "S1": "first look",
+          "C1": null,
+          "C2": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 4,
+      "passage_id": "CRD-Art13-4",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n4. In respect of personal data of the consumer, the trader shall comply with the obligations applicable under Regulation (EU) 2016/679.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "personal data of the consumer",
+        "law_quote": "personal data of the consumer",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about personal data of the consumer, but the process does not mention handling or processing personal data.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "personal data of the consumer",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 5,
+      "passage_id": "CRD-Art13-5",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n5. The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader, except where such content:\n(a) has no utility outside the context of the digital content or digital service supplied by the trader;\n(b) only relates to the consumer’s activity when using the digital content or digital service supplied by the trader;\n(c) has been aggregated with other data by the trader and cannot be disaggregated or only with disproportionate efforts; or\n(d) has been generated jointly by the consumer and others, and other consumers are able to continue to make use of the content.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the trader shall refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "law_quote": "The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about the use of consumer-generated content by traders, but the process does not involve any such activity.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "The trader shall refrain from using any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 6,
+      "passage_id": "CRD-Art13-6",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n6. Except in the situations referred to in point (a), (b) or (c) of paragraph 5, the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "law_quote": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about the trader making available content provided by the consumer, which is not related to the process described, which involves product complaints, refunds, and repairs.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the trader shall, at the request of the consumer, make available to the consumer any content, other than personal data, which was provided or created by the consumer when using the digital content or digital service supplied by the trader",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 7,
+      "passage_id": "CRD-Art13-7",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n7. The consumer shall be entitled to retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format",
+        "law_quote": "retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about retrieving digital content, but the process involves physical products and does not mention digital content.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "retrieve that digital content free of charge, without hindrance from the trader, within a reasonable time and in a commonly used and machine-readable format",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 8,
+      "passage_id": "CRD-Art13-8",
+      "passage_text": "Consumer Rights Directive (2011/83/EU) - Article 13: Obligations of the trader in the event of withdrawal\n8. In the event of withdrawal from the contract, the trader may prevent any further use of the digital content or digital service by the consumer, in particular by making the digital content or digital service inaccessible to the consumer or disabling the user account of the consumer, without prejudice to paragraph 6.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "withdrawal from the contract",
+        "law_quote": "In the event of withdrawal from the contract",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about withdrawal from a contract, which is not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "In the event of withdrawal from the contract",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 9,
+      "passage_id": "GDPR-Art12-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n1. The controller shall take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transparent information and communication for data subjects",
+        "law_quote": "The controller shall take appropriate measures to provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+        "relevant": true,
+        "process_step": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "description_quote": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "reason": "The rule is about providing transparent information to data subjects, and the process has a step involving communication and handling of complaints, which could involve data subjects.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The controller shall take appropriate measures to provide any information ... in a concise, transparent, intelligible and easily accessible form, using clear and plain language",
+        "description_quote_canonical": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "processing of personal data",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must take appropriate measures to provide any information referred to in Articles 13 and 14 and any communication under Articles 15 to 22 and 34 relating to processing to the data subject in a concise, transparent, intelligible and easily accessible form, using clear and plain language, in particular for any information addressed specifically to a child. The information shall be provided in writing, or by other means, including, where appropriate, by electronic means. When requested by the data subject, the information may be provided orally, provided that the identity of the data subject is proven by other means",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "processing of personal data",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "processing of personal data",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 10,
+      "passage_id": "GDPR-Art12-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n2. The controller shall facilitate the exercise of data subject rights under Articles 15 to 22. In the cases referred to in Article 11(2), the controller shall not refuse to act on the request of the data subject for exercising his or her rights under Articles 15 to 22, unless the controller demonstrates that it is not in a position to identify the data subject.",
+      "label": "Split invalid",
+      "label_cause": "obligation word in the IF item(s): the controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "facilitating the exercise of data subject rights",
+        "law_quote": "The controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+        "relevant": true,
+        "process_step": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "description_quote": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "reason": "The rule is about facilitating the exercise of data subject rights, and the process has a step where customer complaints are logged and assigned to a department, which could involve handling data subject rights.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "The controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+        "description_quote_canonical": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller shall facilitate the exercise of data subject rights under Articles 15 to 22",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the cases referred to in Article 11(2)",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must not refuse to act on the request of the data subject for exercising his or her rights under Articles 15 to 22, unless the controller demonstrates that it is not in a position to identify the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": false,
+        "rejected_if": [
+          "the controller shall facilitate the exercise of data subject rights under Articles 15 to 22"
+        ],
+        "duty_holder": null,
+        "check": null,
+        "conditions": [],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {},
+        "first_look_label": null,
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Split invalid",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 11,
+      "passage_id": "GDPR-Art12-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n3. The controller shall provide information on action taken on a request under Articles 15 to 22 to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller shall inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "action taken on a request under Articles 15 to 22",
+        "law_quote": "action taken on a request under Articles 15 to 22",
+        "relevant": true,
+        "process_step": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "description_quote": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "reason": "The rule is about action taken on a request, and the process has a step where a complaint (request) is logged and assigned for investigation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "action taken on a request under Articles 15 to 22",
+        "description_quote_canonical": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the data subject makes a request under Articles 15 to 22",
+                  "kind": "process_fact"
+                }
+              ]
+            },
+            {
+              "logic": "any",
+              "items": [
+                {
+                  "text": "the data subject makes the request by electronic form means",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must provide information on action taken on the request to the data subject without undue delay and in any event within one month of receipt of the request. That period may be extended by two further months where necessary, taking into account the complexity and number of the requests. The controller must inform the data subject of any such extension within one month of receipt of the request, together with the reasons for the delay. Where the data subject makes the request by electronic form means, the information shall be provided by electronic means where possible, unless otherwise requested by the data subject",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+              "status": "confirmed",
+              "quotes": [
+                "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+                "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+              ]
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "confirmed",
+            "original_status": "confirmed",
+            "quotes": [
+              "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "Customer service logs the complaint and assigns it to the relevant department for investigation",
+              "Most complaints come from private persons who bought a kitchen appliance from the shop, and it stopped working a few months later although they used it normally"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "true",
+              "answer": "yes",
+              "reason": "The sentences mention private persons (identifiable individuals) whose complaints are logged, implying the process handles their information."
+            }
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the data subject makes a request under Articles 15 to 22",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the data subject makes a request under Articles 15 to 22",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "the data subject makes the request by electronic form means",
+            "item_kind": "process_fact",
+            "group": "G2",
+            "logic": "any",
+            "split_kind": "process_fact",
+            "text_sent": "the data subject makes the request by electronic form means",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": "first look",
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "G2",
+            "logic": "any",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 12,
+      "passage_id": "GDPR-Art12-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n4. If the controller does not take action on the request of the data subject, the controller shall inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy.",
+      "label": "Not applicable",
+      "label_cause": "an IF item is contradicted",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the controller does not take action on the request of the data subject",
+        "law_quote": "If the controller does not take action on the request of the data subject",
+        "relevant": true,
+        "process_step": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "description_quote": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "reason": "The rule is about the controller not taking action on a data subject's request, which corresponds to the process step where the complaint is logged and assigned for investigation.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "If the controller does not take action on the request of the data subject",
+        "description_quote_canonical": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "the controller does not take action on the request of the data subject",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller must inform the data subject without delay and at the latest within one month of receipt of the request of the reasons for not taking action and on the possibility of lodging a complaint with a supervisory authority and seeking a judicial remedy",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+              "status": "contradicted",
+              "quotes": [
+                "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+                "If a refund is approved, the financial team processes the reimbursement."
+              ]
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "the controller does not take action on the request of the data subject",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "the organisation running the described process does not take action on the request of the data subject",
+            "status": "contradicted",
+            "original_status": "contradicted",
+            "quotes": [
+              "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision.",
+              "If a refund is approved, the financial team processes the reimbursement."
+            ],
+            "quotes_found": [
+              true,
+              true
+            ],
+            "quotes_canonical": [
+              "After reviewing the details, the team determines whether the complaint is valid and whether a refund is justified and notifies the customer with the decision",
+              "If a refund is approved, the financial team processes the reimbursement"
+            ],
+            "quote_found": true,
+            "downgraded": false,
+            "decided_by": "first look",
+            "downgrade_cause": null,
+            "verifier": {
+              "asked": "false",
+              "answer": "yes",
+              "reason": "The sentences describe the organization taking action (reviewing complaints, notifying customers, processing refunds) which directly contradicts the statement that they do not take action."
+            }
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Not applicable",
+        "second_look": null,
+        "look": "first",
+        "second_look_decided": null,
+        "label": "Not applicable",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Not applicable",
+        "if_label": "Not applicable",
+        "exceptions_applying": [],
+        "reason": "an IF item is contradicted",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": "first look"
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "contradicted",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 13,
+      "passage_id": "GDPR-Art12-5",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n5. Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge. Where requests from a data subject are manifestly unfounded or excessive, in particular because of their repetitive character, the controller may either:\n(a) charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or\n(b) refuse to act on the request.\nThe controller shall bear the burden of demonstrating the manifestly unfounded or excessive character of the request.",
+      "label": "Indeterminate",
+      "label_cause": "not every IF item is confirmed",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 2, 34",
+        "law_quote": "Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge.",
+        "relevant": true,
+        "process_step": "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "description_quote": "Customer service logs the complaint and assigns it to the relevant department for investigation.",
+        "reason": "The rule is about providing information and communication related to data subject rights, and the process has a step involving logging and assigning complaints, which could relate to such information.",
+        "law_quote_found": true,
+        "description_quote_found": true,
+        "law_quote_canonical": "Information provided under Articles 13 and 14 and any communication and any actions taken under Articles 15 to 22 and 34 shall be provided free of charge",
+        "description_quote_canonical": "Customer service logs the complaint and assigns it to the relevant department for investigation",
+        "final_relevant": true,
+        "cause": "relevant"
+      },
+      "applicability": {
+        "split": {
+          "duty_type": "duty",
+          "roles": [
+            "controller"
+          ],
+          "if": [
+            {
+              "logic": "all",
+              "items": [
+                {
+                  "text": "requests from a data subject are manifestly unfounded or excessive",
+                  "kind": "process_fact"
+                },
+                {
+                  "text": "in particular because of their repetitive character",
+                  "kind": "process_fact"
+                }
+              ]
+            }
+          ],
+          "then": "the controller may either charge a reasonable fee taking into account the administrative costs of providing the information or communication or taking the action requested; or refuse to act on the request",
+          "exceptions": [],
+          "special_cases": []
+        },
+        "duty_type": "duty",
+        "split_valid": true,
+        "rejected_if": [],
+        "duty_holder": null,
+        "check": {
+          "results": [
+            {
+              "id": "S1",
+              "closest_sentence": "The process begins when a customer files a complaint about a product or service.",
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "conditions": [
+          {
+            "id": "R1",
+            "kind": "role",
+            "text": "the duty is on: controller",
+            "roles": [
+              {
+                "role": "controller",
+                "status": "confirmed",
+                "decided_by": "code rule",
+                "reason": "A1: the organisation running the described process is the controller of the personal data it collects in that process"
+              }
+            ],
+            "status": "confirmed",
+            "decided_by": "code rule",
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false
+          },
+          {
+            "id": "S1",
+            "kind": "scope",
+            "text": "the process handles information about identifiable people",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null
+          },
+          {
+            "id": "C1",
+            "kind": "situation",
+            "text": "requests from a data subject are manifestly unfounded or excessive",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "requests from a data subject are manifestly unfounded or excessive",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          },
+          {
+            "id": "C2",
+            "kind": "situation",
+            "text": "in particular because of their repetitive character",
+            "item_kind": "process_fact",
+            "group": "G1",
+            "logic": "all",
+            "split_kind": "process_fact",
+            "text_sent": "in particular because of their repetitive character",
+            "status": "not_stated",
+            "original_status": "not_stated",
+            "quotes": [],
+            "quotes_found": [],
+            "quotes_canonical": [],
+            "quote_found": null,
+            "downgraded": false,
+            "decided_by": null,
+            "downgrade_cause": null,
+            "verifier": null,
+            "first_look_status": "not_stated"
+          }
+        ],
+        "role_facts": [],
+        "exceptions": [],
+        "role_binding": {
+          "controller": "the organisation running the described process"
+        },
+        "first_look_label": "Indeterminate",
+        "second_look": {
+          "results": [
+            {
+              "id": "C1",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            },
+            {
+              "id": "C2",
+              "closest_sentence": null,
+              "status": "not_stated",
+              "quotes": []
+            }
+          ]
+        },
+        "look": "second",
+        "second_look_decided": false,
+        "label": "Indeterminate",
+        "failed_step": null,
+        "sub_rules": [],
+        "note": null
+      },
+      "resolution": {
+        "label": "Indeterminate",
+        "if_label": "Indeterminate",
+        "exceptions_applying": [],
+        "reason": "not every IF item is confirmed",
+        "decided_by": {
+          "R1": "code rule",
+          "S1": null,
+          "C1": null,
+          "C2": null
+        },
+        "units": [
+          {
+            "id": "R1",
+            "logic": "one",
+            "status": "confirmed",
+            "case_event": false,
+            "items": [
+              "R1"
+            ]
+          },
+          {
+            "id": "S1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "S1"
+            ]
+          },
+          {
+            "id": "C1",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C1"
+            ]
+          },
+          {
+            "id": "C2",
+            "logic": "one",
+            "status": "not_stated",
+            "case_event": false,
+            "items": [
+              "C2"
+            ]
+          }
+        ],
+        "case_events": []
+      },
+      "requirement": null
+    },
+    {
+      "rank": 14,
+      "passage_id": "GDPR-Art12-6",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n6. Without prejudice to Article 11, where the controller has reasonable doubts concerning the identity of the natural person making the request referred to in Articles 15 to 21, the controller may request the provision of additional information necessary to confirm the identity of the data subject.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "confirming the identity of the data subject",
+        "law_quote": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about confirming the identity of the data subject, which is not mentioned or involved in the described business process.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "the controller may request the provision of additional information necessary to confirm the identity of the data subject",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 15,
+      "passage_id": "GDPR-Art12-7",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n7. The information to be provided to data subjects pursuant to Articles 13 and 14 may be provided in combination with standardised icons in order to give in an easily visible, intelligible and clearly legible manner a meaningful overview of the intended processing. Where the icons are presented electronically they shall be machine-readable.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "law_quote": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about data protection and transparency in communication, which is not addressed in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "Transparent information, communication and modalities for the exercise of the rights of the data subject",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 16,
+      "passage_id": "GDPR-Art12-8",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 12: Transparent information, communication and modalities for the exercise of the rights of the data subject\n8. The Commission shall be empowered to adopt delegated acts in accordance with Article 92 for the purpose of determining the information to be presented by the icons and the procedures for providing standardised icons.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "determining the information to be presented by the icons and the procedures for providing standardised icons",
+        "law_quote": "determining the information to be presented by the icons and the procedures for providing standardised icons",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about data protection icons and standardised procedures, which are not mentioned or performed in the business process described.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "determining the information to be presented by the icons and the procedures for providing standardised icons",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 17,
+      "passage_id": "GDPR-Art15-1",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n1. The data subject shall have the right to obtain from the controller confirmation as to whether or not personal data concerning him or her are being processed, and, where that is the case, access to the personal data and the following information:\n(a) the purposes of the processing;\n(b) the categories of personal data concerned;\n(c) the recipients or categories of recipient to whom the personal data have been or will be disclosed, in particular recipients in third countries or international organisations;\n(d) where possible, the envisaged period for which the personal data will be stored, or, if not possible, the criteria used to determine that period;\n(e) the existence of the right to request from the controller rectification or erasure of personal data or restriction of processing of personal data concerning the data subject or to object to such processing;\n(f) the right to lodge a complaint with a supervisory authority;\n(g) where the personal data are not collected from the data subject, any available information as to their source;\n(h) the existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right to obtain confirmation as to whether or not personal data concerning him or her are being processed",
+        "law_quote": "The data subject shall have the right to obtain from the controller confirmation as to whether or not personal data concerning him or her are being processed",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about data subject's right to access personal data, which is not mentioned or performed in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "The data subject shall have the right to obtain from the controller confirmation as to whether or not personal data concerning him or her are being processed",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 18,
+      "passage_id": "GDPR-Art15-2",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n2. Where personal data are transferred to a third country or to an international organisation, the data subject shall have the right to be informed of the appropriate safeguards pursuant to Article 46 relating to the transfer.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the transfer of personal data to a third country or an international organisation",
+        "law_quote": "Where personal data are transferred to a third country or to an international organisation",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about data transfers to third countries or international organisations, which is not mentioned or implied in the process description.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "Where personal data are transferred to a third country or to an international organisation",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 19,
+      "passage_id": "GDPR-Art15-3",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n3. The controller shall provide a copy of the personal data undergoing processing. For any further copies requested by the data subject, the controller may charge a reasonable fee based on administrative costs. Where the data subject makes the request by electronic means, and unless otherwise requested by the data subject, the information shall be provided in a commonly used electronic form.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "providing a copy of the personal data undergoing processing",
+        "law_quote": "The controller shall provide a copy of the personal data undergoing processing",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about providing personal data copies, which is not part of the described complaint resolution process.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "The controller shall provide a copy of the personal data undergoing processing",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    },
+    {
+      "rank": 20,
+      "passage_id": "GDPR-Art15-4",
+      "passage_text": "General Data Protection Regulation (2016/679) - Article 15: Right of access by the data subject\n4. The right to obtain a copy referred to in paragraph 3 shall not adversely affect the rights and freedoms of others.",
+      "label": "Irrelevant",
+      "label_cause": "the model said not relevant, description_quote empty",
+      "failed_step": null,
+      "error": null,
+      "relevance": {
+        "law_focus": "the right to obtain a copy referred to in paragraph 3",
+        "law_quote": "the right to obtain a copy referred to in paragraph 3",
+        "relevant": false,
+        "process_step": "",
+        "description_quote": "",
+        "reason": "The rule is about data subject's right to obtain a copy of their data, which is not mentioned or related to any activity in the business process described.",
+        "law_quote_found": true,
+        "description_quote_found": null,
+        "law_quote_canonical": "The right to obtain a copy referred to in paragraph 3",
+        "description_quote_canonical": null,
+        "final_relevant": false,
+        "cause": "the model said not relevant, description_quote empty"
+      },
+      "applicability": null,
+      "resolution": null,
+      "requirement": null
+    }
+  ],
+  "knowledge_block": "No domain knowledge provided."
+}
