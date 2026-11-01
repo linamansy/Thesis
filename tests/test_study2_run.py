@@ -14,12 +14,13 @@ import pytest
 from src.agents.base_agent import BaseAgent
 from src.bpmngen_generator import BPMNGenGenerator
 from src.config import load_config, project_path
-from src.freeze_sr import check_ids, freeze, held_out_ids
+from src.freeze_sr import check_ids, freeze, frozen_paths, held_out_ids
 from src.freeze_sr import main as freeze_main
 from src.llm.mock_llm import MockLLM
 from src.rag_v3_steps import RoutingAgent, StepRouter, StepsAgent
 from src.run_folder import RunFolder
-from src.run_study2 import CONDITIONS, check_not_existing, prepare, run_condition
+from src.run_study2 import (CONDITIONS, SAME_AS_REFERENCE, check_not_existing, check_same_as_reference, prepare,
+                             run_condition)
 from src.run_study2 import main as run_main
 
 from test_bpmngen_generator import bpmngen_config, fake_harness
@@ -223,3 +224,137 @@ def test_existing_run_folders_are_untouched(tmp_path):
     assert snapshot() == before
     run_all_conditions(config, "study2_new", CONDITIONS)       # another run id leaves the old run as it was
     assert {k: v for k, v in snapshot().items() if k.startswith("study2_old")} == before
+
+
+# ---------- --fresh, cross-run check, empty passage sets, --frozen ----------
+
+class FakeOllamaClient:
+    """Records unload requests; /api/ps lists no loaded model."""
+
+    def __init__(self):
+        self.posts = []
+
+    def post(self, path, json):
+        self.posts.append((path, json))
+        return type("Response", (), {"raise_for_status": lambda self: None})()
+
+    def get(self, path):
+        return type("Response", (), {"json": lambda self: {"models": []}})()
+
+
+def test_fresh_unloads_the_model_once_per_condition(tmp_path):
+    config = study_config(tmp_path)
+    view, _ = prepare(config, CASE, "study2_fresh", CONDITIONS)
+    folder = RunFolder(view, "study2_fresh", 1)
+    n = len(corpus_passages())
+    agent_llm, client = MockLLM([json.dumps(IRRELEVANT)] * n), FakeOllamaClient()
+    for i, condition in enumerate(CONDITIONS, 1):
+        run_condition(view, folder, condition, agent_llm, MockLLM(["{}"]), bpmngen_factory=fake_bpmngen,
+                      fresh=True, ollama_client=client)
+        assert client.posts == [("/api/generate", {"model": config["model"]["name"], "keep_alive": 0})] * i
+
+
+def test_without_fresh_nothing_is_unloaded(tmp_path):
+    config = study_config(tmp_path)
+    view, _ = prepare(config, CASE, "study2_nofresh", ["C1"])
+    client = FakeOllamaClient()
+    run_condition(view, RunFolder(view, "study2_nofresh", 1), "C1", bpmngen_factory=fake_bpmngen,
+                  ollama_client=client)
+    assert client.posts == []
+
+
+def reference_settings():
+    return {k: f"value of {k}" for k in SAME_AS_REFERENCE} | {"fresh": True}
+
+
+def with_reference(config, tmp_path, reference="study2_ref"):
+    config["study2_run"] = dict(config["study2_run"], reference_run_id=reference)
+    info = project_path(config["paths"]["runs"]) / reference / config["paths"]["run_info_file"]
+    info.parent.mkdir(parents=True)
+    info.write_text(json.dumps(reference_settings() | {"run_id": reference}), encoding="utf-8")
+    return config
+
+
+def test_cross_run_check_refuses_a_mismatched_setting(tmp_path):
+    assert set(SAME_AS_REFERENCE) == {"ollama_version", "model_digest", "generator_digest", "ollama_server_env",
+                                      "bpmngen_file_hashes", "bpmngen_library_versions", "think_calls",
+                                      "frozen_sha256", "c3_version", "fresh"}
+    config = with_reference(study_config(tmp_path), tmp_path)
+    check_same_as_reference(config, reference_settings() | {"run_id": "study2_rep2"}, "study2_rep2")
+    for key in SAME_AS_REFERENCE:
+        with pytest.raises(ValueError, match=f"reference run study2_ref.*{key}"):
+            check_same_as_reference(config, reference_settings() | {key: "other"}, "study2_rep2")
+
+
+def test_cross_run_check_needs_a_reference_only_once_it_is_set(tmp_path):
+    config = study_config(tmp_path)
+    assert CONFIG["study2_run"]["reference_run_id"] == ""
+    check_same_as_reference(config, {"fresh": False}, "study2_first")          # empty: the first run sets nothing
+    config["study2_run"] = dict(config["study2_run"], reference_run_id="study2_ref")
+    check_same_as_reference(config, {"fresh": False}, "study2_ref")            # the reference run itself
+    with pytest.raises(ValueError, match="has no"):
+        check_same_as_reference(config, reference_settings(), "study2_rep2")   # reference run does not exist
+
+
+def test_freeze_refuses_a_case_with_no_passages(tmp_path):
+    config = study_config(tmp_path)
+    no_step = {"steps": [{"step_id": "S1", "actor": "x", "activity": "x", "data_or_object": "x",
+                          "quote": "a quote that is not in the description"}]}
+
+    def factory(logger):
+        order = [p.id for p in PASSAGES]
+        return StepRouter(config, StepsAgent(MockLLM([json.dumps(no_step)]), logger), RoutingAgent(MockLLM(["{}"]), logger),
+                          PASSAGES, FakeRetriever(order), FakeRetriever(order[::-1]), FakeReranker(order))
+
+    stages_dir = tmp_path / "sr_freeze" / "empty"
+    with pytest.raises(ValueError, match=rf"0 passages.*'{re.escape(CASE)}': 'S1 failed=False, steps kept=0, "
+                                         r"dropped=1; S2"):
+        freeze(config, [CASE], factory, stages_dir)
+    assert (stages_dir / f"{CASE}.json").exists()      # the stages stay saved for the diagnosis
+
+
+def test_runner_refuses_a_case_with_no_passages(tmp_path):
+    config = study_config(tmp_path, {CASE: {"passages": []}})
+    with pytest.raises(ValueError, match="0 passages"):
+        prepare(config, CASE, "study2_test", CONDITIONS)
+
+
+def smoke_frozen(config, tmp_path):
+    """A frozen file + manifest in the smoke folder (study2_run.smoke_frozen_retrieval moved to tmp_path)."""
+    path = tmp_path / "smoke" / "frozen_retrieval_sr_smoke.json"
+    path.parent.mkdir()
+    path.write_text(json.dumps({"cases": {CASE: {"passages": corpus_passages(2)}}}), encoding="utf-8")
+    path.with_name("frozen_retrieval_sr_smoke_manifest.json").write_text(
+        json.dumps({"sha256": hashlib.sha256(path.read_bytes()).hexdigest()}), encoding="utf-8")
+    config["study2_run"] = dict(config["study2_run"], smoke_frozen_retrieval=str(path))
+    return path
+
+
+def test_frozen_option_and_manifest_name():
+    assert CONFIG["study2_run"]["smoke_frozen_retrieval"] == \
+        "data/retrieval_study2_corpus/smoke/frozen_retrieval_sr_smoke.json"
+    default = frozen_paths(CONFIG)
+    assert default == (project_path(CONFIG["study2_run"]["frozen_retrieval"]),
+                       project_path(CONFIG["study2_run"]["frozen_manifest"]))
+    smoke = frozen_paths(CONFIG, CONFIG["study2_run"]["smoke_frozen_retrieval"])
+    assert smoke[1].name == "frozen_retrieval_sr_smoke_manifest.json" and smoke[0].parent == smoke[1].parent
+
+
+def test_runner_refuses_a_smoke_frozen_file_for_a_non_smoke_run_id(tmp_path):
+    config = study_config(tmp_path)
+    path = smoke_frozen(config, tmp_path)
+    with pytest.raises(ValueError, match="smoke frozen file"):
+        prepare(config, CASE, "study2_test", CONDITIONS, str(path))
+    smoke_id = CONFIG["evaluation"]["smoke_run_prefix"] + "_study2_test"
+    view, sha = prepare(config, CASE, smoke_id, CONDITIONS, str(path))
+    assert view["paths"]["frozen_retrieval"] == str(path)
+    assert sha == hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def test_freeze_writes_to_the_frozen_option_and_never_overwrites_it(tmp_path):
+    path = tmp_path / "smoke" / "frozen_retrieval_sr_smoke.json"
+    path.parent.mkdir()
+    path.write_text("{}", encoding="utf-8")
+    with pytest.raises(SystemExit, match=re.escape(str(path))):   # refused before any model is loaded
+        freeze_main(["--ids", CASE, "--frozen", str(path)])
+    assert path.read_text(encoding="utf-8") == "{}"
